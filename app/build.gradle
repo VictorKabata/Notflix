@@ -1,0 +1,95 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.vickikbt.notflix"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+
+}
+
+dependencies {
+
+    api project(':data')
+    api project(':domain')
+
+    api appDependencies.kotlin
+    api appDependencies.androidCore
+    api appDependencies.appCompat
+
+    //Test Libs TODO: Remove later
+    //testImplementation 'junit:junit:4.+'
+    //androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    //androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    api appDependencies.material
+
+    api appDependencies.constraintLayout
+
+    api appDependencies.navFragment
+    api appDependencies.navUi
+
+    api appDependencies.liveData
+    api appDependencies.viewModel
+
+    api appDependencies.glide
+    //kapt appDependencies.glideCompiler
+
+    api appDependencies.dotsIndicator
+
+    api appDependencies.networkX
+
+    api appDependencies.hiltAndroid
+    kapt appDependencies.hiltAndroidCompiler
+
+    api appDependencies.hiltViewModel
+    kapt appDependencies.hiltViewModelCompiler
+
+    api appDependencies.fadingEdges
+
+    api appDependencies.palette
+
+    api appDependencies.legacySupport
+
+    api appDependencies.preferences
+}

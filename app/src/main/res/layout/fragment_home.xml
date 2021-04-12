@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/fragment_home_scene"
+        tools:context=".ui.fragments.home.HomeFragment">
+
+        <ImageView
+            android:id="@+id/imageView_homeLogo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0"
+            android:elevation="0dp"
+            android:src="@drawable/logo_n"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager_trendingShows"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:alpha="1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.make.dots.dotsindicator.DotsIndicator
+            android:id="@+id/dots_trendingShows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="4dp"
+            android:alpha="0"
+            app:dot_drawable="@drawable/dots_active"
+            app:dot_drawable_unselected="@drawable/dots_inactive"
+            app:dot_height="6dp"
+            app:dot_margin="1dp"
+            app:dot_width="6dp"
+            app:layout_constraintBottom_toBottomOf="@id/viewPager_trendingShows"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <!--<androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewPager_trendingShows">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">-->
+
+        <TextView
+            android:id="@+id/textView_popularMovies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_black"
+            android:maxLines="1"
+            android:text="@string/popular_movies"
+            android:textColor="@color/primaryColor"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewPager_trendingShows" />
+
+        <TextView
+            android:id="@+id/textView_seeMorePopularMovies"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="end"
+            android:text="@string/view_all"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/textView_popularMovies"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textView_popularMovies" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_popularMovies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHeight_min="160dp"
+            app:layout_constraintTop_toBottomOf="@id/textView_popularMovies"
+            tools:listitem="@layout/popular_show_item" />
+
+        <TextView
+            android:id="@+id/textView_topRatedMovies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_black"
+            android:maxLines="1"
+            android:text="@string/top_rated_movies"
+            android:textColor="@color/primaryColor"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerview_popularMovies" />
+
+        <TextView
+            android:id="@+id/textView_seeTopRatedMovies"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="end"
+            android:text="@string/view_all"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/textView_topRatedMovies"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textView_topRatedMovies" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_topRatedMovies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHeight_min="214dp"
+            app:layout_constraintTop_toBottomOf="@id/textView_topRatedMovies"
+            tools:listitem="@layout/top_rated_show_item" />
+
+        <TextView
+            android:id="@+id/textView_popularTvShows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_black"
+            android:maxLines="1"
+            android:text="@string/popular_tv_shows"
+            android:textColor="@color/primaryColor"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerview_topRatedMovies" />
+
+        <TextView
+            android:id="@+id/textView_seeMorePopularTvShows"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="end"
+            android:text="@string/view_all"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/textView_popularMovies"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textView_popularMovies" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_popularTvShows"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHeight_min="160dp"
+            app:layout_constraintTop_toBottomOf="@id/textView_popularTvShows"
+            tools:listitem="@layout/popular_show_item" />
+
+        <TextView
+            android:id="@+id/textView_topRatedTvShows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_black"
+            android:maxLines="1"
+            android:text="@string/top_rated_tv_shows"
+            android:textColor="@color/primaryColor"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerview_popularTvShows" />
+
+        <TextView
+            android:id="@+id/textView_seeTopRatedTvShows"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="end"
+            android:text="@string/view_all"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/textView_topRatedTvShows"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textView_topRatedTvShows" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_topRatedTvShows"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHeight_min="214dp"
+            app:layout_constraintTop_toBottomOf="@id/textView_topRatedTvShows"
+            tools:listitem="@layout/top_rated_show_item" />
+
+        <!--</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>-->
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+</layout>
