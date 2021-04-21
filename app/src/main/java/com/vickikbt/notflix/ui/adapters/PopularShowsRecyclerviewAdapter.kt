@@ -11,9 +11,9 @@ import com.vickikbt.data.util.DataFormatter.loadImage
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.PopularShowItemBinding
-import com.vickikbt.notflix.util.log
+import com.vickikbt.notflix.util.OnClick
 
-class PopularShowsRecyclerviewAdapter constructor(private val showList: List<Movie>) :
+class PopularShowsRecyclerviewAdapter constructor(private val showList: List<Movie>, private val onClick: OnClick) :
     RecyclerView.Adapter<PopularShowsRecyclerViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -32,9 +32,12 @@ class PopularShowsRecyclerviewAdapter constructor(private val showList: List<Mov
         val movie = showList[position]
 
         holder.bind(context, movie)
+
+        holder.itemView.setOnClickListener { onClick.click() }
     }
 
-    override fun getItemCount() = 8
+    override fun getItemCount() = showList.size
+
 
 }
 

@@ -92,4 +92,7 @@ dependencies {
     api appDependencies.legacySupport
 
     api appDependencies.preferences
+
+    //Timber dep- For lightweight simplified logging
+    implementation appDependencies.timber
 }

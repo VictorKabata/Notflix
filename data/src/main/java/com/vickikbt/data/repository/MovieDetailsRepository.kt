@@ -7,8 +7,7 @@ import javax.inject.Inject
 class MovieDetailsRepository @Inject constructor(private val movieDetailsDataSource: MovieDetailsDataSource) :
     IMovieDetailsRepository {
 
-    //override suspend fun fetchMovieDetails(movieId:Int)
 
     override suspend fun fetchMovieDetails(movieId: Int) =
-        movieDetailsDataSource.fetchMovieDetails(movieId)
+        movieDetailsDataSource.getMovieDetails(movieId)
 }

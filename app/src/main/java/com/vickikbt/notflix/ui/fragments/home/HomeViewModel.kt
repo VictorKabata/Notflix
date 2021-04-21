@@ -1,14 +1,12 @@
 package com.vickikbt.notflix.ui.fragments.home
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.vickikbt.data.util.ApiException
 import com.vickikbt.data.util.NoInternetException
 import com.vickikbt.domain.models.PopularResult
 import com.vickikbt.domain.models.UpcomingResult
+import com.vickikbt.domain.usecases.FetchMovieDetailsUseCase
 import com.vickikbt.domain.usecases.FetchPopularMoviesUsecase
 import com.vickikbt.domain.usecases.FetchUpcomingMoviesUsecase
 import com.vickikbt.notflix.util.StateListener
@@ -17,7 +15,8 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel @ViewModelInject constructor(
     private val fetchPopularMoviesUsecase: FetchPopularMoviesUsecase,
-    private val fetchUpcomingMoviesUsecase: FetchUpcomingMoviesUsecase
+    private val fetchUpcomingMoviesUsecase: FetchUpcomingMoviesUsecase,
+    private val fetchMovieDetailsUseCase: FetchMovieDetailsUseCase
 ) :
     ViewModel() {
 
@@ -83,4 +82,27 @@ class HomeViewModel @ViewModelInject constructor(
 
     }
 
+
+    fun fetchMovieDetails(movieId: Int) = liveData {
+        stateListener?.onLoading()
+
+        try {
+            val movieDetailsFlow = fetchMovieDetailsUseCase.invoke(movieId)
+            movieDetailsFlow.collect { movieDetails ->
+                stateListener?.onSuccess("Fetched movie details for: ${movieDetails.title}")
+                emit(movieDetails)
+            }
+            return@liveData
+        } catch (e: ApiException) {
+            stateListener?.onError(e.message!!)
+            return@liveData
+        } catch (e: NoInternetException) {
+            stateListener?.onError(e.message!!)
+            return@liveData
+        } catch (e: Exception) {
+            stateListener?.onError(e.message!!)
+            return@liveData
+        }
+
+    }
 }

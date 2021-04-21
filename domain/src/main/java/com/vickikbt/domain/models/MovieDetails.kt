@@ -1,6 +1,7 @@
 package com.vickikbt.domain.models
 
 
+//@Parcelize
 data class MovieDetails(
     val adult: Boolean,
 

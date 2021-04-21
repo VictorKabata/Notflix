@@ -1,18 +1,22 @@
 package com.vickikbt.data.cache.daos
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.vickikbt.data.models.entity.MovieDetailsEntity
 import com.vickikbt.data.models.entity.MovieEntity
+import com.vickikbt.domain.models.MovieDetails
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MovieDetailsDao {
-    //This interface class is used to JOIN movieId from various tables
 
-    //@Query("SELECT * FROM `Popular Result Table` INNER JOIN `Upcoming Result Table` ON `Popular Result Table.` ")
+    @Insert(onConflict= OnConflictStrategy.REPLACE)
+    suspend fun saveMovieDetails(movieDetailsEntity:MovieDetailsEntity)
 
-    //@Query("SELECT * FROM `Popular Result Table`, `Upcoming Result Table` WHERE id=:=id")
-    //suspend fun getMovieDetails(id:Int): Flow<MovieEntity>
+    @Query("SELECT * FROM `Movie Details Table` WHERE id=:movieId")
+    fun getMovieDetails(movieId:Int):Flow<MovieDetailsEntity>
 
 
 }

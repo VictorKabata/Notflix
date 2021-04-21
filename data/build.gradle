@@ -65,4 +65,7 @@ dependencies {
 
     //DataStore
     implementation dataDependencies.datastore
+
+    //Timber dep- For lightweight simplified logging
+    implementation appDependencies.timber
 }

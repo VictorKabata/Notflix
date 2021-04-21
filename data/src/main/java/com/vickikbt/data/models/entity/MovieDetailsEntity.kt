@@ -20,15 +20,14 @@ data class MovieDetailsEntity(
     @ColumnInfo(name = "Budget")
     val budget: Int,
 
-    //@ColumnInfo(name = "Genres")
     @Embedded(prefix = "Genre ")
     val genres: List<GenreEntity>,
 
     @ColumnInfo(name = "HomePage")
     val homepage: String,
 
-    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "ID")
+    @PrimaryKey(autoGenerate = false)
     val id: Int,
 
     @ColumnInfo(name = "IMDB ID")
@@ -49,11 +48,9 @@ data class MovieDetailsEntity(
     @ColumnInfo(name = "Poster Path")
     val posterPath: String,
 
-    //@ColumnInfo(name = "Production Companies")
     @Embedded(prefix = "Production Companies ")
     val productionCompanies: List<ProductionCompanyEntity>,
 
-    //@ColumnInfo(name = "Production Country")
     @Embedded(prefix = "Production Country ")
     val productionCountries: List<ProductionCountryEntity>,
 
@@ -66,7 +63,6 @@ data class MovieDetailsEntity(
     @ColumnInfo(name = "Runtime")
     val runtime: Int,
 
-    //@ColumnInfo(name = "Spoken Languages")
     @Embedded(prefix = "Spoken Languages")
     val spokenLanguages: List<SpokenLanguageEntity>,
 
@@ -87,4 +83,6 @@ data class MovieDetailsEntity(
 
     @ColumnInfo(name = "Vote Count")
     val voteCount: Int
-)
+){
+
+}

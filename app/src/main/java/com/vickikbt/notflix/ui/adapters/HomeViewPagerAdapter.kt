@@ -61,11 +61,6 @@ class HomeViewPagerAdapter constructor(
         return binding.root
     }
 
-    /*private fun navigateToMovieDetails(view:View){
-        val action=HomeFragmentDirections.homeToMovieDetails(show.id)
-        it.findNavController().navigate(action)
-    }*/
-
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         container.removeView(`object` as View)
     }

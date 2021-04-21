@@ -4,7 +4,6 @@ import com.vickikbt.domain.repositories.IMovieDetailsRepository
 
 class GetMovieDetailsUseCase constructor(private val movieDetailsRepository: IMovieDetailsRepository) {
 
-    //TODO:
-    //suspend operator fun invoke(movieId:Int) =movieDetailsRepository.getMovieDetails(movieId)
+    suspend operator fun invoke(movieId:Int) =movieDetailsRepository.fetchMovieDetails(movieId)
 
 }
