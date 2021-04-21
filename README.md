@@ -7,7 +7,7 @@
 </p>
 
 
-# Notflix
+# Notflix  🛠️Work In Progress🛠
 
  An android app built using Kotlin that consumes [TMDB API]("https://developers.themoviedb.org/3") to display current trending, upcoming and popular movies🍿 and tvshows🎬. It has been built following Clean Architecture Principle, Repository Pattern, MVVM Architecture in the presentation layer as well as jetpack components.
 
@@ -15,7 +15,8 @@
  1. To learn the approch of implementing clean architecture and [SOLID principles](https://en.wikipedia.org/wiki/SOLID#:~:text=The%20SOLID%20concepts%20are%3A,%2C%20but%20closed%20for%20modification.%22) in an android app.
  2. To learn libraries/tools supported by Google and most of the android development communities.
  3. To experiment with modularization and dynamic feature modules.
- 4. Demonstrate best developement practices by utilizing up to date tech-stack .
+ 4. To learn implementation of Picture-in-Picture.
+ 5. Demonstrate best developement practices by utilizing up to date tech-stack .
 
  > The apk can be downloaded [here]("").
 
