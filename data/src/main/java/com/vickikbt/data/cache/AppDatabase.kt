@@ -7,13 +7,10 @@ import com.vickikbt.data.cache.converters.*
 import com.vickikbt.data.cache.daos.MovieDetailsDao
 import com.vickikbt.data.cache.daos.PopularShowsDao
 import com.vickikbt.data.cache.daos.UpcomingShowsDao
-import com.vickikbt.data.models.entity.MovieDetailsEntity
-import com.vickikbt.data.models.entity.MovieEntity
-import com.vickikbt.data.models.entity.PopularResultEntity
-import com.vickikbt.data.models.entity.UpcomingResultEntity
+import com.vickikbt.data.models.entity.*
 
 @Database(
-    entities = [PopularResultEntity::class, MovieEntity::class, UpcomingResultEntity::class, MovieDetailsEntity::class],
+    entities = [PopularResultEntity::class, MovieEntity::class, UpcomingResultEntity::class, MovieDetailsEntity::class, ProductionCompanyEntity::class, ProductionCountryEntity::class, SpokenLanguageEntity::class],
     version = 1,
     exportSchema = false
 )

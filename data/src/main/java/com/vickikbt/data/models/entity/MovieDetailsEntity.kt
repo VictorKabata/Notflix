@@ -4,17 +4,13 @@ import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.vickikbt.domain.models.Genre
-import com.vickikbt.domain.models.ProductionCompany
-import com.vickikbt.domain.models.ProductionCountry
-import com.vickikbt.domain.models.SpokenLanguage
 
 @Entity(tableName = "Movie Details Table")
 data class MovieDetailsEntity(
     @ColumnInfo(name = "Adult")
     val adult: Boolean,
 
-    @ColumnInfo(name = "Backdrop Path")
+    @ColumnInfo(name = "Backdrop_Path")
     val backdropPath: String,
 
     @ColumnInfo(name = "Budget")
@@ -30,13 +26,13 @@ data class MovieDetailsEntity(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
 
-    @ColumnInfo(name = "IMDB ID")
+    @ColumnInfo(name = "IMDB_ID")
     val imdbId: String,
 
-    @ColumnInfo(name = "Original Language")
+    @ColumnInfo(name = "Original_Language")
     val originalLanguage: String,
 
-    @ColumnInfo(name = "Original Title")
+    @ColumnInfo(name = "Original_Title")
     val originalTitle: String,
 
     @ColumnInfo(name = "Overview")
@@ -45,16 +41,16 @@ data class MovieDetailsEntity(
     @ColumnInfo(name = "Popularity")
     val popularity: Double,
 
-    @ColumnInfo(name = "Poster Path")
+    @ColumnInfo(name = "Poster_Path")
     val posterPath: String,
 
-    @Embedded(prefix = "Production Companies ")
+    @Embedded(prefix = "Production_Companies ")
     val productionCompanies: List<ProductionCompanyEntity>,
 
-    @Embedded(prefix = "Production Country ")
+    @Embedded(prefix = "Production_Country ")
     val productionCountries: List<ProductionCountryEntity>,
 
-    @ColumnInfo(name = "Release Date")
+    @ColumnInfo(name = "Release_Date")
     val releaseDate: String,
 
     @ColumnInfo(name = "Revenue")
@@ -63,7 +59,7 @@ data class MovieDetailsEntity(
     @ColumnInfo(name = "Runtime")
     val runtime: Int,
 
-    @Embedded(prefix = "Spoken Languages")
+    @Embedded(prefix = "Spoken_Languages")
     val spokenLanguages: List<SpokenLanguageEntity>,
 
     @ColumnInfo(name = "Status")
@@ -78,11 +74,9 @@ data class MovieDetailsEntity(
     @ColumnInfo(name = "Video")
     val video: Boolean,
 
-    @ColumnInfo(name = "Vote Average")
+    @ColumnInfo(name = "Vote_Average")
     val voteAverage: Double,
 
-    @ColumnInfo(name = "Vote Count")
+    @ColumnInfo(name = "Vote_Count")
     val voteCount: Int
-){
-
-}
+)
