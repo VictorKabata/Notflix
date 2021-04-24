@@ -11,7 +11,7 @@ data class MovieDetailsEntity(
     val adult: Boolean,
 
     @ColumnInfo(name = "Backdrop_Path")
-    val backdrop_path: String,
+    val backdropPath: String?,
 
     @ColumnInfo(name = "Budget")
     val budget: Int,
@@ -27,13 +27,13 @@ data class MovieDetailsEntity(
     val id: Int,
 
     @ColumnInfo(name = "IMDB_ID")
-    val imdb_id: String,
+    val imdbId: String,
 
     @ColumnInfo(name = "Original_Language")
-    val original_language: String,
+    val originalLanguage: String,
 
     @ColumnInfo(name = "Original_Title")
-    val original_title: String,
+    val originalTitle: String,
 
     @ColumnInfo(name = "Overview")
     val overview: String,
@@ -42,7 +42,7 @@ data class MovieDetailsEntity(
     val popularity: Double,
 
     @ColumnInfo(name = "Poster_Path")
-    val poster_path: String,
+    val posterPath: String,
 
     @ColumnInfo(name = "Production_Companies")
     val productionCompaniesEntity: List<ProductionCompanyEntity>,
@@ -51,7 +51,7 @@ data class MovieDetailsEntity(
     val productionCountriesEntity: List<ProductionCountryEntity>,
 
     @ColumnInfo(name = "Release Date")
-    val release_date: String,
+    val releaseDate: String?,
 
     @ColumnInfo(name = "Revenue")
     val revenue: Int,
@@ -75,8 +75,8 @@ data class MovieDetailsEntity(
     val video: Boolean,
 
     @ColumnInfo(name = "Vote_Average")
-    val vote_average: Double,
+    val voteAverage: Double,
 
     @ColumnInfo(name = "Vote_Count")
-    val vote_count: Int
+    val voteCount: Int
 )

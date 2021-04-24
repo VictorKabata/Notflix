@@ -3,7 +3,7 @@ package com.vickikbt.domain.models
 data class MovieDetails(
     val adult: Boolean,
 
-    val backdrop_path: String,
+    val backdropPath: String,
 
     val budget: Int,
 
@@ -15,27 +15,27 @@ data class MovieDetails(
 
     val imdb_id: String,
 
-    val original_language: String,
+    val originalLanguage: String,
 
-    val original_title: String,
+    val originalTitle: String,
 
     val overview: String,
 
     val popularity: Double,
 
-    val poster_path: String,
+    val posterPath: String,
 
-    val production_companies: List<ProductionCompany>,
+    val productionCompanies: List<ProductionCompany>,
 
-    val production_countries: List<ProductionCountry>,
+    val productionCountries: List<ProductionCountry>,
 
-    val release_date: String,
+    val releaseDate: String,
 
     val revenue: Int,
 
     val runtime: Int,
 
-    val spoken_languages: List<SpokenLanguage>,
+    val spokenLanguages: List<SpokenLanguage>,
 
     val status: String,
 
@@ -45,7 +45,7 @@ data class MovieDetails(
 
     val video: Boolean,
 
-    val vote_average: Double,
+    val voteAverage: Double,
 
-    val vote_count: Int
+    val voteCount: Int
 )
