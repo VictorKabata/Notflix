@@ -13,12 +13,12 @@ import com.vickikbt.notflix.databinding.FragmentHomeBinding
 import com.vickikbt.notflix.ui.adapters.HomeViewPagerAdapter
 import com.vickikbt.notflix.ui.adapters.PopularShowsRecyclerviewAdapter
 import com.vickikbt.notflix.ui.adapters.TopRatedShowsRecyclerviewAdapter
-import com.vickikbt.notflix.ui.fragments.movie_details.MovieDetailsViewModel
 import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), StateListener, OnClick {
@@ -26,16 +26,12 @@ class HomeFragment : Fragment(), StateListener, OnClick {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel by activityViewModels<HomeViewModel>()
 
-    private val movieDetailsViewModel by activityViewModels<MovieDetailsViewModel>()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         viewModel.stateListener = this
-
-        //binding.nestedScrollViewContainer.isNestedScrollingEnabled = false
 
         initUI()
 
@@ -78,10 +74,10 @@ class HomeFragment : Fragment(), StateListener, OnClick {
 
     }
 
-    override fun onClick(id: Int) {
-        movieDetailsViewModel.fetchMovieDetails(movieId = id)
+    override fun onClick(movieId: Int) {
+        Timber.e("Clicked movie with id: $movieId")
 
-        val action = HomeFragmentDirections.homeToMovieDetails(id)
+        val action = HomeFragmentDirections.homeToMovieDetails(movieId)
         findNavController().navigate(action)
     }
 

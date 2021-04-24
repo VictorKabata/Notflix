@@ -11,3 +11,5 @@ fun Context.toast(message: String) {
 fun Context.log(message: String) {
     Log.e("VickiKbt", message)
 }
+
+

@@ -5,7 +5,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface IMovieDetailsRepository {
 
-    //Fetch movie details from local database if available else fetch from network
+    //Fetch movie details from local database
+    suspend fun getMovieDetails(movieId: Int): Flow<MovieDetails>?
+
+    //Fetch movie details from api
     suspend fun fetchMovieDetails(movieId: Int): Flow<MovieDetails>
 
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.vickikbt.notflix.R
@@ -20,7 +21,8 @@ import timber.log.Timber
 class MovieDetailsFragment : Fragment(), StateListener {
 
     private lateinit var binding: FragmentMovieDetailsBinding
-    private val viewModel by viewModels<MovieDetailsViewModel>()
+
+    private val viewModel by activityViewModels<MovieDetailsViewModel>()
 
     private val args by navArgs<MovieDetailsFragmentArgs>()
 
@@ -28,18 +30,23 @@ class MovieDetailsFragment : Fragment(), StateListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
         viewModel.stateListener = this
+
+        Timber.e("MovieId Args in MovieDetails Fragment: ${args.movieId}")
 
         initUI()
 
         return binding.root
     }
 
-    private fun initUI() {
-        val movieId = args.movieId
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        viewModel.fetchMovieDetails(args.movieId)
+    }
+
+    private fun initUI() {
         viewModel.movieDetails.observe(viewLifecycleOwner, { movieDetails ->
             Timber.e("MovieDetails: $movieDetails")
         })

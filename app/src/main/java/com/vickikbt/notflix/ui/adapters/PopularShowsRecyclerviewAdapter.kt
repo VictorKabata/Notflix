@@ -12,6 +12,7 @@ import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.PopularShowItemBinding
 import com.vickikbt.notflix.util.OnClick
+import timber.log.Timber
 
 class PopularShowsRecyclerviewAdapter constructor(private val showList: List<Movie>, private val onClick: OnClick) :
     RecyclerView.Adapter<PopularShowsRecyclerViewHolder>() {
@@ -33,7 +34,9 @@ class PopularShowsRecyclerviewAdapter constructor(private val showList: List<Mov
 
         holder.bind(context, movie)
 
-        holder.itemView.setOnClickListener { onClick.onClick(movieId = movie.id) }
+        holder.itemView.setOnClickListener {
+            onClick.onClick(movieId = movie.id)
+        }
     }
 
     override fun getItemCount() = showList.size
