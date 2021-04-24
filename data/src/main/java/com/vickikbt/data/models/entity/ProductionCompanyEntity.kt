@@ -2,20 +2,18 @@ package com.vickikbt.data.models.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-@Entity(tableName = "Production Company Table")
+@Entity(tableName = "Production_Company_Table")
 data class ProductionCompanyEntity(
-    @ColumnInfo(name = "ID")
-    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "Company_ID")
     val id: Int,
 
-    @ColumnInfo(name = "Logo Path")
-    val logoPath: String?,
+    @ColumnInfo(name = "Logo_Path")
+    val logo_path: String,
 
     @ColumnInfo(name = "Name")
     val name: String,
 
-    @ColumnInfo(name = "Original Country")
-    val originCountry: String
+    @ColumnInfo(name = "Original_Country")
+    val origin_country: String
 )

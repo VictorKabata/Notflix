@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Popular Result Table")
+@Entity(tableName = "Popular_Result_Table")
 data class PopularResultEntity(
 
     @ColumnInfo(name = "Page")

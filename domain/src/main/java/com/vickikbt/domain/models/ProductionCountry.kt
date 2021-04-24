@@ -1,9 +1,7 @@
 package com.vickikbt.domain.models
 
-
 data class ProductionCountry(
-
-    val iso31661: String,
+    val iso_3166_1: String,
 
     val name: String
 )

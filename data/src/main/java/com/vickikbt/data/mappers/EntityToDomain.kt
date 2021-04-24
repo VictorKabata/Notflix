@@ -51,29 +51,29 @@ internal fun UpcomingDatesEntity.toDomain(): UpcomingDates {
 internal fun MovieDetailsEntity.toDomain(): MovieDetails {
     return MovieDetails(
         this.adult,
-        this.backdropPath,
+        this.backdrop_path,
         this.budget,
-        this.genres.map { it.toDomain() },
+        this.genresEntity.map { it.toDomain() },
         this.homepage,
         this.id,
-        this.imdbId,
-        this.originalLanguage,
-        this.originalTitle,
+        this.imdb_id,
+        this.original_language,
+        this.original_title,
         this.overview,
         this.popularity,
-        this.posterPath,
-        this.productionCompanies.map { it.toDomain() },
-        this.productionCountries.map { it.toDomain() },
-        this.releaseDate,
+        this.poster_path,
+        this.productionCompaniesEntity.map { it.toDomain() },
+        this.productionCountriesEntity.map { it.toDomain() },
+        this.release_date,
         this.revenue,
         this.runtime,
-        this.spokenLanguages.map { it.toDomain() },
+        this.spokenLanguagesEntity.map { it.toDomain() },
         this.status,
-        this.tagLine,
+        this.tagline,
         this.title,
         this.video,
-        this.voteAverage,
-        this.voteCount
+        this.vote_average,
+        this.vote_count
     )
 }
 
@@ -87,23 +87,23 @@ internal fun GenreEntity.toDomain(): Genre {
 internal fun ProductionCompanyEntity.toDomain(): ProductionCompany {
     return ProductionCompany(
         this.id,
-        this.logoPath,
+        this.logo_path,
         this.name,
-        this.originCountry
+        this.origin_country
     )
 }
 
 internal fun ProductionCountryEntity.toDomain(): ProductionCountry {
     return ProductionCountry(
-        this.iso31661,
+        this.iso_3166_1,
         this.name
     )
 }
 
 internal fun SpokenLanguageEntity.toDomain(): SpokenLanguage {
     return SpokenLanguage(
-        this.englishName,
-        this.iso6391,
+        this.english_name,
+        this.iso_639_1,
         this.name
     )
 }

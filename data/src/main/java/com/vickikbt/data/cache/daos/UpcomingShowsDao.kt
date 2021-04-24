@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.vickikbt.data.models.entity.PopularResultEntity
 import com.vickikbt.data.models.entity.UpcomingResultEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -14,12 +13,12 @@ interface UpcomingShowsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveUpcomingShows(upcomingResultEntity: UpcomingResultEntity)
 
-    @Query("SELECT * FROM `Upcoming Result Table`")
+    @Query("SELECT * FROM Upcoming_Result_Table")
     fun getUpcomingShows(): Flow<UpcomingResultEntity>
 
-    @Query("DELETE FROM `Upcoming Result Table`")
+    @Query("DELETE FROM Upcoming_Result_Table")
     suspend fun deleteUpcomingShows()
 
-    @Query("SELECT COUNT(*) FROM `Upcoming Result Table`")
+    @Query("SELECT COUNT(*) FROM Upcoming_Result_Table")
     suspend fun isUpcomingCacheAvailable(): Int
 }

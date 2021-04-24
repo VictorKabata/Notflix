@@ -13,12 +13,12 @@ interface PopularShowsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun savePopularShows(popularResultEntity: PopularResultEntity)
 
-    @Query("SELECT * FROM `Popular Result Table`")
+    @Query("SELECT * FROM Popular_Result_Table")
     fun getPopularShows(): Flow<PopularResultEntity>
 
-    @Query("DELETE FROM `Popular Result Table`")
+    @Query("DELETE FROM Popular_Result_Table")
     suspend fun deletePopularShows()
 
-    @Query("SELECT COUNT(*) FROM `Popular Result Table`")
+    @Query("SELECT COUNT(*) FROM Popular_Result_Table")
     suspend fun isPopularCacheAvailable(): Int
 }

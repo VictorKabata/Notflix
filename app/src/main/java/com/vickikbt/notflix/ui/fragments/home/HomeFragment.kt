@@ -79,10 +79,10 @@ class HomeFragment : Fragment(), StateListener, OnClick {
 
     //TODO: pass the parcelirazied movie detail object
     override fun click(id:Int) {
-        viewModel.fetchMovieDetails(movieId = id).observe(viewLifecycleOwner,{movieDetails->
+        /*viewModel.fetchMovieDetails(movieId = id).observe(viewLifecycleOwner,{movieDetails->
         val action=HomeFragmentDirections.homeToMovieDetails(id)
         findNavController().navigate(action)
-        })
+        })*/
     }
 
 

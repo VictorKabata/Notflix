@@ -1,23 +1,20 @@
 package com.vickikbt.data.models.dto
 
+
 import com.google.gson.annotations.SerializedName
-import com.vickikbt.domain.models.Genre
-import com.vickikbt.domain.models.ProductionCompany
-import com.vickikbt.domain.models.ProductionCountry
-import com.vickikbt.domain.models.SpokenLanguage
 
 data class MovieDetailsDto(
     @SerializedName("adult")
     val adult: Boolean,
 
-    @SerializedName("backdrop_path")
+    @SerializedName("backdropPath")
     val backdropPath: String,
 
     @SerializedName("budget")
     val budget: Int,
 
     @SerializedName("genres")
-    val genres: List<GenreDto>,
+    val genreDtos: List<GenreDto>,
 
     @SerializedName("homepage")
     val homepage: String,
@@ -44,29 +41,28 @@ data class MovieDetailsDto(
     val posterPath: String,
 
     @SerializedName("production_companies")
-    val productionCompanies: List<ProductionCompanyDto>,
+    val productionCompanyDtos: List<ProductionCompanyDto>,
 
     @SerializedName("production_countries")
-    val productionCountries: List<ProductionCountryDto>,
+    val productionCountryDtos: List<ProductionCountryDto>,
 
-    @SerializedName("release_date")
+    @SerializedName("releaseDate")
     val releaseDate: String,
 
     @SerializedName("revenue")
     val revenue: Int,
 
-    //Like-242
     @SerializedName("runtime")
     val runtime: Int,
 
     @SerializedName("spoken_languages")
-    val spokenLanguages: List<SpokenLanguageDto>,
+    val spokenLanguageDtos: List<SpokenLanguageDto>,
 
     @SerializedName("status")
     val status: String,
 
     @SerializedName("tagline")
-    val tagLine: String,
+    val tagline: String,
 
     @SerializedName("title")
     val title: String,

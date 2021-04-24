@@ -2,18 +2,15 @@ package com.vickikbt.data.models.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-@Entity(tableName = "Spoken Language Table")
+@Entity(tableName = "Spoken_Language_Table")
 data class SpokenLanguageEntity(
+    @ColumnInfo(name = "English_Name")
+    val english_name: String,
 
-    @ColumnInfo(name = "English Name")
-    val englishName: String,
-
-    @ColumnInfo(name = "ISO6391")
-    val iso6391: String,
+    @ColumnInfo(name = "ISO_639_1")
+    val iso_639_1: String,
 
     @ColumnInfo(name = "Name")
-    @PrimaryKey(autoGenerate = false)
     val name: String
 )

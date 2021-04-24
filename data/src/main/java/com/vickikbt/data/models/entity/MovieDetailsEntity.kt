@@ -5,21 +5,21 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Movie Details Table")
+@Entity(tableName = "Movie_Details_Table")
 data class MovieDetailsEntity(
     @ColumnInfo(name = "Adult")
     val adult: Boolean,
 
     @ColumnInfo(name = "Backdrop_Path")
-    val backdropPath: String,
+    val backdrop_path: String,
 
     @ColumnInfo(name = "Budget")
     val budget: Int,
 
-    @Embedded(prefix = "Genre ")
-    val genres: List<GenreEntity>,
+    @ColumnInfo(name = "Genres")
+    val genresEntity: List<GenreEntity>,
 
-    @ColumnInfo(name = "HomePage")
+    @ColumnInfo(name = "Homepage")
     val homepage: String,
 
     @ColumnInfo(name = "ID")
@@ -27,13 +27,13 @@ data class MovieDetailsEntity(
     val id: Int,
 
     @ColumnInfo(name = "IMDB_ID")
-    val imdbId: String,
+    val imdb_id: String,
 
     @ColumnInfo(name = "Original_Language")
-    val originalLanguage: String,
+    val original_language: String,
 
     @ColumnInfo(name = "Original_Title")
-    val originalTitle: String,
+    val original_title: String,
 
     @ColumnInfo(name = "Overview")
     val overview: String,
@@ -42,16 +42,16 @@ data class MovieDetailsEntity(
     val popularity: Double,
 
     @ColumnInfo(name = "Poster_Path")
-    val posterPath: String,
+    val poster_path: String,
 
-    @Embedded(prefix = "Production_Companies ")
-    val productionCompanies: List<ProductionCompanyEntity>,
+    @ColumnInfo(name = "Production_Companies")
+    val productionCompaniesEntity: List<ProductionCompanyEntity>,
 
-    @Embedded(prefix = "Production_Country ")
-    val productionCountries: List<ProductionCountryEntity>,
+    @ColumnInfo(name = "Production_Country")
+    val productionCountriesEntity: List<ProductionCountryEntity>,
 
-    @ColumnInfo(name = "Release_Date")
-    val releaseDate: String,
+    @ColumnInfo(name = "Release Date")
+    val release_date: String,
 
     @ColumnInfo(name = "Revenue")
     val revenue: Int,
@@ -59,14 +59,14 @@ data class MovieDetailsEntity(
     @ColumnInfo(name = "Runtime")
     val runtime: Int,
 
-    @Embedded(prefix = "Spoken_Languages")
-    val spokenLanguages: List<SpokenLanguageEntity>,
+    @ColumnInfo(name = "Spoken_Languages")
+    val spokenLanguagesEntity: List<SpokenLanguageEntity>,
 
     @ColumnInfo(name = "Status")
     val status: String,
 
-    @ColumnInfo(name = "Tag Line")
-    val tagLine: String,
+    @ColumnInfo(name = "Tagline")
+    val tagline: String,
 
     @ColumnInfo(name = "Title")
     val title: String,
@@ -75,8 +75,8 @@ data class MovieDetailsEntity(
     val video: Boolean,
 
     @ColumnInfo(name = "Vote_Average")
-    val voteAverage: Double,
+    val vote_average: Double,
 
     @ColumnInfo(name = "Vote_Count")
-    val voteCount: Int
+    val vote_count: Int
 )

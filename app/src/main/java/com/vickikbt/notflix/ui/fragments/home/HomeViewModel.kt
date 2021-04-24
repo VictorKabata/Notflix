@@ -6,7 +6,6 @@ import com.vickikbt.data.util.ApiException
 import com.vickikbt.data.util.NoInternetException
 import com.vickikbt.domain.models.PopularResult
 import com.vickikbt.domain.models.UpcomingResult
-import com.vickikbt.domain.usecases.FetchMovieDetailsUseCase
 import com.vickikbt.domain.usecases.FetchPopularMoviesUsecase
 import com.vickikbt.domain.usecases.FetchUpcomingMoviesUsecase
 import com.vickikbt.notflix.util.StateListener
@@ -15,8 +14,7 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel @ViewModelInject constructor(
     private val fetchPopularMoviesUsecase: FetchPopularMoviesUsecase,
-    private val fetchUpcomingMoviesUsecase: FetchUpcomingMoviesUsecase,
-    private val fetchMovieDetailsUseCase: FetchMovieDetailsUseCase
+    private val fetchUpcomingMoviesUsecase: FetchUpcomingMoviesUsecase
 ) :
     ViewModel() {
 
@@ -83,7 +81,7 @@ class HomeViewModel @ViewModelInject constructor(
     }
 
 
-    fun fetchMovieDetails(movieId: Int) = liveData {
+    /*fun fetchMovieDetails(movieId: Int) = liveData {
         stateListener?.onLoading()
 
         try {
@@ -104,5 +102,5 @@ class HomeViewModel @ViewModelInject constructor(
             return@liveData
         }
 
-    }
+    }*/
 }

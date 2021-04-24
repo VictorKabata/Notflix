@@ -1,14 +1,14 @@
 package com.vickikbt.data.models.dto
 
-import com.google.gson.annotations.SerializedName
 
+import com.google.gson.annotations.SerializedName
 
 data class ProductionCompanyDto(
     @SerializedName("id")
     val id: Int,
 
     @SerializedName("logo_path")
-    val logoPath: String?,
+    val logoPath: String,
 
     @SerializedName("name")
     val name: String,

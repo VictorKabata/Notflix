@@ -1,11 +1,9 @@
 package com.vickikbt.domain.models
 
-
-//@Parcelize
 data class MovieDetails(
     val adult: Boolean,
 
-    val backdropPath: String,
+    val backdrop_path: String,
 
     val budget: Int,
 
@@ -15,39 +13,39 @@ data class MovieDetails(
 
     val id: Int,
 
-    val imdbId: String,
+    val imdb_id: String,
 
-    val originalLanguage: String,
+    val original_language: String,
 
-    val originalTitle: String,
+    val original_title: String,
 
     val overview: String,
 
     val popularity: Double,
 
-    val posterPath: String,
+    val poster_path: String,
 
-    val productionCompanies: List<ProductionCompany>,
+    val production_companies: List<ProductionCompany>,
 
-    val productionCountries: List<ProductionCountry>,
+    val production_countries: List<ProductionCountry>,
 
-    val releaseDate: String,
+    val release_date: String,
 
     val revenue: Int,
 
     val runtime: Int,
 
-    val spokenLanguages: List<SpokenLanguage>,
+    val spoken_languages: List<SpokenLanguage>,
 
     val status: String,
 
-    val tagLine: String,
+    val tagline: String,
 
     val title: String,
 
     val video: Boolean,
 
-    val voteAverage: Double,
+    val vote_average: Double,
 
-    val voteCount: Int
+    val vote_count: Int
 )

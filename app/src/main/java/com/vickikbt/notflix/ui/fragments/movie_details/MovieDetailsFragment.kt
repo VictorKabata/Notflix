@@ -39,7 +39,7 @@ class MovieDetailsFragment : Fragment(), StateListener {
     private fun initUI() {
         val movieId=args.movieId
 
-        viewModel.fetchMovieDetails(791373)
+        //viewModel.fetchMovieDetails(791373)
     }
 
     override fun onLoading() {

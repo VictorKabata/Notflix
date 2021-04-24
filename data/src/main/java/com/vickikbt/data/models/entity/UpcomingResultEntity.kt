@@ -5,7 +5,7 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Upcoming Result Table")
+@Entity(tableName = "Upcoming_Result_Table")
 data class UpcomingResultEntity(
 
     @Embedded(prefix = "Upcoming_Dates")

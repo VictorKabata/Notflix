@@ -2,15 +2,12 @@ package com.vickikbt.data.models.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-@Entity(tableName = "Production Country Table")
+@Entity(tableName = "Production_Country_Table")
 data class ProductionCountryEntity(
+    @ColumnInfo(name = "ISO_3166_1")
+    val iso_3166_1: String,
 
-    @ColumnInfo(name="ISO31661")
-    val iso31661: String,
-
-    @ColumnInfo(name="Name")
-    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "Name")
     val name: String
 )

@@ -1,10 +1,9 @@
 package com.vickikbt.data.models.dto
 
+
 import com.google.gson.annotations.SerializedName
 
-
 data class SpokenLanguageDto(
-
     @SerializedName("english_name")
     val englishName: String,
 
