@@ -13,6 +13,7 @@ import com.vickikbt.notflix.databinding.FragmentHomeBinding
 import com.vickikbt.notflix.ui.adapters.HomeViewPagerAdapter
 import com.vickikbt.notflix.ui.adapters.PopularShowsRecyclerviewAdapter
 import com.vickikbt.notflix.ui.adapters.TopRatedShowsRecyclerviewAdapter
+import com.vickikbt.notflix.ui.fragments.movie_details.MovieDetailsViewModel
 import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
@@ -25,7 +26,7 @@ class HomeFragment : Fragment(), StateListener, OnClick {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel by activityViewModels<HomeViewModel>()
 
-    //private val movieDetailsViewModel by viewModels<MovieDetailsViewModel>()
+    private val movieDetailsViewModel by activityViewModels<MovieDetailsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,30 +60,29 @@ class HomeFragment : Fragment(), StateListener, OnClick {
         //TODO: Loads up top rated movies list to recyclerview adapter
         viewModel.upcomingMovies.observe(viewLifecycleOwner, { result ->
             binding.recyclerviewTopRatedMovies.adapter =
-                TopRatedShowsRecyclerviewAdapter(result.movies)
+                TopRatedShowsRecyclerviewAdapter(result.movies, this)
         })
 
         //Loads up popular tv shows list to recyclerview adapter
         viewModel.upcomingMovies.observe(viewLifecycleOwner, { result ->
             binding.recyclerviewPopularTvShows.adapter =
-                PopularShowsRecyclerviewAdapter(result.movies,this)
+                PopularShowsRecyclerviewAdapter(result.movies, this)
         })
 
         //Loads up top rated tv shows list to recyclerview adapter
         viewModel.popularMovies.observe(viewLifecycleOwner, { result ->
             binding.recyclerviewTopRatedTvShows.adapter =
-                TopRatedShowsRecyclerviewAdapter(result.movies)
+                TopRatedShowsRecyclerviewAdapter(result.movies, this)
         })
 
 
     }
 
-    //TODO: pass the parcelirazied movie detail object
-    override fun click(id:Int) {
-        /*viewModel.fetchMovieDetails(movieId = id).observe(viewLifecycleOwner,{movieDetails->
-        val action=HomeFragmentDirections.homeToMovieDetails(id)
+    override fun onClick(id: Int) {
+        movieDetailsViewModel.fetchMovieDetails(movieId = id)
+
+        val action = HomeFragmentDirections.homeToMovieDetails(id)
         findNavController().navigate(action)
-        })*/
     }
 
 

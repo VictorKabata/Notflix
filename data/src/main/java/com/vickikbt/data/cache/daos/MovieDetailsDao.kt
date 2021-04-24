@@ -5,16 +5,15 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.vickikbt.data.models.entity.MovieDetailsEntity
-import com.vickikbt.data.models.entity.PopularResultEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MovieDetailsDao {
 
-    /*@Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveMovieDetails(movieDetails: MovieDetailsEntity)*/
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveMovieDetails(movieDetails: MovieDetailsEntity)
 
-    @Query("SELECT * FROM Movie_Details_Table")
-    fun getPopularShows(): Flow<MovieDetailsEntity>
+    @Query("SELECT * FROM Movie_Details_Table WHERE ID=:movieId")
+    fun getPopularShows(movieId: Int): Flow<MovieDetailsEntity>?
 
 }

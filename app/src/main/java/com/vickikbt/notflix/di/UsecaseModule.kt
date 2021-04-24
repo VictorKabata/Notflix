@@ -3,10 +3,13 @@ package com.vickikbt.notflix.di
 import com.vickikbt.data.cache.AppDatabase
 import com.vickikbt.data.datastore.TimeDatastore
 import com.vickikbt.data.network.ApiService
+import com.vickikbt.data.repository.MovieDetailsRepository
 import com.vickikbt.data.repository.PopularMoviesRepository
 import com.vickikbt.data.repository.UpcomingMoviesRepository
+import com.vickikbt.data.sources.MovieDetailsDataSource
 import com.vickikbt.data.sources.PopularMoviesDataSource
 import com.vickikbt.data.sources.UpcomingMoviesDataSource
+import com.vickikbt.domain.usecases.FetchMovieDetailsUseCase
 import com.vickikbt.domain.usecases.FetchPopularMoviesUsecase
 import com.vickikbt.domain.usecases.FetchUpcomingMoviesUsecase
 import dagger.Module
@@ -58,7 +61,7 @@ object UsecaseModule {
         return FetchUpcomingMoviesUsecase(upcomingMoviesRepository)
     }
 
-    /*@Provides
+    @Provides
     fun providesMoviesDetailsDataSource(
         apiService: ApiService,
         appDatabase: AppDatabase,
@@ -75,7 +78,7 @@ object UsecaseModule {
     @Provides
     fun providesMoviesDetailsUsecase(movieDetailsRepository: MovieDetailsRepository): FetchMovieDetailsUseCase {
         return FetchMovieDetailsUseCase(movieDetailsRepository)
-    }*/
+    }
 
 }
 

@@ -12,8 +12,12 @@ import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.TopRatedShowItemBinding
 import com.vickikbt.notflix.util.GlideUtil.getFelPalette
+import com.vickikbt.notflix.util.OnClick
 
-class TopRatedShowsRecyclerviewAdapter constructor(private val showList: List<Movie>) :
+class TopRatedShowsRecyclerviewAdapter constructor(
+    private val showList: List<Movie>,
+    private val onClick: OnClick
+) :
     RecyclerView.Adapter<TopRatedShowsRecyclerViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -32,6 +36,8 @@ class TopRatedShowsRecyclerviewAdapter constructor(private val showList: List<Mo
         val movie = showList[position]
 
         holder.bind(context, movie)
+
+        holder.itemView.setOnClickListener { onClick.onClick(movieId = movie.id) }
     }
 
     override fun getItemCount() = showList.size

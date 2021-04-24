@@ -33,7 +33,7 @@ class PopularShowsRecyclerviewAdapter constructor(private val showList: List<Mov
 
         holder.bind(context, movie)
 
-        holder.itemView.setOnClickListener { onClick.click(id = movie.id) }
+        holder.itemView.setOnClickListener { onClick.onClick(movieId = movie.id) }
     }
 
     override fun getItemCount() = showList.size

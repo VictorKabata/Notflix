@@ -14,6 +14,7 @@ import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MovieDetailsFragment : Fragment(), StateListener {
@@ -29,7 +30,7 @@ class MovieDetailsFragment : Fragment(), StateListener {
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
-        viewModel.stateListener=this
+        viewModel.stateListener = this
 
         initUI()
 
@@ -37,9 +38,11 @@ class MovieDetailsFragment : Fragment(), StateListener {
     }
 
     private fun initUI() {
-        val movieId=args.movieId
+        val movieId = args.movieId
 
-        //viewModel.fetchMovieDetails(791373)
+        viewModel.movieDetails.observe(viewLifecycleOwner, { movieDetails ->
+            Timber.e("MovieDetails: $movieDetails")
+        })
     }
 
     override fun onLoading() {
