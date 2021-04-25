@@ -51,7 +51,7 @@ internal fun UpcomingDatesEntity.toDomain(): UpcomingDates {
 internal fun MovieDetailsEntity.toDomain(): MovieDetails {
     return MovieDetails(
         this.adult,
-        this.backdropPath!!,
+        this.backdropPath,
         this.budget,
         this.genresEntity.map { it.toDomain() },
         this.homepage,
@@ -64,7 +64,7 @@ internal fun MovieDetailsEntity.toDomain(): MovieDetails {
         this.posterPath,
         this.productionCompaniesEntity.map { it.toDomain() },
         this.productionCountriesEntity.map { it.toDomain() },
-        this.releaseDate!!,
+        this.releaseDate,
         this.revenue,
         this.runtime,
         this.spokenLanguagesEntity.map { it.toDomain() },
@@ -87,7 +87,7 @@ internal fun GenreEntity.toDomain(): Genre {
 internal fun ProductionCompanyEntity.toDomain(): ProductionCompany {
     return ProductionCompany(
         this.id,
-        this.logo_path!!,
+        this.logo_path,
         this.name,
         this.origin_country
     )

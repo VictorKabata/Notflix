@@ -18,11 +18,11 @@ class ProductionCompanyEntityConverter {
     }
 
     @TypeConverter
-    fun to(companiesEntityString: String?): List<ProductionCompanyEntity>? {
-        if (companiesEntityString.isNullOrEmpty()) return null
+    fun to(productionCompaniesEntityString: String?): List<ProductionCompanyEntity>? {
+        if (productionCompaniesEntityString.isNullOrEmpty()) return null
 
         val type = object : TypeToken<List<ProductionCompanyEntity>?>() {}.type
-        return gson.fromJson(companiesEntityString, type)
+        return gson.fromJson(productionCompaniesEntityString, type)
     }
 
 }

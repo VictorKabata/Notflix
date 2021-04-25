@@ -75,8 +75,6 @@ class HomeFragment : Fragment(), StateListener, OnClick {
     }
 
     override fun onClick(movieId: Int) {
-        Timber.e("Clicked movie with id: $movieId")
-
         val action = HomeFragmentDirections.homeToMovieDetails(movieId)
         findNavController().navigate(action)
     }
@@ -90,8 +88,8 @@ class HomeFragment : Fragment(), StateListener, OnClick {
         requireActivity().log(message)
     }
 
-    override fun onError(message: String) {
-        requireActivity().toast(message)
+    override fun onError(message: String?) {
+        requireActivity().toast(message!!)
         requireActivity().log(message)
     }
 

@@ -14,50 +14,75 @@ import com.vickikbt.notflix.util.StateListener
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.io.IOException
 
 class MovieDetailsViewModel @ViewModelInject constructor(
     private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
     private val fetchMovieDetailsUseCase: FetchMovieDetailsUseCase
-) :
-    ViewModel() {
+) : ViewModel() {
 
     private val _movieDetailsMutableLiveData = MutableLiveData<MovieDetails>()
     val movieDetails: LiveData<MovieDetails> = _movieDetailsMutableLiveData
 
-    private val _movieId = MutableLiveData<Int>()
-    val movieId: LiveData<Int> = _movieId
+    /*private val _movieId = MutableLiveData<Int>()
+    val movieId: LiveData<Int> = _movieId*/
 
     var stateListener: StateListener? = null
 
-
-    fun fetchMovieDetails(movieId: Int) {
-        Timber.e("fetchingMovieDetails viewModel")
-
+    fun getMovieDetails(movieId: Int) {
         stateListener?.onLoading()
 
         viewModelScope.launch {
             try {
                 val getMovieDetailsResponse = getMovieDetailsUseCase.invoke(movieId)
-                val fetchMovieDetailsResponse = fetchMovieDetailsUseCase.invoke(movieId)
 
                 getMovieDetailsResponse?.collect { movieDetailsLocal ->
-                    if (movieDetailsLocal!=null) _movieDetailsMutableLiveData.value=movieDetailsLocal
-
-                    else{
-                        fetchMovieDetailsResponse.collect { movieDetailsApi->
-                            _movieDetailsMutableLiveData.value=movieDetailsApi
-                        }
-                    }
+                    Timber.e("Fetching from local storage")
+                    _movieDetailsMutableLiveData.value = movieDetailsLocal
+                    return@collect
                 }
                 return@launch
             } catch (e: ApiException) {
-                stateListener?.onError(e.message!!)
+                stateListener?.onError("${e.message}")
                 return@launch
             } catch (e: NoInternetException) {
-                stateListener?.onError(e.message!!)
+                stateListener?.onError("${e.message}")
+                return@launch
+            } catch (e: IOException) {
+                stateListener?.onError("${e.message}")
                 return@launch
             } catch (e: Exception) {
-                stateListener?.onError(e.message!!)
+                stateListener?.onError("${e.message}")
+                return@launch
+            }
+        }
+    }
+
+    fun fetchMovieDetails(movieId: Int) {
+        stateListener?.onLoading()
+
+        viewModelScope.launch {
+            try {
+                val fetchMovieDetailsResponse = fetchMovieDetailsUseCase.invoke(movieId)
+
+                Timber.e("Fetching from local api")
+
+                fetchMovieDetailsResponse.collect { movieDetailsApi ->
+                    _movieDetailsMutableLiveData.value = movieDetailsApi
+                    return@collect
+                }
+                return@launch
+            } catch (e: ApiException) {
+                stateListener?.onError("${e.message}")
+                return@launch
+            } catch (e: NoInternetException) {
+                stateListener?.onError("${e.message}")
+                return@launch
+            } catch (e: IOException) {
+                stateListener?.onError("${e.message}")
+                return@launch
+            } catch (e: Exception) {
+                stateListener?.onError("${e.message}")
                 return@launch
             }
         }

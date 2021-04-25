@@ -14,7 +14,7 @@ class ProductionCountryEntityConverter {
     fun from(productionCountryEntity: List<ProductionCountryEntity>): String? {
         if (productionCountryEntity.isNullOrEmpty()) return null
 
-        val type = object : TypeToken<List<ProductionCompanyEntity>?>() {}.type
+        val type = object : TypeToken<List<ProductionCountryEntity>?>() {}.type
         return gson.toJson(productionCountryEntity, type)
     }
 

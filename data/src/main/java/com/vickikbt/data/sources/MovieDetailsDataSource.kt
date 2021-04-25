@@ -42,19 +42,16 @@ class MovieDetailsDataSource @Inject constructor(
     //Retrieves movie detail based on id from SQLite if not available makes a network call to retrieve movie details from API
     fun getMovieDetails(movieId: Int): Flow<MovieDetails>? {
         val movieDetailsCacheResponse = appDatabase.movieDetailsDao().getPopularShows(movieId)
-
-        Timber.e("MovieDetailsDataSource: Fetching movie details from cache")
         return movieDetailsCacheResponse?.map { it.toDomain() }
     }
 
     //Retrieves movie detail based on id from API
     suspend fun fetchMovieDetails(movieId: Int): Flow<MovieDetails> {
-        Timber.e("MovieDetailsDataSource: Fetching movie details from network")
         val movieDetailsNetworkResponse: MovieDetailsDto = safeApiRequest { apiService.fetchMovieDetails(movieId, API_KEY, "en") }
 
-        //_movieDetails.value = movieDetailsNetworkResponse.toEntity()
+        _movieDetails.value = movieDetailsNetworkResponse.toEntity()
 
-        saveMovieDetails(movieDetailsNetworkResponse.toEntity())
+        //saveMovieDetails(movieDetailsNetworkResponse.toEntity())
 
         return flow { emit(movieDetailsNetworkResponse.toEntity()) }.map { it.toDomain() }
     }
