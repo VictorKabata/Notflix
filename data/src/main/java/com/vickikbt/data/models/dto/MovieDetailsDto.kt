@@ -5,74 +5,74 @@ import com.google.gson.annotations.SerializedName
 
 data class MovieDetailsDto(
     @SerializedName("adult")
-    val adult: Boolean,
+    val adult: Boolean?,
 
     @SerializedName("backdropPath")
-    val backdropPath: String,
+    val backdropPath: String?,
 
     @SerializedName("budget")
-    val budget: Int,
+    val budget: Int?,
 
     @SerializedName("genres")
-    val genreDtos: List<GenreDto>,
+    val genreDtos: List<GenreDto>?,
 
     @SerializedName("homepage")
-    val homepage: String,
+    val homepage: String?,
 
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
 
     @SerializedName("imdb_id")
-    val imdbId: String,
+    val imdbId: String?,
 
     @SerializedName("original_language")
-    val originalLanguage: String,
+    val originalLanguage: String?,
 
     @SerializedName("original_title")
-    val originalTitle: String,
+    val originalTitle: String?,
 
     @SerializedName("overview")
-    val overview: String,
+    val overview: String?,
 
     @SerializedName("popularity")
-    val popularity: Double,
+    val popularity: Double?,
 
     @SerializedName("poster_path")
-    val posterPath: String,
+    val posterPath: String?,
 
     @SerializedName("production_companies")
-    val productionCompanyDtos: List<ProductionCompanyDto>,
+    val productionCompanyDtos: List<ProductionCompanyDto>?,
 
     @SerializedName("production_countries")
-    val productionCountryDtos: List<ProductionCountryDto>,
+    val productionCountryDtos: List<ProductionCountryDto>?,
 
     @SerializedName("releaseDate")
-    val releaseDate: String,
+    val releaseDate: String?,
 
     @SerializedName("revenue")
-    val revenue: Int,
+    val revenue: Int?,
 
     @SerializedName("runtime")
-    val runtime: Int,
+    val runtime: Int?,
 
     @SerializedName("spoken_languages")
-    val spokenLanguageDtos: List<SpokenLanguageDto>,
+    val spokenLanguageDtos: List<SpokenLanguageDto>?,
 
     @SerializedName("status")
-    val status: String,
+    val status: String?,
 
     @SerializedName("tagline")
-    val tagline: String,
+    val tagline: String?,
 
     @SerializedName("title")
-    val title: String,
+    val title: String?,
 
     @SerializedName("video")
-    val video: Boolean,
+    val video: Boolean?,
 
     @SerializedName("vote_average")
-    val voteAverage: Double,
+    val voteAverage: Double?,
 
     @SerializedName("vote_count")
-    val voteCount: Int
+    val voteCount: Int?
 )

@@ -9,7 +9,6 @@ import com.vickikbt.data.repository.UpcomingMoviesRepository
 import com.vickikbt.data.sources.MovieDetailsDataSource
 import com.vickikbt.data.sources.PopularMoviesDataSource
 import com.vickikbt.data.sources.UpcomingMoviesDataSource
-import com.vickikbt.domain.usecases.FetchMovieDetailsUseCase
 import com.vickikbt.domain.usecases.GetMovieDetailsUseCase
 import com.vickikbt.domain.usecases.FetchPopularMoviesUsecase
 import com.vickikbt.domain.usecases.FetchUpcomingMoviesUsecase
@@ -79,11 +78,6 @@ object UsecaseModule {
     @Provides
     fun providesGetMoviesDetailsUsecase(movieDetailsRepository: MovieDetailsRepository): GetMovieDetailsUseCase {
         return GetMovieDetailsUseCase(movieDetailsRepository)
-    }
-
-    @Provides
-    fun providesFetchMoviesDetailsUsecase(movieDetailsRepository: MovieDetailsRepository): FetchMovieDetailsUseCase {
-        return FetchMovieDetailsUseCase(movieDetailsRepository)
     }
 
 }

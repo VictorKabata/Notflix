@@ -9,7 +9,4 @@ class MovieDetailsRepository constructor(private val movieDetailsDetailsDataSour
     IMovieDetailsRepository {
 
     override suspend fun getMovieDetails(movieId: Int)=movieDetailsDetailsDataSource.getMovieDetails(movieId)
-
-
-    override suspend fun fetchMovieDetails(movieId: Int) = movieDetailsDetailsDataSource.fetchMovieDetails(movieId)
 }

@@ -8,7 +8,4 @@ interface IMovieDetailsRepository {
     //Fetch movie details from local database
     suspend fun getMovieDetails(movieId: Int): Flow<MovieDetails>?
 
-    //Fetch movie details from api
-    suspend fun fetchMovieDetails(movieId: Int): Flow<MovieDetails>
-
 }
