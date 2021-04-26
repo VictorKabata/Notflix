@@ -1,10 +1,7 @@
 package com.vickikbt.data.network
 
 
-import com.vickikbt.data.models.dto.CastDto
-import com.vickikbt.data.models.dto.MovieDetailsDto
-import com.vickikbt.data.models.dto.PopularResultDto
-import com.vickikbt.data.models.dto.UpcomingResultDto
+import com.vickikbt.data.models.dto.*
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -37,6 +34,13 @@ interface ApiService {
         @Query("api_key") apiKey: String,
         @Query("language") language: String
     ): Response<CastDto>
+
+    @GET("movie/{movie_id}/videos")
+    suspend fun fetchMovieVideos(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): Response<VideoDto>
 
 
 }
