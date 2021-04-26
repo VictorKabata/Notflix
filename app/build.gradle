@@ -73,7 +73,7 @@ dependencies {
     api appDependencies.viewModel
 
     api appDependencies.glide
-    //kapt appDependencies.glideCompiler
+    //api appDependencies.glideTransformation
 
     api appDependencies.dotsIndicator
 

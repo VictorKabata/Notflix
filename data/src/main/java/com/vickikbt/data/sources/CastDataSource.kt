@@ -28,12 +28,12 @@ class CastDataSource @Inject constructor(
         }
     }
 
-    //Save a movie details to SQLite database
+    //Save a movie cast to SQLite database
     private suspend fun saveMovieCast(castEntity: CastEntity) =
         appDatabase.castDao().saveMovieCast(castEntity)
 
 
-    //Retrieves movie detail based on id from SQLite if not available makes a network call to retrieve movie details from API
+    //Retrieves movie cast based on id from SQLite if not available makes a network call to retrieve movie casts from API
     suspend fun getMovieCast(movieId: Int): Flow<Cast>? {
         val movieCastCacheResponse = appDatabase.castDao().getMovieCast(movieId)
 

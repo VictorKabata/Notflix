@@ -131,3 +131,23 @@ internal fun CastItemDto.toEntity(): CastItemEntity {
     )
 }
 
+internal fun VideoDto.toEntity(): VideoEntity {
+    return VideoEntity(
+        this.id,
+        this.videoItemDtos.map { it.toEntity() }
+    )
+}
+
+internal fun VideoItemDto.toEntity(): VideoItemEntity {
+    return VideoItemEntity(
+        this.id,
+        this.iso_3166_1,
+        this.iso_639_1,
+        this.key,
+        this.name,
+        this.site,
+        this.size,
+        this.type
+    )
+}
+

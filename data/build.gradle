@@ -54,7 +54,6 @@ dependencies {
     //Dependency Injection-
     implementation dataDependencies.hiltAndroid
     kapt dataDependencies.hiltAndroidCompiler
-    //kapt dataDependencies.hiltCompiler
 
     //Room
     api dataDependencies.roomRuntime

@@ -131,3 +131,23 @@ internal fun CastItemEntity.toDomain(): CastItem {
         this.profile_path
     )
 }
+
+internal fun VideoEntity.toDomain(): Video {
+    return Video(
+        this.id,
+        this.videoItemsEntity.map { it.toDomain() }
+    )
+}
+
+internal fun VideoItemEntity.toDomain(): VideoItem {
+    return VideoItem(
+        this.id,
+        this.iso_3166_1,
+        this.iso_639_1,
+        this.key,
+        this.name,
+        this.site,
+        this.size,
+        this.type
+    )
+}

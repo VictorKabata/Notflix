@@ -25,8 +25,8 @@ buildscript {
         hilt_version = "2.28-alpha"
         hilt_viewmodel_version = "1.0.0-alpha02"
         glide_version = "4.12.0"
+        glide_transformation_version = "4.0.0"
         networkx_version = "1.0"
-        //glide_transformation_version = "4.0.0"
         dotsIndicator_version = "1.0.1"
         datastore_version = "1.0.0-alpha08"
         fadingEdge_version = "1.0.0"
@@ -56,6 +56,7 @@ buildscript {
                 navFragment          : "androidx.navigation:navigation-fragment-ktx:$nav_version",
                 navUi                : "androidx.navigation:navigation-ui-ktx:$nav_version",
                 glide                : "com.github.bumptech.glide:glide:$glide_version",
+                glideTransformation  : "jp.wasabeef:glide-transformations:$glide_transformation_version",
                 dotsIndicator        : "com.github.tizisdeepan:dots:$dotsIndicator_version",
                 networkX             : "com.github.rommansabbir:NetworkX:$networkx_version",
 
@@ -114,7 +115,7 @@ buildscript {
     }
 }
 
-plugins{
+plugins {
     id "org.jlleitschuh.gradle.ktlint" version "$ktlint_version"
 }
 

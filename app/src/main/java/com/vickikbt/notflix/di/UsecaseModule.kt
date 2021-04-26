@@ -6,14 +6,8 @@ import com.vickikbt.data.network.ApiService
 import com.vickikbt.data.repository.MovieDetailsRepository
 import com.vickikbt.data.repository.PopularMoviesRepository
 import com.vickikbt.data.repository.UpcomingMoviesRepository
-import com.vickikbt.data.sources.CastDataSource
-import com.vickikbt.data.sources.MovieDetailsDataSource
-import com.vickikbt.data.sources.PopularMoviesDataSource
-import com.vickikbt.data.sources.UpcomingMoviesDataSource
-import com.vickikbt.domain.usecases.FetchMovieCastUseCase
-import com.vickikbt.domain.usecases.FetchMovieDetailsUseCase
-import com.vickikbt.domain.usecases.FetchPopularMoviesUsecase
-import com.vickikbt.domain.usecases.FetchUpcomingMoviesUsecase
+import com.vickikbt.data.sources.*
+import com.vickikbt.domain.usecases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -80,11 +74,20 @@ object UsecaseModule {
     }
 
     @Provides
+    fun providesVideosDataSource(
+        apiService: ApiService,
+        appDatabase: AppDatabase
+    ): VideoDataSource {
+        return VideoDataSource(apiService, appDatabase)
+    }
+
+    @Provides
     fun providesMoviesDetailsRepository(
         movieDetailsDataSource: MovieDetailsDataSource,
-        castDataSource: CastDataSource
+        castDataSource: CastDataSource,
+        videoDataSource: VideoDataSource
     ): MovieDetailsRepository {
-        return MovieDetailsRepository(movieDetailsDataSource, castDataSource)
+        return MovieDetailsRepository(movieDetailsDataSource, castDataSource, videoDataSource)
     }
 
     @Provides
@@ -93,8 +96,12 @@ object UsecaseModule {
     }
 
     @Provides
-    fun providesGetMoviesCastUsecase(movieDetailsRepository: MovieDetailsRepository): FetchMovieCastUseCase {
-        return FetchMovieCastUseCase(movieDetailsRepository)
+    fun providesGetMoviesCastUsecase(movieDetailsRepository: MovieDetailsRepository) =
+        FetchMovieCastUseCase(movieDetailsRepository)
+
+    @Provides
+    fun providesGetMoviesVideoUsecase(movieDetailsRepository: MovieDetailsRepository): FetchMovieVideoUseCase {
+        return FetchMovieVideoUseCase(movieDetailsRepository)
     }
 
 }

@@ -11,10 +11,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.vickikbt.data.util.DataFormatter.getMovieDuration
 import com.vickikbt.data.util.DataFormatter.getPopularity
 import com.vickikbt.data.util.DataFormatter.getRating
 import com.vickikbt.data.util.DataFormatter.getReleaseYear
+import com.vickikbt.domain.models.MovieDetails
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.FragmentMovieDetailsBinding
 import com.vickikbt.notflix.ui.adapters.CastRecyclerviewAdapter
@@ -51,7 +55,6 @@ class MovieDetailsFragment : Fragment(), StateListener {
 
     @SuppressLint("SetTextI18n")
     private fun initUI() {
-
         viewModel.getMovieDetails(args.movieId)
 
         viewModel.movieDetails.observe(viewLifecycleOwner, { movieDetails ->
@@ -81,17 +84,37 @@ class MovieDetailsFragment : Fragment(), StateListener {
 
             initCastRecyclerview()
 
+            initVideoPlayer(movieDetails)
         })
     }
 
     private fun initCastRecyclerview() {
         viewModel.cast.observe(viewLifecycleOwner, { cast ->
-            if (cast != null) binding.recyclerviewCast.adapter = CastRecyclerviewAdapter(cast.castItem)
+            if (cast != null) binding.recyclerviewCast.adapter =
+                CastRecyclerviewAdapter(cast.castItem)
             else {
                 binding.textViewCastTitle.visibility = GONE
                 binding.recyclerviewPopularMovies.visibility = GONE
             }
         })
+    }
+
+    private fun initVideoPlayer(movieDetails:MovieDetails) {
+            viewModel.video.observe(viewLifecycleOwner) { videos ->
+                val video = videos.videoItems[0]
+
+                binding.cardViewTrailer.setOnClickListener {
+                    requireActivity().toast("Feature: Play ${video.name} of type ${video.type} from ${video.site} ")
+                }
+
+                Glide.with(requireActivity())
+                    .load(movieDetails.backdropPath)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .placeholder(R.drawable.image_placeholder)
+                    .error(R.drawable.image_placeholder)
+                    //.apply(RequestOptions.bitmapTransform(BlurTransformation(25, 3)))
+                    .into(binding.imageViewVideoPlaceholder)
+            }
     }
 
     private fun makeTransparentStatusBar(isTransparent: Boolean = true) {
