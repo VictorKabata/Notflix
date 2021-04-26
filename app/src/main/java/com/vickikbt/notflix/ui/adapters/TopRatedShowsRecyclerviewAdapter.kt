@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.vickikbt.data.util.DataFormatter.dateFormatter
+import com.vickikbt.data.util.DataFormatter.getReleaseDate
 import com.vickikbt.data.util.DataFormatter.getRating
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.R
-import com.vickikbt.notflix.databinding.TopRatedShowItemBinding
+import com.vickikbt.notflix.databinding.ItemTopRatedShowBinding
 import com.vickikbt.notflix.util.GlideUtil.getFelPalette
 import com.vickikbt.notflix.util.OnClick
 
@@ -25,8 +25,8 @@ class TopRatedShowsRecyclerviewAdapter constructor(
         viewType: Int
     ): TopRatedShowsRecyclerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: TopRatedShowItemBinding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.top_rated_show_item, parent, false)
+        val binding: ItemTopRatedShowBinding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.item_top_rated_show, parent, false)
 
         return TopRatedShowsRecyclerViewHolder(binding)
     }
@@ -44,7 +44,7 @@ class TopRatedShowsRecyclerviewAdapter constructor(
 
 }
 
-class TopRatedShowsRecyclerViewHolder(private val binding: TopRatedShowItemBinding) :
+class TopRatedShowsRecyclerViewHolder(private val binding: ItemTopRatedShowBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     @SuppressLint("SetTextI18n")
@@ -54,7 +54,7 @@ class TopRatedShowsRecyclerViewHolder(private val binding: TopRatedShowItemBindi
 
         binding.textViewShowTitle.text = "${movie.title}."
         binding.ratingBarShowRating.rating = getRating(movie.vote_average)
-        binding.textViewReleaseDate.text = "${dateFormatter(movie.release_date)}."
+        binding.textViewReleaseDate.text = "${getReleaseDate(movie.release_date)}."
     }
 
 }

@@ -30,12 +30,12 @@
             android:ellipsize="end"
             android:fontFamily="@font/roboto_black"
             android:maxLines="2"
-            android:textColor="@color/primaryColor"
+            android:textColor="@color/primaryTextColor"
             android:textSize="32sp"
             app:layout_constraintBottom_toTopOf="@id/ratingBar_trendingShows"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/ratingBar_trendingShows"
-            tools:text="@string/placeHolder_showTitle" />
+            tools:text="@string/placeholder_movie_title" />
 
         <RatingBar
             android:id="@+id/ratingBar_trendingShows"

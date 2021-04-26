@@ -15,7 +15,6 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.vickikbt.data.util.DataFormatter.loadImage
 import com.vickikbt.notflix.R
 
@@ -62,7 +61,7 @@ object GlideUtil {
                         color = palette!!.getVibrantColor(
                             ContextCompat.getColor(
                                 context,
-                                R.color.primaryColor
+                                R.color.primaryTextColor
                             )
                         )
                         fel.setBackgroundColor(color!!)
@@ -114,7 +113,7 @@ object GlideUtil {
                         color = palette!!.getVibrantColor(
                             ContextCompat.getColor(
                                 context,
-                                R.color.primaryColor
+                                R.color.primaryTextColor
                             )
                         )
 

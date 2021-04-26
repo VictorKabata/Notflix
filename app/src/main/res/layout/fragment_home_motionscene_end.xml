@@ -65,7 +65,7 @@
             android:fontFamily="@font/roboto_black"
             android:maxLines="1"
             android:text="@string/popular_movies"
-            android:textColor="@color/primaryColor"
+            android:textColor="@color/primaryTextColor"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageView_homeLogo" />
@@ -94,7 +94,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintHeight_min="160dp"
             app:layout_constraintTop_toBottomOf="@id/textView_popularMovies"
-            tools:listitem="@layout/popular_show_item" />
+            tools:listitem="@layout/item_popular_show" />
 
         <TextView
             android:id="@+id/textView_topRatedMovies"
@@ -106,7 +106,7 @@
             android:fontFamily="@font/roboto_black"
             android:maxLines="1"
             android:text="@string/top_rated_movies"
-            android:textColor="@color/primaryColor"
+            android:textColor="@color/primaryTextColor"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recyclerview_popularMovies" />
@@ -135,7 +135,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintHeight_min="214dp"
             app:layout_constraintTop_toBottomOf="@id/textView_topRatedMovies"
-            tools:listitem="@layout/top_rated_show_item" />
+            tools:listitem="@layout/item_top_rated_show" />
 
         <TextView
             android:id="@+id/textView_popularTvShows"
@@ -147,7 +147,7 @@
             android:fontFamily="@font/roboto_black"
             android:maxLines="1"
             android:text="@string/popular_tv_shows"
-            android:textColor="@color/primaryColor"
+            android:textColor="@color/primaryTextColor"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recyclerview_topRatedMovies" />
@@ -176,7 +176,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintHeight_min="160dp"
             app:layout_constraintTop_toBottomOf="@id/textView_popularTvShows"
-            tools:listitem="@layout/popular_show_item" />
+            tools:listitem="@layout/item_popular_show" />
 
         <TextView
             android:id="@+id/textView_topRatedTvShows"
@@ -188,7 +188,7 @@
             android:fontFamily="@font/roboto_black"
             android:maxLines="1"
             android:text="@string/top_rated_tv_shows"
-            android:textColor="@color/primaryColor"
+            android:textColor="@color/primaryTextColor"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recyclerview_popularTvShows" />
@@ -217,7 +217,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintHeight_min="214dp"
             app:layout_constraintTop_toBottomOf="@id/textView_topRatedTvShows"
-            tools:listitem="@layout/top_rated_show_item" />
+            tools:listitem="@layout/item_top_rated_show" />
 
         <!--</androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>-->

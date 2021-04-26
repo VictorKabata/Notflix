@@ -66,10 +66,10 @@ class HomeFragment : Fragment(), StateListener, OnClick {
         })
 
         //Loads up top rated tv shows list to recyclerview adapter
-        viewModel.popularMovies.observe(viewLifecycleOwner, { result ->
+        /*viewModel.popularMovies.observe(viewLifecycleOwner, { result ->
             binding.recyclerviewTopRatedTvShows.adapter =
                 TopRatedShowsRecyclerviewAdapter(result.movies, this)
-        })
+        })*/
 
 
     }

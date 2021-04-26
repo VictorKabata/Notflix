@@ -5,17 +5,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.viewpager.widget.PagerAdapter
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.vickikbt.data.util.DataFormatter.getRating
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.R
-import com.vickikbt.notflix.databinding.HomeViewpagerItemBinding
+import com.vickikbt.notflix.databinding.ItemHomeViewpagerBinding
 import com.vickikbt.notflix.ui.fragments.home.HomeFragmentDirections
-import com.vickikbt.notflix.util.GlideUtil.getFelPalette
 import com.vickikbt.notflix.util.GlideUtil.getScrimPalette
 
 class HomeViewPagerAdapter constructor(
@@ -30,8 +27,8 @@ class HomeViewPagerAdapter constructor(
     @SuppressLint("SetTextI18n")
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val layoutInflater = LayoutInflater.from(context)
-        val binding: HomeViewpagerItemBinding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.home_viewpager_item, container, false)
+        val binding: ItemHomeViewpagerBinding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.item_home_viewpager, container, false)
 
         //val randomPosition = Random(position).nextInt()
         val show = showsList[position]
@@ -49,7 +46,7 @@ class HomeViewPagerAdapter constructor(
         container.addView(binding.root, 0)
 
         binding.textViewTrendingShows.setOnClickListener {
-            val action=HomeFragmentDirections.homeToMovieDetails(show.id)
+            val action = HomeFragmentDirections.homeToMovieDetails(show.id)
             it.findNavController().navigate(action)
         }
 

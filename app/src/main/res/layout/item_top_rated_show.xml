@@ -59,13 +59,13 @@
                         android:maxLines="2"
                         android:textAlignment="viewStart"
                         android:textAllCaps="true"
-                        android:textColor="@color/primaryColor"
+                        android:textColor="@color/primaryTextColor"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toTopOf="@id/ratingBar_showRating"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
 
-                        tools:text="@string/placeHolder_showTitle" />
+                        tools:text="@string/placeholder_movie_title" />
 
                     <RatingBar
                         android:id="@+id/ratingBar_showRating"
@@ -86,7 +86,7 @@
                         android:layout_height="0dp"
                         android:layout_marginVertical="2dp"
                         android:layout_marginStart="3dp"
-                        android:background="@color/primaryColor"
+                        android:background="@color/primaryTextColor"
                         app:layout_constraintBottom_toBottomOf="@id/ratingBar_showRating"
                         app:layout_constraintStart_toEndOf="@id/ratingBar_showRating"
                         app:layout_constraintTop_toTopOf="@id/ratingBar_showRating" />
@@ -98,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
                         android:fontFamily="@font/roboto_bold"
-                        android:textColor="@color/primaryColor"
+                        android:textColor="@color/primaryTextColor"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@id/ratingBar_showRating"
                         app:layout_constraintStart_toEndOf="@id/view"

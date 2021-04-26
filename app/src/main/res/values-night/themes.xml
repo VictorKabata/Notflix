@@ -4,12 +4,12 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimary</item>
-        <item name="colorOnPrimary">@color/secondaryColor</item>
+        <item name="colorOnPrimary">@color/secondaryTextColor</item>
 
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/colorPrimaryDark</item>
         <item name="colorSecondaryVariant">@color/colorPrimaryDark</item>
-        <item name="colorOnSecondary">@color/secondaryColor</item>
+        <item name="colorOnSecondary">@color/secondaryTextColor</item>
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
@@ -21,12 +21,12 @@
     <!--SplashScreen Theme-->
     <style name="Theme.Splashscreen" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_image</item>
-        <item name="android:statusBarColor">@color/secondaryColor</item>
+        <item name="android:statusBarColor">@color/secondaryTextColor</item>
     </style>
 
     <!--Rating bar style-->
     <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlNormal">@color/grey</item>
         <item name="colorControlActivated">@color/golden</item>
     </style>
 

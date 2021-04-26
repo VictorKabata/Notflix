@@ -10,11 +10,13 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.vickikbt.data.util.DataFormatter.loadImage
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.R
-import com.vickikbt.notflix.databinding.PopularShowItemBinding
+import com.vickikbt.notflix.databinding.ItemPopularShowBinding
 import com.vickikbt.notflix.util.OnClick
-import timber.log.Timber
 
-class PopularShowsRecyclerviewAdapter constructor(private val showList: List<Movie>, private val onClick: OnClick) :
+class PopularShowsRecyclerviewAdapter constructor(
+    private val showList: List<Movie>,
+    private val onClick: OnClick
+) :
     RecyclerView.Adapter<PopularShowsRecyclerViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -22,8 +24,8 @@ class PopularShowsRecyclerviewAdapter constructor(private val showList: List<Mov
         viewType: Int
     ): PopularShowsRecyclerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: PopularShowItemBinding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.popular_show_item, parent, false)
+        val binding: ItemPopularShowBinding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.item_popular_show, parent, false)
 
         return PopularShowsRecyclerViewHolder(binding)
     }
@@ -44,7 +46,7 @@ class PopularShowsRecyclerviewAdapter constructor(private val showList: List<Mov
 
 }
 
-class PopularShowsRecyclerViewHolder(private val binding: PopularShowItemBinding) :
+class PopularShowsRecyclerViewHolder(private val binding: ItemPopularShowBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(context: Context, movie: Movie) {

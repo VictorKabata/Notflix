@@ -41,12 +41,12 @@
                 android:fontFamily="@font/roboto_bold"
                 android:maxLines="2"
                 android:textAlignment="viewStart"
-                android:textColor="@color/primaryColor"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@id/cardView_showCover"
                 app:layout_constraintStart_toStartOf="@id/cardView_showCover"
                 app:layout_constraintTop_toBottomOf="@id/cardView_showCover"
-                tools:text="@string/placeHolder_showTitle" />
+                tools:text="@string/placeholder_movie_title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

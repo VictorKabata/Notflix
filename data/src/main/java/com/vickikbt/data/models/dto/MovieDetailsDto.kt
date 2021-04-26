@@ -7,7 +7,7 @@ data class MovieDetailsDto(
     @SerializedName("adult")
     val adult: Boolean?,
 
-    @SerializedName("backdropPath")
+    @SerializedName("backdrop_path")
     val backdropPath: String?,
 
     @SerializedName("budget")
@@ -46,7 +46,7 @@ data class MovieDetailsDto(
     @SerializedName("production_countries")
     val productionCountryDtos: List<ProductionCountryDto>?,
 
-    @SerializedName("releaseDate")
+    @SerializedName("release_date")
     val releaseDate: String?,
 
     @SerializedName("revenue")
