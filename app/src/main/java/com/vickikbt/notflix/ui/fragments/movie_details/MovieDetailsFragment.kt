@@ -41,7 +41,7 @@ class MovieDetailsFragment : Fragment(), StateListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
         viewModel.stateListener = this
 
-        //makeTransparentStatusBar(true) TODO: Implement later
+        //makeTransparentStatusBar() //TODO: Implement later
 
         initUI()
 
@@ -54,9 +54,6 @@ class MovieDetailsFragment : Fragment(), StateListener {
         viewModel.getMovieDetails(args.movieId)
 
         viewModel.movieDetails.observe(viewLifecycleOwner, { movieDetails ->
-            Timber.e("Movie Details: $movieDetails")
-            Timber.e("Movie Details Release Date: ${movieDetails.releaseDate}")
-
             getScrimPalette(
                 requireActivity(),
                 movieDetails.backdropPath!!,
@@ -85,7 +82,7 @@ class MovieDetailsFragment : Fragment(), StateListener {
         })
     }
 
-    private fun makeTransparentStatusBar(isTransparent: Boolean) {
+    private fun makeTransparentStatusBar(isTransparent: Boolean=true) {
         if (isTransparent) requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         else requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
     }

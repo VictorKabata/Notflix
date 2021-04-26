@@ -8,14 +8,14 @@ import androidx.lifecycle.viewModelScope
 import com.vickikbt.data.util.ApiException
 import com.vickikbt.data.util.NoInternetException
 import com.vickikbt.domain.models.MovieDetails
-import com.vickikbt.domain.usecases.GetMovieDetailsUseCase
+import com.vickikbt.domain.usecases.FetchMovieDetailsUseCase
 import com.vickikbt.notflix.util.StateListener
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.io.IOException
 
 class MovieDetailsViewModel @ViewModelInject constructor(
-    private val getMovieDetailsUseCase: GetMovieDetailsUseCase
+    private val fetchMovieDetailsUseCase: FetchMovieDetailsUseCase
 ) : ViewModel() {
 
     private val _movieDetailsMutableLiveData = MutableLiveData<MovieDetails>()
@@ -28,7 +28,7 @@ class MovieDetailsViewModel @ViewModelInject constructor(
 
         viewModelScope.launch {
             try {
-                val movieDetailsResponse = getMovieDetailsUseCase.invoke(movieId)
+                val movieDetailsResponse = fetchMovieDetailsUseCase.invoke(movieId)
                 movieDetailsResponse!!.collect { movieDetails ->
                     _movieDetailsMutableLiveData.value = movieDetails
                 }
