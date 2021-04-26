@@ -17,12 +17,12 @@ import com.vickikbt.data.util.DataFormatter.getRating
 import com.vickikbt.data.util.DataFormatter.getReleaseYear
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.FragmentMovieDetailsBinding
+import com.vickikbt.notflix.ui.adapters.CastRecyclerviewAdapter
 import com.vickikbt.notflix.util.GlideUtil.getScrimPalette
 import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -38,7 +38,8 @@ class MovieDetailsFragment : Fragment(), StateListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
         viewModel.stateListener = this
 
         //makeTransparentStatusBar() //TODO: Implement later
@@ -78,11 +79,22 @@ class MovieDetailsFragment : Fragment(), StateListener {
             binding.textViewMovieRating.text = "${getRating(movieDetails.voteAverage!!)}/5.0"
             binding.textViewOverview.text = movieDetails.overview
 
+            initCastRecyclerview()
 
         })
     }
 
-    private fun makeTransparentStatusBar(isTransparent: Boolean=true) {
+    private fun initCastRecyclerview() {
+        viewModel.cast.observe(viewLifecycleOwner, { cast ->
+            if (cast != null) binding.recyclerviewCast.adapter = CastRecyclerviewAdapter(cast.castItem)
+            else {
+                binding.textViewCastTitle.visibility = GONE
+                binding.recyclerviewPopularMovies.visibility = GONE
+            }
+        })
+    }
+
+    private fun makeTransparentStatusBar(isTransparent: Boolean = true) {
         if (isTransparent) requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         else requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
     }

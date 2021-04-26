@@ -36,5 +36,5 @@ data class CastItemEntity(
     val popularity: Double,
 
     @ColumnInfo(name = "Profile_Path")
-    val profile_path: String
+    val profile_path: String?
 )

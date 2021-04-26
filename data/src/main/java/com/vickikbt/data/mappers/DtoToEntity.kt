@@ -108,3 +108,26 @@ internal fun SpokenLanguageDto.toEntity(): SpokenLanguageEntity {
     )
 }
 
+internal fun CastDto.toEntity(): CastEntity {
+    return CastEntity(
+        this.castItemDto.map { it.toEntity() },
+        this.id
+    )
+}
+
+internal fun CastItemDto.toEntity(): CastItemEntity {
+    return CastItemEntity(
+        this.adult,
+        this.castId,
+        this.character,
+        this.creditId,
+        this.gender,
+        this.castId,
+        this.name,
+        this.order,
+        this.originalName,
+        this.popularity,
+        this.profilePath
+    )
+}
+

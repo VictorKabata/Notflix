@@ -6,9 +6,11 @@ import com.vickikbt.data.network.ApiService
 import com.vickikbt.data.repository.MovieDetailsRepository
 import com.vickikbt.data.repository.PopularMoviesRepository
 import com.vickikbt.data.repository.UpcomingMoviesRepository
+import com.vickikbt.data.sources.CastDataSource
 import com.vickikbt.data.sources.MovieDetailsDataSource
 import com.vickikbt.data.sources.PopularMoviesDataSource
 import com.vickikbt.data.sources.UpcomingMoviesDataSource
+import com.vickikbt.domain.usecases.FetchMovieCastUseCase
 import com.vickikbt.domain.usecases.FetchMovieDetailsUseCase
 import com.vickikbt.domain.usecases.FetchPopularMoviesUsecase
 import com.vickikbt.domain.usecases.FetchUpcomingMoviesUsecase
@@ -64,20 +66,35 @@ object UsecaseModule {
     @Provides
     fun providesMoviesDetailsDataSource(
         apiService: ApiService,
-        appDatabase: AppDatabase,
-        timeDatastore: TimeDatastore
+        appDatabase: AppDatabase
     ): MovieDetailsDataSource {
         return MovieDetailsDataSource(apiService, appDatabase)
     }
 
     @Provides
-    fun providesMoviesDetailsRepository(movieDetailsDataSource: MovieDetailsDataSource): MovieDetailsRepository {
-        return MovieDetailsRepository(movieDetailsDataSource)
+    fun providesCastDataSource(
+        apiService: ApiService,
+        appDatabase: AppDatabase
+    ): CastDataSource {
+        return CastDataSource(apiService, appDatabase)
+    }
+
+    @Provides
+    fun providesMoviesDetailsRepository(
+        movieDetailsDataSource: MovieDetailsDataSource,
+        castDataSource: CastDataSource
+    ): MovieDetailsRepository {
+        return MovieDetailsRepository(movieDetailsDataSource, castDataSource)
     }
 
     @Provides
     fun providesGetMoviesDetailsUsecase(movieDetailsRepository: MovieDetailsRepository): FetchMovieDetailsUseCase {
         return FetchMovieDetailsUseCase(movieDetailsRepository)
+    }
+
+    @Provides
+    fun providesGetMoviesCastUsecase(movieDetailsRepository: MovieDetailsRepository): FetchMovieCastUseCase {
+        return FetchMovieCastUseCase(movieDetailsRepository)
     }
 
 }

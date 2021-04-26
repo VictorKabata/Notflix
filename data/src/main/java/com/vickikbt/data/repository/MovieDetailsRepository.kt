@@ -1,12 +1,17 @@
 package com.vickikbt.data.repository
 
+import com.vickikbt.data.sources.CastDataSource
 import com.vickikbt.data.sources.MovieDetailsDataSource
-import com.vickikbt.domain.models.MovieDetails
 import com.vickikbt.domain.repositories.IMovieDetailsRepository
-import kotlinx.coroutines.flow.Flow
 
-class MovieDetailsRepository constructor(private val movieDetailsDetailsDataSource: MovieDetailsDataSource) :
+class MovieDetailsRepository constructor(
+    private val movieDetailsDetailsDataSource: MovieDetailsDataSource,
+    private val castDataSource: CastDataSource
+) :
     IMovieDetailsRepository {
 
-    override suspend fun getMovieDetails(movieId: Int)=movieDetailsDetailsDataSource.getMovieDetails(movieId)
+    override suspend fun getMovieDetails(movieId: Int) =
+        movieDetailsDetailsDataSource.getMovieDetails(movieId)
+
+    override suspend fun getMovieCast(movieId: Int) = castDataSource.getMovieCast(movieId)
 }

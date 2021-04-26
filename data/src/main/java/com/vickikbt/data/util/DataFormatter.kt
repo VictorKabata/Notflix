@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat
 
 object DataFormatter {
 
-    fun loadImage(imageUrl: String) = "$IMAGE_PREFIX/original/$imageUrl"
+    fun loadImage(imageUrl: String?) = "$IMAGE_PREFIX/original/$imageUrl"
 
     //Original- 1998-11-19
     //Target- Nov, 1998

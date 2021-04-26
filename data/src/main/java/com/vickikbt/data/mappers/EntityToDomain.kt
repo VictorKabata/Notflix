@@ -1,5 +1,6 @@
 package com.vickikbt.data.mappers
 
+
 import com.vickikbt.data.models.entity.*
 import com.vickikbt.domain.models.*
 
@@ -105,5 +106,28 @@ internal fun SpokenLanguageEntity.toDomain(): SpokenLanguage {
         this.english_name,
         this.iso_639_1,
         this.name
+    )
+}
+
+internal fun CastEntity.toDomain(): Cast {
+    return Cast(
+        this.cast.map { it.toDomain() },
+        this.id
+    )
+}
+
+internal fun CastItemEntity.toDomain(): CastItem {
+    return CastItem(
+        this.adult,
+        this.cast_id,
+        this.character,
+        this.credit_id,
+        this.gender,
+        this.cast_id,
+        this.name,
+        this.order,
+        this.original_name,
+        this.popularity,
+        this.profile_path
     )
 }

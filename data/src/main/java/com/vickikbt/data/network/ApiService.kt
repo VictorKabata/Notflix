@@ -1,8 +1,8 @@
 package com.vickikbt.data.network
 
 
+import com.vickikbt.data.models.dto.CastDto
 import com.vickikbt.data.models.dto.MovieDetailsDto
-import com.vickikbt.data.models.dto.MovieDto
 import com.vickikbt.data.models.dto.PopularResultDto
 import com.vickikbt.data.models.dto.UpcomingResultDto
 import retrofit2.Response
@@ -30,6 +30,13 @@ interface ApiService {
         @Query("api_key") apiKey: String,
         @Query("language") language: String
     ): Response<MovieDetailsDto>
+
+    @GET("movie/{movie_id}/credits")
+    suspend fun fetchMovieCast(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): Response<CastDto>
 
 
 }

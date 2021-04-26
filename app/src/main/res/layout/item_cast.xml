@@ -5,25 +5,26 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:padding="4dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="4dp">
 
         <ImageView
             android:id="@+id/imageView_actor_profile"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_actor" />
+            android:src="@drawable/ic_actor" />
 
         <TextView
             android:id="@+id/textView_actor_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:fontFamily="@font/roboto_black"
+            android:gravity="center"
             android:maxLines="1"
             android:textColor="@color/primaryTextColor"
             android:textSize="14sp"
@@ -34,12 +35,14 @@
 
         <TextView
             android:id="@+id/textView_actor_character_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="2dp"
             android:ellipsize="end"
             android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
             android:maxLines="1"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/grey"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@id/textView_actor_name"
             app:layout_constraintStart_toStartOf="@id/textView_actor_name"

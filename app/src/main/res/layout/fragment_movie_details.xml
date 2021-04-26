@@ -120,7 +120,6 @@
             android:clipToPadding="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -226,7 +225,7 @@
                     android:maxLines="1"
                     android:text="@string/overview"
                     android:textColor="@color/primaryTextColor"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/chipGroup_genres" />
 
@@ -257,7 +256,7 @@
                     android:maxLines="1"
                     android:text="@string/cast"
                     android:textColor="@color/primaryTextColor"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textView_overview" />
 
@@ -284,7 +283,7 @@
                     android:maxLines="1"
                     android:text="@string/trailer"
                     android:textColor="@color/primaryTextColor"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/recyclerview_cast" />
 
@@ -314,7 +313,7 @@
                     android:maxLines="1"
                     android:text="@string/similar_movies"
                     android:textColor="@color/primaryTextColor"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cardView_trailer" />
 
