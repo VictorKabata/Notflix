@@ -18,6 +18,7 @@ import com.vickikbt.data.util.DataFormatter.getMovieDuration
 import com.vickikbt.data.util.DataFormatter.getPopularity
 import com.vickikbt.data.util.DataFormatter.getRating
 import com.vickikbt.data.util.DataFormatter.getReleaseYear
+import com.vickikbt.data.util.DataFormatter.loadImage
 import com.vickikbt.domain.models.MovieDetails
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.FragmentMovieDetailsBinding
@@ -27,6 +28,8 @@ import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
 import dagger.hilt.android.AndroidEntryPoint
+import jp.wasabeef.glide.transformations.BlurTransformation
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -99,22 +102,24 @@ class MovieDetailsFragment : Fragment(), StateListener {
         })
     }
 
-    private fun initVideoPlayer(movieDetails:MovieDetails) {
-            viewModel.video.observe(viewLifecycleOwner) { videos ->
-                val video = videos.videoItems[0]
+    private fun initVideoPlayer(movieDetails: MovieDetails) {
+        viewModel.video.observe(viewLifecycleOwner) { videos ->
+            val video = videos.videoItems[0]
 
-                binding.cardViewTrailer.setOnClickListener {
-                    requireActivity().toast("Feature: Play ${video.name} of type ${video.type} from ${video.site} ")
-                }
-
-                Glide.with(requireActivity())
-                    .load(movieDetails.backdropPath)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .placeholder(R.drawable.image_placeholder)
-                    .error(R.drawable.image_placeholder)
-                    //.apply(RequestOptions.bitmapTransform(BlurTransformation(25, 3)))
-                    .into(binding.imageViewVideoPlaceholder)
+            binding.cardViewTrailer.setOnClickListener {
+                requireActivity().toast("Feature: Play ${video.name} of type ${video.type} from ${video.site} ")
             }
+
+            Timber.e("Movie details: ${movieDetails.backdropPath}")
+
+            Glide.with(requireActivity())
+                .load(loadImage(movieDetails.backdropPath))
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .placeholder(R.drawable.image_placeholder)
+                .error(R.drawable.image_placeholder)
+                .apply(RequestOptions.bitmapTransform(BlurTransformation(10, 2)))
+                .into(binding.imageViewVideoPlaceholder)
+        }
     }
 
     private fun makeTransparentStatusBar(isTransparent: Boolean = true) {

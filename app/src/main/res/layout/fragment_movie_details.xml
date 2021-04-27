@@ -28,12 +28,12 @@
                 <!--region $MovieBackdropRegion-->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="300dp">
 
                     <com.bosphere.fadingedgelayout.FadingEdgeLayout
                         android:id="@+id/fel_image_poster"
                         android:layout_width="match_parent"
-                        android:layout_height="400dp"
+                        android:layout_height="match_parent"
                         app:fel_edge="bottom"
                         app:fel_size_bottom="250dp"
                         app:layout_constraintTop_toTopOf="parent">
@@ -42,7 +42,7 @@
                             android:id="@+id/imageView_movie_poster"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
+                            android:scaleType="center"
                             tools:src="@drawable/ic_launcher_background" />
 
                     </com.bosphere.fadingedgelayout.FadingEdgeLayout>

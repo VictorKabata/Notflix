@@ -73,7 +73,7 @@ dependencies {
     api appDependencies.viewModel
 
     api appDependencies.glide
-    //api appDependencies.glideTransformation
+    api appDependencies.glideTransformation
 
     api appDependencies.dotsIndicator
 
