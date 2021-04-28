@@ -25,7 +25,7 @@ object DataFormatter {
     //Target- 1998
     @SuppressLint("SimpleDateFormat")
     fun getReleaseYear(date: String?): String {
-        val originalFormat = SimpleDateFormat("yyyy-MM-dd").parse(date)
+        val originalFormat = SimpleDateFormat("yyyy-MM-dd").parse(date!!)
         val targetFormat = SimpleDateFormat("yyyy")
 
         val releaseYear=targetFormat.format(originalFormat!!)

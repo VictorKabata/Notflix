@@ -9,7 +9,7 @@ data class ProductionCompanyEntity(
     val id: Int?,
 
     @ColumnInfo(name = "Logo_Path")
-    val logo_path: String??,
+    val logo_path: String?,
 
     @ColumnInfo(name = "Name")
     val name: String?,

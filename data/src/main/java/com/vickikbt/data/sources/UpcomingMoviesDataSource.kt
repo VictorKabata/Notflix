@@ -41,7 +41,7 @@ class UpcomingMoviesDataSource @Inject constructor(
         val lastSyncTime = timeDatastore.getSyncTime()
         val isTimeSurpassed = TimeUtil.isTimeWithinInterval(
             Constants.TimeInterval,
-            lastSyncTime!!,
+            lastSyncTime,
             System.currentTimeMillis()
         )
 

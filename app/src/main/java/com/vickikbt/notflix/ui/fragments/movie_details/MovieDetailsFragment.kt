@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.MediaController
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -136,7 +135,7 @@ class MovieDetailsFragment : Fragment(), StateListener {
         val videoPath = "https://www.youtube.com/watch?v=${videoItem.key}"
 
         val youTubeBaseActivity = YouTubeBaseActivity()
-        val youtubePlayer=YouTubePlayerView(youTubeBaseActivity)
+        val youtubePlayer = YouTubePlayerView(youTubeBaseActivity)
         youtubePlayer.initialize(
             resources.getString(R.string.yt_player_api_key),
             object : YouTubePlayer.OnInitializedListener {
@@ -160,21 +159,10 @@ class MovieDetailsFragment : Fragment(), StateListener {
             })
     }
 
-    private fun makeTransparentStatusBar(isTransparent: Boolean = true) {
+    /*private fun makeTransparentStatusBar(isTransparent: Boolean = true) {
         if (isTransparent) requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         else requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        makeTransparentStatusBar(false)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        //binding.youtubePlayerViewPlayer.release()
-        makeTransparentStatusBar(false)
-    }
+    }*/
 
     override fun onLoading() {
         requireActivity().log("Loading")
