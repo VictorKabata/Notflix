@@ -12,17 +12,32 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: set up JDK 1.8
+      - name: Set up JDK 1.8
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
       - name: Unit tests
         run: bash ./gradlew test --stacktrace
 
+  #Perform linting using KtLint
+  ktlint:
+    name: Run Linting with KtLint
+    runs-on: ubuntu-latest
+
+      steps:
+        - uses: action/checkout@v2
+        - name: Run KtLint
+        - run: brew install ktlint
+            run: |
+              ktlint --reporter=checkstyle,output=build/ktlint-report-in-checkstyle-format.xml
+
+        - uses: yutailang0119/action-ktlint@v1.0.0
+            with:
+              xml_path: build/ktlint-report-in-checkstyle-format.xml
 
   #Generate an unsigned apk and uploads it as an artifact
   build:
-    name: Generate APK
+    name: Generate Unsigned APK
     runs-on: ubuntu-latest
 
     steps:
