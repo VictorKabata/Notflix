@@ -1,10 +1,11 @@
 name: Android Build
 
 on: push
+  branches:
+    - main
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -12,3 +13,15 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+
+      - name: Run Kotlin Linter
+        run: ./gradlew ktlintStagingDebugCheck
+
+      - name: Build debug APK
+          run: bash ./gradlew assembleDebug --stacktrace
+
+      - name: Upload APK
+          uses: actions/upload-artifact@v1
+          with:
+            name: app
+            path: app/build/outputs/apk/debug/app-debug.apk
