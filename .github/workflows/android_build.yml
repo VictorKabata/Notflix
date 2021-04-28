@@ -2,9 +2,10 @@ name: Android Build
 
 on:
   push:
-    #branches: [ master ]
+    branches: [ main ]
 
 jobs:
+  # Run unit test before pushing the code
   test:
     name: Run Unit Tests
     runs-on: ubuntu-latest
@@ -19,6 +20,7 @@ jobs:
         run: bash ./gradlew test --stacktrace
 
 
+  #Generate an unsigned apk and uploads it as an artifact
   build:
     name: Generate APK
     runs-on: ubuntu-latest
@@ -30,9 +32,11 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Build Debug APK
+        # Build unsigned apk
+      - name: Build Unsigned APK
         run: bash ./gradlew :app:assembleDebug
 
+        #Upload unsigned apk as an artifact
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
