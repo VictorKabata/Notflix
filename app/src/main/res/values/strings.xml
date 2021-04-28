@@ -40,4 +40,6 @@
     <string name="placeholder_actor_name">Johnny Cage</string>
     <string name="trailer">Trailer</string>
     <string name="similar_movies">Similar Movies</string>
+
+    <string name="yt_player_api_key" translatable="false">AIzaSyBEJ7BED3Xeei06jrVm6HPc2yTCkB-Y42E</string>
 </resources>

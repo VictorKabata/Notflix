@@ -7,6 +7,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.MediaController
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,12 +15,18 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.youtube.player.YouTubeBaseActivity
+import com.google.android.youtube.player.YouTubeInitializationResult
+import com.google.android.youtube.player.YouTubePlayer
+import com.google.android.youtube.player.YouTubePlayerView
 import com.vickikbt.data.util.DataFormatter.getMovieDuration
 import com.vickikbt.data.util.DataFormatter.getPopularity
 import com.vickikbt.data.util.DataFormatter.getRating
 import com.vickikbt.data.util.DataFormatter.getReleaseYear
+import com.vickikbt.data.util.DataFormatter.getYoutubeVideoFromUrl
 import com.vickikbt.data.util.DataFormatter.loadImage
 import com.vickikbt.domain.models.MovieDetails
+import com.vickikbt.domain.models.VideoItem
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.FragmentMovieDetailsBinding
 import com.vickikbt.notflix.ui.adapters.CastRecyclerviewAdapter
@@ -29,17 +36,16 @@ import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.glide.transformations.BlurTransformation
-import timber.log.Timber
 
 
 @AndroidEntryPoint
 class MovieDetailsFragment : Fragment(), StateListener {
 
     private lateinit var binding: FragmentMovieDetailsBinding
-
     private val viewModel by viewModels<MovieDetailsViewModel>()
-
     private val args by navArgs<MovieDetailsFragmentArgs>()
+
+    private lateinit var mediaController: MediaController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +54,8 @@ class MovieDetailsFragment : Fragment(), StateListener {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
         viewModel.stateListener = this
+
+        //lifecycle.addObserver(binding.youtubePlayerViewPlayer)
 
         //makeTransparentStatusBar() //TODO: Implement later
 
@@ -106,12 +114,6 @@ class MovieDetailsFragment : Fragment(), StateListener {
         viewModel.video.observe(viewLifecycleOwner) { videos ->
             val video = videos.videoItems[0]
 
-            binding.cardViewTrailer.setOnClickListener {
-                requireActivity().toast("Feature: Play ${video.name} of type ${video.type} from ${video.site} ")
-            }
-
-            Timber.e("Movie details: ${movieDetails.backdropPath}")
-
             Glide.with(requireActivity())
                 .load(loadImage(movieDetails.backdropPath))
                 .transition(DrawableTransitionOptions.withCrossFade())
@@ -119,7 +121,43 @@ class MovieDetailsFragment : Fragment(), StateListener {
                 .error(R.drawable.image_placeholder)
                 .apply(RequestOptions.bitmapTransform(BlurTransformation(10, 2)))
                 .into(binding.imageViewVideoPlaceholder)
+
+            binding.fabPlayTrailer.setOnClickListener {
+                initYoutubePlayer(video)
+            }
         }
+    }
+
+    private fun initYoutubePlayer(videoItem: VideoItem) {
+        requireActivity().log("Starting Youtube player")
+
+        requireActivity().log("Video Path: https://www.youtube.com/watch?v=${videoItem.key}")
+
+        val videoPath = "https://www.youtube.com/watch?v=${videoItem.key}"
+
+        val youTubeBaseActivity = YouTubeBaseActivity()
+        val youtubePlayer=YouTubePlayerView(youTubeBaseActivity)
+        youtubePlayer.initialize(
+            resources.getString(R.string.yt_player_api_key),
+            object : YouTubePlayer.OnInitializedListener {
+                override fun onInitializationSuccess(
+                    youtubePlayerProvider: YouTubePlayer.Provider?,
+                    youtubePlayer: YouTubePlayer?,
+                    isInitialized: Boolean
+                ) {
+                    youtubePlayer!!.loadVideo(getYoutubeVideoFromUrl(videoPath))
+                    youtubePlayer.play()
+                }
+
+                override fun onInitializationFailure(
+                    youtubePlayerProvider: YouTubePlayer.Provider?,
+                    youTubeInitializationResult: YouTubeInitializationResult?
+                ) {
+                    requireActivity().log("YT initialization failed!: ${youTubeInitializationResult?.name}")
+                    requireActivity().toast("Failed to load trailer")
+                }
+
+            })
     }
 
     private fun makeTransparentStatusBar(isTransparent: Boolean = true) {
@@ -134,6 +172,7 @@ class MovieDetailsFragment : Fragment(), StateListener {
 
     override fun onDestroy() {
         super.onDestroy()
+        //binding.youtubePlayerViewPlayer.release()
         makeTransparentStatusBar(false)
     }
 

@@ -306,7 +306,13 @@
                         android:alpha="0.8"
                         android:scaleType="centerCrop"
                         android:visibility="visible"
-                        tools:src="@drawable/ic_launcher_background"/>
+                        tools:src="@drawable/ic_launcher_background" />
+
+                    <View
+                        android:id="@+id/youtubePlayer_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/fab_play_trailer"

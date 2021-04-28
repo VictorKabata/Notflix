@@ -80,6 +80,7 @@ dependencies {
     api appDependencies.networkX
 
     api appDependencies.hiltAndroid
+    implementation files('libs\\YouTubeAndroidPlayerApi.jar')
     kapt appDependencies.hiltAndroidCompiler
 
     api appDependencies.hiltViewModel
@@ -94,5 +95,7 @@ dependencies {
     api appDependencies.preferences
 
     //Timber dep- For lightweight simplified logging
-    implementation appDependencies.timber
+    api appDependencies.timber
+
+    //api appDependencies.androidYTPlayer
 }

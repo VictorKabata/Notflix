@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import com.vickikbt.data.util.Constants.IMAGE_PREFIX
 import timber.log.Timber
 import java.text.SimpleDateFormat
+import java.util.regex.Pattern
 
 object DataFormatter {
 
@@ -43,6 +44,16 @@ object DataFormatter {
         val hours = time / 60 + startTime.substring(0, 1).toInt()
         val mins = time % 60 + startTime.substring(3, 4).toInt()
         return "${hours}hrs : ${mins}mins"
+    }
+
+    fun getYoutubeVideoFromUrl(inUrl:String): String?{
+        if (inUrl.toLowerCase().contains("youtu.eb")){
+            return inUrl.substring(inUrl.lastIndexOf("/")+1)
+        }
+        val pattern="(?<=watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*"
+        val compiledPattern=Pattern.compile(pattern)
+        val matcher=compiledPattern.matcher(inUrl)
+        return if (matcher.find()) matcher.group() else null
     }
 
 }

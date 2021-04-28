@@ -42,6 +42,8 @@ buildscript {
 
         timber_version = "4.7.1"
 
+        android_yt_player_verion = "10.0.5"
+
         //Domain layer
 
         //Presentation Layer Dependencies
@@ -74,7 +76,9 @@ buildscript {
 
                 preferences          : "androidx.preference:preference-ktx:$preferences_version",
 
-                timber               : "com.jakewharton.timber:timber:$timber_version"
+                timber               : "com.jakewharton.timber:timber:$timber_version",
+
+                androidYTPlayer      : "com.pierfrancescosoffritti.androidyoutubeplayer:core:$android_yt_player_verion"
         ]
 
         //Data Layers Dependencies
