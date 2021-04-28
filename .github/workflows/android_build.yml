@@ -1,12 +1,13 @@
 name: Android Build
 
-on: push
+on:
+  push:
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
+  unit_tests:
+    runs-on: [ubuntu-latest]
     steps:
-      - name: Android Build
-        uses: vgaidarji/android-github-actions-build@v1.0.1
+      - uses: actions/checkout@v2
+
+      - name: Run Unit tests
+        run: ./gradlew test

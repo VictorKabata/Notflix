@@ -57,10 +57,10 @@ dependencies {
     api appDependencies.androidCore
     api appDependencies.appCompat
 
-    //Test Libs TODO: Remove later
-    //testImplementation 'junit:junit:4.+'
-    //androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    //androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    //Test Libs
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     api appDependencies.material
 
@@ -96,6 +96,4 @@ dependencies {
 
     //Timber dep- For lightweight simplified logging
     api appDependencies.timber
-
-    //api appDependencies.androidYTPlayer
 }
