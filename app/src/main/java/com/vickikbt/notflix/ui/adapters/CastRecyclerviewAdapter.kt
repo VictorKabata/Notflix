@@ -28,6 +28,8 @@ class CastRecyclerviewAdapter constructor(
         return CastRecyclerViewHolder(binding)
     }
 
+    override fun getItemCount() = castList.size
+
     override fun onBindViewHolder(holder: CastRecyclerViewHolder, position: Int) {
         val context = holder.itemView.context
         val cast = castList[position]
@@ -35,8 +37,6 @@ class CastRecyclerviewAdapter constructor(
         holder.bind(context, cast)
 
     }
-
-    override fun getItemCount() = castList.size
 
 
 }

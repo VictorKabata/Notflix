@@ -100,8 +100,8 @@ class MovieDetailsFragment : Fragment(), StateListener {
 
     private fun initCastRecyclerview() {
         viewModel.cast.observe(viewLifecycleOwner, { cast ->
-            if (cast != null) binding.recyclerviewCast.adapter =
-                CastRecyclerviewAdapter(cast.castItem)
+            if (cast != null) binding.recyclerviewCast.adapter = CastRecyclerviewAdapter(cast.castItem)
+
             else {
                 binding.textViewCastTitle.visibility = GONE
                 binding.recyclerviewPopularMovies.visibility = GONE
