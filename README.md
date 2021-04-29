@@ -1,4 +1,5 @@
-<p align="center"><img src="assets/logo.png" alt="NotFlix" height="200px"></p>
+<p align="center"><img src="assets/logo_n.png" alt="NotFlix" height="200px"></p>
+<p align="center"><img src="assets/logo_notflix.png" alt="NotFlix" height="31px"></p>
 
 <p align="center">
 <img  src="https://img.shields.io/badge/-KOTLIN-E50914?logo=kotlin&logoColor=white&style=for-the-badge">&nbsp;
@@ -18,9 +19,7 @@
  4. To learn implementation of Picture-in-Picture.
  5. Demonstrate best developement practices by utilizing up to date tech-stack .
 
- > The apk can be downloaded [here]("").
-
- ## Table Of Content
+ ## Table Of Content.
 
 - [Prerequisite](#prerequisite)
     - [Disclaimer](##disclaimer)
@@ -33,10 +32,11 @@
         - [Data](###data)
         - [Presentation](###presentation)
 - [Tech Stack](#techstack)
-    - [Patterns](#patterns)
-    - [Libraries](#libraries)
-    - [Plugins](#plugins)
-- [Related Posts](#related-posts)
+    - [Patterns](##patterns)
+    - [Libraries](##libraries)
+    - [Plugins](##plugins)
+- [Related Resources](#related-resources)
+- [Other Helpful Resources](#other_helpful_posts)
 - [Demo](#demo)
 - [Work In Progress](#work-in-progress)
 
@@ -44,7 +44,7 @@
 
 In order to be able to build the application you'll need to change the api key in [`gradle.properties`](link_to_gradle.properties_file). First and formost you need to generate your own api key by [creating](https://www.themoviedb.org/signup) an IMDB account and [generating](https://www.themoviedb.org/settings/api) an api key.
 
-## Disclaimer
+## Disclaimer.
 
 Complex architectures like the pure clean architecture can also increase code complexity since decoupling your code also means creating lots of data transformations(mappers) and models,that may end up increasing the learning curve of your code to a point where it would be better to use a simpler architecture like MVVM.
 
@@ -83,9 +83,9 @@ The circles represent different layers of your app. Note that:
 
 - [__Dependency Inversion__](https://en.wikipedia.org/wiki/Dependency_inversion_principle): Components should depend on abstractions rather than concrete implementations. Also higher level modules shouldn’t depend on lower level modules.
 
-## Layers
+## Layers.
 
-### 1. Domain
+### 1. Domain.
 This is the core layer of the application. The ```domain``` layer is independent of any other layers thus ] domain models and business logic can be independent from other layers.This means that changes in other layers will have no effect on domain layer eg.  screen UI (presentation layer) or changing database (data layer) will not result in any code change withing domain layer.
 
 Components of domain layer include:
@@ -95,7 +95,7 @@ Components of domain layer include:
 
 - __Use cases/Interactors__: They enclose a single action, like getting data from a database or posting to a service. They use the repositories to resolve the action they are supposed to do. They usually override the operator “invoke”, so they can be called as a function.
 
-### 2. Data
+### 2. Data.
 The ```data``` layer is responsibile for selecting the proper data source for the domain layer. It contains the implementations of the repositories declared in the domain layer. 
 
 Components of data layer include:
@@ -117,20 +117,20 @@ Components of data layer include:
 
 
 
-### 3. Presentation
+### 3. Presentation.
 The ```presentation``` layer contains components involved in showing information to the user. The main part of this layer are the views and viewModels.
 
-## Tech Stack
+## Tech Stack.
 This project uses many of the popular libraries, plugins and tools of the android ecosystem.
 
-### Patterns
+### Patterns.
 - [Observer Pattern](https://medium.com/android-news/observer-pattern-how-does-it-work-82dfd81305a4) - The observer pattern is a software design pattern that defines a one to many dependencies between objects so that one object changes state, all of its dependents are notified and updated automatically.
 
 - [Repository Pattern](https://medium.com/swlh/repository-pattern-in-android-c31d0268118c): The repository pattern is a software design pattern that restricts us from work directly with the data in the application and creates new layers for database operations, business logic, and the application's UI.
 
 - [UseCase Pattern](https://proandroiddev.com/why-you-need-use-cases-interactors-142e8a6fe576) - UseCase pattern is a software design pattern that is used to bridge the gap between business and system models without altering requirements contents nor preempting architectural options.
 
-### Libraries
+### Libraries.
 
 - [Hilt](https://github.com/google/hilt) - Dependency Injection library.
 - [Jetpack](https://developer.android.com/jetpack)
@@ -156,7 +156,21 @@ and default parameters.
 - [Glide](https://github.com/bumptech/glide)- Image Library from loading images from the database and cacheing in memory.
 
 
-## Related Posts
+## Related Resources.
+In this section i've included some resources ie. articles and GitHub reposirtories that i used to learn about Clean Architecture:
 
+1. [The clean code blog](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) by Robert C. Martin.
+2. [A detailed guide on developing android apps using clean architecture pattern](https://medium.com/@dmilicic/a-detailed-guide-on-developing-android-apps-using-the-clean-architecture-pattern-d38d71e94029) Medium article.
+3. [Clean Architecture Component Boilerplater](https://github.com/bufferapp/clean-architecture-components-boilerplate) GitHub repo .
+4. [The Force](https://github.com/odaridavid/Clean-MVVM-ArchComponents) GitHub repo by [David Odari](https://twitter.com/_davidodari) demonstrating using clean architecture pattern  
+5. [Clean architecture tutorial for android](https://www.raywenderlich.com/3595916-clean-architecture-tutorial-for-android-getting-started) article by Raywenderlich which is really beginner friendly.
+6. [Clean architecture in android](https://medium.com/swlh/clean-architecture-in-android-a-beginner-approach-be0ce00d806b) Medium article.
+7. [Intro to app architecture](https://proandroiddev.com/intro-to-app-architecture-922b392b21b2) and [Intro to app modularization](https://proandroiddev.com/intro-to-app-modularization-42411e4c421e) articles by ProAndroidDev.
+
+## Other Helpful Resources.
+In this section i've included resources that are not related to clean architecture but were really helpful in learning other android components and tools:
+
+1. [Pokedex](https://github.com/ronnieotieno/PokeApi-Pokedex) GitHub repo by [Ronnie Otieno](https://twitter.com/ronnieonly) demonstrating how to use various jetpack components.
+2. [Fundamentals of testing](https://developer.android.com/training/testing/fundamentals) from the official [android developers](https://developer.android.com/) site.
 
 
