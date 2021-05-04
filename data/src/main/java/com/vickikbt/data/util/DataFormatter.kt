@@ -28,7 +28,7 @@ object DataFormatter {
         val originalFormat = SimpleDateFormat("yyyy-MM-dd").parse(date!!)
         val targetFormat = SimpleDateFormat("yyyy")
 
-        val releaseYear=targetFormat.format(originalFormat!!)
+        val releaseYear = targetFormat.format(originalFormat!!)
 
         Timber.e("Release Year: $releaseYear")
 
@@ -37,7 +37,7 @@ object DataFormatter {
 
     fun getRating(rating: Double) = (rating.toFloat() * 5) / 10
 
-    fun getPopularity(popularity: Double) = ((popularity.toFloat() * 100) / 10000).toDouble().toString()
+    fun getPopularity(rating: Double) = ((rating.toInt() * 100) / 10).toString()
 
     fun getMovieDuration(time: Int): String {
         val startTime = "00:00"
@@ -46,13 +46,13 @@ object DataFormatter {
         return "${hours}hrs : ${mins}mins"
     }
 
-    fun getYoutubeVideoFromUrl(inUrl:String): String?{
-        if (inUrl.toLowerCase().contains("youtu.eb")){
-            return inUrl.substring(inUrl.lastIndexOf("/")+1)
+    fun getYoutubeVideoFromUrl(inUrl: String): String? {
+        if (inUrl.toLowerCase().contains("youtu.eb")) {
+            return inUrl.substring(inUrl.lastIndexOf("/") + 1)
         }
-        val pattern="(?<=watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*"
-        val compiledPattern=Pattern.compile(pattern)
-        val matcher=compiledPattern.matcher(inUrl)
+        val pattern = "(?<=watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*"
+        val compiledPattern = Pattern.compile(pattern)
+        val matcher = compiledPattern.matcher(inUrl)
         return if (matcher.find()) matcher.group() else null
     }
 

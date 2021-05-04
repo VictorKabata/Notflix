@@ -54,8 +54,6 @@ class MovieDetailsFragment : Fragment(), StateListener {
             DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
         viewModel.stateListener = this
 
-        //lifecycle.addObserver(binding.youtubePlayerViewPlayer)
-
         //makeTransparentStatusBar() //TODO: Implement later
 
         initUI()
@@ -157,6 +155,10 @@ class MovieDetailsFragment : Fragment(), StateListener {
                 }
 
             })
+    }
+
+    private fun initSimilarMoviesRecyclerview(){
+
     }
 
     /*private fun makeTransparentStatusBar(isTransparent: Boolean = true) {
