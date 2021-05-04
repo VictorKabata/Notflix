@@ -29,7 +29,10 @@ import com.vickikbt.domain.models.VideoItem
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.FragmentMovieDetailsBinding
 import com.vickikbt.notflix.ui.adapters.CastRecyclerviewAdapter
+import com.vickikbt.notflix.ui.adapters.PopularShowsRecyclerviewAdapter
+import com.vickikbt.notflix.ui.adapters.SimilarShowsRecyclerviewAdapter
 import com.vickikbt.notflix.util.GlideUtil.getScrimPalette
+import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
@@ -38,7 +41,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation
 
 
 @AndroidEntryPoint
-class MovieDetailsFragment : Fragment(), StateListener {
+class MovieDetailsFragment : Fragment(), StateListener, OnClick {
 
     private lateinit var binding: FragmentMovieDetailsBinding
     private val viewModel by viewModels<MovieDetailsViewModel>()
@@ -65,7 +68,7 @@ class MovieDetailsFragment : Fragment(), StateListener {
     private fun initUI() {
         viewModel.getMovieDetails(args.movieId)
 
-        viewModel.movieDetails.observe(viewLifecycleOwner, { movieDetails ->
+        viewModel.movieDetails.observe(viewLifecycleOwner) { movieDetails ->
             getScrimPalette(
                 requireActivity(),
                 movieDetails.backdropPath!!,
@@ -73,7 +76,6 @@ class MovieDetailsFragment : Fragment(), StateListener {
                 binding.felImagePoster,
             )
 
-            //binding.collapsingToolbar.title
             binding.textViewMovieName.text = "${movieDetails.title}."
 
 
@@ -86,25 +88,27 @@ class MovieDetailsFragment : Fragment(), StateListener {
 
             binding.textViewMovieDuration.text = getMovieDuration(movieDetails.runtime ?: 0)
 
-            binding.textViewMoviePopularity.text = getPopularity(movieDetails.popularity!!)
+            binding.textViewMoviePopularity.text = getPopularity(movieDetails.voteAverage!!)
             binding.textViewMovieRating.text = "${getRating(movieDetails.voteAverage!!)}/5.0"
             binding.textViewOverview.text = movieDetails.overview
 
             initCastRecyclerview()
 
             initVideoPlayer(movieDetails)
-        })
+
+            initSimilarMoviesRecyclerview()
+        }
     }
 
     private fun initCastRecyclerview() {
-        viewModel.cast.observe(viewLifecycleOwner, { cast ->
+        viewModel.cast.observe(viewLifecycleOwner) { cast ->
             if (cast != null) binding.recyclerviewCast.adapter = CastRecyclerviewAdapter(cast.castItem)
 
             else {
                 binding.textViewCastTitle.visibility = GONE
                 binding.recyclerviewPopularMovies.visibility = GONE
             }
-        })
+        }
     }
 
     private fun initVideoPlayer(movieDetails: MovieDetails) {
@@ -158,13 +162,20 @@ class MovieDetailsFragment : Fragment(), StateListener {
     }
 
     private fun initSimilarMoviesRecyclerview(){
-
+        viewModel.similarMovies.observe(viewLifecycleOwner){result->
+            binding.recyclerviewPopularMovies.adapter =
+                SimilarShowsRecyclerviewAdapter(result.movies, this)
+        }
     }
 
     /*private fun makeTransparentStatusBar(isTransparent: Boolean = true) {
         if (isTransparent) requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         else requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
     }*/
+
+    override fun onClick(movieId: Int) {
+
+    }
 
     override fun onLoading() {
         requireActivity().log("Loading")
@@ -180,5 +191,4 @@ class MovieDetailsFragment : Fragment(), StateListener {
             requireActivity().log(message)
         }
     }
-
 }

@@ -346,12 +346,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="6dp"
                     android:orientation="horizontal"
                     android:paddingHorizontal="8dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintHeight_min="160dp"
                     app:layout_constraintTop_toBottomOf="@id/textView_similar_movies_title"
-                    tools:listitem="@layout/item_popular_show" />
+                    tools:listitem="@layout/item_similar_show" />
                 <!--endregion-->
 
 

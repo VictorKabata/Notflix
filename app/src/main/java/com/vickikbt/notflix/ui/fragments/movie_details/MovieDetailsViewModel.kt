@@ -9,10 +9,12 @@ import com.vickikbt.data.util.ApiException
 import com.vickikbt.data.util.NoInternetException
 import com.vickikbt.domain.models.Cast
 import com.vickikbt.domain.models.MovieDetails
+import com.vickikbt.domain.models.SimilarResult
 import com.vickikbt.domain.models.Video
 import com.vickikbt.domain.usecases.FetchMovieCastUseCase
 import com.vickikbt.domain.usecases.FetchMovieDetailsUseCase
 import com.vickikbt.domain.usecases.FetchMovieVideoUseCase
+import com.vickikbt.domain.usecases.FetchSimilarMoviesUseCase
 import com.vickikbt.notflix.util.StateListener
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -21,7 +23,8 @@ import java.io.IOException
 class MovieDetailsViewModel @ViewModelInject constructor(
     private val fetchMovieDetailsUseCase: FetchMovieDetailsUseCase,
     private val fetchMovieCastUseCase: FetchMovieCastUseCase,
-    private val fetchMovieVideoUseCase: FetchMovieVideoUseCase
+    private val fetchMovieVideoUseCase: FetchMovieVideoUseCase,
+    private val fetchSimilarMoviesUseCase: FetchSimilarMoviesUseCase
 ) : ViewModel() {
 
     private val _movieDetailsMutableLiveData = MutableLiveData<MovieDetails>()
@@ -33,8 +36,12 @@ class MovieDetailsViewModel @ViewModelInject constructor(
     private val _videosMutableLiveData = MutableLiveData<Video>()
     val video: LiveData<Video> = _videosMutableLiveData
 
+    private val _similarMoviesMutableLiveData = MutableLiveData<SimilarResult>()
+    val similarMovies: LiveData<SimilarResult> = _similarMoviesMutableLiveData
+
     var stateListener: StateListener? = null
 
+    //Get movieDetails
     fun getMovieDetails(movieId: Int) {
         stateListener?.onLoading()
 
@@ -45,6 +52,7 @@ class MovieDetailsViewModel @ViewModelInject constructor(
                     _movieDetailsMutableLiveData.value = movieDetails
                 }.also { getMovieCast(movieId = movieId) }
                     .also { getMovieVideos(movieId = movieId) }
+                    .also { getSimilarMovies(movieId = movieId) }
                 return@launch
             } catch (e: ApiException) {
                 stateListener?.onError("${e.message}")
@@ -107,6 +115,30 @@ class MovieDetailsViewModel @ViewModelInject constructor(
                 stateListener?.onError("${e.message}")
                 return@launch
             } catch (e: IOException) {
+                stateListener?.onError("${e.message}")
+                return@launch
+            } catch (e: Exception) {
+                stateListener?.onError("${e.message}")
+                return@launch
+            }
+        }
+    }
+
+    //Get similar movies
+    private fun getSimilarMovies(movieId: Int) {
+        stateListener?.onLoading()
+
+        viewModelScope.launch {
+            try {
+                val similarMoviesResponse = fetchSimilarMoviesUseCase.invoke(movieId)
+                similarMoviesResponse.collect { similarMovies ->
+                    _similarMoviesMutableLiveData.value = similarMovies
+                }
+                return@launch
+            } catch (e: ApiException) {
+                stateListener?.onError("${e.message}")
+                return@launch
+            } catch (e: NoInternetException) {
                 stateListener?.onError("${e.message}")
                 return@launch
             } catch (e: Exception) {

@@ -46,7 +46,6 @@ class PopularMoviesDataSource @Inject constructor(
         )
 
         return if (isPopularShowsCacheAvailable && !isTimeSurpassed) {
-            Log.e("VickiKbt", "fetchPopularMovies: Data from cache")
             popularShowsDao.getPopularShows().map { it.toDomain() }
         } else {
 
@@ -57,7 +56,6 @@ class PopularMoviesDataSource @Inject constructor(
 
             timeDatastore.saveSyncTime(System.currentTimeMillis())
 
-            Log.e("VickiKbt", "fetchPopularMovies: Data from network")
             //flow { emit(moviesDto.toDomain()) } From network
             return popularShowsDao.getPopularShows().map { it.toDomain() } //From cache database
         }

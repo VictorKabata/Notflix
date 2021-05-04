@@ -19,6 +19,7 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 @Module
 object UsecaseModule {
 
+    //region PopularMoviesUseCase Modules
     @Provides
     fun providesPopularMoviesDataSource(
         apiService: ApiService,
@@ -37,7 +38,9 @@ object UsecaseModule {
     fun providesFetchPopularMoviesUsecase(popularMoviesRepository: PopularMoviesRepository): FetchPopularMoviesUsecase {
         return FetchPopularMoviesUsecase(popularMoviesRepository)
     }
+    //endregion
 
+    //region UpcomingMoviesUseCase Modules
     @Provides
     fun providesUpcomingMoviesDataSource(
         apiService: ApiService,
@@ -56,6 +59,7 @@ object UsecaseModule {
     fun providesFetchUpcomingMoviesUsecase(upcomingMoviesRepository: UpcomingMoviesRepository): FetchUpcomingMoviesUsecase {
         return FetchUpcomingMoviesUsecase(upcomingMoviesRepository)
     }
+    //endregion
 
     @Provides
     fun providesMoviesDetailsDataSource(
@@ -82,12 +86,26 @@ object UsecaseModule {
     }
 
     @Provides
+    fun providesSimilarMoviesDataSource(
+        apiService: ApiService,
+        appDatabase: AppDatabase
+    ): SimilarMoviesDataSource {
+        return SimilarMoviesDataSource(apiService, appDatabase)
+    }
+
+    @Provides
     fun providesMoviesDetailsRepository(
         movieDetailsDataSource: MovieDetailsDataSource,
         castDataSource: CastDataSource,
-        videoDataSource: VideoDataSource
+        videoDataSource: VideoDataSource,
+        similarMoviesDataSource: SimilarMoviesDataSource
     ): MovieDetailsRepository {
-        return MovieDetailsRepository(movieDetailsDataSource, castDataSource, videoDataSource)
+        return MovieDetailsRepository(
+            movieDetailsDataSource,
+            castDataSource,
+            videoDataSource,
+            similarMoviesDataSource
+        )
     }
 
     @Provides
@@ -102,6 +120,11 @@ object UsecaseModule {
     @Provides
     fun providesGetMoviesVideoUsecase(movieDetailsRepository: MovieDetailsRepository): FetchMovieVideoUseCase {
         return FetchMovieVideoUseCase(movieDetailsRepository)
+    }
+
+    @Provides
+    fun providesFetchSimilarMoviesUsecase(movieDetailsRepository: MovieDetailsRepository): FetchSimilarMoviesUseCase {
+        return FetchSimilarMoviesUseCase(movieDetailsRepository)
     }
 
 }
