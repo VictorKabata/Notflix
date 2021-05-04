@@ -151,3 +151,12 @@ internal fun VideoItemEntity.toDomain(): VideoItem {
         this.type
     )
 }
+
+internal fun SimilarResultEntity.toDomain(): SimilarResult {
+    return SimilarResult(
+        this.page,
+        this.movieEntity.map { it.toDomain() },
+        this.total_pages,
+        this.total_results
+    )
+}
