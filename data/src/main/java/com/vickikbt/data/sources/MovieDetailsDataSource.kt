@@ -35,7 +35,7 @@ class MovieDetailsDataSource @Inject constructor(
 
     //Retrieves movie detail based on id from SQLite if not available makes a network call to retrieve movie details from API
     suspend fun getMovieDetails(movieId: Int): Flow<MovieDetails>? {
-        val movieDetailsCacheResponse = appDatabase.movieDetailsDao().getPopularShows(movieId)
+        val movieDetailsCacheResponse = appDatabase.movieDetailsDao().getMovieDetails(movieId)
 
         return if (movieDetailsCacheResponse != null) {
             Timber.e("Fetching from SQLite database")

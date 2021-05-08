@@ -17,7 +17,7 @@ interface VideosDao {
     suspend fun getMovieVideo(movieId: Int): VideoEntity?
 
     //TODO: setup WorkManager to delete movie videos after 30 days
-    @Query("DELETE FROM Cast_Table")
+    @Query("DELETE FROM Videos_Table")
     suspend fun deleteAllMovieVideos()
 
 }

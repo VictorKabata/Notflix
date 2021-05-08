@@ -12,9 +12,7 @@ class NotflixApplication : Application() {
         super.onCreate()
 
         //Initialise Timber for logging
-        if (BuildConfig.DEBUG) {
-            Timber.plant(DebugTree())
-        }
+        if (BuildConfig.DEBUG) Timber.plant(DebugTree())
     }
 
 }
