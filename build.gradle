@@ -33,20 +33,19 @@ buildscript {
         palette_version = "1.0.0"
         preferences_version = "1.1.1"
         legacySupport_version = "1.0.0"
+        android_yt_player_verion = "10.0.5"
 
         //Data layer
         room_version = "2.3.0"
         retrofit_version = '2.9.0'
+        okhttp_vesion = "4.8.0"
         coroutine_version = "1.3.9"
         loggingIntercepter_version = "4.7.2"
 
         timber_version = "4.7.1"
 
-        android_yt_player_verion = "10.0.5"
 
-        //Domain layer
-
-        //Presentation Layer Dependencies
+        //region Presentation Layer Dependencies
         appDependencies = [
                 kotlin               : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
                 androidCore          : "androidx.core:core-ktx:$androidCore_version",
@@ -80,11 +79,13 @@ buildscript {
 
                 androidYTPlayer      : "com.pierfrancescosoffritti.androidyoutubeplayer:core:$android_yt_player_verion"
         ]
+        //endregion
 
-        //Data Layers Dependencies
+        //region Data Layers Dependencies
         dataDependencies = [
                 kotlin             : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
                 retrofit           : "com.squareup.retrofit2:retrofit:$retrofit_version",
+                okhttp             : "com.squareup.okhttp3:okhttp:$okhttp_vesion",
                 coroutinesCore     : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version",
                 gsonConvertor      : "com.squareup.retrofit2:converter-gson:$retrofit_version",
                 loggingIntercepter : "com.squareup.okhttp3:logging-interceptor:$loggingIntercepter_version",
@@ -96,12 +97,14 @@ buildscript {
                 hiltAndroidCompiler: "com.google.dagger:hilt-android-compiler:$hilt_version",
                 timber             : "com.jakewharton.timber:timber:$timber_version"
         ]
+        //endregion
 
-        //Domain Layer Dependencies
+        //region Domain Layer Dependencies
         domainDependencies = [
                 kotlin        : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
                 coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version",
         ]
+        //endregion
 
     }
 
@@ -115,7 +118,6 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
-        //classpath "org.jlleitschuh.gradle:ktlint-gradle:$klint_version"
     }
 }
 
