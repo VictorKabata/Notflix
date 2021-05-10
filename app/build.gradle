@@ -75,7 +75,7 @@ dependencies {
     api appDependencies.networkX
 
     api appDependencies.hiltAndroid
-    implementation files('libs\\YouTubeAndroidPlayerApi.jar')
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
     kapt appDependencies.hiltAndroidCompiler
 
     api appDependencies.hiltViewModel
@@ -91,4 +91,18 @@ dependencies {
 
     //Timber dep- For lightweight simplified logging
     api appDependencies.timber
+
+    testImplementation testDependencies.jUnit
+    testImplementation testDependencies.truth
+    testImplementation testDependencies.coroutinesTest
+    testImplementation testDependencies.robolectric
+    //testImplementation testDependencies.mockWebServer
+
+    //androidTestImplementation testDependencies.androidJUnit
+    androidTestImplementation testDependencies.androidEspresso
+    androidTestImplementation testDependencies.androidCoreTesting
+    androidTestImplementation testDependencies.androidArchCoreTesting
+    implementation "com.squareup.okhttp3:mockwebserver:4.7.2"
+    androidTestImplementation testDependencies.androidTestRules
+    androidTestImplementation testDependencies.androidTestRunner
 }

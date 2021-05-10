@@ -7,6 +7,10 @@ interface IPopularRepository {
 
     suspend fun fetchPopularMovies():Flow<PopularResult>
 
+    //suspend fun savePopularShows()
+
+    //suspend fun deletePopularShows()
+
     //suspend fun fetchPopularShows()
 
     //suspend fun savePopularMoviesAndShows()

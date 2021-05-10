@@ -31,7 +31,7 @@ class HomeViewModel @ViewModelInject constructor(
     private val _upcomingMoviesMutableLiveData = MutableLiveData<UpcomingResult>()
     val upcomingMovies: LiveData<UpcomingResult> = _upcomingMoviesMutableLiveData
 
-    private fun fetchPopularMovies() {
+    fun fetchPopularMovies() {
         stateListener?.onLoading()
 
         viewModelScope.launch {
@@ -55,7 +55,7 @@ class HomeViewModel @ViewModelInject constructor(
 
     }
 
-    private fun fetchUpcomingMovies() {
+    fun fetchUpcomingMovies() {
         stateListener?.onLoading()
 
         viewModelScope.launch {

@@ -46,7 +46,6 @@ class UpcomingMoviesDataSource @Inject constructor(
         )
 
         return if (isUpcomingShowsCacheAvailable && !isTimeSurpassed) {
-            Log.e("VickiKbt", "fetchUpcomingMovies: Data from cache")
             upcomingShowsDao.getUpcomingShows().map { it.toDomain() }
         } else {
             deletePopularShows()
@@ -56,8 +55,6 @@ class UpcomingMoviesDataSource @Inject constructor(
 
             timeDatastore.saveSyncTime(System.currentTimeMillis())
 
-            Log.e("VickiKbt", "fetchUpcomingMovies: Data from network")
-            //flow { emit(moviesDto.toEntity()) }
             upcomingShowsDao.getUpcomingShows().map { it.toDomain() }
         }
     }
