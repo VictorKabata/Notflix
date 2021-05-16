@@ -4,7 +4,8 @@
 
     <Transition
         app:constraintSetEnd="@id/collapsed"
-        app:constraintSetStart="@id/expanded">
+        app:constraintSetStart="@id/expanded"
+        app:duration="1000">
 
         <OnSwipe
             app:dragDirection="dragUp"
@@ -21,10 +22,9 @@
             android:id="@+id/viewPager_trendingShows"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:alpha="1"
             android:elevation="0dp"
-            app:layout_constraintTop_toTopOf="parent">
-            <PropertySet android:alpha="1" />
-        </Constraint>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
             android:id="@id/imageView_homeLogo"
@@ -64,10 +64,9 @@
             android:id="@+id/viewPager_trendingShows"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:alpha="0"
             android:elevation="4dp"
-            app:layout_constraintTop_toTopOf="parent">
-            <PropertySet android:alpha="0" />
-        </Constraint>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
             android:id="@id/imageView_homeLogo"
@@ -75,7 +74,6 @@
             android:layout_height="?attr/actionBarSize"
             android:alpha="1"
             android:elevation="12dp"
-            android:paddingVertical="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
