@@ -8,6 +8,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:gravity="center"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="24sp"
+        android:text="Under Development" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

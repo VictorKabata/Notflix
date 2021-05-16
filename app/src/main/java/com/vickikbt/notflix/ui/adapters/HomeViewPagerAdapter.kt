@@ -35,7 +35,7 @@ class HomeViewPagerAdapter constructor(
 
         getScrimPalette(
             context,
-            show.backdrop_path,
+            show.backdrop_path!!,
             binding.imageViewHomeSliderBackground,
             binding.felTrendingShows,
         )

@@ -13,8 +13,8 @@ object DataFormatter {
     //Original- 1998-11-19
     //Target- Nov, 1998
     @SuppressLint("SimpleDateFormat")
-    fun getReleaseDate(date: String): String {
-        val originalFormat = SimpleDateFormat("yyyy-MM-dd").parse(date)
+    fun getReleaseDate(date: String?): String {
+        val originalFormat = SimpleDateFormat("yyyy-MM-dd").parse(date!!)
         val targetFormat = SimpleDateFormat("MMM, yyyy")
 
         return targetFormat.format(originalFormat!!)
@@ -35,7 +35,7 @@ object DataFormatter {
         return releaseYear
     }
 
-    fun getRating(rating: Double) = (rating.toFloat() * 5) / 10
+    fun getRating(rating: Double?) = (rating!!.toFloat() * 5) / 10
 
     fun getPopularity(rating: Double) = ((rating.toInt() * 100) / 10).toString()
 

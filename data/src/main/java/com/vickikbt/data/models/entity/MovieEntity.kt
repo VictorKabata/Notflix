@@ -8,45 +8,45 @@ import androidx.room.PrimaryKey
 data class MovieEntity(
 
     @ColumnInfo(name = "Adult")
-    val adult: Boolean,
+    val adult: Boolean? = null,
 
     @ColumnInfo(name = "Backdrop_Path")
-    val backdrop_path: String,
+    val backdrop_path: String? = null,
 
     @ColumnInfo(name = "Genre_IDs")
-    val genre_ids: List<Int>,
+    val genre_ids: List<Int>? = null,
 
     @ColumnInfo(name = "ID")
     @PrimaryKey(autoGenerate = false)
     val id: Int,
 
     @ColumnInfo(name = "Original_Language")
-    val original_language: String,
+    val original_language: String? = null,
 
     @ColumnInfo(name = "Original_Title")
-    val original_title: String,
+    val original_title: String? = null,
 
     @ColumnInfo(name = "Overview")
-    val overview: String,
+    val overview: String? = null,
 
     @ColumnInfo(name = "Popularity")
-    val popularity: Double,
+    val popularity: Double? = null,
 
     @ColumnInfo(name = "Poster_Path")
-    val poster_path: String,
+    val poster_path: String? = null,
 
     @ColumnInfo(name = "Release_Date")
-    val release_date: String,
+    val release_date: String? = null,
 
     @ColumnInfo(name = "Title")
-    val title: String,
+    val title: String? = null,
 
     @ColumnInfo(name = "Video")
-    val video: Boolean,
+    val video: Boolean? = null,
 
     @ColumnInfo(name = "Vote_Average")
-    val vote_average: Double,
+    val vote_average: Double? = null,
 
     @ColumnInfo(name = "Vote_Count")
-    val vote_count: Int
+    val vote_count: Int? = null
 )

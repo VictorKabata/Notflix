@@ -50,7 +50,7 @@ class TopRatedShowsRecyclerViewHolder(private val binding: ItemTopRatedShowBindi
     @SuppressLint("SetTextI18n")
     fun bind(context: Context, movie: Movie) {
 
-        getFelPalette(context, movie.backdrop_path, binding.imageViewShowCover, binding.fel)
+        getFelPalette(context, movie.backdrop_path!!, binding.imageViewShowCover, binding.fel)
 
         binding.textViewShowTitle.text = "${movie.title}."
         binding.ratingBarShowRating.rating = getRating(movie.vote_average)

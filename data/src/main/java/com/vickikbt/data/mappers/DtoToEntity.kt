@@ -154,7 +154,7 @@ internal fun VideoItemDto.toEntity(): VideoItemEntity {
 internal fun SimilarResultDto.toEntity(): SimilarResultEntity {
     return SimilarResultEntity(
         this.page,
-        this.movieDtos.map { it.toEntity() },
+        this.movieDtos?.map { it.toEntity() },
         this.total_pages,
         this.total_results
     )
