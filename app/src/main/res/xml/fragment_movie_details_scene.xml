@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetEnd="@+id/collapsed"
+        app:constraintSetStart="@+id/expanded">
+
+        <OnSwipe
+            app:dragDirection="dragUp"
+            app:nestedScrollFlags="none"
+            app:touchAnchorId="@id/constraint_layout_movie_details"
+            app:touchAnchorSide="middle" />
+
+    </Transition>
+
+    <ConstraintSet android:id="@+id/expanded">
+        <Constraint
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/constraint_layout_movie_details"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBar">
+
+
+        </Constraint>
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/collapsed">
+        <Constraint
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/constraint_layout_movie_details"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBar">
+
+
+        </Constraint>
+
+    </ConstraintSet>
+
+</MotionScene>
