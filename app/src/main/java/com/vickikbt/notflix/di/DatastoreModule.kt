@@ -1,6 +1,7 @@
 package com.vickikbt.notflix.di
 
 import android.app.Application
+import com.vickikbt.data.datastore.ThemeDatastore
 import com.vickikbt.data.datastore.TimeDatastore
 import dagger.Module
 import dagger.Provides
@@ -17,5 +18,11 @@ object DatastoreModule {
     @Singleton
     fun providesTimeDatastore(application: Application): TimeDatastore {
         return TimeDatastore(application)
+    }
+
+    @Provides
+    @Singleton
+    fun providesThemeDatastore(application: Application): ThemeDatastore {
+        return ThemeDatastore(application)
     }
 }

@@ -9,18 +9,18 @@ import androidx.room.PrimaryKey
 data class UpcomingResultEntity(
 
     @Embedded(prefix = "Upcoming_Dates")
-    val upcomingDates: UpcomingDatesEntity,
+    val upcomingDates: UpcomingDatesEntity? = null,
 
     @ColumnInfo(name = "Page")
     @PrimaryKey(autoGenerate = false)
     val page: Int,
 
     @ColumnInfo(name = "Movies")
-    val moviesEntity: List<MovieEntity>,
+    val moviesEntity: List<MovieEntity>? = null,
 
     @ColumnInfo(name = "Total_Page")
-    val total_pages: Int,
+    val total_pages: Int? = null,
 
     @ColumnInfo(name = "Total_Results")
-    val total_results: Int
+    val total_results: Int? = null
 )

@@ -1,10 +1,12 @@
 package com.vickikbt.notflix.di
 
 import com.vickikbt.data.cache.AppDatabase
+import com.vickikbt.data.datastore.ThemeDatastore
 import com.vickikbt.data.datastore.TimeDatastore
 import com.vickikbt.data.network.ApiService
 import com.vickikbt.data.repository.MovieDetailsRepository
 import com.vickikbt.data.repository.PopularMoviesRepository
+import com.vickikbt.data.repository.SettingsRepository
 import com.vickikbt.data.repository.UpcomingMoviesRepository
 import com.vickikbt.data.sources.*
 import com.vickikbt.domain.usecases.*
@@ -125,6 +127,28 @@ object UsecaseModule {
     @Provides
     fun providesFetchSimilarMoviesUsecase(movieDetailsRepository: MovieDetailsRepository): FetchSimilarMoviesUseCase {
         return FetchSimilarMoviesUseCase(movieDetailsRepository)
+    }
+
+    @Provides
+    fun providesSettingsDataSource(
+        themeDatastore: ThemeDatastore
+    ): SettingsDataSource {
+        return SettingsDataSource(themeDatastore)
+    }
+
+    @Provides
+    fun providesSettingsRepository(settingsDataSource: SettingsDataSource): SettingsRepository {
+        return SettingsRepository(settingsDataSource)
+    }
+
+    @Provides
+    fun providesGetSavedThemeUseCase(settingsRepository: SettingsRepository): GetSavedThemeUseCase {
+        return GetSavedThemeUseCase(settingsRepository)
+    }
+
+    @Provides
+    fun providesSetThemeUseCase(settingsRepository: SettingsRepository): SelectThemeUseCase {
+        return SelectThemeUseCase(settingsRepository)
     }
 
 }

@@ -1,15 +1,15 @@
 package com.vickikbt.domain.models
 
 data class CastItem(
-    val adult: Boolean,
-    val cast_id: Int,
-    val character: String,
-    val credit_id: String,
-    val gender: Int,
-    val id: Int,
-    val name: String,
-    val order: Int,
-    val original_name: String,
-    val popularity: Double,
-    val profile_path: String?
+    val adult: Boolean? = null,
+    val cast_id: Int? = null,
+    val character: String? = null,
+    val credit_id: String? = null,
+    val gender: Int? = null,
+    val id: Int?=null,
+    val name: String? = null,
+    val order: Int? = null,
+    val original_name: String? = null,
+    val popularity: Double? = null,
+    val profile_path: String? = null
 )

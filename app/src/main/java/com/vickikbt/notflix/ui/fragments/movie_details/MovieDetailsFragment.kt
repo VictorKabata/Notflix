@@ -39,6 +39,7 @@ import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.glide.transformations.BlurTransformation
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -105,7 +106,7 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
     private fun initCastRecyclerview() {
         viewModel.cast.observe(viewLifecycleOwner) { cast ->
             if (cast != null) binding.recyclerviewCast.adapter =
-                CastRecyclerviewAdapter(cast.castItem)
+                CastRecyclerviewAdapter(cast.castItem!!)
             else {
                 binding.textViewCastTitle.visibility = GONE
                 binding.recyclerviewCast.visibility = GONE
@@ -115,7 +116,7 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
 
     private fun initVideoPlayer(movieDetails: MovieDetails) {
         viewModel.video.observe(viewLifecycleOwner) { videos ->
-            val video = videos.videoItems[0]
+            val video = videos.videoItems!![0]
 
             Glide.with(requireActivity())
                 .load(loadImage(movieDetails.backdropPath))
@@ -165,12 +166,11 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
 
     private fun initSimilarMoviesRecyclerview() {
         viewModel.similarMovies.observe(viewLifecycleOwner) { result ->
-            if (result.movies == null) {
+            if (result.movies!!.isEmpty()) {
                 binding.textViewSimilarMoviesTitle.visibility = GONE
                 binding.recyclerviewSimilarMovies.visibility = GONE
             } else {
-                binding.recyclerviewSimilarMovies.adapter =
-                    SimilarShowsRecyclerviewAdapter(result.movies!!, this)
+                binding.recyclerviewSimilarMovies.adapter = SimilarShowsRecyclerviewAdapter(result.movies!!, this)
             }
         }
     }
@@ -178,16 +178,6 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
     private fun makeTransparentStatusBar(isTransparent: Boolean = true) {
         if (isTransparent) requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         else requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        //makeTransparentStatusBar(false)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        //makeTransparentStatusBar(false)
     }
 
     override fun onClick(movieId: Int) {

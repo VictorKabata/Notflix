@@ -15,7 +15,8 @@ object Constants {
     const val TIME_DATASTORE_NAME = "Time Datastore"
     const val TIME_DATASTORE_KEY = "Time Key"
 
-    //const val POPULAR_SHOWS_SHARED_PREF_KEY = "Popular_Show_Time"
+    const val THEME_DATASTORE_NAME = "Theme Datastore"
+    const val THEME_DATASTORE_KEY = "Theme Key"
 
     const val TimeInterval = 6L
 

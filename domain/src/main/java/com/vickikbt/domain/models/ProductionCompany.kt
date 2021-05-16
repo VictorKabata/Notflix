@@ -1,11 +1,11 @@
 package com.vickikbt.domain.models
 
 data class ProductionCompany(
-    val id: Int?,
+    val id: Int?=null,
 
-    val logo_path: String?,
+    val logo_path: String?=null,
 
-    val name: String?,
+    val name: String?=null,
 
-    val origin_country: String?
+    val origin_country: String?=null
 )

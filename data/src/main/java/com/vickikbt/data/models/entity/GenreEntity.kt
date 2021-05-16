@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 
 data class GenreEntity(
     @ColumnInfo(name = "Genre_ID")
-    val id: Int,
+    val id: Int?=null,
 
     @ColumnInfo(name = "Name")
-    val name: String
+    val name: String?=null
 )

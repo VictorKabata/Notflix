@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Cast_Table")
 data class CastEntity(
     @ColumnInfo(name = "Cast")
-    val cast: List<CastItemEntity>,
+    val cast: List<CastItemEntity>?=null,
 
     @ColumnInfo(name = "ID")
     @PrimaryKey(autoGenerate = false)

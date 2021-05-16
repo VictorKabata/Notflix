@@ -12,5 +12,5 @@ data class VideoEntity(
     val id: Int,
 
     @ColumnInfo(name = "Video Items")
-    val videoItemsEntity: List<VideoItemEntity>
+    val videoItemsEntity: List<VideoItemEntity>?=null
 )

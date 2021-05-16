@@ -19,20 +19,12 @@
     <string name="placeholder_movie_overview">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius neque odio, at tincidunt lacus auctor id. Aenean consequat, lectus vel rhoncus faucibus, lectus nulla pretium nunc, at suscipit libero nunc et sapien. Mauris a dolor et turpis tempus scelerisque.</string>
     <string name="placeholder_genre">Action</string>
 
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <!--Preference Titles-->
+    <string name="title_app_theme">App Theme</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <!--Preference Headers-->
+    <string name="select_app_theme">Select app theme</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
     <string name="popularity">Popularity</string>
     <string name="overview">Overview</string>
@@ -41,5 +33,8 @@
     <string name="trailer">Trailer</string>
     <string name="similar_movies">Similar Movies</string>
 
+    <string name="def">Default</string>
+
     <string name="yt_player_api_key" translatable="false">AIzaSyBEJ7BED3Xeei06jrVm6HPc2yTCkB-Y42E</string>
+
 </resources>

@@ -6,8 +6,8 @@ import androidx.room.Entity
 @Entity(tableName = "Production_Country_Table")
 data class ProductionCountryEntity(
     @ColumnInfo(name = "ISO_3166_1")
-    val iso_3166_1: String?,
+    val iso_3166_1: String?=null,
 
     @ColumnInfo(name = "Name")
-    val name: String?
+    val name: String?=null
 )

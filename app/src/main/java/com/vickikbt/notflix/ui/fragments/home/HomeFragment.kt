@@ -18,7 +18,6 @@ import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), StateListener, OnClick {
@@ -43,26 +42,26 @@ class HomeFragment : Fragment(), StateListener, OnClick {
         //TODO: Loads up trending movies list to viewpager adapter
         viewModel.upcomingMovies.observe(viewLifecycleOwner, { result ->
             binding.viewPagerTrendingShows.adapter =
-                HomeViewPagerAdapter(requireActivity(), result.movies)
+                HomeViewPagerAdapter(requireActivity(), result.movies!!)
             binding.dotsTrendingShows.setViewPager(binding.viewPagerTrendingShows)
         })
 
         //Loads up popular movies list to recyclerview adapter
         viewModel.popularMovies.observe(viewLifecycleOwner, { result ->
             binding.recyclerviewPopularMovies.adapter =
-                PopularShowsRecyclerviewAdapter(result.movies, this)
+                PopularShowsRecyclerviewAdapter(result.movies!!, this)
         })
 
         //TODO: Loads up top rated movies list to recyclerview adapter
         viewModel.upcomingMovies.observe(viewLifecycleOwner, { result ->
             binding.recyclerviewTopRatedMovies.adapter =
-                TopRatedShowsRecyclerviewAdapter(result.movies, this)
+                TopRatedShowsRecyclerviewAdapter(result.movies!!, this)
         })
 
         //Loads up popular tv shows list to recyclerview adapter
         viewModel.upcomingMovies.observe(viewLifecycleOwner, { result ->
             binding.recyclerviewPopularTvShows.adapter =
-                PopularShowsRecyclerviewAdapter(result.movies, this)
+                PopularShowsRecyclerviewAdapter(result.movies!!, this)
         })
 
         //Loads up top rated tv shows list to recyclerview adapter

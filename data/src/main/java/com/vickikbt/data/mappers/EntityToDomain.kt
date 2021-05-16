@@ -7,7 +7,7 @@ import com.vickikbt.domain.models.*
 internal fun PopularResultEntity.toDomain(): PopularResult {
     return PopularResult(
         this.page,
-        this.movieEntity.map { it.toDomain() },
+        this.movieEntity?.map { it.toDomain() },
         this.total_pages,
         this.total_results
     )
@@ -15,9 +15,9 @@ internal fun PopularResultEntity.toDomain(): PopularResult {
 
 internal fun UpcomingResultEntity.toDomain(): UpcomingResult {
     return UpcomingResult(
-        this.upcomingDates.toDomain(),
+        this.upcomingDates?.toDomain(),
         this.page,
-        this.moviesEntity.map { it.toDomain() },
+        this.moviesEntity?.map { it.toDomain() },
         this.total_pages,
         this.total_results
     )
@@ -111,7 +111,7 @@ internal fun SpokenLanguageEntity.toDomain(): SpokenLanguage {
 
 internal fun CastEntity.toDomain(): Cast {
     return Cast(
-        this.cast.map { it.toDomain() },
+        this.cast?.map { it.toDomain() },
         this.id
     )
 }
@@ -135,7 +135,7 @@ internal fun CastItemEntity.toDomain(): CastItem {
 internal fun VideoEntity.toDomain(): Video {
     return Video(
         this.id,
-        this.videoItemsEntity.map { it.toDomain() }
+        this.videoItemsEntity?.map { it.toDomain() }
     )
 }
 

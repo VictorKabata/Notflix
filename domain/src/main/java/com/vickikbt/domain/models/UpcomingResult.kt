@@ -1,13 +1,13 @@
 package com.vickikbt.domain.models
 
 data class UpcomingResult(
-    val upcomingDates: UpcomingDates,
+    val upcomingDates: UpcomingDates?=null,
 
-    val page: Int,
+    val page: Int?=null,
 
-    val movies: List<Movie>,
+    val movies: List<Movie>?=null,
 
-    val total_pages: Int,
+    val total_pages: Int?=null,
 
-    val total_results: Int
+    val total_results: Int?=null
 )
