@@ -136,13 +136,14 @@ This project uses many of the popular libraries, plugins and tools of the androi
 - [Jetpack](https://developer.android.com/jetpack)
   -   [Android KTX](https://developer.android.com/kotlin/ktx.html) - Provide concise, idiomatic Kotlin to Jetpack and Android platform APIs.
     - [AndroidX](https://developer.android.com/jetpack/androidx) - Major improvement to the original Android [Support Library](https://developer.android.com/topic/libraries/support-library/index), which is no longer maintained.
-    -   [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle) - perform actions in response to a change in the lifecycle status of another component, such as activities and fragments.
-    - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - lifecycle-aware, meaning it respects the lifecycle of other app components, such as activities, fragments, or services.
-    -   [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - designed to store and manage UI-related data in a lifecycle conscious way. The ViewModel class allows data to survive configuration changes such as screen rotations.
+    -   [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle) - Perform actions in response to a change in the lifecycle status of another component, such as activities and fragments.
+    - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Lifecycle-aware, meaning it respects the lifecycle of other app components, such as activities, fragments, or services.
+    -   [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Designed to store and manage UI-related data in a lifecycle conscious way. The ViewModel class allows data to survive configuration changes such as screen rotations.
      - [Data Binding](https://developer.android.com/topic/libraries/data-binding/) - Allows you to bind UI components in your layouts to data sources in your app using a declarative format rather than programmatically.
     - [Room](https://developer.android.com/training/data-storage/room) - Provides an abstraction layer over SQLite used for offline data caching.
     - [Navigation Component](https://developer.android.com/guide/navigation/navigation-getting-started)-Component that allows easier implementation of navigation from simple button clicks to more complex patterns.
 
+- [MotionLayout](https://medium.com/google-developers/introduction-to-motionlayout-part-i-29208674b10d) - Helps create and manage beautiful UI animations.
 - [Retrofit](https://square.github.io/retrofit/) - Type-safe http client 
 and supports coroutines out of the box.  
 - [GSON](https://github.com/square/gson) - JSON Parser,used to parse 
@@ -154,6 +155,13 @@ and default parameters.
 - [Timber](https://github.com/JakeWharton/timber)-Library for easier logging.
 - [Material Design](https://material.io/develop/android/docs/getting-started/) - Build awesome beautiful UIs.
 - [Glide](https://github.com/bumptech/glide)- Image Library from loading images from the database and cacheing in memory.
+- [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines,provides runBlocking coroutine builder used in tests.
+- [Truth](https://truth.dev/) - Assertions Library,provides readability as far as assertions are concerned.
+- [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver) - Web server for testing HTTP clients, verify requests and responses on the TMDB API with the retrofit client.
+
+### Plugins
+- [GitHub Actions](https://github.com/VictorKabata/Notflix/actions) - GitHub actions is used in this project to check for syntax correctness using KtLint, execute the unit tests and generate a new package when pushing chanes to the main branch.
+- [KtLint](https://github.com/pinterest/ktlint) - The project uses KtLint to check for syntax correctness.
 
 
 ## Related Resources.
@@ -172,5 +180,18 @@ In this section i've included resources that are not related to clean architectu
 
 1. [Pokedex](https://github.com/ronnieotieno/PokeApi-Pokedex) GitHub repo by [Ronnie Otieno](https://twitter.com/ronnieonly) demonstrating how to use various jetpack components.
 2. [Fundamentals of testing](https://developer.android.com/training/testing/fundamentals) from the official [android developers](https://developer.android.com/) site.
+3. [Android MotionLayout Tutorial – Collapsing View](https://riggaroo.dev/android-motionlayout-tutorial-collapsing-view/) blog post on how to create a collapsing view with MotionLayout.
+4. [MotionLayout – Collapsing Toolbar](https://blog.stylingandroid.com/motionlayout-collapsing-toolbar-part-1/) blog post demonstrating how to create a collapsing toolbar using MotionLayout
+5. [Introduction to Github Actions for Android](https://blog.mindorks.com/github-actions-for-android) blog by [Mindorks](https://mindorks.com/) on how to set up GitHub actions for an android project.
+
+## Demo
+These are the app's screenshots:
 
 
+<img src="assets/img1.png" width="250"/> 
+
+<img src="assets/img2.png" width="250"/> <img src="assets/img3.png" width="250"/>
+
+<img src="assets/img4.png" width="250"/> <img src="assets/img5.png" width="250"/>
+
+<img src="assets/img6.png" width="250"/>
