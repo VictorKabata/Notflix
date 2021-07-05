@@ -195,5 +195,3 @@ These are the app's screenshots:
 <img src="assets/img4.png" width="250"/> <img src="assets/img5.png" width="250"/>
 
 <img src="assets/img6.png" width="250"/>
-
-
