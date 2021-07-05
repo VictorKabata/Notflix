@@ -1,5 +1,3 @@
-include ':data'
-include ':domain'
 include ':app'
 rootProject.name = "Notflix"
 include ':feature:home'

@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -33,12 +36,53 @@ android {
 }
 
 dependencies {
+    api appDependencies.kotlin
+    api appDependencies.androidCore
+    api appDependencies.appCompat
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    api appDependencies.material
+
+    api appDependencies.constraintLayout
+
+    api appDependencies.navFragment
+    api appDependencies.navDfm
+    api appDependencies.navUi
+
+    api appDependencies.liveData
+    api appDependencies.viewModel
+
+    api appDependencies.glide
+    api appDependencies.glideTransformation
+
+    //TODO: Move to home module
+    api appDependencies.dotsIndicator
+
+    //TODO: Move to home module
+    api appDependencies.networkX
+
+    api appDependencies.hiltAndroid
+    kapt appDependencies.hiltAndroidCompiler
+
+    api appDependencies.hiltViewModel
+    kapt appDependencies.hiltViewModelCompiler
+
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
+
+    api appDependencies.fadingEdges
+
+    api appDependencies.palette
+
+    api appDependencies.legacySupport
+
+    api appDependencies.preferences
+
+    //Timber dep- For lightweight simplified logging
+    api appDependencies.timber
+
+    //GSON
+    api networkDependencies.gsonConvertor
+
+    //Paging 3
+    //implementation dataDependencies.paging
+
 }

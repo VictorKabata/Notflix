@@ -9,6 +9,12 @@
         <dist:delivery>
             <dist:install-time />
         </dist:delivery>
+
         <dist:fusing dist:include="true" />
     </dist:module>
+
+    <application>
+        <activity android:name=".ui.activity.MainActivity"></activity>
+    </application>
+
 </manifest>
