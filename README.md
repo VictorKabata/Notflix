@@ -8,7 +8,7 @@
 </p>
 
 
-# Notflix  🛠️Work In Progress🛠
+# Notflix  🛠️Under Refactor🛠
 
  An android app built using Kotlin that consumes [TMDB API]("https://developers.themoviedb.org/3") to display current trending, upcoming and popular movies🍿 and tvshows🎬. It has been built following Clean Architecture Principle, Repository Pattern, MVVM Architecture in the presentation layer as well as jetpack components.
 
