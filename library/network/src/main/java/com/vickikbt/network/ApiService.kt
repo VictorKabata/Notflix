@@ -1,14 +1,10 @@
 package com.vickikbt.network
 
 
-import com.vickikbt.data.models.dto.*
-import com.vickikbt.data.util.Constants.API_KEY
-import com.vickikbt.data.util.Constants.STARTING_PAGE_INDEX
-import com.vickikbt.network.models.CastDto
-import com.vickikbt.network.models.PopularResultDto
-import com.vickikbt.network.models.SimilarResultDto
-import com.vickikbt.network.models.UpcomingResultDto
-import com.vickikbt.network.models.VideoDto
+import com.vickikbt.core.Constants.API_KEY
+import com.vickikbt.core.Constants.STARTING_PAGE_INDEX
+import com.vickikbt.data.models.dto.MovieDetailsDto
+import com.vickikbt.network.models.*
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

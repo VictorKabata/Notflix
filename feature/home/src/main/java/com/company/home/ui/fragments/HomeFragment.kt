@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.company.home.R
+import com.company.home.databinding.FragmentHomeBinding
 import com.company.home.ui.adapters.HomeViewPagerAdapter
 import com.company.home.ui.adapters.PopularShowsRecyclerviewAdapter
-import com.vickikbt.notflix.R
-import com.vickikbt.notflix.databinding.FragmentHomeBinding
-import com.vickikbt.notflix.ui.adapters.TopRatedShowsRecyclerviewAdapter
+import com.company.home.ui.adapters.TopRatedShowsRecyclerviewAdapter
 import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log

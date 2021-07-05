@@ -5,6 +5,7 @@ import com.vickikbt.cache.AppDatabase
 import com.vickikbt.cache.models.CastEntity
 import com.vickikbt.cache.models.MovieDetailsEntity
 import com.vickikbt.cache.models.VideoEntity
+import com.vickikbt.core.Constants.API_KEY
 import com.vickikbt.network.ApiService
 import com.vickikbt.repository.mappers.toDomain
 import com.vickikbt.repository.mappers.toEntity
@@ -12,8 +13,6 @@ import com.vickikbt.repository.models.Cast
 import com.vickikbt.repository.models.MovieDetails
 import com.vickikbt.repository.models.SimilarResult
 import com.vickikbt.repository.models.Video
-import com.vickikbt.core.Constants.API_KEY
-import com.vickikbt.repository.utils.Coroutines
 import com.vickikbt.repository.utils.SafeApiRequest
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -31,15 +30,15 @@ class MovieDetailsRepositoryImpl @Inject constructor(
 
     init {
         _movieDetails.observeForever { movieDetails ->
-            Coroutines.io { saveMovieDetails(movieDetails) }
+            com.vickikbt.core.Coroutines.io { saveMovieDetails(movieDetails) }
         }
 
         _cast.observeForever { cast ->
-            Coroutines.io { saveMovieCast(cast) }
+            com.vickikbt.core.Coroutines.io { saveMovieCast(cast) }
         }
 
         _videos.observeForever { videos ->
-            Coroutines.io { saveMovieVideos(videos) }
+            com.vickikbt.core.Coroutines.io { saveMovieVideos(videos) }
         }
     }
 

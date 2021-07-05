@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.company.home.R
+import com.company.home.databinding.ItemTopRatedShowBinding
 import com.vickikbt.core.DataFormatter.getRating
 import com.vickikbt.core.DataFormatter.getReleaseDate
-import com.vickikbt.notflix.R
-import com.vickikbt.notflix.databinding.ItemTopRatedShowBinding
 import com.vickikbt.notflix.util.GlideUtil.getFelPalette
 import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.repository.models.Movie

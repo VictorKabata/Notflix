@@ -7,10 +7,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.company.details.R
+import com.company.details.databinding.ItemSimilarShowBinding
 import com.vickikbt.core.DataFormatter
 import com.vickikbt.core.DataFormatter.loadImage
-import com.vickikbt.notflix.R
-import com.vickikbt.notflix.databinding.ItemSimilarShowBinding
 import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.repository.models.Movie
 

@@ -1,11 +1,7 @@
 package com.vickikbt.notflix
 
 import android.app.Application
-import androidx.appcompat.app.AppCompatDelegate
-import com.vickikbt.data.datastore.ThemeDatastore
-import com.vickikbt.data.util.Coroutines
 import dagger.hilt.android.HiltAndroidApp
-import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 import javax.inject.Inject
@@ -14,7 +10,7 @@ import javax.inject.Inject
 class NotflixApplication : Application() {
 
     @Inject
-    lateinit var themeDataStore: ThemeDatastore
+    //lateinit var themeDataStore: ThemeDatastore
 
     override fun onCreate() {
         super.onCreate()
@@ -28,11 +24,13 @@ class NotflixApplication : Application() {
         //Coroutines.main { initTheme() }
     }
 
-    private suspend fun initTheme() {
+    /*private suspend fun initTheme() {
         val value = themeDataStore.getSavedTheme()
-        value.collect { theme->
-            AppCompatDelegate.setDefaultNightMode(theme ?: AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        value.collect { theme ->
+            AppCompatDelegate.setDefaultNightMode(
+                theme ?: AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+            )
         }
-    }
+    }*/
 
 }

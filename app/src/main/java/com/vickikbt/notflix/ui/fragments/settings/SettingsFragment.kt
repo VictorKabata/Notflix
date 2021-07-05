@@ -1,26 +1,18 @@
 package com.vickikbt.notflix.ui.fragments.settings
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
-import com.vickikbt.data.util.Coroutines
-import com.vickikbt.domain.usecases.GetSavedThemeUseCase
-import com.vickikbt.notflix.NotflixApplication
+import com.vickikbt.core.Coroutines
 import com.vickikbt.notflix.R
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsFragment : PreferenceFragmentCompat() {
 
     private lateinit var themePreference: ListPreference
 
-    @Inject
-    lateinit var getSavedThemeUseCase: GetSavedThemeUseCase
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.settings_fragment, rootKey)
@@ -31,7 +23,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         }
 
-        setTheme()
+        //setTheme()
 
 
     }
@@ -50,7 +42,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     }
 
-    private fun setTheme() {
+    /*private fun setTheme() {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(requireContext())
         sharedPref.registerOnSharedPreferenceChangeListener { _, key ->
             val theme = sharedPref.getString(key, "Dark Theme")
@@ -68,7 +60,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             Timber.e("Theme: $theme")
         }
 
-    }
+    }*/
 
 
 }

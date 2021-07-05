@@ -1,8 +1,7 @@
 package com.vickikbt.core
 
 import android.annotation.SuppressLint
-import com.vickikbt.data.util.Constants.IMAGE_PREFIX
-import com.vickikbt.repository.utils.Constants.IMAGE_PREFIX
+import com.vickikbt.core.Constants.IMAGE_PREFIX
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.regex.Pattern

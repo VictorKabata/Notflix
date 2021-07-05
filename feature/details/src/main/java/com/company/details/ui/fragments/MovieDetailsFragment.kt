@@ -11,19 +11,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.company.details.R
+import com.company.details.databinding.FragmentMovieDetailsBinding
 import com.company.details.ui.adapters.CastRecyclerviewAdapter
+import com.company.details.ui.adapters.SimilarShowsRecyclerviewAdapter
 import com.vickikbt.core.DataFormatter.getMovieDuration
 import com.vickikbt.core.DataFormatter.getPopularity
 import com.vickikbt.core.DataFormatter.getRating
 import com.vickikbt.core.DataFormatter.getReleaseYear
 import com.vickikbt.core.DataFormatter.loadImage
-import com.vickikbt.notflix.R
-import com.vickikbt.notflix.databinding.FragmentMovieDetailsBinding
-import com.company.details.ui.adapters.SimilarShowsRecyclerviewAdapter
 import com.vickikbt.notflix.util.GlideUtil.getScrimPalette
 import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.notflix.util.StateListener
@@ -39,7 +38,7 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
 
     private lateinit var binding: FragmentMovieDetailsBinding
     private val viewModel by viewModels<MovieDetailsViewModel>()
-    private val args by navArgs<MovieDetailsFragmentArgs>()
+    //private val args by navArgs<MovieDeta>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +57,7 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
 
     @SuppressLint("SetTextI18n")
     private fun initUI() {
-        viewModel.getMovieDetails(args.movieId)
+        //viewModel.getMovieDetails(args.movieId)
 
         binding.imageViewBack.setOnClickListener { findNavController().navigateUp() }
 

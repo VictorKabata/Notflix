@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.vickikbt.data.util.Constants.THEME_DATASTORE_KEY
-import com.vickikbt.data.util.Constants.THEME_DATASTORE_NAME
-import com.vickikbt.data.util.Coroutines
+import com.vickikbt.core.Constants.THEME_DATASTORE_KEY
+import com.vickikbt.core.Constants.THEME_DATASTORE_NAME
+import com.vickikbt.core.Coroutines
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf

@@ -7,9 +7,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.company.home.R
+import com.company.home.databinding.ItemPopularShowBinding
 import com.vickikbt.core.DataFormatter.loadImage
-import com.vickikbt.notflix.R
-import com.vickikbt.notflix.databinding.ItemPopularShowBinding
 import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.repository.models.Movie
 
@@ -54,8 +54,8 @@ class PopularShowsRecyclerViewHolder(private val binding: ItemPopularShowBinding
         Glide.with(context)
             .load(loadImage(movie.poster_path))
             .transition(DrawableTransitionOptions.withCrossFade())
-            .placeholder(R.drawable.image_placeholder)
-            .error(R.drawable.image_placeholder)
+            //.placeholder(R.drawable.image_placeholder)
+            //.error(R.drawable.image_placeholder)
             .into(binding.imageViewShowCover)
 
         binding.textViewShowTitle.text = movie.title

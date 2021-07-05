@@ -19,7 +19,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
@@ -49,7 +49,9 @@ android {
 
 dependencies {
     implementation project(':core')
-    implementation project(':library:repository')
+    api project(':library:repository')
+
+    //implementation files('libs/YouTubeAndroidPlayerApi.jar')
 
     testImplementation testDependencies.jUnit
     testImplementation testDependencies.truth

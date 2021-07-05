@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.viewpager.widget.PagerAdapter
+import com.company.home.R
+import com.company.home.databinding.ItemHomeViewpagerBinding
 import com.vickikbt.core.DataFormatter.getRating
-import com.vickikbt.notflix.R
-import com.vickikbt.notflix.databinding.ItemHomeViewpagerBinding
-import com.vickikbt.notflix.ui.fragments.home.HomeFragmentDirections
 import com.vickikbt.notflix.util.GlideUtil.getScrimPalette
 import com.vickikbt.repository.models.Movie
 
@@ -45,8 +43,8 @@ class HomeViewPagerAdapter constructor(
         container.addView(binding.root, 0)
 
         binding.textViewTrendingShows.setOnClickListener {
-            val action = HomeFragmentDirections.homeToMovieDetails(show.id)
-            it.findNavController().navigate(action)
+            //val action = HomeFragmentDirections.homeToMovieDetails(show.id)
+            //it.findNavController().navigate(action)
         }
 
 

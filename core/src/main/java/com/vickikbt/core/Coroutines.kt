@@ -1,4 +1,4 @@
-package com.vickikbt.repository.utils
+package com.vickikbt.core
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
