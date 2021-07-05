@@ -3,7 +3,15 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="Notflix.app" target="15" />
+      <module name="Notflix.core" target="15" />
       <module name="Notflix.data" target="15" />
+      <module name="Notflix.feature.details" target="15" />
+      <module name="Notflix.feature.favorites" target="15" />
+      <module name="Notflix.feature.home" target="15" />
+      <module name="Notflix.feature.search" target="15" />
+      <module name="Notflix.library.cache" target="15" />
+      <module name="Notflix.library.network" target="15" />
+      <module name="Notflix.library.repository" target="15" />
     </bytecodeTargetLevel>
   </component>
 </project>

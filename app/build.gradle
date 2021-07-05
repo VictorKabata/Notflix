@@ -45,6 +45,7 @@ android {
     buildFeatures {
         dataBinding true
     }
+    dynamicFeatures = [':feature:home', ':feature:search', ':feature:favorites', ':feature:details']
 
 }
 

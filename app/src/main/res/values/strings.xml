@@ -36,5 +36,8 @@
     <string name="def">Default</string>
 
     <string name="yt_player_api_key" translatable="false">AIzaSyBEJ7BED3Xeei06jrVm6HPc2yTCkB-Y42E</string>
+    <string name="title_search">Search</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_details">Details</string>
 
 </resources>
