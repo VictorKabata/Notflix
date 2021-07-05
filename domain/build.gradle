@@ -9,6 +9,6 @@ java {
 }
 
 dependencies {
-    api domainDependencies.kotlin
-    api domainDependencies.coroutinesCore
+    //api domainDependencies.kotlin
+    //api domainDependencies.coroutinesCore
 }

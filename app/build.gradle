@@ -94,7 +94,7 @@ dependencies {
     api appDependencies.timber
 
     //Paging 3
-    implementation dataDependencies.paging
+    //implementation dataDependencies.paging
 
     testImplementation testDependencies.jUnit
     testImplementation testDependencies.truth

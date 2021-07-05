@@ -15,7 +15,8 @@ buildscript {
         //Plugins
         ktlint_version = "9.2.1"
 
-        //Presentation layer
+
+        //App Dependencies
         androidCore_version = "1.3.2"
         appCompat_version = "1.2.0"
         material_version = "1.3.0"
@@ -28,7 +29,7 @@ buildscript {
         glide_transformation_version = "4.0.0"
         networkx_version = "1.0"
         dotsIndicator_version = "1.0.1"
-        datastore_version = "1.0.0-alpha08"
+        timber_version = "4.7.1"
         fadingEdge_version = "1.0.0"
         palette_version = "1.0.0"
         preferences_version = "1.1.1"
@@ -36,14 +37,17 @@ buildscript {
         android_yt_player_verion = "10.0.5"
         paging_version = "3.0.0"
 
-        //Data layer
-        room_version = "2.3.0"
+        //Core Dependencies
+        coroutine_version = "1.3.9"
+
+        //Network Dependencies
         retrofit_version = '2.9.0'
         okhttp_vesion = "4.8.0"
-        coroutine_version = "1.3.9"
         loggingIntercepter_version = "4.7.2"
 
-        timber_version = "4.7.1"
+        //Cache Dependencies
+        room_version = "2.3.0"
+        datastore_version = "1.0.0-alpha08"
 
         //Test Libraries
         jUnit_version = "4.13.2"
@@ -58,6 +62,7 @@ buildscript {
                 kotlin               : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
                 androidCore          : "androidx.core:core-ktx:$androidCore_version",
                 appCompat            : "androidx.appcompat:appcompat:$appCompat_version",
+                coroutinesCore     : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version",
                 material             : "com.google.android.material:material:$material_version",
                 constraintLayout     : "androidx.constraintlayout:constraintlayout:$constraintLayout_version",
                 liveData             : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
@@ -89,31 +94,26 @@ buildscript {
         ]
         //endregion
 
-        //region Data Layers Dependencies
-        dataDependencies = [
+
+        //region Cache Dependencies
+        cacheDependencies = [
                 kotlin             : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
-                retrofit           : "com.squareup.retrofit2:retrofit:$retrofit_version",
-                okhttp             : "com.squareup.okhttp3:okhttp:$okhttp_vesion",
-                coroutinesCore     : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version",
-                gsonConvertor      : "com.squareup.retrofit2:converter-gson:$retrofit_version",
-                loggingIntercepter : "com.squareup.okhttp3:logging-interceptor:$loggingIntercepter_version",
                 roomRuntime        : "androidx.room:room-runtime:$room_version",
                 roomCompiler       : "androidx.room:room-compiler:$room_version",
                 roomKtx            : "androidx.room:room-ktx:$room_version",
-                datastore          : "androidx.datastore:datastore-preferences:$datastore_version",
-                hiltAndroid        : "com.google.dagger:hilt-android:$hilt_version",
-                hiltAndroidCompiler: "com.google.dagger:hilt-android-compiler:$hilt_version",
-                timber             : "com.jakewharton.timber:timber:$timber_version",
-                paging             : "androidx.paging:paging-runtime:$paging_version"
+                datastore          : "androidx.datastore:datastore-preferences:$datastore_version"
         ]
         //endregion
 
-        //region Domain Layer Dependencies
-        domainDependencies = [
-                kotlin        : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
-                coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version",
+        //region Network Dependencies
+        networkDependencies = [
+                retrofit           : "com.squareup.retrofit2:retrofit:$retrofit_version",
+                okhttp             : "com.squareup.okhttp3:okhttp:$okhttp_vesion",
+                gsonConvertor      : "com.squareup.retrofit2:converter-gson:$retrofit_version",
+                loggingIntercepter : "com.squareup.okhttp3:logging-interceptor:$loggingIntercepter_version"
         ]
         //endregion
+
 
         //region Test Dependencies
         testDependencies = [
