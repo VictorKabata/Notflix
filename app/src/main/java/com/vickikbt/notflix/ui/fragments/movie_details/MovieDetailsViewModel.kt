@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vickikbt.data.sources.SimilarMoviesDataSource
 import com.vickikbt.data.util.ApiException
 import com.vickikbt.data.util.NoInternetException
 import com.vickikbt.domain.models.Cast
@@ -24,7 +25,8 @@ class MovieDetailsViewModel @ViewModelInject constructor(
     private val fetchMovieDetailsUseCase: FetchMovieDetailsUseCase,
     private val fetchMovieCastUseCase: FetchMovieCastUseCase,
     private val fetchMovieVideoUseCase: FetchMovieVideoUseCase,
-    private val fetchSimilarMoviesUseCase: FetchSimilarMoviesUseCase
+    private val fetchSimilarMoviesUseCase: FetchSimilarMoviesUseCase,
+    private val similarMoviesDataSource: SimilarMoviesDataSource
 ) : ViewModel() {
 
     private val _movieDetailsMutableLiveData = MutableLiveData<MovieDetails>()
@@ -147,6 +149,9 @@ class MovieDetailsViewModel @ViewModelInject constructor(
             }
         }
     }
+
+    private fun getSimilarMoviesPaging(movieId: Int) =
+        similarMoviesDataSource.fetchSimilarMovie(movieId = movieId)
 
 
 }

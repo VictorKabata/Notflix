@@ -51,7 +51,7 @@ class PopularMoviesDataSource @Inject constructor(
 
             deletePopularShows()
 
-            val moviesDto = safeApiRequest { apiService.fetchPopularMovies(API_KEY, "en") }
+            val moviesDto = safeApiRequest { apiService.fetchPopularMovies() }
             popularShowsLiveData.postValue(moviesDto.toEntity())
 
             timeDatastore.saveSyncTime(System.currentTimeMillis())

@@ -34,6 +34,7 @@ buildscript {
         preferences_version = "1.1.1"
         legacySupport_version = "1.0.0"
         android_yt_player_verion = "10.0.5"
+        paging_version = "3.0.0"
 
         //Data layer
         room_version = "2.3.0"
@@ -84,7 +85,7 @@ buildscript {
 
                 timber               : "com.jakewharton.timber:timber:$timber_version",
 
-                androidYTPlayer      : "com.pierfrancescosoffritti.androidyoutubeplayer:core:$android_yt_player_verion"
+                androidYTPlayer      : "com.pierfrancescosoffritti.androidyoutubeplayer:core:$android_yt_player_verion",
         ]
         //endregion
 
@@ -102,7 +103,8 @@ buildscript {
                 datastore          : "androidx.datastore:datastore-preferences:$datastore_version",
                 hiltAndroid        : "com.google.dagger:hilt-android:$hilt_version",
                 hiltAndroidCompiler: "com.google.dagger:hilt-android-compiler:$hilt_version",
-                timber             : "com.jakewharton.timber:timber:$timber_version"
+                timber             : "com.jakewharton.timber:timber:$timber_version",
+                paging             : "androidx.paging:paging-runtime:$paging_version"
         ]
         //endregion
 

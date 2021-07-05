@@ -1,6 +1,5 @@
 package com.vickikbt.data.sources
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.vickikbt.data.cache.AppDatabase
 import com.vickikbt.data.datastore.TimeDatastore
@@ -9,7 +8,6 @@ import com.vickikbt.data.mappers.toEntity
 import com.vickikbt.data.models.entity.UpcomingResultEntity
 import com.vickikbt.data.network.ApiService
 import com.vickikbt.data.util.Constants
-import com.vickikbt.data.util.Constants.API_KEY
 import com.vickikbt.data.util.Coroutines
 import com.vickikbt.data.util.SafeApiRequest
 import com.vickikbt.data.util.TimeUtil
@@ -50,7 +48,7 @@ class UpcomingMoviesDataSource @Inject constructor(
         } else {
             deletePopularShows()
 
-            val moviesDto = safeApiRequest { apiService.fetchUpcomingMovies(API_KEY, "en") }
+            val moviesDto = safeApiRequest { apiService.fetchUpcomingMovies() }
             upcomingShowsLiveData.postValue(moviesDto.toEntity())
 
             timeDatastore.saveSyncTime(System.currentTimeMillis())

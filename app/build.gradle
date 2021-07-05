@@ -75,11 +75,12 @@ dependencies {
     api appDependencies.networkX
 
     api appDependencies.hiltAndroid
-    implementation files('libs/YouTubeAndroidPlayerApi.jar')
     kapt appDependencies.hiltAndroidCompiler
 
     api appDependencies.hiltViewModel
     kapt appDependencies.hiltViewModelCompiler
+
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 
     api appDependencies.fadingEdges
 
@@ -91,6 +92,9 @@ dependencies {
 
     //Timber dep- For lightweight simplified logging
     api appDependencies.timber
+
+    //Paging 3
+    implementation dataDependencies.paging
 
     testImplementation testDependencies.jUnit
     testImplementation testDependencies.truth

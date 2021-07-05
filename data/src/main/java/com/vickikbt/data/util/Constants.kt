@@ -18,6 +18,9 @@ object Constants {
     const val THEME_DATASTORE_NAME = "Theme Datastore"
     const val THEME_DATASTORE_KEY = "Theme Key"
 
-    const val TimeInterval = 6L
+    const val TimeInterval = 24L
+
+    const val STARTING_PAGE_INDEX = 1
+    const val PAGING_SIZE = 50
 
 }
