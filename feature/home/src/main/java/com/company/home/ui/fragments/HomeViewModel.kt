@@ -15,8 +15,7 @@ import kotlinx.coroutines.launch
 class HomeViewModel @ViewModelInject constructor(
     private val popularMoviesRepository: PopularMoviesRepository,
     private val upcomingMoviesRepository: UpcomingRepository
-) :
-    ViewModel() {
+) : ViewModel() {
 
     init {
         fetchPopularMovies()

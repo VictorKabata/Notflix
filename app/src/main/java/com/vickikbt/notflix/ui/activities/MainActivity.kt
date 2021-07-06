@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
-        //val navController = findNavController(R.id.nav_host_fragment)
 
         binding.bottomNav.setupWithNavController(navController)
 
@@ -38,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        Coroutines.main { initUI() }
+        //Coroutines.main { initUI() }
     }
 
     private suspend fun initUI() {

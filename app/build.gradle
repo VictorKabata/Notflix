@@ -51,7 +51,6 @@ dependencies {
     implementation project(':core')
     api project(':library:repository')
 
-    //implementation files('libs/YouTubeAndroidPlayerApi.jar')
 
     testImplementation testDependencies.jUnit
     testImplementation testDependencies.truth

@@ -60,6 +60,9 @@ dependencies {
     //TODO: Move to home module
     api appDependencies.networkX
 
+    api "com.google.dagger:dagger:2.37"
+    api "com.google.dagger:dagger-android:2.37"
+
     api appDependencies.hiltAndroid
     kapt appDependencies.hiltAndroidCompiler
 

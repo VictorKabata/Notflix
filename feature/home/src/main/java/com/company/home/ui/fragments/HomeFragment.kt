@@ -6,12 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.company.home.R
 import com.company.home.databinding.FragmentHomeBinding
-import com.company.home.ui.adapters.HomeViewPagerAdapter
-import com.company.home.ui.adapters.PopularShowsRecyclerviewAdapter
-import com.company.home.ui.adapters.TopRatedShowsRecyclerviewAdapter
 import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
@@ -22,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment(), StateListener, OnClick {
 
     private lateinit var binding: FragmentHomeBinding
-    private val viewModel by activityViewModels<HomeViewModel>()
+    private val viewModel by viewModels<HomeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,12 +28,12 @@ class HomeFragment : Fragment(), StateListener, OnClick {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         viewModel.stateListener = this
 
-        initUI()
+        //initUI()
 
         return binding.root
     }
 
-    private fun initUI() {
+    /*private fun initUI() {
 
         //TODO: Loads up trending movies list to viewpager adapter
         viewModel.upcomingMovies.observe(viewLifecycleOwner, { result ->
@@ -64,13 +61,13 @@ class HomeFragment : Fragment(), StateListener, OnClick {
         })
 
         //Loads up top rated tv shows list to recyclerview adapter
-        /*viewModel.popularMovies.observe(viewLifecycleOwner, { result ->
+        *//*viewModel.popularMovies.observe(viewLifecycleOwner, { result ->
             binding.recyclerviewTopRatedTvShows.adapter =
                 TopRatedShowsRecyclerviewAdapter(result.movies, this)
-        })*/
+        })*//*
 
 
-    }
+    }*/
 
     override fun onClick(movieId: Int) {
         //val action = HomeFragmentDirections.homeToMovieDetails(movieId)
