@@ -35,6 +35,6 @@ android {
 dependencies {
 
     implementation project(":core")
-    implementation project(":library:cache")
-    implementation project(":library:network")
+    api project(":library:cache")
+    api project(":library:network")
 }

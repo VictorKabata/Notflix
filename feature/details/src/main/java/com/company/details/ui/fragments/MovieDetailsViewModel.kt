@@ -1,6 +1,5 @@
 package com.company.details.ui.fragments
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,7 +16,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-class MovieDetailsViewModel @ViewModelInject constructor(
+class MovieDetailsViewModel constructor(
     private val movieDetailsRepository: MovieDetailsRepository
 ) : ViewModel() {
 

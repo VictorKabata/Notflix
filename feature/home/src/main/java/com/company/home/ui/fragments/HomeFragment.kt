@@ -9,34 +9,39 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.company.home.R
 import com.company.home.databinding.FragmentHomeBinding
+import com.company.home.di.loadHomeModule
 import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.android.scope.lifecycleScope
+import org.koin.android.viewmodel.compat.ScopeCompat.getViewModel
 
-@AndroidEntryPoint
+
 class HomeFragment : Fragment(), StateListener, OnClick {
 
     private lateinit var binding: FragmentHomeBinding
+
     private val viewModel by viewModels<HomeViewModel>()
+    private fun injectFeatures() = loadHomeModule
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        //injectFeatures()
         viewModel.stateListener = this
 
-        //initUI()
+        initUI()
 
         return binding.root
     }
 
-    /*private fun initUI() {
+    private fun initUI() {
 
         //TODO: Loads up trending movies list to viewpager adapter
-        viewModel.upcomingMovies.observe(viewLifecycleOwner, { result ->
+        /*viewModel.upcomingMovies.observe(viewLifecycleOwner, { result ->
             binding.viewPagerTrendingShows.adapter =
                 HomeViewPagerAdapter(requireActivity(), result.movies!!)
             binding.dotsTrendingShows.setViewPager(binding.viewPagerTrendingShows)
@@ -58,16 +63,9 @@ class HomeFragment : Fragment(), StateListener, OnClick {
         viewModel.upcomingMovies.observe(viewLifecycleOwner, { result ->
             binding.recyclerviewPopularTvShows.adapter =
                 PopularShowsRecyclerviewAdapter(result.movies!!, this)
-        })
+        })*/
 
-        //Loads up top rated tv shows list to recyclerview adapter
-        *//*viewModel.popularMovies.observe(viewLifecycleOwner, { result ->
-            binding.recyclerviewTopRatedTvShows.adapter =
-                TopRatedShowsRecyclerviewAdapter(result.movies, this)
-        })*//*
-
-
-    }*/
+    }
 
     override fun onClick(movieId: Int) {
         //val action = HomeFragmentDirections.homeToMovieDetails(movieId)

@@ -7,16 +7,13 @@ import com.vickikbt.cache.models.UpcomingResultEntity
 import com.vickikbt.domain.models.UpcomingResult
 import com.vickikbt.network.ApiService
 import com.vickikbt.repository.mappers.toDomain
-import com.vickikbt.core.Constants
-import com.vickikbt.core.Coroutines
 import com.vickikbt.repository.mappers.toEntity
 import com.vickikbt.repository.utils.SafeApiRequest
 import com.vickikbt.repository.utils.TimeUtil
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-class UpcomingMoviesRepositoryImpl @Inject constructor(
+class UpcomingMoviesRepositoryImpl constructor(
     private val apiService: ApiService,
     private val appDatabase: AppDatabase,
     private val timeDatastore: TimeDatastore
@@ -56,7 +53,9 @@ class UpcomingMoviesRepositoryImpl @Inject constructor(
     }
 
     override suspend fun saveUpcomingMovies(upcomingResultEntity: UpcomingResultEntity) {
-        com.vickikbt.core.Coroutines.io { appDatabase.upcomingShowsDao().saveUpcomingShows(upcomingResultEntity) }
+        com.vickikbt.core.Coroutines.io {
+            appDatabase.upcomingShowsDao().saveUpcomingShows(upcomingResultEntity)
+        }
     }
 
     private suspend fun deletePopularShows() {

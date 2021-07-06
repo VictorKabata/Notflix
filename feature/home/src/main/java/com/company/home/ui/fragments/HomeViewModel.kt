@@ -1,7 +1,9 @@
 package com.company.home.ui.fragments
 
-import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.vickikbt.domain.models.PopularResult
 import com.vickikbt.domain.models.UpcomingResult
 import com.vickikbt.notflix.util.StateListener
@@ -12,7 +14,7 @@ import com.vickikbt.repository.utils.NoInternetException
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class HomeViewModel @ViewModelInject constructor(
+class HomeViewModel(
     private val popularMoviesRepository: PopularMoviesRepository,
     private val upcomingMoviesRepository: UpcomingRepository
 ) : ViewModel() {

@@ -17,9 +17,8 @@ import com.vickikbt.repository.utils.SafeApiRequest
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
-import javax.inject.Inject
 
-class MovieDetailsRepositoryImpl @Inject constructor(
+class MovieDetailsRepositoryImpl constructor(
     private val apiService: ApiService,
     private val appDatabase: AppDatabase
 ) : SafeApiRequest(), MovieDetailsRepository {
@@ -74,7 +73,8 @@ class MovieDetailsRepositoryImpl @Inject constructor(
             flow { emit(movieCastCacheResponse.toDomain()) }
         } else {
             Timber.e("Fetching movie cast from SQLite database failed, fetching from network.")
-            val movieCastNetworkResponse = safeApiRequest { apiService.fetchMovieCast(movieId, API_KEY, "en") }
+            val movieCastNetworkResponse =
+                safeApiRequest { apiService.fetchMovieCast(movieId, API_KEY, "en") }
 
             _cast.value = movieCastNetworkResponse.toEntity()
 
@@ -82,7 +82,8 @@ class MovieDetailsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun saveMovieVideos(videoEntity: VideoEntity)= appDatabase.videsoDao().saveMovieVideo(videoEntity)
+    override suspend fun saveMovieVideos(videoEntity: VideoEntity) =
+        appDatabase.videsoDao().saveMovieVideo(videoEntity)
 
     override suspend fun getMovieVideos(movieId: Int): Flow<Video> {
         val movieVideosCacheResponse = appDatabase.videsoDao().getMovieVideo(movieId)
@@ -92,7 +93,8 @@ class MovieDetailsRepositoryImpl @Inject constructor(
             flow { emit(movieVideosCacheResponse.toDomain()) }
         } else {
             Timber.e("Fetching movie videos from SQLite database failed, fetching from network.")
-            val movieVideosNetworkResponse = safeApiRequest { apiService.fetchMovieVideos(movieId, API_KEY, "en") }
+            val movieVideosNetworkResponse =
+                safeApiRequest { apiService.fetchMovieVideos(movieId, API_KEY, "en") }
 
             _videos.value = movieVideosNetworkResponse.toEntity()
 

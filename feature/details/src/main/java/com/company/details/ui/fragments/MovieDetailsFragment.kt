@@ -29,11 +29,9 @@ import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
 import com.vickikbt.repository.models.MovieDetails
-import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.glide.transformations.BlurTransformation
 
 
-@AndroidEntryPoint
 class MovieDetailsFragment : Fragment(), StateListener, OnClick {
 
     private lateinit var binding: FragmentMovieDetailsBinding

@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.company.favorites.R
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class FavoritesFragment : Fragment() {
 
     override fun onCreateView(

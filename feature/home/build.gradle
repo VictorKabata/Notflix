@@ -42,6 +42,7 @@ android {
 dependencies {
     implementation project(":app")
     implementation project(":core")
+    //implementation project(':library:repository')
 
     kapt "com.google.dagger:dagger-compiler:2.37"
     kapt "com.google.dagger:dagger-android-processor:2.37"
