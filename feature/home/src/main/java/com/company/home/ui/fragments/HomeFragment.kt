@@ -6,23 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.company.home.R
 import com.company.home.databinding.FragmentHomeBinding
 import com.company.home.di.loadHomeModule
+import com.company.home.ui.adapters.HomeViewPagerAdapter
+import com.company.home.ui.adapters.PopularShowsRecyclerviewAdapter
+import com.company.home.ui.adapters.TopRatedShowsRecyclerviewAdapter
 import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
-import org.koin.android.scope.lifecycleScope
-import org.koin.android.viewmodel.compat.ScopeCompat.getViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class HomeFragment : Fragment(), StateListener, OnClick {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private val viewModel by viewModels<HomeViewModel>()
+    private val viewModel: HomeViewModel by viewModel()
     private fun injectFeatures() = loadHomeModule
 
     override fun onCreateView(
@@ -30,7 +31,7 @@ class HomeFragment : Fragment(), StateListener, OnClick {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        //injectFeatures()
+        injectFeatures()
         viewModel.stateListener = this
 
         initUI()
@@ -41,7 +42,7 @@ class HomeFragment : Fragment(), StateListener, OnClick {
     private fun initUI() {
 
         //TODO: Loads up trending movies list to viewpager adapter
-        /*viewModel.upcomingMovies.observe(viewLifecycleOwner, { result ->
+        viewModel.upcomingMovies.observe(viewLifecycleOwner, { result ->
             binding.viewPagerTrendingShows.adapter =
                 HomeViewPagerAdapter(requireActivity(), result.movies!!)
             binding.dotsTrendingShows.setViewPager(binding.viewPagerTrendingShows)
@@ -63,7 +64,7 @@ class HomeFragment : Fragment(), StateListener, OnClick {
         viewModel.upcomingMovies.observe(viewLifecycleOwner, { result ->
             binding.recyclerviewPopularTvShows.adapter =
                 PopularShowsRecyclerviewAdapter(result.movies!!, this)
-        })*/
+        })
 
     }
 
