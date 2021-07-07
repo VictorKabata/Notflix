@@ -25,34 +25,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNav.setupWithNavController(navController)
 
-        navController.addOnDestinationChangedListener { _, destination, _ ->
+        /*navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.details_fragment -> {
                     binding.bottomNav.visibility = GONE
                 }
                 else -> binding.bottomNav.visibility = VISIBLE
             }
-        }
+        }*/
 
-        //Coroutines.main { initUI() }
     }
-
-    private suspend fun initUI() {
-        /*(application as NotflixApplication)
-            .themeDataStore
-            .getSavedTheme()
-            .collect { theme ->
-                when (theme) {
-                    1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    2 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    -1 ->
-                        if (Build.VERSION.SDK_INT >= 29)
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                        else
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY)
-                }
-            }*/
-    }
-
-
 }

@@ -10,15 +10,11 @@
         app:graphResName="home_navigation"
         app:moduleName="home"/>
 
-    <fragment
+    <include-dynamic
         android:id="@+id/favorites_fragment"
-        android:name="com.company.favorites.ui.fragment.FavoritesFragment"
-        app:moduleName=":feature:favorites" />
-
-    <fragment
-        android:id="@+id/details_fragment"
-        android:name="com.company.details.ui.fragments.MovieDetailsFragment"
-        app:moduleName=":feature:details" />
+        android:name="com.company.favorites"
+        app:graphResName="favorites_navigation"
+        app:moduleName="favorites"/>
 
     <fragment
         android:id="@+id/settings_fragment"

@@ -4,38 +4,22 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import com.company.details.R
 import com.company.details.databinding.FragmentMovieDetailsBinding
-import com.company.details.ui.adapters.CastRecyclerviewAdapter
-import com.company.details.ui.adapters.SimilarShowsRecyclerviewAdapter
-import com.vickikbt.core.DataFormatter.getMovieDuration
-import com.vickikbt.core.DataFormatter.getPopularity
-import com.vickikbt.core.DataFormatter.getRating
-import com.vickikbt.core.DataFormatter.getReleaseYear
-import com.vickikbt.core.DataFormatter.loadImage
-import com.vickikbt.notflix.util.GlideUtil.getScrimPalette
 import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
 import com.vickikbt.repository.models.MovieDetails
-import jp.wasabeef.glide.transformations.BlurTransformation
 
 
 class MovieDetailsFragment : Fragment(), StateListener, OnClick {
 
     private lateinit var binding: FragmentMovieDetailsBinding
-    private val viewModel by viewModels<MovieDetailsViewModel>()
+    //private val viewModel by viewModels<MovieDetailsViewModel>()
     //private val args by navArgs<MovieDeta>()
 
     override fun onCreateView(
@@ -44,9 +28,8 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
-        viewModel.stateListener = this
+        //viewModel.stateListener = this
 
-        //makeTransparentStatusBar()
 
         initUI()
 
@@ -57,7 +40,7 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
     private fun initUI() {
         //viewModel.getMovieDetails(args.movieId)
 
-        binding.imageViewBack.setOnClickListener { findNavController().navigateUp() }
+        /*binding.imageViewBack.setOnClickListener { findNavController().navigateUp() }
 
         viewModel.movieDetails.observe(viewLifecycleOwner) { movieDetails ->
             getScrimPalette(
@@ -87,22 +70,22 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
             initVideoPlayer(movieDetails)
 
             initSimilarMoviesRecyclerview()
-        }
+        }*/
     }
 
     private fun initCastRecyclerview() {
-        viewModel.cast.observe(viewLifecycleOwner) { cast ->
+        /*viewModel.cast.observe(viewLifecycleOwner) { cast ->
             if (cast != null) binding.recyclerviewCast.adapter =
                 CastRecyclerviewAdapter(cast.castItem!!)
             else {
                 binding.textViewCastTitle.visibility = GONE
                 binding.recyclerviewCast.visibility = GONE
             }
-        }
+        }*/
     }
 
     private fun initVideoPlayer(movieDetails: MovieDetails) {
-        viewModel.video.observe(viewLifecycleOwner) { videos ->
+        /*viewModel.video.observe(viewLifecycleOwner) { videos ->
             val video = videos.videoItems!![0]
 
             Glide.with(requireActivity())
@@ -116,7 +99,7 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
             binding.fabPlayTrailer.setOnClickListener {
                 //initYoutubePlayer(video)
             }
-        }
+        }*/
     }
 
     /*private fun initYoutubePlayer(videoItem: VideoItem) {
@@ -152,7 +135,7 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
     }*/
 
     private fun initSimilarMoviesRecyclerview() {
-        viewModel.similarMovies.observe(viewLifecycleOwner) { result ->
+        /*viewModel.similarMovies.observe(viewLifecycleOwner) { result ->
             if (result.movies!!.isEmpty()) {
                 binding.textViewSimilarMoviesTitle.visibility = GONE
                 binding.recyclerviewSimilarMovies.visibility = GONE
@@ -160,12 +143,7 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
                 binding.recyclerviewSimilarMovies.adapter =
                     SimilarShowsRecyclerviewAdapter(result.movies!!, this)
             }
-        }
-    }
-
-    private fun makeTransparentStatusBar(isTransparent: Boolean = true) {
-        if (isTransparent) requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        else requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        }*/
     }
 
     override fun onClick(movieId: Int) {

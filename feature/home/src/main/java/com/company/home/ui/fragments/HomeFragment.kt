@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.company.home.R
 import com.company.home.databinding.FragmentHomeBinding
 import com.company.home.di.loadHomeModule
@@ -69,8 +70,8 @@ class HomeFragment : Fragment(), StateListener, OnClick {
     }
 
     override fun onClick(movieId: Int) {
-        //val action = HomeFragmentDirections.homeToMovieDetails(movieId)
-        //findNavController().navigate(action)
+        //val action=HomeFragmentDirections.homeToDetails(movieId)
+        findNavController().navigate(R.id.home_to_details)
     }
 
 

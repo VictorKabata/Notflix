@@ -6,5 +6,21 @@
     <fragment
         android:id="@+id/home_fragment"
         android:name="com.company.home.ui.fragments.HomeFragment"
-        android:label="Home" />
+        android:label="Home" >
+        <action
+            android:id="@+id/home_to_details"
+            app:destination="@id/details_fragment" />
+    </fragment>
+
+    <include-dynamic
+        android:id="@+id/details_fragment"
+        android:name="com.company.details"
+        app:graphResName="details_navigation"
+        app:moduleName="details">
+        <argument
+            android:name="movieId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </include-dynamic>
+
 </navigation>
