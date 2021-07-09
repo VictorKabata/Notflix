@@ -6,6 +6,11 @@
     <fragment
         android:id="@+id/movie_details_fragment"
         android:name="com.company.details.ui.fragments.MovieDetailsFragment"
-        android:label="MovieDetailsFragment" />
+        android:label="MovieDetailsFragment" >
+        <argument
+            android:name="movieId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 
 </navigation>

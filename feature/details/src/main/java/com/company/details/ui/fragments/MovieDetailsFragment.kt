@@ -4,23 +4,38 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.company.details.R
 import com.company.details.databinding.FragmentMovieDetailsBinding
+import com.company.details.di.loadDetailsModule
+import com.company.details.ui.adapters.CastRecyclerviewAdapter
+import com.company.details.ui.adapters.SimilarShowsRecyclerviewAdapter
+import com.vickikbt.core.DataFormatter.getMovieDuration
+import com.vickikbt.core.DataFormatter.getPopularity
+import com.vickikbt.core.DataFormatter.getRating
+import com.vickikbt.core.DataFormatter.getReleaseYear
+import com.vickikbt.notflix.util.GlideUtil.getScrimPalette
 import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
 import com.vickikbt.repository.models.MovieDetails
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class MovieDetailsFragment : Fragment(), StateListener, OnClick {
 
     private lateinit var binding: FragmentMovieDetailsBinding
-    //private val viewModel by viewModels<MovieDetailsViewModel>()
-    //private val args by navArgs<MovieDeta>()
+
+    private val viewModel: MovieDetailsViewModel by viewModel()
+    private fun injectFeatures() = loadDetailsModule
+
+    private val args by navArgs<MovieDetailsFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +43,8 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
-        //viewModel.stateListener = this
+        injectFeatures()
+        viewModel.stateListener = this
 
 
         initUI()
@@ -38,9 +54,9 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
 
     @SuppressLint("SetTextI18n")
     private fun initUI() {
-        //viewModel.getMovieDetails(args.movieId)
+        viewModel.getMovieDetails(args.movieId)
 
-        /*binding.imageViewBack.setOnClickListener { findNavController().navigateUp() }
+        binding.imageViewBack.setOnClickListener { findNavController().navigateUp() }
 
         viewModel.movieDetails.observe(viewLifecycleOwner) { movieDetails ->
             getScrimPalette(
@@ -70,18 +86,18 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
             initVideoPlayer(movieDetails)
 
             initSimilarMoviesRecyclerview()
-        }*/
+        }
     }
 
     private fun initCastRecyclerview() {
-        /*viewModel.cast.observe(viewLifecycleOwner) { cast ->
+        viewModel.cast.observe(viewLifecycleOwner) { cast ->
             if (cast != null) binding.recyclerviewCast.adapter =
                 CastRecyclerviewAdapter(cast.castItem!!)
             else {
                 binding.textViewCastTitle.visibility = GONE
                 binding.recyclerviewCast.visibility = GONE
             }
-        }*/
+        }
     }
 
     private fun initVideoPlayer(movieDetails: MovieDetails) {
@@ -135,7 +151,7 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
     }*/
 
     private fun initSimilarMoviesRecyclerview() {
-        /*viewModel.similarMovies.observe(viewLifecycleOwner) { result ->
+        viewModel.similarMovies.observe(viewLifecycleOwner) { result ->
             if (result.movies!!.isEmpty()) {
                 binding.textViewSimilarMoviesTitle.visibility = GONE
                 binding.recyclerviewSimilarMovies.visibility = GONE
@@ -143,7 +159,7 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
                 binding.recyclerviewSimilarMovies.adapter =
                     SimilarShowsRecyclerviewAdapter(result.movies!!, this)
             }
-        }*/
+        }
     }
 
     override fun onClick(movieId: Int) {

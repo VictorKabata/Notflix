@@ -70,8 +70,8 @@ class HomeFragment : Fragment(), StateListener, OnClick {
     }
 
     override fun onClick(movieId: Int) {
-        //val action=HomeFragmentDirections.homeToDetails(movieId)
-        findNavController().navigate(R.id.home_to_details)
+        val action=HomeFragmentDirections.homeToDetails(movieId = movieId)
+        findNavController().navigate(action)
     }
 
 

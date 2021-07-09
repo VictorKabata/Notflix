@@ -27,6 +27,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/imageView_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="24dp"
+            android:padding="12dp"
+            android:src="@drawable/ic_favourite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@android:color/white" />
+
         <!--region $Movie Header Region-->
         <com.bosphere.fadingedgelayout.FadingEdgeLayout
             android:id="@+id/fel_image_poster"
@@ -41,7 +52,7 @@
                 android:id="@+id/imageView_movie_poster"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="center"
+                android:scaleType="centerCrop"
                 tools:src="@drawable/ic_launcher_background" />
 
         </com.bosphere.fadingedgelayout.FadingEdgeLayout>
@@ -116,6 +127,7 @@
             android:layout_height="0dp"
             android:clipToPadding="true"
             android:elevation="0dp"
+            android:overScrollMode="never"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appBar">
 

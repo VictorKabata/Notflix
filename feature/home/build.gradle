@@ -2,6 +2,7 @@ plugins {
     id 'com.android.dynamic-feature'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -42,7 +43,6 @@ android {
 dependencies {
     implementation project(":app")
     implementation project(":core")
-    //implementation project(':library:repository')
 
     kapt "com.google.dagger:dagger-compiler:2.37"
     kapt "com.google.dagger:dagger-android-processor:2.37"
