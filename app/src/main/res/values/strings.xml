@@ -20,10 +20,15 @@
     <string name="placeholder_genre">Action</string>
 
     <!--Preference Titles-->
-    <string name="title_app_theme">App Theme</string>
+    <string name="title_personalisation">Personalisation</string>
+    <string name="title_extras">Extras</string>
 
     <!--Preference Headers-->
-    <string name="select_app_theme">Select app theme</string>
+    <string name="change_theme">Change theme</string>
+    <string name="change_language">Change language</string>
+    <string name="change_image_quality">Change image quality</string>
+    <string name="view_app_source_code">View app source code</string>
+    <string name="source_code">Source Code</string>
 
 
     <string name="popularity">Popularity</string>
@@ -39,5 +44,7 @@
     <string name="title_search">Search</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_details">Details</string>
+
+
 
 </resources>

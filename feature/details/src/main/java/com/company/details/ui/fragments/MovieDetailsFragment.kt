@@ -41,8 +41,7 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
         injectFeatures()
         viewModel.stateListener = this
 

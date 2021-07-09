@@ -13,4 +13,30 @@
         <item>system_default</item>
     </string-array>
 
+    <string-array name="language_entries">
+        <item>English</item>
+        <item>Russian</item>
+        <item>French</item>
+        <item>German</item>
+    </string-array>
+
+    <string-array name="language_values">
+        <item>english</item>
+        <item>russian</item>
+        <item>french</item>
+        <item>german</item>
+    </string-array>
+
+    <string-array name="image_quality_entries">
+        <item>High quality</item>
+        <item>Medium quality</item>
+        <item>Low quality</item>
+    </string-array>
+
+    <string-array name="image_quality_values">
+        <item>high_quality</item>
+        <item>medium_quality</item>
+        <item>low_quality</item>
+    </string-array>
+
 </resources>

@@ -80,12 +80,14 @@ class HomeFragment : Fragment(), StateListener, OnClick {
     }
 
     override fun onSuccess(message: String) {
-        requireActivity().log(message)
+        if(isAdded) requireActivity().log(message)
     }
 
     override fun onError(message: String?) {
-        requireActivity().toast(message!!)
-        requireActivity().log(message)
+        if(isAdded) {
+            requireActivity().toast(message!!)
+            requireActivity().log(message)
+        }
     }
 
 }

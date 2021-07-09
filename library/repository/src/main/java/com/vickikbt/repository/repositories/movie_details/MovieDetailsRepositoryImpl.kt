@@ -83,10 +83,10 @@ class MovieDetailsRepositoryImpl constructor(
     }
 
     override suspend fun saveMovieVideos(videoEntity: VideoEntity) =
-        appDatabase.videsoDao().saveMovieVideo(videoEntity)
+        appDatabase.videosDao().saveMovieVideo(videoEntity)
 
     override suspend fun getMovieVideos(movieId: Int): Flow<Video> {
-        val movieVideosCacheResponse = appDatabase.videsoDao().getMovieVideo(movieId)
+        val movieVideosCacheResponse = appDatabase.videosDao().getMovieVideo(movieId)
 
         return if (movieVideosCacheResponse != null) {
             Timber.e("Fetching movie videos from SQLite database")
