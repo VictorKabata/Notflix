@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.company.home.R
 import com.company.home.databinding.ItemPopularShowBinding
-import com.vickikbt.core.DataFormatter.loadImage
+import com.company.home.utils.loadImage
 import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.repository.models.Movie
 
@@ -52,7 +52,7 @@ class PopularShowsRecyclerViewHolder(private val binding: ItemPopularShowBinding
     fun bind(context: Context, movie: Movie) {
 
         Glide.with(context)
-            .load(loadImage(movie.poster_path))
+            .load(movie.poster_path!!.loadImage())
             .transition(DrawableTransitionOptions.withCrossFade())
             //.placeholder(R.drawable.image_placeholder)
             //.error(R.drawable.image_placeholder)

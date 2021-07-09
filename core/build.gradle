@@ -35,6 +35,8 @@ android {
 }
 
 dependencies {
+    //implementation project(":library:cache")
+
     api appDependencies.kotlin
     api appDependencies.androidCore
     api appDependencies.appCompat

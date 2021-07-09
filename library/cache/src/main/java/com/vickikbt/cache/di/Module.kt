@@ -2,8 +2,10 @@ package com.vickikbt.cache.di
 
 import androidx.room.Room
 import com.vickikbt.cache.AppDatabase
-import com.vickikbt.cache.datastore.ThemeDatastore
 import com.vickikbt.cache.datastore.TimeDatastore
+import com.vickikbt.cache.preferences.ImagesPreferences
+import com.vickikbt.cache.preferences.LanguagePreferences
+import com.vickikbt.cache.preferences.ThemePreferences
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
@@ -15,11 +17,19 @@ val cacheModule = module {
             .build()
     }
 
-    single{
+    single {
         TimeDatastore(androidApplication())
     }
 
-    single{
-        ThemeDatastore(androidApplication())
+    single {
+        ThemePreferences(androidApplication())
+    }
+
+    single {
+        LanguagePreferences(androidApplication())
+    }
+
+    single {
+        ImagesPreferences(androidApplication())
     }
 }

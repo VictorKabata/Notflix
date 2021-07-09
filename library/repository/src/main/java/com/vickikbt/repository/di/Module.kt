@@ -29,7 +29,7 @@ val repositoryModule = module {
 
     single<SettingsRepository> {
         SettingsRepositoryImpl(
-            themeDatastore = get()
+            themePreferences = get()
         )
     }
 

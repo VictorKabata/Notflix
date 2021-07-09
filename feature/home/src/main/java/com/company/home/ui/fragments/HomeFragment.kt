@@ -27,6 +27,8 @@ class HomeFragment : Fragment(), StateListener, OnClick {
     private val viewModel: HomeViewModel by viewModel()
     private fun injectFeatures() = loadHomeModule
 
+    //private val themePreferences: ThemePreferences by inject()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,6 +36,10 @@ class HomeFragment : Fragment(), StateListener, OnClick {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         injectFeatures()
         viewModel.stateListener = this
+
+       /* val appTheme = themePreferences.appTheme
+        Timber.e("App theme: $appTheme")*/
+
 
         initUI()
 
@@ -67,10 +73,11 @@ class HomeFragment : Fragment(), StateListener, OnClick {
                 PopularShowsRecyclerviewAdapter(result.movies!!, this)
         })
 
+
     }
 
     override fun onClick(movieId: Int) {
-        val action=HomeFragmentDirections.homeToDetails(movieId = movieId)
+        val action = HomeFragmentDirections.homeToDetails(movieId = movieId)
         findNavController().navigate(action)
     }
 
@@ -80,11 +87,11 @@ class HomeFragment : Fragment(), StateListener, OnClick {
     }
 
     override fun onSuccess(message: String) {
-        if(isAdded) requireActivity().log(message)
+        if (isAdded) requireActivity().log(message)
     }
 
     override fun onError(message: String?) {
-        if(isAdded) {
+        if (isAdded) {
             requireActivity().toast(message!!)
             requireActivity().log(message)
         }

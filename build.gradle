@@ -29,7 +29,6 @@ buildscript {
         glide_transformation_version = "4.0.0"
         networkx_version = "1.0"
         dotsIndicator_version = "1.0.1"
-        datastore_version = "1.0.0-alpha08"
         fadingEdge_version = "1.0.0"
         palette_version = "1.0.0"
         preferences_version = "1.1.1"
@@ -39,6 +38,7 @@ buildscript {
 
         //Data layer
         room_version = "2.3.0"
+        datastore_version = "1.0.0-alpha08"
         retrofit_version = '2.9.0'
         okhttp_vesion = "4.8.0"
         coroutine_version = "1.3.9"

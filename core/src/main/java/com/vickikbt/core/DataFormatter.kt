@@ -2,13 +2,18 @@ package com.vickikbt.core
 
 import android.annotation.SuppressLint
 import com.vickikbt.core.Constants.IMAGE_PREFIX
+import org.koin.android.ext.android.inject
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.regex.Pattern
 
 object DataFormatter {
 
-    fun loadImage(imageUrl: String?) = "$IMAGE_PREFIX/original/$imageUrl"
+    //private val imagesPreferences: ImagesPreferences by inject()
+
+    fun loadImage(imageUrl: String?){
+        "$IMAGE_PREFIX/original/$imageUrl"
+    }
 
     //Original- 1998-11-19
     //Target- Nov, 1998
