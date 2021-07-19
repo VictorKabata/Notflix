@@ -1,0 +1,14 @@
+com/company/favorites/databinding/FragmentFavoritesBinding.java
+ com.company.favorites.databinding.FragmentFavoritesBinding
+com/company/favorites/DataBinderMapperImpl.java
+ com.company.favorites.DataBinderMapperImpl
+ com.company.favorites.DataBinderMapperImpl$InnerBrLookup
+ com.company.favorites.DataBinderMapperImpl$InnerLayoutIdLookup
+com/company/favorites/databinding/ActivityFavoritesBinding.java
+ com.company.favorites.databinding.ActivityFavoritesBinding
+com/company/favorites/BuildConfig.java
+ com.company.favorites.BuildConfig
+com/company/favorites/BR.java
+ com.company.favorites.BR
+com/company/favorites/DataBindingInfo.java
+ com.company.favorites.DataBindingInfo

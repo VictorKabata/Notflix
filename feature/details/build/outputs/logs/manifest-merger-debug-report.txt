@@ -1,0 +1,59 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:2:1-20:12
+INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:2:1-20:12
+INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:2:1-20:12
+INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:2:1-20:12
+INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:2:1-20:12
+INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:2:1-20:12
+INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:2:1-20:12
+	package
+		ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:4:5-34
+		INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml
+		INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml
+		ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:2:1-20:12
+		INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml
+	xmlns:dist
+		ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:3:5-61
+	android:versionCode
+		INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml
+		ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:2:1-20:12
+		INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:2:11-69
+dist:module
+ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:6:5-14:19
+	dist:instant
+		ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:7:9-29
+	dist:title
+		ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:8:9-43
+dist:delivery
+ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:9:9-11:25
+dist:on-demand
+ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:10:13-31
+dist:fusing
+ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:13:9-44
+	dist:include
+		ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:13:22-41
+application
+ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:16:5-18:19
+activity#com.company.details.ui.activity.DetailsActivity
+ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:17:9-74
+	android:name
+		ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml:17:19-62
+uses-sdk
+INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml
+INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml
+INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml
+INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml
+		ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml
+		INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml
+		ADDED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml
+		INJECTED from D:\Projects\Kotlin\Notflix\feature\details\src\main\AndroidManifest.xml

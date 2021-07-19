@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    featureSplit="details"
+    package="com.vickikbt.notflix"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:targetSdkVersion="30" />
+
+    <dist:module
+        dist:instant="false"
+        dist:title="@string/title_details" >
+        <dist:delivery>
+            <dist:on-demand />
+        </dist:delivery>
+
+        <dist:fusing dist:include="true" />
+    </dist:module>
+
+    <application
+        android:debuggable="true"
+        android:testOnly="true" >
+        <activity
+            android:name="com.company.details.ui.activity.DetailsActivity"
+            android:splitName="details" />
+    </application>
+
+</manifest>

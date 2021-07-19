@@ -1,0 +1,10 @@
+com/company/search/BuildConfig.java
+ com.company.search.BuildConfig
+com/company/search/DataBindingInfo.java
+ com.company.search.DataBindingInfo
+com/company/search/BR.java
+ com.company.search.BR
+com/company/search/DataBinderMapperImpl.java
+ com.company.search.DataBinderMapperImpl
+ com.company.search.DataBinderMapperImpl$InnerBrLookup
+ com.company.search.DataBinderMapperImpl$InnerLayoutIdLookup

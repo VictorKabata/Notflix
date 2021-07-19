@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "D:\\Projects\\Kotlin\\Notflix\\feature\\home\\build\\intermediates\\res\\merged\\debug\\xml_fragment_home_scene.xml.flat",
+        "source": "D:\\Projects\\Kotlin\\Notflix\\feature\\home\\src\\main\\res\\xml\\fragment_home_scene.xml"
+    },
+    {
+        "merged": "D:\\Projects\\Kotlin\\Notflix\\feature\\home\\build\\intermediates\\res\\merged\\debug\\layout_fragment_home.xml.flat",
+        "source": "D:\\Projects\\Kotlin\\Notflix\\feature\\home\\src\\main\\res\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "D:\\Projects\\Kotlin\\Notflix\\feature\\home\\build\\intermediates\\res\\merged\\debug\\layout_item_home_viewpager.xml.flat",
+        "source": "D:\\Projects\\Kotlin\\Notflix\\feature\\home\\src\\main\\res\\layout\\item_home_viewpager.xml"
+    },
+    {
+        "merged": "D:\\Projects\\Kotlin\\Notflix\\feature\\home\\build\\intermediates\\res\\merged\\debug\\layout_item_popular_show.xml.flat",
+        "source": "D:\\Projects\\Kotlin\\Notflix\\feature\\home\\src\\main\\res\\layout\\item_popular_show.xml"
+    },
+    {
+        "merged": "D:\\Projects\\Kotlin\\Notflix\\feature\\home\\build\\intermediates\\res\\merged\\debug\\layout_activity_home.xml.flat",
+        "source": "D:\\Projects\\Kotlin\\Notflix\\feature\\home\\src\\main\\res\\layout\\activity_home.xml"
+    },
+    {
+        "merged": "D:\\Projects\\Kotlin\\Notflix\\feature\\home\\build\\intermediates\\res\\merged\\debug\\layout_item_top_rated_show.xml.flat",
+        "source": "D:\\Projects\\Kotlin\\Notflix\\feature\\home\\src\\main\\res\\layout\\item_top_rated_show.xml"
+    },
+    {
+        "merged": "D:\\Projects\\Kotlin\\Notflix\\feature\\home\\build\\intermediates\\res\\merged\\debug\\navigation_home_navigation.xml.flat",
+        "source": "D:\\Projects\\Kotlin\\Notflix\\feature\\home\\src\\main\\res\\navigation\\home_navigation.xml"
+    }
+]

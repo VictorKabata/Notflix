@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "applicationId": "com.company.details",
+  "variantType": "OPTIONAL_APK",
+  "elements": [
+    {
+      "outputType": {
+        "type": "PROCESSED_RES"
+      },
+      "apkData": {
+        "type": "MAIN",
+        "splits": [],
+        "versionCode": 1,
+        "versionName": "1.0",
+        "outputFile": "details-debug.apk",
+        "fullName": "debug",
+        "baseName": "debug",
+        "dirName": ""
+      },
+      "path": "resources-debug.ap_",
+      "properties": {
+        "packageId": "com.vickikbt.notflix",
+        "split": "",
+        "minSdkVersion": "21"
+      }
+    }
+  ]
+}

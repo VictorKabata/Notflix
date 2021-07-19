@@ -1,0 +1,23 @@
+-keep class com.company.home.ui.activity.HomeActivity { <init>(); }
+-keep class androidx.constraintlayout.motion.widget.MotionLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.constraintlayout.widget.ConstraintLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.core.widget.NestedScrollView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.fragment.app.FragmentContainerView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.recyclerview.widget.RecyclerView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.viewpager.widget.ViewPager { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.bosphere.fadingedgelayout.FadingEdgeLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.company.details { <init>(...); }
+
+-keep class com.company.home.ui.fragments.HomeFragment { <init>(...); }
+
+-keep class com.google.android.material.card.MaterialCardView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.make.dots.dotsindicator.DotsIndicator { <init>(android.content.Context, android.util.AttributeSet); }
+

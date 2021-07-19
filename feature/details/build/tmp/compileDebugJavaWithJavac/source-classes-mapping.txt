@@ -1,0 +1,24 @@
+com/company/details/databinding/ItemCastBindingImpl.java
+ com.company.details.databinding.ItemCastBindingImpl
+com/company/details/DataBindingInfo.java
+ com.company.details.DataBindingInfo
+com/company/details/databinding/ItemCastBinding.java
+ com.company.details.databinding.ItemCastBinding
+com/company/details/databinding/FragmentMovieDetailsBindingImpl.java
+ com.company.details.databinding.FragmentMovieDetailsBindingImpl
+com/company/details/DataBinderMapperImpl.java
+ com.company.details.DataBinderMapperImpl
+ com.company.details.DataBinderMapperImpl$InnerBrLookup
+ com.company.details.DataBinderMapperImpl$InnerLayoutIdLookup
+com/company/details/databinding/ItemSimilarShowBinding.java
+ com.company.details.databinding.ItemSimilarShowBinding
+com/company/details/BuildConfig.java
+ com.company.details.BuildConfig
+com/company/details/databinding/ItemSimilarShowBindingImpl.java
+ com.company.details.databinding.ItemSimilarShowBindingImpl
+com/company/details/databinding/FragmentMovieDetailsBinding.java
+ com.company.details.databinding.FragmentMovieDetailsBinding
+com/company/details/databinding/ActivityDetailsBinding.java
+ com.company.details.databinding.ActivityDetailsBinding
+com/company/details/BR.java
+ com.company.details.BR

@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\Projects\\Kotlin\\Notflix\\feature\\favorites\\build\\intermediates\\res\\merged\\debug\\layout_fragment_favorites.xml.flat",
+        "source": "D:\\Projects\\Kotlin\\Notflix\\feature\\favorites\\src\\main\\res\\layout\\fragment_favorites.xml"
+    },
+    {
+        "merged": "D:\\Projects\\Kotlin\\Notflix\\feature\\favorites\\build\\intermediates\\res\\merged\\debug\\layout_activity_favorites.xml.flat",
+        "source": "D:\\Projects\\Kotlin\\Notflix\\feature\\favorites\\src\\main\\res\\layout\\activity_favorites.xml"
+    },
+    {
+        "merged": "D:\\Projects\\Kotlin\\Notflix\\feature\\favorites\\build\\intermediates\\res\\merged\\debug\\navigation_favorites_navigation.xml.flat",
+        "source": "D:\\Projects\\Kotlin\\Notflix\\feature\\favorites\\src\\main\\res\\navigation\\favorites_navigation.xml"
+    }
+]
