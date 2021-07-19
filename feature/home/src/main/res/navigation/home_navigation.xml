@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/home_fragment">
+
+    <fragment
+        android:id="@+id/home_fragment"
+        android:name="com.company.home.ui.fragments.HomeFragment"
+        android:label="Home" >
+        <action
+            android:id="@+id/home_to_details"
+            app:destination="@id/details_fragment" />
+    </fragment>
+
+    <include-dynamic
+        android:id="@+id/details_fragment"
+        android:name="com.company.details"
+        app:graphResName="details_navigation"
+        app:moduleName="details">
+        <argument
+            android:name="movieId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </include-dynamic>
+
+</navigation>

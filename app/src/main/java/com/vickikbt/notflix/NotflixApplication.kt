@@ -2,36 +2,52 @@ package com.vickikbt.notflix
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
-import com.vickikbt.data.datastore.ThemeDatastore
-import com.vickikbt.data.util.Coroutines
-import dagger.hilt.android.HiltAndroidApp
-import kotlinx.coroutines.flow.collect
+import com.vickikbt.cache.preferences.ThemePreferences
+import com.vickikbt.cache.di.cacheModule
+import com.vickikbt.network.di.networkModule
+import com.vickikbt.repository.di.repositoryModule
+import org.koin.android.ext.android.inject
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 import timber.log.Timber
 import timber.log.Timber.DebugTree
-import javax.inject.Inject
 
-@HiltAndroidApp
 class NotflixApplication : Application() {
 
-    @Inject
-    lateinit var themeDataStore: ThemeDatastore
+    private val themePreferences: ThemePreferences by inject()
 
     override fun onCreate() {
         super.onCreate()
 
+        initKoin()
+
         //Initialise Timber for logging
         if (BuildConfig.DEBUG) Timber.plant(DebugTree())
 
+        initTheme()
+
     }
 
-    init {
-        //Coroutines.main { initTheme() }
+    private fun initKoin() {
+        startKoin {
+            val modules = listOf(networkModule, cacheModule, repositoryModule)
+
+            androidLogger(Level.NONE)
+            androidContext(this@NotflixApplication)
+            modules(modules)
+        }
     }
 
-    private suspend fun initTheme() {
-        val value = themeDataStore.getSavedTheme()
-        value.collect { theme->
-            AppCompatDelegate.setDefaultNightMode(theme ?: AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+    private fun initTheme() {
+        val appTheme = themePreferences.appTheme
+        appTheme.observeForever { theme ->
+            when (theme) {
+                "light_theme"-> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                "dark_theme"-> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                "system_default"-> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            }
         }
     }
 

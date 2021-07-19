@@ -15,7 +15,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.vickikbt.data.util.DataFormatter.loadImage
+import com.vickikbt.core.DataFormatter.loadImage
 import com.vickikbt.notflix.R
 
 object GlideUtil {

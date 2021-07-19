@@ -65,6 +65,11 @@ dependencies {
     api "org.koin:koin-android-scope:$koin_version"
     api "org.koin:koin-android-viewmodel:$koin_version"
 
+    //api appDependencies.hiltAndroid
+    //kapt appDependencies.hiltAndroidCompiler
+
+    //api appDependencies.hiltViewModel
+    //kapt appDependencies.hiltViewModelCompiler
 
     api appDependencies.fadingEdges
 

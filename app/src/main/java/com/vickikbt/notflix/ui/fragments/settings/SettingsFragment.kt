@@ -1,74 +1,28 @@
 package com.vickikbt.notflix.ui.fragments.settings
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.preference.ListPreference
-import androidx.preference.Preference
+import android.view.View
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
-import com.vickikbt.data.util.Coroutines
-import com.vickikbt.domain.usecases.GetSavedThemeUseCase
-import com.vickikbt.notflix.NotflixApplication
+import com.vickikbt.cache.preferences.ImagesPreferences
 import com.vickikbt.notflix.R
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.android.ext.android.inject
 import timber.log.Timber
-import javax.inject.Inject
 
-@AndroidEntryPoint
 class SettingsFragment : PreferenceFragmentCompat() {
 
-    private lateinit var themePreference: ListPreference
-
-    @Inject
-    lateinit var getSavedThemeUseCase: GetSavedThemeUseCase
+    private val imagesPreferences: ImagesPreferences by inject()
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.settings_fragment, rootKey)
-        themePreference = findPreference("theme")!!
-
-        Coroutines.main {
-            //initUI()
-
-        }
-
-        setTheme()
-
 
     }
 
-    private fun initUI() {
-        val themeArrayOptions = resources.getStringArray(R.array.theme_entries)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        themePreference.summaryProvider = Preference.SummaryProvider<ListPreference> { preference ->
-            when (preference.value) {
-                "Light" -> themeArrayOptions[0]
-                "Dark" -> themeArrayOptions[1]
-                "System" -> themeArrayOptions[2]
-                else -> getString(R.string.def)
-            }
+        imagesPreferences.imageQuality.observeForever {
+            Timber.e("Image quality: $it")
         }
-
     }
-
-    private fun setTheme() {
-        val sharedPref = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        sharedPref.registerOnSharedPreferenceChangeListener { _, key ->
-            val theme = sharedPref.getString(key, "Dark Theme")
-            when (theme) {
-                "light_theme" -> (requireActivity().application as NotflixApplication).themeDataStore.saveSelectedTheme(
-                    AppCompatDelegate.MODE_NIGHT_NO
-                )
-                "dark_theme" -> (requireActivity().application as NotflixApplication).themeDataStore.saveSelectedTheme(
-                    AppCompatDelegate.MODE_NIGHT_YES
-                )
-                "system_default" -> (requireActivity().application as NotflixApplication).themeDataStore.saveSelectedTheme(
-                    AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-                )
-            }
-            Timber.e("Theme: $theme")
-        }
-
-    }
-
 
 }

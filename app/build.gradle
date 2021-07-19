@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
 }
 
@@ -22,7 +21,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
@@ -44,57 +43,16 @@ android {
 
     buildFeatures {
         dataBinding true
+        viewBinding true
     }
+    dynamicFeatures = [':feature:home', ':feature:search', ':feature:favorites', ':feature:details']
 
 }
 
 dependencies {
+    implementation project(':core')
+    api project(':library:repository')
 
-    api project(':data')
-    api project(':domain')
-
-    api appDependencies.kotlin
-    api appDependencies.androidCore
-    api appDependencies.appCompat
-
-    api appDependencies.material
-
-    api appDependencies.constraintLayout
-
-    api appDependencies.navFragment
-    api appDependencies.navUi
-
-    api appDependencies.liveData
-    api appDependencies.viewModel
-
-    api appDependencies.glide
-    api appDependencies.glideTransformation
-
-    api appDependencies.dotsIndicator
-
-    api appDependencies.networkX
-
-    api appDependencies.hiltAndroid
-    kapt appDependencies.hiltAndroidCompiler
-
-    api appDependencies.hiltViewModel
-    kapt appDependencies.hiltViewModelCompiler
-
-    implementation files('libs/YouTubeAndroidPlayerApi.jar')
-
-    api appDependencies.fadingEdges
-
-    api appDependencies.palette
-
-    api appDependencies.legacySupport
-
-    api appDependencies.preferences
-
-    //Timber dep- For lightweight simplified logging
-    api appDependencies.timber
-
-    //Paging 3
-    //implementation dataDependencies.paging
 
     testImplementation testDependencies.jUnit
     testImplementation testDependencies.truth

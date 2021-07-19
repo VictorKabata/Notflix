@@ -14,6 +14,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
 
+        <item name="android:forceDarkAllowed">true</item>
+
         <!--<item name="colorSurface">@color/secondaryColor</item>-->
 
     </style>

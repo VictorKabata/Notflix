@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<<<<<<< Updated upstream:data/src/main/AndroidManifest.xml
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.vickikbt.data">
-=======
-<manifest package="com.vickikbt.core">
->>>>>>> Stashed changes:core/src/main/AndroidManifest.xml
-
-</manifest>

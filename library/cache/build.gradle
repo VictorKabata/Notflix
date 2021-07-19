@@ -5,14 +5,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        minSdkVersion 22
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -34,15 +34,12 @@ android {
 }
 
 dependencies {
-
-    implementation project(':app')
-
-    //implementation appDependencies.kotlin
-    //implementation appDependencies.androidCore
+    //implementation project(":app")
+    implementation project(":core")
 
     //Room
-    implementation cacheDependencies.roomRuntime
-    implementation cacheDependencies.roomKtx
+    api cacheDependencies.roomRuntime
+    api cacheDependencies.roomKtx
     kapt cacheDependencies.roomCompiler
 
     //DataStore

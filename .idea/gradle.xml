@@ -12,12 +12,19 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/data" />
-            <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/details" />
+            <option value="$PROJECT_DIR$/feature/favorites" />
+            <option value="$PROJECT_DIR$/feature/home" />
+            <option value="$PROJECT_DIR$/feature/search" />
+            <option value="$PROJECT_DIR$/library" />
+            <option value="$PROJECT_DIR$/library/cache" />
+            <option value="$PROJECT_DIR$/library/network" />
+            <option value="$PROJECT_DIR$/library/repository" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
-        <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
   </component>
