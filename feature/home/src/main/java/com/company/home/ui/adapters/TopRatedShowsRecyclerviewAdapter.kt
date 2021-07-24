@@ -4,15 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.company.home.R
 import com.company.home.databinding.ItemTopRatedShowBinding
-import com.vickikbt.core.DataFormatter.getRating
-import com.vickikbt.core.DataFormatter.getReleaseDate
-import com.vickikbt.notflix.util.GlideUtil.getFelPalette
+import com.vickikbt.domain.models.Movie
+import com.vickikbt.notflix.util.DataFormatter.getRating
+import com.vickikbt.notflix.util.DataFormatter.getReleaseDate
 import com.vickikbt.notflix.util.OnClick
-import com.vickikbt.repository.models.Movie
 
 class TopRatedShowsRecyclerviewAdapter constructor(
     private val showList: List<Movie>,
@@ -25,8 +22,7 @@ class TopRatedShowsRecyclerviewAdapter constructor(
         viewType: Int
     ): TopRatedShowsRecyclerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: ItemTopRatedShowBinding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.item_top_rated_show, parent, false)
+        val binding= ItemTopRatedShowBinding.inflate(layoutInflater, parent, false)
 
         return TopRatedShowsRecyclerViewHolder(binding)
     }
@@ -49,8 +45,6 @@ class TopRatedShowsRecyclerViewHolder(private val binding: ItemTopRatedShowBindi
 
     @SuppressLint("SetTextI18n")
     fun bind(context: Context, movie: Movie) {
-
-        getFelPalette(context, movie.backdrop_path!!, binding.imageViewShowCover, binding.fel)
 
         binding.textViewShowTitle.text = "${movie.title}."
         binding.ratingBarShowRating.rating = getRating(movie.vote_average)

@@ -2,11 +2,8 @@ package com.company.details.ui.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -15,41 +12,40 @@ import com.company.details.databinding.FragmentMovieDetailsBinding
 import com.company.details.di.loadDetailsModule
 import com.company.details.ui.adapters.CastRecyclerviewAdapter
 import com.company.details.ui.adapters.SimilarShowsRecyclerviewAdapter
-import com.vickikbt.core.DataFormatter.getMovieDuration
-import com.vickikbt.core.DataFormatter.getPopularity
-import com.vickikbt.core.DataFormatter.getRating
-import com.vickikbt.core.DataFormatter.getReleaseYear
-import com.vickikbt.notflix.util.GlideUtil.getScrimPalette
+import com.vickikbt.domain.models.MovieDetails
+import com.vickikbt.notflix.util.DataFormatter.getMovieDuration
+import com.vickikbt.notflix.util.DataFormatter.getPopularity
+import com.vickikbt.notflix.util.DataFormatter.getRating
+import com.vickikbt.notflix.util.DataFormatter.getReleaseYear
 import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
-import com.vickikbt.repository.models.MovieDetails
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MovieDetailsFragment : Fragment(), StateListener, OnClick {
+class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateListener, OnClick {
 
-    private lateinit var binding: FragmentMovieDetailsBinding
+    private var _binding: FragmentMovieDetailsBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel: MovieDetailsViewModel by viewModel()
     private fun injectFeatures() = loadDetailsModule
 
     private val args by navArgs<MovieDetailsFragmentArgs>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentMovieDetailsBinding.bind(view)
+
         injectFeatures()
         viewModel.stateListener = this
 
 
         initUI()
 
-        return binding.root
     }
+
 
     @SuppressLint("SetTextI18n")
     private fun initUI() {
@@ -58,12 +54,12 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
         binding.imageViewBack.setOnClickListener { findNavController().navigateUp() }
 
         viewModel.movieDetails.observe(viewLifecycleOwner) { movieDetails ->
-            getScrimPalette(
+            /*getScrimPalette(
                 requireActivity(),
                 movieDetails.backdropPath!!,
                 binding.imageViewMoviePoster,
                 binding.felImagePoster,
-            )
+            )*/
 
             binding.textViewMovieName.text = "${movieDetails.title}."
 
@@ -159,6 +155,11 @@ class MovieDetailsFragment : Fragment(), StateListener, OnClick {
                     SimilarShowsRecyclerviewAdapter(result.movies!!, this)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onClick(movieId: Int) {

@@ -1,9 +1,9 @@
 package com.company.home.utils
 
 import com.vickikbt.cache.preferences.ImagesPreferences
-import com.vickikbt.core.Constants.IMAGE_PREFIX
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import com.vickikbt.domain.utils.Constants.IMAGE_PREFIX
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import timber.log.Timber
 
 inline fun <reified T> getKoinInstance(): T {

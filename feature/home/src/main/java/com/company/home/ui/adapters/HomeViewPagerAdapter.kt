@@ -5,13 +5,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.viewpager.widget.PagerAdapter
-import com.company.home.R
 import com.company.home.databinding.ItemHomeViewpagerBinding
-import com.vickikbt.core.DataFormatter.getRating
-import com.vickikbt.notflix.util.GlideUtil.getScrimPalette
-import com.vickikbt.repository.models.Movie
+import com.vickikbt.domain.models.Movie
+import com.vickikbt.notflix.util.DataFormatter.getRating
 
 class HomeViewPagerAdapter constructor(
     private val context: Context,
@@ -25,17 +22,9 @@ class HomeViewPagerAdapter constructor(
     @SuppressLint("SetTextI18n")
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val layoutInflater = LayoutInflater.from(context)
-        val binding: ItemHomeViewpagerBinding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.item_home_viewpager, container, false)
+        val binding = ItemHomeViewpagerBinding.inflate(layoutInflater, container, false)
 
         val show = showsList[position]
-
-        getScrimPalette(
-            context,
-            show.backdrop_path!!,
-            binding.imageViewHomeSliderBackground,
-            binding.felTrendingShows,
-        )
 
         binding.textViewTrendingShows.text = "${show.title}."
         binding.ratingBarTrendingShows.rating = getRating(show.vote_average)

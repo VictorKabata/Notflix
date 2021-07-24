@@ -1,2 +1,0 @@
-com/vickikbt/repository/BuildConfig.java
- com.vickikbt.repository.BuildConfig

@@ -4,19 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vickikbt.data.utils.ApiException
+import com.vickikbt.data.utils.NoInternetException
 import com.vickikbt.domain.models.PopularResult
 import com.vickikbt.domain.models.UpcomingResult
+import com.vickikbt.domain.repository.PopularMoviesRepository
+import com.vickikbt.domain.repository.UpcomingMoviesRepository
 import com.vickikbt.notflix.util.StateListener
-import com.vickikbt.repository.repositories.popular_movies.PopularMoviesRepository
-import com.vickikbt.repository.repositories.upcoming_movies.UpcomingRepository
-import com.vickikbt.repository.utils.ApiException
-import com.vickikbt.repository.utils.NoInternetException
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val popularMoviesRepository: PopularMoviesRepository,
-    private val upcomingMoviesRepository: UpcomingRepository
+    private val upcomingMoviesMoviesRepository: UpcomingMoviesRepository
 ) : ViewModel() {
 
     init {
@@ -61,7 +61,7 @@ class HomeViewModel(
 
         viewModelScope.launch {
             try {
-                val upcomingMoviesResponse = upcomingMoviesRepository.fetchUpcomingMovies()
+                val upcomingMoviesResponse = upcomingMoviesMoviesRepository.fetchUpcomingMovies()
                 upcomingMoviesResponse.collect { result ->
                     _upcomingMoviesMutableLiveData.value = result
                     stateListener?.onSuccess("Fetched upcoming movies")

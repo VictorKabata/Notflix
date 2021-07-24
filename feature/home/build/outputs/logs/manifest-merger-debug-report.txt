@@ -4,6 +4,7 @@ ADDED from D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml:
 INJECTED from D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml:2:1-20:12
 INJECTED from D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml:2:1-20:12
 INJECTED from D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml:2:1-20:12
+MERGED from [com.github.tizisdeepan:dots:1.0.1] C:\Users\Vicki\.gradle\caches\transforms-2\files-2.1\0d52f45ac32bdc65521a53d53e4e17fa\jetified-dots-1.0.1\AndroidManifest.xml:2:1-11:12
 INJECTED from D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml:2:1-20:12
 INJECTED from D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml:2:1-20:12
 INJECTED from D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml:2:1-20:12
@@ -47,6 +48,8 @@ uses-sdk
 INJECTED from D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml
 INJECTED from D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml
+MERGED from [com.github.tizisdeepan:dots:1.0.1] C:\Users\Vicki\.gradle\caches\transforms-2\files-2.1\0d52f45ac32bdc65521a53d53e4e17fa\jetified-dots-1.0.1\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.tizisdeepan:dots:1.0.1] C:\Users\Vicki\.gradle\caches\transforms-2\files-2.1\0d52f45ac32bdc65521a53d53e4e17fa\jetified-dots-1.0.1\AndroidManifest.xml:7:5-9:41
 INJECTED from D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml
 INJECTED from D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml
 	android:targetSdkVersion

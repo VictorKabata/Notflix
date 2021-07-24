@@ -1,12 +1,11 @@
 package com.company.details.di
 
 import com.company.details.ui.fragments.MovieDetailsViewModel
-import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 
 val detailsModule = module {
-    viewModel { MovieDetailsViewModel(get()) }
+    //viewModel { MovieDetailsViewModel(get()) }
 }
 
 val loadDetailsModule by lazy {

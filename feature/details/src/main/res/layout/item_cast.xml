@@ -1,54 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="4dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/imageView_actor_profile"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_actor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_actor_name"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="4dp">
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_black"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/imageView_actor_profile"
+        app:layout_constraintStart_toStartOf="@id/imageView_actor_profile"
+        app:layout_constraintTop_toBottomOf="@id/imageView_actor_profile"
+        tools:text="@string/placeholder_actor_name" />
 
-        <ImageView
-            android:id="@+id/imageView_actor_profile"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/ic_actor" />
+    <TextView
+        android:id="@+id/textView_actor_character_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="2dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/grey"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/textView_actor_name"
+        app:layout_constraintStart_toStartOf="@id/textView_actor_name"
+        app:layout_constraintTop_toBottomOf="@id/textView_actor_name"
+        tools:text="@string/placeholder_actor_name" />
 
-        <TextView
-            android:id="@+id/textView_actor_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="@font/roboto_black"
-            android:gravity="center"
-            android:maxLines="1"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@id/imageView_actor_profile"
-            app:layout_constraintStart_toStartOf="@id/imageView_actor_profile"
-            app:layout_constraintTop_toBottomOf="@id/imageView_actor_profile"
-            tools:text="@string/placeholder_actor_name" />
-
-        <TextView
-            android:id="@+id/textView_actor_character_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="2dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center"
-            android:maxLines="1"
-            android:textColor="@color/grey"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@id/textView_actor_name"
-            app:layout_constraintStart_toStartOf="@id/textView_actor_name"
-            app:layout_constraintTop_toBottomOf="@id/textView_actor_name"
-            tools:text="@string/placeholder_actor_name" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

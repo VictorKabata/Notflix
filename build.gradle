@@ -22,9 +22,7 @@ buildscript {
         constraintLayout_version = "2.0.4"
         nav_version = "2.3.4"
         lifecycle_version = "2.3.1"
-        hilt_version = "2.28-alpha"
-        hilt_viewmodel_version = "1.0.0-alpha02"
-        koin_version = "2.1.4"
+        koin_version = "3.1.2"
         glide_version = "4.12.0"
         glide_transformation_version = "4.0.0"
         networkx_version = "1.0"
@@ -56,59 +54,51 @@ buildscript {
 
         //region Presentation Layer Dependencies
         appDependencies = [
-                kotlin               : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
-                androidCore          : "androidx.core:core-ktx:$androidCore_version",
-                appCompat            : "androidx.appcompat:appcompat:$appCompat_version",
-                material             : "com.google.android.material:material:$material_version",
-                constraintLayout     : "androidx.constraintlayout:constraintlayout:$constraintLayout_version",
+                kotlin             : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+                androidCore        : "androidx.core:core-ktx:$androidCore_version",
+                appCompat          : "androidx.appcompat:appcompat:$appCompat_version",
+                material           : "com.google.android.material:material:$material_version",
+                constraintLayout   : "androidx.constraintlayout:constraintlayout:$constraintLayout_version",
 
-                liveData             : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
-                viewModel            : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
+                liveData           : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
+                viewModel          : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
 
-                navFragment          : "androidx.navigation:navigation-fragment-ktx:$nav_version",
-                navUi                : "androidx.navigation:navigation-ui-ktx:$nav_version",
-                navDfm               : "androidx.navigation:navigation-dynamic-features-fragment:$nav_version",
+                koinAndroid     : "io.insert-koin:koin-android:$koin_version",
 
-                glide                : "com.github.bumptech.glide:glide:$glide_version",
-                glideTransformation  : "jp.wasabeef:glide-transformations:$glide_transformation_version",
-                dotsIndicator        : "com.github.tizisdeepan:dots:$dotsIndicator_version",
-                networkX             : "com.github.rommansabbir:NetworkX:$networkx_version",
+                navFragment        : "androidx.navigation:navigation-fragment-ktx:$nav_version",
+                navUi              : "androidx.navigation:navigation-ui-ktx:$nav_version",
+                navDfm             : "androidx.navigation:navigation-dynamic-features-fragment:$nav_version",
 
-                hiltAndroid          : "com.google.dagger:hilt-android:$hilt_version",
-                hiltAndroidCompiler  : "com.google.dagger:hilt-android-compiler:$hilt_version",
+                glide              : "com.github.bumptech.glide:glide:$glide_version",
+                glideTransformation: "jp.wasabeef:glide-transformations:$glide_transformation_version",
 
-                hiltViewModel        : "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_viewmodel_version",
-                hiltViewModelCompiler: "androidx.hilt:hilt-compiler:$hilt_viewmodel_version",
+                dotsIndicator      : "com.github.tizisdeepan:dots:$dotsIndicator_version",
+                networkX           : "com.github.rommansabbir:NetworkX:$networkx_version",
 
-                fadingEdges          : "com.github.bosphere.android-fadingedgelayout:fadingedgelayout:$fadingEdge_version",
+                fadingEdges        : "com.github.bosphere.android-fadingedgelayout:fadingedgelayout:$fadingEdge_version",
 
-                palette              : "androidx.palette:palette:$palette_version",
+                palette            : "androidx.palette:palette:$palette_version",
 
-                legacySupport        : "androidx.legacy:legacy-support-v4:$legacySupport_version",
+                legacySupport      : "androidx.legacy:legacy-support-v4:$legacySupport_version",
 
-                preferences          : "androidx.preference:preference-ktx:$preferences_version",
+                preferences        : "androidx.preference:preference-ktx:$preferences_version",
 
-                timber               : "com.jakewharton.timber:timber:$timber_version",
-
-                androidYTPlayer      : "com.pierfrancescosoffritti.androidyoutubeplayer:core:$android_yt_player_verion",
+                timber             : "com.jakewharton.timber:timber:$timber_version"
         ]
         //endregion
 
         //region Data Layers Dependencies
-        networkDependencies = [
+        dataDependencies = [
                 retrofit          : "com.squareup.retrofit2:retrofit:$retrofit_version",
                 okhttp            : "com.squareup.okhttp3:okhttp:$okhttp_vesion",
                 gsonConvertor     : "com.squareup.retrofit2:converter-gson:$retrofit_version",
                 loggingIntercepter: "com.squareup.okhttp3:logging-interceptor:$loggingIntercepter_version",
-        ]
-        //endregion
 
-        //region Data Layers Dependencies
-        cacheDependencies = [
-                roomRuntime : "androidx.room:room-runtime:$room_version",
-                roomCompiler: "androidx.room:room-compiler:$room_version",
-                roomKtx     : "androidx.room:room-ktx:$room_version",
-                datastore   : "androidx.datastore:datastore-preferences:$datastore_version",
+                roomRuntime       : "androidx.room:room-runtime:$room_version",
+                roomCompiler      : "androidx.room:room-compiler:$room_version",
+                roomKtx           : "androidx.room:room-ktx:$room_version",
+
+                datastore         : "androidx.datastore:datastore-preferences:$datastore_version"
         ]
         //endregion
 

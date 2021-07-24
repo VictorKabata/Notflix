@@ -1,28 +1,12 @@
 com/company/home/databinding/ItemTopRatedShowBinding.java
  com.company.home.databinding.ItemTopRatedShowBinding
+com/company/home/databinding/ItemPopularShowBinding.java
+ com.company.home.databinding.ItemPopularShowBinding
+com/company/home/databinding/ActivityHomeBinding.java
+ com.company.home.databinding.ActivityHomeBinding
+com/company/home/databinding/FragmentHomeBinding.java
+ com.company.home.databinding.FragmentHomeBinding
 com/company/home/databinding/ItemHomeViewpagerBinding.java
  com.company.home.databinding.ItemHomeViewpagerBinding
 com/company/home/BuildConfig.java
  com.company.home.BuildConfig
-com/company/home/databinding/ItemPopularShowBindingImpl.java
- com.company.home.databinding.ItemPopularShowBindingImpl
-com/company/home/databinding/ItemHomeViewpagerBindingImpl.java
- com.company.home.databinding.ItemHomeViewpagerBindingImpl
-com/company/home/databinding/ItemPopularShowBinding.java
- com.company.home.databinding.ItemPopularShowBinding
-com/company/home/DataBinderMapperImpl.java
- com.company.home.DataBinderMapperImpl
- com.company.home.DataBinderMapperImpl$InnerBrLookup
- com.company.home.DataBinderMapperImpl$InnerLayoutIdLookup
-com/company/home/databinding/ActivityHomeBinding.java
- com.company.home.databinding.ActivityHomeBinding
-com/company/home/BR.java
- com.company.home.BR
-com/company/home/databinding/FragmentHomeBinding.java
- com.company.home.databinding.FragmentHomeBinding
-com/company/home/DataBindingInfo.java
- com.company.home.DataBindingInfo
-com/company/home/databinding/FragmentHomeBindingImpl.java
- com.company.home.databinding.FragmentHomeBindingImpl
-com/company/home/databinding/ItemTopRatedShowBindingImpl.java
- com.company.home.databinding.ItemTopRatedShowBindingImpl

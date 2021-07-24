@@ -3,16 +3,15 @@ package com.company.details.ui.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.company.details.R
 import com.company.details.databinding.ItemSimilarShowBinding
-import com.vickikbt.core.DataFormatter
-import com.vickikbt.core.DataFormatter.loadImage
+import com.vickikbt.notflix.util.DataFormatter
+import com.vickikbt.notflix.util.DataFormatter.loadImage
 import com.vickikbt.notflix.util.OnClick
-import com.vickikbt.repository.models.Movie
+import com.vickikbt.domain.models.Movie
 
 class SimilarShowsRecyclerviewAdapter constructor(
     private val showList: List<Movie>,
@@ -25,8 +24,7 @@ class SimilarShowsRecyclerviewAdapter constructor(
         viewType: Int
     ): SimilarShowsRecyclerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: ItemSimilarShowBinding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.item_similar_show, parent, false)
+        val binding = ItemSimilarShowBinding.inflate(layoutInflater,parent, false)
 
         return SimilarShowsRecyclerViewHolder(binding)
     }

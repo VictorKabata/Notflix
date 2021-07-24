@@ -1,10 +1,7 @@
 package com.company.home.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.company.home.R
@@ -17,34 +14,30 @@ import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class HomeFragment : Fragment(), StateListener, OnClick {
+class HomeFragment : Fragment(R.layout.fragment_home), StateListener, OnClick {
 
-    private lateinit var binding: FragmentHomeBinding
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel: HomeViewModel by viewModel()
     private fun injectFeatures() = loadHomeModule
 
     //private val themePreferences: ThemePreferences by inject()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentHomeBinding.bind(view)
+
         injectFeatures()
         viewModel.stateListener = this
 
-       /* val appTheme = themePreferences.appTheme
-        Timber.e("App theme: $appTheme")*/
-
-
         initUI()
 
-        return binding.root
     }
+
 
     private fun initUI() {
 
@@ -79,6 +72,11 @@ class HomeFragment : Fragment(), StateListener, OnClick {
     override fun onClick(movieId: Int) {
         val action = HomeFragmentDirections.homeToDetails(movieId = movieId)
         findNavController().navigate(action)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

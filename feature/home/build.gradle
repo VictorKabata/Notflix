@@ -35,15 +35,12 @@ android {
     }
 
     buildFeatures {
-        dataBinding true
         viewBinding true
     }
 }
 
 dependencies {
     implementation project(":app")
-    implementation project(":core")
 
-    kapt "com.google.dagger:dagger-compiler:2.37"
-    kapt "com.google.dagger:dagger-android-processor:2.37"
+    implementation appDependencies.dotsIndicator
 }

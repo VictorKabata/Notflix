@@ -2,8 +2,8 @@ package com.vickikbt.notflix
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
-import com.vickikbt.cache.preferences.ThemePreferences
 import com.vickikbt.cache.di.cacheModule
+import com.vickikbt.cache.preferences.ThemePreferences
 import com.vickikbt.network.di.networkModule
 import com.vickikbt.repository.di.repositoryModule
 import org.koin.android.ext.android.inject
@@ -44,11 +44,15 @@ class NotflixApplication : Application() {
         val appTheme = themePreferences.appTheme
         appTheme.observeForever { theme ->
             when (theme) {
-                "light_theme"-> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                "dark_theme"-> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                "system_default"-> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                "light_theme" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                "dark_theme" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                "system_default" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             }
         }
     }
+
+    /*private fun initLanguage() {
+
+    }*/
 
 }

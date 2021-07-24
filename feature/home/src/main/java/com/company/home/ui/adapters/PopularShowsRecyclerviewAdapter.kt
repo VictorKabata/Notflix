@@ -3,15 +3,13 @@ package com.company.home.ui.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.company.home.R
 import com.company.home.databinding.ItemPopularShowBinding
 import com.company.home.utils.loadImage
+import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.util.OnClick
-import com.vickikbt.repository.models.Movie
 
 class PopularShowsRecyclerviewAdapter constructor(
     private val showList: List<Movie>,
@@ -24,8 +22,7 @@ class PopularShowsRecyclerviewAdapter constructor(
         viewType: Int
     ): PopularShowsRecyclerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: ItemPopularShowBinding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.item_popular_show, parent, false)
+        val binding = ItemPopularShowBinding.inflate(layoutInflater, parent, false)
 
         return PopularShowsRecyclerViewHolder(binding)
     }

@@ -1,2 +1,0 @@
-com/vickikbt/network/BuildConfig.java
- com.vickikbt.network.BuildConfig

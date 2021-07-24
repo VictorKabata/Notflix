@@ -35,13 +35,10 @@ android {
     }
 
     buildFeatures {
-        dataBinding true
         viewBinding true
     }
 }
 
 dependencies {
     implementation project(":app")
-    implementation project(":core")
-    //implementation project(":library:repository")
 }

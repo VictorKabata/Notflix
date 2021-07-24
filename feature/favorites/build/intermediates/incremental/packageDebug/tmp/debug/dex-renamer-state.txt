@@ -1,4 +1,4 @@
-#Mon Jul 12 23:50:07 EAT 2021
+#Sat Jul 24 00:38:39 EAT 2021
 base.0=D\:\\Projects\\Kotlin\\Notflix\\feature\\favorites\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

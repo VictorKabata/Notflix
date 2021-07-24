@@ -42,25 +42,49 @@ android {
     }
 
     buildFeatures {
-        dataBinding true
         viewBinding true
     }
+
     dynamicFeatures = [':feature:home', ':feature:search', ':feature:favorites', ':feature:details']
 
 }
 
 dependencies {
-    implementation project(':core')
-    api project(':library:repository')
+    api project(':domain')
+    api project(':data:repository')
 
+    api appDependencies.kotlin
+    api appDependencies.androidCore
+
+    api appDependencies.appCompat
+    api appDependencies.material
+    api appDependencies.constraintLayout
+    api appDependencies.legacySupport
+
+    api appDependencies.liveData
+    api appDependencies.viewModel
+
+    api appDependencies.koinAndroid
+
+    api appDependencies.navFragment
+    api appDependencies.navUi
+    api appDependencies.navDfm
+
+    api appDependencies.glide
+
+    implementation appDependencies.preferences
+
+    api appDependencies.timber
+
+    api appDependencies.fadingEdges
+
+    api appDependencies.palette
 
     testImplementation testDependencies.jUnit
     testImplementation testDependencies.truth
     testImplementation testDependencies.coroutinesTest
     testImplementation testDependencies.robolectric
-    //testImplementation testDependencies.mockWebServer
 
-    //androidTestImplementation testDependencies.androidJUnit
     androidTestImplementation testDependencies.androidEspresso
     androidTestImplementation testDependencies.androidCoreTesting
     androidTestImplementation testDependencies.androidArchCoreTesting

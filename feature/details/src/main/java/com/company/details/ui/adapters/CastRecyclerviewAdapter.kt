@@ -3,14 +3,13 @@ package com.company.details.ui.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.company.details.R
 import com.company.details.databinding.ItemCastBinding
-import com.vickikbt.core.DataFormatter.loadImage
-import com.vickikbt.repository.models.CastItem
+import com.vickikbt.domain.models.CastItem
+import com.vickikbt.notflix.util.DataFormatter.loadImage
 
 class CastRecyclerviewAdapter constructor(
     private val castList: List<CastItem>,
@@ -22,8 +21,7 @@ class CastRecyclerviewAdapter constructor(
         viewType: Int
     ): CastRecyclerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: ItemCastBinding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.item_cast, parent, false)
+        val binding = ItemCastBinding.inflate(layoutInflater, parent, false)
 
         return CastRecyclerViewHolder(binding)
     }
