@@ -22,6 +22,7 @@
             <option value="$PROJECT_DIR$/feature/favorites" />
             <option value="$PROJECT_DIR$/feature/home" />
             <option value="$PROJECT_DIR$/feature/search" />
+            <option value="$PROJECT_DIR$/feature/settings" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -1,21 +1,20 @@
 plugins {
-    id 'com.android.library'
+    id 'com.android.dynamic-feature'
     id 'kotlin-android'
-    id 'kotlin-kapt'
 }
-
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
+        applicationId "com.vickikbt.settings"
+        applicationId "com.company.home"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -24,6 +23,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -33,19 +33,13 @@ android {
         jvmTarget = '1.8'
     }
 
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
-    api project(":domain")
+    implementation project(":app")
 
-    implementation appDependencies.kotlin
-    implementation appDependencies.androidCore
-
-    //Retrofit/Networking
-    api dataDependencies.retrofit
-    api dataDependencies.okhttp
-    api dataDependencies.gsonConvertor
-    api dataDependencies.loggingIntercepter
-
-    implementation appDependencies.koinAndroid
+    implementation appDependencies.preferences
 }

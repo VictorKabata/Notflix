@@ -6,7 +6,7 @@ plugins {
 }
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion "30.0.3"
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.company.search"

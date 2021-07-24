@@ -8,17 +8,24 @@
         android:id="@+id/home_fragment"
         android:name="com.company.home"
         app:graphResName="home_navigation"
-        app:moduleName="home"/>
+        app:moduleName="home" />
+
+    <!--<include-dynamic
+        android:id="@+id/search_fragment"
+        android:name="com.company.search"
+        app:graphResName="search_navigation"
+        app:moduleName="search"/>-->
 
     <include-dynamic
         android:id="@+id/favorites_fragment"
         android:name="com.company.favorites"
         app:graphResName="favorites_navigation"
-        app:moduleName="favorites"/>
+        app:moduleName="favorites" />
 
-    <fragment
+    <include-dynamic
         android:id="@+id/settings_fragment"
-        android:name="com.vickikbt.notflix.ui.fragments.settings.SettingsFragment"
-        android:label="@string/title_settings" />
+        android:name="com.company.settings"
+        app:graphResName="settings_navigation"
+        app:moduleName="settings" />
 
 </navigation>

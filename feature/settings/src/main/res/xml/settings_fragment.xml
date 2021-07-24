@@ -37,7 +37,7 @@
         <Preference
             android:icon="@drawable/ic_github"
             app:summary="@string/view_app_source_code"
-            app:title="@string/source_code"/>
+            app:title="@string/source_code" />
 
     </PreferenceCategory>
 

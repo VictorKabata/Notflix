@@ -1,0 +1,13 @@
+<resources>
+    <!--Preference Titles-->
+    <string name="title_personalisation">Personalisation</string>
+    <string name="title_extras">Extras</string>
+
+    <!--Preference Headers-->
+    <string name="change_theme">Change theme</string>
+    <string name="change_language">Change language</string>
+    <string name="change_image_quality">Change image quality</string>
+    <string name="view_app_source_code">View app source code</string>
+    <string name="source_code">Source Code</string>
+
+</resources>

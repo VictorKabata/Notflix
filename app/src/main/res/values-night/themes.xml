@@ -14,10 +14,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
 
-        <!--<item name="colorSurface">@color/primaryColor</item>-->
-
-        <item name="android:forceDarkAllowed">true</item>
-
     </style>
 
     <!--SplashScreen Theme-->

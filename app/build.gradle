@@ -7,7 +7,7 @@ plugins {
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion "30.0.3"
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.vickikbt.notflix"
@@ -45,7 +45,7 @@ android {
         viewBinding true
     }
 
-    dynamicFeatures = [':feature:home', ':feature:search', ':feature:favorites', ':feature:details']
+    dynamicFeatures = [':feature:home', ':feature:search', ':feature:favorites', ':feature:details', ':feature:settings']
 
 }
 
@@ -71,8 +71,6 @@ dependencies {
     api appDependencies.navDfm
 
     api appDependencies.glide
-
-    implementation appDependencies.preferences
 
     api appDependencies.timber
 

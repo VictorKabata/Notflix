@@ -1,10 +1,10 @@
-package com.vickikbt.notflix.ui.fragments.settings
+package com.vickikbt.settings.ui.fragments
 
 import android.os.Bundle
 import android.view.View
 import androidx.preference.PreferenceFragmentCompat
 import com.vickikbt.cache.preferences.ImagesPreferences
-import com.vickikbt.notflix.R
+import com.vickikbt.settings.R
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 

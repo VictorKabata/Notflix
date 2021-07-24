@@ -14,16 +14,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
 
-        <item name="android:forceDarkAllowed">true</item>
-
-        <!--<item name="colorSurface">@color/secondaryColor</item>-->
-
     </style>
 
     <!--SplashScreen Theme-->
     <style name="Theme.Splashscreen" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_image</item>
         <item name="android:statusBarColor">@color/secondaryTextColor</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
     <!--Rating bar style-->
