@@ -1,2 +1,0 @@
-com/company/search/BuildConfig.java
- com.company.search.BuildConfig

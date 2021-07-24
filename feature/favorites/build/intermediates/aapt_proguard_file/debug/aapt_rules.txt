@@ -1,7 +1,0 @@
--keep class com.company.favorites.ui.activity.FavoritesActivity { <init>(); }
--keep class androidx.constraintlayout.widget.ConstraintLayout { <init>(android.content.Context, android.util.AttributeSet); }
-
--keep class androidx.fragment.app.FragmentContainerView { <init>(android.content.Context, android.util.AttributeSet); }
-
--keep class com.company.favorites.ui.fragment.FavoritesFragment { <init>(...); }
-

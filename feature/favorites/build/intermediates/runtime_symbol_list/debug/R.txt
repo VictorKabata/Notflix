@@ -1,5 +1,0 @@
-int id favorites_fragment 0x7c010000
-int id nav_host_fragment 0x7c010001
-int layout activity_favorites 0x7c020000
-int layout fragment_favorites 0x7c020001
-int navigation favorites_navigation 0x7c030000

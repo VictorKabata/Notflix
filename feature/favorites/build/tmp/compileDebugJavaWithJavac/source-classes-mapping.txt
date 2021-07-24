@@ -1,6 +1,0 @@
-com/company/favorites/databinding/FragmentFavoritesBinding.java
- com.company.favorites.databinding.FragmentFavoritesBinding
-com/company/favorites/databinding/ActivityFavoritesBinding.java
- com.company.favorites.databinding.ActivityFavoritesBinding
-com/company/favorites/BuildConfig.java
- com.company.favorites.BuildConfig
