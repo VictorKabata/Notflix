@@ -29,11 +29,13 @@
 20-->D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml:13:22-41
 21    </dist:module>
 22
-23    <application android:debuggable="true" >
+23    <application
 23-->D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml:16:5-18:19
-24        <activity android:name="com.company.home.ui.activity.HomeActivity" />
-24-->D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml:17:9-71
-24-->D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml:17:19-59
-25    </application>
-26
-27</manifest>
+24        android:debuggable="true"
+25        android:testOnly="true" >
+26        <activity android:name="com.company.home.ui.activity.HomeActivity" />
+26-->D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml:17:9-71
+26-->D:\Projects\Kotlin\Notflix\feature\home\src\main\AndroidManifest.xml:17:19-59
+27    </application>
+28
+29</manifest>

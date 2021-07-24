@@ -18,7 +18,9 @@
         <dist:fusing dist:include="true" />
     </dist:module>
 
-    <application android:debuggable="true" >
+    <application
+        android:debuggable="true"
+        android:testOnly="true" >
         <activity
             android:name="com.company.home.ui.activity.HomeActivity"
             android:splitName="home" />
