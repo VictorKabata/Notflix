@@ -1,6 +1,7 @@
 package com.vickikbt.notflix.ui.activities
 
 import android.os.Bundle
+import android.view.View.GONE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -9,7 +10,6 @@ import com.jeppeman.globallydynamic.globalsplitinstall.*
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.ActivityMainBinding
 import timber.log.Timber
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,23 +34,38 @@ class MainActivity : AppCompatActivity() {
 
         initDestinationListener(navController)
 
-        initModuleInstall()
+        binding.bottomNav.setOnClickListener {
+            Timber.e("Clicked bottom nav")
+        }
+
 
     }
 
     private fun initDestinationListener(navController: NavController) {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.label) {
-                "favorites" -> {
-                    Timber.e("Favourites fragment")
+                "Home" -> {
+                    Timber.e("Home fragment")
+                }
+                "Search" -> {
+                    installDynamicModule(moduleName = "search")
+                }
+                "Favorites" -> {
+                    Timber.e("Favorites fragment")
+                    installDynamicModule(moduleName = "favorites")
+                }
+                "Settings" -> {
+                    Timber.e("Settings fragment")
+                }
+                "Details" -> {
+                    Timber.e("Details fragment")
+                    binding.bottomNav.visibility=GONE
                 }
             }
         }
     }
 
-    private fun initModuleInstall() {
-        Timber.e("initModuleInstall invoked")
-
+    private fun installDynamicModule(moduleName: String) {
         val listener = GlobalSplitInstallUpdatedListener { state ->
             when (state.status()) {
                 GlobalSplitInstallSessionStatus.DOWNLOADING -> Timber.e("Downloading module")
@@ -61,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val request = GlobalSplitInstallRequest.newBuilder()
-            .addModule("favorites")
+            .addModule(moduleName)
             //.addLanguage(Locale.ENGLISH)
             .build()
 
@@ -71,6 +86,7 @@ class MainActivity : AppCompatActivity() {
             .addOnSuccessListener { sessionId -> Timber.e("Success downloading module: $sessionId") }
             .addOnFailureListener { exception -> Timber.e("Failure: ${exception.message}") }
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
