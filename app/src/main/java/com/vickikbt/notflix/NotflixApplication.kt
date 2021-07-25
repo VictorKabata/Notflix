@@ -1,7 +1,9 @@
 package com.vickikbt.notflix
 
 import android.app.Application
+import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
+import com.jeppeman.globallydynamic.globalsplitcompat.GlobalSplitCompat
 import com.vickikbt.cache.di.cacheModule
 import com.vickikbt.cache.preferences.ThemePreferences
 import com.vickikbt.network.di.networkModule
@@ -22,11 +24,9 @@ class NotflixApplication : Application() {
         super.onCreate()
 
         initKoin()
-
-        //Initialise Timber for logging
-        if (BuildConfig.DEBUG) Timber.plant(DebugTree())
-
         initTheme()
+
+        if (BuildConfig.DEBUG) Timber.plant(DebugTree())
 
     }
 
@@ -51,8 +51,10 @@ class NotflixApplication : Application() {
         }
     }
 
-    /*private fun initLanguage() {
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        GlobalSplitCompat.install(this)
+    }
 
-    }*/
 
 }

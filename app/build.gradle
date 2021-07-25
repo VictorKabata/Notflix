@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.jeppeman.globallydynamic'
 }
 
 android {
@@ -45,6 +46,13 @@ android {
         viewBinding true
     }
 
+    globallyDynamicServers {
+        studioEmbedded {
+            throttleDownloadBy 3000
+            applyToBuildVariants 'debug'
+        }
+    }
+
     dynamicFeatures = [':feature:home', ':feature:search', ':feature:favorites', ':feature:details', ':feature:settings']
 
 }
@@ -55,6 +63,7 @@ dependencies {
 
     api appDependencies.kotlin
     api appDependencies.androidCore
+    debugApi appDependencies.globallyDynamic
 
     api appDependencies.appCompat
     api appDependencies.material
