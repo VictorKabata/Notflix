@@ -1,22 +1,30 @@
 package com.vickikbt.notflix.ui.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View.GONE
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jeppeman.globallydynamic.globalsplitinstall.*
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.ActivityMainBinding
+import com.vickikbt.notflix.ui.fragments.ProgressBottomSheetFragment
 import timber.log.Timber
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var navController: NavController
+
     private lateinit var globalSplitInstallManager: GlobalSplitInstallManager
+    private var globalSessionId = 0
+
+    private lateinit var globalInstallListener: GlobalSplitInstallUpdatedListener
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,70 +34,96 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-
-        binding.bottomNav.setupWithNavController(navController)
+        navController = navHostFragment.navController
 
         globalSplitInstallManager = GlobalSplitInstallManagerFactory.create(this)
 
-        initDestinationListener(navController)
-
-        binding.bottomNav.setOnClickListener {
-            Timber.e("Clicked bottom nav")
-        }
+        initUI()
 
 
     }
 
-    private fun initDestinationListener(navController: NavController) {
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.label) {
-                "Home" -> {
-                    Timber.e("Home fragment")
-                }
-                "Search" -> {
-                    installDynamicModule(moduleName = "search")
-                }
-                "Favorites" -> {
-                    Timber.e("Favorites fragment")
-                    installDynamicModule(moduleName = "favorites")
-                }
-                "Settings" -> {
-                    Timber.e("Settings fragment")
-                }
-                "Details" -> {
-                    Timber.e("Details fragment")
-                    binding.bottomNav.visibility=GONE
-                }
-            }
-        }
+    private fun initUI() {
+        binding.bottomNav.setOnNavigationItemSelectedListener(this)
+
     }
 
-    private fun installDynamicModule(moduleName: String) {
-        val listener = GlobalSplitInstallUpdatedListener { state ->
-            when (state.status()) {
-                GlobalSplitInstallSessionStatus.DOWNLOADING -> Timber.e("Downloading module")
-                GlobalSplitInstallSessionStatus.FAILED -> Timber.e("Downloading module failed")
-                GlobalSplitInstallSessionStatus.DOWNLOADED -> Timber.e("Module downloaded")
-                GlobalSplitInstallSessionStatus.INSTALLED -> Timber.e("Module installed")
+
+    @SuppressLint("SwitchIntDef")
+    private fun installDynamicModule(moduleName: String, fragmentId: Int) {
+        val name = moduleName.substring(0).capitalize()
+
+        globalInstallListener = GlobalSplitInstallUpdatedListener { state ->
+            if (state.sessionId() == globalSessionId) {
+                Timber.e("State in listener: ${state.status()}")
+                //val progressBottomSheetFragment = ProgressBottomSheetFragment(state)
+                //progressBottomSheetFragment.show(supportFragmentManager, "Progress BottomSheet")
             }
         }
+
+        globalSplitInstallManager.registerListener(globalInstallListener)
 
         val request = GlobalSplitInstallRequest.newBuilder()
             .addModule(moduleName)
-            //.addLanguage(Locale.ENGLISH)
             .build()
 
-        globalSplitInstallManager.registerListener(listener)
 
         globalSplitInstallManager.startInstall(request)
-            .addOnSuccessListener { sessionId -> Timber.e("Success downloading module: $sessionId") }
-            .addOnFailureListener { exception -> Timber.e("Failure: ${exception.message}") }
+            .addOnSuccessListener { sessionId ->
+            globalSessionId = sessionId
+            val currentState=globalSplitInstallManager.getSessionState(sessionId).result.status()
+
+            when(currentState){
+                GlobalSplitInstallSessionStatus.DOWNLOADING->{
+                    Timber.e("Downloading")
+                }
+
+                GlobalSplitInstallSessionStatus.DOWNLOADED->{
+                    Timber.e("Downloaded")
+                }
+            }
+
+        }
+        .addOnFailureListener { exception ->
+            when((exception as GlobalSplitInstallException).errorCode){
+                GlobalSplitInstallErrorCode.NETWORK_ERROR->{
+                    Timber.e("Network error downloading feature")
+                }
+
+                GlobalSplitInstallErrorCode.INSUFFICIENT_STORAGE ->{
+                    Timber.e("Insufficient storage error downloading feature")
+                }
+            }
+        }
+
     }
 
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.home_fragment -> {
+                navController.navigate(R.id.settings_fragment)
+                return true
+            }
+            R.id.favorites_fragment -> {
+                if (globalSplitInstallManager.installedModules.contains("favorites")) {
+                    navController.navigate(R.id.favorites_fragment)
+                } else installDynamicModule("favorites", R.id.favorites_fragment)
+
+                return true
+            }
+            R.id.settings_fragment -> {
+                navController.navigate(R.id.settings_fragment)
+                return true
+            }
+        }
+
+        return false
+    }
 
     override fun onDestroy() {
         super.onDestroy()
+        globalSplitInstallManager.unregisterListener(globalInstallListener)
         _binding = null
     }
 }

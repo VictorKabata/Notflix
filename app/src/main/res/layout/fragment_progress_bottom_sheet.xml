@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:behavior_hideable="true"
+    android:background="@drawable/background_bottom_sheet_progress"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <TextView
+        android:id="@+id/textView_feature_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_bold"
+        android:maxLines="1"
+        android:text="Downloading feature: Favorites"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_feature_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_regular"
+        android:maxLines="1"
+        android:text="Downloading 5mb/11mb"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@id/textView_feature_title"
+        app:layout_constraintTop_toBottomOf="@id/textView_feature_title" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progressBar_download"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="28dp"
+        android:progress="69"
+        android:visibility="visible"
+        app:indicatorColor="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/textView_feature_size"
+        app:trackCornerRadius="8dp"
+        app:trackThickness="6dp" />
+
+    <TextView
+        android:id="@+id/textView_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="42dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/cancel"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progressBar_download" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

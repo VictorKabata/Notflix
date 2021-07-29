@@ -34,7 +34,7 @@
 
     <fragment
         android:id="@+id/progress_fragment"
-        android:name="com.vickikbt.notflix.ui.fragments.ProgressFragment"
+        android:name="com.vickikbt.notflix.ui.fragments.CustomProgressFragment"
         android:label="@string/progress" />
 
 </navigation>

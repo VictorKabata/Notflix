@@ -6,7 +6,7 @@ import androidx.navigation.dynamicfeatures.fragment.ui.AbstractProgressFragment
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.FragmentProgressBinding
 
-class ProgressFragment : AbstractProgressFragment(R.layout.fragment_progress) {
+class CustomProgressFragment : AbstractProgressFragment(R.layout.fragment_progress) {
 
     private var _binding: FragmentProgressBinding? = null
     private val binding get() = _binding!!
