@@ -9,9 +9,7 @@
 
     <string name="trending_movies">Trending Movies</string>
     <string name="popular_movies">Popular Movies</string>
-    <string name="top_rated_movies">Top Rated Movies</string>
-    <string name="popular_tv_shows">Popular TV Shows</string>
-    <string name="top_rated_tv_shows">Top Rated TV Shows</string>
+    <string name="upcoming_movies">Upcoming Movies</string>
     <string name="view_all">View All</string>
 
     <string name="placeholder_movie_title">Pirates of The Caribbean: Some Villan\'s Revenge.</string>

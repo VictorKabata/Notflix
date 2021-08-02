@@ -28,8 +28,9 @@ interface ApiService {
     @GET("trending/{media_type}/{time_window}")
     suspend fun fetchTrendingMovies(
         @Path("media_type") mediaType: String = "movies",
-        @Path("time_window") timeWindow: String = "week"
-    ):Response<TrendingMoviesDto>
+        @Path("time_window") timeWindow: String = "week",
+        @Query("api_key") apiKey: String = API_KEY
+    ): Response<TrendingMoviesDto>
 
     @GET("movie/upcoming")
     suspend fun fetchUpcomingMovies(

@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jeppeman.globallydynamic.globalsplitinstall.*
 import com.vickikbt.notflix.R
@@ -35,6 +36,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
+        binding.bottomNav.setupWithNavController(navController)
+
         globalSplitInstallManager = GlobalSplitInstallManagerFactory.create(this)
 
         initUI()
@@ -43,7 +46,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     private fun initUI() {
-        binding.bottomNav.setOnNavigationItemSelectedListener(this)
+        //binding.bottomNav.setOnNavigationItemSelectedListener(this)
 
     }
 

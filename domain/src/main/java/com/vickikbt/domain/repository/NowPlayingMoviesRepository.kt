@@ -6,8 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface NowPlayingMoviesRepository {
 
-    suspend fun saveNowPlayingMovies(movies: List<Movie>)
-
-    suspend fun fetchNowPlayingMovies(): Flow<NowPlayingMovies>
+    suspend fun fetchNowPlayingMovies(): Flow<List<Movie>>
 
 }

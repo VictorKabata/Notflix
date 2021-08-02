@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.vickikbt.cache.models.MovieEntity
+import com.vickikbt.domain.models.Movie
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -14,7 +15,7 @@ interface MoviesDao {
     suspend fun saveMovies(movieEntities: List<MovieEntity>)
 
     @Query("SELECT * FROM `Movies Table` WHERE category=:category")
-    suspend fun getMovies(category: String): Flow<List<MovieEntity>>
+    fun getMovies(category: String): Flow<List<MovieEntity>>
 
     @Query("DELETE FROM `Movies Table` WHERE category=:category")
     suspend fun deleteMovies(category: String)

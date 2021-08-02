@@ -11,8 +11,7 @@ data class MovieEntity(
 
     val genreIds: List<Int>?,
 
-    @PrimaryKey(autoGenerate = false)
-    val id: Int,
+    val id: Int?,
 
     val originalLanguage: String?,
 
@@ -36,5 +35,8 @@ data class MovieEntity(
 
     val category: String?,
 
-    val isFavorite: Boolean?
+    val isFavorite: Boolean?,
+
+    @PrimaryKey(autoGenerate = true)
+    val cacheId:Int=0
 )

@@ -2,7 +2,6 @@ package com.company.home.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -16,7 +15,6 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.company.home.R
 import com.company.home.databinding.ItemHomeViewpagerBinding
 import com.company.home.utils.loadImage
 import com.vickikbt.domain.models.Movie
@@ -28,7 +26,7 @@ class HomeViewPagerAdapter constructor(
     private val showsList: List<Movie>
 ) : PagerAdapter() {
 
-    override fun getCount() = 5 //shows.size
+    override fun getCount() = 5//showsList.size
 
     override fun isViewFromObject(view: View, `object`: Any) = view.equals(`object`)
 
@@ -40,7 +38,7 @@ class HomeViewPagerAdapter constructor(
         val show = showsList[position]
 
         Glide.with(context)
-            .load(show.backdrop_path!!.loadImage())
+            .load(show.backdropPath?.loadImage())
             //.placeholder(R.drawable.image_placeholder)
             //.error(R.drawable.image_placeholder)
             .transition(DrawableTransitionOptions.withCrossFade(800))
@@ -66,10 +64,15 @@ class HomeViewPagerAdapter constructor(
                     val imageBitmapDrawable = resource as BitmapDrawable
                     val imageBitmap = imageBitmapDrawable.bitmap
 
-                    Palette.from(imageBitmap).generate { palette ->
+                    Palette.from(imageBitmap).maximumColorCount(20).generate { palette ->
                         val vibrantSwatch = palette?.vibrantSwatch
                         val dominantSwatch = palette?.dominantSwatch
 
+                        if (vibrantSwatch != null) {
+                            binding.felTrendingShows.setBackgroundColor(vibrantSwatch.rgb)
+                        } else {
+                            binding.felTrendingShows.setBackgroundColor(dominantSwatch!!.rgb)
+                        }
 
                     }
 
@@ -79,7 +82,7 @@ class HomeViewPagerAdapter constructor(
             }).into(binding.imageViewHomeSliderBackground)
 
         binding.textViewTrendingShows.text = "${show.title}."
-        binding.ratingBarTrendingShows.rating = getRating(show.vote_average)
+        binding.ratingBarTrendingShows.rating = getRating(show.voteAverage)
 
         container.addView(binding.root, 0)
 

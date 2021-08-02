@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/fragment_home_scene"
-    tools:context=".ui.fragments.home.HomeFragment">
+    app:layoutDescription="@xml/fragment_home_scene">
 
     <ImageView
         android:id="@+id/imageView_homeLogo"
@@ -18,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!--region $TrendingMoviesRegion-->
+    <!--region Now Playing Movies-->
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager_trendingShows"
         android:layout_width="match_parent"
@@ -43,7 +41,6 @@
         app:layout_constraintStart_toStartOf="parent" />
     <!--endregion-->
 
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView_container"
         android:layout_width="match_parent"
@@ -55,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!--region $PopularMoviesRegion-->
+            <!--region Trending Movies-->
             <TextView
                 android:id="@+id/textView_popularMovies"
                 android:layout_width="wrap_content"
@@ -65,7 +62,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/roboto_black"
                 android:maxLines="1"
-                android:text="@string/popular_movies"
+                android:text="@string/trending_movies"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +96,7 @@
 
             <!--endregion-->
 
-            <!--region $TopRatedMoviesRegion-->
+            <!--region Popular Movies-->
             <TextView
                 android:id="@+id/textView_topRatedMovies"
                 android:layout_width="wrap_content"
@@ -109,7 +106,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/roboto_black"
                 android:maxLines="1"
-                android:text="@string/top_rated_movies"
+                android:text="@string/popular_movies"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -142,7 +139,7 @@
                 tools:listitem="@layout/item_top_rated_show" />
             <!--endregion-->
 
-            <!--region $UpcomingMoviesRegion-->
+            <!--region Upcoming Movies-->
             <TextView
                 android:id="@+id/textView_popularTvShows"
                 android:layout_width="wrap_content"
@@ -152,7 +149,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/roboto_black"
                 android:maxLines="1"
-                android:text="@string/popular_tv_shows"
+                android:text="@string/upcoming_movies"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"

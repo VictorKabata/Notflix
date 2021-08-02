@@ -34,7 +34,7 @@ class PopularShowsRecyclerviewAdapter constructor(
         holder.bind(context, movie)
 
         holder.itemView.setOnClickListener {
-            onClick.onClick(movieId = movie.id)
+            onClick.onClick(movieId = movie.id!!)
         }
     }
 
@@ -49,7 +49,7 @@ class PopularShowsRecyclerViewHolder(private val binding: ItemPopularShowBinding
     fun bind(context: Context, movie: Movie) {
 
         Glide.with(context)
-            .load(movie.poster_path!!.loadImage())
+            .load(movie.posterPath?.loadImage())
             .transition(DrawableTransitionOptions.withCrossFade())
             //.placeholder(R.drawable.image_placeholder)
             //.error(R.drawable.image_placeholder)

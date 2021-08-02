@@ -7,8 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface TrendingMoviesRepository {
 
-    suspend fun saveTrendingMovies(movies: List<Movie>)
-
-    suspend fun fetchTrendingMovies(): Flow<TrendingMovies>
+    suspend fun fetchTrendingMovies(): Flow<List<Movie>>
 
 }

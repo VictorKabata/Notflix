@@ -4,11 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import com.vickikbt.cache.AppDatabase
 import com.vickikbt.cache.models.CastEntity
 import com.vickikbt.cache.models.MovieDetailsEntity
-import com.vickikbt.cache.models.VideoEntity
+import com.vickikbt.cache.models.MovieVideoEntity
 import com.vickikbt.domain.models.Cast
 import com.vickikbt.domain.models.MovieDetails
-import com.vickikbt.domain.models.SimilarResult
-import com.vickikbt.domain.models.Video
+import com.vickikbt.domain.models.MovieVideo
+import com.vickikbt.domain.models.SimilarMovies
 import com.vickikbt.domain.repository.MovieDetailsRepository
 import com.vickikbt.domain.utils.Constants.API_KEY
 import com.vickikbt.network.ApiService
@@ -16,6 +16,7 @@ import com.vickikbt.repository.mappers.toDomain
 import com.vickikbt.repository.mappers.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 class MovieDetailsRepositoryImpl constructor(
     private val apiService: ApiService,
@@ -24,7 +25,7 @@ class MovieDetailsRepositoryImpl constructor(
 
     private val _movieDetails = MutableLiveData<MovieDetailsEntity>()
     private val _cast = MutableLiveData<CastEntity>()
-    private val _videos = MutableLiveData<VideoEntity>()
+    private val _videos = MutableLiveData<MovieVideoEntity>()
 
     init {
         _movieDetails.observeForever { movieDetails ->
@@ -48,7 +49,7 @@ class MovieDetailsRepositoryImpl constructor(
         val movieDetailsCacheResponse = appDatabase.movieDetailsDao().getMovieDetails(movieId)
 
         return if (movieDetailsCacheResponse != null) {
-            flow { emit(movieDetailsCacheResponse.toDomain()) }
+            movieDetailsCacheResponse.map { it.toDomain() }
         } else {
             val movieDetailsNetworkResponse =
                 safeApiRequest { apiService.fetchMovieDetails(movieId, API_KEY, "en") }
@@ -80,11 +81,11 @@ class MovieDetailsRepositoryImpl constructor(
     /*override suspend fun saveMovieVideos(videoEntity: VideoEntity) =
         appDatabase.videosDao().saveMovieVideo(videoEntity)*/
 
-    override suspend fun getMovieVideos(movieId: Int): Flow<Video> {
+    override suspend fun getMovieVideos(movieId: Int): Flow<MovieVideo> {
         val movieVideosCacheResponse = appDatabase.videosDao().getMovieVideo(movieId)
 
         return if (movieVideosCacheResponse != null) {
-            flow { emit(movieVideosCacheResponse.toDomain()) }
+            movieVideosCacheResponse.map { it.toDomain() }
         } else {
             val movieVideosNetworkResponse =
                 safeApiRequest { apiService.fetchMovieVideos(movieId, API_KEY, "en") }
@@ -95,7 +96,7 @@ class MovieDetailsRepositoryImpl constructor(
         }
     }
 
-    override suspend fun fetchSimilarMovies(movieId: Int): Flow<SimilarResult> {
+    override suspend fun fetchSimilarMovies(movieId: Int): Flow<SimilarMovies> {
         val similarMoviesDto = safeApiRequest { apiService.fetchSimilarMovies(movieId) }
         return flow { emit(similarMoviesDto.toEntity().toDomain()) }
     }

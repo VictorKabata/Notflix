@@ -11,7 +11,6 @@ interface CastDao {
     @Insert
     suspend fun saveMovieCast(castEntity: CastEntity)
 
-    //TODO: Change this query to return Flow<CastEntity>?
     @Query("SELECT * FROM `Casts Table` WHERE id=:movieId")
     suspend fun getMovieCast(movieId: Int): CastEntity?
 

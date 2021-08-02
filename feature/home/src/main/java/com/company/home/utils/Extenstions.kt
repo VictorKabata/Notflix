@@ -26,9 +26,8 @@ fun String.loadImage(): String {
             }
             "low_quality" -> {
                 imageQuality = "$IMAGE_PREFIX/w500/$this" //ToDo: Lower image quality value
-            }
+            }else->imageQuality = "$IMAGE_PREFIX/w500/$this"
         }
     }
-    Timber.e("Image quality: $imageQuality")
     return imageQuality!!
 }

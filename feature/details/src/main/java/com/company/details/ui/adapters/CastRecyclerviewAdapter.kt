@@ -8,11 +8,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.company.details.R
 import com.company.details.databinding.ItemCastBinding
-import com.vickikbt.domain.models.CastItem
+import com.vickikbt.domain.models.Actor
 import com.vickikbt.notflix.util.DataFormatter.loadImage
 
 class CastRecyclerviewAdapter constructor(
-    private val castList: List<CastItem>,
+    private val actors: List<Actor>,
 ) :
     RecyclerView.Adapter<CastRecyclerViewHolder>() {
 
@@ -26,11 +26,11 @@ class CastRecyclerviewAdapter constructor(
         return CastRecyclerViewHolder(binding)
     }
 
-    override fun getItemCount() = castList.size
+    override fun getItemCount() = actors.size
 
     override fun onBindViewHolder(holder: CastRecyclerViewHolder, position: Int) {
         val context = holder.itemView.context
-        val cast = castList[position]
+        val cast = actors[position]
 
         holder.bind(context, cast)
 
@@ -42,18 +42,18 @@ class CastRecyclerviewAdapter constructor(
 class CastRecyclerViewHolder(private val binding: ItemCastBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(context: Context, cast: CastItem) {
+    fun bind(context: Context, actor: Actor) {
 
         Glide.with(context)
-            .load(loadImage(cast.profile_path))
+            .load(loadImage(actor.profilePath))
             .circleCrop()
             .transition(DrawableTransitionOptions.withCrossFade())
             .placeholder(R.drawable.ic_actor)
             .error(R.drawable.ic_actor)
             .into(binding.imageViewActorProfile)
 
-        binding.textViewActorName.text = cast.name
-        binding.textViewActorCharacterName.text = cast.character
+        binding.textViewActorName.text = actor.name
+        binding.textViewActorCharacterName.text = actor.character
 
     }
 

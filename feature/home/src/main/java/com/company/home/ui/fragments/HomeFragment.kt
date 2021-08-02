@@ -15,6 +15,7 @@ import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 
 class HomeFragment : Fragment(R.layout.fragment_home), StateListener, OnClick {
@@ -24,8 +25,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), StateListener, OnClick {
 
     private val viewModel: HomeViewModel by viewModel()
     private fun injectFeatures() = loadHomeModule
-
-    //private val themePreferences: ThemePreferences by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,29 +40,24 @@ class HomeFragment : Fragment(R.layout.fragment_home), StateListener, OnClick {
 
     private fun initUI() {
 
-        //TODO: Loads up trending movies list to viewpager adapter
-        viewModel.upcomingMovies.observe(viewLifecycleOwner, { result ->
-            binding.viewPagerTrendingShows.adapter =
-                HomeViewPagerAdapter(requireActivity(), result.movies!!)
+        viewModel.nowPlayingMovies.observe(viewLifecycleOwner, { nowPlayingMovies ->
+            Timber.e("Now playing: $nowPlayingMovies")
+            binding.viewPagerTrendingShows.adapter = HomeViewPagerAdapter(requireActivity(), nowPlayingMovies)
             binding.dotsTrendingShows.setViewPager(binding.viewPagerTrendingShows)
         })
 
-        //Loads up popular movies list to recyclerview adapter
-        viewModel.popularMovies.observe(viewLifecycleOwner, { result ->
-            binding.recyclerviewPopularMovies.adapter =
-                PopularShowsRecyclerviewAdapter(result.movies!!, this)
+        viewModel.trendingMovies.observe(viewLifecycleOwner, { trendingMovies ->
+            binding.recyclerviewPopularMovies.adapter = PopularShowsRecyclerviewAdapter(trendingMovies, this)
         })
 
-        //TODO: Loads up top rated movies list to recyclerview adapter
-        viewModel.upcomingMovies.observe(viewLifecycleOwner, { result ->
+        viewModel.popularMovies.observe(viewLifecycleOwner, { popularMovies ->
             binding.recyclerviewTopRatedMovies.adapter =
-                TopRatedShowsRecyclerviewAdapter(result.movies!!, this)
+                TopRatedShowsRecyclerviewAdapter(popularMovies, this)
         })
 
-        //Loads up popular tv shows list to recyclerview adapter
-        viewModel.upcomingMovies.observe(viewLifecycleOwner, { result ->
+        viewModel.upcomingMovies.observe(viewLifecycleOwner, { upcomingMovies ->
             binding.recyclerviewPopularTvShows.adapter =
-                PopularShowsRecyclerviewAdapter(result.movies!!, this)
+                PopularShowsRecyclerviewAdapter(upcomingMovies, this)
         })
 
 

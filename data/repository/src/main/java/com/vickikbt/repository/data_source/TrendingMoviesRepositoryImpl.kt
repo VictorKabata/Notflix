@@ -5,7 +5,7 @@ import com.vickikbt.cache.AppDatabase
 import com.vickikbt.cache.datastore.TimeDatastore
 import com.vickikbt.cache.models.MovieEntity
 import com.vickikbt.domain.models.Movie
-import com.vickikbt.domain.repository.UpcomingMoviesRepository
+import com.vickikbt.domain.repository.TrendingMoviesRepository
 import com.vickikbt.domain.utils.Constants
 import com.vickikbt.domain.utils.Coroutines
 import com.vickikbt.network.ApiService
@@ -16,26 +16,26 @@ import com.vickikbt.repository.utils.TimeUtil
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class UpcomingMoviesMoviesRepositoryImpl constructor(
+class TrendingMoviesRepositoryImpl constructor(
     private val apiService: ApiService,
     private val appDatabase: AppDatabase,
     private val timeDatastore: TimeDatastore
-) : SafeApiRequest(), UpcomingMoviesRepository {
+) : SafeApiRequest(), TrendingMoviesRepository {
 
     private val moviesDao = appDatabase.moviesDao()
-    private val upcomingMoviesLivedata = MutableLiveData<List<MovieEntity>>()
+    private val trendingMoviesLivedata = MutableLiveData<List<MovieEntity>>()
 
     init {
-        upcomingMoviesLivedata.observeForever {
-            Coroutines.io { saveUpcomingMovies(it) }
+        trendingMoviesLivedata.observeForever {
+            Coroutines.io { saveTrendingMovies(it) }
         }
     }
 
-    private suspend fun saveUpcomingMovies(movies: List<MovieEntity>) =
+    private suspend fun saveTrendingMovies(movies: List<MovieEntity>) =
         moviesDao.saveMovies(movieEntities = movies)
 
-    override suspend fun fetchUpcomingMovies(): Flow<List<Movie>> {
-        val isCategoryCacheAvailable = moviesDao.isCategoryCacheAvailable("upcoming") > 0
+    override suspend fun fetchTrendingMovies(): Flow<List<Movie>> {
+        val isCategoryCacheAvailable = moviesDao.isCategoryCacheAvailable("trending") > 0
 
         val lastSyncTime = timeDatastore.getSyncTime()
         val isTimeSurpassed = TimeUtil.isTimeWithinInterval(
@@ -45,25 +45,23 @@ class UpcomingMoviesMoviesRepositoryImpl constructor(
         )
 
         return if (isCategoryCacheAvailable && !isTimeSurpassed) {
-            val cacheResponse = moviesDao.getMovies("upcoming")
+            val cacheResponse = moviesDao.getMovies("trending")
             cacheResponse.map { it.map { it.toDomain() } }
         } else {
-            moviesDao.deleteMovies(category = "upcoming")
+            moviesDao.deleteMovies("trending")
 
             val networkResponse =
-                safeApiRequest { apiService.fetchUpcomingMovies() }.movies?.map {
-                    it.toEntity(category = "upcoming")
+                safeApiRequest { apiService.fetchTrendingMovies() }.movies?.map {
+                    it.toEntity(category = "trending")
                 }
+            trendingMoviesLivedata.value = networkResponse!!
 
-            upcomingMoviesLivedata.value = networkResponse!!
-
-            val cacheResponse = moviesDao.getMovies(category = "upcoming")
+            val cacheResponse = moviesDao.getMovies("trending")
 
             timeDatastore.saveSyncTime(System.currentTimeMillis())
 
             cacheResponse.map { it.map { it.toDomain() } }
         }
     }
-
 
 }

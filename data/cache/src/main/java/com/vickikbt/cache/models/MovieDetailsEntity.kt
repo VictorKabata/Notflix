@@ -15,7 +15,7 @@ data class MovieDetailsEntity(
     val homepage: String?,
 
     @PrimaryKey(autoGenerate = false)
-    val id: Int,
+    val id: Int?,
 
     val imdbId: String?,
 

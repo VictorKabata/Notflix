@@ -36,7 +36,7 @@ class SimilarShowsRecyclerviewAdapter constructor(
         holder.bind(context, movie)
 
         holder.itemView.setOnClickListener {
-            onClick.onClick(movieId = movie.id)
+            onClick.onClick(movieId = movie.id!!)
         }
     }
 
@@ -51,14 +51,14 @@ class SimilarShowsRecyclerViewHolder(private val binding: ItemSimilarShowBinding
     fun bind(context: Context, movie: Movie) {
 
         Glide.with(context)
-            .load(loadImage(movie.poster_path))
+            .load(loadImage(movie.posterPath))
             .transition(DrawableTransitionOptions.withCrossFade())
             .placeholder(R.drawable.image_placeholder)
             .error(R.drawable.image_placeholder)
             .into(binding.imageViewShowCover)
 
         binding.textViewShowTitle.text = movie.title
-        binding.ratingBarShowRating.rating = DataFormatter.getRating(movie.vote_average)
+        binding.ratingBarShowRating.rating = DataFormatter.getRating(movie.voteAverage)
 
     }
 

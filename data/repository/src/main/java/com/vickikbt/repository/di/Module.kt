@@ -1,13 +1,7 @@
 package com.vickikbt.repository.di
 
-import com.vickikbt.domain.repository.MovieDetailsRepository
-import com.vickikbt.domain.repository.PopularMoviesRepository
-import com.vickikbt.domain.repository.SettingsRepository
-import com.vickikbt.domain.repository.UpcomingMoviesRepository
-import com.vickikbt.repository.data_source.MovieDetailsRepositoryImpl
-import com.vickikbt.repository.data_source.PopularMoviesMoviesRepositoryImpl
-import com.vickikbt.repository.data_source.SettingsRepositoryImpl
-import com.vickikbt.repository.data_source.UpcomingMoviesMoviesRepositoryImpl
+import com.vickikbt.domain.repository.*
+import com.vickikbt.repository.data_source.*
 import org.koin.dsl.module
 
 val repositoryModule = module {
@@ -19,8 +13,16 @@ val repositoryModule = module {
         )
     }
 
+    single<NowPlayingMoviesRepository> {
+        NowPlayingMoviesRepositoryImpl(
+            apiService = get(),
+            appDatabase = get(),
+            timeDatastore = get()
+        )
+    }
+
     single<PopularMoviesRepository> {
-        PopularMoviesMoviesRepositoryImpl(
+        PopularMoviesRepositoryImpl(
             apiService = get(),
             appDatabase = get(),
             timeDatastore = get()
@@ -30,6 +32,14 @@ val repositoryModule = module {
     single<SettingsRepository> {
         SettingsRepositoryImpl(
             themePreferences = get()
+        )
+    }
+
+    single<TrendingMoviesRepository> {
+        TrendingMoviesRepositoryImpl(
+            apiService = get(),
+            appDatabase = get(),
+            timeDatastore = get()
         )
     }
 

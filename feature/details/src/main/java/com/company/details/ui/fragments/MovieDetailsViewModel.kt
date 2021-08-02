@@ -6,10 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vickikbt.data.utils.ApiException
 import com.vickikbt.data.utils.NoInternetException
-import com.vickikbt.domain.models.Cast
-import com.vickikbt.domain.models.MovieDetails
-import com.vickikbt.domain.models.SimilarResult
-import com.vickikbt.domain.models.Video
+import com.vickikbt.domain.models.*
 import com.vickikbt.domain.repository.MovieDetailsRepository
 import com.vickikbt.notflix.util.StateListener
 import kotlinx.coroutines.flow.collect
@@ -26,11 +23,11 @@ class MovieDetailsViewModel constructor(
     private val _castsMutableLiveData = MutableLiveData<Cast>()
     val cast: LiveData<Cast> = _castsMutableLiveData
 
-    private val _videosMutableLiveData = MutableLiveData<Video>()
-    val video: LiveData<Video> = _videosMutableLiveData
+    private val _videosMutableLiveData = MutableLiveData<MovieVideo>()
+    val video: LiveData<MovieVideo> = _videosMutableLiveData
 
-    private val _similarMoviesMutableLiveData = MutableLiveData<SimilarResult>()
-    val similarMovies: LiveData<SimilarResult> = _similarMoviesMutableLiveData
+    private val _similarMoviesMutableLiveData = MutableLiveData<SimilarMovies>()
+    val similarMovies: LiveData<SimilarMovies> = _similarMoviesMutableLiveData
 
     var stateListener: StateListener? = null
 

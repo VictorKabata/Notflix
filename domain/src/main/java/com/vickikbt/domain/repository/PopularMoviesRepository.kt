@@ -6,9 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface PopularMoviesRepository {
 
-    suspend fun savePopularMovies(movies: List<Movie>)
-
-    suspend fun fetchPopularMovies(): Flow<PopularMovies>
+    suspend fun fetchPopularMovies(): Flow<List<Movie>>
 
 
 }

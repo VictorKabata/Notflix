@@ -2,14 +2,25 @@ package com.company.home.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.company.home.databinding.ItemTopRatedShowBinding
+import com.company.home.utils.loadImage
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.util.DataFormatter.getRating
 import com.vickikbt.notflix.util.DataFormatter.getReleaseDate
 import com.vickikbt.notflix.util.OnClick
+import timber.log.Timber
 
 class TopRatedShowsRecyclerviewAdapter constructor(
     private val showList: List<Movie>,
@@ -22,7 +33,7 @@ class TopRatedShowsRecyclerviewAdapter constructor(
         viewType: Int
     ): TopRatedShowsRecyclerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding= ItemTopRatedShowBinding.inflate(layoutInflater, parent, false)
+        val binding = ItemTopRatedShowBinding.inflate(layoutInflater, parent, false)
 
         return TopRatedShowsRecyclerViewHolder(binding)
     }
@@ -33,7 +44,7 @@ class TopRatedShowsRecyclerviewAdapter constructor(
 
         holder.bind(context, movie)
 
-        holder.itemView.setOnClickListener { onClick.onClick(movieId = movie.id) }
+        holder.itemView.setOnClickListener { onClick.onClick(movieId = movie.id!!) }
     }
 
     override fun getItemCount() = showList.size
@@ -46,9 +57,53 @@ class TopRatedShowsRecyclerViewHolder(private val binding: ItemTopRatedShowBindi
     @SuppressLint("SetTextI18n")
     fun bind(context: Context, movie: Movie) {
 
+        Glide.with(context)
+            .load(movie.backdropPath?.loadImage())
+            .transition(DrawableTransitionOptions.withCrossFade(800))
+            .listener(object : RequestListener<Drawable> {
+
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    Timber.e("Failed to get image bitmap")
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    val imageBitmapDrawable = resource as BitmapDrawable
+                    val imageBitmap = imageBitmapDrawable.bitmap
+
+                    Palette.from(imageBitmap).maximumColorCount(20).generate { palette ->
+                        val vibrantSwatch = palette?.vibrantSwatch
+                        val dominantSwatch = palette?.dominantSwatch
+
+                        if (vibrantSwatch != null) {
+                            binding.fel.setBackgroundColor(vibrantSwatch.rgb)
+                            binding.textViewShowTitle.setTextColor(vibrantSwatch.titleTextColor)
+                        } else {
+                            binding.fel.setBackgroundColor(dominantSwatch!!.rgb)
+                            binding.textViewShowTitle.setTextColor(dominantSwatch.titleTextColor)
+                        }
+
+                    }
+
+                    return false
+                }
+
+            }).into(binding.imageViewShowCover)
+
         binding.textViewShowTitle.text = "${movie.title}."
-        binding.ratingBarShowRating.rating = getRating(movie.vote_average)
-        binding.textViewReleaseDate.text = "${getReleaseDate(movie.release_date)}."
+        binding.ratingBarShowRating.rating = getRating(movie.voteAverage)
+        binding.textViewReleaseDate.text = "${getReleaseDate(movie.releaseDate)}."
     }
 
 }
