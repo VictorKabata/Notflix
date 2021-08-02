@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     private lateinit var globalInstallListener: GlobalSplitInstallUpdatedListener
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_Notflix)
@@ -55,46 +54,30 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         globalInstallListener = GlobalSplitInstallUpdatedListener { state ->
             if (state.sessionId() == globalSessionId) {
-                Timber.e("State in listener: ${state.status()}")
-                //val progressBottomSheetFragment = ProgressBottomSheetFragment(state)
-                //progressBottomSheetFragment.show(supportFragmentManager, "Progress BottomSheet")
+                val progressBottomSheetFragment = ProgressBottomSheetFragment(state)
+                progressBottomSheetFragment.show(supportFragmentManager, "Progress BottomSheet")
             }
         }
-
-        globalSplitInstallManager.registerListener(globalInstallListener)
 
         val request = GlobalSplitInstallRequest.newBuilder()
             .addModule(moduleName)
             .build()
 
 
+        globalSplitInstallManager.registerListener(globalInstallListener)
         globalSplitInstallManager.startInstall(request)
-            .addOnSuccessListener { sessionId ->
-            globalSessionId = sessionId
-            val currentState=globalSplitInstallManager.getSessionState(sessionId).result.status()
+            .addOnSuccessListener { sessionId -> globalSessionId = sessionId }
+            .addOnFailureListener { exception ->
+                when ((exception as GlobalSplitInstallException).errorCode) {
+                    GlobalSplitInstallErrorCode.NETWORK_ERROR -> {
+                        Timber.e("Network error downloading feature")
+                    }
 
-            when(currentState){
-                GlobalSplitInstallSessionStatus.DOWNLOADING->{
-                    Timber.e("Downloading")
-                }
-
-                GlobalSplitInstallSessionStatus.DOWNLOADED->{
-                    Timber.e("Downloaded")
-                }
-            }
-
-        }
-        .addOnFailureListener { exception ->
-            when((exception as GlobalSplitInstallException).errorCode){
-                GlobalSplitInstallErrorCode.NETWORK_ERROR->{
-                    Timber.e("Network error downloading feature")
-                }
-
-                GlobalSplitInstallErrorCode.INSUFFICIENT_STORAGE ->{
-                    Timber.e("Insufficient storage error downloading feature")
+                    GlobalSplitInstallErrorCode.INSUFFICIENT_STORAGE -> {
+                        Timber.e("Insufficient storage error downloading feature")
+                    }
                 }
             }
-        }
 
     }
 

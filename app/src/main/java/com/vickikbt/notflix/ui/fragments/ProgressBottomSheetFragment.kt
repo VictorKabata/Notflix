@@ -33,6 +33,18 @@ class ProgressBottomSheetFragment constructor(
 
     private fun initUI() {
         when (state.status()) {
+
+            GlobalSplitInstallSessionStatus.PENDING -> {
+                val totalByte = state.totalBytesToDownload().toMegabytes()
+                val progressBytes = state.bytesDownloaded().toMegabytes()
+
+                binding.textViewFeatureTitle.text = "Downloading feature"
+                binding.textViewFeatureSize.text = "Downloading ${progressBytes}mb/${totalByte}mb"
+                binding.progressBarDownload.progress = progressBytes
+                binding.textViewAction.visibility=View.GONE
+
+            }
+
             GlobalSplitInstallSessionStatus.DOWNLOADING -> {
                 val totalByte = state.totalBytesToDownload().toMegabytes()
                 val progressBytes = state.bytesDownloaded().toMegabytes()
@@ -55,7 +67,6 @@ class ProgressBottomSheetFragment constructor(
                 val progressBytes = state.bytesDownloaded()
 
                 Log.e("VickiKbt", "Pending: ${progressBytes.toMegabytes()}")
-
 
             }
 

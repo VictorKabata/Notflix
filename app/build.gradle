@@ -48,7 +48,7 @@ android {
 
     globallyDynamicServers {
         studioEmbedded {
-            throttleDownloadBy 10000
+            throttleDownloadBy 20000
             applyToBuildVariants 'debug'
         }
     }
