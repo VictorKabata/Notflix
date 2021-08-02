@@ -1,11 +1,12 @@
 package com.vickikbt.domain.models
 
-data class PopularResult(
+data class SimilarMovies(
+
     val page: Int?,
 
     val movies: List<Movie>?,
 
-    val total_pages: Int,
+    val totalPages: Int?,
 
-    val total_results: Int?
+    val totalResults: Int?
 )

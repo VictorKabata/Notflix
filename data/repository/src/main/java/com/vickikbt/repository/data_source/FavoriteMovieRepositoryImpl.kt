@@ -1,8 +1,11 @@
 package com.vickikbt.repository.data_source
 
+import com.vickikbt.cache.AppDatabase
+import com.vickikbt.network.ApiService
+
 class FavoriteMovieRepositoryImpl constructor(
-    private val apiService: com.vickikbt.network.ApiService,
-    private val appDatabase: com.vickikbt.cache.AppDatabase
+    private val apiService: ApiService,
+    private val appDatabase: AppDatabase
 ) : com.vickikbt.network.utils.SafeApiRequest() {
 
     /*override suspend fun saveFavoriteMovie(favoriteMovie: FavoriteMovie) {

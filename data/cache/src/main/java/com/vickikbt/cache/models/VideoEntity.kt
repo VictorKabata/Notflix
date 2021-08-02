@@ -1,16 +1,24 @@
 package com.vickikbt.cache.models
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "Videos_Table")
 data class VideoEntity(
 
-    @ColumnInfo(name = "ID")
-    @PrimaryKey(autoGenerate = false)
-    val id: Int,
+    val id: String?,
 
-    @ColumnInfo(name = "Video Items")
-    val videoItemsEntity: List<VideoItemEntity>?
+    val iso31661: String?,
+
+    val iso6391: String?,
+
+    val key: String?,
+
+    val name: String?,
+
+    val official: Boolean?,
+
+    val publishedAt: String?,
+
+    val site: String?,
+
+    val size: Int?,
+
+    val type: String?
 )

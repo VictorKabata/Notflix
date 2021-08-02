@@ -1,20 +1,14 @@
 package com.vickikbt.domain.repository
 
-import com.vickikbt.domain.models.PopularResult
+import com.vickikbt.domain.models.Movie
+import com.vickikbt.domain.models.PopularMovies
 import kotlinx.coroutines.flow.Flow
 
 interface PopularMoviesRepository {
 
-    suspend fun savePopularShows(popularResult: PopularResult)
+    suspend fun savePopularMovies(movies: List<Movie>)
 
-    suspend fun fetchPopularMovies(): Flow<PopularResult>
+    suspend fun fetchPopularMovies(): Flow<PopularMovies>
 
-    //suspend fun deletePopularShows()
-
-    //suspend fun fetchPopularShows()
-
-    //suspend fun savePopularMoviesAndShows()
-
-    //suspend fun getPopularMoviesAndShows()
 
 }

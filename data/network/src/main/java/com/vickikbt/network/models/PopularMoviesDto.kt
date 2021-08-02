@@ -1,18 +1,17 @@
 package com.vickikbt.network.models
 
 import com.google.gson.annotations.SerializedName
-import com.vickikbt.data.models.dto.MovieDto
 
-data class PopularResultDto(
-    @SerializedName("page")
+data class PopularMoviesDto(
+
     val page: Int?,
 
     @SerializedName("results")
-    val movieDtos: List<MovieDto>?,
+    val movies: List<MovieDto>?,
 
     @SerializedName("total_pages")
-    val total_pages: Int,
+    val totalPages: Int?,
 
     @SerializedName("total_results")
-    val total_results: Int?
+    val totalResults: Int?
 )

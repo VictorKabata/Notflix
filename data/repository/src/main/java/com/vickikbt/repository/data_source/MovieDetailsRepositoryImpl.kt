@@ -5,7 +5,6 @@ import com.vickikbt.cache.AppDatabase
 import com.vickikbt.cache.models.CastEntity
 import com.vickikbt.cache.models.MovieDetailsEntity
 import com.vickikbt.cache.models.VideoEntity
-import com.vickikbt.repository.mappers.toDomain
 import com.vickikbt.domain.models.Cast
 import com.vickikbt.domain.models.MovieDetails
 import com.vickikbt.domain.models.SimilarResult
@@ -13,6 +12,7 @@ import com.vickikbt.domain.models.Video
 import com.vickikbt.domain.repository.MovieDetailsRepository
 import com.vickikbt.domain.utils.Constants.API_KEY
 import com.vickikbt.network.ApiService
+import com.vickikbt.repository.mappers.toDomain
 import com.vickikbt.repository.mappers.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.vickikbt.cache.models.MovieDetailsEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MovieDetailsDao {
@@ -12,12 +13,11 @@ interface MovieDetailsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveMovieDetails(movieDetails: MovieDetailsEntity)
 
-    //ToDo: Change this query to return Flow<MovieDetailsEntity>?
-    @Query("SELECT * FROM Movie_Details_Table WHERE ID=:movieId")
-    suspend fun getMovieDetails(movieId: Int): MovieDetailsEntity?
+    @Query("SELECT * FROM `Movie Details Table` WHERE id=:movieId")
+    suspend fun getMovieDetails(movieId: Int): Flow<MovieDetailsEntity>
 
     //TODO: setup WorkManager to delete movie details after 30 days
-    @Query("DELETE FROM Movie_Details_Table")
+    @Query("DELETE FROM `Movie Details Table`")
     suspend fun deleteAllMovieDetails()
 
 }

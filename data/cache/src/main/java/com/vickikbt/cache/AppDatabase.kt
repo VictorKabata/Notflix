@@ -4,11 +4,17 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.vickikbt.cache.converters.*
-import com.vickikbt.cache.daos.*
-import com.vickikbt.cache.models.*
+import com.vickikbt.cache.daos.CastDao
+import com.vickikbt.cache.daos.MovieDetailsDao
+import com.vickikbt.cache.daos.MoviesDao
+import com.vickikbt.cache.daos.VideosDao
+import com.vickikbt.cache.models.CastEntity
+import com.vickikbt.cache.models.MovieDetailsEntity
+import com.vickikbt.cache.models.MovieEntity
+import com.vickikbt.cache.models.VideoEntity
 
 @Database(
-    entities = [PopularResultEntity::class, MovieEntity::class, UpcomingResultEntity::class, MovieDetailsEntity::class, CastEntity::class, VideoEntity::class, FavoriteMovieEntity::class],
+    entities = [MovieEntity::class, MovieDetailsEntity::class, CastEntity::class, VideoEntity::class],
     version = 1,
     exportSchema = false
 )
@@ -16,19 +22,14 @@ import com.vickikbt.cache.models.*
     MovieEntityConverter::class,
     GenreIDEntityConverter::class,
     GenreEntityConverter::class,
-    ProductionCompanyEntityConverter::class,
-    ProductionCountryEntityConverter::class,
     SpokenLanguageEntityConverter::class,
-    CastItemEntityConverter::class,
-    VideoItemEntityConverter::class
+    ActorEntityConverter::class,
+    VideoEntityConverter::class
 )
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun popularShowsDao(): PopularShowsDao
-    abstract fun upcomingShowsDao(): UpcomingShowsDao
+    abstract fun moviesDao(): MoviesDao
     abstract fun movieDetailsDao(): MovieDetailsDao
     abstract fun castDao(): CastDao
     abstract fun videosDao(): VideosDao
-    abstract fun favoritesDao(): FavoritesDao
-
 }

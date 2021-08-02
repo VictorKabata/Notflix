@@ -12,11 +12,11 @@ interface CastDao {
     suspend fun saveMovieCast(castEntity: CastEntity)
 
     //TODO: Change this query to return Flow<CastEntity>?
-    @Query("SELECT * FROM Cast_Table WHERE ID=:movieId")
+    @Query("SELECT * FROM `Casts Table` WHERE id=:movieId")
     suspend fun getMovieCast(movieId: Int): CastEntity?
 
     //TODO: setup WorkManager to delete movie cast after 30 days
-    @Query("DELETE FROM Cast_Table")
+    @Query("DELETE FROM `Casts Table`")
     suspend fun deleteAllMovieCast()
 
 }

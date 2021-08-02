@@ -1,52 +1,40 @@
 package com.vickikbt.cache.models
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "Movies Table")
 data class MovieEntity(
+    val adult: Boolean?,
 
-    @ColumnInfo(name = "Adult")
-    val adult: Boolean? ,
+    val backdropPath: String?,
 
-    @ColumnInfo(name = "Backdrop_Path")
-    val backdrop_path: String? ,
+    val genreIds: List<Int>?,
 
-    @ColumnInfo(name = "Genre_IDs")
-    val genre_ids: List<Int>? ,
-
-    @ColumnInfo(name = "ID")
     @PrimaryKey(autoGenerate = false)
     val id: Int,
 
-    @ColumnInfo(name = "Original_Language")
-    val original_language: String? ,
+    val originalLanguage: String?,
 
-    @ColumnInfo(name = "Original_Title")
-    val original_title: String? ,
+    val originalTitle: String?,
 
-    @ColumnInfo(name = "Overview")
-    val overview: String? ,
+    val overview: String?,
 
-    @ColumnInfo(name = "Popularity")
-    val popularity: Double? ,
+    val popularity: Double?,
 
-    @ColumnInfo(name = "Poster_Path")
-    val poster_path: String? ,
+    val posterPath: String?,
 
-    @ColumnInfo(name = "Release_Date")
-    val release_date: String? ,
+    val releaseDate: String?,
 
-    @ColumnInfo(name = "Title")
-    val title: String? ,
+    val title: String?,
 
-    @ColumnInfo(name = "Video")
-    val video: Boolean? ,
+    val video: Boolean?,
 
-    @ColumnInfo(name = "Vote_Average")
-    val vote_average: Double? ,
+    val voteAverage: Double?,
 
-    @ColumnInfo(name = "Vote_Count")
-    val vote_count: Int? 
+    val voteCount: Int?,
+
+    val category: String?,
+
+    val isFavorite: Boolean?
 )

@@ -3,29 +3,33 @@ package com.vickikbt.domain.models
 data class Movie(
     val adult: Boolean?,
 
-    val backdrop_path: String?,
+    val backdropPath: String?,
 
-    val genre_ids: List<Int>?,
+    val genreIds: List<Int>?,
 
-    val id: Int,
+    val id: Int?,
 
-    val original_language: String?,
+    val originalLanguage: String?,
 
-    val original_title: String?,
+    val originalTitle: String?,
 
     val overview: String?,
 
     val popularity: Double?,
 
-    val poster_path: String?,
+    val posterPath: String?,
 
-    val release_date: String?,
+    val releaseDate: String?,
 
     val title: String?,
 
     val video: Boolean?,
 
-    val vote_average: Double?,
+    val voteAverage: Double?,
 
-    val vote_count: Int?
+    val voteCount: Int?,
+
+    val category:String?,
+
+    val isFavorite:Boolean?
 )

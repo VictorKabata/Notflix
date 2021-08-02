@@ -3,11 +3,11 @@ package com.vickikbt.cache.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Casts Table")
-data class CastEntity(
-
-    val actor: List<ActorEntity>?,
+@Entity(tableName = "Movie Videos Table")
+data class MovieVideoEntity(
 
     @PrimaryKey(autoGenerate = false)
-    val id: Int?
+    val id: Int?,
+
+    val videos: List<VideoEntity>?
 )

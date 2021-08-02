@@ -1,8 +1,7 @@
 package com.vickikbt.domain.models
 
-data class Genre(
-
+data class MovieVideo(
     val id: Int?,
 
-    val name: String?
+    val videos: List<Video>?
 )

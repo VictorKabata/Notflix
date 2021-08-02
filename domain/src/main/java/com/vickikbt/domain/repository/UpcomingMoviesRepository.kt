@@ -1,16 +1,13 @@
 package com.vickikbt.domain.repository
 
-import com.vickikbt.domain.models.UpcomingResult
+import com.vickikbt.domain.models.Movie
+import com.vickikbt.domain.models.UpcomingMovies
 import kotlinx.coroutines.flow.Flow
 
 interface UpcomingMoviesRepository {
 
-    suspend fun fetchUpcomingMovies(): Flow<UpcomingResult>
+    suspend fun saveUpcomingMovies(movies: List<Movie>)
 
-    //suspend fun saveUpcomingMovies(upcomingResult: UpcomingResult)
-
-    //suspend fun savePopularMoviesAndShows()
-
-    //suspend fun getPopularMoviesAndShows()
+    suspend fun fetchUpcomingMovies(): Flow<UpcomingMovies>
 
 }
