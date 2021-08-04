@@ -176,54 +176,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal"
-                android:paddingHorizontal="8dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintHeight_min="160dp"
                 app:layout_constraintTop_toBottomOf="@id/textView_popularTvShows"
                 tools:listitem="@layout/item_popular_movies" />
 
             <!--endregion-->
-
-            <!--<TextView
-                android:id="@+id/textView_topRatedTvShows"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="16dp"
-                android:ellipsize="end"
-                android:fontFamily="@font/roboto_black"
-                android:maxLines="1"
-                android:text="@string/top_rated_tv_shows"
-                android:textColor="@color/primaryTextColor"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recyclerview_popularTvShows" />
-
-            <TextView
-                android:id="@+id/textView_seeTopRatedTvShows"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                android:fontFamily="@font/roboto_bold"
-                android:gravity="end"
-                android:text="@string/view_all"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@id/textView_topRatedTvShows"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/textView_topRatedTvShows" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview_topRatedTvShows"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="8dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintHeight_min="214dp"
-                app:layout_constraintTop_toBottomOf="@id/textView_topRatedTvShows"
-                tools:listitem="@layout/item_top_rated_show" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
