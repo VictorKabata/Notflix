@@ -9,5 +9,7 @@
     <string name="change_image_quality">Change image quality</string>
     <string name="view_app_source_code">View app source code</string>
     <string name="source_code">Source Code</string>
+    <string name="report_an_error_youve_encountered">Report an error you\'ve encountered</string>
+    <string name="report_bug">Report Bug</string>
 
 </resources>
