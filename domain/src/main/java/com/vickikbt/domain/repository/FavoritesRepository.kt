@@ -5,10 +5,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface FavoritesRepository {
 
-    suspend fun saveFavoriteMovie(favoriteMovie: Movie)
+    suspend fun isMovieFavorite(movieId: Int):Flow<Boolean>
+
+    suspend fun updateIsMovieFavorite(movieId:Int,isFavorite: Boolean)
 
     suspend fun getFavoriteMovies(): Flow<List<Movie>>
-
-    //suspend fun saveFavoriteMovieDetail(favoriteMovieDetails: MovieDetails)
 
 }

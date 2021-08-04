@@ -37,11 +37,4 @@
         android:name="com.vickikbt.notflix.ui.fragments.CustomProgressFragment"
         android:label="@string/progress" />
 
-    <include-dynamic
-        android:id="@+id/details_fragment"
-        android:name="com.company.details"
-        android:label="@string/title_details"
-        app:graphResName="details_navigation"
-        app:moduleName="details" />
-
 </navigation>

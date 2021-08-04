@@ -21,14 +21,11 @@ import com.company.details.databinding.FragmentMovieDetailsBinding
 import com.company.details.di.loadDetailsModule
 import com.company.details.ui.adapters.CastRecyclerviewAdapter
 import com.company.details.ui.adapters.SimilarShowsRecyclerviewAdapter
+import com.vickikbt.notflix.util.*
 import com.vickikbt.notflix.util.DataFormatter.getMovieDuration
 import com.vickikbt.notflix.util.DataFormatter.getPopularity
 import com.vickikbt.notflix.util.DataFormatter.getRating
 import com.vickikbt.notflix.util.DataFormatter.getReleaseYear
-import com.vickikbt.notflix.util.StateListener
-import com.vickikbt.notflix.util.loadImage
-import com.vickikbt.notflix.util.log
-import com.vickikbt.notflix.util.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -54,7 +51,6 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
         initUI()
 
     }
-
 
     @SuppressLint("SetTextI18n")
     private fun initUI() {
@@ -122,15 +118,39 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
 
             initSimilarMoviesRecyclerview()
         }
+
+        viewModel.isMovieFavorite.observe(viewLifecycleOwner) { isFavorite ->
+            val favUnselected = resources.getDrawable(R.drawable.ic_fav_unselected)
+            val favSelected = resources.getDrawable(R.drawable.ic_fav_selected)
+
+            if (isFavorite) {
+                binding.imageViewFavorite.setImageDrawable(favSelected)
+
+                binding.imageViewFavorite.setOnClickListener {
+                    updateMovieFavorite(false)
+                    binding.imageViewFavorite.setImageDrawable(favUnselected)
+                }
+            } else {
+                binding.imageViewFavorite.setImageDrawable(favUnselected)
+
+                binding.imageViewFavorite.setOnClickListener {
+                    updateMovieFavorite(true)
+                    binding.imageViewFavorite.setImageDrawable(favSelected)
+                }
+            }
+        }
     }
+
+    private fun updateMovieFavorite(isFavorite: Boolean) =
+        viewModel.updateIsMovieFavorite(movieId = args.movieId, isFavorite = isFavorite)
 
     private fun initCastRecyclerview() {
         viewModel.cast.observe(viewLifecycleOwner) { cast ->
             if (cast != null) {
                 binding.recyclerviewCast.adapter = CastRecyclerviewAdapter(cast.actor!!)
             } else {
-                binding.textViewCastTitle.visibility = GONE
-                binding.recyclerviewCast.visibility = GONE
+                binding.textViewCastTitle.hide()
+                binding.recyclerviewCast.hide()
             }
         }
     }

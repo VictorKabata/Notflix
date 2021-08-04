@@ -1,4 +1,4 @@
-package com.company.home.ui.adapters
+package com.company.favorites.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,27 +6,27 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.company.home.databinding.ItemPopularShowBinding
+import com.company.favorites.databinding.ItemFavoriteMoviesBinding
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.util.loadImage
 
-class PopularShowsRecyclerviewAdapter constructor(
+class FavoriteMoviesRecyclerviewAdapter constructor(
     private val showList: List<Movie>,
     private val onItemClicked: (Movie) -> Unit
 ) :
-    RecyclerView.Adapter<PopularShowsRecyclerViewHolder>() {
+    RecyclerView.Adapter<FavoriteMoviesRecyclerViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): PopularShowsRecyclerViewHolder {
+    ): FavoriteMoviesRecyclerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ItemPopularShowBinding.inflate(layoutInflater, parent, false)
+        val binding = ItemFavoriteMoviesBinding.inflate(layoutInflater, parent, false)
 
-        return PopularShowsRecyclerViewHolder(binding)
+        return FavoriteMoviesRecyclerViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: PopularShowsRecyclerViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavoriteMoviesRecyclerViewHolder, position: Int) {
         val context = holder.itemView.context
         val movie = showList[position]
 
@@ -40,7 +40,7 @@ class PopularShowsRecyclerviewAdapter constructor(
 
 }
 
-class PopularShowsRecyclerViewHolder(private val binding: ItemPopularShowBinding) :
+class FavoriteMoviesRecyclerViewHolder(private val binding: ItemFavoriteMoviesBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(context: Context, movie: Movie) {
@@ -48,8 +48,6 @@ class PopularShowsRecyclerViewHolder(private val binding: ItemPopularShowBinding
         Glide.with(context)
             .load(movie.posterPath?.loadImage())
             .transition(DrawableTransitionOptions.withCrossFade())
-            //.placeholder(R.drawable.image_placeholder)
-            //.error(R.drawable.image_placeholder)
             .into(binding.imageViewShowCover)
 
         binding.textViewShowTitle.text = movie.title

@@ -6,5 +6,21 @@
     <fragment
         android:id="@+id/favorites_fragment"
         android:name="com.company.favorites.ui.fragment.FavoritesFragment"
-        android:label="@string/title_favorites" />
+        android:label="@string/title_favorites" >
+        <action
+            android:id="@+id/favorites_to_details"
+            app:destination="@id/details_fragment" />
+    </fragment>
+
+    <include-dynamic
+        android:id="@+id/details_fragment"
+        android:name="com.company.details"
+        android:label="@string/title_details"
+        app:graphResName="details_navigation"
+        app:moduleName="details" >
+        <argument
+            android:name="movieId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </include-dynamic>
 </navigation>

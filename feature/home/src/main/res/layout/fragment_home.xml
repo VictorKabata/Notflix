@@ -45,6 +45,8 @@
         android:id="@+id/nestedScrollView_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewPager_trendingShows">
 
@@ -88,11 +90,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal"
-                android:paddingHorizontal="8dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintHeight_min="160dp"
+                app:layout_constraintHeight_min="170dp"
                 app:layout_constraintTop_toBottomOf="@id/textView_popularMovies"
-                tools:listitem="@layout/item_popular_show" />
+                tools:listitem="@layout/item_popular_movies" />
 
             <!--endregion-->
 
@@ -102,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/roboto_black"
                 android:maxLines="1"
@@ -132,11 +133,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal"
-                android:paddingHorizontal="8dp"
+                android:scrollbars="none"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintHeight_min="214dp"
                 app:layout_constraintTop_toBottomOf="@id/textView_topRatedMovies"
-                tools:listitem="@layout/item_top_rated_show" />
+                tools:listitem="@layout/item_top_rated_movies" />
             <!--endregion-->
 
             <!--region Upcoming Movies-->
@@ -179,7 +180,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintHeight_min="160dp"
                 app:layout_constraintTop_toBottomOf="@id/textView_popularTvShows"
-                tools:listitem="@layout/item_popular_show" />
+                tools:listitem="@layout/item_popular_movies" />
 
             <!--endregion-->
 

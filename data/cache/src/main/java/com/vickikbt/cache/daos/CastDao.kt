@@ -2,6 +2,7 @@ package com.vickikbt.cache.daos
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.vickikbt.cache.models.CastEntity
 import kotlinx.coroutines.flow.Flow
@@ -9,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CastDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveMovieCast(castEntity: CastEntity)
 
     @Query("SELECT * FROM `Casts Table` WHERE id=:movieId")

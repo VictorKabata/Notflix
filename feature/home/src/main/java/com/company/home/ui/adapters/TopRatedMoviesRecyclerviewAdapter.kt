@@ -14,7 +14,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.company.home.databinding.ItemTopRatedShowBinding
+import com.company.home.databinding.ItemTopRatedMoviesBinding
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.util.DataFormatter.getRating
 import com.vickikbt.notflix.util.DataFormatter.getReleaseDate
@@ -32,7 +32,7 @@ class TopRatedShowsRecyclerviewAdapter constructor(
         viewType: Int
     ): TopRatedShowsRecyclerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ItemTopRatedShowBinding.inflate(layoutInflater, parent, false)
+        val binding = ItemTopRatedMoviesBinding.inflate(layoutInflater, parent, false)
 
         return TopRatedShowsRecyclerViewHolder(binding)
     }
@@ -50,7 +50,7 @@ class TopRatedShowsRecyclerviewAdapter constructor(
 
 }
 
-class TopRatedShowsRecyclerViewHolder(private val binding: ItemTopRatedShowBinding) :
+class TopRatedShowsRecyclerViewHolder(private val binding: ItemTopRatedMoviesBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     @SuppressLint("SetTextI18n")
