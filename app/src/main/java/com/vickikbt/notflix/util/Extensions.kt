@@ -1,5 +1,6 @@
 package com.vickikbt.notflix.util
 
+import android.view.View
 import com.vickikbt.cache.preferences.ImagesPreferences
 import com.vickikbt.domain.utils.Constants
 import org.koin.core.component.KoinComponent
@@ -40,4 +41,12 @@ fun String.loadImage(): String {
  */
 fun Long.toMegabytes(): Int {
     return (this/1024/1024).toInt()
+}
+
+fun View.show(){
+    visibility=View.VISIBLE
+}
+
+fun View.hide(){
+    visibility=View.GONE
 }

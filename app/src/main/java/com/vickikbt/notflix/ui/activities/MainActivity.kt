@@ -3,8 +3,6 @@ package com.vickikbt.notflix.ui.activities
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
-import android.view.View.GONE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -14,6 +12,8 @@ import com.jeppeman.globallydynamic.globalsplitinstall.*
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.ActivityMainBinding
 import com.vickikbt.notflix.ui.fragments.ProgressBottomSheetFragment
+import com.vickikbt.notflix.util.hide
+import com.vickikbt.notflix.util.show
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -45,9 +45,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         initUI()
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id==R.id.details_fragment){
-                binding.bottomNav.visibility=GONE
-            }
+            if (destination.label == "MovieDetailsFragment") binding.bottomNav.hide()
+            else binding.bottomNav.show()
         }
 
 
@@ -93,7 +92,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-
         when (item.itemId) {
             R.id.home_fragment -> {
                 navController.navigate(R.id.settings_fragment)
