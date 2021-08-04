@@ -7,13 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.company.home.databinding.ItemPopularShowBinding
-import com.company.home.utils.loadImage
 import com.vickikbt.domain.models.Movie
-import com.vickikbt.notflix.util.OnClick
+import com.vickikbt.notflix.util.loadImage
 
 class PopularShowsRecyclerviewAdapter constructor(
     private val showList: List<Movie>,
-    private val onClick: OnClick
+    private val onItemClicked: (Movie) -> Unit
 ) :
     RecyclerView.Adapter<PopularShowsRecyclerViewHolder>() {
 
@@ -33,9 +32,7 @@ class PopularShowsRecyclerviewAdapter constructor(
 
         holder.bind(context, movie)
 
-        holder.itemView.setOnClickListener {
-            onClick.onClick(movieId = movie.id!!)
-        }
+        holder.itemView.setOnClickListener { onItemClicked(movie) }
     }
 
     override fun getItemCount() = showList.size

@@ -1,30 +1,39 @@
 package com.company.details.ui.fragments
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.palette.graphics.Palette
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.company.details.R
 import com.company.details.databinding.FragmentMovieDetailsBinding
 import com.company.details.di.loadDetailsModule
 import com.company.details.ui.adapters.CastRecyclerviewAdapter
 import com.company.details.ui.adapters.SimilarShowsRecyclerviewAdapter
-import com.vickikbt.domain.models.MovieDetails
 import com.vickikbt.notflix.util.DataFormatter.getMovieDuration
 import com.vickikbt.notflix.util.DataFormatter.getPopularity
 import com.vickikbt.notflix.util.DataFormatter.getRating
 import com.vickikbt.notflix.util.DataFormatter.getReleaseYear
-import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.notflix.util.StateListener
+import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 
-class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateListener, OnClick {
+class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateListener {
 
     private var _binding: FragmentMovieDetailsBinding? = null
     private val binding get() = _binding!!
@@ -54,12 +63,45 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
         binding.imageViewBack.setOnClickListener { findNavController().navigateUp() }
 
         viewModel.movieDetails.observe(viewLifecycleOwner) { movieDetails ->
-            /*getScrimPalette(
-                requireActivity(),
-                movieDetails.backdropPath!!,
-                binding.imageViewMoviePoster,
-                binding.felImagePoster,
-            )*/
+            Glide.with(requireContext())
+                .load(movieDetails.backdropPath?.loadImage())
+                .transition(DrawableTransitionOptions.withCrossFade(800))
+                .listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        Timber.e("Failed to get image bitmap")
+                        return false
+                    }
+
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        val imageBitmapDrawable = resource as BitmapDrawable
+                        val imageBitmap = imageBitmapDrawable.bitmap
+
+                        Palette.from(imageBitmap).maximumColorCount(20).generate { palette ->
+                            val vibrantSwatch = palette?.vibrantSwatch
+                            val dominantSwatch = palette?.dominantSwatch
+
+                            if (vibrantSwatch != null) {
+                                binding.felImagePoster.setBackgroundColor(vibrantSwatch.rgb)
+                            } else {
+                                binding.felImagePoster.setBackgroundColor(dominantSwatch!!.rgb)
+                            }
+
+                        }
+
+                        return false
+                    }
+                }).into(binding.imageViewMoviePoster)
 
             binding.textViewMovieName.text = "${movieDetails.title}."
 
@@ -78,72 +120,20 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
 
             initCastRecyclerview()
 
-            initVideoPlayer(movieDetails)
-
             initSimilarMoviesRecyclerview()
         }
     }
 
     private fun initCastRecyclerview() {
         viewModel.cast.observe(viewLifecycleOwner) { cast ->
-            if (cast != null) binding.recyclerviewCast.adapter =
-                CastRecyclerviewAdapter(cast.actor!!)
-            else {
+            if (cast != null) {
+                binding.recyclerviewCast.adapter = CastRecyclerviewAdapter(cast.actor!!)
+            } else {
                 binding.textViewCastTitle.visibility = GONE
                 binding.recyclerviewCast.visibility = GONE
             }
         }
     }
-
-    private fun initVideoPlayer(movieDetails: MovieDetails) {
-        /*viewModel.video.observe(viewLifecycleOwner) { videos ->
-            val video = videos.videoItems!![0]
-
-            Glide.with(requireActivity())
-                .load(loadImage(movieDetails.backdropPath))
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .placeholder(R.drawable.image_placeholder)
-                .error(R.drawable.image_placeholder)
-                .apply(RequestOptions.bitmapTransform(BlurTransformation(10, 2)))
-                .into(binding.imageViewVideoPlaceholder)
-
-            binding.fabPlayTrailer.setOnClickListener {
-                //initYoutubePlayer(video)
-            }
-        }*/
-    }
-
-    /*private fun initYoutubePlayer(videoItem: VideoItem) {
-        requireActivity().log("Starting Youtube player")
-
-        requireActivity().log("Video Path: https://www.youtube.com/watch?v=${videoItem.key}")
-
-        val videoPath = "https://www.youtube.com/watch?v=${videoItem.key}"
-
-        val youTubeBaseActivity = YouTubeBaseActivity()
-        val youtubePlayer = YouTubePlayerView(youTubeBaseActivity)
-        youtubePlayer.initialize(
-            resources.getString(R.string.yt_player_api_key),
-            object : YouTubePlayer.OnInitializedListener {
-                override fun onInitializationSuccess(
-                    youtubePlayerProvider: YouTubePlayer.Provider?,
-                    youtubePlayer: YouTubePlayer?,
-                    isInitialized: Boolean
-                ) {
-                    youtubePlayer!!.loadVideo(getYoutubeVideoFromUrl(videoPath))
-                    youtubePlayer.play()
-                }
-
-                override fun onInitializationFailure(
-                    youtubePlayerProvider: YouTubePlayer.Provider?,
-                    youTubeInitializationResult: YouTubeInitializationResult?
-                ) {
-                    requireActivity().log("YT initialization failed!: ${youTubeInitializationResult.name}")
-                    requireActivity().toast("Failed to load trailer")
-                }
-
-            })
-    }*/
 
     private fun initSimilarMoviesRecyclerview() {
         viewModel.similarMovies.observe(viewLifecycleOwner) { result ->
@@ -152,7 +142,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
                 binding.recyclerviewSimilarMovies.visibility = GONE
             } else {
                 binding.recyclerviewSimilarMovies.adapter =
-                    SimilarShowsRecyclerviewAdapter(result.movies!!, this)
+                    SimilarShowsRecyclerviewAdapter(result.movies!!)
             }
         }
     }
@@ -162,9 +152,6 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
         _binding = null
     }
 
-    override fun onClick(movieId: Int) {
-
-    }
 
     override fun onLoading() {
         requireActivity().log("Loading")

@@ -10,15 +10,13 @@ import com.company.home.di.loadHomeModule
 import com.company.home.ui.adapters.HomeViewPagerAdapter
 import com.company.home.ui.adapters.PopularShowsRecyclerviewAdapter
 import com.company.home.ui.adapters.TopRatedShowsRecyclerviewAdapter
-import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.notflix.util.StateListener
 import com.vickikbt.notflix.util.log
 import com.vickikbt.notflix.util.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 
-class HomeFragment : Fragment(R.layout.fragment_home), StateListener, OnClick {
+class HomeFragment : Fragment(R.layout.fragment_home), StateListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -41,32 +39,37 @@ class HomeFragment : Fragment(R.layout.fragment_home), StateListener, OnClick {
     private fun initUI() {
 
         viewModel.nowPlayingMovies.observe(viewLifecycleOwner, { nowPlayingMovies ->
-            Timber.e("Now playing: $nowPlayingMovies")
-            binding.viewPagerTrendingShows.adapter = HomeViewPagerAdapter(requireActivity(), nowPlayingMovies)
+            binding.viewPagerTrendingShows.adapter = HomeViewPagerAdapter(requireActivity(), nowPlayingMovies){movie->
+                val action = HomeFragmentDirections.homeToDetails(movieId = movie.id!!)
+                findNavController().navigate(action)
+            }
             binding.dotsTrendingShows.setViewPager(binding.viewPagerTrendingShows)
         })
 
         viewModel.trendingMovies.observe(viewLifecycleOwner, { trendingMovies ->
-            binding.recyclerviewPopularMovies.adapter = PopularShowsRecyclerviewAdapter(trendingMovies, this)
+            binding.recyclerviewPopularMovies.adapter = PopularShowsRecyclerviewAdapter(trendingMovies){movie->
+                val action = HomeFragmentDirections.homeToDetails(movieId = movie.id!!)
+                findNavController().navigate(action)
+            }
         })
 
         viewModel.popularMovies.observe(viewLifecycleOwner, { popularMovies ->
-            binding.recyclerviewTopRatedMovies.adapter =
-                TopRatedShowsRecyclerviewAdapter(popularMovies, this)
+            binding.recyclerviewTopRatedMovies.adapter = TopRatedShowsRecyclerviewAdapter(popularMovies){movie->
+                val action = HomeFragmentDirections.homeToDetails(movieId = movie.id!!)
+                findNavController().navigate(action)
+            }
         })
 
         viewModel.upcomingMovies.observe(viewLifecycleOwner, { upcomingMovies ->
-            binding.recyclerviewPopularTvShows.adapter =
-                PopularShowsRecyclerviewAdapter(upcomingMovies, this)
+            binding.recyclerviewPopularTvShows.adapter = PopularShowsRecyclerviewAdapter(upcomingMovies){movie->
+                val action = HomeFragmentDirections.homeToDetails(movieId = movie.id!!)
+                findNavController().navigate(action)
+            }
         })
 
 
     }
 
-    override fun onClick(movieId: Int) {
-        val action = HomeFragmentDirections.homeToDetails(movieId = movieId)
-        findNavController().navigate(action)
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

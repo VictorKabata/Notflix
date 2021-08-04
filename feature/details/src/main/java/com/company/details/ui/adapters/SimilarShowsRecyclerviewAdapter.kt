@@ -10,12 +10,11 @@ import com.company.details.R
 import com.company.details.databinding.ItemSimilarShowBinding
 import com.vickikbt.notflix.util.DataFormatter
 import com.vickikbt.notflix.util.DataFormatter.loadImage
-import com.vickikbt.notflix.util.OnClick
 import com.vickikbt.domain.models.Movie
+import com.vickikbt.notflix.util.loadImage
 
 class SimilarShowsRecyclerviewAdapter constructor(
-    private val showList: List<Movie>,
-    private val onClick: OnClick
+    private val showList: List<Movie>
 ) :
     RecyclerView.Adapter<SimilarShowsRecyclerViewHolder>() {
 
@@ -36,7 +35,7 @@ class SimilarShowsRecyclerviewAdapter constructor(
         holder.bind(context, movie)
 
         holder.itemView.setOnClickListener {
-            onClick.onClick(movieId = movie.id!!)
+            //onClick.onClick(movieId = movie.id!!)
         }
     }
 
@@ -51,7 +50,7 @@ class SimilarShowsRecyclerViewHolder(private val binding: ItemSimilarShowBinding
     fun bind(context: Context, movie: Movie) {
 
         Glide.with(context)
-            .load(loadImage(movie.posterPath))
+            .load(movie.posterPath?.loadImage())
             .transition(DrawableTransitionOptions.withCrossFade())
             .placeholder(R.drawable.image_placeholder)
             .error(R.drawable.image_placeholder)

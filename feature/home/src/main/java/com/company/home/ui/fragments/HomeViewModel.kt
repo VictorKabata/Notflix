@@ -1,16 +1,10 @@
 package com.company.home.ui.fragments
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.vickikbt.data.utils.ApiException
 import com.vickikbt.data.utils.NoInternetException
 import com.vickikbt.domain.models.Movie
-import com.vickikbt.domain.repository.NowPlayingMoviesRepository
-import com.vickikbt.domain.repository.PopularMoviesRepository
-import com.vickikbt.domain.repository.TrendingMoviesRepository
-import com.vickikbt.domain.repository.UpcomingMoviesRepository
+import com.vickikbt.domain.repository.*
 import com.vickikbt.notflix.util.StateListener
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -146,28 +140,4 @@ class HomeViewModel(
         }
 
     }
-
-
-    /*fun fetchMovieDetails(movieId: Int) = liveData {
-        stateListener?.onLoading()
-
-        try {
-            val movieDetailsFlow = fetchMovieDetailsUseCase.invoke(movieId)
-            movieDetailsFlow.collect { movieDetails ->
-                stateListener?.onSuccess("Fetched movie details for: ${movieDetails.title}")
-                emit(movieDetails)
-            }
-            return@liveData
-        } catch (e: ApiException) {
-            stateListener?.onError(e.message!!)
-            return@liveData
-        } catch (e: NoInternetException) {
-            stateListener?.onError(e.message!!)
-            return@liveData
-        } catch (e: Exception) {
-            stateListener?.onError(e.message!!)
-            return@liveData
-        }
-
-    }*/
 }

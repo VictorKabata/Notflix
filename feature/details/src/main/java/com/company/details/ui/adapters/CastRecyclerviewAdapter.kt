@@ -10,6 +10,7 @@ import com.company.details.R
 import com.company.details.databinding.ItemCastBinding
 import com.vickikbt.domain.models.Actor
 import com.vickikbt.notflix.util.DataFormatter.loadImage
+import com.vickikbt.notflix.util.loadImage
 
 class CastRecyclerviewAdapter constructor(
     private val actors: List<Actor>,
@@ -45,7 +46,7 @@ class CastRecyclerViewHolder(private val binding: ItemCastBinding) :
     fun bind(context: Context, actor: Actor) {
 
         Glide.with(context)
-            .load(loadImage(actor.profilePath))
+            .load(actor.profilePath?.loadImage())
             .circleCrop()
             .transition(DrawableTransitionOptions.withCrossFade())
             .placeholder(R.drawable.ic_actor)

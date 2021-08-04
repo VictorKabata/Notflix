@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.vickikbt.cache.models.MovieVideoEntity
-import com.vickikbt.cache.models.VideoEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -20,5 +19,8 @@ interface VideosDao {
     //TODO: setup WorkManager to delete movie videos after 30 days
     @Query("DELETE FROM `Movie Videos Table`")
     suspend fun deleteAllMovieVideos()
+
+    @Query("SELECT COUNT(*) FROM `Movie Videos Table` WHERE id=:movieId")
+    suspend fun isMovieVideoCacheAvailable(movieId: Int): Int
 
 }

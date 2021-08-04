@@ -11,6 +11,7 @@ import com.vickikbt.domain.repository.MovieDetailsRepository
 import com.vickikbt.notflix.util.StateListener
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.io.IOException
 
 class MovieDetailsViewModel constructor(
@@ -38,11 +39,13 @@ class MovieDetailsViewModel constructor(
         viewModelScope.launch {
             try {
                 val movieDetailsResponse = movieDetailsRepository.getMovieDetails(movieId)
-                movieDetailsResponse!!.collect { movieDetails ->
+                movieDetailsResponse.collect { movieDetails ->
                     _movieDetailsMutableLiveData.value = movieDetails
-                }.also { getMovieCast(movieId = movieId) }
-                    .also { getMovieVideos(movieId = movieId) }
-                    .also { getSimilarMovies(movieId = movieId) }
+
+                    getMovieCast(movieId = movieId)
+                    getMovieVideos(movieId = movieId)
+                    getSimilarMovies(movieId = movieId)
+                }
                 return@launch
             } catch (e: ApiException) {
                 stateListener?.onError("${e.message}")
@@ -67,7 +70,7 @@ class MovieDetailsViewModel constructor(
         viewModelScope.launch {
             try {
                 val movieCastResponse = movieDetailsRepository.getMovieCast(movieId)
-                movieCastResponse!!.collect { cast ->
+                movieCastResponse.collect { cast ->
                     _castsMutableLiveData.value = cast
                 }
                 return@launch
@@ -94,7 +97,7 @@ class MovieDetailsViewModel constructor(
         viewModelScope.launch {
             try {
                 val movieVideoResponse = movieDetailsRepository.getMovieVideos(movieId)
-                movieVideoResponse!!.collect { video ->
+                movieVideoResponse.collect { video ->
                     _videosMutableLiveData.value = video
                 }
                 return@launch

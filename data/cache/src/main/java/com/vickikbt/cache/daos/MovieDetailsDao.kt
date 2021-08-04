@@ -20,4 +20,7 @@ interface MovieDetailsDao {
     @Query("DELETE FROM `Movie Details Table`")
     suspend fun deleteAllMovieDetails()
 
+    @Query("SELECT COUNT(*) FROM `Movie Details Table` WHERE id=:movieId")
+    suspend fun isMovieDetailsAvailable(movieId: Int):Int
+
 }

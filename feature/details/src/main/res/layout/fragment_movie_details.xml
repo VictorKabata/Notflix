@@ -19,8 +19,9 @@
         android:id="@+id/imageView_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:elevation="24dp"
-        android:padding="12dp"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,8 +30,9 @@
         android:id="@+id/imageView_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:elevation="24dp"
-        android:padding="12dp"
         android:src="@drawable/ic_favourite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -126,6 +128,7 @@
         android:clipToPadding="true"
         android:elevation="0dp"
         android:overScrollMode="never"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBar">
 
@@ -138,7 +141,7 @@
                 android:id="@+id/constraint_popularity_rating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="48dp"
+                android:layout_marginHorizontal="48dp"
                 android:paddingVertical="8dp"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -159,7 +162,7 @@
 
                 <TextView
                     android:id="@+id/textView_movie_popularity_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_black"
                     android:text="@string/popularity"
@@ -167,17 +170,19 @@
                     android:textColor="@color/primaryTextColor"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/view_separator"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <View
+                    android:id="@+id/view_separator"
                     android:layout_width="2dp"
                     android:layout_height="0dp"
                     android:layout_marginVertical="8dp"
                     android:background="@color/primaryTextColor"
                     app:layout_constraintBottom_toBottomOf="@id/textView_movie_popularity_title"
-                    app:layout_constraintEnd_toStartOf="@id/textView_movie_rating"
-                    app:layout_constraintStart_toEndOf="@id/textView_movie_popularity_title"
-                    app:layout_constraintTop_toTopOf="@id/textView_movie_popularity" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imageView_rating_star"
@@ -190,7 +195,7 @@
 
                 <TextView
                     android:id="@+id/textView_movie_rating"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_black"
                     android:textAlignment="center"
@@ -198,6 +203,7 @@
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/view_separator"
                     tools:text="4.2/5.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

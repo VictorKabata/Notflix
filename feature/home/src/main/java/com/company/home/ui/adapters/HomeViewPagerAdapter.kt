@@ -16,14 +16,15 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.company.home.databinding.ItemHomeViewpagerBinding
-import com.company.home.utils.loadImage
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.util.DataFormatter.getRating
+import com.vickikbt.notflix.util.loadImage
 import timber.log.Timber
 
 class HomeViewPagerAdapter constructor(
     private val context: Context,
-    private val showsList: List<Movie>
+    private val movieList: List<Movie>,
+    private val onItemClicked: (Movie) -> Unit
 ) : PagerAdapter() {
 
     override fun getCount() = 5//showsList.size
@@ -35,10 +36,10 @@ class HomeViewPagerAdapter constructor(
         val layoutInflater = LayoutInflater.from(context)
         val binding = ItemHomeViewpagerBinding.inflate(layoutInflater, container, false)
 
-        val show = showsList[position]
+        val movie = movieList[position]
 
         Glide.with(context)
-            .load(show.backdropPath?.loadImage())
+            .load(movie.backdropPath?.loadImage())
             //.placeholder(R.drawable.image_placeholder)
             //.error(R.drawable.image_placeholder)
             .transition(DrawableTransitionOptions.withCrossFade(800))
@@ -81,15 +82,12 @@ class HomeViewPagerAdapter constructor(
 
             }).into(binding.imageViewHomeSliderBackground)
 
-        binding.textViewTrendingShows.text = "${show.title}."
-        binding.ratingBarTrendingShows.rating = getRating(show.voteAverage)
+        binding.textViewTrendingShows.text = "${movie.title}."
+        binding.ratingBarTrendingShows.rating = getRating(movie.voteAverage)
 
         container.addView(binding.root, 0)
 
-        binding.textViewTrendingShows.setOnClickListener {
-            //val action = HomeFragmentDirections.homeToMovieDetails(show.id)
-            //it.findNavController().navigate(action)
-        }
+        binding.textViewTrendingShows.setOnClickListener { onItemClicked(movie) }
 
 
         return binding.root

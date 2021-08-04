@@ -16,12 +16,24 @@
 
     <!--region $Expanded State-->
     <ConstraintSet android:id="@+id/expanded">
-
         <Constraint
             android:id="@+id/imageView_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"
+            android:elevation="24dp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/imageView_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:elevation="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
@@ -73,7 +85,6 @@
             app:layout_constraintBottom_toTopOf="@id/textView_movie_name"
             app:layout_constraintStart_toStartOf="@id/textView_movie_name" />
 
-
         <Constraint
             android:id="@+id/nested_scrollview_movie_details"
             android:layout_width="match_parent"
@@ -91,8 +102,20 @@
             android:id="@+id/imageView_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:elevation="24dp"
+            android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="@id/appBar"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/imageView_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="24dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/appBar"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
@@ -114,12 +137,12 @@
             android:id="@id/textView_movie_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:alpha="1"
             android:scaleX="0.78"
             android:scaleY="0.78"
-            android:layout_marginStart="6dp"
             app:layout_constraintBottom_toBottomOf="@id/appBar"
-            app:layout_constraintEnd_toEndOf="@id/appBar"
+            app:layout_constraintEnd_toStartOf="@id/imageView_favorite"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/appBar">
 

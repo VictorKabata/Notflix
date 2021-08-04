@@ -15,16 +15,15 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.company.home.databinding.ItemTopRatedShowBinding
-import com.company.home.utils.loadImage
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.util.DataFormatter.getRating
 import com.vickikbt.notflix.util.DataFormatter.getReleaseDate
-import com.vickikbt.notflix.util.OnClick
+import com.vickikbt.notflix.util.loadImage
 import timber.log.Timber
 
 class TopRatedShowsRecyclerviewAdapter constructor(
     private val showList: List<Movie>,
-    private val onClick: OnClick
+    private val onItemClicked: (Movie) -> Unit
 ) :
     RecyclerView.Adapter<TopRatedShowsRecyclerViewHolder>() {
 
@@ -44,7 +43,7 @@ class TopRatedShowsRecyclerviewAdapter constructor(
 
         holder.bind(context, movie)
 
-        holder.itemView.setOnClickListener { onClick.onClick(movieId = movie.id!!) }
+        holder.itemView.setOnClickListener { onItemClicked(movie) }
     }
 
     override fun getItemCount() = showList.size

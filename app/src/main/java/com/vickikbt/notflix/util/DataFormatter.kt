@@ -2,7 +2,6 @@ package com.vickikbt.notflix.util
 
 import android.annotation.SuppressLint
 import com.vickikbt.domain.utils.Constants.IMAGE_PREFIX
-import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.regex.Pattern
 
@@ -32,11 +31,7 @@ object DataFormatter {
         val originalFormat = SimpleDateFormat("yyyy-MM-dd").parse(date!!)
         val targetFormat = SimpleDateFormat("yyyy")
 
-        val releaseYear = targetFormat.format(originalFormat!!)
-
-        Timber.e("Release Year: $releaseYear")
-
-        return releaseYear
+        return targetFormat.format(originalFormat!!)
     }
 
     fun getRating(rating: Double?) = (rating!!.toFloat() * 5) / 10

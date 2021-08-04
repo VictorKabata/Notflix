@@ -3,6 +3,8 @@ package com.vickikbt.notflix.ui.activities
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.view.View.GONE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -41,6 +43,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         globalSplitInstallManager = GlobalSplitInstallManagerFactory.create(this)
 
         initUI()
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id==R.id.details_fragment){
+                binding.bottomNav.visibility=GONE
+            }
+        }
 
 
     }
