@@ -21,11 +21,11 @@ jobs:
         run: bash ./gradlew test --stacktrace
 
 
- #Generate an unsigned bundle and uploads it as an artifact
- build:
+  #Generate an unsigned bundle and uploads it as an artifact
+  build:
    name: Generate Unsigned Bundle
    runs-on: ubuntu-latest
-    needs: [ test ]
+   needs: [ test ]
 
    steps:
        # Build unsigned bundle
