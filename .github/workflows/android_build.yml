@@ -6,18 +6,18 @@ on:
 
 jobs:
   #Run unit test before pushing the code
-  test:
-    name: Run Unit Tests
-    runs-on: ubuntu-latest
+  # test:
+  #   name: Run Unit Tests
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
-      - name: Unit tests
-        run: bash ./gradlew test --stacktrace
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Set up JDK 1.8
+  #       uses: actions/setup-java@v1
+  #       with:
+  #         java-version: 1.8
+  #     - name: Unit tests
+  #       run: bash ./gradlew test --stacktrace
 
 
  #Generate an unsigned apk and uploads it as an artifact
@@ -35,8 +35,8 @@ jobs:
          
 
        # Build unsigned apk
-      - name: Build Unsigned APK
-        run: bash ./gradlew :app:assembleDebug
+      - name: Build Unsigned AAB
+        run: bash ./gradlew :app:bundleDebug
 
           #Upload unsigned apk as an artifact
       - name: Upload Bundle to Firebase App Distribution
@@ -45,4 +45,4 @@ jobs:
           appId: ${{secrets.FIREBASE_APP_ID}}
           token: ${{secrets.FIREBASE_TOKEN}}
           groups: Debug
-          file: app/build/outputs/apk/debug/app-debug.apk #change to aab
+          file: app/build/outputs/apk/debug/app-debug.aab #change to aab
