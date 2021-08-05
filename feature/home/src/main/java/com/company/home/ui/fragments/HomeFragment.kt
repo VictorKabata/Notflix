@@ -10,7 +10,9 @@ import com.company.home.di.loadHomeModule
 import com.company.home.ui.adapters.HomeViewPagerAdapter
 import com.company.home.ui.adapters.PopularShowsRecyclerviewAdapter
 import com.company.home.ui.adapters.TopRatedShowsRecyclerviewAdapter
-import com.vickikbt.notflix.util.*
+import com.vickikbt.notflix.util.StateListener
+import com.vickikbt.notflix.util.log
+import com.vickikbt.notflix.util.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -36,32 +38,48 @@ class HomeFragment : Fragment(R.layout.fragment_home), StateListener {
 
     private fun initUI() {
         viewModel.nowPlayingMovies.observe(viewLifecycleOwner, { nowPlayingMovies ->
-            binding.viewPagerTrendingShows.adapter = HomeViewPagerAdapter(requireActivity(), nowPlayingMovies){movie->
-                val action = HomeFragmentDirections.homeToDetails(movieId = movie.id!!, cacheId = movie.cacheId!!)
-                findNavController().navigate(action)
-            }
+            binding.viewPagerTrendingShows.adapter =
+                HomeViewPagerAdapter(requireActivity(), nowPlayingMovies) { movie ->
+                    val action = HomeFragmentDirections.homeToDetails(
+                        movieId = movie.id!!,
+                        cacheId = movie.cacheId!!
+                    )
+                    findNavController().navigate(action)
+                }
             binding.dotsTrendingShows.setViewPager(binding.viewPagerTrendingShows)
         })
 
         viewModel.trendingMovies.observe(viewLifecycleOwner, { trendingMovies ->
-            binding.recyclerviewPopularMovies.adapter = PopularShowsRecyclerviewAdapter(trendingMovies){movie->
-                val action = HomeFragmentDirections.homeToDetails(movieId = movie.id!!, cacheId = movie.cacheId!!)
-                findNavController().navigate(action)
-            }
+            binding.recyclerviewPopularMovies.adapter =
+                PopularShowsRecyclerviewAdapter(trendingMovies) { movie ->
+                    val action = HomeFragmentDirections.homeToDetails(
+                        movieId = movie.id!!,
+                        cacheId = movie.cacheId!!
+                    )
+                    findNavController().navigate(action)
+                }
         })
 
         viewModel.popularMovies.observe(viewLifecycleOwner, { popularMovies ->
-            binding.recyclerviewTopRatedMovies.adapter = TopRatedShowsRecyclerviewAdapter(popularMovies){movie->
-                val action = HomeFragmentDirections.homeToDetails(movieId = movie.id!!, cacheId = movie.cacheId!!)
-                findNavController().navigate(action)
-            }
+            binding.recyclerviewTopRatedMovies.adapter =
+                TopRatedShowsRecyclerviewAdapter(popularMovies) { movie ->
+                    val action = HomeFragmentDirections.homeToDetails(
+                        movieId = movie.id!!,
+                        cacheId = movie.cacheId!!
+                    )
+                    findNavController().navigate(action)
+                }
         })
 
         viewModel.upcomingMovies.observe(viewLifecycleOwner, { upcomingMovies ->
-            binding.recyclerviewPopularTvShows.adapter = PopularShowsRecyclerviewAdapter(upcomingMovies){movie->
-                val action = HomeFragmentDirections.homeToDetails(movieId = movie.id!!, cacheId = movie.cacheId!!)
-                findNavController().navigate(action)
-            }
+            binding.recyclerviewPopularTvShows.adapter =
+                PopularShowsRecyclerviewAdapter(upcomingMovies) { movie ->
+                    val action = HomeFragmentDirections.homeToDetails(
+                        movieId = movie.id!!,
+                        cacheId = movie.cacheId!!
+                    )
+                    findNavController().navigate(action)
+                }
         })
 
 
@@ -75,21 +93,16 @@ class HomeFragment : Fragment(R.layout.fragment_home), StateListener {
 
 
     override fun onLoading() {
-        requireActivity().log("Loading...")
-        //binding.shimmerHome.show()
+        requireContext().log("Loading...")
     }
 
     override fun onSuccess(message: String) {
-        if (isAdded) requireActivity().log(message)
-        //binding.shimmerHome.hide()
+        requireContext().log(message)
     }
 
     override fun onError(message: String?) {
-        if (isAdded) {
-            requireActivity().toast(message!!)
-            requireActivity().log(message)
-        }
-        //binding.shimmerHome.show()
+        requireContext().toast(message!!)
+        requireContext().log(message)
     }
 
 }
