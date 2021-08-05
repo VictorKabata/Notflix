@@ -15,6 +15,8 @@ buildscript {
         //Plugins
         ktlint_version = "9.2.1"
         globallyDynamic_version = "1.0.0"
+        google_service_version="4.3.8"
+        appDistribution_version="2.1.2"
 
         //App Dependencies
         androidCore_version = "1.3.2"
@@ -34,6 +36,7 @@ buildscript {
         legacySupport_version = "1.0.0"
         android_yt_player_verion = "10.0.5"
         paging_version = "3.0.0"
+        shimmer_version = "0.5.0"
 
         //Data layer
         room_version = "2.3.0"
@@ -86,7 +89,9 @@ buildscript {
 
                 preferences        : "androidx.preference:preference-ktx:$preferences_version",
 
-                timber             : "com.jakewharton.timber:timber:$timber_version"
+                timber             : "com.jakewharton.timber:timber:$timber_version",
+
+                shimmer            : "com.facebook.shimmer:shimmer:$shimmer_version"
         ]
         //endregion
 
@@ -144,6 +149,8 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         classpath "com.jeppeman.globallydynamic.gradle:plugin:$globallyDynamic_version"
+        classpath "com.google.gms:google-services:$google_service_version"
+        classpath "com.google.firebase:firebase-appdistribution-gradle:$appDistribution_version"
     }
 }
 

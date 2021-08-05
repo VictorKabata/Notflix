@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.jeppeman.globallydynamic'
+    id 'com.google.firebase.appdistribution'
 }
 
 android {
@@ -48,7 +49,7 @@ android {
 
     globallyDynamicServers {
         studioEmbedded {
-            throttleDownloadBy 20000
+            throttleDownloadBy 5000
             applyToBuildVariants 'debug'
         }
     }
@@ -86,6 +87,8 @@ dependencies {
     api appDependencies.fadingEdges
 
     api appDependencies.palette
+
+    api appDependencies.shimmer
 
     testImplementation testDependencies.jUnit
     testImplementation testDependencies.truth

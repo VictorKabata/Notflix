@@ -18,7 +18,7 @@
         <item>Spanish</item>
         <item>French</item>
         <item>German</item>
-        <item>Russian</item>
+        <item>No Russian</item>
     </string-array>
 
     <string-array name="language_values">

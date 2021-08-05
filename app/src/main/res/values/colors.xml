@@ -11,5 +11,6 @@
     <color name="secondaryTextColor">#FFFFFFFF</color>
 
     <color name="grey">#909090</color>
+    <color name="text_grey">#808080</color>
     <color name="golden">#FFCA28</color>
 </resources>

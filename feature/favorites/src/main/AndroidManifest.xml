@@ -7,7 +7,8 @@
         dist:instant="false"
         dist:title="@string/title_favorites">
         <dist:delivery>
-            <dist:on-demand />
+            <!--<dist:on-demand />--> <!--ToDo: Revert back to on demand delivery-->
+            <dist:install-time />
         </dist:delivery>
 
         <dist:fusing dist:include="true" />

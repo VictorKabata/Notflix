@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "842533603856",
+    "project_id": "notflix-312019",
+    "storage_bucket": "notflix-312019.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842533603856:android:5e5df80e0be8fb45b05895",
+        "android_client_info": {
+          "package_name": "com.vickikbt.notflix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842533603856-hs48gdmb4ra97v7163ck04kg4puj8mul.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vickikbt.notflix",
+            "certificate_hash": "f24fa4a347a491e41be3251cfe7572929badb7ec"
+          }
+        },
+        {
+          "client_id": "842533603856-g0eugu2njcp5oqe0l96q4691um870cql.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEJ7BED3Xeei06jrVm6HPc2yTCkB-Y42E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842533603856-g0eugu2njcp5oqe0l96q4691um870cql.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

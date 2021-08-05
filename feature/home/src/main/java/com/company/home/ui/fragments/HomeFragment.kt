@@ -10,9 +10,7 @@ import com.company.home.di.loadHomeModule
 import com.company.home.ui.adapters.HomeViewPagerAdapter
 import com.company.home.ui.adapters.PopularShowsRecyclerviewAdapter
 import com.company.home.ui.adapters.TopRatedShowsRecyclerviewAdapter
-import com.vickikbt.notflix.util.StateListener
-import com.vickikbt.notflix.util.log
-import com.vickikbt.notflix.util.toast
+import com.vickikbt.notflix.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -78,10 +76,12 @@ class HomeFragment : Fragment(R.layout.fragment_home), StateListener {
 
     override fun onLoading() {
         requireActivity().log("Loading...")
+        //binding.shimmerHome.show()
     }
 
     override fun onSuccess(message: String) {
         if (isAdded) requireActivity().log(message)
+        //binding.shimmerHome.hide()
     }
 
     override fun onError(message: String?) {
@@ -89,6 +89,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), StateListener {
             requireActivity().toast(message!!)
             requireActivity().log(message)
         }
+        //binding.shimmerHome.show()
     }
 
 }
