@@ -24,7 +24,7 @@ jobs:
   build:
     name: Generate Unsigned APK
     runs-on: ubuntu-latest
-    needs: [ test ]
+    #needs: [ test ]
 
     steps:
       - uses: actions/checkout@v2
