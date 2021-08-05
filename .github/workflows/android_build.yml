@@ -5,7 +5,6 @@ on:
    branches: [ main ]
 
 jobs:
-
   #Run unit test before pushing the code
   test:
     name: Run Unit Tests
@@ -21,22 +20,29 @@ jobs:
         run: bash ./gradlew test --stacktrace
 
 
-  #Generate an unsigned bundle and uploads it as an artifact
+ #Generate an unsigned apk and uploads it as an artifact
   build:
-   name: Generate Unsigned Bundle
-   runs-on: ubuntu-latest
-   #needs: [ test ]
+    name: Generate Unsigned APK
+    runs-on: ubuntu-latest
+    needs: [ test ]
 
-   steps:
-       # Build unsigned bundle
-     - name: Build Unsigned Bundle
-       run: bash ./gradlew :app:assembleDebug
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+         
 
-       #Upload unsigned apk as an artifact
-     - name: Upload Bundle to Firebase App Distribution
-       uses: wzieba/Firebase-Distribution-Github-Action@v1.2.1
-       with:
-         appId: ${{secrets.FIREBASE_APP_ID}}
-         token: ${{secrets.FIREBASE_TOKEN}}
-         groups: Debug
-         file: app/build/outputs/apk/debug/app-debug.apk #change to aab
+       # Build unsigned apk
+      - name: Build Unsigned APK
+        run: bash ./gradlew :app:assembleDebug
+
+          #Upload unsigned apk as an artifact
+      - name: Upload Bundle to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.2.1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          groups: Debug
+          file: app/build/outputs/apk/debug/app-debug.apk #change to aab
