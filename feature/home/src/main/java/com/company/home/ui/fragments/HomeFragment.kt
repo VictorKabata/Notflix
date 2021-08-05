@@ -37,10 +37,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), StateListener {
 
 
     private fun initUI() {
-
         viewModel.nowPlayingMovies.observe(viewLifecycleOwner, { nowPlayingMovies ->
             binding.viewPagerTrendingShows.adapter = HomeViewPagerAdapter(requireActivity(), nowPlayingMovies){movie->
-                val action = HomeFragmentDirections.homeToDetails(movieId = movie.id!!)
+                val action = HomeFragmentDirections.homeToDetails(movieId = movie.id!!, cacheId = movie.cacheId!!)
                 findNavController().navigate(action)
             }
             binding.dotsTrendingShows.setViewPager(binding.viewPagerTrendingShows)
@@ -48,21 +47,21 @@ class HomeFragment : Fragment(R.layout.fragment_home), StateListener {
 
         viewModel.trendingMovies.observe(viewLifecycleOwner, { trendingMovies ->
             binding.recyclerviewPopularMovies.adapter = PopularShowsRecyclerviewAdapter(trendingMovies){movie->
-                val action = HomeFragmentDirections.homeToDetails(movieId = movie.id!!)
+                val action = HomeFragmentDirections.homeToDetails(movieId = movie.id!!, cacheId = movie.cacheId!!)
                 findNavController().navigate(action)
             }
         })
 
         viewModel.popularMovies.observe(viewLifecycleOwner, { popularMovies ->
             binding.recyclerviewTopRatedMovies.adapter = TopRatedShowsRecyclerviewAdapter(popularMovies){movie->
-                val action = HomeFragmentDirections.homeToDetails(movieId = movie.id!!)
+                val action = HomeFragmentDirections.homeToDetails(movieId = movie.id!!, cacheId = movie.cacheId!!)
                 findNavController().navigate(action)
             }
         })
 
         viewModel.upcomingMovies.observe(viewLifecycleOwner, { upcomingMovies ->
             binding.recyclerviewPopularTvShows.adapter = PopularShowsRecyclerviewAdapter(upcomingMovies){movie->
-                val action = HomeFragmentDirections.homeToDetails(movieId = movie.id!!)
+                val action = HomeFragmentDirections.homeToDetails(movieId = movie.id!!, cacheId = movie.cacheId!!)
                 findNavController().navigate(action)
             }
         })

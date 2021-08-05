@@ -14,11 +14,11 @@ class FavoriteMovieRepositoryImpl constructor(
 
     private val movieDao = appDatabase.moviesDao()
 
-    override suspend fun isMovieFavorite(movieId: Int): Flow<Boolean> =
+    override suspend fun isMovieFavorite(movieId: Int): Flow<Boolean?> =
         movieDao.isMovieFavorite(movieId)
 
-    override suspend fun updateIsMovieFavorite(movieId: Int, isFavorite: Boolean) =
-        movieDao.updateMovieIsFavorite(movieId, isFavorite)
+    override suspend fun updateIsMovieFavorite(cacheId: Int, isFavorite: Boolean) =
+        movieDao.updateMovieIsFavorite(cacheId, isFavorite)
 
     override suspend fun getFavoriteMovies(): Flow<List<Movie>> {
         return movieDao.getFavoriteMovies().map { it.map { it.toDomain() } }

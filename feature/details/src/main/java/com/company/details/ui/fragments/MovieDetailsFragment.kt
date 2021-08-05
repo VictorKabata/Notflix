@@ -54,6 +54,9 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
 
     @SuppressLint("SetTextI18n")
     private fun initUI() {
+        Timber.e("Movie ID: ${args.movieId}")
+        Timber.e("Cache ID: ${args.cacheId}")
+
         viewModel.getMovieDetails(args.movieId)
 
         binding.imageViewBack.setOnClickListener { findNavController().navigateUp() }
@@ -123,7 +126,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
             val favUnselected = resources.getDrawable(R.drawable.ic_fav_unselected)
             val favSelected = resources.getDrawable(R.drawable.ic_fav_selected)
 
-            if (isFavorite) {
+            if (isFavorite!=null && isFavorite) {
                 binding.imageViewFavorite.setImageDrawable(favSelected)
 
                 binding.imageViewFavorite.setOnClickListener {
@@ -142,7 +145,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
     }
 
     private fun updateMovieFavorite(isFavorite: Boolean) =
-        viewModel.updateIsMovieFavorite(movieId = args.movieId, isFavorite = isFavorite)
+        viewModel.updateIsMovieFavorite(cacheId = args.cacheId, isFavorite = isFavorite)
 
     private fun initCastRecyclerview() {
         viewModel.cast.observe(viewLifecycleOwner) { cast ->

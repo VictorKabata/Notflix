@@ -35,7 +35,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), StateListener {
     private fun initUI(){
         viewModel.favoriteMovies.observe(viewLifecycleOwner){favorites->
             binding.recyclerviewFavoriteMovies.adapter=FavoriteMoviesRecyclerviewAdapter(favorites){movie->
-                val action = FavoritesFragmentDirections.favoritesToDetails(movieId = movie.id!!)
+                val action = FavoritesFragmentDirections.favoritesToDetails(movieId = movie.id!!, cacheId=movie.cacheId!!)
                 findNavController().navigate(action)
             }
         }

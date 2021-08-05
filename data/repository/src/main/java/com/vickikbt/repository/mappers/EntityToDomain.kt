@@ -28,7 +28,8 @@ internal fun MovieEntity.toDomain(): Movie {
         this.voteAverage,
         this.voteCount,
         category = null,
-        isFavorite = null
+        isFavorite = null,
+        this.cacheId
     )
 }
 
@@ -119,7 +120,7 @@ internal fun ActorEntity.toDomain(): Actor {
         this.id,
         this.name,
         this.originalName,
-        this.profilePath
+        this?.profilePath
     )
 }
 

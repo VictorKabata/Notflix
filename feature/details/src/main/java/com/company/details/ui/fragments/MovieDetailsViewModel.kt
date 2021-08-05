@@ -32,8 +32,8 @@ class MovieDetailsViewModel constructor(
     private val _similarMovies = MutableLiveData<SimilarMovies>()
     val similarMovies: LiveData<SimilarMovies> = _similarMovies
 
-    private val _isMovieFavorite = MutableLiveData<Boolean>()
-    val isMovieFavorite: LiveData<Boolean> = _isMovieFavorite
+    private val _isMovieFavorite = MutableLiveData<Boolean?>()
+    val isMovieFavorite: LiveData<Boolean?> = _isMovieFavorite
 
     var stateListener: StateListener? = null
 
@@ -156,12 +156,12 @@ class MovieDetailsViewModel constructor(
         }
     }
 
-    fun updateIsMovieFavorite(movieId: Int, isFavorite: Boolean) {
+    fun updateIsMovieFavorite(cacheId: Int, isFavorite: Boolean) {
         stateListener?.onLoading()
 
         viewModelScope.launch {
             try {
-                favoritesRepository.updateIsMovieFavorite(movieId, isFavorite)
+                favoritesRepository.updateIsMovieFavorite(cacheId, isFavorite)
             } catch (e: Exception) {
                 Timber.e("Error updating isFav: ${e.message}")
             }

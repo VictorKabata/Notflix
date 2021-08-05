@@ -11,8 +11,6 @@
         android:layout_width="140dp"
         android:layout_height="180dp"
         app:cardCornerRadius="4dp"
-        android:clickable="true"
-        android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

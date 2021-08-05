@@ -118,7 +118,7 @@ internal fun ActorDto.toEntity(): ActorEntity {
         this.id,
         this.name,
         this.originalName,
-        this.profilePath
+        this?.profilePath
     )
 }
 

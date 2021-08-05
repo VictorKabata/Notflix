@@ -16,8 +16,8 @@ interface MoviesDao {
     @Query("SELECT * FROM `Movies Table` WHERE category=:category")
     fun getMovies(category: String): Flow<List<MovieEntity>>
 
-    @Query("DELETE FROM `Movies Table` WHERE category=:category")
-    suspend fun deleteMovies(category: String)
+    @Query("DELETE FROM `Movies Table` WHERE category=:category AND isFavorite IS NOT :isFavorite")
+    suspend fun deleteMovies(category: String, isFavorite: Boolean=true)
 
     @Query("SELECT COUNT(*) FROM `Movies Table` WHERE category=:category")
     suspend fun isCategoryCacheAvailable(category: String): Int
@@ -25,10 +25,10 @@ interface MoviesDao {
     @Query("SELECT * FROM `Movies Table` WHERE isFavorite=:isFavorite")
     fun getFavoriteMovies(isFavorite: Boolean = true): Flow<List<MovieEntity>>
 
-    @Query("SELECT isFavorite FROM `Movies Table` WHERE id=:movieId")
-    fun isMovieFavorite(movieId: Int): Flow<Boolean>
+    @Query("SELECT isFavorite FROM `Movies Table` WHERE id=:movieId AND isFavorite=true")
+    fun isMovieFavorite(movieId: Int): Flow<Boolean?>
 
-    @Query("UPDATE `Movies Table` SET isFavorite=:isFavorite WHERE id=:movieId")
-    suspend fun updateMovieIsFavorite(movieId: Int, isFavorite: Boolean)
+    @Query("UPDATE `Movies Table` SET isFavorite=:isFavorite WHERE cacheId=:cacheId")
+    suspend fun updateMovieIsFavorite(cacheId: Int, isFavorite: Boolean)
 
 }

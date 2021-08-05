@@ -29,7 +29,9 @@ data class Movie(
 
     val voteCount: Int?,
 
-    val category:String?,
+    val category: String?,
 
-    val isFavorite:Boolean?
+    val isFavorite: Boolean?,
+
+    val cacheId: Int?
 )
