@@ -11,6 +11,8 @@ import com.company.favorites.databinding.FragmentFavoritesBinding
 import com.company.favorites.di.loadFavoritesModule
 import com.company.favorites.ui.adapters.FavoriteMoviesRecyclerviewAdapter
 import com.vickikbt.notflix.util.StateListener
+import com.vickikbt.notflix.util.hide
+import com.vickikbt.notflix.util.show
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -34,9 +36,17 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), StateListener {
 
     private fun initUI(){
         viewModel.favoriteMovies.observe(viewLifecycleOwner){favorites->
-            binding.recyclerviewFavoriteMovies.adapter=FavoriteMoviesRecyclerviewAdapter(favorites){movie->
-                val action = FavoritesFragmentDirections.favoritesToDetails(movieId = movie.id!!, cacheId=movie.cacheId!!)
-                findNavController().navigate(action)
+            if (favorites.isNullOrEmpty()){
+                binding.recyclerviewFavoriteMovies.hide()
+                binding.layoutEmpty.root.show()
+            }else{
+                binding.recyclerviewFavoriteMovies.show()
+                binding.layoutEmpty.root.hide()
+
+                binding.recyclerviewFavoriteMovies.adapter=FavoriteMoviesRecyclerviewAdapter(favorites){movie->
+                    val action = FavoritesFragmentDirections.favoritesToDetails(movieId = movie.id!!, cacheId=movie.cacheId!!)
+                    findNavController().navigate(action)
+                }
             }
         }
     }

@@ -22,6 +22,10 @@
             app:titleTextAppearance="@style/Toolbar.TitleText" />
     </com.google.android.material.appbar.AppBarLayout>-->
 
+    <include layout="@layout/layout_no_favorites"
+        android:visibility="gone"
+        android:id="@+id/layout_empty"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_favoriteMovies"
         android:layout_width="match_parent"
