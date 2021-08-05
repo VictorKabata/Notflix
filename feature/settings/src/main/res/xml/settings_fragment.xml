@@ -37,11 +37,13 @@
         <Preference
             android:icon="@drawable/ic_report_bug"
             app:summary="@string/report_an_error_youve_encountered"
+            app:key="report bug"
             app:title="@string/report_bug" />
 
         <Preference
             android:icon="@drawable/ic_github"
             app:summary="@string/view_app_source_code"
+            app:key="source code"
             app:title="@string/source_code" />
 
     </PreferenceCategory>

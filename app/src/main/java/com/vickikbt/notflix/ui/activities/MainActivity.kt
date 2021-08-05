@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onDestroy() {
         super.onDestroy()
-        globalSplitInstallManager.unregisterListener(globalInstallListener)
+        //globalSplitInstallManager.unregisterListener(globalInstallListener)
         _binding = null
     }
 }

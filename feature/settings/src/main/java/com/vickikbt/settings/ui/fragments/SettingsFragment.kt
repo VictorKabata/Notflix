@@ -6,6 +6,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.vickikbt.cache.preferences.ImagesPreferences
+import com.vickikbt.notflix.util.toast
 import com.vickikbt.settings.R
 import org.koin.android.ext.android.inject
 import timber.log.Timber
@@ -28,12 +29,25 @@ class SettingsFragment : PreferenceFragmentCompat(), PreferenceManager.OnPrefere
     }
 
     override fun onPreferenceTreeClick(preference: Preference?): Boolean {
-        val preferenceKey=preference?.key
+        when(preference?.key){
+            "report bug"->{
+                reportBug()
+            }
 
-        //when(preference)
-
+            "source code"->{
+                openSourceCode()
+            }
+        }
 
         return super.onPreferenceTreeClick(preference)
+    }
+
+    private fun reportBug(){
+
+    }
+
+    private fun openSourceCode(){
+
     }
 
 }
