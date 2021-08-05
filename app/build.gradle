@@ -47,12 +47,12 @@ android {
         viewBinding true
     }
 
-    globallyDynamicServers {
+    /*globallyDynamicServers {
         studioEmbedded {
             throttleDownloadBy 5000
             applyToBuildVariants 'debug'
         }
-    }
+    }*/
 
     dynamicFeatures = [':feature:home', ':feature:search', ':feature:favorites', ':feature:details', ':feature:settings']
 

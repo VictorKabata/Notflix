@@ -45,4 +45,4 @@ jobs:
           appId: ${{secrets.FIREBASE_APP_ID}}
           token: ${{secrets.FIREBASE_TOKEN}}
           groups: Debug
-          file: app/build/outputs/apk/debug/app-debug.aab #change to aab
+          file: app/build/outputs/bundle/debug/app-debug.aab
