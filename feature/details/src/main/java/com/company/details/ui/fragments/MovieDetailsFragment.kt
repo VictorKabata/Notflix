@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -126,12 +127,14 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
             val favUnselected = resources.getDrawable(R.drawable.ic_fav_unselected)
             val favSelected = resources.getDrawable(R.drawable.ic_fav_selected)
 
+            val zoomInAnim = AnimationUtils.loadAnimation(context, R.anim.zoom_in)
             if (isFavorite!=null && isFavorite) {
                 binding.imageViewFavorite.setImageDrawable(favSelected)
 
                 binding.imageViewFavorite.setOnClickListener {
                     updateMovieFavorite(false)
                     binding.imageViewFavorite.setImageDrawable(favUnselected)
+                    it.startAnimation(zoomInAnim)
                 }
             } else {
                 binding.imageViewFavorite.setImageDrawable(favUnselected)
@@ -139,6 +142,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
                 binding.imageViewFavorite.setOnClickListener {
                     updateMovieFavorite(true)
                     binding.imageViewFavorite.setImageDrawable(favSelected)
+                    it.startAnimation(zoomInAnim)
                 }
             }
         }

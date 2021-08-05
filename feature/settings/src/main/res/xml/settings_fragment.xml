@@ -36,9 +36,9 @@
 
         <Preference
             android:icon="@drawable/ic_report_bug"
-            app:summary="@string/report_an_error_youve_encountered"
+            app:summary="@string/suggest_feature_or_report_bug"
             app:key="report bug"
-            app:title="@string/report_bug" />
+            app:title="@string/contact_developer" />
 
         <Preference
             android:icon="@drawable/ic_github"

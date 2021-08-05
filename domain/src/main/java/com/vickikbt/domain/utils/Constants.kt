@@ -23,4 +23,9 @@ object Constants {
     const val STARTING_PAGE_INDEX = 1
     const val PAGING_SIZE = 50
 
+    const val SOURCE_CODE_URL="https://github.com/VictorKabata/Notflix"
+
+    const val BUG_REPORT_EMAIL="victorbro14@gmail.com"
+    const val BUG_REPORT_SUBJECT="Notflix Bug Report"
+
 }
