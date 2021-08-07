@@ -48,4 +48,5 @@ dependencies {
     api dataDependencies.loggingIntercepter
 
     implementation appDependencies.koinAndroid
+    androidTestImplementation 'junit:junit:4.12'
 }

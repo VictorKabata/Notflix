@@ -1,20 +1,13 @@
 package com.vickikbt.notflix.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.jeppeman.globallydynamic.globalsplitinstall.GlobalSplitInstallSessionState
-import com.jeppeman.globallydynamic.globalsplitinstall.GlobalSplitInstallSessionStatus
-import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.FragmentProgressBottomSheetBinding
-import com.vickikbt.notflix.util.toMegabytes
 
-class ProgressBottomSheetFragment constructor(
-    private val state: GlobalSplitInstallSessionState
-) : BottomSheetDialogFragment() {
+class ProgressBottomSheetFragment : BottomSheetDialogFragment() {
 
     private var _binding: FragmentProgressBottomSheetBinding? = null
     private val binding get() = _binding!!
@@ -26,12 +19,12 @@ class ProgressBottomSheetFragment constructor(
     ): View {
         _binding = FragmentProgressBottomSheetBinding.inflate(inflater, container, false)
 
-        initUI()
+        //initUI()
 
         return binding.root
     }
 
-    private fun initUI() {
+    /*private fun initUI() {
         when (state.status()) {
 
             GlobalSplitInstallSessionStatus.PENDING -> {
@@ -98,7 +91,7 @@ class ProgressBottomSheetFragment constructor(
             }
         }
 
-    }
+    }*/
 
     private fun cancelFeatureDownload() {
 

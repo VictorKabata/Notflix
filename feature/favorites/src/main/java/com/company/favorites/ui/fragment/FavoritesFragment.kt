@@ -1,24 +1,23 @@
 package com.company.favorites.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.company.favorites.R
 import com.company.favorites.databinding.FragmentFavoritesBinding
 import com.company.favorites.di.loadFavoritesModule
 import com.company.favorites.ui.adapters.FavoriteMoviesRecyclerviewAdapter
-import com.vickikbt.notflix.util.StateListener
-import com.vickikbt.notflix.util.hide
-import com.vickikbt.notflix.util.show
+import com.vickikbt.domain.models.Movie
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class FavoritesFragment : Fragment(R.layout.fragment_favorites), StateListener {
+class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 
-    private var _binding:FragmentFavoritesBinding?=null
+    private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: FavoritesViewModel by viewModel()
@@ -26,46 +25,40 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), StateListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding= FragmentFavoritesBinding.bind(view)
+        _binding = FragmentFavoritesBinding.bind(view)
         injectFeatures()
-        viewModel.stateListener=this
 
         initUI()
 
     }
 
-    private fun initUI(){
-        viewModel.favoriteMovies.observe(viewLifecycleOwner){favorites->
-            if (favorites.isNullOrEmpty()){
-                binding.recyclerviewFavoriteMovies.hide()
-                binding.layoutEmpty.root.show()
-            }else{
-                binding.recyclerviewFavoriteMovies.show()
-                binding.layoutEmpty.root.hide()
-
-                binding.recyclerviewFavoriteMovies.adapter=FavoriteMoviesRecyclerviewAdapter(favorites){movie->
-                    val action = FavoritesFragmentDirections.favoritesToDetails(movieId = movie.id!!, cacheId=movie.cacheId!!)
-                    findNavController().navigate(action)
+    private fun initUI() {
+        lifecycleScope.launch {
+            viewModel.favoriteMovies.collect { uiState ->
+                when (uiState) {
+                    is FavoritesViewModel.FavoritesUiState.Error -> showError(uiState.error)
+                    FavoritesViewModel.FavoritesUiState.Loading -> Timber.e("Loading favorites")
+                    is FavoritesViewModel.FavoritesUiState.Success -> showFavoriteMovies(uiState.movies)
                 }
             }
         }
     }
 
-    override fun onLoading() {
-        Timber.e("Loading favorites...")
+    private fun showError(errorMessage: String) {
+        Timber.e("An error occurred: $errorMessage")
     }
 
-    override fun onSuccess(message: String) {
-
+    private fun showFavoriteMovies(favorites: List<Movie>) {
+        binding.recyclerviewFavoriteMovies.adapter = FavoriteMoviesRecyclerviewAdapter(favorites) { movie ->
+                val action = FavoritesFragmentDirections.favoritesToDetails(movieId = movie.id!!, cacheId=movie.cacheId!!)
+                findNavController().navigate(action)
+        }
     }
 
-    override fun onError(message: String?) {
-        Timber.e("Error fetching favorites: $message")
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding=null
+        _binding = null
     }
 
 }

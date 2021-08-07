@@ -46,3 +46,4 @@ jobs:
           token: ${{secrets.FIREBASE_TOKEN}}
           groups: Debug
           file: app/build/outputs/bundle/debug/app-debug.aab
+          debug: true

@@ -4,12 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.company.home.R
-import com.jeppeman.globallydynamic.globalsplitinstall.GlobalSplitInstallManagerFactory
-import com.jeppeman.globallydynamic.globalsplitinstall.GlobalSplitInstallRequest
-import com.jeppeman.globallydynamic.globalsplitinstall.GlobalSplitInstallSessionStatus
-import com.jeppeman.globallydynamic.globalsplitinstall.GlobalSplitInstallUpdatedListener
 import timber.log.Timber
-import java.util.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -17,7 +12,8 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
         Timber.e("OnCreate HomeActivity")

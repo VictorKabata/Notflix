@@ -1,32 +1,26 @@
 package com.vickikbt.notflix.ui.activities
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.jeppeman.globallydynamic.globalsplitinstall.*
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.ActivityMainBinding
-import com.vickikbt.notflix.ui.fragments.ProgressBottomSheetFragment
 import com.vickikbt.notflix.util.hide
 import com.vickikbt.notflix.util.show
-import timber.log.Timber
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var navController: NavController
 
-    private lateinit var globalSplitInstallManager: GlobalSplitInstallManager
-    private var globalSessionId = 0
+    //private lateinit var globalSplitInstallManager: GlobalSplitInstallManager
+    //private var globalSessionId = 0
 
-    private lateinit var globalInstallListener: GlobalSplitInstallUpdatedListener
+    //private lateinit var globalInstallListener: GlobalSplitInstallUpdatedListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +34,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         binding.bottomNav.setupWithNavController(navController)
 
-        globalSplitInstallManager = GlobalSplitInstallManagerFactory.create(this)
+        //globalSplitInstallManager = GlobalSplitInstallManagerFactory.create(this)
 
         initUI()
 
@@ -58,8 +52,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
 
-    @SuppressLint("SwitchIntDef")
-    private fun installDynamicModule(moduleName: String, fragmentId: Int) {
+    /*private fun installDynamicModule(moduleName: String, fragmentId: Int) {
         val name = moduleName.substring(0).capitalize()
 
         globalInstallListener = GlobalSplitInstallUpdatedListener { state ->
@@ -111,7 +104,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
 
         return false
-    }
+    }*/
 
     override fun onDestroy() {
         super.onDestroy()

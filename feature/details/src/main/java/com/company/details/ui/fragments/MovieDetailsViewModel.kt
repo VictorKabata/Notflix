@@ -10,6 +10,8 @@ import com.vickikbt.domain.models.*
 import com.vickikbt.domain.repository.FavoritesRepository
 import com.vickikbt.domain.repository.MovieDetailsRepository
 import com.vickikbt.notflix.util.StateListener
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -20,8 +22,8 @@ class MovieDetailsViewModel constructor(
     private val favoritesRepository: FavoritesRepository
 ) : ViewModel() {
 
-    private val _movieDetails = MutableLiveData<MovieDetails>()
-    val movieDetails: LiveData<MovieDetails> = _movieDetails
+    private val _movieDetails = MutableStateFlow<MovieDetailsUiState>(MovieDetailsUiState.Loading)
+    val movieDetails: StateFlow<MovieDetailsUiState> = _movieDetails
 
     private val _casts = MutableLiveData<Cast>()
     val cast: LiveData<Cast> = _casts
@@ -38,34 +40,19 @@ class MovieDetailsViewModel constructor(
     var stateListener: StateListener? = null
 
     //Get movieDetails
-    fun getMovieDetails(movieId: Int) {
-        stateListener?.onLoading()
+    fun getMovieDetails(movieId: Int)=viewModelScope.launch {
+        try {
+            val movieDetailsResponse = movieDetailsRepository.getMovieDetails(movieId)
+            movieDetailsResponse.collect { movieDetails ->
+                _movieDetails.value = MovieDetailsUiState.Success(movieDetails)
 
-        viewModelScope.launch {
-            try {
-                val movieDetailsResponse = movieDetailsRepository.getMovieDetails(movieId)
-                movieDetailsResponse.collect { movieDetails ->
-                    _movieDetails.value = movieDetails
-
-                    isMovieFavorite(movieId = movieId)
-                    getMovieCast(movieId = movieId)
-                    getMovieVideos(movieId = movieId)
-                    getSimilarMovies(movieId = movieId)
-                }
-                return@launch
-            } catch (e: ApiException) {
-                stateListener?.onError("${e.message}")
-                return@launch
-            } catch (e: NoInternetException) {
-                stateListener?.onError("${e.message}")
-                return@launch
-            } catch (e: IOException) {
-                stateListener?.onError("${e.message}")
-                return@launch
-            } catch (e: Exception) {
-                stateListener?.onError("${e.message}")
-                return@launch
+                isMovieFavorite(movieId = movieId)
+                getMovieCast(movieId = movieId)
+                getMovieVideos(movieId = movieId)
+                getSimilarMovies(movieId = movieId)
             }
+        } catch (e: Exception) {
+            MovieDetailsUiState.Error("${e.message}")
         }
     }
 
@@ -166,6 +153,12 @@ class MovieDetailsViewModel constructor(
                 Timber.e("Error updating isFav: ${e.message}")
             }
         }
+    }
+
+    sealed class MovieDetailsUiState {
+        object Loading : MovieDetailsUiState()
+        data class Success(val movieDetails: MovieDetails) : MovieDetailsUiState()
+        data class Error(val error: String) : MovieDetailsUiState()
     }
 
 
