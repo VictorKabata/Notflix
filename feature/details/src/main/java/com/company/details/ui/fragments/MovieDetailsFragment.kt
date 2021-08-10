@@ -8,7 +8,9 @@ import android.view.View
 import android.view.View.GONE
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.palette.graphics.Palette
@@ -57,25 +59,29 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
 
     }
 
-    @SuppressLint("SetTextI18n")
     private fun initUI() {
         viewModel.getMovieDetails(args.movieId)
 
-        lifecycleScope.launch {
+        binding.imageViewBack.setOnClickListener { findNavController().navigateUp() }
 
-            binding.imageViewBack.setOnClickListener { findNavController().navigateUp() }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+
+                launch {
+                    viewModel.movieDetails.collect { uiState ->
+                        when (uiState) {
+                            is MovieDetailsViewModel.MovieDetailsUiState.Error -> showError(uiState.error)
+                            is MovieDetailsViewModel.MovieDetailsUiState.Success -> showMovieDetails(uiState.movieDetails)
+                            else -> showLoading()
+                        }
+                    }
+                }
+
+            }
 
             showCastRecyclerview()
 
             showSimilarMoviesRecyclerview()
-
-            viewModel.movieDetails.collect { uiState ->
-                when (uiState) {
-                    is MovieDetailsViewModel.MovieDetailsUiState.Error -> showError(uiState.error)
-                    is MovieDetailsViewModel.MovieDetailsUiState.Success -> showMovieDetails(uiState.movieDetails)
-                    else -> showLoading()
-                }
-            }
 
             viewModel.isMovieFavorite.observe(viewLifecycleOwner) { isFavorite ->
                 val favUnselected = resources.getDrawable(R.drawable.ic_fav_unselected)
