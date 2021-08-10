@@ -3,7 +3,9 @@ package com.company.home.ui.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.company.home.R
 import com.company.home.databinding.FragmentHomeBinding
@@ -12,8 +14,8 @@ import com.company.home.ui.adapters.HomeViewPagerAdapter
 import com.company.home.ui.adapters.PopularShowsRecyclerviewAdapter
 import com.company.home.ui.adapters.TopRatedShowsRecyclerviewAdapter
 import com.vickikbt.domain.models.Movie
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -36,36 +38,47 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun initUI() {
-        lifecycleScope.launch {
-            viewModel.nowPlayingMovies.collect { uiState ->
-                when (uiState) {
-                    is HomeViewModel.HomeUiState.Error -> showError(uiState.error)
-                    is HomeViewModel.HomeUiState.Success -> showNowPlayingMovies(uiState.movies)
-                    else -> showLoading()
-                }
-            }
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
 
-            viewModel.trendingMovies.collect { uiState ->
-                when (uiState) {
-                    is HomeViewModel.HomeUiState.Error -> showError(uiState.error)
-                    is HomeViewModel.HomeUiState.Success -> showTrendingMovies(uiState.movies)
-                    else -> showLoading()
+                launch {
+                    viewModel.nowPlayingMovies.collect { uiState ->
+                        when (uiState) {
+                            is HomeViewModel.HomeUiState.Error -> showError(uiState.error)
+                            is HomeViewModel.HomeUiState.Success -> showNowPlayingMovies(uiState.movies)
+                            else -> showLoading()
+                        }
+                    }
                 }
-            }
 
-            viewModel.popularMovies.collect { uiState ->
-                when (uiState) {
-                    is HomeViewModel.HomeUiState.Error -> showError(uiState.error)
-                    is HomeViewModel.HomeUiState.Success -> showPopularMovies(uiState.movies)
-                    else -> showLoading()
+                launch {
+                    viewModel.trendingMovies.collect { uiState ->
+                        when (uiState) {
+                            is HomeViewModel.HomeUiState.Error -> showError(uiState.error)
+                            is HomeViewModel.HomeUiState.Success -> showTrendingMovies(uiState.movies)
+                            else -> showLoading()
+                        }
+                    }
                 }
-            }
 
-            viewModel.upcomingMovies.collect { uiState ->
-                when (uiState) {
-                    is HomeViewModel.HomeUiState.Error -> showError(uiState.error)
-                    is HomeViewModel.HomeUiState.Success -> showUpcomingMovies(uiState.movies)
-                    else -> showLoading()
+                launch {
+                    viewModel.popularMovies.collect { uiState ->
+                        when (uiState) {
+                            is HomeViewModel.HomeUiState.Error -> showError(uiState.error)
+                            is HomeViewModel.HomeUiState.Success -> showPopularMovies(uiState.movies)
+                            else -> showLoading()
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.upcomingMovies.collect { uiState ->
+                        when (uiState) {
+                            is HomeViewModel.HomeUiState.Error -> showError(uiState.error)
+                            is HomeViewModel.HomeUiState.Success -> showUpcomingMovies(uiState.movies)
+                            else -> showLoading()
+                        }
+                    }
                 }
             }
         }
