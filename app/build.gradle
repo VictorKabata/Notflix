@@ -55,20 +55,20 @@ dependencies {
     api project(':domain')
     api project(':data:repository')
 
-    api appDependencies.kotlin
+    api "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
     api appDependencies.androidCore
     debugApi appDependencies.globallyDynamic
 
     api appDependencies.appCompat
     api appDependencies.material
-    api appDependencies.constraintLayout
+    api "androidx.constraintlayout:constraintlayout:2.1.0"
     api appDependencies.legacySupport
 
     api appDependencies.liveData
     api appDependencies.viewModel
-    //api appDependencies.lifecycleRuntime
+    api appDependencies.lifecycleRuntime
 
-    //implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+    api appDependencies.coroutinesAndroid
 
     api appDependencies.koinAndroid
 

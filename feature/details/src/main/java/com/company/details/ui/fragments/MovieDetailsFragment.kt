@@ -1,15 +1,16 @@
 package com.company.details.ui.fragments
 
-import android.annotation.SuppressLint
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
 import android.view.animation.AnimationUtils
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.palette.graphics.Palette
@@ -24,19 +25,23 @@ import com.company.details.databinding.FragmentMovieDetailsBinding
 import com.company.details.di.loadDetailsModule
 import com.company.details.ui.adapters.CastRecyclerviewAdapter
 import com.company.details.ui.adapters.SimilarShowsRecyclerviewAdapter
+import com.vickikbt.domain.models.Cast
 import com.vickikbt.domain.models.MovieDetails
-import com.vickikbt.notflix.util.*
+import com.vickikbt.domain.models.MovieVideo
+import com.vickikbt.domain.models.SimilarMovies
 import com.vickikbt.notflix.util.DataFormatter.getMovieDuration
 import com.vickikbt.notflix.util.DataFormatter.getPopularity
 import com.vickikbt.notflix.util.DataFormatter.getRating
 import com.vickikbt.notflix.util.DataFormatter.getReleaseYear
+import com.vickikbt.notflix.util.hide
+import com.vickikbt.notflix.util.loadImage
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 
-class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateListener {
+class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
 
     private var _binding: FragmentMovieDetailsBinding? = null
     private val binding get() = _binding!!
@@ -51,8 +56,6 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
         _binding = FragmentMovieDetailsBinding.bind(view)
 
         injectFeatures()
-        viewModel.stateListener = this
-
 
         initUI()
 
@@ -64,48 +67,71 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
         binding.imageViewBack.setOnClickListener { findNavController().navigateUp() }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            //viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
 
-                //launch {
-                    viewModel.movieDetails.collect { uiState ->
+                launch {
+                    viewModel.isMovieFavorite.collect { uiState ->
                         when (uiState) {
-                            is MovieDetailsViewModel.MovieDetailsUiState.Error -> showError(uiState.error)
-                            is MovieDetailsViewModel.MovieDetailsUiState.Success -> showMovieDetails(uiState.movieDetails)
+                            is MovieDetailsViewModel.IsMovieFavoriteUiState.Error -> showError(
+                                uiState.error
+                            )
+                            is MovieDetailsViewModel.IsMovieFavoriteUiState.Success -> showIsMovieFavorite(
+                                uiState.isMovieFavorite
+                            )
                             else -> showLoading()
                         }
                     }
-                //}
+                }
 
-            //}
-
-            showCastRecyclerview()
-
-            showSimilarMoviesRecyclerview()
-
-            viewModel.isMovieFavorite.observe(viewLifecycleOwner) { isFavorite ->
-                val favUnselected = resources.getDrawable(R.drawable.ic_fav_unselected)
-                val favSelected = resources.getDrawable(R.drawable.ic_fav_selected)
-
-                val zoomInAnim = AnimationUtils.loadAnimation(context, R.anim.zoom_in)
-                if (isFavorite != null && isFavorite) {
-                    binding.imageViewFavorite.setImageDrawable(favSelected)
-
-                    binding.imageViewFavorite.setOnClickListener {
-                        updateMovieFavorite(false)
-                        binding.imageViewFavorite.setImageDrawable(favUnselected)
-                        it.startAnimation(zoomInAnim)
-                    }
-                } else {
-                    binding.imageViewFavorite.setImageDrawable(favUnselected)
-
-                    binding.imageViewFavorite.setOnClickListener {
-                        updateMovieFavorite(true)
-                        binding.imageViewFavorite.setImageDrawable(favSelected)
-                        it.startAnimation(zoomInAnim)
+                launch {
+                    viewModel.movieDetails.collect { uiState ->
+                        when (uiState) {
+                            is MovieDetailsViewModel.MovieDetailsUiState.Error -> showError(uiState.error)
+                            is MovieDetailsViewModel.MovieDetailsUiState.Success -> showMovieDetails(
+                                uiState.movieDetails
+                            )
+                            else -> showLoading()
+                        }
                     }
                 }
-            }
 
+                launch {
+                    viewModel.cast.collect { uiState ->
+                        when (uiState) {
+                            is MovieDetailsViewModel.MovieCastUiState.Error -> showError(uiState.error)
+                            is MovieDetailsViewModel.MovieCastUiState.Success -> showMovieCast(
+                                uiState.movieCast
+                            )
+                            else -> showLoading()
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.videos.collect { uiState ->
+                        when (uiState) {
+                            is MovieDetailsViewModel.MovieVideosUiState.Error -> showError(uiState.error)
+                            is MovieDetailsViewModel.MovieVideosUiState.Success -> showMovieVideos(
+                                uiState.videos
+                            )
+                            else -> showLoading()
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.similarMovies.collect { uiState ->
+                        when (uiState) {
+                            is MovieDetailsViewModel.SimilarMoviesUiState.Error -> showError(uiState.error)
+                            is MovieDetailsViewModel.SimilarMoviesUiState.Success -> showSimilarMovies(
+                                uiState.similarMovies
+                            )
+                            else -> showLoading()
+                        }
+                    }
+                }
+
+            }
         }
     }
 
@@ -115,6 +141,30 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
 
     private fun showLoading() {
 
+    }
+
+    private fun showIsMovieFavorite(isFavorite: Boolean?) {
+        val favUnselected = ResourcesCompat.getDrawable(resources, R.drawable.ic_fav_unselected, null)
+        val favSelected = ResourcesCompat.getDrawable(resources, R.drawable.ic_fav_selected, null)
+
+        val zoomInAnim = AnimationUtils.loadAnimation(context, R.anim.zoom_in)
+        if (isFavorite != null && isFavorite) {
+            binding.imageViewFavorite.setImageDrawable(favSelected)
+
+            binding.imageViewFavorite.setOnClickListener {
+                updateMovieFavorite(false)
+                binding.imageViewFavorite.setImageDrawable(favUnselected)
+                it.startAnimation(zoomInAnim)
+            }
+        } else {
+            binding.imageViewFavorite.setImageDrawable(favUnselected)
+
+            binding.imageViewFavorite.setOnClickListener {
+                updateMovieFavorite(true)
+                binding.imageViewFavorite.setImageDrawable(favSelected)
+                it.startAnimation(zoomInAnim)
+            }
+        }
     }
 
     private fun showMovieDetails(movieDetails: MovieDetails) {
@@ -174,50 +224,34 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
         binding.textViewOverview.text = movieDetails.overview
     }
 
+    private fun showMovieCast(cast: Cast?) {
+        if (cast != null) {
+            binding.recyclerviewCast.adapter = CastRecyclerviewAdapter(cast.actor!!)
+        } else {
+            binding.textViewCastTitle.hide()
+            binding.recyclerviewCast.hide()
+        }
+    }
+
+    private fun showMovieVideos(movieVideo: MovieVideo) {
+        Timber.e("Movie videos: ${movieVideo.videos}")
+    }
+
+    private fun showSimilarMovies(similarMovies: SimilarMovies) {
+        if (similarMovies.movies!!.isEmpty()) {
+            binding.textViewSimilarMoviesTitle.visibility = GONE
+            binding.recyclerviewSimilarMovies.visibility = GONE
+        } else {
+            binding.recyclerviewSimilarMovies.adapter =
+                SimilarShowsRecyclerviewAdapter(similarMovies.movies!!)
+        }
+    }
+
     private fun updateMovieFavorite(isFavorite: Boolean) =
         viewModel.updateIsMovieFavorite(cacheId = args.cacheId, isFavorite = isFavorite)
-
-    private fun showCastRecyclerview() {
-        viewModel.cast.observe(viewLifecycleOwner) { cast ->
-            if (cast != null) {
-                binding.recyclerviewCast.adapter = CastRecyclerviewAdapter(cast.actor!!)
-            } else {
-                binding.textViewCastTitle.hide()
-                binding.recyclerviewCast.hide()
-            }
-        }
-    }
-
-    private fun showSimilarMoviesRecyclerview() {
-        viewModel.similarMovies.observe(viewLifecycleOwner) { result ->
-            if (result.movies!!.isEmpty()) {
-                binding.textViewSimilarMoviesTitle.visibility = GONE
-                binding.recyclerviewSimilarMovies.visibility = GONE
-            } else {
-                binding.recyclerviewSimilarMovies.adapter =
-                    SimilarShowsRecyclerviewAdapter(result.movies!!)
-            }
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-
-    override fun onLoading() {
-        requireActivity().log("Loading")
-    }
-
-    override fun onSuccess(message: String) {
-        requireActivity().log(message)
-    }
-
-    override fun onError(message: String?) {
-        if (isAdded) {
-            requireActivity().toast(message!!)
-            requireActivity().log(message)
-        }
     }
 }

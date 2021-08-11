@@ -14,8 +14,8 @@ import com.company.home.ui.adapters.HomeViewPagerAdapter
 import com.company.home.ui.adapters.PopularShowsRecyclerviewAdapter
 import com.company.home.ui.adapters.TopRatedShowsRecyclerviewAdapter
 import com.vickikbt.domain.models.Movie
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
