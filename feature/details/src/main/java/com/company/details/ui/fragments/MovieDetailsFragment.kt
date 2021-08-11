@@ -10,7 +10,6 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.palette.graphics.Palette
@@ -65,9 +64,9 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
         binding.imageViewBack.setOnClickListener { findNavController().navigateUp() }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+            //viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
 
-                launch {
+                //launch {
                     viewModel.movieDetails.collect { uiState ->
                         when (uiState) {
                             is MovieDetailsViewModel.MovieDetailsUiState.Error -> showError(uiState.error)
@@ -75,9 +74,9 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details), StateLis
                             else -> showLoading()
                         }
                     }
-                }
+                //}
 
-            }
+            //}
 
             showCastRecyclerview()
 

@@ -43,7 +43,7 @@ buildscript {
         datastore_version = "1.0.0-alpha08"
         retrofit_version = '2.9.0'
         okhttp_vesion = "4.8.0"
-        coroutine_version = "1.3.9"
+        coroutine_version = "1.5.1"
         loggingIntercepter_version = "4.7.2"
 
         timber_version = "4.7.1"
@@ -92,7 +92,9 @@ buildscript {
 
                 timber             : "com.jakewharton.timber:timber:$timber_version",
 
-                shimmer            : "com.facebook.shimmer:shimmer:$shimmer_version"
+                shimmer            : "com.facebook.shimmer:shimmer:$shimmer_version",
+
+                coroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
         ]
         //endregion
 
@@ -114,7 +116,7 @@ buildscript {
         //region Domain Layer Dependencies
         domainDependencies = [
                 kotlin        : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
-                coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version",
+                coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
         ]
         //endregion
 
