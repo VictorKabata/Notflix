@@ -3,7 +3,9 @@ package com.company.favorites.ui.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.company.favorites.R
 import com.company.favorites.databinding.FragmentFavoritesBinding
@@ -33,12 +35,18 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     }
 
     private fun initUI() {
-        lifecycleScope.launch {
-            viewModel.favoriteMovies.collect { uiState ->
-                when (uiState) {
-                    is FavoritesViewModel.FavoritesUiState.Error -> showError(uiState.error)
-                    FavoritesViewModel.FavoritesUiState.Loading -> Timber.e("Loading favorites")
-                    is FavoritesViewModel.FavoritesUiState.Success -> showFavoriteMovies(uiState.movies)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.favoriteMovies.collect { uiState ->
+                        when (uiState) {
+                            is FavoritesViewModel.FavoritesUiState.Error -> showError(uiState.error)
+                            FavoritesViewModel.FavoritesUiState.Loading -> Timber.e("Loading favorites")
+                            is FavoritesViewModel.FavoritesUiState.Success -> showFavoriteMovies(
+                                uiState.movies
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -49,10 +57,14 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     }
 
     private fun showFavoriteMovies(favorites: List<Movie>) {
-        binding.recyclerviewFavoriteMovies.adapter = FavoriteMoviesRecyclerviewAdapter(favorites) { movie ->
-                val action = FavoritesFragmentDirections.favoritesToDetails(movieId = movie.id!!, cacheId=movie.cacheId!!)
+        binding.recyclerviewFavoriteMovies.adapter =
+            FavoriteMoviesRecyclerviewAdapter(favorites) { movie ->
+                val action = FavoritesFragmentDirections.favoritesToDetails(
+                    movieId = movie.id!!,
+                    cacheId = movie.cacheId!!
+                )
                 findNavController().navigate(action)
-        }
+            }
     }
 
 
