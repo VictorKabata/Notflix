@@ -1,26 +1,31 @@
 package com.vickikbt.notflix.ui.activities
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.jeppeman.globallydynamic.globalsplitinstall.*
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.ActivityMainBinding
 import com.vickikbt.notflix.util.hide
 import com.vickikbt.notflix.util.show
+import timber.log.Timber
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var navController: NavController
 
-    //private lateinit var globalSplitInstallManager: GlobalSplitInstallManager
-    //private var globalSessionId = 0
+    private lateinit var globalSplitInstallManager: GlobalSplitInstallManager
+    private var globalSessionId = 0
 
-    //private lateinit var globalInstallListener: GlobalSplitInstallUpdatedListener
+    private lateinit var globalInstallListener: GlobalSplitInstallUpdatedListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,31 +39,36 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNav.setupWithNavController(navController)
 
-        //globalSplitInstallManager = GlobalSplitInstallManagerFactory.create(this)
+        globalSplitInstallManager = GlobalSplitInstallManagerFactory.create(this)
 
         initUI()
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.label == "MovieDetailsFragment") binding.bottomNav.hide()
             else binding.bottomNav.show()
+
+            Timber.e("Destination: ${destination.label}")
+            /*if(destination.label=="Favorites"){
+                installDynamicModule(moduleName = "Favorites", fragmentId = R.id.favorites_fragment)
+            }*/
         }
 
 
     }
 
     private fun initUI() {
-        //binding.bottomNav.setOnNavigationItemSelectedListener(this)
+        binding.bottomNav.setOnNavigationItemSelectedListener(this)
 
     }
 
 
-    /*private fun installDynamicModule(moduleName: String, fragmentId: Int) {
+    private fun installDynamicModule(moduleName: String, fragmentId: Int) {
         val name = moduleName.substring(0).capitalize()
 
         globalInstallListener = GlobalSplitInstallUpdatedListener { state ->
             if (state.sessionId() == globalSessionId) {
-                val progressBottomSheetFragment = ProgressBottomSheetFragment(state)
-                progressBottomSheetFragment.show(supportFragmentManager, "Progress BottomSheet")
+                //val progressBottomSheetFragment = ProgressBottomSheetFragment(state)
+                //progressBottomSheetFragment.show(supportFragmentManager, "Progress BottomSheet")
             }
         }
 
@@ -87,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.home_fragment -> {
-                navController.navigate(R.id.settings_fragment)
+                navController.navigate(R.id.home_fragment)
                 return true
             }
             R.id.favorites_fragment -> {
@@ -104,11 +114,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         return false
-    }*/
+    }
 
     override fun onDestroy() {
         super.onDestroy()
-        //globalSplitInstallManager.unregisterListener(globalInstallListener)
+        globalSplitInstallManager.unregisterListener(globalInstallListener)
         _binding = null
     }
+
 }

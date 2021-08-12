@@ -34,6 +34,13 @@ android {
 
     }
 
+    globallyDynamicServers {
+        studioEmbedded {
+            throttleDownloadBy 9000
+            applyToBuildVariants 'debug'
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -61,7 +68,7 @@ dependencies {
 
     api appDependencies.appCompat
     api appDependencies.material
-    api "androidx.constraintlayout:constraintlayout:2.1.0"
+    api appDependencies.constraintLayout
     api appDependencies.legacySupport
 
     api appDependencies.liveData

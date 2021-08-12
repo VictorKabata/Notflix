@@ -6,6 +6,7 @@
     <dist:module
         dist:instant="false"
         dist:title="@string/title_home">
+
         <dist:delivery>
             <dist:install-time />
         </dist:delivery>
@@ -14,7 +15,7 @@
     </dist:module>
 
     <application>
-        <activity android:name=".ui.activity.HomeActivity"></activity>
+        <activity android:name=".ui.activity.HomeActivity" />
     </application>
 
 </manifest>

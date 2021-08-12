@@ -22,7 +22,7 @@ buildscript {
         androidCore_version = '1.6.0'
         appCompat_version = '1.3.1'
         material_version = '1.4.0'
-        constraintLayout_version = "2.0.4"
+        constraintLayout_version = "2.1.0"
         nav_version = '2.3.5'
         lifecycle_version = "2.4.0-alpha03"
         koin_version = "3.1.2"
@@ -94,7 +94,7 @@ buildscript {
 
                 shimmer            : "com.facebook.shimmer:shimmer:$shimmer_version",
 
-                coroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+                coroutinesAndroid  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
         ]
         //endregion
 
