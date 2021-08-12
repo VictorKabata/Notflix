@@ -5,6 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:src="@drawable/logo_n"
+        app:layout_constraintBottom_toTopOf="@id/textView_status"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/textView_status"
         android:layout_width="wrap_content"
@@ -24,14 +33,14 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="42dp"
         android:layout_marginTop="24dp"
+        android:progress="69"
         android:visibility="visible"
         app:indicatorColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView_status"
         app:trackCornerRadius="8dp"
-        app:trackThickness="8dp"
-        android:progress="69" />
+        app:trackThickness="8dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_download"
@@ -39,10 +48,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_bold"
-        android:textColor="#FFFFFF"
         android:paddingHorizontal="16dp"
         android:paddingVertical="10dp"
         android:text="@string/cancel"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:visibility="visible"
         app:cornerRadius="8dp"
