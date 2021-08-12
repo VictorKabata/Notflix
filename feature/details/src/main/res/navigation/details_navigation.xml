@@ -11,7 +11,6 @@
             android:name="movieId"
             app:argType="integer"
             android:defaultValue="0" />
-
         <argument
             android:name="cacheId"
             app:argType="integer"

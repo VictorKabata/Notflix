@@ -1,13 +1,20 @@
 package com.vickikbt.notflix.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.play.core.splitinstall.SplitInstallSessionState
+import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
+import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.FragmentProgressBottomSheetBinding
+import com.vickikbt.notflix.util.toMegabytes
+import timber.log.Timber
 
-class ProgressBottomSheetFragment : BottomSheetDialogFragment() {
+class ProgressBottomSheetFragment constructor(private val state: SplitInstallSessionState) :
+    BottomSheetDialogFragment() {
 
     private var _binding: FragmentProgressBottomSheetBinding? = null
     private val binding get() = _binding!!
@@ -19,15 +26,15 @@ class ProgressBottomSheetFragment : BottomSheetDialogFragment() {
     ): View {
         _binding = FragmentProgressBottomSheetBinding.inflate(inflater, container, false)
 
-        //initUI()
+        initUI()
 
         return binding.root
     }
 
-    /*private fun initUI() {
+    private fun initUI() {
         when (state.status()) {
 
-            GlobalSplitInstallSessionStatus.PENDING -> {
+            SplitInstallSessionStatus.PENDING -> {
                 val totalByte = state.totalBytesToDownload().toMegabytes()
                 val progressBytes = state.bytesDownloaded().toMegabytes()
 
@@ -38,7 +45,7 @@ class ProgressBottomSheetFragment : BottomSheetDialogFragment() {
 
             }
 
-            GlobalSplitInstallSessionStatus.DOWNLOADING -> {
+            SplitInstallSessionStatus.DOWNLOADING -> {
                 val totalByte = state.totalBytesToDownload().toMegabytes()
                 val progressBytes = state.bytesDownloaded().toMegabytes()
 
@@ -51,35 +58,35 @@ class ProgressBottomSheetFragment : BottomSheetDialogFragment() {
 
             }
 
-            GlobalSplitInstallSessionStatus.DOWNLOADED -> {
-                Log.e("VickiKbt", "Downloaded")
+            SplitInstallSessionStatus.DOWNLOADED -> {
+                Timber.e("Downloaded")
             }
 
-            GlobalSplitInstallSessionStatus.PENDING -> {
+            SplitInstallSessionStatus.PENDING -> {
                 val totalByte = state.totalBytesToDownload()
                 val progressBytes = state.bytesDownloaded()
 
-                Log.e("VickiKbt", "Pending: ${progressBytes.toMegabytes()}")
+                Timber.e("Pending: ${progressBytes.toMegabytes()}")
 
             }
 
-            GlobalSplitInstallSessionStatus.INSTALLING -> {
+            SplitInstallSessionStatus.INSTALLING -> {
                 val totalByte = state.totalBytesToDownload()
                 val progressBytes = state.bytesDownloaded()
 
-                Log.e("VickiKbt", "Installing: ${progressBytes.toMegabytes()}")
+                Timber.e("Installing: ${progressBytes.toMegabytes()}")
 
             }
 
-            GlobalSplitInstallSessionStatus.CANCELED -> {
-                Log.e("VickiKbt", "Downloaded")
+            SplitInstallSessionStatus.CANCELED -> {
+                Timber.e("Downloaded")
             }
 
-            GlobalSplitInstallSessionStatus.CANCELING -> {
-                Log.e("VickiKbt", "Cancelling")
+            SplitInstallSessionStatus.CANCELING -> {
+                Timber.e("Cancelling")
             }
 
-            GlobalSplitInstallSessionStatus.FAILED -> {
+            SplitInstallSessionStatus.FAILED -> {
                 val totalByte = state.totalBytesToDownload().toMegabytes()
                 val progressBytes = state.bytesDownloaded().toMegabytes()
 
@@ -91,7 +98,7 @@ class ProgressBottomSheetFragment : BottomSheetDialogFragment() {
             }
         }
 
-    }*/
+    }
 
     private fun cancelFeatureDownload() {
 

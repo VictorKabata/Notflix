@@ -9,14 +9,16 @@ buildscript {
         buildToolsVersion = "30.0.3"
         minSdkVersion = 21
         targetSdkVersion = 30
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.01"
 
         //Plugins
         ktlint_version = "9.2.1"
         globallyDynamic_version = "1.0.0"
         google_service_version = "4.3.8"
         appDistribution_version = "2.1.2"
+        playCore_version = "1.10.0"
+        playCore_ktx_version = "1.8.1"
 
         //App Dependencies
         androidCore_version = '1.6.0'
@@ -94,7 +96,10 @@ buildscript {
 
                 shimmer            : "com.facebook.shimmer:shimmer:$shimmer_version",
 
-                coroutinesAndroid  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+                coroutinesAndroid  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version",
+
+                playCore           : "com.google.android.play:core:$playCore_version",
+                playCoreKtx        : "com.google.android.play:core-ktx:$playCore_ktx_version"
         ]
         //endregion
 

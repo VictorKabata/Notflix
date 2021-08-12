@@ -2,6 +2,8 @@ package com.vickikbt.notflix.ui.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.navigation.dynamicfeatures.fragment.ui.AbstractProgressFragment
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.FragmentProgressBinding
@@ -11,16 +13,24 @@ class CustomProgressFragment : AbstractProgressFragment(R.layout.fragment_progre
     private var _binding: FragmentProgressBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var fadeInAnimation:Animation
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentProgressBinding.bind(view)
 
+        fadeInAnimation=AnimationUtils.loadAnimation(requireContext(),R.anim.fade_in)
     }
 
     override fun onCancelled() {
         val retryText = requireActivity().resources.getString(R.string.retry)
         binding.buttonDownload.text = retryText
-        binding.textViewStatus.text = "Module download cancelled"
+        binding.textViewStatus.apply {
+            startAnimation(fadeInAnimation)
+            text = "Module download cancelled"
+        }
+
+        binding.progressBarDownload.hide()
 
         binding.buttonDownload.setOnClickListener { retryDownload() }
     }
@@ -28,7 +38,12 @@ class CustomProgressFragment : AbstractProgressFragment(R.layout.fragment_progre
     override fun onFailed(errorCode: Int) {
         val retryText = requireActivity().resources.getString(R.string.retry)
         binding.buttonDownload.text = retryText
-        binding.textViewStatus.text = "Module download failed"
+        binding.textViewStatus.apply {
+            startAnimation(fadeInAnimation)
+            text = "Module download failed"
+        }
+
+        binding.progressBarDownload.hide()
 
         binding.buttonDownload.setOnClickListener { retryDownload() }
     }
@@ -37,7 +52,10 @@ class CustomProgressFragment : AbstractProgressFragment(R.layout.fragment_progre
         val progress = (bytesDownloaded.toDouble() * 100) / bytesTotal
 
         binding.progressBarDownload.progress = progress.toInt()
-        binding.textViewStatus.text = "Downloading module"
+        binding.textViewStatus.apply {
+            startAnimation(fadeInAnimation)
+            text = "Downloading module"
+        }
 
         binding.buttonDownload.setOnClickListener { cancelDownload() }
     }

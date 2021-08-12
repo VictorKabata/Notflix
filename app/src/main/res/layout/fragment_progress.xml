@@ -8,9 +8,9 @@
     <ImageView
         android:layout_width="130dp"
         android:layout_height="130dp"
+        android:layout_marginBottom="2dp"
         android:src="@drawable/logo_n"
         app:layout_constraintBottom_toTopOf="@id/textView_status"
-        android:layout_marginBottom="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -33,14 +33,15 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="42dp"
         android:layout_marginTop="24dp"
-        android:progress="69"
+        android:max="100"
         android:visibility="visible"
         app:indicatorColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView_status"
         app:trackCornerRadius="8dp"
-        app:trackThickness="8dp" />
+        app:trackThickness="8dp"
+        tools:progress="69" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_download"

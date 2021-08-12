@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.dynamicfeatures.DynamicExtras
+import androidx.navigation.dynamicfeatures.DynamicInstallMonitor
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.jeppeman.globallydynamic.globalsplitinstall.*
+import com.google.android.play.core.splitinstall.SplitInstallSessionState
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.ActivityMainBinding
+import com.vickikbt.notflix.ui.fragments.ProgressBottomSheetFragment
 import com.vickikbt.notflix.util.hide
 import com.vickikbt.notflix.util.show
 import timber.log.Timber
@@ -22,10 +24,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     private lateinit var navController: NavController
 
-    private lateinit var globalSplitInstallManager: GlobalSplitInstallManager
-    private var globalSessionId = 0
+    //private lateinit var globalSplitInstallManager: GlobalSplitInstallManager
+    //private var globalSessionId = 0
 
-    private lateinit var globalInstallListener: GlobalSplitInstallUpdatedListener
+    //private lateinit var globalInstallListener: GlobalSplitInstallUpdatedListener
+
+    private lateinit var installMonitor : DynamicInstallMonitor
+    private lateinit var dynamicExtras : DynamicExtras
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +38,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
         binding.bottomNav.setupWithNavController(navController)
 
-        globalSplitInstallManager = GlobalSplitInstallManagerFactory.create(this)
+        //globalSplitInstallManager = GlobalSplitInstallManagerFactory.create(this)
 
         initUI()
 
@@ -48,21 +52,17 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             else binding.bottomNav.show()
 
             Timber.e("Destination: ${destination.label}")
-            /*if(destination.label=="Favorites"){
-                installDynamicModule(moduleName = "Favorites", fragmentId = R.id.favorites_fragment)
-            }*/
         }
 
 
     }
 
     private fun initUI() {
-        binding.bottomNav.setOnNavigationItemSelectedListener(this)
-
+        //binding.bottomNav.setOnNavigationItemSelectedListener(this)
     }
 
 
-    private fun installDynamicModule(moduleName: String, fragmentId: Int) {
+    /*private fun installDynamicModule(moduleName: String, fragmentId: Int) {
         val name = moduleName.substring(0).capitalize()
 
         globalInstallListener = GlobalSplitInstallUpdatedListener { state ->
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 }
             }
 
-    }
+    }*/
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -101,9 +101,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 return true
             }
             R.id.favorites_fragment -> {
-                if (globalSplitInstallManager.installedModules.contains("favorites")) {
-                    navController.navigate(R.id.favorites_fragment)
-                } else installDynamicModule("favorites", R.id.favorites_fragment)
+                installMonitor= DynamicInstallMonitor()
+                dynamicExtras=DynamicExtras(installMonitor = installMonitor)
+
+                monitorFeatureInstall()
+
+                navController.navigate(R.id.favorites_fragment, null, null, dynamicExtras)
 
                 return true
             }
@@ -116,10 +119,26 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         return false
     }
 
+    private fun monitorFeatureInstall() {
+        installMonitor.status.observe(this) { state ->
+            Timber.e("State: $state")
+
+            showProgressBottomSheet(state)
+
+            if (state.hasTerminalStatus()) installMonitor.status.removeObservers(this)
+        }
+    }
+
+    private fun showProgressBottomSheet(state: SplitInstallSessionState){
+        val progressBottomSheet=ProgressBottomSheetFragment(state = state)
+        progressBottomSheet.show(supportFragmentManager, "Progress Bottom Sheet")
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        globalSplitInstallManager.unregisterListener(globalInstallListener)
+        //globalSplitInstallManager.unregisterListener(globalInstallListener)
         _binding = null
     }
+
 
 }
