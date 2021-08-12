@@ -23,6 +23,8 @@
 
 - [Prerequisite](#prerequisite)
     - [Disclaimer](##disclaimer)
+- [App Structure](##app-structure)
+    - [Dynamic Feature Modules and Dynamic Delivery](###dynamic-feature-modules-and-dynamic-delivery?)
 - [Architecture](#architecture)
     - [What is Clean Architecture](##why-clean-architecture)
     - [Why Clean Architecture](##why-clean-architecture)
@@ -32,9 +34,8 @@
         - [Data](###data)
         - [Presentation](###presentation)
 - [Tech Stack](#techstack)
-    - [Patterns](##patterns)
     - [Libraries](##libraries)
-    - [Plugins](##plugins)
+    - [Extras](##extras)
 - [Related Resources](#related-resources)
 - [Other Helpful Resources](#other_helpful_posts)
 - [Demo](#demo)
@@ -46,9 +47,25 @@ In order to be able to build the application you'll need to change the api key i
 
 ## Disclaimer.
 
-Complex architectures like the pure clean architecture can also increase code complexity since decoupling your code also means creating lots of data transformations(mappers) and models,that may end up increasing the learning curve of your code to a point where it would be better to use a simpler architecture like MVVM.
+- Complex architectures like the pure clean architecture can also increase code complexity since decoupling your code also means creating lots of data transformations(mappers) and models,that may end up increasing the learning curve of your code to a point where it would be better to use a simpler architecture like MVVM.
+
+- When using dynamic delivery you'll need a Playstore Developer Account in order to test the dynamic delivery feature However, there is a work around by using [GloballyDynamic](https://globallydynamic.io/) which provides the same dynamic delivery capabilities as Playstore with other added advantages well suited for testing. [Read More](https://proandroiddev.com/globallydynamic-dynamic-delivery-during-development-f28093ed184f).
+
+- Dynamic feature modules require use of Android App Bundles which at the moment are not supported by all app distribution platforms and the platforms that support app bundles have diffrent integrations. However, this can be solved by using [GloballyDynamic](https://globallydynamic.io/).
 
 So let's get started ...
+
+## App Structure
+### Dynamic Feature Modules and Dynamic Delivery?
+
+`Dynamic feature modules` allow separation of certain features and resources from the base module of the app and include them in the app bundle. User can then download and install these modules later when they are required(on demand) even after the app has already been installed.E.g. In Notflix the Favorites feature/module is not installed when the app is first installed since not all user use that feature but later on the can opt to download it when the need arises. These features/modules can also be uninstalled later without installing the entire app
+
+`Dynamic Delivery` is Google Play's app serving model that uses [Android App Bundles](https://developer.android.com/guide/app-bundle) to generate and server optimized APKs for each user's device configuration so that users download only the feature and resources the need to run the app.
+
+Play Feature Delivery allow certain features of the app to be delivered conditionally (depending on user's language, location/country, paying or free user etc.) or downloaded on demand.
+
+<p align="center"><img src="assets/notflix_arch.png" alt="Notflix App Structure"></p>
+
 
 ## Architecture.
 
@@ -122,13 +139,6 @@ The ```presentation``` layer contains components involved in showing information
 
 ## Tech Stack.
 This project uses many of the popular libraries, plugins and tools of the android ecosystem.
-
-### Patterns.
-- [Observer Pattern](https://medium.com/android-news/observer-pattern-how-does-it-work-82dfd81305a4) - The observer pattern is a software design pattern that defines a one to many dependencies between objects so that one object changes state, all of its dependents are notified and updated automatically.
-
-- [Repository Pattern](https://medium.com/swlh/repository-pattern-in-android-c31d0268118c): The repository pattern is a software design pattern that restricts us from work directly with the data in the application and creates new layers for database operations, business logic, and the application's UI.
-
-- [UseCase Pattern](https://proandroiddev.com/why-you-need-use-cases-interactors-142e8a6fe576) - UseCase pattern is a software design pattern that is used to bridge the gap between business and system models without altering requirements contents nor preempting architectural options.
 
 ### Libraries.
 
