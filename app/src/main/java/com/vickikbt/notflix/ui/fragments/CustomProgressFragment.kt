@@ -13,13 +13,13 @@ class CustomProgressFragment : AbstractProgressFragment(R.layout.fragment_progre
     private var _binding: FragmentProgressBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var fadeInAnimation:Animation
+    private lateinit var fadeInAnimation: Animation
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentProgressBinding.bind(view)
 
-        fadeInAnimation=AnimationUtils.loadAnimation(requireContext(),R.anim.fade_in)
+        fadeInAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in)
     }
 
     override fun onCancelled() {
@@ -49,9 +49,12 @@ class CustomProgressFragment : AbstractProgressFragment(R.layout.fragment_progre
     }
 
     override fun onProgress(status: Int, bytesDownloaded: Long, bytesTotal: Long) {
-        val progress = (bytesDownloaded.toDouble() * 100) / bytesTotal
+        val bytesProgress = (bytesDownloaded.toDouble() * 100) / bytesTotal
 
-        binding.progressBarDownload.progress = progress.toInt()
+        binding.progressBarDownload.apply {
+            max = bytesTotal.toInt()
+            progress = bytesProgress.toInt()
+        }
         binding.textViewStatus.apply {
             startAnimation(fadeInAnimation)
             text = "Downloading module"
