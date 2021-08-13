@@ -2,7 +2,7 @@ buildscript {
 
     ext {
         //Kotlin
-        kotlin_version = "1.4.30"
+        kotlin_version = "1.5.20"
 
         //Versioning
         compileSdkVersion = 30

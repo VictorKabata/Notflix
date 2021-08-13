@@ -10,7 +10,9 @@ import com.google.android.play.core.splitinstall.SplitInstallSessionState
 import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.FragmentProgressBottomSheetBinding
+import com.vickikbt.notflix.util.hide
 import com.vickikbt.notflix.util.toMegabytes
+import com.vickikbt.notflix.util.toast
 import timber.log.Timber
 
 class ProgressBottomSheetFragment constructor(private val state: SplitInstallSessionState) :
@@ -33,15 +35,17 @@ class ProgressBottomSheetFragment constructor(private val state: SplitInstallSes
 
     private fun initUI() {
         when (state.status()) {
-
             SplitInstallSessionStatus.PENDING -> {
                 val totalByte = state.totalBytesToDownload().toMegabytes()
                 val progressBytes = state.bytesDownloaded().toMegabytes()
 
                 binding.textViewFeatureTitle.text = "Downloading feature"
                 binding.textViewFeatureSize.text = "Downloading ${progressBytes}mb/${totalByte}mb"
-                binding.progressBarDownload.progress = progressBytes
-                binding.textViewAction.visibility=View.GONE
+                binding.progressBarDownload.apply {
+                    max = totalByte
+                    progress = totalByte
+                }
+                binding.textViewAction.hide()
 
             }
 
@@ -52,8 +56,10 @@ class ProgressBottomSheetFragment constructor(private val state: SplitInstallSes
                 val retryText = resources.getString(R.string.retry)
                 binding.textViewFeatureTitle.text = "Downloading feature"
                 binding.textViewFeatureSize.text = "Downloading ${progressBytes}mb/${totalByte}mb"
-                binding.progressBarDownload.max = totalByte
-                binding.progressBarDownload.progress = progressBytes
+                binding.progressBarDownload.apply {
+                    max = totalByte
+                    progress = progressBytes
+                }
                 binding.textViewAction.text = retryText
 
             }
@@ -62,20 +68,16 @@ class ProgressBottomSheetFragment constructor(private val state: SplitInstallSes
                 Timber.e("Downloaded")
             }
 
-            SplitInstallSessionStatus.PENDING -> {
-                val totalByte = state.totalBytesToDownload()
-                val progressBytes = state.bytesDownloaded()
-
-                Timber.e("Pending: ${progressBytes.toMegabytes()}")
-
-            }
-
             SplitInstallSessionStatus.INSTALLING -> {
-                val totalByte = state.totalBytesToDownload()
-                val progressBytes = state.bytesDownloaded()
+                val totalByte = state.totalBytesToDownload().toMegabytes()
 
-                Timber.e("Installing: ${progressBytes.toMegabytes()}")
+                binding.progressBarDownload.apply {
+                    max = totalByte
+                    progress = totalByte
+                }
 
+                binding.textViewFeatureTitle.text = "Installing feature"
+                binding.textViewFeatureSize.text = "Installing ${totalByte}mb"
             }
 
             SplitInstallSessionStatus.CANCELED -> {
@@ -95,6 +97,11 @@ class ProgressBottomSheetFragment constructor(private val state: SplitInstallSes
                 binding.textViewFeatureSize.text = "Failed ${progressBytes}mb/${totalByte}mb"
                 binding.progressBarDownload.hide()
                 binding.textViewAction.text = retryText
+            }
+
+            SplitInstallSessionStatus.INSTALLED->{
+                requireContext().toast("Feature Downloaded")
+                this.dismiss()
             }
         }
 

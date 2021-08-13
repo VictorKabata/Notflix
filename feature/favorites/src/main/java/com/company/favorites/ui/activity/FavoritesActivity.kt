@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.company.favorites.R
+import com.google.android.play.core.splitcompat.SplitCompat
 
 
 class FavoritesActivity : AppCompatActivity() {
@@ -21,6 +22,7 @@ class FavoritesActivity : AppCompatActivity() {
 
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(newBase)
+        SplitCompat.installActivity(this)
         //GlobalSplitCompat.installActivity(this)
     }
 

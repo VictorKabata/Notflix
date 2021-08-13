@@ -11,6 +11,8 @@ import com.company.favorites.R
 import com.company.favorites.databinding.FragmentFavoritesBinding
 import com.company.favorites.di.loadFavoritesModule
 import com.company.favorites.ui.adapters.FavoriteMoviesRecyclerviewAdapter
+import com.google.android.play.core.splitinstall.SplitInstallManager
+import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.vickikbt.domain.models.Movie
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -34,6 +36,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 
     }
 
+    //ToDo: Remove boiler plate code
     private fun initUI() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {

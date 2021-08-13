@@ -4,12 +4,9 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.dynamicfeatures.DynamicExtras
-import androidx.navigation.dynamicfeatures.DynamicInstallMonitor
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.play.core.splitinstall.SplitInstallSessionState
+import com.google.android.play.core.splitinstall.*
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.ActivityMainBinding
 import com.vickikbt.notflix.ui.fragments.ProgressBottomSheetFragment
@@ -24,13 +21,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     private lateinit var navController: NavController
 
-    //private lateinit var globalSplitInstallManager: GlobalSplitInstallManager
-    //private var globalSessionId = 0
+    //private lateinit var installMonitor: DynamicInstallMonitor
+    //private lateinit var dynamicExtras: DynamicExtras
 
-    //private lateinit var globalInstallListener: GlobalSplitInstallUpdatedListener
-
-    private lateinit var installMonitor : DynamicInstallMonitor
-    private lateinit var dynamicExtras : DynamicExtras
+    private lateinit var splitInstallManager: SplitInstallManager
+    private lateinit var splitInstallStateUpdatedListener: SplitInstallStateUpdatedListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +33,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        binding.bottomNav.setupWithNavController(navController)
+        //binding.bottomNav.setupWithNavController(navController)
 
+        splitInstallManager = SplitInstallManagerFactory.create(this)
         //globalSplitInstallManager = GlobalSplitInstallManagerFactory.create(this)
 
         initUI()
@@ -58,41 +55,36 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     private fun initUI() {
-        //binding.bottomNav.setOnNavigationItemSelectedListener(this)
+        binding.bottomNav.setOnNavigationItemSelectedListener(this)
+
+        splitInstallStateUpdatedListener = SplitInstallStateUpdatedListener { state ->
+            showProgressBottomSheet(state)
+        }
     }
 
 
-    /*private fun installDynamicModule(moduleName: String, fragmentId: Int) {
-        val name = moduleName.substring(0).capitalize()
+    private fun installDynamicModule(moduleName: String, fragmentId: Int) {
+        if (splitInstallManager.installedModules.contains(moduleName)) { //Module already installed
+            navController.navigate(fragmentId)
+            return
+        } else { //Install module
+            splitInstallManager.registerListener(splitInstallStateUpdatedListener)
 
-        globalInstallListener = GlobalSplitInstallUpdatedListener { state ->
-            if (state.sessionId() == globalSessionId) {
-                //val progressBottomSheetFragment = ProgressBottomSheetFragment(state)
-                //progressBottomSheetFragment.show(supportFragmentManager, "Progress BottomSheet")
-            }
+            val splitInstallRequest = SplitInstallRequest.newBuilder()
+                .addModule(moduleName)
+                .build()
+
+            splitInstallManager.startInstall(splitInstallRequest)
+                .addOnCompleteListener { }
+                .addOnSuccessListener { }
+                .addOnFailureListener { }
         }
+    }
 
-        val request = GlobalSplitInstallRequest.newBuilder()
-            .addModule(moduleName)
-            .build()
-
-
-        globalSplitInstallManager.registerListener(globalInstallListener)
-        globalSplitInstallManager.startInstall(request)
-            .addOnSuccessListener { sessionId -> globalSessionId = sessionId }
-            .addOnFailureListener { exception ->
-                when ((exception as GlobalSplitInstallException).errorCode) {
-                    GlobalSplitInstallErrorCode.NETWORK_ERROR -> {
-                        Timber.e("Network error downloading feature")
-                    }
-
-                    GlobalSplitInstallErrorCode.INSUFFICIENT_STORAGE -> {
-                        Timber.e("Insufficient storage error downloading feature")
-                    }
-                }
-            }
-
-    }*/
+    private fun showProgressBottomSheet(state: SplitInstallSessionState) {
+        val progressBottomSheet = ProgressBottomSheetFragment(state = state)
+        progressBottomSheet.show(supportFragmentManager, "Progress Bottom Sheet")
+    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -101,12 +93,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 return true
             }
             R.id.favorites_fragment -> {
-                installMonitor= DynamicInstallMonitor()
-                dynamicExtras=DynamicExtras(installMonitor = installMonitor)
 
-                monitorFeatureInstall()
-
-                navController.navigate(R.id.favorites_fragment, null, null, dynamicExtras)
+                installDynamicModule(
+                    moduleName = getString(R.string.title_favorites),
+                    fragmentId = R.id.favorites_fragment
+                )
 
                 return true
             }
@@ -119,25 +110,16 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         return false
     }
 
-    private fun monitorFeatureInstall() {
-        installMonitor.status.observe(this) { state ->
-            Timber.e("State: $state")
-
-            showProgressBottomSheet(state)
-
-            if (state.hasTerminalStatus()) installMonitor.status.removeObservers(this)
-        }
-    }
-
-    private fun showProgressBottomSheet(state: SplitInstallSessionState){
-        val progressBottomSheet=ProgressBottomSheetFragment(state = state)
-        progressBottomSheet.show(supportFragmentManager, "Progress Bottom Sheet")
+    override fun onResume() {
+        splitInstallManager.registerListener(splitInstallStateUpdatedListener)
+        super.onResume()
     }
 
     override fun onDestroy() {
-        super.onDestroy()
-        //globalSplitInstallManager.unregisterListener(globalInstallListener)
         _binding = null
+        splitInstallManager.unregisterListener(splitInstallStateUpdatedListener)
+        //globalSplitInstallManager.unregisterListener(globalInstallListener)
+        super.onDestroy()
     }
 
 
