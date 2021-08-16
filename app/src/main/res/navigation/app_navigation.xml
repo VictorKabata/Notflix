@@ -2,7 +2,6 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mobile_navigation"
-    app:progressDestination="@id/progress_fragment"
     app:startDestination="@id/home_fragment">
 
     <include-dynamic
@@ -31,10 +30,4 @@
         android:label="@string/title_settings"
         app:graphResName="settings_navigation"
         app:moduleName="settings" />
-
-    <fragment
-        android:id="@+id/progress_fragment"
-        android:name="com.vickikbt.notflix.ui.fragments.CustomProgressFragment"
-        android:label="@string/progress" />
-
 </navigation>
