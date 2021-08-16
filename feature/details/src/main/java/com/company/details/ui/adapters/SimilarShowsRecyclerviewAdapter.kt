@@ -8,9 +8,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.company.details.R
 import com.company.details.databinding.ItemSimilarShowBinding
-import com.vickikbt.notflix.util.DataFormatter
-import com.vickikbt.notflix.util.DataFormatter.loadImage
 import com.vickikbt.domain.models.Movie
+import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
 
 class SimilarShowsRecyclerviewAdapter constructor(
@@ -23,7 +22,7 @@ class SimilarShowsRecyclerviewAdapter constructor(
         viewType: Int
     ): SimilarShowsRecyclerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ItemSimilarShowBinding.inflate(layoutInflater,parent, false)
+        val binding = ItemSimilarShowBinding.inflate(layoutInflater, parent, false)
 
         return SimilarShowsRecyclerViewHolder(binding)
     }
@@ -57,7 +56,7 @@ class SimilarShowsRecyclerViewHolder(private val binding: ItemSimilarShowBinding
             .into(binding.imageViewShowCover)
 
         binding.textViewShowTitle.text = movie.title
-        binding.ratingBarShowRating.rating = DataFormatter.getRating(movie.voteAverage)
+        binding.ratingBarShowRating.rating = movie.voteAverage!!.getRating()
 
     }
 

@@ -9,7 +9,6 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.company.details.R
 import com.company.details.databinding.ItemCastBinding
 import com.vickikbt.domain.models.Actor
-import com.vickikbt.notflix.util.DataFormatter.loadImage
 import com.vickikbt.notflix.util.loadImage
 
 class CastRecyclerviewAdapter constructor(

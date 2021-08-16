@@ -44,11 +44,6 @@ class MovieDetailsViewModel constructor(
             val movieDetailsResponse = movieDetailsRepository.getMovieDetails(movieId)
             movieDetailsResponse.collect { movieDetails ->
                 _movieDetails.value = MovieDetailsUiState.Success(movieDetails)
-
-                isMovieFavorite(movieId = movieId)
-                getMovieCast(movieId = movieId)
-                getMovieVideos(movieId = movieId)
-                getSimilarMovies(movieId = movieId)
             }
         } catch (e: Exception) {
             MovieDetailsUiState.Error("${e.message}")
@@ -56,7 +51,7 @@ class MovieDetailsViewModel constructor(
     }
 
     //Get movie cast
-    private fun getMovieCast(movieId: Int) = viewModelScope.launch {
+    fun getMovieCast(movieId: Int) = viewModelScope.launch {
         try {
             val movieCastResponse = movieDetailsRepository.getMovieCast(movieId)
             movieCastResponse.collect { cast ->
@@ -68,7 +63,7 @@ class MovieDetailsViewModel constructor(
     }
 
     //Get movie videos
-    private fun getMovieVideos(movieId: Int) = viewModelScope.launch {
+    fun getMovieVideos(movieId: Int) = viewModelScope.launch {
         try {
             val movieVideoResponse = movieDetailsRepository.getMovieVideos(movieId)
             movieVideoResponse.collect { video ->
@@ -80,7 +75,7 @@ class MovieDetailsViewModel constructor(
     }
 
     //Get similar movies
-    private fun getSimilarMovies(movieId: Int) = viewModelScope.launch {
+    fun getSimilarMovies(movieId: Int) = viewModelScope.launch {
         try {
             val similarMoviesResponse = movieDetailsRepository.fetchSimilarMovies(movieId)
             similarMoviesResponse.collect { similarMovies ->
@@ -91,7 +86,7 @@ class MovieDetailsViewModel constructor(
         }
     }
 
-    private fun isMovieFavorite(movieId: Int) = viewModelScope.launch {
+    fun isMovieFavorite(movieId: Int) = viewModelScope.launch {
         val response = favoritesRepository.isMovieFavorite(movieId)
         response.collect {
             _isMovieFavorite.value = IsMovieFavoriteUiState.Success(it)

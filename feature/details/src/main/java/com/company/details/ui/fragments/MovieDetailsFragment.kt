@@ -29,12 +29,7 @@ import com.vickikbt.domain.models.Cast
 import com.vickikbt.domain.models.MovieDetails
 import com.vickikbt.domain.models.MovieVideo
 import com.vickikbt.domain.models.SimilarMovies
-import com.vickikbt.notflix.util.DataFormatter.getMovieDuration
-import com.vickikbt.notflix.util.DataFormatter.getPopularity
-import com.vickikbt.notflix.util.DataFormatter.getRating
-import com.vickikbt.notflix.util.DataFormatter.getReleaseYear
-import com.vickikbt.notflix.util.hide
-import com.vickikbt.notflix.util.loadImage
+import com.vickikbt.notflix.util.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -62,7 +57,11 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
     }
 
     private fun initUI() {
-        viewModel.getMovieDetails(args.movieId)
+        viewModel.getMovieDetails(movieId = args.movieId)
+        viewModel.isMovieFavorite(movieId = args.movieId)
+        viewModel.getMovieCast(movieId = args.movieId)
+        viewModel.getMovieVideos(movieId = args.movieId)
+        viewModel.getSimilarMovies(movieId = args.movieId)
 
         binding.imageViewBack.setOnClickListener { findNavController().navigateUp() }
 
@@ -144,7 +143,8 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
     }
 
     private fun showIsMovieFavorite(isFavorite: Boolean?) {
-        val favUnselected = ResourcesCompat.getDrawable(resources, R.drawable.ic_fav_unselected, null)
+        val favUnselected =
+            ResourcesCompat.getDrawable(resources, R.drawable.ic_fav_unselected, null)
         val favSelected = ResourcesCompat.getDrawable(resources, R.drawable.ic_fav_selected, null)
 
         val zoomInAnim = AnimationUtils.loadAnimation(context, R.anim.zoom_in)
@@ -211,16 +211,17 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
         binding.textViewMovieName.text = movieDetails.title
 
         if (!movieDetails.releaseDate.isNullOrEmpty()) binding.textViewMovieRelease.text =
-            getReleaseYear(movieDetails.releaseDate)
+            movieDetails.releaseDate!!.getReleaseYear()
         else {
             binding.textViewMovieRelease.visibility = GONE
             binding.view.visibility = GONE
         }
 
-        binding.textViewMovieDuration.text = getMovieDuration(movieDetails.runtime ?: 0)
+        binding.textViewMovieDuration.text = movieDetails.runtime?.getMovieDuration()
 
-        binding.textViewMoviePopularity.text = getPopularity(movieDetails.voteAverage!!)
-        binding.textViewMovieRating.text = "${getRating(movieDetails.voteAverage!!)}/5.0"
+        binding.textViewMoviePopularity.text = movieDetails.voteAverage!!.getPopularity()
+        binding.textViewMovieRating.text =
+            movieDetails.voteAverage?.getRating() //"${getRating()}/5.0"
         binding.textViewOverview.text = movieDetails.overview
     }
 
