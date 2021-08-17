@@ -39,6 +39,7 @@ buildscript {
         android_yt_player_verion = "10.0.5"
         paging_version = "3.0.0"
         shimmer_version = "0.5.0"
+        exoplayer_version = "2.13.2"
 
         //Data layer
         room_version = "2.3.0"
@@ -99,7 +100,9 @@ buildscript {
                 coroutinesAndroid  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version",
 
                 playCore           : "com.google.android.play:core:$playCore_version",
-                playCoreKtx        : "com.google.android.play:core-ktx:$playCore_ktx_version"
+                playCoreKtx        : "com.google.android.play:core-ktx:$playCore_ktx_version",
+
+                exoplayer          : "com.google.android.exoplayer:exoplayer:$exoplayer_version"
         ]
         //endregion
 

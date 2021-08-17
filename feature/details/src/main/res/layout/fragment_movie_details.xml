@@ -302,7 +302,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recyclerview_cast" />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardView_trailer"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
@@ -314,20 +314,10 @@
                 app:layout_constraintStart_toStartOf="@id/textView_trailer_title"
                 app:layout_constraintTop_toBottomOf="@id/textView_trailer_title">
 
-                <ImageView
-                    android:id="@+id/imageView_video_placeholder"
+                <com.google.android.exoplayer2.ui.PlayerView
+                    android:id="@+id/playerView_details"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:alpha="0.8"
-                    android:scaleType="centerCrop"
-                    android:visibility="visible"
-                    tools:src="@drawable/ic_launcher_background" />
-
-                <View
-                    android:id="@+id/youtubePlayer_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
+                    android:layout_height="match_parent"/>
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fab_play_trailer"
@@ -337,7 +327,7 @@
                     android:alpha="0.6"
                     android:src="@drawable/ic_play"
                     app:fabSize="normal" />
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
             <!--endregion-->
 
             <!--region $SimilarMoviesRegion-->

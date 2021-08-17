@@ -42,4 +42,6 @@ android {
 
 dependencies {
     implementation project(":app")
+
+    implementation appDependencies.exoplayer
 }

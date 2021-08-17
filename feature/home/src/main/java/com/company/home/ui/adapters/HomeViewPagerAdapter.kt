@@ -17,7 +17,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.company.home.databinding.ItemHomeViewpagerBinding
 import com.vickikbt.domain.models.Movie
-import com.vickikbt.notflix.util.DataFormatter.getRating
+import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
 import timber.log.Timber
 
@@ -83,7 +83,7 @@ class HomeViewPagerAdapter constructor(
             }).into(binding.imageViewHomeSliderBackground)
 
         binding.textViewTrendingShows.text = "${movie.title}."
-        binding.ratingBarTrendingShows.rating = getRating(movie.voteAverage)
+        binding.ratingBarTrendingShows.rating = movie.voteAverage!!.getRating()
 
         container.addView(binding.root, 0)
 

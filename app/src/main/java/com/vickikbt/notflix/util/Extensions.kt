@@ -71,7 +71,7 @@ fun String.getReleaseYear(): String {
     return targetFormat.format(originalFormat!!)
 }
 
-fun Double.getRating() = ((this.toFloat() * 5) / 10).toString()
+fun Double.getRating() = ((this.toFloat() * 5) / 10)
 
 fun Double.getPopularity() = ((this.toInt() * 100) / 10).toString()
 

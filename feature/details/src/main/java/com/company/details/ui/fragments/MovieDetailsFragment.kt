@@ -25,6 +25,8 @@ import com.company.details.databinding.FragmentMovieDetailsBinding
 import com.company.details.di.loadDetailsModule
 import com.company.details.ui.adapters.CastRecyclerviewAdapter
 import com.company.details.ui.adapters.SimilarShowsRecyclerviewAdapter
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.util.Util
 import com.vickikbt.domain.models.Cast
 import com.vickikbt.domain.models.MovieDetails
 import com.vickikbt.domain.models.MovieVideo
@@ -34,7 +36,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
-
 
 class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
 
@@ -46,6 +47,11 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
 
     private val args by navArgs<MovieDetailsFragmentArgs>()
 
+    private var simpleExoPlayer:SimpleExoPlayer?=null
+    private var playWhenReady=true
+    private var currentWindow=0
+    private var playbackPosition:Long=0
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMovieDetailsBinding.bind(view)
@@ -53,6 +59,8 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
         injectFeatures()
 
         initUI()
+
+        initVideoPlayer()
 
     }
 
@@ -220,8 +228,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
         binding.textViewMovieDuration.text = movieDetails.runtime?.getMovieDuration()
 
         binding.textViewMoviePopularity.text = movieDetails.voteAverage!!.getPopularity()
-        binding.textViewMovieRating.text =
-            movieDetails.voteAverage?.getRating() //"${getRating()}/5.0"
+        binding.textViewMovieRating.text = "${movieDetails.voteAverage?.getRating()}" //"${getRating()}/5.0"
         binding.textViewOverview.text = movieDetails.overview
     }
 
@@ -235,7 +242,25 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
     }
 
     private fun showMovieVideos(movieVideo: MovieVideo) {
-        Timber.e("Movie videos: ${movieVideo.videos}")
+        movieVideo.videos?.filter { it.site=="YouTube" && it.type=="Trailer" || it.type=="Teaser" }?.forEach {
+            Timber.e("Movie video: $it")
+        }
+
+    }
+
+    private fun initVideoPlayer(){
+        simpleExoPlayer=SimpleExoPlayer.Builder(requireContext()).build()
+        binding.playerViewDetails.player=simpleExoPlayer
+    }
+
+    private fun releaseVideoPlayer(){
+        if(simpleExoPlayer!=null){
+            playWhenReady= simpleExoPlayer!!.playWhenReady
+            playbackPosition=simpleExoPlayer!!.currentPosition
+            currentWindow=simpleExoPlayer!!.currentWindowIndex
+            simpleExoPlayer!!.release()
+            simpleExoPlayer=null
+        }
     }
 
     private fun showSimilarMovies(similarMovies: SimilarMovies) {
@@ -250,6 +275,26 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
 
     private fun updateMovieFavorite(isFavorite: Boolean) =
         viewModel.updateIsMovieFavorite(cacheId = args.cacheId, isFavorite = isFavorite)
+
+    override fun onStart() {
+        super.onStart()
+        if (Util.SDK_INT>=24) initVideoPlayer()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (Util.SDK_INT>=24 || simpleExoPlayer==null) initVideoPlayer()
+    }
+
+    override fun onPause() {
+        if (Util.SDK_INT<24) releaseVideoPlayer()
+        super.onPause()
+    }
+
+    override fun onStop() {
+        if (Util.SDK_INT<24) releaseVideoPlayer()
+        super.onStop()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

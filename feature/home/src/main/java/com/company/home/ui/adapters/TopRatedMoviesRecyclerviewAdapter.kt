@@ -16,8 +16,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.company.home.databinding.ItemTopRatedMoviesBinding
 import com.vickikbt.domain.models.Movie
-import com.vickikbt.notflix.util.DataFormatter.getRating
-import com.vickikbt.notflix.util.DataFormatter.getReleaseDate
+import com.vickikbt.notflix.util.getRating
+import com.vickikbt.notflix.util.getReleaseDate
 import com.vickikbt.notflix.util.loadImage
 import timber.log.Timber
 
@@ -101,8 +101,8 @@ class TopRatedShowsRecyclerViewHolder(private val binding: ItemTopRatedMoviesBin
             }).into(binding.imageViewShowCover)
 
         binding.textViewShowTitle.text = "${movie.title}."
-        binding.ratingBarShowRating.rating = getRating(movie.voteAverage)
-        binding.textViewReleaseDate.text = "${getReleaseDate(movie.releaseDate)}."
+        binding.ratingBarShowRating.rating = movie.voteAverage!!.getRating()
+        binding.textViewReleaseDate.text = "${movie.releaseDate!!.getReleaseDate()}."
     }
 
 }
