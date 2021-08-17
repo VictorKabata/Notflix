@@ -28,4 +28,6 @@ object Constants {
     const val BUG_REPORT_EMAIL="victorbro14@gmail.com"
     const val BUG_REPORT_SUBJECT="Notflix Bug Report"
 
+    const val YT_VIDEO_URL="https://www.youtube.com/watch?v="
+
 }

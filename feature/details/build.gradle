@@ -44,4 +44,5 @@ dependencies {
     implementation project(":app")
 
     implementation appDependencies.exoplayer
+    implementation appDependencies.yt_extractor
 }

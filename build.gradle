@@ -40,6 +40,7 @@ buildscript {
         paging_version = "3.0.0"
         shimmer_version = "0.5.0"
         exoplayer_version = "2.13.2"
+        yt_extractor_version = "v1.7.0"
 
         //Data layer
         room_version = "2.3.0"
@@ -102,7 +103,8 @@ buildscript {
                 playCore           : "com.google.android.play:core:$playCore_version",
                 playCoreKtx        : "com.google.android.play:core-ktx:$playCore_ktx_version",
 
-                exoplayer          : "com.google.android.exoplayer:exoplayer:$exoplayer_version"
+                exoplayer          : "com.google.android.exoplayer:exoplayer:$exoplayer_version",
+                yt_extractor       : "com.github.HaarigerHarald:android-youtubeExtractor:$yt_extractor_version"
         ]
         //endregion
 

@@ -3,6 +3,7 @@ package com.company.details.ui.fragments
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.SparseArray
 import android.view.View
 import android.view.View.GONE
 import android.view.animation.AnimationUtils
@@ -14,6 +15,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.palette.graphics.Palette
+import at.huber.youtubeExtractor.VideoMeta
+import at.huber.youtubeExtractor.YouTubeExtractor
+import at.huber.youtubeExtractor.YtFile
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -25,12 +29,18 @@ import com.company.details.databinding.FragmentMovieDetailsBinding
 import com.company.details.di.loadDetailsModule
 import com.company.details.ui.adapters.CastRecyclerviewAdapter
 import com.company.details.ui.adapters.SimilarShowsRecyclerviewAdapter
+import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.source.MediaSource
+import com.google.android.exoplayer2.source.MergingMediaSource
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.Util
 import com.vickikbt.domain.models.Cast
 import com.vickikbt.domain.models.MovieDetails
 import com.vickikbt.domain.models.MovieVideo
 import com.vickikbt.domain.models.SimilarMovies
+import com.vickikbt.domain.utils.Constants.YT_VIDEO_URL
 import com.vickikbt.notflix.util.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -47,10 +57,12 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
 
     private val args by navArgs<MovieDetailsFragmentArgs>()
 
-    private var simpleExoPlayer:SimpleExoPlayer?=null
-    private var playWhenReady=true
-    private var currentWindow=0
-    private var playbackPosition:Long=0
+    private var simpleExoPlayer: SimpleExoPlayer? = null
+    private var playWhenReady = true
+    private var currentWindow = 0
+    private var playbackPosition: Long = 0
+
+    private var videoKey: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,8 +71,6 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
         injectFeatures()
 
         initUI()
-
-        initVideoPlayer()
 
     }
 
@@ -228,7 +238,8 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
         binding.textViewMovieDuration.text = movieDetails.runtime?.getMovieDuration()
 
         binding.textViewMoviePopularity.text = movieDetails.voteAverage!!.getPopularity()
-        binding.textViewMovieRating.text = "${movieDetails.voteAverage?.getRating()}" //"${getRating()}/5.0"
+        binding.textViewMovieRating.text =
+            "${movieDetails.voteAverage?.getRating()}" //"${getRating()}/5.0"
         binding.textViewOverview.text = movieDetails.overview
     }
 
@@ -242,24 +253,60 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
     }
 
     private fun showMovieVideos(movieVideo: MovieVideo) {
-        movieVideo.videos?.filter { it.site=="YouTube" && it.type=="Trailer" || it.type=="Teaser" }?.forEach {
-            Timber.e("Movie video: $it")
+        val filteredVideos=movieVideo.videos?.filter { it.site == "YouTube" && it.type == "Trailer" || it.type == "Teaser" }
+
+        filteredVideos?.forEach {
+            Timber.e("Filtered videos: $it")
         }
 
+        videoKey = filteredVideos!![0].key
+
+        initVideoPlayer()
     }
 
-    private fun initVideoPlayer(){
-        simpleExoPlayer=SimpleExoPlayer.Builder(requireContext()).build()
-        binding.playerViewDetails.player=simpleExoPlayer
+    private fun initVideoPlayer() {
+        simpleExoPlayer = SimpleExoPlayer.Builder(requireContext()).build()
+        binding.playerViewDetails.player = simpleExoPlayer
+
+        val videoUrl = "$YT_VIDEO_URL${videoKey}"
+
+        Timber.e("Video URL to be played: $videoUrl")
+
+        object : YouTubeExtractor(requireContext()) {
+            override fun onExtractionComplete(
+                ytFiles: SparseArray<YtFile>?,
+                videoMeta: VideoMeta?
+            ) {
+                if (ytFiles != null) {
+                    val videoTag = 137
+                    val audioTag = 140
+                    val vidUrl = ytFiles[videoTag].url
+                    val audioUrl = ytFiles[audioTag].url
+
+                    val audioSource: MediaSource = ProgressiveMediaSource
+                            .Factory(DefaultHttpDataSource.Factory())
+                            .createMediaSource(MediaItem.fromUri(audioUrl))
+
+                    val videoSource: MediaSource = ProgressiveMediaSource
+                        .Factory(DefaultHttpDataSource.Factory())
+                        .createMediaSource(MediaItem.fromUri(vidUrl))
+
+                    simpleExoPlayer!!.setMediaSource(MergingMediaSource(true,videoSource,audioSource), true)
+                    simpleExoPlayer!!.prepare()
+                    simpleExoPlayer!!.playWhenReady=playWhenReady
+                    simpleExoPlayer!!.seekTo(currentWindow,playbackPosition)
+                }
+            }
+        }.extract(videoUrl, false, true)
     }
 
-    private fun releaseVideoPlayer(){
-        if(simpleExoPlayer!=null){
-            playWhenReady= simpleExoPlayer!!.playWhenReady
-            playbackPosition=simpleExoPlayer!!.currentPosition
-            currentWindow=simpleExoPlayer!!.currentWindowIndex
+    private fun releaseVideoPlayer() {
+        if (simpleExoPlayer != null) {
+            playWhenReady = simpleExoPlayer!!.playWhenReady
+            playbackPosition = simpleExoPlayer!!.currentPosition
+            currentWindow = simpleExoPlayer!!.currentWindowIndex
             simpleExoPlayer!!.release()
-            simpleExoPlayer=null
+            simpleExoPlayer = null
         }
     }
 
@@ -278,21 +325,21 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
 
     override fun onStart() {
         super.onStart()
-        if (Util.SDK_INT>=24) initVideoPlayer()
+        if (Util.SDK_INT >= 24) initVideoPlayer()
     }
 
     override fun onResume() {
         super.onResume()
-        if (Util.SDK_INT>=24 || simpleExoPlayer==null) initVideoPlayer()
+        if (Util.SDK_INT >= 24 || simpleExoPlayer == null) initVideoPlayer()
     }
 
     override fun onPause() {
-        if (Util.SDK_INT<24) releaseVideoPlayer()
+        if (Util.SDK_INT < 24) releaseVideoPlayer()
         super.onPause()
     }
 
     override fun onStop() {
-        if (Util.SDK_INT<24) releaseVideoPlayer()
+        if (Util.SDK_INT < 24) releaseVideoPlayer()
         super.onStop()
     }
 

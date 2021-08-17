@@ -319,14 +319,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fab_play_trailer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:alpha="0.6"
                     android:src="@drawable/ic_play"
-                    app:fabSize="normal" />
+                    app:fabSize="normal" />-->
             </com.google.android.material.card.MaterialCardView>
             <!--endregion-->
 
