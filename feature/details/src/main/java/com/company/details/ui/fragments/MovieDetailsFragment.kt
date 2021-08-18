@@ -2,6 +2,7 @@ package com.company.details.ui.fragments
 
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.SparseArray
 import android.view.View
@@ -34,6 +35,7 @@ import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.MergingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.Util
 import com.vickikbt.domain.models.Cast
@@ -82,6 +84,8 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
         viewModel.getSimilarMovies(movieId = args.movieId)
 
         binding.imageViewBack.setOnClickListener { findNavController().navigateUp() }
+
+        binding.fabPlayTrailer.setOnClickListener { initVideoPlayer() }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -261,18 +265,23 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
 
         videoKey = filteredVideos!![0].key
 
-        initVideoPlayer()
+        //initVideoPlayer()
     }
 
     private fun initVideoPlayer() {
-        simpleExoPlayer = SimpleExoPlayer.Builder(requireContext()).build()
-        binding.playerViewDetails.player = simpleExoPlayer
+        simpleExoPlayer = SimpleExoPlayer.Builder(requireContext()).build().also {exoplayer->
+            binding.playerViewDetails.player = exoplayer
+        }
 
         val videoUrl = "$YT_VIDEO_URL${videoKey}"
 
+        val mediaItem = MediaItem.fromUri(" https://storage.googleapis.com/exoplayer-test-media-0/play.mp3")
+        simpleExoPlayer!!.setMediaItem(mediaItem)
+
+
         Timber.e("Video URL to be played: $videoUrl")
 
-        object : YouTubeExtractor(requireContext()) {
+        /*object : YouTubeExtractor(requireContext()) {
             override fun onExtractionComplete(
                 ytFiles: SparseArray<YtFile>?,
                 videoMeta: VideoMeta?
@@ -297,7 +306,9 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
                     simpleExoPlayer!!.seekTo(currentWindow,playbackPosition)
                 }
             }
-        }.extract(videoUrl, false, true)
+        }.extract(videoUrl, false, true)*/
+
+
     }
 
     private fun releaseVideoPlayer() {
