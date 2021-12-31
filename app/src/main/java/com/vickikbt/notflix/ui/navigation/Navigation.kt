@@ -8,6 +8,10 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.vickikbt.notflix.ui.screens.details.DetailsScreen
+import com.vickikbt.notflix.ui.screens.favorites.FavoritesScreen
+import com.vickikbt.notflix.ui.screens.home.HomeScreen
+import com.vickikbt.notflix.ui.screens.settings.SettingsScreen
 
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
@@ -23,19 +27,19 @@ fun Navigation(navController: NavHostController) {
 
     AnimatedNavHost(navController = navController, startDestination = NavigationItem.Home.route){
         composable(route=NavigationItem.Home.route){
-
+            HomeScreen(navController = navController)
         }
 
         composable(route=NavigationItem.Favorites.route){
-
+            FavoritesScreen(navController = navController)
         }
 
         composable(route=NavigationItem.Settings.route){
-
+            SettingsScreen(navController = navController)
         }
 
         composable(route=NavigationItem.Details.route){
-
+            DetailsScreen(navController = navController)
         }
     }
 
