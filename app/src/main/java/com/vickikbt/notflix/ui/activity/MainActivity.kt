@@ -1,55 +1,22 @@
 package com.vickikbt.notflix.ui.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
-import com.vickikbt.notflix.R
-import com.vickikbt.notflix.databinding.ActivityMainBinding
-import timber.log.Timber
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.runtime.Composable
 
-class MainActivity : AppCompatActivity() {
-
-    private var _binding: ActivityMainBinding? = null
-    private val binding get() = _binding!!
-
-    private lateinit var navController: NavController
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_Notflix)
-        _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContent {
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
-
-        binding.bottomNav.setupWithNavController(navController)
-
-
-        initUI()
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.label == "MovieDetailsFragment") binding.bottomNav.hide()
-            else binding.bottomNav.show()
-
-            Timber.e("Destination: ${destination.label}")
         }
-
-
     }
 
-    private fun initUI() {
+    @Composable
+    fun MainScreen(){
 
     }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
 
 }
