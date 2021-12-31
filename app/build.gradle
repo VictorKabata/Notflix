@@ -2,9 +2,6 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'androidx.navigation.safeargs.kotlin'
-    id 'com.jeppeman.globallydynamic'
-    id 'com.google.firebase.appdistribution'
 }
 
 android {
@@ -21,20 +18,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    signingConfigs {
-        release {
-            keyAlias "key0"
-            keyPassword "mementomori"
-            storeFile file("./notflix.jks")
-            storePassword "mementomori"
-        }
-    }
-
     buildTypes {
         release {
             minifyEnabled false
             //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
 
         debug {
@@ -44,13 +31,6 @@ android {
 
     }
 
-    /*globallyDynamicServers {
-        studioEmbedded {
-            throttleDownloadBy 9000
-            applyToBuildVariants 'debug'
-        }
-    }*/
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -58,12 +38,26 @@ android {
 
     kotlinOptions {
         jvmTarget = '1.8'
+        useIR = true
     }
 
     buildFeatures {
         viewBinding true
+        compose true
     }
 
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerVersion '1.5.21'
+    }
+
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+
+    //ToDo: Remove dynamic feature modules
     dynamicFeatures = [':feature:home', ':feature:search', ':feature:favorites', ':feature:details', ':feature:settings']
 
 }
@@ -72,43 +66,39 @@ dependencies {
     api project(':domain')
     api project(':data:repository')
 
-    api "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
-    api appDependencies.androidCore
-    debugApi appDependencies.globallyDynamic
-    api appDependencies.playCore
-    api appDependencies.playCoreKtx
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$androidCore_version"
 
-    api appDependencies.appCompat
-    api appDependencies.material
-    api appDependencies.constraintLayout
-    api appDependencies.legacySupport
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
+    implementation "androidx.compose.ui:ui-util:$compose_version"
+    implementation "androidx.constraintlayout:constraintlayout-compose:$compose_constraint_version"
+    implementation "androidx.activity:activity-compose:$compose_activity_version"
 
-    api appDependencies.liveData
-    api appDependencies.viewModel
-    api appDependencies.lifecycleRuntime
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 
-    api appDependencies.coroutinesAndroid
+    //Koin-Dependency injection
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-androidx-compose:$koin_version"
 
-    api appDependencies.koinAndroid
+    //Timber-Logging
+    implementation "com.jakewharton.timber:timber:$timber_version"
 
-    api appDependencies.navFragment
-    api appDependencies.navUi
-    api appDependencies.navDfm
+    //Compose Navigation-Navigation between various screens
+    implementation "androidx.navigation:navigation-compose:$navigation_version"
 
-    api appDependencies.glide
+    //Coil-Image Loader
+    implementation "io.coil-kt:coil-compose:$coil_version"
 
-    api appDependencies.timber
+    //Palette-Used to extract color palette from images
+    implementation "com.android.support:palette-v7:$palette_version"
 
-    api appDependencies.fadingEdges
-
-    api appDependencies.palette
-
-    api appDependencies.shimmer
-
-    testImplementation testDependencies.jUnit
-    testImplementation testDependencies.truth
-    testImplementation testDependencies.coroutinesTest
-    testImplementation testDependencies.robolectric
+    testImplementation "junit:junit:$jUnit_version"
+    testImplementation "com.google.truth:truth:$truth_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTest_version"
 
     androidTestImplementation testDependencies.androidEspresso
     androidTestImplementation testDependencies.androidCoreTesting

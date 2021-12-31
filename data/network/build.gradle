@@ -38,15 +38,15 @@ android {
 dependencies {
     api project(":domain")
 
-    implementation appDependencies.kotlin
-    implementation appDependencies.androidCore
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$androidCore_version"
 
     //Retrofit/Networking
-    api dataDependencies.retrofit
-    api dataDependencies.okhttp
-    api dataDependencies.gsonConvertor
-    api dataDependencies.loggingIntercepter
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.okhttp3:okhttp:$okhttp_vesion"
+    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    api "com.squareup.okhttp3:logging-interceptor:$loggingIntercepter_version"
 
-    implementation appDependencies.koinAndroid
-    androidTestImplementation 'junit:junit:4.12'
+    implementation "io.insert-koin:koin-android:$koin_version"
+
 }

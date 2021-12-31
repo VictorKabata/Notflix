@@ -2,7 +2,6 @@ plugins {
     id 'com.android.dynamic-feature'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'androidx.navigation.safeargs.kotlin'
 }
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -41,6 +40,4 @@ android {
 
 dependencies {
     implementation project(":app")
-
-    implementation appDependencies.dotsIndicator
 }

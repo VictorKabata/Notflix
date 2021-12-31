@@ -39,20 +39,18 @@ dependencies {
     api project(":domain")
     api project(":data:network")
 
-    implementation appDependencies.kotlin
-    implementation appDependencies.androidCore
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$androidCore_version"
 
     //Room
-    api dataDependencies.roomRuntime
-    api dataDependencies.roomKtx
-    kapt dataDependencies.roomCompiler
+    api "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    api "androidx.room:room-ktx:$room_version"
 
     //DataStore
-    implementation dataDependencies.datastore
+    implementation "androidx.datastore:datastore-preferences:$datastore_version"
 
-    implementation appDependencies.koinAndroid
+    implementation "io.insert-koin:koin-android:$koin_version"
 
-    implementation dataDependencies.gsonConvertor
-
-    implementation appDependencies.liveData
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 }
