@@ -77,6 +77,13 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout-compose:$compose_constraint_version"
     implementation "androidx.activity:activity-compose:$compose_activity_version"
 
+    implementation "com.google.accompanist:accompanist-pager:$accompanist_version"
+    implementation "com.google.accompanist:accompanist-permissions:$accompanist_version"
+    implementation "com.google.accompanist:accompanist-insets:$accompanist_version"
+    implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist_version"
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.17.0"
+    //implementation "com.google.accompanist:accompanist-placeholder:$accompanist_version"
+
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 

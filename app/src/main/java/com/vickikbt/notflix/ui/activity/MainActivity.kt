@@ -1,4 +1,4 @@
-package com.vickikbt.notflix.ui.activities
+package com.vickikbt.notflix.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,8 +7,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.databinding.ActivityMainBinding
-import com.vickikbt.notflix.util.hide
-import com.vickikbt.notflix.util.show
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
