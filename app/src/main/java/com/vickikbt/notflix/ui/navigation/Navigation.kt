@@ -16,7 +16,6 @@ import com.vickikbt.notflix.ui.screens.settings.SettingsScreen
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
-@ExperimentalFoundationApi
 @Composable
 fun Navigation(navController: NavHostController) {
 
