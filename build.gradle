@@ -2,10 +2,10 @@ buildscript {
 
     ext {
         //Versioning
-        compileSdkVersion = 30
+        compileSdkVersion = 31
         buildToolsVersion = "30.0.3"
         minSdkVersion = 21
-        targetSdkVersion = 30
+        targetSdkVersion = 31
         versionCode = 3
         versionName = "1.02"
 
@@ -16,6 +16,7 @@ buildscript {
         //Dependencies
         kotlin_version = "1.5.30"
         androidCore_version = "1.7.0"
+        material_version="1.4.0"
         compose_version = "1.0.3"
         compose_activity_version = '1.4.0'
         compose_constraint_version = '1.0.0-rc01'

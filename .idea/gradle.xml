@@ -16,12 +16,6 @@
             <option value="$PROJECT_DIR$/data/network" />
             <option value="$PROJECT_DIR$/data/repository" />
             <option value="$PROJECT_DIR$/domain" />
-            <option value="$PROJECT_DIR$/feature" />
-            <option value="$PROJECT_DIR$/feature/details" />
-            <option value="$PROJECT_DIR$/feature/favorites" />
-            <option value="$PROJECT_DIR$/feature/home" />
-            <option value="$PROJECT_DIR$/feature/search" />
-            <option value="$PROJECT_DIR$/feature/settings" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
