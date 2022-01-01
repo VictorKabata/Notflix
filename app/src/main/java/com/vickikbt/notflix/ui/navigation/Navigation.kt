@@ -18,10 +18,10 @@ import com.vickikbt.notflix.ui.screens.settings.SettingsScreen
 @Composable
 fun Navigation(navController: NavHostController) {
 
-    //val defaultEnterAnimationDuration = 600
-    //val defaultExitAnimationDuration = 1100
-    //val slideDefaultInitialOffset = 1800
-    //val slideDefaultTargetOffset = 1500
+    // val defaultEnterAnimationDuration = 600
+    // val defaultExitAnimationDuration = 1100
+    // val slideDefaultInitialOffset = 1800
+    // val slideDefaultTargetOffset = 1500
 
     AnimatedNavHost(navController = navController, startDestination = NavigationItem.Home.route) {
         composable(route = NavigationItem.Home.route) {
@@ -40,5 +40,4 @@ fun Navigation(navController: NavHostController) {
             DetailsScreen(navController = navController)
         }
     }
-
 }
