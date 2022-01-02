@@ -1,6 +1,8 @@
 package com.vickikbt.notflix.ui.screens.home
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -19,6 +21,7 @@ import com.google.accompanist.pager.rememberPagerState
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemNowPlayingMovies
+import com.vickikbt.notflix.ui.components.ItemRecentlyPlayedAlbum
 import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Grey
@@ -118,4 +121,17 @@ fun TrendingMovies(navController: NavController, viewModel: HomeViewModel, movie
             //ToDo: OnSectionedClicked-navigate to view all
         }
     )
+
+    Spacer(modifier = Modifier.height(8.dp))
+
+    LazyRow(
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        items(items = movies) { item ->
+            ItemRecentlyPlayedAlbum(movie = item, onItemClick = {
+                //ToDo: OnItemClicked-Navigate to movie details
+            })
+        }
+    }
 }

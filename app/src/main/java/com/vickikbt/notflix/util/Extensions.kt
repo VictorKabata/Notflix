@@ -32,7 +32,8 @@ fun String.loadImage(): String {
             }
             "low_quality" -> {
                 imageQuality = "${Constants.IMAGE_PREFIX}/w500/$this" //ToDo: Lower image quality value
-            }else->imageQuality = "${Constants.IMAGE_PREFIX}/w500/$this"
+            }//else->imageQuality = "${Constants.IMAGE_PREFIX}/w500/$this"
+            else->imageQuality = "${Constants.IMAGE_PREFIX}/original/$this"
         }
     }
     return imageQuality!!
