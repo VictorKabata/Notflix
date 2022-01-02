@@ -29,7 +29,11 @@ buildscript {
         timber_version = "5.0.1"
         paging_version = "3.0.0"
         coroutines_version = "1.5.2"
+<<<<<<< Updated upstream
         firebase_bom = "29.0.3"
+=======
+        rating_bar_version="1.1.1"
+>>>>>>> Stashed changes
 
         room_version = "2.4.0"
         datastore_version = "1.0.0"

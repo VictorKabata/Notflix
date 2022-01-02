@@ -112,6 +112,9 @@ dependencies {
     //Palette-Used to extract color palette from images
     implementation "com.android.support:palette-v7:$palette_version"
 
+    //Gowtham Compose Rating Bar
+    implementation "com.github.a914-gowtham:compose-ratingbar:$rating_bar_version"
+
     testImplementation "junit:junit:$jUnit_version"
     testImplementation "com.google.truth:truth:$truth_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTest_version"
