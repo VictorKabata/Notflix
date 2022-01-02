@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -21,6 +22,7 @@ import com.google.accompanist.pager.rememberPagerState
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemNowPlayingMovies
+import com.vickikbt.notflix.ui.components.ItemPopularMovies
 import com.vickikbt.notflix.ui.components.ItemRecentlyPlayedAlbum
 import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
@@ -28,6 +30,7 @@ import com.vickikbt.notflix.ui.theme.Grey
 import org.koin.androidx.compose.getViewModel
 import timber.log.Timber
 
+@ExperimentalMaterialApi
 @ExperimentalPagerApi
 @Composable
 fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewModel()) {
@@ -36,6 +39,8 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
 
     val nowPlayingMovies = viewModel.nowPlayingMovies.observeAsState().value
     val trendingMovies = viewModel.trendingMovies.observeAsState().value
+    val popularMovies = viewModel.popularMovies.observeAsState().value
+    val upcomingMovies = viewModel.upcomingMovies.observeAsState().value
 
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
         Column(
@@ -56,8 +61,22 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
             if (trendingMovies != null) {
                 TrendingMovies(
                     navController = navController,
-                    viewModel = viewModel,
                     movies = trendingMovies
+                )
+            }
+
+            if (popularMovies != null) {
+                PopularMovies(
+                    navController = navController,
+                    viewModel = viewModel,
+                    movies = popularMovies
+                )
+            }
+
+            if (upcomingMovies != null) {
+                UpcomingMovies(
+                    navController = navController,
+                    movies = upcomingMovies
                 )
             }
 
@@ -110,7 +129,7 @@ fun NowPlayingMovies(
 }
 
 @Composable
-fun TrendingMovies(navController: NavController, viewModel: HomeViewModel, movies: List<Movie>) {
+fun TrendingMovies(navController: NavController, movies: List<Movie>) {
     SectionSeparator(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 12.dp)
@@ -132,6 +151,69 @@ fun TrendingMovies(navController: NavController, viewModel: HomeViewModel, movie
             ItemRecentlyPlayedAlbum(movie = item, onItemClick = {
                 //ToDo: OnItemClicked-Navigate to movie details
             })
+        }
+    }
+}
+
+@ExperimentalMaterialApi
+@Composable
+fun PopularMovies(
+    navController: NavController,
+    viewModel: HomeViewModel,
+    movies: List<Movie>
+) {
+    SectionSeparator(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp, top = 12.dp)
+            .fillMaxWidth()
+            .wrapContentHeight(),
+        sectionTitle = stringResource(id = R.string.popular_movies),
+        onItemClick = {
+            //ToDo: OnSectionedClicked-navigate to view all
+        }
+    )
+
+    Spacer(modifier = Modifier.height(8.dp))
+
+    LazyRow(
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(14.dp)
+    ) {
+        items(items = movies) { item ->
+            ItemPopularMovies(viewModel = viewModel, movie = item, onClickItem = {
+
+            })
+
+        }
+    }
+
+}
+
+@Composable
+fun UpcomingMovies(navController: NavController, movies: List<Movie>) {
+    Column(modifier = Modifier.padding(bottom = 90.dp)) {
+        SectionSeparator(
+            modifier = Modifier
+                .padding(start = 16.dp, end = 16.dp, top = 12.dp)
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            sectionTitle = stringResource(id = R.string.upcoming_movies),
+            onItemClick = {
+                //ToDo: OnSectionedClicked-navigate to view all
+            }
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        LazyRow(
+            contentPadding = PaddingValues(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            items(items = movies) { item ->
+                ItemRecentlyPlayedAlbum(movie = item, onItemClick = {
+                    //ToDo: OnItemClicked-Navigate to movie details
+                })
+            }
         }
     }
 }

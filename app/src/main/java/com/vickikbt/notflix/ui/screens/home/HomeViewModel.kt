@@ -10,14 +10,18 @@ import androidx.lifecycle.viewModelScope
 import androidx.palette.graphics.Palette
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.domain.repository.NowPlayingMoviesRepository
+import com.vickikbt.domain.repository.PopularMoviesRepository
 import com.vickikbt.domain.repository.TrendingMoviesRepository
+import com.vickikbt.domain.repository.UpcomingMoviesRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class HomeViewModel constructor(
     private val nowPlayingMoviesRepository: NowPlayingMoviesRepository,
-    private val trendingMoviesRepository: TrendingMoviesRepository
+    private val trendingMoviesRepository: TrendingMoviesRepository,
+    private val popularMoviesRepository: PopularMoviesRepository,
+    private val upcomingMoviesRepository: UpcomingMoviesRepository
 ) :
     ViewModel() {
 
@@ -27,9 +31,17 @@ class HomeViewModel constructor(
     private val _trendingMovies = MutableLiveData<List<Movie>>()
     val trendingMovies: LiveData<List<Movie>> get() = _trendingMovies
 
+    private val _popularMovies = MutableLiveData<List<Movie>>()
+    val popularMovies: LiveData<List<Movie>> get() = _popularMovies
+
+    private val _upcomingMovies = MutableLiveData<List<Movie>>()
+    val upcomingMovies: LiveData<List<Movie>> get() = _upcomingMovies
+
     init {
         fetchNowPlayingMovies()
         fetchTrendingMovies()
+        fetchPopularMovies()
+        fetchUpcomingMovies()
     }
 
     private fun fetchNowPlayingMovies() = viewModelScope.launch {
@@ -52,7 +64,31 @@ class HomeViewModel constructor(
                 _trendingMovies.value = result
             }
         } catch (e: Exception) {
-            Timber.e("Error fetching now playing movies: ${e.localizedMessage}")
+            Timber.e("Error fetching trending movies: ${e.localizedMessage}")
+        }
+    }
+
+    private fun fetchPopularMovies() = viewModelScope.launch {
+        try {
+            val popularMoviesResponse = popularMoviesRepository.fetchPopularMovies()
+
+            popularMoviesResponse.collect { result ->
+                _popularMovies.value = result
+            }
+        } catch (e: Exception) {
+            Timber.e("Error fetching popular movies: ${e.localizedMessage}")
+        }
+    }
+
+    private fun fetchUpcomingMovies() = viewModelScope.launch {
+        try {
+            val upcomingMoviesResponse = upcomingMoviesRepository.fetchUpcomingMovies()
+
+            upcomingMoviesResponse.collect { result ->
+                _upcomingMovies.value = result
+            }
+        } catch (e: Exception) {
+            Timber.e("Error fetching upcoming movies: ${e.localizedMessage}")
         }
     }
 
