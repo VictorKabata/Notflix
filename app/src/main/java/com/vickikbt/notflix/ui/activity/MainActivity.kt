@@ -18,7 +18,6 @@ import com.vickikbt.notflix.ui.navigation.Navigation
 import com.vickikbt.notflix.ui.navigation.NavigationItem
 import com.vickikbt.notflix.ui.theme.NotflixTheme
 
-
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
@@ -37,7 +36,6 @@ class MainActivity : ComponentActivity() {
                     MainScreen()
                 }
             }
-
         }
     }
 }
@@ -73,5 +71,4 @@ fun MainScreen() {
     ) {
         Navigation(navController = navController)
     }
-
 }
