@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -16,7 +17,9 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 import com.vickikbt.domain.models.Movie
+import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemNowPlayingMovies
+import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Grey
 import org.koin.androidx.compose.getViewModel
@@ -29,6 +32,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
     val scrollState = rememberScrollState()
 
     val nowPlayingMovies = viewModel.nowPlayingMovies.observeAsState().value
+    val trendingMovies = viewModel.trendingMovies.observeAsState().value
 
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
         Column(
@@ -43,6 +47,14 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                     navController = navController,
                     viewModel = viewModel,
                     movies = nowPlayingMovies
+                )
+            }
+
+            if (trendingMovies != null) {
+                TrendingMovies(
+                    navController = navController,
+                    viewModel = viewModel,
+                    movies = trendingMovies
                 )
             }
 
@@ -91,5 +103,19 @@ fun NowPlayingMovies(
         spacing = 6.dp,
         activeColor = DarkPrimaryColor,
         inactiveColor = Grey
+    )
+}
+
+@Composable
+fun TrendingMovies(navController: NavController, viewModel: HomeViewModel, movies: List<Movie>) {
+    SectionSeparator(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp, top = 12.dp)
+            .fillMaxWidth()
+            .wrapContentHeight(),
+        sectionTitle = stringResource(id = R.string.trending_movies),
+        onItemClick = {
+            //ToDo: OnSectionedClicked-navigate to view all
+        }
     )
 }
