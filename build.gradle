@@ -29,6 +29,7 @@ buildscript {
         timber_version = "5.0.1"
         paging_version = "3.0.0"
         coroutines_version = "1.5.2"
+        firebase_bom = "29.0.3"
 
         room_version = "2.4.0"
         datastore_version = "1.0.0"
@@ -69,6 +70,8 @@ buildscript {
 
     dependencies {
         classpath "com.android.tools.build:gradle:7.0.3"
+        classpath 'com.google.gms:google-services:4.3.10'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
