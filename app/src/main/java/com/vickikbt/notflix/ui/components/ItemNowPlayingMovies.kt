@@ -34,7 +34,7 @@ import com.vickikbt.notflix.ui.theme.Golden
 import kotlinx.coroutines.launch
 
 @Composable
-fun ItemUpcomingMovies(
+fun ItemNowPlayingMovies(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel,
     movie: Movie,

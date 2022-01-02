@@ -16,11 +16,11 @@ buildscript {
         //Dependencies
         kotlin_version = "1.5.30"
         androidCore_version = "1.7.0"
-        material_version="1.4.0"
+        material_version = "1.4.0"
         compose_version = "1.0.3"
         compose_activity_version = '1.4.0'
         compose_constraint_version = '1.0.0-rc01'
-        accompanist_version="0.20.0"
+        accompanist_version = "0.20.0"
         koin_version = "3.1.2"
         navigation_version = "2.4.0-alpha02"
         lifecycle_version = "2.3.1"
@@ -30,7 +30,7 @@ buildscript {
         paging_version = "3.0.0"
         coroutines_version = "1.5.2"
         firebase_bom = "29.0.3"
-        rating_bar_version="1.1.1"
+        rating_bar_version = "1.1.1"
 
         room_version = "2.4.0"
         datastore_version = "1.0.0"
