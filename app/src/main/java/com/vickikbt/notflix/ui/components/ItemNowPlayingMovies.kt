@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -27,14 +26,17 @@ import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarStyle
+import com.gowtham.ratingbar.StepSize
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.ui.screens.home.HomeViewModel
 import com.vickikbt.notflix.ui.theme.Black
 import com.vickikbt.notflix.ui.theme.Golden
+import com.vickikbt.notflix.util.getRating
+import com.vickikbt.notflix.util.loadImage
 import kotlinx.coroutines.launch
 
 @Composable
-fun ItemUpcomingMovies(
+fun ItemNowPlayingMovies(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel,
     movie: Movie,
@@ -45,12 +47,12 @@ fun ItemUpcomingMovies(
     val dominantColor = remember { mutableStateOf(defaultDominantColor) }
     val dominantTextColor = remember { mutableStateOf(defaultDominantTextColor) }
 
-    Card(modifier = modifier.clickable { onItemClick() }) {
+    Box(modifier = modifier.clickable { onItemClick() }) {
         ConstraintLayout(modifier = Modifier.fillMaxSize()) {
             val (imageMovieCover, boxFadingEdge, textMovieTitle, ratingBarRanking) = createRefs()
 
             val painter = rememberImagePainter(
-                data = movie.backdropPath,
+                data = movie.backdropPath?.loadImage(),
                 builder = { crossfade(true) }
             )
 
@@ -82,7 +84,7 @@ fun ItemUpcomingMovies(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp)
+                    .height(210.dp)
                     .background(
                         Brush.verticalGradient(
                             listOf(
@@ -100,12 +102,12 @@ fun ItemUpcomingMovies(
             //region Movie Title
             Text(
                 modifier = Modifier
-                    .padding(end = 32.dp)
+                    .padding(start = 8.dp, end = 8.dp)
                     .constrainAs(textMovieTitle) {
                         width = Dimension.fillToConstraints
-                        start.linkTo(ratingBarRanking.start)
+                        start.linkTo(parent.start)
                         bottom.linkTo(ratingBarRanking.top)
-                        end.linkTo(parent.start)
+                        end.linkTo(parent.end)
                     },
                 text = movie.title ?: "Unknown movie",
                 fontSize = 32.sp,
@@ -125,8 +127,10 @@ fun ItemUpcomingMovies(
                         start.linkTo(parent.start)
                         bottom.linkTo(parent.bottom)
                     },
-                value = 3.5f,
+                value = movie.voteAverage?.getRating() ?: 0f,
                 numStars = 5,
+                size = 18.dp,
+                stepSize = StepSize.HALF,
                 isIndicator = true,
                 ratingBarStyle = RatingBarStyle.Normal,
                 activeColor = Golden,
