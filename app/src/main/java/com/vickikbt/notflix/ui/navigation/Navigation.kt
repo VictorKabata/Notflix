@@ -4,8 +4,8 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.google.accompanist.navigation.animation.composable
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.vickikbt.notflix.ui.screens.details.DetailsScreen
 import com.vickikbt.notflix.ui.screens.favorites.FavoritesScreen
@@ -23,7 +23,8 @@ fun Navigation(navController: NavHostController) {
     // val slideDefaultInitialOffset = 1800
     // val slideDefaultTargetOffset = 1500
 
-    AnimatedNavHost(navController = navController, startDestination = NavigationItem.Home.route) {
+
+    NavHost(navController = navController, startDestination = NavigationItem.Home.route) {
         composable(route = NavigationItem.Home.route) {
             HomeScreen(navController = navController)
         }

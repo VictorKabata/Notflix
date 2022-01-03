@@ -32,24 +32,11 @@ fun String.loadImage(): String {
             }
             "low_quality" -> {
                 imageQuality = "${Constants.IMAGE_PREFIX}/w500/$this" //ToDo: Lower image quality value
-            }else->imageQuality = "${Constants.IMAGE_PREFIX}/w500/$this"
+            }//else->imageQuality = "${Constants.IMAGE_PREFIX}/w500/$this"
+            else->imageQuality = "${Constants.IMAGE_PREFIX}/original/$this"
         }
     }
     return imageQuality!!
-}
-
-/**
- * Sets view visibility to visible
- */
-fun View.show(){
-    visibility=View.VISIBLE
-}
-
-/**
- * Sets view visibility to gone
- */
-fun View.hide(){
-    visibility=View.GONE
 }
 
 //Original- 1998-11-19
@@ -81,13 +68,3 @@ fun Int.getMovieDuration(): String {
     val mins = this % 60 + startTime.substring(3, 4).toInt()
     return "${hours}hrs : ${mins}mins"
 }
-
-/*fun getYoutubeVideoFromUrl(inUrl: String): String? {
-    if (inUrl.lowercase(Locale.getDefault()).contains("youtu.eb")) {
-        return inUrl.substring(inUrl.lastIndexOf("/") + 1)
-    }
-    val pattern = "(?<=watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*"
-    val compiledPattern = Pattern.compile(pattern)
-    val matcher = compiledPattern.matcher(inUrl)
-    return if (matcher.find()) matcher.group() else null
-}*/

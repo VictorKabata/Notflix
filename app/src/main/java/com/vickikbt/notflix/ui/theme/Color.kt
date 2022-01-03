@@ -16,5 +16,5 @@ val DarkTextSecondary = Color(0xFFC3C3C3)
 
 val White = Color(0xFFFFFFFF)
 val Black = Color(0xFF000000)
-val Grey= Color(0xFF909090)
+val Gray= Color(0xFF909090)
 val Golden=Color(0xFFFFCA28)

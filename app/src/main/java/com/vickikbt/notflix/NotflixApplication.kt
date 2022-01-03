@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.vickikbt.cache.di.cacheModule
 import com.vickikbt.cache.preferences.ThemePreferences
 import com.vickikbt.network.di.networkModule
+import com.vickikbt.notflix.di.presentationModule
 import com.vickikbt.repository.di.repositoryModule
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
@@ -30,7 +31,7 @@ class NotflixApplication : Application() {
 
     private fun initKoin() {
         startKoin {
-            val modules = listOf(networkModule, cacheModule, repositoryModule)
+            val modules = listOf(networkModule, cacheModule, repositoryModule, presentationModule)
 
             androidLogger(Level.NONE)
             androidContext(this@NotflixApplication)
