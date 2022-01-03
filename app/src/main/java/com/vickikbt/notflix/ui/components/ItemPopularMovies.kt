@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -17,12 +18,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
+import com.gowtham.ratingbar.RatingBar
+import com.gowtham.ratingbar.RatingBarStyle
+import com.gowtham.ratingbar.StepSize
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.ui.screens.home.HomeViewModel
+import com.vickikbt.notflix.ui.theme.Black
+import com.vickikbt.notflix.ui.theme.Golden
+import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
 import kotlinx.coroutines.launch
 
@@ -41,15 +52,17 @@ fun ItemPopularMovies(
     val dominantSubTextColor = remember { mutableStateOf(defaultDominantTextColor) }
 
     Card(
-        modifier = modifier.clickable { onClickItem(movie) },
+        modifier = modifier
+            .width(300.dp)
+            .height(210.dp)
+            .clickable { onClickItem(movie) },
         elevation = 8.dp,
         shape = RoundedCornerShape(4.dp)
     ) {
 
         ConstraintLayout(modifier = Modifier.fillMaxSize()) {
-            val (imageMovieCover, boxFadingEdge, textMovieTitle, ratingStarRanking) = createRefs()
-
-
+            val (imageMovieCover, boxFadingEdge, textMovieTitle, ratingBarRanking) = createRefs()
+            
             val painter = rememberImagePainter(
                 data = movie.backdropPath?.loadImage(),
                 builder = { crossfade(true) }
@@ -58,8 +71,7 @@ fun ItemPopularMovies(
             //region Movie Cover
             Image(
                 modifier = Modifier
-                    .width(300.dp)
-                    .height(210.dp)
+                    .fillMaxSize()
                     .constrainAs(imageMovieCover) {},
                 alignment = Alignment.Center,
                 contentScale = ContentScale.Crop,
@@ -85,7 +97,7 @@ fun ItemPopularMovies(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(180.dp)
+                    .height(100.dp)
                     .background(
                         Brush.verticalGradient(
                             listOf(
@@ -100,59 +112,47 @@ fun ItemPopularMovies(
             )
             //endregion
 
-            /*Text(
+            //region Movie Title
+            Text(
                 modifier = Modifier
-                    .padding(start = 16.dp, end = 8.dp)
-                    .constrainAs(textSongTitle) {
+                    .padding(start = 8.dp, end = 8.dp)
+                    .constrainAs(textMovieTitle) {
                         width = Dimension.fillToConstraints
                         start.linkTo(parent.start)
-                        bottom.linkTo(textSongArtist.top)
-                        end.linkTo(fabPlaySong.start)
+                        bottom.linkTo(ratingBarRanking.top)
+                        end.linkTo(parent.end)
                     },
-                text = song.title ?: "Unknown song title",
-                fontSize = 24.sp,
-                maxLines = 1,
+                text = movie.title ?: "Unknown movie",
+                fontSize = 18.sp,
+                maxLines = 2,
                 style = MaterialTheme.typography.h6,
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Start,
                 color = dominantTextColor.value
             )
+            //endregion
 
-            Text(
+            //region Movie Rating
+            RatingBar(
                 modifier = Modifier
-                    .padding(bottom = 20.dp, start = 16.dp, end = 8.dp)
-                    .constrainAs(textSongArtist) {
-                        width = Dimension.fillToConstraints
+                    .padding(start = 8.dp, bottom = 6.dp)
+                    .constrainAs(ratingBarRanking) {
                         start.linkTo(parent.start)
                         bottom.linkTo(parent.bottom)
-                        end.linkTo(fabPlaySong.start)
                     },
-                text = if (song.artistName.isNullOrEmpty() || song.artistName == "<unknown>") "Unknown artist" else song.artistName,
-                fontSize = 15.sp,
-                maxLines = 1,
-                style = MaterialTheme.typography.h5,
-                overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Start,
-                color = dominantSubTextColor.value
+                value = movie.voteAverage?.getRating() ?: 0f,
+                numStars = 5,
+                size = 15.dp,
+                stepSize = StepSize.HALF,
+                isIndicator = true,
+                ratingBarStyle = RatingBarStyle.Normal,
+                activeColor = Golden,
+                inactiveColor = Black,
+                onValueChange = {},
+                onRatingChanged = {}
             )
+            //endregion
 
-            FloatingActionButton(
-                modifier = Modifier
-                    .padding(end = 8.dp, bottom = 24.dp)
-                    .alpha(0.4f)
-                    .constrainAs(fabPlaySong) {
-                        end.linkTo(parent.end)
-                        top.linkTo(textSongTitle.top)
-                        bottom.linkTo(textSongArtist.bottom)
-                    },
-                backgroundColor = MaterialTheme.colors.surface,
-                onClick = {}) {
-                Icon(
-                    imageVector = Icons.Rounded.PlayArrow,
-                    contentDescription = stringResource(id = R.string.play)
-                )
-            }
-        }*/
         }
     }
 }
