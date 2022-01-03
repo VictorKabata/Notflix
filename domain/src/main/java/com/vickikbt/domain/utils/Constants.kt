@@ -26,7 +26,7 @@ object Constants {
     const val SOURCE_CODE_URL = "https://github.com/VictorKabata/Notflix"
 
     const val BUG_REPORT_EMAIL = "victorbro14@gmail.com"
-    const val BUG_REPORT_SUBJECT = "Notflix Bug Report"
+    const val BUG_REPORT_SUBJECT = "Notflix-Bug report or feature request"
 
     const val YT_VIDEO_URL = "https://www.youtube.com/watch?v="
     const val VIMEO_VIDEO_URL = "https://vimeo.com/"

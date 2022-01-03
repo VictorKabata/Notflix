@@ -29,11 +29,11 @@ fun PreferencesGroup(
             verticalAlignment = Alignment.CenterVertically
         ) {
             if (!title.isNullOrEmpty()) {
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = Modifier.weight(2f))
 
                 Text(
                     modifier = Modifier
-                        .weight(6f)
+                        .weight(8f)
                         .padding(horizontal = 12.dp),
                     text = title,
                     style = MaterialTheme.typography.h3,

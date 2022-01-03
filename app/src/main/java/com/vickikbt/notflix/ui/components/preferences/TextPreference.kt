@@ -33,7 +33,7 @@ fun TextPreference(
         Icon(
             modifier = Modifier
                 .padding(vertical = 24.dp, horizontal = 16.dp)
-                .weight(1f),
+                .weight(2f),
             painter = icon,
             contentDescription = ""
         )
@@ -41,7 +41,7 @@ fun TextPreference(
         Column(
             modifier = Modifier
                 .height(65.dp)
-                .weight(6f),
+                .weight(8f),
             verticalArrangement = Arrangement.Center
         ) {
 
