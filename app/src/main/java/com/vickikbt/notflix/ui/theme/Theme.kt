@@ -10,12 +10,14 @@ import com.google.accompanist.systemuicontroller.SystemUiController
 
 private val DarkColorPalette = darkColors(
     primary = DarkPrimaryColor,
+    secondary = DarkPrimaryColor,
     surface = DarkSurface,
     onSurface = DarkTextPrimary
 )
 
 private val LightColorPalette = lightColors(
     primary = PrimaryColor,
+    secondary = PrimaryColor,
     surface = Surface,
     onSurface = TextPrimary
 )

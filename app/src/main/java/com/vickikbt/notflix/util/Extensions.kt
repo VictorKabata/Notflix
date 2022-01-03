@@ -1,11 +1,13 @@
 package com.vickikbt.notflix.util
 
 import android.annotation.SuppressLint
-import android.view.View
-import com.vickikbt.cache.preferences.ImagesPreferences
+import com.vickikbt.cache.datastore.DatastoreManager
 import com.vickikbt.domain.utils.Constants
+import com.vickikbt.domain.utils.Coroutines
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import timber.log.Timber
 import java.text.SimpleDateFormat
 
 
@@ -15,28 +17,31 @@ inline fun <reified T> getKoinInstance(): T {
     }.value
 }
 
-private val imagesPreferences: ImagesPreferences = getKoinInstance()
+private val dataStoreManager: DatastoreManager = getKoinInstance()
 
 /**
  * Append the image url with string to determine the image quality to be loaded
  */
 fun String.loadImage(): String {
     var imageQuality: String? = null
-    imagesPreferences.imageQuality.observeForever {
-        when (it) {
-            "high_quality" -> {
-                imageQuality = "${Constants.IMAGE_PREFIX}/original/$this"
+    Coroutines.main {
+        dataStoreManager.getString(Constants.KEY_LANGUAGE, "Low Quality").collectLatest {
+            imageQuality = when (it) {
+                "High Quality" -> {
+                    "${Constants.IMAGE_PREFIX}/original/$this"
+                }
+                "Medium Quality" -> {
+                    "${Constants.IMAGE_PREFIX}/w500/$this"
+                }
+                "Low Quality" -> {
+                    "${Constants.IMAGE_PREFIX}/w500/$this"
+                }
+                else -> "${Constants.IMAGE_PREFIX}/w500/$this"
             }
-            "medium_quality" -> {
-                imageQuality = "${Constants.IMAGE_PREFIX}/w500/$this"
-            }
-            "low_quality" -> {
-                imageQuality = "${Constants.IMAGE_PREFIX}/w500/$this" //ToDo: Lower image quality value
-            }//else->imageQuality = "${Constants.IMAGE_PREFIX}/w500/$this"
-            else->imageQuality = "${Constants.IMAGE_PREFIX}/original/$this"
         }
+        return@main
     }
-    return imageQuality!!
+    return imageQuality?:"${Constants.IMAGE_PREFIX}/w500/$this"
 }
 
 //Original- 1998-11-19
