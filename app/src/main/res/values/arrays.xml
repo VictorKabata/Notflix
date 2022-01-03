@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Preferences Options -->
-    <string-array name="theme_entries">
+    <string-array name="theme_options">
         <item>Light Theme</item>
         <item>Dark Theme</item>
         <item>System Default</item>
     </string-array>
 
-    <string-array name="language_entries">
+    <string-array name="language_options">
         <item>English</item>
         <item>Spanish</item>
         <item>French</item>
         <item>German</item>
-        <item>No Russian</item>
     </string-array>
 
-    <string-array name="image_quality_entries">
+    <string-array name="image_quality_options">
         <item>High quality</item>
         <item>Medium quality</item>
         <item>Low quality</item>

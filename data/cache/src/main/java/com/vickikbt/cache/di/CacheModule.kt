@@ -1,6 +1,7 @@
 package com.vickikbt.cache.di
 
 import androidx.room.Room
+import com.vickikbt.cache.datastore.DatastoreManager
 import com.vickikbt.cache.datastore.TimeDatastore
 import com.vickikbt.cache.preferences.ImagesPreferences
 import com.vickikbt.cache.preferences.LanguagePreferences
@@ -18,6 +19,9 @@ val cacheModule = module {
         ).fallbackToDestructiveMigration().build()
     }
 
+    single { DatastoreManager(androidApplication()) }
+
+    //ToDo: Remove other datastore instances
     single {
         TimeDatastore(androidApplication())
     }

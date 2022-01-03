@@ -11,22 +11,37 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.vickikbt.domain.utils.Constants
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.AppBar
+import com.vickikbt.notflix.ui.components.preferences.DialogPreferenceSelection
 import com.vickikbt.notflix.ui.components.preferences.PreferencesGroup
 import com.vickikbt.notflix.ui.components.preferences.TextPreference
+import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun SettingsScreen(navController: NavController) {
+fun SettingsScreen(navController: NavController, viewModel: SettingsViewModel = getViewModel()) {
 
     val context = LocalContext.current
+
+    val currentTheme = viewModel.selectedTheme.observeAsState().value
+    val currentLanguage = viewModel.selectedLanguage.observeAsState().value
+    val currentImageQuality = viewModel.selectedImageQuality.observeAsState().value
+
+    val showThemeDialog = remember { mutableStateOf(false) }
+    val showLanguageDialog = remember { mutableStateOf(false) }
+    val showImageQualityDialog = remember { mutableStateOf(false) }
 
     Scaffold(topBar = { AppBar(stringResource(id = R.string.title_settings)) }) {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
@@ -37,22 +52,40 @@ fun SettingsScreen(navController: NavController) {
                     TextPreference(
                         icon = painterResource(id = R.drawable.ic_theme),
                         title = stringResource(id = R.string.change_theme),
-                        subTitle = "Dark Theme",
-                        onClick = { }
+                        subTitle = currentTheme ?: stringResource(id = R.string.def),
+                        onClick = { showThemeDialog.value = !showThemeDialog.value }
+                    )
+
+                    if (showThemeDialog.value) ChangeTheme(
+                        viewModel = viewModel,
+                        showDialog = showThemeDialog,
+                        currentValue = currentTheme
                     )
 
                     TextPreference(
                         icon = painterResource(id = R.drawable.ic_language),
                         title = stringResource(id = R.string.change_language),
-                        subTitle = "English",
-                        onClick = { }
+                        subTitle = currentLanguage,
+                        onClick = { showLanguageDialog.value = !showLanguageDialog.value }
+                    )
+
+                    if (showLanguageDialog.value) ChangeLanguage(
+                        viewModel = viewModel,
+                        showDialog = showLanguageDialog,
+                        currentValue = currentLanguage
                     )
 
                     TextPreference(
                         icon = painterResource(id = R.drawable.ic_image_quality),
                         title = stringResource(id = R.string.change_image_quality),
-                        subTitle = "High Quality",
-                        onClick = { }
+                        subTitle = currentImageQuality,
+                        onClick = { showImageQualityDialog.value = !showImageQualityDialog.value }
+                    )
+
+                    if (showImageQualityDialog.value) ChangeImageQuality(
+                        viewModel = viewModel,
+                        showDialog = showImageQualityDialog,
+                        currentValue = currentImageQuality
                     )
                 }
 
@@ -81,6 +114,54 @@ fun SettingsScreen(navController: NavController) {
         }
     }
 
+}
+
+@Composable
+private fun ChangeTheme(
+    viewModel: SettingsViewModel,
+    showDialog: MutableState<Boolean>,
+    currentValue: String?
+) {
+    DialogPreferenceSelection(
+        showDialog = showDialog.value,
+        title = stringResource(id = R.string.change_theme),
+        currentValue = currentValue ?: stringResource(id = R.string.def),
+        options = stringArrayResource(id = R.array.theme_options),
+        onNegativeClick = { showDialog.value = false }) { theme ->
+        viewModel.savePreferenceSelection(key = Constants.KEY_THEME, selection = theme)
+    }
+}
+
+@Composable
+private fun ChangeLanguage(
+    viewModel: SettingsViewModel,
+    showDialog: MutableState<Boolean>,
+    currentValue: String?
+) {
+    DialogPreferenceSelection(
+        showDialog = showDialog.value,
+        title = stringResource(id = R.string.change_language),
+        currentValue = currentValue ?: stringResource(id = R.string.def),
+        options = stringArrayResource(id = R.array.language_options),
+        onNegativeClick = { showDialog.value = false }) { language ->
+        viewModel.savePreferenceSelection(key = Constants.KEY_LANGUAGE, selection = language)
+    }
+}
+
+@Composable
+private fun ChangeImageQuality(
+    viewModel: SettingsViewModel,
+    showDialog: MutableState<Boolean>,
+    currentValue: String?
+) {
+    DialogPreferenceSelection(
+        showDialog = showDialog.value,
+        title = stringResource(id = R.string.change_image_quality),
+        currentValue = currentValue ?: stringResource(id = R.string.def),
+        options = stringArrayResource(id = R.array.image_quality_options),
+        onNegativeClick = { showDialog.value = false }) { imageQuality ->
+        viewModel.savePreferenceSelection(key = Constants.KEY_IMAGE_QUALITY, selection = imageQuality)
+    }
 }
 
 private fun reportBug(context: Context) {

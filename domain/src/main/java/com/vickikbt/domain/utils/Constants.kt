@@ -10,13 +10,12 @@ object Constants {
 
     const val IMAGE_PREFIX = "https://image.tmdb.org/t/p/"
 
-    const val SHARED_PREF_NAME = "Time Preferences"
-
     const val TIME_DATASTORE_NAME = "Time Datastore"
     const val TIME_DATASTORE_KEY = "Time Key"
 
-    const val THEME_DATASTORE_NAME = "Theme Datastore"
-    const val THEME_DATASTORE_KEY = "Theme Key"
+    const val KEY_THEME = "Theme"
+    const val KEY_LANGUAGE = "Language"
+    const val KEY_IMAGE_QUALITY = "Image Quality"
 
     const val TimeInterval = 24L
 
@@ -27,8 +26,5 @@ object Constants {
 
     const val BUG_REPORT_EMAIL = "victorbro14@gmail.com"
     const val BUG_REPORT_SUBJECT = "Notflix-Bug report or feature request"
-
-    const val YT_VIDEO_URL = "https://www.youtube.com/watch?v="
-    const val VIMEO_VIDEO_URL = "https://vimeo.com/"
 
 }
