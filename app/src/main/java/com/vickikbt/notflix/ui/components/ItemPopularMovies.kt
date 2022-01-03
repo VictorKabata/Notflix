@@ -5,10 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -31,9 +28,10 @@ import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.ui.screens.home.HomeViewModel
-import com.vickikbt.notflix.ui.theme.Black
 import com.vickikbt.notflix.ui.theme.Golden
+import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.util.getRating
+import com.vickikbt.notflix.util.getReleaseDate
 import com.vickikbt.notflix.util.loadImage
 import kotlinx.coroutines.launch
 
@@ -61,8 +59,8 @@ fun ItemPopularMovies(
     ) {
 
         ConstraintLayout(modifier = Modifier.fillMaxSize()) {
-            val (imageMovieCover, boxFadingEdge, textMovieTitle, ratingBarRanking) = createRefs()
-            
+            val (imageMovieCover, boxFadingEdge, textMovieTitle, rowRankRelease) = createRefs()
+
             val painter = rememberImagePainter(
                 data = movie.backdropPath?.loadImage(),
                 builder = { crossfade(true) }
@@ -119,7 +117,7 @@ fun ItemPopularMovies(
                     .constrainAs(textMovieTitle) {
                         width = Dimension.fillToConstraints
                         start.linkTo(parent.start)
-                        bottom.linkTo(ratingBarRanking.top)
+                        bottom.linkTo(rowRankRelease.top)
                         end.linkTo(parent.end)
                     },
                 text = movie.title ?: "Unknown movie",
@@ -132,25 +130,56 @@ fun ItemPopularMovies(
             )
             //endregion
 
+
             //region Movie Rating
-            RatingBar(
+            Row(
                 modifier = Modifier
-                    .padding(start = 8.dp, bottom = 6.dp)
-                    .constrainAs(ratingBarRanking) {
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
+                    .constrainAs(rowRankRelease) {
                         start.linkTo(parent.start)
                         bottom.linkTo(parent.bottom)
                     },
-                value = movie.voteAverage?.getRating() ?: 0f,
-                numStars = 5,
-                size = 15.dp,
-                stepSize = StepSize.HALF,
-                isIndicator = true,
-                ratingBarStyle = RatingBarStyle.Normal,
-                activeColor = Golden,
-                inactiveColor = Black,
-                onValueChange = {},
-                onRatingChanged = {}
-            )
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                RatingBar(
+                    modifier = Modifier,
+                    value = movie.voteAverage?.getRating() ?: 0f,
+                    numStars = 5,
+                    size = 15.dp,
+                    stepSize = StepSize.HALF,
+                    isIndicator = true,
+                    ratingBarStyle = RatingBarStyle.Normal,
+                    activeColor = Golden,
+                    inactiveColor = Gray,
+                    onValueChange = {},
+                    onRatingChanged = {}
+                )
+
+                if (!movie.releaseDate.isNullOrEmpty()) {
+                    Divider(
+                        modifier = Modifier
+                            .padding(horizontal = 4.dp)
+                            .width(2.dp)
+                            .height(13.dp),
+                        color = Gray.copy(alpha = .4f),
+                    )
+
+                    Text(
+                        modifier = Modifier,
+                        text = movie.releaseDate!!.getReleaseDate(),
+                        fontSize = 14.sp,
+                        maxLines = 1,
+                        style = MaterialTheme.typography.h5,
+                        overflow = TextOverflow.Ellipsis,
+                        textAlign = TextAlign.Start,
+                        color = dominantSubTextColor.value
+                    )
+                }
+            }
             //endregion
 
         }

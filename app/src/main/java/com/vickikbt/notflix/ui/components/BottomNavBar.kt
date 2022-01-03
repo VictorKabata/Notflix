@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import com.vickikbt.notflix.ui.navigation.NavigationItem
-import com.vickikbt.notflix.ui.theme.Grey
+import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.ui.theme.PrimaryColor
 
 @Composable
@@ -51,7 +51,7 @@ fun BottomNavBar(
                     },
                     label = { Text(text = item.title) },
                     selectedContentColor = PrimaryColor,
-                    unselectedContentColor = Grey,
+                    unselectedContentColor = Gray,
                     alwaysShowLabel = true,
                     selected = isSelected,
                     onClick = {

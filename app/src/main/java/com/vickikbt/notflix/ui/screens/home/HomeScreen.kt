@@ -26,7 +26,7 @@ import com.vickikbt.notflix.ui.components.ItemPopularMovies
 import com.vickikbt.notflix.ui.components.ItemRecentlyPlayedAlbum
 import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
-import com.vickikbt.notflix.ui.theme.Grey
+import com.vickikbt.notflix.ui.theme.Gray
 import org.koin.androidx.compose.getViewModel
 import timber.log.Timber
 
@@ -124,7 +124,7 @@ fun NowPlayingMovies(
         indicatorWidth = 6.dp,
         spacing = 6.dp,
         activeColor = DarkPrimaryColor,
-        inactiveColor = Grey
+        inactiveColor = Gray
     )
 }
 
