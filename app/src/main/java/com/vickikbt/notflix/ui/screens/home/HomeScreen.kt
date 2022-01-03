@@ -21,14 +21,10 @@ fun HomeScreen(navController: NavController) {
                 .fillMaxSize()
                 .verticalScroll(scrollState)
         ) {
-
         }
-
     }
-
 }
 
 @Composable
 fun UpcomingMovies(navController: NavController) {
-
 }
