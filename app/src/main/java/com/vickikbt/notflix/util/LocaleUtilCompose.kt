@@ -10,7 +10,7 @@ class LocaleUtilCompose constructor(private val context: Context) {
         val locale=Locale(language)
         val resources=context.resources
         val configuration=resources.configuration
-        configuration.locale=locale
+        configuration.setLocale(Locale.FRANCE)
         resources.updateConfiguration(configuration, resources.displayMetrics)
         Timber.e("Set locale: $language")
     }

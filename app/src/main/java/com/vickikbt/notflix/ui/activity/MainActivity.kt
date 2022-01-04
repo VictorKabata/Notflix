@@ -11,6 +11,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -24,19 +25,19 @@ import com.vickikbt.notflix.ui.theme.NotflixTheme
 import com.vickikbt.notflix.util.LocaleUtilCompose
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import java.util.*
 
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
 class MainActivity : ComponentActivity() {
 
-    val localeUtil by inject<LocaleUtilCompose>()
+    //private val localeUtil by inject<LocaleUtilCompose>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val settingsViewModel: SettingsViewModel = getViewModel()
-            localeUtil.changeLocale(language = "es")
 
             val useDarkTheme = when (settingsViewModel.selectedTheme.observeAsState().value) {
                 Constants.LIGHT_THEME -> false

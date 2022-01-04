@@ -5,7 +5,6 @@ import com.vickikbt.cache.preferences.PreferenceManager
 import com.vickikbt.domain.utils.Constants
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import timber.log.Timber
 import java.text.SimpleDateFormat
 
 
@@ -36,8 +35,7 @@ fun String.loadImage(): String {
             else -> "${Constants.IMAGE_PREFIX}/w500/$this"
         }
     }
-    Timber.e("Image quality:$imageQuality")
-    return imageQuality!!
+    return imageQuality ?: "${Constants.IMAGE_PREFIX}/w500/$this"
 }
 
 //Original- 1998-11-19

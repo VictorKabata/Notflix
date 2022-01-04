@@ -8,8 +8,6 @@ import java.util.*
 
 class LocaleUtil constructor(baseContext: Context) : ContextWrapper(baseContext) {
 
-    companion object {
-
         fun updateLocale(applicationContext: Context, locale: Locale): LocaleUtil {
             var context = applicationContext
             val resources = context.resources
@@ -32,7 +30,5 @@ class LocaleUtil constructor(baseContext: Context) : ContextWrapper(baseContext)
             
             return LocaleUtil(context)
         }
-
-    }
 
 }
