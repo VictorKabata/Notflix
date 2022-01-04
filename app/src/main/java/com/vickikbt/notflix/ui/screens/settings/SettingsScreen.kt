@@ -28,6 +28,8 @@ import com.vickikbt.notflix.ui.components.AppBar
 import com.vickikbt.notflix.ui.components.preferences.DialogPreferenceSelection
 import com.vickikbt.notflix.ui.components.preferences.PreferencesGroup
 import com.vickikbt.notflix.ui.components.preferences.TextPreference
+import com.vickikbt.notflix.util.LocaleUtilCompose
+import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
 import timber.log.Timber
 

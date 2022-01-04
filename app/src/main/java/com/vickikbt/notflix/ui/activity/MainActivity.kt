@@ -21,6 +21,8 @@ import com.vickikbt.notflix.ui.navigation.Navigation
 import com.vickikbt.notflix.ui.navigation.NavigationItem
 import com.vickikbt.notflix.ui.screens.settings.SettingsViewModel
 import com.vickikbt.notflix.ui.theme.NotflixTheme
+import com.vickikbt.notflix.util.LocaleUtilCompose
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 @ExperimentalAnimationApi
@@ -28,11 +30,13 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 @ExperimentalMaterialApi
 class MainActivity : ComponentActivity() {
 
+    val localeUtil by inject<LocaleUtilCompose>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
-            val settingsViewModel:SettingsViewModel=getViewModel()
+            val settingsViewModel: SettingsViewModel = getViewModel()
+            localeUtil.changeLocale(language = "es")
 
             val useDarkTheme = when (settingsViewModel.selectedTheme.observeAsState().value) {
                 Constants.LIGHT_THEME -> false
@@ -49,6 +53,8 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+
 }
 
 @ExperimentalAnimationApi
