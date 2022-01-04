@@ -163,7 +163,10 @@ private fun ChangeImageQuality(
         currentValue = currentValue ?: stringResource(id = R.string.def),
         options = stringArrayResource(id = R.array.image_quality_options),
         onNegativeClick = { showDialog.value = false }) { imageQuality ->
-        viewModel.savePreferenceSelection(key = Constants.KEY_IMAGE_QUALITY, selection = imageQuality)
+        viewModel.savePreferenceSelection(
+            key = Constants.KEY_IMAGE_QUALITY,
+            selection = imageQuality
+        )
     }
 }
 
