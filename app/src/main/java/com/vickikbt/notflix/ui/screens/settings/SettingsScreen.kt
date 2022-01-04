@@ -29,6 +29,7 @@ import com.vickikbt.notflix.ui.components.preferences.DialogPreferenceSelection
 import com.vickikbt.notflix.ui.components.preferences.PreferencesGroup
 import com.vickikbt.notflix.ui.components.preferences.TextPreference
 import org.koin.androidx.compose.getViewModel
+import timber.log.Timber
 
 @Composable
 fun SettingsScreen(navController: NavController, viewModel: SettingsViewModel = getViewModel()) {
@@ -154,6 +155,8 @@ private fun ChangeImageQuality(
     showDialog: MutableState<Boolean>,
     currentValue: String?
 ) {
+
+    Timber.e("Current value image quality: $currentValue")
     DialogPreferenceSelection(
         showDialog = showDialog.value,
         title = stringResource(id = R.string.change_image_quality),

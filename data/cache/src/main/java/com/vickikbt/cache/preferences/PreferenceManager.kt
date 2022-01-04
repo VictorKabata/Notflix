@@ -9,7 +9,8 @@ import com.vickikbt.domain.utils.Constants
 
 class PreferenceManager constructor(private val context: Context) {
 
-    private val preferences: SharedPreferences = context.getSharedPreferences("notflix_preferences", Context.MODE_PRIVATE)
+    private val preferences: SharedPreferences =
+        context.getSharedPreferences("notflix_preferences", Context.MODE_PRIVATE)
 
     fun setString(key: String, value: String?) {
         preferences.edit {
@@ -33,8 +34,26 @@ class PreferenceManager constructor(private val context: Context) {
             Constants.SYSTEM_THEME
         )
 
+    private val _appLanguage: String?
+        get() = getString(
+            Constants.KEY_LANGUAGE,
+            defaultValue = "No Russian"
+        )
+
+    private val _imageQuality: String?
+        get() = getString(
+            Constants.KEY_IMAGE_QUALITY,
+            defaultValue = "${Constants.IMAGE_PREFIX}/w500/$this"
+        )
+
     private val _appThemeMutableLiveData: MutableLiveData<String> = MutableLiveData()
     val appTheme: LiveData<String> get() = _appThemeMutableLiveData
+
+    private val _appLanguageMutableLiveData: MutableLiveData<String> = MutableLiveData()
+    val appLanguage: LiveData<String> get() = _appLanguageMutableLiveData
+
+    private val _imageQualityMutableLiveData: MutableLiveData<String> = MutableLiveData()
+    val imageQuality: LiveData<String> get() = _imageQualityMutableLiveData
 
     private val preferenceChangedListener =
         SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
@@ -42,11 +61,21 @@ class PreferenceManager constructor(private val context: Context) {
                 Constants.KEY_THEME -> {
                     _appThemeMutableLiveData.value = _appTheme
                 }
+
+                Constants.KEY_LANGUAGE -> {
+                    _appLanguageMutableLiveData.value = _appLanguage
+                }
+
+                Constants.KEY_IMAGE_QUALITY -> {
+                    _imageQualityMutableLiveData.value = _imageQuality
+                }
             }
         }
 
     init {
         _appThemeMutableLiveData.value = _appTheme
+        _appLanguageMutableLiveData.value = _appLanguage
+        _imageQualityMutableLiveData.value = _imageQuality
         preferences.registerOnSharedPreferenceChangeListener(preferenceChangedListener)
     }
 

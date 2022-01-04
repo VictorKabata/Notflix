@@ -29,12 +29,6 @@ val repositoryModule = module {
         )
     }
 
-    single<SettingsRepository> {
-        SettingsRepositoryImpl(
-            themePreferences = get()
-        )
-    }
-
     single<TrendingMoviesRepository> {
         TrendingMoviesRepositoryImpl(
             apiService = get(),
