@@ -111,15 +111,15 @@ fun NowPlayingMovies(
 
     Spacer(modifier = Modifier.height(6.dp))
 
-    HorizontalPagerIndicator(
-        modifier = Modifier.padding(vertical = 4.dp),
-        pagerState = pagerState,
-        indicatorHeight = 6.dp,
-        indicatorWidth = 6.dp,
-        spacing = 6.dp,
-        activeColor = DarkPrimaryColor,
-        inactiveColor = Gray
-    )
+//    HorizontalPagerIndicator(
+//        modifier = Modifier.padding(vertical = 4.dp),
+//        pagerState = pagerState,
+//        indicatorHeight = 6.dp,
+//        indicatorWidth = 6.dp,
+//        spacing = 6.dp,
+//        activeColor = DarkPrimaryColor,
+//        inactiveColor = Gray
+//    )
 }
 
 @Composable

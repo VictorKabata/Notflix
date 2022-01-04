@@ -18,6 +18,7 @@ import com.vickikbt.repository.mappers.toDomain
 import com.vickikbt.repository.mappers.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 
 class MovieDetailsRepositoryImpl constructor(
@@ -51,38 +52,48 @@ class MovieDetailsRepositoryImpl constructor(
     override suspend fun getMovieDetails(movieId: Int): Flow<MovieDetails> {
         val isMovieDetailsCacheAvailable = movieDetailsDao.isMovieDetailsAvailable(movieId) > 0
 
-        return if (isMovieDetailsCacheAvailable) {
-            val movieDetailsCacheResponse = movieDetailsDao.getMovieDetails(movieId)
-            movieDetailsCacheResponse.map { it.toDomain() }
-        } else {
-            val movieDetailsNetworkResponse =
-                safeApiRequest { apiService.fetchMovieDetails(movieId) }
+        return try {
+            if (isMovieDetailsCacheAvailable) {
+                val movieDetailsCacheResponse = movieDetailsDao.getMovieDetails(movieId)
+                movieDetailsCacheResponse.map { it.toDomain() }
+            } else {
+                val movieDetailsNetworkResponse =
+                    safeApiRequest { apiService.fetchMovieDetails(movieId) }
 
-            _movieDetails.value = movieDetailsNetworkResponse.toEntity()
+                _movieDetails.value = movieDetailsNetworkResponse.toEntity()
 
-            val movieDetailsCacheResponse = movieDetailsDao.getMovieDetails(movieId)
-            movieDetailsCacheResponse.map { it.toDomain() }
+                val movieDetailsCacheResponse = movieDetailsDao.getMovieDetails(movieId)
+                movieDetailsCacheResponse.map { it.toDomain() }
+            }
+        } catch (e: Exception) {
+            flowOf()
         }
     }
 
-    private suspend fun saveMovieCast(castEntity: CastEntity) = appDatabase.castDao().saveMovieCast(castEntity)
+    private suspend fun saveMovieCast(castEntity: CastEntity) =
+        appDatabase.castDao().saveMovieCast(castEntity)
 
     override suspend fun getMovieCast(movieId: Int): Flow<Cast> {
-        val isMovieCacheAvailable=appDatabase.castDao().isMovieCastAvailable(movieId)>0
+        val isMovieCacheAvailable = appDatabase.castDao().isMovieCastAvailable(movieId) > 0
 
-        return if (isMovieCacheAvailable) {
-            val movieCastCacheResponse = appDatabase.castDao().getMovieCast(movieId)
-            movieCastCacheResponse.map { it.toDomain() }
-        } else {
-            val movieCastNetworkResponse =
-                safeApiRequest { apiService.fetchMovieCast(movieId) }
+        return try {
+            if (isMovieCacheAvailable) {
+                val movieCastCacheResponse = appDatabase.castDao().getMovieCast(movieId)
+                movieCastCacheResponse.map { it.toDomain() }
+            } else {
+                val movieCastNetworkResponse =
+                    safeApiRequest { apiService.fetchMovieCast(movieId) }
 
-            Log.e("VickiKbt","Movie Cast Network Response: $movieCastNetworkResponse")
+                Log.e("MovieDetails", "Movie Cast Network Response: $movieCastNetworkResponse")
 
-            _cast.value = movieCastNetworkResponse.toEntity()
+                _cast.value = movieCastNetworkResponse.toEntity()
 
-            val movieCastCacheResponse = appDatabase.castDao().getMovieCast(movieId)
-            movieCastCacheResponse.map { it.toDomain() }
+                val movieCastCacheResponse = appDatabase.castDao().getMovieCast(movieId)
+                movieCastCacheResponse.map { it.toDomain() }
+            }
+        } catch (e: Exception) {
+            Log.e("MovieDetails", "${e.message}")
+            flowOf()
         }
     }
 
@@ -93,23 +104,31 @@ class MovieDetailsRepositoryImpl constructor(
         val isMovieVideoCacheAvailable =
             appDatabase.videosDao().isMovieVideoCacheAvailable(movieId) > 0
 
-        return if (isMovieVideoCacheAvailable) {
-            val movieVideosCacheResponse = appDatabase.videosDao().getMovieVideo(movieId)
-            movieVideosCacheResponse.map { it.toDomain() }
-        } else {
-            val movieVideosNetworkResponse =
-                safeApiRequest { apiService.fetchMovieVideos(movieId) }
+        return try {
+            if (isMovieVideoCacheAvailable) {
+                val movieVideosCacheResponse = appDatabase.videosDao().getMovieVideo(movieId)
+                movieVideosCacheResponse.map { it.toDomain() }
+            } else {
+                val movieVideosNetworkResponse =
+                    safeApiRequest { apiService.fetchMovieVideos(movieId) }
 
-            _videos.value = movieVideosNetworkResponse.toEntity()
+                _videos.value = movieVideosNetworkResponse.toEntity()
 
-            flow { emit(movieVideosNetworkResponse.toEntity().toDomain()) }
+                flow { emit(movieVideosNetworkResponse.toEntity().toDomain()) }
+            }
+        } catch (e: Exception) {
+            Log.e("MovieDetails", "${e.message}")
+            flowOf()
         }
     }
 
     override suspend fun fetchSimilarMovies(movieId: Int): Flow<SimilarMovies> {
         val similarMoviesDto = safeApiRequest { apiService.fetchSimilarMovies(movieId) }
-        return flow { emit(similarMoviesDto.toEntity().toDomain()) }
+        return try {
+            flow { emit(similarMoviesDto.toEntity().toDomain()) }
+        } catch (e: Exception) {
+            Log.e("MovieDetails", "${e.message}")
+            flowOf()
+        }
     }
-
-
 }
