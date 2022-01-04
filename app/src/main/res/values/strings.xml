@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Notflix</string>
 
     <string name="title_home">Home</string>
@@ -25,9 +25,10 @@
     <string name="change_theme">Change theme</string>
     <string name="change_language">Change language</string>
     <string name="change_image_quality">Change image quality</string>
-    <string name="view_app_source_code">View app source code</string>
+    <string name="report_bug">Report Bug</string>
+    <string name="report_bug_description">Report bug or request feature</string>
     <string name="source_code">Source Code</string>
-
+    <string name="source_code_description">View app source code</string>
 
     <string name="popularity">Popularity</string>
     <string name="overview">Overview</string>
