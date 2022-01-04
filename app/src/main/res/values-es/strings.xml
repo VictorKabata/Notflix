@@ -1,11 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">Notflix</string>
 
-    <string name="title_home">Home</string>
-    <string name="title_search">Search</string>
-    <string name="title_favorites">Favorites</string>
-    <string name="title_settings">Settings</string>
-    <string name="title_details">Details</string>
+    <string name="title_home">Casa</string>
+    <string name="title_search">Búsqueda</string>
+    <string name="title_favorites">Favoritos</string>
+    <string name="title_settings">Ajustes</string>
+    <string name="title_details">Detalles</string>
 
     <string name="trending_movies">Trending Movies</string>
     <string name="popular_movies">Popular Movies</string>
@@ -18,17 +19,17 @@
     <string name="placeholder_genre" translatable="false">Action</string>
 
     <!--Preference Titles-->
-    <string name="title_personalisation">Personalisation</string>
+    <string name="title_personalisation">Personalización</string>
     <string name="title_extras">Extras</string>
 
     <!--Preference Headers-->
-    <string name="change_theme">Change theme</string>
-    <string name="change_language">Change language</string>
-    <string name="change_image_quality">Change image quality</string>
-    <string name="report_bug">Report Bug</string>
-    <string name="report_bug_description">Report bug or request feature</string>
-    <string name="source_code">Source Code</string>
-    <string name="source_code_description">View app source code</string>
+    <string name="change_theme">Cambiar de tema</string>
+    <string name="change_language">Cambiar idioma</string>
+    <string name="change_image_quality">Cambiar la calidad de la imagen</string>
+    <string name="report_bug">Reportar un error</string>
+    <string name="report_bug_description">Informar error o solicitar función</string>
+    <string name="source_code">Código fuente</string>
+    <string name="source_code_description">Ver el código fuente de la aplicación</string>
 
     <string name="popularity">Popularity</string>
     <string name="overview">Overview</string>
@@ -40,6 +41,4 @@
     <string name="def">Default</string>
 
     <string name="cancel">Cancel</string>
-
-
 </resources>
