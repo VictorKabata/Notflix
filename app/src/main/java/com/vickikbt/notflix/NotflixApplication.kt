@@ -3,7 +3,6 @@ package com.vickikbt.notflix
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import com.vickikbt.cache.di.cacheModule
-import com.vickikbt.cache.preferences.ThemePreferences
 import com.vickikbt.network.di.networkModule
 import com.vickikbt.notflix.di.presentationModule
 import com.vickikbt.repository.di.repositoryModule
