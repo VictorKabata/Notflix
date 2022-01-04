@@ -24,8 +24,6 @@ import com.vickikbt.notflix.ui.components.ItemNowPlayingMovies
 import com.vickikbt.notflix.ui.components.ItemPopularMovies
 import com.vickikbt.notflix.ui.components.ItemRecentlyPlayedAlbum
 import com.vickikbt.notflix.ui.components.SectionSeparator
-import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
-import com.vickikbt.notflix.ui.theme.Gray
 import org.koin.androidx.compose.getViewModel
 import timber.log.Timber
 
@@ -78,11 +76,8 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                     movies = upcomingMovies
                 )
             }
-
         }
-
     }
-
 }
 
 @ExperimentalPagerApi
@@ -110,7 +105,7 @@ fun NowPlayingMovies(
             viewModel = viewModel,
             movie = movies[page]
         ) {
-            //ToDo: OnItemClick- Navigate to movie details
+            // ToDo: OnItemClick- Navigate to movie details
         }
     }
 
@@ -136,7 +131,7 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
             .wrapContentHeight(),
         sectionTitle = stringResource(id = R.string.trending_movies),
         onItemClick = {
-            //ToDo: OnSectionedClicked-navigate to view all
+            // ToDo: OnSectionedClicked-navigate to view all
         }
     )
 
@@ -148,7 +143,7 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
     ) {
         items(items = movies) { item ->
             ItemRecentlyPlayedAlbum(movie = item, onItemClick = {
-                //ToDo: OnItemClicked-Navigate to movie details
+                // ToDo: OnItemClicked-Navigate to movie details
             })
         }
     }
@@ -168,7 +163,7 @@ fun PopularMovies(
             .wrapContentHeight(),
         sectionTitle = stringResource(id = R.string.popular_movies),
         onItemClick = {
-            //ToDo: OnSectionedClicked-navigate to view all
+            // ToDo: OnSectionedClicked-navigate to view all
         }
     )
 
@@ -180,12 +175,9 @@ fun PopularMovies(
     ) {
         items(items = movies) { item ->
             ItemPopularMovies(viewModel = viewModel, movie = item, onClickItem = {
-
             })
-
         }
     }
-
 }
 
 @Composable
@@ -198,7 +190,7 @@ fun UpcomingMovies(navController: NavController, movies: List<Movie>) {
                 .wrapContentHeight(),
             sectionTitle = stringResource(id = R.string.upcoming_movies),
             onItemClick = {
-                //ToDo: OnSectionedClicked-navigate to view all
+                // ToDo: OnSectionedClicked-navigate to view all
             }
         )
 
@@ -210,7 +202,7 @@ fun UpcomingMovies(navController: NavController, movies: List<Movie>) {
         ) {
             items(items = movies) { item ->
                 ItemRecentlyPlayedAlbum(movie = item, onItemClick = {
-                    //ToDo: OnItemClicked-Navigate to movie details
+                    // ToDo: OnItemClicked-Navigate to movie details
                 })
             }
         }
