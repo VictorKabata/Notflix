@@ -4,19 +4,24 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.vickikbt.domain.utils.Constants
 import com.vickikbt.notflix.ui.components.BottomNavBar
 import com.vickikbt.notflix.ui.navigation.Navigation
 import com.vickikbt.notflix.ui.navigation.NavigationItem
+import com.vickikbt.notflix.ui.screens.settings.SettingsViewModel
 import com.vickikbt.notflix.ui.theme.NotflixTheme
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
@@ -27,7 +32,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            val useDarkTheme = true
+            val settingsViewModel:SettingsViewModel=getViewModel()
+
+            val useDarkTheme = when (settingsViewModel.selectedTheme.observeAsState().value) {
+                Constants.LIGHT_THEME -> false
+                Constants.DARK_THEME -> true
+                else -> isSystemInDarkTheme()
+            }
 
             val systemUiController = rememberSystemUiController()
 

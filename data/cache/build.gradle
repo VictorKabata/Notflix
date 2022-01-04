@@ -53,4 +53,7 @@ dependencies {
     implementation "io.insert-koin:koin-android:$koin_version"
 
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    //Timber-Logging
+    implementation "com.jakewharton.timber:timber:$timber_version"
 }
