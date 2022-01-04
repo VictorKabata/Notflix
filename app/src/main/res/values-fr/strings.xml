@@ -6,12 +6,12 @@
     <string name="title_search">Chercher</string>
     <string name="title_favorites">Favoris</string>
     <string name="title_settings">Réglages</string>
-    <string name="title_details">Des détails</string>
+    <string name="title_details">Des Détails</string>
 
-    <string name="trending_movies">Films tendances</string>
-    <string name="popular_movies">Films populaires</string>
-    <string name="upcoming_movies">Films à venir</string>
-    <string name="view_all">Voir tout</string>
+    <string name="trending_movies">Films Tendances</string>
+    <string name="popular_movies">Films Populaires</string>
+    <string name="upcoming_movies">Films à Venir</string>
+    <string name="view_all">Voir Tout</string>
 
     <string name="placeholder_movie_title" translatable="false">Pirates of The Caribbean: Some Villan\'s Revenge.</string>
     <string name="placeholder_movie_duration" translatable="false">4hrs 20mins</string>
