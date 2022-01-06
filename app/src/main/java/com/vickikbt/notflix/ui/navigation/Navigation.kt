@@ -25,7 +25,7 @@ fun Navigation(navController: NavHostController) {
     // val slideDefaultInitialOffset = 1800
     // val slideDefaultTargetOffset = 1500
 
-    NavHost(navController = navController, startDestination = NavigationItem.Home.route) {
+    NavHost(navController = navController, startDestination = NavigationItem.Details.route) {
         composable(route = NavigationItem.Home.route) {
             HomeScreen(navController = navController)
         }
