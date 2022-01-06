@@ -9,19 +9,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.palette.graphics.Palette
 import com.vickikbt.domain.models.Movie
-import com.vickikbt.domain.repository.NowPlayingMoviesRepository
-import com.vickikbt.domain.repository.PopularMoviesRepository
-import com.vickikbt.domain.repository.TrendingMoviesRepository
-import com.vickikbt.domain.repository.UpcomingMoviesRepository
+import com.vickikbt.domain.utils.Constants
+import com.vickikbt.repository.repository.movies_repository.MoviesRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class HomeViewModel constructor(
-    private val nowPlayingMoviesRepository: NowPlayingMoviesRepository,
-    private val trendingMoviesRepository: TrendingMoviesRepository,
-    private val popularMoviesRepository: PopularMoviesRepository,
-    private val upcomingMoviesRepository: UpcomingMoviesRepository
+    private val moviesRepository: MoviesRepository
 ) :
     ViewModel() {
 
@@ -46,7 +41,8 @@ class HomeViewModel constructor(
 
     private fun fetchNowPlayingMovies() = viewModelScope.launch {
         try {
-            val nowPlayingMoviesResponse = nowPlayingMoviesRepository.fetchNowPlayingMovies()
+            val nowPlayingMoviesResponse =
+                moviesRepository.fetchMovies(category = Constants.CATEGORY_NOW_PLAYING_MOVIES)
 
             nowPlayingMoviesResponse.collect { result ->
                 _nowPlayingMovies.value = result
@@ -58,7 +54,8 @@ class HomeViewModel constructor(
 
     private fun fetchTrendingMovies() = viewModelScope.launch {
         try {
-            val trendingMoviesResponse = trendingMoviesRepository.fetchTrendingMovies()
+            val trendingMoviesResponse =
+                moviesRepository.fetchMovies(category = Constants.CATEGORY_TRENDING_MOVIES)
 
             trendingMoviesResponse.collect { result ->
                 _trendingMovies.value = result
@@ -70,7 +67,8 @@ class HomeViewModel constructor(
 
     private fun fetchPopularMovies() = viewModelScope.launch {
         try {
-            val popularMoviesResponse = popularMoviesRepository.fetchPopularMovies()
+            val popularMoviesResponse =
+                moviesRepository.fetchMovies(category = Constants.CATEGORY_POPULAR_MOVIES)
 
             popularMoviesResponse.collect { result ->
                 _popularMovies.value = result
@@ -82,7 +80,8 @@ class HomeViewModel constructor(
 
     private fun fetchUpcomingMovies() = viewModelScope.launch {
         try {
-            val upcomingMoviesResponse = upcomingMoviesRepository.fetchUpcomingMovies()
+            val upcomingMoviesResponse =
+                moviesRepository.fetchMovies(category = Constants.CATEGORY_UPCOMING_MOVIES)
 
             upcomingMoviesResponse.collect { result ->
                 _upcomingMovies.value = result

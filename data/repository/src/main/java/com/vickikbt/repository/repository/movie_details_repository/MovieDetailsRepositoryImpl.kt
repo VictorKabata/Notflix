@@ -1,4 +1,4 @@
-package com.vickikbt.repository.data_source
+package com.vickikbt.repository.repository.movie_details_repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +10,6 @@ import com.vickikbt.domain.models.Cast
 import com.vickikbt.domain.models.MovieDetails
 import com.vickikbt.domain.models.MovieVideo
 import com.vickikbt.domain.models.SimilarMovies
-import com.vickikbt.domain.repository.MovieDetailsRepository
 import com.vickikbt.domain.utils.Coroutines
 import com.vickikbt.network.ApiService
 import com.vickikbt.network.utils.SafeApiRequest

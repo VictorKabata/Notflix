@@ -31,7 +31,7 @@ buildscript {
         coroutines_version = "1.5.2"
         firebase_bom = "29.0.3"
         rating_bar_version = "1.1.1"
-        paging_compose="1.0.0-alpha02"
+        paging_compose="1.0.0-alpha14"
 
         room_version = "2.4.0"
         datastore_version = "1.0.0"
