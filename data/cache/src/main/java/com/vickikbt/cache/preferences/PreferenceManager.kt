@@ -43,7 +43,7 @@ class PreferenceManager constructor(private val context: Context) {
     private val _imageQuality: String?
         get() = getString(
             Constants.KEY_IMAGE_QUALITY,
-            defaultValue = "${Constants.IMAGE_PREFIX}/w500/$this"
+            defaultValue = "Low Quality"
         )
 
     private val _appThemeMutableLiveData: MutableLiveData<String> = MutableLiveData()
