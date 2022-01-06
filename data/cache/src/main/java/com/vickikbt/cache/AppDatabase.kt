@@ -11,7 +11,7 @@ import com.vickikbt.cache.daos.VideosDao
 import com.vickikbt.cache.models.*
 
 @Database(
-    entities = [MovieEntity::class, MovieDetailsEntity::class, CastEntity::class, MovieVideoEntity::class],
+    entities = [MovieEntity::class, RemoteKey::class, MovieDetailsEntity::class, CastEntity::class, MovieVideoEntity::class],
     version = 1,
     exportSchema = false
 )
