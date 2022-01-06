@@ -9,6 +9,7 @@ import androidx.paging.PagingData
 import com.vickikbt.cache.AppDatabase
 import com.vickikbt.cache.models.MovieEntity
 import com.vickikbt.domain.models.Movie
+import com.vickikbt.domain.utils.Constants
 import com.vickikbt.domain.utils.Coroutines
 import com.vickikbt.network.ApiService
 import com.vickikbt.network.utils.SafeApiRequest
@@ -54,8 +55,8 @@ class MoviesRepositoryImpl constructor(
 
         val moviesPagingConfig = PagingConfig(
             enablePlaceholders = false,
-            pageSize = PAGE_SIZE,
-            maxSize = PAGE_SIZE + (PAGE_SIZE * 4)
+            pageSize = Constants.PAGING_SIZE,
+            maxSize = Constants.PAGING_SIZE + (Constants.PAGING_SIZE * 4)
         )
 
         val moviesRemoteMediator = MoviesRemoteMediator(
