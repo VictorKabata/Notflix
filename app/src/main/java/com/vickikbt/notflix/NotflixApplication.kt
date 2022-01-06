@@ -1,6 +1,7 @@
 package com.vickikbt.notflix
 
 import android.app.Application
+import androidx.paging.ExperimentalPagingApi
 import com.vickikbt.cache.di.cacheModule
 import com.vickikbt.network.di.networkModule
 import com.vickikbt.notflix.di.presentationModule
@@ -12,6 +13,7 @@ import org.koin.core.logger.Level
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
+@ExperimentalPagingApi
 class NotflixApplication : Application() {
 
     override fun onCreate() {

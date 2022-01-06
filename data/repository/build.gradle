@@ -44,5 +44,5 @@ dependencies {
     implementation "io.insert-koin:koin-android:$koin_version"
 
     //Paging 3
-    implementation "androidx.paging:paging-compose:$paging_compose"
+    api "androidx.paging:paging-compose:$paging_compose"
 }

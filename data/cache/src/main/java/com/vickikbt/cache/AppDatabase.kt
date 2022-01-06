@@ -4,10 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.vickikbt.cache.converters.*
-import com.vickikbt.cache.daos.CastDao
-import com.vickikbt.cache.daos.MovieDetailsDao
-import com.vickikbt.cache.daos.MoviesDao
-import com.vickikbt.cache.daos.VideosDao
+import com.vickikbt.cache.daos.*
 import com.vickikbt.cache.models.*
 
 @Database(
@@ -26,6 +23,7 @@ import com.vickikbt.cache.models.*
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun moviesDao(): MoviesDao
+    abstract fun remoteKeyDao(): RemoteKeyDao
     abstract fun movieDetailsDao(): MovieDetailsDao
     abstract fun castDao(): CastDao
     abstract fun videosDao(): VideosDao

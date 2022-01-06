@@ -15,6 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.paging.PagingData
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
@@ -27,6 +30,7 @@ import com.vickikbt.notflix.ui.components.ItemRecentlyPlayedAlbum
 import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Gray
+import kotlinx.coroutines.flow.Flow
 import org.koin.androidx.compose.getViewModel
 import timber.log.Timber
 
@@ -51,11 +55,11 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
         ) {
 
             if (nowPlayingMovies != null) {
-                NowPlayingMovies(
+                /*NowPlayingMovies(
                     navController = navController,
                     viewModel = viewModel,
                     movies = nowPlayingMovies
-                )
+                )*/
             }
 
             if (trendingMovies != null) {
@@ -66,18 +70,18 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
             }
 
             if (popularMovies != null) {
-                PopularMovies(
+                /*PopularMovies(
                     navController = navController,
                     viewModel = viewModel,
                     movies = popularMovies
-                )
+                )*/
             }
 
             if (upcomingMovies != null) {
-                UpcomingMovies(
+                /*UpcomingMovies(
                     navController = navController,
                     movies = upcomingMovies
-                )
+                )*/
             }
 
         }
@@ -129,7 +133,10 @@ fun NowPlayingMovies(
 }
 
 @Composable
-fun TrendingMovies(navController: NavController, movies: List<Movie>) {
+fun TrendingMovies(navController: NavController, movies: Flow<PagingData<Movie>>) {
+
+    val moviesList = movies.collectAsLazyPagingItems()
+
     SectionSeparator(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 12.dp)
@@ -147,8 +154,8 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
         contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        items(items = movies) { item ->
-            ItemRecentlyPlayedAlbum(movie = item, onItemClick = {
+        items(items = moviesList) { item ->
+            ItemRecentlyPlayedAlbum(movie = item!!, onItemClick = {
                 //ToDo: OnItemClicked-Navigate to movie details
             })
         }

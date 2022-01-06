@@ -16,28 +16,29 @@ interface ApiService {
         @Query("api_key") apiKey: String = API_KEY,
         @Query("page") page: Int = STARTING_PAGE_INDEX,
         @Query("language") language: String = "en"
-    ): Response<NowPlayingMoviesDto>
+    ): NowPlayingMoviesDto
 
     @GET("movie/popular")
     suspend fun fetchPopularMovies(
         @Query("api_key") apiKey: String = API_KEY,
         @Query("page") page: Int = STARTING_PAGE_INDEX,
         @Query("language") language: String = "en"
-    ): Response<PopularMoviesDto>
+    ): PopularMoviesDto
 
     @GET("trending/{media_type}/{time_window}")
     suspend fun fetchTrendingMovies(
         @Path("media_type") mediaType: String = "movies",
         @Path("time_window") timeWindow: String = "week",
-        @Query("api_key") apiKey: String = API_KEY
-    ): Response<TrendingMoviesDto>
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("page") page: Int = STARTING_PAGE_INDEX,
+    ): TrendingMoviesDto
 
     @GET("movie/upcoming")
     suspend fun fetchUpcomingMovies(
         @Query("api_key") apiKey: String = API_KEY,
         @Query("page") page: Int = STARTING_PAGE_INDEX,
         @Query("language") language: String = "en"
-    ): Response<UpcomingMoviesDto>
+    ): UpcomingMoviesDto
 
     @GET("movie/{movie_id}")
     suspend fun fetchMovieDetails(

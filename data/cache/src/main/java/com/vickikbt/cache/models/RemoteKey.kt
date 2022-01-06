@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "Remote_Key_Table")
 data class RemoteKey(
-    @ColumnInfo(name = "Player_ID")
+    @ColumnInfo(name = "Movie_ID")
     @PrimaryKey(autoGenerate = false)
-    val playerId: Int,
+    val movieId: Int,
 
     @ColumnInfo(name = "Previous_Key")
     val prevKey: Int? = null,

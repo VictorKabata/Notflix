@@ -1,57 +1,58 @@
 package com.vickikbt.repository.repository.movies_repository
 
+import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.vickikbt.cache.AppDatabase
 import com.vickikbt.cache.models.MovieEntity
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.domain.utils.Coroutines
 import com.vickikbt.network.ApiService
-import com.vickikbt.network.utils.SafeApiRequest
-import com.vickikbt.repository.mappers.toDomain
-import com.vickikbt.repository.mappers.toEntity
+import com.vickikbt.repository.paging.MoviesRemoteMediator
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
+@ExperimentalPagingApi
 class MoviesRepositoryImpl constructor(
     private val apiService: ApiService,
     private val appDatabase: AppDatabase
-) : MoviesRepository, SafeApiRequest() {
+) : MoviesRepository {
     private val moviesDao = appDatabase.moviesDao()
 
     private val _movieMutableLiveData = MutableLiveData<List<MovieEntity>>()
 
     init {
         _movieMutableLiveData.observeForever { movies ->
-            Coroutines.io { moviesDao.saveMovies(movieEntities = movies) }
+            Coroutines.io { saveMovies(movieEntities = movies) }
         }
     }
 
     private suspend fun saveMovies(movieEntities: List<MovieEntity>) =
         moviesDao.saveMovies(movieEntities)
 
-    override suspend fun fetchMovies(category: String): Flow<List<Movie>> {
+    override suspend fun fetchMovies(category: String): Flow<PagingData<Movie>> {
         val isCategoryCacheAvailable = moviesDao.isCategoryCacheAvailable(category) > 0
 
-        //ToDo: Check sync time-IsTimeSurpassed
+        val moviesPagingConfig = PagingConfig(
+            enablePlaceholders = false,
+            pageSize = PAGE_SIZE,
+            maxSize = PAGE_SIZE + (PAGE_SIZE * 4)
+        )
 
-        return if (isCategoryCacheAvailable) {
-            val cacheResponse = moviesDao.getMovies(category)
-            cacheResponse.map { it.map { it.toDomain() } }
-        } else {
-            moviesDao.deleteMovies(category)
+        val moviesRemoteMediator = MoviesRemoteMediator(
+            category = category,
+            apiService = apiService,
+            appDatabase = appDatabase
+        )
+        val moviesPagingSource = { moviesDao.getMovies(category = category) }
 
-            val networkResponse =
-                safeApiRequest { apiService.fetchNowPlayingMovies() }.movies?.map {
-                    it.toEntity(category = category)
-                }
-            _movieMutableLiveData.value = networkResponse!!
-
-            val cacheResponse = moviesDao.getMovies(category)
-
-            //ToDo: Update sync time
-
-            cacheResponse.map { it.map { it.toDomain() } }
-        }
+        return Pager(
+            config = moviesPagingConfig,
+            remoteMediator = moviesRemoteMediator,
+            pagingSourceFactory = moviesPagingSource
+        ).flow
     }
 
 

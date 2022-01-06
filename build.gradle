@@ -33,7 +33,7 @@ buildscript {
         rating_bar_version = "1.1.1"
         paging_compose="1.0.0-alpha14"
 
-        room_version = "2.4.0"
+        room_version = "2.4.0-alpha02"
         datastore_version = "1.0.0"
         retrofit_version = '2.9.0'
         okhttp_vesion = "4.8.0"
