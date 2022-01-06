@@ -12,7 +12,6 @@ import com.vickikbt.domain.models.Movie
 import com.vickikbt.domain.utils.Constants
 import com.vickikbt.domain.utils.Constants.STARTING_PAGE_INDEX
 import com.vickikbt.network.ApiService
-import com.vickikbt.network.models.NowPlayingMoviesDto
 import com.vickikbt.network.models.PopularMoviesDto
 import com.vickikbt.network.models.TrendingMoviesDto
 import com.vickikbt.network.models.UpcomingMoviesDto
@@ -56,9 +55,6 @@ class MoviesRemoteMediator constructor(
                 Constants.CATEGORY_TRENDING_MOVIES -> {
                     apiService.fetchTrendingMovies(page = page)
                 }
-                Constants.CATEGORY_NOW_PLAYING_MOVIES -> {
-                    apiService.fetchNowPlayingMovies(page = page)
-                }
                 else -> null
             }
 
@@ -72,9 +68,6 @@ class MoviesRemoteMediator constructor(
                 Constants.CATEGORY_TRENDING_MOVIES -> {
                     (response as TrendingMoviesDto).movies
                 }
-                Constants.CATEGORY_NOW_PLAYING_MOVIES -> {
-                    (response as NowPlayingMoviesDto).movies
-                }
                 else -> null
             }
 
@@ -86,9 +79,6 @@ class MoviesRemoteMediator constructor(
                     movies?.isEmpty()
                 }
                 Constants.CATEGORY_TRENDING_MOVIES -> {
-                    movies?.isEmpty()
-                }
-                Constants.CATEGORY_NOW_PLAYING_MOVIES -> {
                     movies?.isEmpty()
                 }
                 else -> true
@@ -123,9 +113,6 @@ class MoviesRemoteMediator constructor(
                     MediatorResult.Success(endOfPaginationReached = false)
                 }
                 Constants.CATEGORY_TRENDING_MOVIES -> {
-                    MediatorResult.Success(endOfPaginationReached = false)
-                }
-                Constants.CATEGORY_NOW_PLAYING_MOVIES -> {
                     MediatorResult.Success(endOfPaginationReached = false)
                 }
                 else -> MediatorResult.Success(endOfPaginationReached = true)

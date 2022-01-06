@@ -13,16 +13,16 @@ import com.vickikbt.domain.models.Movie
 import com.vickikbt.domain.utils.Constants
 import com.vickikbt.repository.repository.movies_repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class HomeViewModel constructor(
     private val moviesRepository: MoviesRepository
-) :
-    ViewModel() {
+) : ViewModel() {
 
-    private val _nowPlayingMovies = MutableLiveData<Flow<PagingData<Movie>>>()
-    val nowPlayingMovies: LiveData<Flow<PagingData<Movie>>> get() = _nowPlayingMovies
+    private val _nowPlayingMovies = MutableLiveData<List<Movie>>()
+    val nowPlayingMovies: LiveData<List<Movie>> get() = _nowPlayingMovies
 
     private val _trendingMovies = MutableLiveData<Flow<PagingData<Movie>>>()
     val trendingMovies: LiveData<Flow<PagingData<Movie>>> get() = _trendingMovies
@@ -42,8 +42,10 @@ class HomeViewModel constructor(
 
     private fun fetchNowPlayingMovies() = viewModelScope.launch {
         try {
-            _nowPlayingMovies.value =
-                moviesRepository.fetchMovies(category = Constants.CATEGORY_NOW_PLAYING_MOVIES)
+            val response = moviesRepository.fetchNowPlayingMovies()
+            response.collectLatest {
+                _nowPlayingMovies.value = it
+            }
         } catch (e: Exception) {
             Timber.e("Error fetching now playing movies: ${e.localizedMessage}")
         }

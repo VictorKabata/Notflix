@@ -2,6 +2,7 @@ package com.vickikbt.network
 
 
 import com.vickikbt.domain.utils.Constants.API_KEY
+import com.vickikbt.domain.utils.Constants.PAGING_SIZE
 import com.vickikbt.domain.utils.Constants.STARTING_PAGE_INDEX
 import com.vickikbt.network.models.*
 import retrofit2.Response
@@ -15,13 +16,15 @@ interface ApiService {
     suspend fun fetchNowPlayingMovies(
         @Query("api_key") apiKey: String = API_KEY,
         @Query("page") page: Int = STARTING_PAGE_INDEX,
+        @Query("perPage") perPage: Int = PAGING_SIZE,
         @Query("language") language: String = "en"
-    ): NowPlayingMoviesDto
+    ): Response<NowPlayingMoviesDto>
 
     @GET("movie/popular")
     suspend fun fetchPopularMovies(
         @Query("api_key") apiKey: String = API_KEY,
         @Query("page") page: Int = STARTING_PAGE_INDEX,
+        @Query("perPage") perPage: Int = PAGING_SIZE,
         @Query("language") language: String = "en"
     ): PopularMoviesDto
 
@@ -31,12 +34,14 @@ interface ApiService {
         @Path("time_window") timeWindow: String = "week",
         @Query("api_key") apiKey: String = API_KEY,
         @Query("page") page: Int = STARTING_PAGE_INDEX,
+        @Query("per_page") perPage: Int = PAGING_SIZE,
     ): TrendingMoviesDto
 
     @GET("movie/upcoming")
     suspend fun fetchUpcomingMovies(
         @Query("api_key") apiKey: String = API_KEY,
         @Query("page") page: Int = STARTING_PAGE_INDEX,
+        @Query("per_page") perPage: Int = PAGING_SIZE,
         @Query("language") language: String = "en"
     ): UpcomingMoviesDto
 
@@ -66,6 +71,7 @@ interface ApiService {
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String = API_KEY,
         @Query("page") page: Int = STARTING_PAGE_INDEX,
+        @Query("per_page") perPage: Int = PAGING_SIZE,
         @Query("language") language: String = "en"
     ): Response<SimilarMoviesDto>
 

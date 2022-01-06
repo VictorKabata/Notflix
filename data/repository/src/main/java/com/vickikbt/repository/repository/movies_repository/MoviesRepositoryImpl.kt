@@ -11,6 +11,8 @@ import com.vickikbt.cache.models.MovieEntity
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.domain.utils.Coroutines
 import com.vickikbt.network.ApiService
+import com.vickikbt.network.utils.SafeApiRequest
+import com.vickikbt.repository.mappers.toEntity
 import com.vickikbt.repository.paging.MoviesRemoteMediator
 import kotlinx.coroutines.flow.Flow
 
@@ -18,7 +20,7 @@ import kotlinx.coroutines.flow.Flow
 class MoviesRepositoryImpl constructor(
     private val apiService: ApiService,
     private val appDatabase: AppDatabase
-) : MoviesRepository {
+) : MoviesRepository, SafeApiRequest() {
     private val moviesDao = appDatabase.moviesDao()
 
     private val _movieMutableLiveData = MutableLiveData<List<MovieEntity>>()
@@ -31,6 +33,21 @@ class MoviesRepositoryImpl constructor(
 
     private suspend fun saveMovies(movieEntities: List<MovieEntity>) =
         moviesDao.saveMovies(movieEntities)
+
+    override suspend fun fetchNowPlayingMovies(category: String): Flow<List<Movie>> {
+        val isCategoryCacheAvailable = moviesDao.isCategoryCacheAvailable(category) > 0
+
+        return if (isCategoryCacheAvailable) {
+            moviesDao.getNowPlayingMovies()
+        } else {
+            val networkResponse = safeApiRequest { apiService.fetchNowPlayingMovies() }.movies
+            val nowPlayingMoviesEntity = networkResponse?.map { it.toEntity(category = category) }
+            _movieMutableLiveData.value = nowPlayingMoviesEntity
+
+            moviesDao.getNowPlayingMovies()
+        }
+
+    }
 
     override suspend fun fetchMovies(category: String): Flow<PagingData<Movie>> {
         val isCategoryCacheAvailable = moviesDao.isCategoryCacheAvailable(category) > 0

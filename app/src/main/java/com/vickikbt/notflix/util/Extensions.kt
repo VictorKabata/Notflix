@@ -36,7 +36,6 @@ fun String.loadImage(): String {
             else -> "${Constants.IMAGE_PREFIX}/w500/$this"
         }
     }
-    Timber.e("Image quality:$imageQuality")
     return imageQuality!!
 }
 

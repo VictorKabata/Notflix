@@ -55,11 +55,11 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
         ) {
 
             if (nowPlayingMovies != null) {
-                /*NowPlayingMovies(
+                NowPlayingMovies(
                     navController = navController,
                     viewModel = viewModel,
                     movies = nowPlayingMovies
-                )*/
+                )
             }
 
             if (trendingMovies != null) {
@@ -70,18 +70,18 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
             }
 
             if (popularMovies != null) {
-                /*PopularMovies(
+                PopularMovies(
                     navController = navController,
                     viewModel = viewModel,
                     movies = popularMovies
-                )*/
+                )
             }
 
             if (upcomingMovies != null) {
-                /*UpcomingMovies(
+                UpcomingMovies(
                     navController = navController,
                     movies = upcomingMovies
-                )*/
+                )
             }
 
         }
@@ -167,8 +167,10 @@ fun TrendingMovies(navController: NavController, movies: Flow<PagingData<Movie>>
 fun PopularMovies(
     navController: NavController,
     viewModel: HomeViewModel,
-    movies: List<Movie>
+    movies: Flow<PagingData<Movie>>
 ) {
+    val moviesList = movies.collectAsLazyPagingItems()
+
     SectionSeparator(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 12.dp)
@@ -186,8 +188,8 @@ fun PopularMovies(
         contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(14.dp)
     ) {
-        items(items = movies) { item ->
-            ItemPopularMovies(viewModel = viewModel, movie = item, onClickItem = {
+        items(items=moviesList) { item ->
+            ItemPopularMovies(viewModel = viewModel, movie = item!!, onClickItem = {
 
             })
 
@@ -197,7 +199,10 @@ fun PopularMovies(
 }
 
 @Composable
-fun UpcomingMovies(navController: NavController, movies: List<Movie>) {
+fun UpcomingMovies(navController: NavController, movies: Flow<PagingData<Movie>>
+) {
+    val moviesList = movies.collectAsLazyPagingItems()
+
     Column(modifier = Modifier.padding(bottom = 90.dp)) {
         SectionSeparator(
             modifier = Modifier
@@ -216,8 +221,8 @@ fun UpcomingMovies(navController: NavController, movies: List<Movie>) {
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            items(items = movies) { item ->
-                ItemRecentlyPlayedAlbum(movie = item, onItemClick = {
+            items(items = moviesList) { item ->
+                ItemRecentlyPlayedAlbum(movie = item!!, onItemClick = {
                     //ToDo: OnItemClicked-Navigate to movie details
                 })
             }
