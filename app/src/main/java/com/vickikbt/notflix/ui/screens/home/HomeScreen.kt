@@ -24,6 +24,7 @@ import com.vickikbt.notflix.ui.components.ItemNowPlayingMovies
 import com.vickikbt.notflix.ui.components.ItemPopularMovies
 import com.vickikbt.notflix.ui.components.ItemRecentlyPlayedAlbum
 import com.vickikbt.notflix.ui.components.SectionSeparator
+import com.vickikbt.notflix.ui.navigation.NavigationItem
 import org.koin.androidx.compose.getViewModel
 import timber.log.Timber
 
@@ -106,6 +107,7 @@ fun NowPlayingMovies(
             movie = movies[page]
         ) {
             // ToDo: OnItemClick- Navigate to movie details
+//            navController.navigate("details/"+it.id!!)
         }
     }
 
@@ -144,6 +146,7 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
         items(items = movies) { item ->
             ItemRecentlyPlayedAlbum(movie = item, onItemClick = {
                 // ToDo: OnItemClicked-Navigate to movie details
+                navController.navigate("details/"+it.id!!)
             })
         }
     }
@@ -175,6 +178,7 @@ fun PopularMovies(
     ) {
         items(items = movies) { item ->
             ItemPopularMovies(viewModel = viewModel, movie = item, onClickItem = {
+                navController.navigate("details/"+it.id!!)
             })
         }
     }
@@ -203,6 +207,7 @@ fun UpcomingMovies(navController: NavController, movies: List<Movie>) {
             items(items = movies) { item ->
                 ItemRecentlyPlayedAlbum(movie = item, onItemClick = {
                     // ToDo: OnItemClicked-Navigate to movie details
+                    navController.navigate("details/"+it.id!!)
                 })
             }
         }

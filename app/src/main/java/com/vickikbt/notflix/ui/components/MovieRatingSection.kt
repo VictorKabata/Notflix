@@ -15,7 +15,7 @@ import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.theme.Surface
 
 @Composable
-fun MovieRatingSection(popularity: Int?, voteAverage: Double?, modifier: Modifier) {
+fun MovieRatingSection(popularity: String, voteAverage: Double?, modifier: Modifier) {
     Row(
         modifier = modifier
             .fillMaxWidth()

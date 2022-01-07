@@ -130,7 +130,6 @@ fun ItemPopularMovies(
             )
             //endregion
 
-
             //region Movie Rating
             Row(
                 modifier = Modifier
@@ -181,7 +180,6 @@ fun ItemPopularMovies(
                 }
             }
             //endregion
-
         }
     }
 }
