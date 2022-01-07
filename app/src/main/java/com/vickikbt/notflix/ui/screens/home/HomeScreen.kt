@@ -2,7 +2,6 @@ package com.vickikbt.notflix.ui.screens.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -169,15 +168,15 @@ fun TrendingMovies(navController: NavController, movies: Flow<PagingData<Movie>>
         contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        items(items = movies) { item ->
+        items(items = moviesList) { item ->
             ItemRecentlyPlayedAlbum(
                 modifier = Modifier.placeholder(
-                    visible = movies.isNullOrEmpty(),
+                    visible = moviesList.itemCount == null,
                     color = Gray,
                     shape = RoundedCornerShape(4.dp),
                     highlight = PlaceholderHighlight.fade()
                 ),
-                movie = item,
+                movie = item!!,
                 onItemClick = {
                     //ToDo: OnItemClicked-Navigate to movie details
                 })
@@ -211,16 +210,16 @@ fun PopularMovies(
         contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(14.dp)
     ) {
-        items(items = movies) { item ->
+        items(items = moviesList) { item ->
             ItemPopularMovies(
                 modifier = Modifier.placeholder(
-                    visible = movies.isNullOrEmpty(),
+                    visible = moviesList.itemCount == null,
                     color = Gray,
                     shape = RoundedCornerShape(4.dp),
                     highlight = PlaceholderHighlight.fade()
                 ),
                 viewModel = viewModel,
-                movie = item,
+                movie = item!!,
                 onClickItem = {
 
                 })
@@ -231,7 +230,8 @@ fun PopularMovies(
 }
 
 @Composable
-fun UpcomingMovies(navController: NavController, movies: Flow<PagingData<Movie>>
+fun UpcomingMovies(
+    navController: NavController, movies: Flow<PagingData<Movie>>
 ) {
     val moviesList = movies.collectAsLazyPagingItems()
 
@@ -253,15 +253,15 @@ fun UpcomingMovies(navController: NavController, movies: Flow<PagingData<Movie>>
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            items(items = movies) { item ->
+            items(items = moviesList) { item ->
                 ItemRecentlyPlayedAlbum(
                     modifier = Modifier.placeholder(
-                        visible = movies.isNullOrEmpty(),
+                        visible = moviesList.itemCount == null,
                         color = Gray,
                         shape = RoundedCornerShape(4.dp),
                         highlight = PlaceholderHighlight.fade()
                     ),
-                    movie = item,
+                    movie = item!!,
                     onItemClick = {
                         //ToDo: OnItemClicked-Navigate to movie details
                     })
