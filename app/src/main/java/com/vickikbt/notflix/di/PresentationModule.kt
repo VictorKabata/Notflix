@@ -12,7 +12,7 @@ val presentationModule = module {
 
     single { LocaleUtilCompose(androidApplication()) }
 
-    viewModel { HomeViewModel(get(), get(), get(), get()) }
+    viewModel { HomeViewModel(get()) }
     
     viewModel { SettingsViewModel(get()) }
 }
