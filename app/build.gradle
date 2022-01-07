@@ -91,6 +91,7 @@ dependencies {
     implementation "com.google.accompanist:accompanist-insets:$accompanist_version"
     implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist_version"
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.17.0"
+    implementation "com.google.accompanist:accompanist-placeholder-material:$accompanist_version"
     //implementation "com.google.accompanist:accompanist-placeholder:$accompanist_version"
     implementation "com.google.accompanist:accompanist-pager-indicators:0.22.0-rc"
 
