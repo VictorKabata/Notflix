@@ -5,7 +5,6 @@ import com.vickikbt.cache.preferences.PreferenceManager
 import com.vickikbt.domain.utils.Constants
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import timber.log.Timber
 import java.text.SimpleDateFormat
 
 

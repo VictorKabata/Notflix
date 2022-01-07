@@ -1,16 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">Notflix</string>
 
-    <string name="title_home">Home</string>
-    <string name="title_search">Search</string>
-    <string name="title_favorites">Favorites</string>
-    <string name="title_settings">Settings</string>
-    <string name="title_details">Details</string>
+    <string name="title_home">Accueil</string>
+    <string name="title_search">Chercher</string>
+    <string name="title_favorites">Favoris</string>
+    <string name="title_settings">Réglages</string>
+    <string name="title_details">Des Détails</string>
 
-    <string name="trending_movies">Trending Movies</string>
-    <string name="popular_movies">Popular Movies</string>
-    <string name="upcoming_movies">Upcoming Movies</string>
-    <string name="view_all">View All</string>
+    <string name="trending_movies">Films Tendances</string>
+    <string name="popular_movies">Films Populaires</string>
+    <string name="upcoming_movies">Films à Venir</string>
+    <string name="view_all">Voir Tout</string>
 
     <string name="placeholder_movie_title" translatable="false">Pirates of The Caribbean: Some Villan\'s Revenge.</string>
     <string name="placeholder_movie_duration" translatable="false">4hrs 20mins</string>
@@ -40,6 +41,4 @@
     <string name="def">Default</string>
 
     <string name="cancel">Cancel</string>
-
-
 </resources>
