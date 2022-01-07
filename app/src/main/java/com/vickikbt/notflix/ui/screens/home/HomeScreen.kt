@@ -57,33 +57,32 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            if (nowPlayingMovies != null) {
-                NowPlayingMovies(
-                    navController = navController,
-                    viewModel = viewModel,
-                    movies = nowPlayingMovies
-                )
-            }
+            NowPlayingMovies(
+                navController = navController,
+                viewModel = viewModel,
+                movies = nowPlayingMovies ?: listOf()
+            )
 
-            if (trendingMovies != null) {
+            trendingMovies?.let {
                 TrendingMovies(
                     navController = navController,
-                    movies = trendingMovies
+                    movies = it
                 )
             }
 
-            if (popularMovies != null) {
+
+            popularMovies?.let {
                 PopularMovies(
                     navController = navController,
                     viewModel = viewModel,
-                    movies = popularMovies
+                    movies = it
                 )
             }
 
-            if (upcomingMovies != null) {
+            upcomingMovies?.let {
                 UpcomingMovies(
                     navController = navController,
-                    movies = upcomingMovies
+                    movies = it
                 )
             }
 
