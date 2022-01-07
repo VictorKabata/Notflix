@@ -10,6 +10,11 @@ object Constants {
 
     const val IMAGE_PREFIX = "https://image.tmdb.org/t/p/"
 
+    const val CATEGORY_POPULAR_MOVIES="popular"
+    const val CATEGORY_NOW_PLAYING_MOVIES="now_playing"
+    const val CATEGORY_TRENDING_MOVIES="trending"
+    const val CATEGORY_UPCOMING_MOVIES="upcoming"
+
     const val TIME_DATASTORE_NAME = "Time Datastore"
     const val TIME_DATASTORE_KEY = "Time Key"
 
@@ -24,7 +29,7 @@ object Constants {
     const val TimeInterval = 24L
 
     const val STARTING_PAGE_INDEX = 1
-    const val PAGING_SIZE = 50
+    const val PAGING_SIZE = 5
 
     const val SOURCE_CODE_URL = "https://github.com/VictorKabata/Notflix"
 

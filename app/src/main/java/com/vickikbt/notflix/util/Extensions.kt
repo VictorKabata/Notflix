@@ -35,7 +35,7 @@ fun String.loadImage(): String {
             else -> "${Constants.IMAGE_PREFIX}/w500/$this"
         }
     }
-    return imageQuality ?: "${Constants.IMAGE_PREFIX}/w500/$this"
+    return imageQuality!!
 }
 
 //Original- 1998-11-19

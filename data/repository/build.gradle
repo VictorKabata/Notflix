@@ -21,7 +21,6 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -43,4 +42,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$androidCore_version"
 
     implementation "io.insert-koin:koin-android:$koin_version"
+
+    //Paging 3
+    api "androidx.paging:paging-compose:$paging_compose"
 }
