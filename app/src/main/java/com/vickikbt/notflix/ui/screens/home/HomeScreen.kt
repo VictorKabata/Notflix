@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
@@ -19,6 +20,9 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.material.fade
+import com.google.accompanist.placeholder.placeholder
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemNowPlayingMovies
@@ -107,7 +111,12 @@ fun NowPlayingMovies(
         ItemNowPlayingMovies(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(360.dp),
+                .height(360.dp)
+                .placeholder(
+                    visible = movies.isNullOrEmpty(),
+                    color = Gray,
+                    highlight = PlaceholderHighlight.fade()
+                ),
             viewModel = viewModel,
             movie = movies[page]
         ) {
@@ -118,7 +127,13 @@ fun NowPlayingMovies(
     Spacer(modifier = Modifier.height(6.dp))
 
     HorizontalPagerIndicator(
-        modifier = Modifier.padding(vertical = 4.dp),
+        modifier = Modifier
+            .padding(vertical = 4.dp)
+            .placeholder(
+                visible = movies.isNullOrEmpty(),
+                color = Gray,
+                highlight = PlaceholderHighlight.fade()
+            ),
         pagerState = pagerState,
         indicatorHeight = 6.dp,
         indicatorWidth = 6.dp,
@@ -148,9 +163,17 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         items(items = movies) { item ->
-            ItemRecentlyPlayedAlbum(movie = item, onItemClick = {
-                //ToDo: OnItemClicked-Navigate to movie details
-            })
+            ItemRecentlyPlayedAlbum(
+                modifier = Modifier.placeholder(
+                    visible = movies.isNullOrEmpty(),
+                    color = Gray,
+                    shape = RoundedCornerShape(4.dp),
+                    highlight = PlaceholderHighlight.fade()
+                ),
+                movie = item,
+                onItemClick = {
+                    //ToDo: OnItemClicked-Navigate to movie details
+                })
         }
     }
 }
@@ -180,9 +203,18 @@ fun PopularMovies(
         horizontalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         items(items = movies) { item ->
-            ItemPopularMovies(viewModel = viewModel, movie = item, onClickItem = {
+            ItemPopularMovies(
+                modifier = Modifier.placeholder(
+                    visible = movies.isNullOrEmpty(),
+                    color = Gray,
+                    shape = RoundedCornerShape(4.dp),
+                    highlight = PlaceholderHighlight.fade()
+                ),
+                viewModel = viewModel,
+                movie = item,
+                onClickItem = {
 
-            })
+                })
 
         }
     }
@@ -210,9 +242,17 @@ fun UpcomingMovies(navController: NavController, movies: List<Movie>) {
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(items = movies) { item ->
-                ItemRecentlyPlayedAlbum(movie = item, onItemClick = {
-                    //ToDo: OnItemClicked-Navigate to movie details
-                })
+                ItemRecentlyPlayedAlbum(
+                    modifier = Modifier.placeholder(
+                        visible = movies.isNullOrEmpty(),
+                        color = Gray,
+                        shape = RoundedCornerShape(4.dp),
+                        highlight = PlaceholderHighlight.fade()
+                    ),
+                    movie = item,
+                    onItemClick = {
+                        //ToDo: OnItemClicked-Navigate to movie details
+                    })
             }
         }
     }
