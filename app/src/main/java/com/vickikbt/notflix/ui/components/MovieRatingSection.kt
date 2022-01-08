@@ -8,18 +8,29 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.placeholder
+import com.google.accompanist.placeholder.shimmer
 import com.vickikbt.notflix.R
+import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.ui.theme.Surface
+import com.vickikbt.notflix.ui.theme.TextSecondary
 
 @Composable
-fun MovieRatingSection(popularity: String, voteAverage: Double?, modifier: Modifier) {
+fun MovieRatingSection(popularity: String?, voteAverage: Float?, modifier: Modifier) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(65.dp),
+            .height(65.dp)
+            .placeholder(
+                visible = popularity.isNullOrEmpty(),
+                color = Gray,
+                highlight = PlaceholderHighlight.shimmer(highlightColor = TextSecondary)
+            ),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -27,7 +38,11 @@ fun MovieRatingSection(popularity: String, voteAverage: Double?, modifier: Modif
             verticalArrangement = Arrangement.SpaceAround,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "$popularity", style = MaterialTheme.typography.h6, fontSize = 32.sp)
+            Text(
+                text = "$popularity",
+                style = MaterialTheme.typography.h6,
+                fontSize = 32.sp,
+            )
             Text(text = "Popularity", style = MaterialTheme.typography.h6, fontSize = 20.sp)
         }
         Spacer(modifier = modifier.width(15.dp))
@@ -49,7 +64,11 @@ fun MovieRatingSection(popularity: String, voteAverage: Double?, modifier: Modif
                 contentDescription = "rating star",
                 modifier = modifier.size(40.dp)
             )
-            Text(text = "$voteAverage/5.0", style = MaterialTheme.typography.h6, fontSize = 20.sp)
+            Text(
+                text = "$voteAverage/5.0",
+                style = MaterialTheme.typography.h6,
+                fontSize = 20.sp,
+            )
         }
     }
 }

@@ -27,16 +27,20 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.placeholder
+import com.google.accompanist.placeholder.shimmer
 import com.vickikbt.domain.models.MovieDetails
 import com.vickikbt.notflix.ui.components.CastSection
 import com.vickikbt.notflix.ui.components.MovieRatingSection
 import com.vickikbt.notflix.ui.components.SimilarMoviesSection
 import com.vickikbt.notflix.ui.components.TrailerSection
 import com.vickikbt.notflix.ui.theme.DarkTextPrimary
+import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.ui.theme.TextSecondary
 import com.vickikbt.notflix.util.getMovieDuration
 import com.vickikbt.notflix.util.getPopularity
-import com.vickikbt.notflix.util.getReleaseYear
+import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
@@ -68,31 +72,29 @@ fun DetailsScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+                .verticalScroll(rememberScrollState())
+                .placeholder(
+                    visible = false,
+                    color = MaterialTheme.colors.primary,
+                    highlight = PlaceholderHighlight.shimmer(highlightColor = Color.Gray)
+                ),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-           if (movieDetails != null){
-               MovieImage(movieDetails)
-           }
+            MovieImage(movieDetails)
 
-            val moviePopularity = movieDetails?.popularity?.getPopularity()
             val voteAverage = movieDetails?.voteAverage
 
-            if (moviePopularity != null && voteAverage != null) {
-                MovieRatingSection(
-                    popularity = voteAverage.getPopularity(),
-                    voteAverage = voteAverage,
-                    modifier = Modifier
-                )
-            }
+            MovieRatingSection(
+                popularity = voteAverage?.getPopularity(),
+                voteAverage = voteAverage?.getRating(),
+                modifier = Modifier
+            )
 
-            if (movieDetails?.overview != null) {
-                MovieOverview(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    overview = movieDetails.overview!!
-                )
-            }
+            MovieOverview(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                overview = movieDetails?.overview
+            )
 
             CastSection(
                 modifier = Modifier,
@@ -114,17 +116,22 @@ fun DetailsScreen(
 }
 
 @Composable
-fun MovieImage(movieDetails: MovieDetails, viewModel: DetailsViewModel = getViewModel()) {
+fun MovieImage(movieDetails: MovieDetails?, viewModel: DetailsViewModel = getViewModel()) {
     val defaultDominantColor = MaterialTheme.colors.surface
     val defaultDominantTextColor = MaterialTheme.colors.onSurface
     val dominantColor = remember { mutableStateOf(defaultDominantColor) }
     val dominantTextColor = remember { mutableStateOf(defaultDominantTextColor) }
-    ConstraintLayout {
+    ConstraintLayout(
+        modifier = Modifier.placeholder(
+            visible = movieDetails == null,
+            color = Gray,
+            highlight = PlaceholderHighlight.shimmer(highlightColor = TextSecondary)
+        )
+    ) {
 
         val (movieImage, runTime, movieTitle) = createRefs()
-        val imagePainter = rememberImagePainter(data = movieDetails.backdropPath?.loadImage())
-
-        val movieRunTime = movieDetails.runtime?.getMovieDuration()
+        val imagePainter = rememberImagePainter(data = movieDetails?.backdropPath?.loadImage())
+        val movieRunTime = movieDetails?.runtime?.getMovieDuration()
 
         // Movie image region
 
@@ -179,6 +186,7 @@ fun MovieImage(movieDetails: MovieDetails, viewModel: DetailsViewModel = getView
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
             color = dominantTextColor.value,
+
         )
 
         // Movie date and time
@@ -195,7 +203,7 @@ fun MovieImage(movieDetails: MovieDetails, viewModel: DetailsViewModel = getView
 }
 
 @Composable
-fun MovieOverview(modifier: Modifier, overview: String) {
+fun MovieOverview(modifier: Modifier, overview: String?) {
     ConstraintLayout(
         modifier = modifier
             .fillMaxWidth()
@@ -207,25 +215,32 @@ fun MovieOverview(modifier: Modifier, overview: String) {
             text = "Overview",
             style = MaterialTheme.typography.h6,
             fontSize = 20.sp,
-            modifier = Modifier.constrainAs(title) {
-                start.linkTo(parent.start, margin = 10.dp)
-                end.linkTo(parent.end, margin = 10.dp)
-                width = Dimension.fillToConstraints
-                top.linkTo(parent.top)
-            },
+            modifier = Modifier
+                .constrainAs(title) {
+                    start.linkTo(parent.start, margin = 10.dp)
+                    end.linkTo(parent.end, margin = 10.dp)
+                    width = Dimension.fillToConstraints
+                    top.linkTo(parent.top)
+                },
             color = DarkTextPrimary
         )
 
         // Movie overview text
         Text(
-            text = overview,
+            text = overview ?: "",
             style = MaterialTheme.typography.body1.copy(color = TextSecondary),
-            modifier = Modifier.constrainAs(overviewText) {
-                top.linkTo(title.bottom, margin = 5.dp)
-                start.linkTo(parent.start, margin = 10.dp)
-                width = Dimension.fillToConstraints
-                end.linkTo(parent.end, margin = 10.dp)
-            },
+            modifier = Modifier
+                .constrainAs(overviewText) {
+                    top.linkTo(title.bottom, margin = 5.dp)
+                    start.linkTo(parent.start, margin = 10.dp)
+                    width = Dimension.fillToConstraints
+                    end.linkTo(parent.end, margin = 10.dp)
+                }
+                .placeholder(
+                    visible = overview.isNullOrEmpty(),
+                    color = Gray,
+                    highlight = PlaceholderHighlight.shimmer(highlightColor = Color.Gray)
+                ),
             textAlign = TextAlign.Start,
             overflow = TextOverflow.Ellipsis,
         )

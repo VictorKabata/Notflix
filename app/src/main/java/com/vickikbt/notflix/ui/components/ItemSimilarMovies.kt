@@ -16,6 +16,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.rememberImagePainter
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.placeholder
+import com.google.accompanist.placeholder.shimmer
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
@@ -23,6 +26,7 @@ import com.vickikbt.domain.models.Movie
 import com.vickikbt.domain.models.SimilarMovies
 import com.vickikbt.notflix.ui.theme.Golden
 import com.vickikbt.notflix.ui.theme.Gray
+import com.vickikbt.notflix.ui.theme.TextSecondary
 import com.vickikbt.notflix.util.getRating
 
 @Composable
@@ -45,11 +49,17 @@ fun SimilarMoviesSection(similarMovies: SimilarMovies?, modifier: Modifier) {
         )
 
         LazyRow(
-            modifier = Modifier.constrainAs(movies) {
-                top.linkTo(textSimilarMovies.bottom)
-                start.linkTo(parent.start, margin = 10.dp)
-                end.linkTo(parent.end, margin = 10.dp)
-            },
+            modifier = Modifier
+                .constrainAs(movies) {
+                    top.linkTo(textSimilarMovies.bottom)
+                    start.linkTo(parent.start, margin = 10.dp)
+                    end.linkTo(parent.end, margin = 10.dp)
+                }
+                .placeholder(
+                    visible = similarMovies == null,
+                    color = Gray,
+                    highlight = PlaceholderHighlight.shimmer(highlightColor = TextSecondary)
+                ),
             contentPadding = PaddingValues(all = 10.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {

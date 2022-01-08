@@ -15,8 +15,13 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.placeholder
+import com.google.accompanist.placeholder.shimmer
 import com.vickikbt.domain.models.Cast
 import com.vickikbt.notflix.ui.theme.DarkTextSecondary
+import com.vickikbt.notflix.ui.theme.Gray
+import com.vickikbt.notflix.ui.theme.TextSecondary
 
 @Composable
 fun CastSection(modifier: Modifier, cast: Cast?) {
@@ -24,7 +29,6 @@ fun CastSection(modifier: Modifier, cast: Cast?) {
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
-
     ) {
         val (textCast, actors) = createRefs()
 
@@ -39,11 +43,17 @@ fun CastSection(modifier: Modifier, cast: Cast?) {
         )
 
         LazyRow(
-            modifier = Modifier.constrainAs(actors) {
-                top.linkTo(textCast.bottom, margin = 5.dp)
-                start.linkTo(parent.start, margin = 10.dp)
-                end.linkTo(parent.end, margin = 10.dp)
-            },
+            modifier = Modifier
+                .constrainAs(actors) {
+                    top.linkTo(textCast.bottom, margin = 5.dp)
+                    start.linkTo(parent.start, margin = 10.dp)
+                    end.linkTo(parent.end, margin = 10.dp)
+                }
+                .placeholder(
+                    visible = cast == null,
+                    color = Gray,
+                    highlight = PlaceholderHighlight.shimmer(highlightColor = TextSecondary)
+                ),
             contentPadding = PaddingValues(all = 10.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
