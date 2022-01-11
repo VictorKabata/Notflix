@@ -51,10 +51,6 @@ fun DetailsScreen(
     detailsViewModel: DetailsViewModel = getViewModel(),
     movieId: Int,
 ) {
-    val defaultDominantColor = MaterialTheme.colors.surface
-    val defaultDominantTextColor = MaterialTheme.colors.onSurface
-    val dominantColor = remember { mutableStateOf(defaultDominantColor) }
-    val dominantTextColor = remember { mutableStateOf(defaultDominantTextColor) }
     detailsViewModel.apply {
         fetchMovieCast(movieId)
         fetchMovieDetails(movieId)
