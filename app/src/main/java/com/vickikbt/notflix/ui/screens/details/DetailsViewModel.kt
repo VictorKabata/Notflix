@@ -3,6 +3,7 @@ package com.vickikbt.notflix.ui.screens.details
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,8 +23,8 @@ class DetailsViewModel(
     private val movieDetailsRepository: MovieDetailsRepository
 ) : ViewModel() {
 
-    private val _movieIsFavorite = MutableStateFlow(false)
-    val movieIsFavorite: StateFlow<Boolean> get() = _movieIsFavorite
+    private val _movieIsFavorite: MutableStateFlow<Boolean?> = MutableStateFlow(false)
+    val movieIsFavorite: StateFlow<Boolean?> get() = _movieIsFavorite
 
     private val _movieDetails = MutableLiveData<MovieDetails>()
     val movieDetails: LiveData<MovieDetails> get() = _movieDetails
@@ -78,16 +79,25 @@ class DetailsViewModel(
     fun saveMovieDetails(movieDetails: MovieDetails, cast: Cast, movieVideo: MovieVideo?) =
         viewModelScope.launch {
             movieDetailsRepository.apply {
-                saveMovieDetails(movieDetails).saveMovieCast(cast)
+                saveMovieDetails(movieDetails)
+                saveMovieCast(cast)
                 if (movieVideo != null) {
                     saveMovieVideos(movieVideo)
                 }
             }
         }
 
+    fun updateFavorite(cacheId: Int, isFavorite: Boolean) = viewModelScope.launch {
+        movieDetailsRepository.updateMovieIsFavorite(cacheId, isFavorite)
+    }
+
     fun checkIfMovieIsFavorite(movieId: Int) = viewModelScope.launch {
         movieDetailsRepository.isMovieFavorite(movieId).collect {
             _movieIsFavorite.value = it
         }
+    }
+
+    fun logThis(something: Any) {
+        Log.d("Det", "The value of favorite is $something")
     }
 }

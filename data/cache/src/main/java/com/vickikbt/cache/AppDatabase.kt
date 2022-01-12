@@ -12,7 +12,7 @@ import com.vickikbt.cache.models.*
 
 @Database(
     entities = [MovieEntity::class, MovieDetailsEntity::class, CastEntity::class, MovieVideoEntity::class],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(

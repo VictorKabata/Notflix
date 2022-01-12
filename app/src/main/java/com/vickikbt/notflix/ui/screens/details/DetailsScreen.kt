@@ -1,17 +1,15 @@
 package com.vickikbt.notflix.ui.screens.details
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.BlendMode
@@ -52,17 +50,22 @@ fun DetailsScreen(
     navController: NavController,
     detailsViewModel: DetailsViewModel = getViewModel(),
     movieId: Int,
+    cacheId: Int,
 ) {
     detailsViewModel.apply {
         fetchMovieCast(movieId)
         fetchMovieDetails(movieId)
         fetchMovieVideo(movieId)
         fetchSimilarMovies(movieId)
+        checkIfMovieIsFavorite(movieId)
+        logThis(cacheId)
     }
+
     val movieDetails = detailsViewModel.movieDetails.observeAsState().value
     val movieCast = detailsViewModel.movieCast.observeAsState().value
     val similarMovies = detailsViewModel.similarMovies.observeAsState().value
     val movieVideo = detailsViewModel.movieVideo.observeAsState().value
+    val movieIsFavorite = detailsViewModel.movieIsFavorite.collectAsState().value
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.surface
@@ -78,7 +81,12 @@ fun DetailsScreen(
                 ),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            MovieImageSection(movieDetails)
+            MovieImageSection(movieDetails) {
+                if (movieDetails != null && movieCast != null) {
+                    detailsViewModel.saveMovieDetails(movieDetails, movieCast, null)
+                    detailsViewModel.updateFavorite(cacheId, movieIsFavorite?.not() ?: false)
+                }
+            }
 
             val voteAverage = movieDetails?.voteAverage
 
@@ -114,7 +122,8 @@ fun DetailsScreen(
 }
 
 @Composable
-fun MovieImageSection(movieDetails: MovieDetails?, viewModel: DetailsViewModel = getViewModel()) {
+fun MovieImageSection(movieDetails: MovieDetails?, viewModel: DetailsViewModel = getViewModel(), iconOnClick: () -> Unit) {
+    val movieIsFavorite = viewModel.movieIsFavorite.collectAsState().value
     val defaultDominantColor = MaterialTheme.colors.surface
     val defaultDominantTextColor = MaterialTheme.colors.onSurface
     val dominantColor = remember { mutableStateOf(defaultDominantColor) }
@@ -130,8 +139,6 @@ fun MovieImageSection(movieDetails: MovieDetails?, viewModel: DetailsViewModel =
         val (movieImage, runTime, movieTitle, backArrow, favoriteIcon) = createRefs()
         val imagePainter = rememberImagePainter(data = movieDetails?.backdropPath?.loadImage())
         val movieRunTime = movieDetails?.runtime?.getMovieDuration()
-
-
 
         // Movie image region
 
@@ -204,22 +211,27 @@ fun MovieImageSection(movieDetails: MovieDetails?, viewModel: DetailsViewModel =
         Image(
             painter = painterResource(id = R.drawable.ic_back),
             contentDescription = "back",
-            modifier = Modifier.constrainAs(backArrow) {
-                top.linkTo(parent.top, margin = 30.dp)
-                start.linkTo(parent.start, margin = 10.dp)
-            }.size(30.dp)
+            modifier = Modifier
+                .constrainAs(backArrow) {
+                    top.linkTo(parent.top, margin = 30.dp)
+                    start.linkTo(parent.start, margin = 10.dp)
+                }
+                .size(30.dp)
         )
 
         // endOfRegion backArrow
 
         //region favoriteIcon
         Image(
-            painter = painterResource(id = R.drawable.ic_favourite),
+            painter = painterResource(id = if (movieIsFavorite == true) R.drawable.ic_favorite_selected else R.drawable.ic_favourite),
             contentDescription = "back",
-            modifier = Modifier.constrainAs(favoriteIcon) {
-                top.linkTo(parent.top, margin = 30.dp)
-                end.linkTo(parent.end, margin = 10.dp)
-            }.size(30.dp)
+            modifier = Modifier
+                .constrainAs(favoriteIcon) {
+                    top.linkTo(parent.top, margin = 30.dp)
+                    end.linkTo(parent.end, margin = 10.dp)
+                }
+                .size(30.dp)
+                .clickable { iconOnClick }
         )
 
         // endOfRegion favoriteIcon

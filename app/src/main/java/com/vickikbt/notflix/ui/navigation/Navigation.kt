@@ -45,12 +45,16 @@ fun Navigation(navController: NavHostController) {
             arguments = listOf(
                 navArgument("movieId") {
                     type = NavType.IntType
+                },
+                navArgument("cacheId"){
+                    type = NavType.IntType
                 }
             )
         ) {
             val movieID = it.arguments?.getInt("movieId")
-            if (movieID != null) {
-                DetailsScreen(navController = navController, movieId = movieID)
+            val cacheId = it.arguments?.getInt("cacheId")
+            if (movieID != null && cacheId != null) {
+                DetailsScreen(navController = navController, movieId = movieID, cacheId = cacheId)
             }
         }
     }

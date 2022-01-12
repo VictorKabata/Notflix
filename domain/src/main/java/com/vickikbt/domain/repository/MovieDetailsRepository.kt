@@ -28,17 +28,19 @@ interface MovieDetailsRepository {
     /**
      * Save movie details to local storage
      */
-    suspend fun saveMovieDetails(movieDetails: MovieDetails): MovieDetailsRepository
+    suspend fun saveMovieDetails(movieDetails: MovieDetails)
 
     /**
      * Save movie cast details to local storage
      */
-    suspend fun saveMovieCast(cast: Cast): MovieDetailsRepository
+    suspend fun saveMovieCast(cast: Cast)
 
     /**
      * Save movie videos to local storage
      */
-    suspend fun saveMovieVideos(movieVideo: MovieVideo): MovieDetailsRepository
+    suspend fun saveMovieVideos(movieVideo: MovieVideo)
 
-    suspend fun isMovieFavorite(movieId: Int): Flow<Boolean>
+    suspend fun isMovieFavorite(movieId: Int): Flow<Boolean?>
+
+    suspend fun updateMovieIsFavorite(cacheId: Int, isFavorite: Boolean)
 }

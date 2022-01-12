@@ -146,7 +146,7 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
             ItemRecentlyPlayedAlbum(
                 movie = item, onItemClick = {
                     // ToDo: OnItemClicked-Navigate to movie details
-                    navController.navigate("details/" + it.id!!)
+                    navController.navigate("details/" + it.id!! +"/" +it.cacheId!!)
                 }
             )
         }

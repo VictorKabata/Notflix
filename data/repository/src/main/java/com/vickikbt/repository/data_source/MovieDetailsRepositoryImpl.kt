@@ -16,10 +16,7 @@ import com.vickikbt.network.ApiService
 import com.vickikbt.network.utils.SafeApiRequest
 import com.vickikbt.repository.mappers.toDomain
 import com.vickikbt.repository.mappers.toEntity
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 
 class MovieDetailsRepositoryImpl constructor(
     private val apiService: ApiService,
@@ -46,9 +43,8 @@ class MovieDetailsRepositoryImpl constructor(
         }
     }
 
-    override suspend fun saveMovieDetails(movieDetails: MovieDetails): MovieDetailsRepository {
+    override suspend fun saveMovieDetails(movieDetails: MovieDetails) {
         appDatabase.movieDetailsDao().saveMovieDetails(movieDetails.toEntity())
-        return this
     }
 
     override suspend fun getMovieDetails(movieId: Int): Flow<MovieDetails> {
@@ -72,9 +68,8 @@ class MovieDetailsRepositoryImpl constructor(
         }
     }
 
-    override suspend fun saveMovieCast(cast: Cast): MovieDetailsRepository {
+    override suspend fun saveMovieCast(cast: Cast) {
         appDatabase.castDao().saveMovieCast(cast.toEntity())
-        return this
     }
 
     override suspend fun getMovieCast(movieId: Int): Flow<Cast> {
@@ -101,9 +96,8 @@ class MovieDetailsRepositoryImpl constructor(
         }
     }
 
-    override suspend fun saveMovieVideos(movieVideo: MovieVideo): MovieDetailsRepository {
+    override suspend fun saveMovieVideos(movieVideo: MovieVideo) {
         appDatabase.videosDao().saveMovieVideo(movieVideo.toEntity())
-        return this
     }
 
     override suspend fun getMovieVideos(movieId: Int): Flow<MovieVideo> {
@@ -138,7 +132,16 @@ class MovieDetailsRepositoryImpl constructor(
         }
     }
 
-    override suspend fun isMovieFavorite(movieId: Int): Flow<Boolean> {
-        return flowOf(appDatabase.movieDetailsDao().isMovieDetailsAvailable(movieId) == 1)
+    override suspend fun isMovieFavorite(movieId: Int): Flow<Boolean?> {
+        appDatabase.moviesDao().isMovieFavorite(movieId).collect {
+            Log.d("Movdet", "Value of isFavorite is: ${it.toString()}")
+        }
+//        appDatabase.moviesDao().getFavoriteMovies().collect {
+//            Log.d("Movdet", (it.size.toString()))
+//        }
+        return appDatabase.moviesDao().isMovieFavorite(movieId)
     }
+
+    override suspend fun updateMovieIsFavorite(cacheId: Int, isFavorite: Boolean) =
+        appDatabase.moviesDao().updateMovieIsFavorite(cacheId, isFavorite)
 }
