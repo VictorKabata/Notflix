@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -31,6 +32,7 @@ import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.placeholder
 import com.google.accompanist.placeholder.shimmer
 import com.vickikbt.domain.models.MovieDetails
+import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.CastSection
 import com.vickikbt.notflix.ui.components.MovieRatingSection
 import com.vickikbt.notflix.ui.components.SimilarMoviesSection
@@ -76,7 +78,7 @@ fun DetailsScreen(
                 ),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            MovieImage(movieDetails)
+            MovieImageSection(movieDetails)
 
             val voteAverage = movieDetails?.voteAverage
 
@@ -112,7 +114,7 @@ fun DetailsScreen(
 }
 
 @Composable
-fun MovieImage(movieDetails: MovieDetails?, viewModel: DetailsViewModel = getViewModel()) {
+fun MovieImageSection(movieDetails: MovieDetails?, viewModel: DetailsViewModel = getViewModel()) {
     val defaultDominantColor = MaterialTheme.colors.surface
     val defaultDominantTextColor = MaterialTheme.colors.onSurface
     val dominantColor = remember { mutableStateOf(defaultDominantColor) }
@@ -125,9 +127,11 @@ fun MovieImage(movieDetails: MovieDetails?, viewModel: DetailsViewModel = getVie
         )
     ) {
 
-        val (movieImage, runTime, movieTitle) = createRefs()
+        val (movieImage, runTime, movieTitle, backArrow, favoriteIcon) = createRefs()
         val imagePainter = rememberImagePainter(data = movieDetails?.backdropPath?.loadImage())
         val movieRunTime = movieDetails?.runtime?.getMovieDuration()
+
+
 
         // Movie image region
 
@@ -195,6 +199,30 @@ fun MovieImage(movieDetails: MovieDetails?, viewModel: DetailsViewModel = getVie
                 bottom.linkTo(movieTitle.top)
             }
         )
+
+        //region backArrow
+        Image(
+            painter = painterResource(id = R.drawable.ic_back),
+            contentDescription = "back",
+            modifier = Modifier.constrainAs(backArrow) {
+                top.linkTo(parent.top, margin = 30.dp)
+                start.linkTo(parent.start, margin = 10.dp)
+            }.size(30.dp)
+        )
+
+        // endOfRegion backArrow
+
+        //region favoriteIcon
+        Image(
+            painter = painterResource(id = R.drawable.ic_favourite),
+            contentDescription = "back",
+            modifier = Modifier.constrainAs(favoriteIcon) {
+                top.linkTo(parent.top, margin = 30.dp)
+                end.linkTo(parent.end, margin = 10.dp)
+            }.size(30.dp)
+        )
+
+        // endOfRegion favoriteIcon
     }
 }
 
