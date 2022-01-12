@@ -34,20 +34,22 @@ class MovieDetailsRepositoryImpl constructor(
 
     init {
         _movieDetails.observeForever { movieDetails ->
-            Coroutines.io { saveMovieDetails(movieDetails) }
+            Coroutines.io { saveMovieDetails(movieDetails.toDomain()) }
         }
 
         _cast.observeForever { cast ->
-            Coroutines.io { saveMovieCast(cast) }
+            Coroutines.io { saveMovieCast(cast.toDomain()) }
         }
 
         _videos.observeForever { videos ->
-            Coroutines.io { saveMovieVideos(videos) }
+            Coroutines.io { saveMovieVideos(videos.toDomain()) }
         }
     }
 
-    private suspend fun saveMovieDetails(movieDetailsEntity: MovieDetailsEntity) =
-        appDatabase.movieDetailsDao().saveMovieDetails(movieDetailsEntity)
+    override suspend fun saveMovieDetails(movieDetails: MovieDetails): MovieDetailsRepository {
+        appDatabase.movieDetailsDao().saveMovieDetails(movieDetails.toEntity())
+        return this
+    }
 
     override suspend fun getMovieDetails(movieId: Int): Flow<MovieDetails> {
         val isMovieDetailsCacheAvailable = movieDetailsDao.isMovieDetailsAvailable(movieId) > 0
@@ -70,8 +72,10 @@ class MovieDetailsRepositoryImpl constructor(
         }
     }
 
-    private suspend fun saveMovieCast(castEntity: CastEntity) =
-        appDatabase.castDao().saveMovieCast(castEntity)
+    override suspend fun saveMovieCast(cast: Cast): MovieDetailsRepository {
+        appDatabase.castDao().saveMovieCast(cast.toEntity())
+        return this
+    }
 
     override suspend fun getMovieCast(movieId: Int): Flow<Cast> {
         val isMovieCacheAvailable = appDatabase.castDao().isMovieCastAvailable(movieId) > 0
@@ -97,8 +101,10 @@ class MovieDetailsRepositoryImpl constructor(
         }
     }
 
-    private suspend fun saveMovieVideos(movieVideoEntity: MovieVideoEntity) =
-        appDatabase.videosDao().saveMovieVideo(movieVideoEntity)
+    override suspend fun saveMovieVideos(movieVideo: MovieVideo): MovieDetailsRepository {
+        appDatabase.videosDao().saveMovieVideo(movieVideo.toEntity())
+        return this
+    }
 
     override suspend fun getMovieVideos(movieId: Int): Flow<MovieVideo> {
         val isMovieVideoCacheAvailable =
@@ -130,5 +136,9 @@ class MovieDetailsRepositoryImpl constructor(
             Log.e("MovieDetails", "${e.message}")
             flowOf()
         }
+    }
+
+    override suspend fun isMovieFavorite(movieId: Int): Flow<Boolean> {
+        return flowOf(appDatabase.movieDetailsDao().isMovieDetailsAvailable(movieId) == 1)
     }
 }

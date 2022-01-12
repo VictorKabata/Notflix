@@ -13,12 +13,18 @@ import com.vickikbt.domain.models.MovieDetails
 import com.vickikbt.domain.models.MovieVideo
 import com.vickikbt.domain.models.SimilarMovies
 import com.vickikbt.domain.repository.MovieDetailsRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(
     private val movieDetailsRepository: MovieDetailsRepository
 ) : ViewModel() {
+
+    private val _movieIsFavorite = MutableStateFlow(false)
+    val movieIsFavorite: StateFlow<Boolean> get() = _movieIsFavorite
+
     private val _movieDetails = MutableLiveData<MovieDetails>()
     val movieDetails: LiveData<MovieDetails> get() = _movieDetails
 
@@ -69,7 +75,19 @@ class DetailsViewModel(
         }
     }
 
-    fun saveMovieDetails(movieDetails: MovieDetails,){
+    fun saveMovieDetails(movieDetails: MovieDetails, cast: Cast, movieVideo: MovieVideo?) =
+        viewModelScope.launch {
+            movieDetailsRepository.apply {
+                saveMovieDetails(movieDetails).saveMovieCast(cast)
+                if (movieVideo != null) {
+                    saveMovieVideos(movieVideo)
+                }
+            }
+        }
 
+    fun checkIfMovieIsFavorite(movieId: Int) = viewModelScope.launch {
+        movieDetailsRepository.isMovieFavorite(movieId).collect {
+            _movieIsFavorite.value = it
+        }
     }
 }
