@@ -16,7 +16,6 @@ fun FavoritesScreen(navController: NavController) {
 
     Scaffold(topBar = { AppBar(stringResource(id = R.string.title_favorites)) }) {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
-
         }
     }
 }
