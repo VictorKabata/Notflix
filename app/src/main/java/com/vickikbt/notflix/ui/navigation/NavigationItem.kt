@@ -9,5 +9,4 @@ sealed class NavigationItem(var route: String, var title: String, var icon: Int?
     object Settings : NavigationItem("settings", "Settings", R.drawable.ic_settings)
 
     object Details : NavigationItem("details", "Movie Details", null)
-
 }
