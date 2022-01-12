@@ -1,6 +1,7 @@
 package com.vickikbt.notflix.ui.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -14,6 +15,7 @@ import com.vickikbt.notflix.ui.screens.favorites.FavoritesScreen
 import com.vickikbt.notflix.ui.screens.home.HomeScreen
 import com.vickikbt.notflix.ui.screens.settings.SettingsScreen
 
+@ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
