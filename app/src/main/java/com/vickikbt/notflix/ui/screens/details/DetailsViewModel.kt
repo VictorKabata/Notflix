@@ -68,4 +68,8 @@ class DetailsViewModel(
             }
         }
     }
+
+    fun saveMovieDetails(movieDetails: MovieDetails,){
+
+    }
 }
