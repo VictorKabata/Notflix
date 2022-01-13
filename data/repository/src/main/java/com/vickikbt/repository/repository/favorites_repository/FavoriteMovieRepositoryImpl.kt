@@ -1,8 +1,7 @@
-package com.vickikbt.repository.data_source
+package com.vickikbt.repository.repository.favorites_repository
 
 import com.vickikbt.cache.AppDatabase
 import com.vickikbt.domain.models.Movie
-import com.vickikbt.domain.repository.FavoritesRepository
 import com.vickikbt.network.utils.SafeApiRequest
 import com.vickikbt.repository.mappers.toDomain
 import kotlinx.coroutines.flow.Flow
