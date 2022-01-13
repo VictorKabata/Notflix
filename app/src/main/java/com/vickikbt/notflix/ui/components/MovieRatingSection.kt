@@ -37,7 +37,7 @@ fun MovieRatingSection(popularity: String?, voteAverage: Float?, modifier: Modif
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        ConstraintLayout(Modifier.wrapContentHeight().wrapContentWidth()) {
+        ConstraintLayout(Modifier.wrapContentHeight().fillMaxWidth()) {
             val (image, popularityRef, popularityText, divider, rating) = createRefs()
             Text(
                 text = "$popularity",
@@ -54,7 +54,7 @@ fun MovieRatingSection(popularity: String?, voteAverage: Float?, modifier: Modif
                 text = "Popularity", style = MaterialTheme.typography.h6, fontSize = 18.sp,
                 modifier = Modifier.constrainAs(popularityText) {
                     top.linkTo(popularityRef.bottom,)
-                    start.linkTo(parent.start)
+                    end.linkTo(divider.start, margin = 15.dp)
                 }
             )
 
@@ -64,7 +64,8 @@ fun MovieRatingSection(popularity: String?, voteAverage: Float?, modifier: Modif
                     .fillMaxHeight(0.7f)
                     .width(2.dp)
                     .constrainAs(divider) {
-                        start.linkTo(popularityText.end, margin = 15.dp)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
                         top.linkTo(parent.top)
                         bottom.linkTo(parent.bottom, margin = 10.dp)
                         height = Dimension.fillToConstraints
