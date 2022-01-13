@@ -26,6 +26,7 @@ fun MovieRatingSection(popularity: String?, voteAverage: Float?, modifier: Modif
         modifier = modifier
             .fillMaxWidth()
             .height(65.dp)
+            .padding(bottom = 10.dp)
             .placeholder(
                 visible = popularity.isNullOrEmpty(),
                 color = Gray,

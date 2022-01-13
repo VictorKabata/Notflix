@@ -1,5 +1,6 @@
 package com.vickikbt.notflix.ui.screens.home
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -146,7 +147,8 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
             ItemRecentlyPlayedAlbum(
                 movie = item, onItemClick = {
                     // ToDo: OnItemClicked-Navigate to movie details
-                    navController.navigate("details/" + it.id!! +"/" +it.cacheId!!)
+                    Log.d("Home", "${item.isFavorite}")
+                    navController.navigate("details/" + it.id!! + "/" + it.cacheId!!)
                 }
             )
         }

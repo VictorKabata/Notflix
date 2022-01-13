@@ -74,6 +74,7 @@ fun DetailsScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
+                .padding(bottom = 20.dp)
                 .placeholder(
                     visible = false,
                     color = MaterialTheme.colors.primary,
