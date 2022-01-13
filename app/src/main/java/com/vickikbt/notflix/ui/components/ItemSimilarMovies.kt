@@ -1,20 +1,25 @@
 package com.vickikbt.notflix.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import coil.compose.rememberImagePainter
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.placeholder
@@ -76,8 +81,8 @@ fun SimilarMoviesSection(similarMovies: SimilarMovies?, modifier: Modifier) {
 fun SimilarMovieItem(movie: Movie) {
     ConstraintLayout(
         modifier = Modifier
-            .width(90.dp)
-            .height(120.dp)
+            .wrapContentWidth(align = Alignment.Start)
+            .wrapContentHeight()
     ) {
         val painter =
             rememberImagePainter(data = "https://image.tmdb.org/t/p/w500${movie.backdropPath}")
@@ -86,16 +91,19 @@ fun SimilarMovieItem(movie: Movie) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(100.dp)
+                .wrapContentHeight()
                 .constrainAs(imageCard) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
-                }
+                },
+            shape = RoundedCornerShape(4.dp)
         ) {
             Image(
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .height(210.dp)
+                    .width(150.dp)
+                ,
                 painter = painter,
                 contentDescription = "similar movie image",
                 contentScale = ContentScale.Crop
@@ -104,13 +112,15 @@ fun SimilarMovieItem(movie: Movie) {
 
         // movie name
         Text(
-            text = "${movie.title}", style = MaterialTheme.typography.h6.copy(fontSize = 16.sp),
+            text = "${movie.title}", style = MaterialTheme.typography.h5.copy(fontSize = 14.sp),
             modifier = Modifier.constrainAs(movieName) {
                 top.linkTo(imageCard.bottom)
                 start.linkTo(parent.start)
+                end.linkTo(imageCard.end)
+                width = Dimension.fillToConstraints
             },
             overflow = TextOverflow.Ellipsis,
-            textAlign = TextAlign.Center,
+            textAlign = TextAlign.Start,
             maxLines = 1,
         )
 
@@ -119,6 +129,8 @@ fun SimilarMovieItem(movie: Movie) {
             modifier = Modifier.constrainAs(rating) {
                 top.linkTo(movieName.bottom)
                 start.linkTo(parent.start)
+                end.linkTo(imageCard.end)
+                width = Dimension.fillToConstraints
             },
             value = movie.voteAverage?.getRating() ?: 0f,
             numStars = 5,

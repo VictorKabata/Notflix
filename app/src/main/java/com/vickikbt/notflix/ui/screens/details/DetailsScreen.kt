@@ -1,10 +1,7 @@
 package com.vickikbt.notflix.ui.screens.details
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -194,10 +191,9 @@ fun MovieImageSection(movieDetails: MovieDetails?, viewModel: DetailsViewModel =
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
             color = dominantTextColor.value,
-
         )
 
-        // Movie date and time
+        // Movie duration
         Text(
             text = "$movieRunTime",
             color = dominantTextColor.value,
@@ -244,7 +240,7 @@ fun MovieOverview(modifier: Modifier, overview: String?) {
     ConstraintLayout(
         modifier = modifier
             .fillMaxWidth()
-            .height(100.dp)
+            .wrapContentHeight()
     ) {
         val (title, overviewText) = createRefs()
         // title of the section
@@ -265,7 +261,7 @@ fun MovieOverview(modifier: Modifier, overview: String?) {
         // Movie overview text
         Text(
             text = overview ?: "",
-            style = MaterialTheme.typography.body1.copy(color = TextSecondary),
+            style = MaterialTheme.typography.body1.copy(color = TextSecondary, fontSize = 15.sp),
             modifier = Modifier
                 .constrainAs(overviewText) {
                     top.linkTo(title.bottom, margin = 5.dp)

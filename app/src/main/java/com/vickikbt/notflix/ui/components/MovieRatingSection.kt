@@ -1,6 +1,7 @@
 package com.vickikbt.notflix.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -12,6 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.placeholder
 import com.google.accompanist.placeholder.shimmer
@@ -25,8 +28,7 @@ fun MovieRatingSection(popularity: String?, voteAverage: Float?, modifier: Modif
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(65.dp)
-            .padding(bottom = 10.dp)
+            .wrapContentHeight()
             .placeholder(
                 visible = popularity.isNullOrEmpty(),
                 color = Gray,
@@ -35,40 +37,59 @@ fun MovieRatingSection(popularity: String?, voteAverage: Float?, modifier: Modif
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Column(
-            verticalArrangement = Arrangement.SpaceAround,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        ConstraintLayout(Modifier.wrapContentHeight().wrapContentWidth()) {
+            val (image, popularityRef, popularityText, divider, rating) = createRefs()
             Text(
                 text = "$popularity",
                 style = MaterialTheme.typography.h6,
-                fontSize = 32.sp,
+                fontSize = 42.sp,
+                modifier = Modifier.constrainAs(popularityRef) {
+                    top.linkTo(parent.top)
+                    start.linkTo(popularityText.start)
+                    end.linkTo(popularityText.end)
+                }
             )
-            Text(text = "Popularity", style = MaterialTheme.typography.h6, fontSize = 20.sp)
-        }
-        Spacer(modifier = modifier.width(15.dp))
-        Divider(
-            thickness = 2.dp,
-            modifier = modifier
-                .fillMaxHeight(0.7f)
-                .width(2.dp),
-            color = Surface
-        )
-        Spacer(modifier = modifier.width(15.dp))
 
-        Column(
-            verticalArrangement = Arrangement.SpaceAround,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+            Text(
+                text = "Popularity", style = MaterialTheme.typography.h6, fontSize = 18.sp,
+                modifier = Modifier.constrainAs(popularityText) {
+                    top.linkTo(popularityRef.bottom,)
+                    start.linkTo(parent.start)
+                }
+            )
+
+            Divider(
+                thickness = 2.dp,
+                modifier = modifier
+                    .fillMaxHeight(0.7f)
+                    .width(2.dp)
+                    .constrainAs(divider) {
+                        start.linkTo(popularityText.end, margin = 15.dp)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom, margin = 10.dp)
+                        height = Dimension.fillToConstraints
+                    },
+                color = Surface
+            )
+
             Image(
                 painter = painterResource(id = R.drawable.ic_rating_star),
                 contentDescription = "rating star",
-                modifier = modifier.size(40.dp)
+                modifier = modifier.constrainAs(image) {
+                    bottom.linkTo(popularityRef.bottom)
+                    start.linkTo(rating.start)
+                    end.linkTo(rating.end)
+                }
             )
+
             Text(
                 text = "$voteAverage/5.0",
                 style = MaterialTheme.typography.h6,
                 fontSize = 20.sp,
+                modifier = Modifier.constrainAs(rating) {
+                    start.linkTo(divider.end, margin = 15.dp)
+                    top.linkTo(popularityText.top)
+                }
             )
         }
     }

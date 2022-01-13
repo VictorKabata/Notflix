@@ -1,6 +1,7 @@
 package com.vickikbt.notflix.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -8,6 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -45,7 +47,7 @@ fun CastSection(modifier: Modifier, cast: Cast?) {
         LazyRow(
             modifier = Modifier
                 .constrainAs(actors) {
-                    top.linkTo(textCast.bottom, margin = 5.dp)
+                    top.linkTo(textCast.bottom)
                     start.linkTo(parent.start, margin = 10.dp)
                     end.linkTo(parent.end, margin = 10.dp)
                 }
@@ -75,7 +77,7 @@ fun CastSection(modifier: Modifier, cast: Cast?) {
 fun ItemMovieCast(imageUrl: String?, name: String, role: String, modifier: Modifier) {
     ConstraintLayout(
         modifier = modifier
-            .height(80.dp)
+            .wrapContentHeight()
             .width(80.dp)
     ) {
         val (actorImage, actorName, actorRole) = createRefs()
@@ -88,7 +90,7 @@ fun ItemMovieCast(imageUrl: String?, name: String, role: String, modifier: Modif
         Image(
             painter = painter, contentDescription = "actor image",
             modifier = Modifier
-                .size(60.dp)
+                .size(80.dp)
                 .constrainAs(actorImage) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
@@ -102,11 +104,11 @@ fun ItemMovieCast(imageUrl: String?, name: String, role: String, modifier: Modif
             },
             overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Center,
-            maxLines = 1,
+            maxLines = 1
         )
 
         Text(
-            text = role, style = MaterialTheme.typography.body2.copy(fontSize = 11.sp),
+            text = role, style = MaterialTheme.typography.h4.copy(fontSize = 12.sp, color = TextSecondary),
             modifier = Modifier.constrainAs(actorRole) {
                 top.linkTo(actorName.bottom)
                 start.linkTo(parent.start)
