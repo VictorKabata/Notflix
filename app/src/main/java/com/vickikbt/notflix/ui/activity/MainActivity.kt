@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
@@ -11,7 +12,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -22,18 +22,16 @@ import com.vickikbt.notflix.ui.navigation.Navigation
 import com.vickikbt.notflix.ui.navigation.NavigationItem
 import com.vickikbt.notflix.ui.screens.settings.SettingsViewModel
 import com.vickikbt.notflix.ui.theme.NotflixTheme
-import com.vickikbt.notflix.util.LocaleUtilCompose
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
-import java.util.*
 
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
 class MainActivity : ComponentActivity() {
 
-    //private val localeUtil by inject<LocaleUtilCompose>()
+    // private val localeUtil by inject<LocaleUtilCompose>()
 
+    @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -54,10 +52,9 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
-
 }
 
+@ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
