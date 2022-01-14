@@ -1,5 +1,7 @@
 package com.vickikbt.notflix.di
 
+import com.vickikbt.notflix.ui.screens.details.DetailsViewModel
+import com.vickikbt.notflix.ui.screens.favorites.FavoritesViewModel
 import com.vickikbt.notflix.ui.screens.home.HomeViewModel
 import com.vickikbt.notflix.ui.screens.settings.SettingsViewModel
 import com.vickikbt.notflix.util.LocaleUtilCompose
@@ -15,4 +17,6 @@ val presentationModule = module {
     viewModel { HomeViewModel(get()) }
     
     viewModel { SettingsViewModel(get()) }
+    viewModel { DetailsViewModel(get()) }
+    viewModel { FavoritesViewModel(get()) }
 }

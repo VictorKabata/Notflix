@@ -2,6 +2,7 @@ package com.vickikbt.notflix.ui.screens.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -12,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -23,7 +25,7 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.material.fade
+import com.google.accompanist.placeholder.fade
 import com.google.accompanist.placeholder.placeholder
 import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.R
@@ -70,7 +72,6 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                 )
             }
 
-
             popularMovies?.let {
                 PopularMovies(
                     navController = navController,
@@ -85,11 +86,8 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                     movies = it
                 )
             }
-
         }
-
     }
-
 }
 
 @ExperimentalPagerApi
@@ -117,12 +115,13 @@ fun NowPlayingMovies(
                 .placeholder(
                     visible = movies.isNullOrEmpty(),
                     color = Gray,
-                    highlight = PlaceholderHighlight.fade()
+                    highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
                 ),
             viewModel = viewModel,
             movie = movies[page]
         ) {
-            //ToDo: OnItemClick- Navigate to movie details
+            val movie = movies[page]
+            navController.navigate("details/" + movie.id!! + "/" + movie.cacheId!!)
         }
     }
 
@@ -134,7 +133,7 @@ fun NowPlayingMovies(
             .placeholder(
                 visible = movies.isNullOrEmpty(),
                 color = Gray,
-                highlight = PlaceholderHighlight.fade()
+                highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
             ),
         pagerState = pagerState,
         indicatorHeight = 6.dp,
@@ -157,7 +156,7 @@ fun TrendingMovies(navController: NavController, movies: Flow<PagingData<Movie>>
             .wrapContentHeight(),
         sectionTitle = stringResource(id = R.string.trending_movies),
         onItemClick = {
-            //ToDo: OnSectionedClicked-navigate to view all
+            // ToDo: OnSectionedClicked-navigate to view all
         }
     )
 
@@ -173,12 +172,13 @@ fun TrendingMovies(navController: NavController, movies: Flow<PagingData<Movie>>
                     visible = moviesList.itemCount == null,
                     color = Gray,
                     shape = RoundedCornerShape(4.dp),
-                    highlight = PlaceholderHighlight.fade()
+                    highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
                 ),
                 movie = item!!,
                 onItemClick = {
-                    //ToDo: OnItemClicked-Navigate to movie details
-                })
+//                    navController.navigate("details/" + movie.id!! + "/" + movie.cacheId!!)
+                }
+            )
         }
     }
 }
@@ -199,7 +199,7 @@ fun PopularMovies(
             .wrapContentHeight(),
         sectionTitle = stringResource(id = R.string.popular_movies),
         onItemClick = {
-            //ToDo: OnSectionedClicked-navigate to view all
+            // ToDo: OnSectionedClicked-navigate to view all
         }
     )
 
@@ -215,22 +215,21 @@ fun PopularMovies(
                     visible = moviesList.itemCount == null,
                     color = Gray,
                     shape = RoundedCornerShape(4.dp),
-                    highlight = PlaceholderHighlight.fade()
+                    highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
                 ),
                 viewModel = viewModel,
                 movie = item!!,
                 onClickItem = {
-
-                })
-
+                }
+            )
         }
     }
-
 }
 
 @Composable
 fun UpcomingMovies(
-    navController: NavController, movies: Flow<PagingData<Movie>>
+    navController: NavController,
+    movies: Flow<PagingData<Movie>>
 ) {
     val moviesList = movies.collectAsLazyPagingItems()
 
@@ -242,7 +241,7 @@ fun UpcomingMovies(
                 .wrapContentHeight(),
             sectionTitle = stringResource(id = R.string.upcoming_movies),
             onItemClick = {
-                //ToDo: OnSectionedClicked-navigate to view all
+                // ToDo: OnSectionedClicked-navigate to view all
             }
         )
 
@@ -258,12 +257,13 @@ fun UpcomingMovies(
                         visible = moviesList.itemCount == null,
                         color = Gray,
                         shape = RoundedCornerShape(4.dp),
-                        highlight = PlaceholderHighlight.fade()
+                        highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
                     ),
                     movie = item!!,
                     onItemClick = {
-                        //ToDo: OnItemClicked-Navigate to movie details
-                    })
+                        // ToDo: OnItemClicked-Navigate to movie details
+                    }
+                )
             }
         }
     }

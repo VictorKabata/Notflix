@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/compose-model-1641357851769.xml" value="2.0" />
+        <entry key="../../../../layout/compose-model-1641369813399.xml" value="2.0" />
+        <entry key="../../../../layout/compose-model-1641490548212.xml" value="2.0" />
+        <entry key="../../../../layout/compose-model-1641716517069.xml" value="2.0" />
         <entry key="..\:/Projects/Kotlin/Notflix/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.15989583333333332" />
         <entry key="..\:/Projects/Kotlin/Notflix/app/src/main/res/drawable/ic_github.xml" value="0.26851851851851855" />
         <entry key="..\:/Projects/Kotlin/Notflix/app/src/main/res/drawable/ic_image_quality.xml" value="0.26851851851851855" />
@@ -11,6 +15,7 @@
         <entry key="..\:/Projects/Kotlin/Notflix/app/src/main/res/drawable/ic_report_bug.xml" value="0.26851851851851855" />
         <entry key="..\:/Projects/Kotlin/Notflix/app/src/main/res/drawable/ic_theme.xml" value="0.26851851851851855" />
         <entry key="..\:/Projects/Kotlin/Notflix/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2601851851851852" />
+        <entry key="app/src/main/res/drawable/ic_rating_star.xml" value="0.1" />
       </map>
     </option>
   </component>
