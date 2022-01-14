@@ -1,7 +1,10 @@
 package com.vickikbt.notflix.ui.screens.details
 
-import androidx.compose.foundation.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -32,7 +35,6 @@ import com.vickikbt.notflix.ui.components.CastSection
 import com.vickikbt.notflix.ui.components.MovieRatingSection
 import com.vickikbt.notflix.ui.components.SimilarMoviesSection
 import com.vickikbt.notflix.ui.components.TrailerSection
-import com.vickikbt.notflix.ui.theme.DarkTextPrimary
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.ui.theme.TextSecondary
 import com.vickikbt.notflix.util.getMovieDuration
@@ -79,7 +81,7 @@ fun DetailsScreen(
                 ),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            MovieImageSection(movieDetails) {
+            MovieImageSection(movieDetails, navController = navController) {
                 if (movieDetails != null && movieCast != null) {
                     detailsViewModel.saveMovieDetails(movieDetails, movieCast, null)
                     detailsViewModel.updateFavorite(cacheId, movieIsFavorite?.not() ?: false)
@@ -120,7 +122,12 @@ fun DetailsScreen(
 }
 
 @Composable
-fun MovieImageSection(movieDetails: MovieDetails?, viewModel: DetailsViewModel = getViewModel(), iconOnClick: () -> Unit) {
+fun MovieImageSection(
+    movieDetails: MovieDetails?,
+    viewModel: DetailsViewModel = getViewModel(),
+    navController: NavController,
+    iconOnClick: () -> Unit,
+) {
     val movieIsFavorite = viewModel.movieIsFavorite.collectAsState().value
     val defaultDominantColor = MaterialTheme.colors.surface
     val defaultDominantTextColor = MaterialTheme.colors.onSurface
@@ -214,6 +221,9 @@ fun MovieImageSection(movieDetails: MovieDetails?, viewModel: DetailsViewModel =
                     start.linkTo(parent.start, margin = 10.dp)
                 }
                 .size(30.dp)
+                .clickable {
+                    navController.popBackStack()
+                }
         )
 
         // endOfRegion backArrow
@@ -255,7 +265,6 @@ fun MovieOverview(modifier: Modifier, overview: String?) {
                     width = Dimension.fillToConstraints
                     top.linkTo(parent.top)
                 },
-            color = DarkTextPrimary
         )
 
         // Movie overview text

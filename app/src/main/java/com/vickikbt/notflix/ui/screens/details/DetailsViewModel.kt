@@ -13,7 +13,8 @@ import com.vickikbt.domain.models.Cast
 import com.vickikbt.domain.models.MovieDetails
 import com.vickikbt.domain.models.MovieVideo
 import com.vickikbt.domain.models.SimilarMovies
-import com.vickikbt.domain.repository.MovieDetailsRepository
+
+import com.vickikbt.repository.repository.movie_details_repository.MovieDetailsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect

@@ -70,7 +70,7 @@ fun MovieRatingSection(popularity: String?, voteAverage: Float?, modifier: Modif
                         bottom.linkTo(parent.bottom, margin = 10.dp)
                         height = Dimension.fillToConstraints
                     },
-                color = Surface
+                color = MaterialTheme.colors.onSurface
             )
 
             Image(
