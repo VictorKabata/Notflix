@@ -2,8 +2,8 @@
 <resources>
     <!-- Preferences Options -->
     <string-array name="theme_options">
-        <item>Light theme</item>
-        <item>Dark theme</item>
+        <item>Leichtes thema</item>
+        <item>Dunkles thema</item>
         <item>System default</item>
     </string-array>
 
@@ -15,8 +15,8 @@
     </string-array>
 
     <string-array name="image_quality_options">
-        <item>High quality</item>
-        <item>Medium quality</item>
-        <item>Low quality</item>
+        <item>Hohe qualität</item>
+        <item>Mittlere qualität</item>
+        <item>Geringe qualität</item>
     </string-array>
 </resources>

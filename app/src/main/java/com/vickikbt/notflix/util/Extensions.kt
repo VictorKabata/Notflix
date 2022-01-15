@@ -74,7 +74,7 @@ fun String.getLanguageName(): String {
         "English" -> "en"
         "Spanish" -> "es"
         "French" -> "fr"
-        "German" -> "gm"
+        "German" -> "de"
         else -> Locale.getDefault().language
     }
 }
