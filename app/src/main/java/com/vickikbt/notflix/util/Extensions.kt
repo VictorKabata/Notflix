@@ -6,6 +6,7 @@ import com.vickikbt.domain.utils.Constants
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.text.SimpleDateFormat
+import java.util.*
 
 
 inline fun <reified T> getKoinInstance(): T {
@@ -66,4 +67,14 @@ fun Int.getMovieDuration(): String {
     val hours = this / 60 + startTime.substring(0, 1).toInt()
     val mins = this % 60 + startTime.substring(3, 4).toInt()
     return "${hours}hrs : ${mins}mins"
+}
+
+fun String.getLanguageName(): String {
+    return when (this) {
+        "English" -> "en"
+        "Spanish" -> "es"
+        "French" -> "fr"
+        "German" -> "de"
+        else -> Locale.getDefault().language
+    }
 }

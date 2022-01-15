@@ -3,6 +3,7 @@ package com.vickikbt.notflix.ui.screens.settings
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,10 +29,9 @@ import com.vickikbt.notflix.ui.components.AppBar
 import com.vickikbt.notflix.ui.components.preferences.DialogPreferenceSelection
 import com.vickikbt.notflix.ui.components.preferences.PreferencesGroup
 import com.vickikbt.notflix.ui.components.preferences.TextPreference
-import com.vickikbt.notflix.util.LocaleUtilCompose
+import com.vickikbt.notflix.util.LocaleManager
 import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
-import timber.log.Timber
 
 @Composable
 fun SettingsScreen(navController: NavController, viewModel: SettingsViewModel = getViewModel()) {
@@ -106,6 +106,7 @@ fun SettingsScreen(navController: NavController, viewModel: SettingsViewModel = 
                     )
 
                     TextPreference(
+                        modifier = Modifier.clickable { },
                         icon = painterResource(id = R.drawable.ic_github),
                         title = stringResource(id = R.string.source_code),
                         subTitle = stringResource(id = R.string.source_code_description),
@@ -146,7 +147,8 @@ private fun ChangeLanguage(
         title = stringResource(id = R.string.change_language),
         currentValue = currentValue ?: stringResource(id = R.string.def),
         options = stringArrayResource(id = R.array.language_options),
-        onNegativeClick = { showDialog.value = false }) { language ->
+        onNegativeClick = { showDialog.value = false }
+    ) { language ->
         viewModel.savePreferenceSelection(key = Constants.KEY_LANGUAGE, selection = language)
     }
 }
@@ -157,8 +159,6 @@ private fun ChangeImageQuality(
     showDialog: MutableState<Boolean>,
     currentValue: String?
 ) {
-
-    Timber.e("Current value image quality: $currentValue")
     DialogPreferenceSelection(
         showDialog = showDialog.value,
         title = stringResource(id = R.string.change_image_quality),

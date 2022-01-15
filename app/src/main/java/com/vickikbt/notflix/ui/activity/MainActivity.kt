@@ -12,24 +12,30 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.vickikbt.domain.utils.Constants
+import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.BottomNavBar
 import com.vickikbt.notflix.ui.navigation.Navigation
 import com.vickikbt.notflix.ui.navigation.NavigationItem
 import com.vickikbt.notflix.ui.screens.settings.SettingsViewModel
 import com.vickikbt.notflix.ui.theme.NotflixTheme
+import com.vickikbt.notflix.util.LocaleManager
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import timber.log.Timber
+import java.util.*
 
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
 class MainActivity : ComponentActivity() {
 
-    // private val localeUtil by inject<LocaleUtilCompose>()
+    private val localeUtil by inject<LocaleManager>()
 
     @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +43,16 @@ class MainActivity : ComponentActivity() {
         setContent {
             val settingsViewModel: SettingsViewModel = getViewModel()
 
+            localeUtil.setLocale(
+                context = LocalContext.current,
+                language = settingsViewModel.selectedLanguage.observeAsState().value
+                    ?: Locale.getDefault().displayLanguage
+            )
+
+
             val useDarkTheme = when (settingsViewModel.selectedTheme.observeAsState().value) {
-                Constants.LIGHT_THEME -> false
-                Constants.DARK_THEME -> true
+                stringResource(id = R.string.light_theme) -> false
+                stringResource(id = R.string.dark_theme) -> true
                 else -> isSystemInDarkTheme()
             }
 

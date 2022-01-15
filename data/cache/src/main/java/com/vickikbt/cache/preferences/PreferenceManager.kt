@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.vickikbt.cache.R
 import com.vickikbt.domain.utils.Constants
 
 class PreferenceManager constructor(private val context: Context) {
@@ -31,7 +32,7 @@ class PreferenceManager constructor(private val context: Context) {
     private val _appTheme: String?
         get() = getString(
             Constants.KEY_THEME,
-            Constants.SYSTEM_THEME
+            context.resources.getString(R.string.system_default)
         )
 
     private val _appLanguage: String?
