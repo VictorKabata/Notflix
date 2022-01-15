@@ -9,14 +9,15 @@
     <string name="title_details">Detalles</string>
 
     <string name="trending_movies">Trending Movies</string>
-    <string name="popular_movies">Popular Movies</string>
-    <string name="upcoming_movies">Upcoming Movies</string>
-    <string name="view_all">View All</string>
+    <string name="popular_movies">Películas Populares</string>
+    <string name="upcoming_movies">Próximas Películas</string>
+    <string name="view_all">Ver Todo</string>
 
     <string name="placeholder_movie_title" translatable="false">Pirates of The Caribbean: Some Villan\'s Revenge.</string>
     <string name="placeholder_movie_duration" translatable="false">4hrs 20mins</string>
     <string name="placeholder_movie_overview" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius neque odio, at tincidunt lacus auctor id. Aenean consequat, lectus vel rhoncus faucibus, lectus nulla pretium nunc, at suscipit libero nunc et sapien. Mauris a dolor et turpis tempus scelerisque.</string>
     <string name="placeholder_genre" translatable="false">Action</string>
+    <string name="placeholder_actor_name" translatable="false">Johnny Cage</string>
 
     <!--Preference Titles-->
     <string name="title_personalisation">Personalización</string>
@@ -31,14 +32,13 @@
     <string name="source_code">Código fuente</string>
     <string name="source_code_description">Ver el código fuente de la aplicación</string>
 
-    <string name="popularity">Popularity</string>
-    <string name="overview">Overview</string>
-    <string name="cast">Cast</string>
-    <string name="placeholder_actor_name">Johnny Cage</string>
-    <string name="trailer">Trailer</string>
-    <string name="similar_movies">Similar Movies</string>
+    <string name="popularity">Popularidad</string>
+    <string name="overview">Descripción General</string>
+    <string name="cast">Elenco</string>
+    <string name="trailer">Trailer de la película</string>
+    <string name="similar_movies">Películas Similares</string>
 
-    <string name="def">Default</string>
+    <string name="def">Defecto</string>
 
-    <string name="cancel">Cancel</string>
+    <string name="cancel">Cancelar</string>
 </resources>
