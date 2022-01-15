@@ -32,6 +32,10 @@
     <string name="source_code">Quellcode</string>
     <string name="source_code_description">App-Quellcode anzeigen</string>
 
+    <string name="light_theme">Leichtes thema</string>
+    <string name="dark_theme">Dunkles thema</string>
+    <string name="system_default">System default</string>
+
     <string name="popularity">Popularität</string>
     <string name="overview">Überblick</string>
     <string name="cast">Filmdarsteller</string>

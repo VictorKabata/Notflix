@@ -32,6 +32,10 @@
     <string name="source_code">Code source</string>
     <string name="source_code_description">Afficher le code source de l\'application</string>
 
+    <string name="light_theme">Thème lumière</string>
+    <string name="dark_theme">Thème sombre</string>
+    <string name="system_default">System default</string>
+
     <string name="popularity">Popularité</string>
     <string name="overview">Aperçu</string>
     <string name="cast">Distribution de film</string>

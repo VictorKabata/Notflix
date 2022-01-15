@@ -75,8 +75,7 @@ fun SettingsScreen(navController: NavController, viewModel: SettingsViewModel = 
                     if (showLanguageDialog.value) ChangeLanguage(
                         viewModel = viewModel,
                         showDialog = showLanguageDialog,
-                        currentValue = currentLanguage,
-                        context = context
+                        currentValue = currentLanguage
                     )
 
                     TextPreference(
@@ -141,11 +140,8 @@ private fun ChangeTheme(
 private fun ChangeLanguage(
     viewModel: SettingsViewModel,
     showDialog: MutableState<Boolean>,
-    currentValue: String?,
-    context: Context
+    currentValue: String?
 ) {
-    val localeManager = get<LocaleManager>()
-
     DialogPreferenceSelection(
         showDialog = showDialog.value,
         title = stringResource(id = R.string.change_language),
@@ -154,7 +150,6 @@ private fun ChangeLanguage(
         onNegativeClick = { showDialog.value = false }
     ) { language ->
         viewModel.savePreferenceSelection(key = Constants.KEY_LANGUAGE, selection = language)
-        //localeManager.setLocale(context, language)
     }
 }
 

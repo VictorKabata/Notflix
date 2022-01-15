@@ -30,6 +30,10 @@
     <string name="source_code">Source Code</string>
     <string name="source_code_description">View app source code</string>
 
+    <string name="light_theme">Light theme</string>
+    <string name="dark_theme">Dark theme</string>
+    <string name="system_default">System default</string>
+
     <string name="popularity">Popularity</string>
     <string name="overview">Overview</string>
     <string name="cast">Cast</string>

@@ -13,11 +13,13 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.vickikbt.domain.utils.Constants
+import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.BottomNavBar
 import com.vickikbt.notflix.ui.navigation.Navigation
 import com.vickikbt.notflix.ui.navigation.NavigationItem
@@ -49,8 +51,8 @@ class MainActivity : ComponentActivity() {
             )
 
             val useDarkTheme = when (settingsViewModel.selectedTheme.observeAsState().value) {
-                Constants.LIGHT_THEME -> false
-                Constants.DARK_THEME -> true
+                stringResource(id = R.string.light_theme) -> false
+                stringResource(id = R.string.dark_theme) -> true
                 else -> isSystemInDarkTheme()
             }
 

@@ -22,9 +22,9 @@ object Constants {
     const val KEY_LANGUAGE = "Language"
     const val KEY_IMAGE_QUALITY = "Image Quality"
 
-    const val LIGHT_THEME = "Light Theme"
-    const val DARK_THEME = "Dark Theme"
-    const val SYSTEM_THEME = "System Default"
+    //const val LIGHT_THEME = "Light Theme"
+    //const val DARK_THEME = "Dark Theme"
+    //const val SYSTEM_THEME = "System Default"
 
     const val TimeInterval = 24L
 
