@@ -22,20 +22,27 @@ import com.vickikbt.notflix.ui.navigation.Navigation
 import com.vickikbt.notflix.ui.navigation.NavigationItem
 import com.vickikbt.notflix.ui.screens.settings.SettingsViewModel
 import com.vickikbt.notflix.ui.theme.NotflixTheme
+import com.vickikbt.notflix.util.LocaleManager
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import timber.log.Timber
+import java.util.*
 
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
 class MainActivity : ComponentActivity() {
 
-    // private val localeUtil by inject<LocaleUtilCompose>()
+    val localeUtil by inject<LocaleManager>()
 
     @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val settingsViewModel: SettingsViewModel = getViewModel()
+
+            Timber.e("Current language is: ${Locale.getDefault().displayLanguage}")
+            Timber.e("Current locale is: ${resources.configuration.locale}")
 
             val useDarkTheme = when (settingsViewModel.selectedTheme.observeAsState().value) {
                 Constants.LIGHT_THEME -> false
