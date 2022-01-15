@@ -16,6 +16,9 @@
         <entry key="..\:/Projects/Kotlin/Notflix/app/src/main/res/drawable/ic_theme.xml" value="0.26851851851851855" />
         <entry key="..\:/Projects/Kotlin/Notflix/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2601851851851852" />
         <entry key="app/src/main/res/drawable/ic_rating_star.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/logo.xml" value="0.1388888888888889" />
+        <entry key="app/src/main/res/drawable/logo_n.xml" value="0.1388888888888889" />
+        <entry key="app/src/main/res/drawable/splash_image.xml" value="0.1388888888888889" />
       </map>
     </option>
   </component>
