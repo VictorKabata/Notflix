@@ -18,7 +18,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.vickikbt.domain.utils.Constants
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.BottomNavBar
 import com.vickikbt.notflix.ui.navigation.Navigation
@@ -49,6 +48,7 @@ class MainActivity : ComponentActivity() {
                 language = settingsViewModel.selectedLanguage.observeAsState().value
                     ?: Locale.getDefault().displayLanguage
             )
+
 
             val useDarkTheme = when (settingsViewModel.selectedTheme.observeAsState().value) {
                 stringResource(id = R.string.light_theme) -> false
