@@ -12,6 +12,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -33,7 +34,7 @@ import java.util.*
 @ExperimentalMaterialApi
 class MainActivity : ComponentActivity() {
 
-    val localeUtil by inject<LocaleManager>()
+    private val localeUtil by inject<LocaleManager>()
 
     @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,8 +42,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             val settingsViewModel: SettingsViewModel = getViewModel()
 
-            Timber.e("Current language is: ${Locale.getDefault().displayLanguage}")
-            Timber.e("Current locale is: ${resources.configuration.locale}")
+            localeUtil.setLocale(
+                context = LocalContext.current,
+                language = settingsViewModel.selectedLanguage.observeAsState().value
+                    ?: Locale.getDefault().displayLanguage
+            )
 
             val useDarkTheme = when (settingsViewModel.selectedTheme.observeAsState().value) {
                 Constants.LIGHT_THEME -> false

@@ -30,7 +30,7 @@ import com.vickikbt.notflix.ui.components.preferences.DialogPreferenceSelection
 import com.vickikbt.notflix.ui.components.preferences.PreferencesGroup
 import com.vickikbt.notflix.ui.components.preferences.TextPreference
 import com.vickikbt.notflix.util.LocaleManager
-import com.vickikbt.notflix.util.getLanguageName
+import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -144,6 +144,7 @@ private fun ChangeLanguage(
     currentValue: String?,
     context: Context
 ) {
+    val localeManager = get<LocaleManager>()
 
     DialogPreferenceSelection(
         showDialog = showDialog.value,
@@ -153,7 +154,7 @@ private fun ChangeLanguage(
         onNegativeClick = { showDialog.value = false }
     ) { language ->
         viewModel.savePreferenceSelection(key = Constants.KEY_LANGUAGE, selection = language)
-        LocaleManager(context).setNewLocale(language = language.getLanguageName())
+        //localeManager.setLocale(context, language)
     }
 }
 
