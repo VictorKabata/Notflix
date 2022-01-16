@@ -30,9 +30,9 @@ fun NotflixTheme(
 ) {
     SideEffect {
         if (darkTheme) {
-            systemUiController.setStatusBarColor(color = DarkSurface, darkIcons = !darkTheme)
+            systemUiController.setStatusBarColor(color = DarkSurface)
         } else {
-            systemUiController.setStatusBarColor(color = Surface, darkIcons = darkTheme)
+            systemUiController.setStatusBarColor(color = Surface)
         }
     }
 
