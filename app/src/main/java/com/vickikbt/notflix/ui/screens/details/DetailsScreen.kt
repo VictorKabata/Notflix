@@ -97,8 +97,7 @@ fun DetailsScreen(
             )
 
             MovieOverview(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 overview = movieDetails?.overview
             )
 
@@ -133,6 +132,7 @@ fun MovieImageSection(
     val defaultDominantTextColor = MaterialTheme.colors.onSurface
     val dominantColor = remember { mutableStateOf(defaultDominantColor) }
     val dominantTextColor = remember { mutableStateOf(defaultDominantTextColor) }
+
     ConstraintLayout(
         modifier = Modifier.placeholder(
             visible = movieDetails == null,
@@ -145,8 +145,7 @@ fun MovieImageSection(
         val imagePainter = rememberImagePainter(data = movieDetails?.backdropPath?.loadImage())
         val movieRunTime = movieDetails?.runtime?.getMovieDuration()
 
-        // Movie image region
-
+        //region Movie Poster
         if (imagePainter.state is ImagePainter.State.Success) {
             LaunchedEffect(key1 = imagePainter) {
                 launch {
@@ -184,8 +183,9 @@ fun MovieImageSection(
                 },
             contentScale = ContentScale.Crop
         )
+        //endregion
 
-        // Movie title
+        //region Movie Title
         Text(
             text = movieDetails?.title ?: "unknown movie",
             style = MaterialTheme.typography.h6.copy(fontSize = 30.sp),
@@ -199,8 +199,9 @@ fun MovieImageSection(
             overflow = TextOverflow.Ellipsis,
             color = dominantTextColor.value,
         )
+        //endregion
 
-        // Movie duration
+        //region Movie Duration
         Text(
             text = "$movieRunTime",
             color = dominantTextColor.value,
@@ -210,6 +211,7 @@ fun MovieImageSection(
                 bottom.linkTo(movieTitle.top)
             }
         )
+        //endregion
 
         //region backArrow
         Image(
@@ -225,8 +227,7 @@ fun MovieImageSection(
                     navController.popBackStack()
                 }
         )
-
-        // endOfRegion backArrow
+        // endregion backArrow
 
         //region favoriteIcon
         Image(
@@ -241,7 +242,7 @@ fun MovieImageSection(
                 .clickable { iconOnClick }
         )
 
-        // endOfRegion favoriteIcon
+        // endregion
     }
 }
 
