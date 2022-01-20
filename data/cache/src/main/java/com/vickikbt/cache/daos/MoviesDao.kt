@@ -1,10 +1,13 @@
 package com.vickikbt.cache.daos
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.vickikbt.cache.models.MovieEntity
+import com.vickikbt.domain.models.Movie
+import com.vickikbt.domain.utils.Constants
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -14,7 +17,10 @@ interface MoviesDao {
     suspend fun saveMovies(movieEntities: List<MovieEntity>)
 
     @Query("SELECT * FROM `Movies Table` WHERE category=:category")
-    fun getMovies(category: String): Flow<List<MovieEntity>>
+    fun getNowPlayingMovies(category: String = Constants.CATEGORY_NOW_PLAYING_MOVIES): Flow<List<Movie>>
+
+    @Query("SELECT * FROM `Movies Table` WHERE category=:category")
+    fun getMovies(category: String): PagingSource<Int, Movie>
 
     @Query("DELETE FROM `Movies Table` WHERE category=:category AND isFavorite IS NOT :isFavorite")
     suspend fun deleteMovies(category: String, isFavorite: Boolean = true)

@@ -139,7 +139,6 @@ fun ItemNowPlayingMovies(
                 onRatingChanged = {}
             )
             //endregion
-
         }
     }
 }

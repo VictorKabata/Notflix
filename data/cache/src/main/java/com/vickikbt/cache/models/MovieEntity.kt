@@ -35,8 +35,8 @@ data class MovieEntity(
 
     val category: String?,
 
-    val isFavorite: Boolean?,
+    var isFavorite: Boolean = false,
 
     @PrimaryKey(autoGenerate = true)
-    val cacheId:Int=0
+    val cacheId: Int = 0
 )

@@ -1,6 +1,7 @@
 package com.vickikbt.notflix.ui.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -13,7 +14,9 @@ import com.vickikbt.notflix.ui.screens.details.DetailsScreen
 import com.vickikbt.notflix.ui.screens.favorites.FavoritesScreen
 import com.vickikbt.notflix.ui.screens.home.HomeScreen
 import com.vickikbt.notflix.ui.screens.settings.SettingsScreen
+import com.vickikbt.notflix.ui.screens.splash.NotflixSplashScreen
 
+@ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
@@ -25,7 +28,10 @@ fun Navigation(navController: NavHostController) {
     // val slideDefaultInitialOffset = 1800
     // val slideDefaultTargetOffset = 1500
 
-    NavHost(navController = navController, startDestination = NavigationItem.Home.route) {
+    NavHost(navController = navController, startDestination = NavigationItem.Splash.route) {
+        composable(route = NavigationItem.Splash.route) {
+            NotflixSplashScreen(navController = navController)
+        }
         composable(route = NavigationItem.Home.route) {
             HomeScreen(navController = navController)
         }
@@ -43,12 +49,16 @@ fun Navigation(navController: NavHostController) {
             arguments = listOf(
                 navArgument("movieId") {
                     type = NavType.IntType
+                },
+                navArgument("cacheId") {
+                    type = NavType.IntType
                 }
             )
         ) {
             val movieID = it.arguments?.getInt("movieId")
-            if (movieID != null) {
-                DetailsScreen(navController = navController, movieId = movieID)
+            val cacheId = it.arguments?.getInt("cacheId")
+            if (movieID != null && cacheId != null) {
+                DetailsScreen(navController = navController, movieId = movieID, cacheId = cacheId)
             }
         }
     }

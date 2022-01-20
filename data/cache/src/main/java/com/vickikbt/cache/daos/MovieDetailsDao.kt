@@ -16,11 +16,10 @@ interface MovieDetailsDao {
     @Query("SELECT * FROM `Movie Details Table` WHERE id=:movieId")
     fun getMovieDetails(movieId: Int): Flow<MovieDetailsEntity>
 
-    //TODO: setup WorkManager to delete movie details after 30 days
+    // TODO: setup WorkManager to delete movie details after 30 days
     @Query("DELETE FROM `Movie Details Table`")
     suspend fun deleteAllMovieDetails()
 
     @Query("SELECT COUNT(*) FROM `Movie Details Table` WHERE id=:movieId")
-    suspend fun isMovieDetailsAvailable(movieId: Int):Int
-
+    suspend fun isMovieDetailsAvailable(movieId: Int): Int
 }

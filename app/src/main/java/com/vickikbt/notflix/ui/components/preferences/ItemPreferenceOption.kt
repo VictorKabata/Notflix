@@ -27,14 +27,12 @@ fun ItemPreferenceOption(
     Row(
         modifier = modifier.clickable { onOptionSelected() },
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
+        horizontalArrangement = Arrangement.spacedBy(6.dp)
     ) {
         RadioButton(selected = selectedOption, onClick = { onOptionSelected() })
 
         Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 12.dp),
+            modifier = Modifier.fillMaxWidth(),
             text = optionText,
             style = MaterialTheme.typography.body1,
             color = MaterialTheme.colors.onSurface,
