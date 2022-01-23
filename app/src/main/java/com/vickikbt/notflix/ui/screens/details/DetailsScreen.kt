@@ -1,5 +1,6 @@
 package com.vickikbt.notflix.ui.screens.details
 
+import android.widget.Toast
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,6 +21,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -37,10 +39,10 @@ import com.google.accompanist.placeholder.placeholder
 import com.google.accompanist.placeholder.shimmer
 import com.vickikbt.domain.models.MovieDetails
 import com.vickikbt.notflix.R
-import com.vickikbt.notflix.ui.components.AppBars.DetailsAppBar
 import com.vickikbt.notflix.ui.components.ItemMovieCast
 import com.vickikbt.notflix.ui.components.ItemSimilarMovies
 import com.vickikbt.notflix.ui.components.MovieRatingSection
+import com.vickikbt.notflix.ui.components.app_bars.DetailsAppBar
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.ui.theme.TextSecondary
 import com.vickikbt.notflix.util.getMovieDuration
@@ -72,6 +74,8 @@ fun DetailsScreen(
     val similarMovies = detailsViewModel.similarMovies.observeAsState().value
     val movieVideo = detailsViewModel.movieVideo.observeAsState().value
     val movieIsFavorite = detailsViewModel.movieIsFavorite.collectAsState().value
+
+    val context = LocalContext.current
 
     val lazyListState = rememberLazyListState()
     val scrollOffset = min(
@@ -158,8 +162,8 @@ fun DetailsScreen(
                         Spacer(modifier = Modifier.height(8.dp))
 
                         LazyRow(
-                            modifier = Modifier.padding(horizontal = 16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(16.dp)
+                            contentPadding = PaddingValues(horizontal = 16.dp),
+                            horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
                             items(items = movieCast?.actor!!) { item ->
                                 ItemMovieCast(actor = item)
@@ -183,7 +187,7 @@ fun DetailsScreen(
 
                     Card(
                         modifier = Modifier
-                            .padding(horizontal = 16.dp)
+                            .padding(horizontal = 15.dp)
                             .fillMaxWidth()
                             .height(250.dp),
                         elevation = 12.dp,
@@ -206,8 +210,8 @@ fun DetailsScreen(
                     )
 
                     LazyRow(
-                        modifier = Modifier.padding(horizontal = 16.dp),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                        contentPadding = PaddingValues(horizontal = 16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         if (similarMovies?.movies != null) {
                             items(similarMovies.movies!!) { movie ->
@@ -220,7 +224,16 @@ fun DetailsScreen(
 
             }
 
-            DetailsAppBar(scrollOffset = scrollOffset)
+            DetailsAppBar(
+                scrollOffset = scrollOffset,
+                title = movieDetails?.title,
+                onNavigationIconClick = { navController.navigateUp() },
+                onShareIconClick = {
+                    Toast.makeText(context, "Clicked share icon", Toast.LENGTH_SHORT).show()
+                },
+                onFavoriteIconClick = {
+                    Toast.makeText(context, "Clicked favorite icon", Toast.LENGTH_SHORT).show()
+                })
         }
     }
 }
@@ -330,7 +343,7 @@ fun MoviePoster(
             style = MaterialTheme.typography.h6,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
-            color = dominantTextColor.copy(alpha = (scrollOffset+0.2f).coerceAtMost(1f)),
+            color = dominantTextColor.copy(alpha = (scrollOffset + 0.2f).coerceAtMost(1f)),
             fontSize = 30.sp
         )
         //endregion

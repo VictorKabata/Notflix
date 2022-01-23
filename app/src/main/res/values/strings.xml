@@ -51,6 +51,7 @@
     <string name="rating">Rating</string>
     <string name="unknown_actor">Unknown Actor</string>
     <string name="unknown_character">Unknown character</string>
+    <string name="back">Back</string>
 
 
 </resources>

@@ -44,7 +44,7 @@ fun ItemSimilarMovies(movie: Movie) {
         }
 
         Text(
-            modifier = Modifier.fillMaxWidth(0.9f),
+            modifier = Modifier.width(148.dp),
             text = movie.title ?: stringResource(id = com.vickikbt.notflix.R.string.unknown_movie),
             style = MaterialTheme.typography.h5,
             fontSize = 14.sp,

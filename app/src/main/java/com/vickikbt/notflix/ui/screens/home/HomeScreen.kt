@@ -36,7 +36,6 @@ import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Gray
 import kotlinx.coroutines.flow.Flow
 import org.koin.androidx.compose.getViewModel
-import timber.log.Timber
 
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
@@ -98,8 +97,6 @@ fun NowPlayingMovies(
 ) {
     val pagerState = rememberPagerState()
 
-    Timber.e("Now playing: $movies")
-
     HorizontalPager(
         modifier = Modifier
             .fillMaxWidth()
@@ -120,7 +117,7 @@ fun NowPlayingMovies(
             movie = movies[page]
         ) {
             val movie = movies[page]
-            navController.navigate("details/" + movie.id!! + "/" + movie.cacheId!!)
+            navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
         }
     }
 
@@ -145,7 +142,6 @@ fun NowPlayingMovies(
 
 @Composable
 fun TrendingMovies(navController: NavController, movies: Flow<PagingData<Movie>>) {
-
     val moviesList = movies.collectAsLazyPagingItems()
 
     SectionSeparator(
@@ -174,8 +170,8 @@ fun TrendingMovies(navController: NavController, movies: Flow<PagingData<Movie>>
                     highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
                 ),
                 movie = item!!,
-                onItemClick = {
-//                    navController.navigate("details/" + movie.id!! + "/" + movie.cacheId!!)
+                onItemClick = { movie ->
+                    navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
                 }
             )
         }
@@ -218,7 +214,8 @@ fun PopularMovies(
                 ),
                 viewModel = viewModel,
                 movie = item!!,
-                onClickItem = {
+                onClickItem = { movie ->
+                    navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
                 }
             )
         }
@@ -259,8 +256,8 @@ fun UpcomingMovies(
                         highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
                     ),
                     movie = item!!,
-                    onItemClick = {
-                        // ToDo: OnItemClicked-Navigate to movie details
+                    onItemClick = { movie ->
+                        navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
                     }
                 )
             }
