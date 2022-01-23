@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class DetailsViewModel(
     private val movieDetailsRepository: MovieDetailsRepository
@@ -39,19 +40,19 @@ class DetailsViewModel(
     private val _similarMovies = MutableLiveData<SimilarMovies>()
     val similarMovies: LiveData<SimilarMovies> get() = _similarMovies
 
-    fun fetchMovieDetails(movieId: Int) = viewModelScope.launch {
+    fun getMovieDetails(movieId: Int) = viewModelScope.launch {
         movieDetailsRepository.getMovieDetails(movieId).collect {
             _movieDetails.value = it
         }
     }
 
-    fun fetchMovieCast(movieId: Int) = viewModelScope.launch {
+    fun getMovieCast(movieId: Int) = viewModelScope.launch {
         movieDetailsRepository.getMovieCast(movieId).collect {
             _movieCast.value = it
         }
     }
 
-    fun fetchMovieVideo(movieId: Int) = viewModelScope.launch {
+    fun getMovieVideo(movieId: Int) = viewModelScope.launch {
         movieDetailsRepository.getMovieVideos(movieId).collect {
             _movieVideo.value = it
         }
@@ -88,17 +89,16 @@ class DetailsViewModel(
             }
         }
 
-    fun updateFavorite(cacheId: Int, isFavorite: Boolean) = viewModelScope.launch {
-        movieDetailsRepository.updateMovieIsFavorite(cacheId, isFavorite)
-    }
-
-    fun checkIfMovieIsFavorite(movieId: Int) = viewModelScope.launch {
-        movieDetailsRepository.isMovieFavorite(movieId).collect {
-            _movieIsFavorite.value = it
+    fun updateFavorite(cacheId: Int, isFavorite: Boolean) {
+        Timber.e("Updating : $cacheId to $isFavorite")
+        viewModelScope.launch {
+            movieDetailsRepository.updateMovieIsFavorite(cacheId, isFavorite)
         }
     }
 
-    fun logThis(something: Any) {
-        Log.d("Det", "The value of favorite is $something")
+    fun isMovieFavorite(movieId: Int) = viewModelScope.launch {
+        movieDetailsRepository.isMovieFavorite(movieId).collect {
+            _movieIsFavorite.value = it
+        }
     }
 }

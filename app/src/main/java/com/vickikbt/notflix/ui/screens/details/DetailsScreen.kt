@@ -1,6 +1,7 @@
 package com.vickikbt.notflix.ui.screens.details
 
-import android.widget.Toast
+import android.content.Context
+import android.content.Intent
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -61,12 +62,11 @@ fun DetailsScreen(
     cacheId: Int,
 ) {
     detailsViewModel.apply {
-        fetchMovieCast(movieId)
-        fetchMovieDetails(movieId)
-        fetchMovieVideo(movieId)
+        isMovieFavorite(movieId)
+        getMovieDetails(movieId)
+        getMovieCast(movieId)
+        getMovieVideo(movieId)
         fetchSimilarMovies(movieId)
-        checkIfMovieIsFavorite(movieId)
-        logThis(cacheId)
     }
 
     val movieDetails = detailsViewModel.movieDetails.observeAsState().value
@@ -224,16 +224,20 @@ fun DetailsScreen(
 
             }
 
+            //region App Bar
             DetailsAppBar(
                 scrollOffset = scrollOffset,
                 title = movieDetails?.title,
                 onNavigationIconClick = { navController.navigateUp() },
-                onShareIconClick = {
-                    Toast.makeText(context, "Clicked share icon", Toast.LENGTH_SHORT).show()
-                },
+                onShareIconClick = { shareMovie(context = context, movieId = movieId) },
                 onFavoriteIconClick = {
-                    Toast.makeText(context, "Clicked favorite icon", Toast.LENGTH_SHORT).show()
+                    updateMovieFavorite(
+                        viewModel = detailsViewModel,
+                        isFavorite = movieIsFavorite ?: false,
+                        cacheId = cacheId
+                    )
                 })
+            //endregion
         }
     }
 }
@@ -348,5 +352,21 @@ fun MoviePoster(
         )
         //endregion
     }
+}
+
+private fun updateMovieFavorite(isFavorite: Boolean, cacheId: Int, viewModel: DetailsViewModel) =
+    viewModel.updateFavorite(cacheId = cacheId, isFavorite = isFavorite)
+
+private fun shareMovie(context: Context, movieId: Int) {
+    val shareIntent = Intent()
+    shareIntent.action = Intent.ACTION_SEND
+    shareIntent.type = "text/plain"
+    shareIntent.putExtra(Intent.EXTRA_TEXT, "https://com.vickikbt.notlfix/id?=$movieId")
+    context.startActivity(
+        Intent.createChooser(
+            shareIntent,
+            context.resources.getString(R.string.share)
+        )
+    )
 }
 

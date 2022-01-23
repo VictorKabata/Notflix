@@ -5,7 +5,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -43,7 +42,8 @@ fun DetailsAppBar(
             IconButton(onClick = { onNavigationIconClick() }) {
                 Icon(
                     imageVector = Icons.Rounded.ArrowBack,
-                    contentDescription = stringResource(R.string.back)
+                    contentDescription = stringResource(R.string.back),
+                    tint = MaterialTheme.colors.onSurface
                 )
             }
         },
@@ -51,13 +51,16 @@ fun DetailsAppBar(
             IconButton(onClick = { onShareIconClick() }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_share),
-                    contentDescription = stringResource(id = R.string.share)
+                    contentDescription = stringResource(id = R.string.share),
+                    tint = MaterialTheme.colors.onSurface
                 )
             }
+
             IconButton(onClick = { onFavoriteIconClick() }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_favourite),
-                    contentDescription = stringResource(id = R.string.title_favorites)
+                    contentDescription = stringResource(id = R.string.title_favorites),
+                    tint = MaterialTheme.colors.onSurface
                 )
             }
         },
