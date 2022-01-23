@@ -2,7 +2,9 @@ package com.vickikbt.notflix.ui.screens.details
 
 import android.content.Context
 import android.content.Intent
+import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -52,6 +54,7 @@ import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
+import timber.log.Timber
 import kotlin.math.min
 
 @Composable
@@ -62,7 +65,7 @@ fun DetailsScreen(
     cacheId: Int,
 ) {
     detailsViewModel.apply {
-        isMovieFavorite(movieId)
+        getIsMovieFavorite(movieId)
         getMovieDetails(movieId)
         getMovieCast(movieId)
         getMovieVideo(movieId)
@@ -73,8 +76,22 @@ fun DetailsScreen(
     val movieCast = detailsViewModel.movieCast.observeAsState().value
     val similarMovies = detailsViewModel.similarMovies.observeAsState().value
     val movieVideo = detailsViewModel.movieVideo.observeAsState().value
-    val movieIsFavorite = detailsViewModel.movieIsFavorite.collectAsState().value
+    val isMovieFavorite = detailsViewModel.movieIsFavorite.observeAsState().value
 
+    Timber.e("Is movie fav: $isMovieFavorite")
+
+    LaunchedEffect(key1 = Unit) {
+        launch {
+            if (movieDetails != null && movieCast != null) {
+                Timber.e("Saving movie details")
+                detailsViewModel.saveMovieDetails(
+                    movieDetails = movieDetails,
+                    cast = movieCast,
+                    movieVideo = movieVideo
+                )
+            }
+        }
+    }
     val context = LocalContext.current
 
     val lazyListState = rememberLazyListState()
@@ -231,11 +248,19 @@ fun DetailsScreen(
                 onNavigationIconClick = { navController.navigateUp() },
                 onShareIconClick = { shareMovie(context = context, movieId = movieId) },
                 onFavoriteIconClick = {
-                    updateMovieFavorite(
-                        viewModel = detailsViewModel,
-                        isFavorite = movieIsFavorite ?: false,
-                        cacheId = cacheId
-                    )
+                    if (isMovieFavorite != null && isMovieFavorite == true) {
+                        updateMovieFavorite(
+                            viewModel = detailsViewModel,
+                            isFavorite = false,
+                            cacheId = cacheId
+                        )
+                    } else if (isMovieFavorite != null && isMovieFavorite == false) {
+                        updateMovieFavorite(
+                            viewModel = detailsViewModel,
+                            isFavorite = true,
+                            cacheId = cacheId
+                        )
+                    }
                 })
             //endregion
         }
@@ -249,12 +274,17 @@ fun MoviePoster(
     viewModel: DetailsViewModel = getViewModel(),
     scrollOffset: Float
 ) {
-    val imageSize by animateDpAsState(targetValue = max(56.dp, 350.dp * scrollOffset))
+    val imageSize by animateDpAsState(
+        targetValue = max(56.dp, 350.dp * scrollOffset),
+        animationSpec = tween(easing = FastOutLinearInEasing)
+    )
 
     val defaultDominantColor = MaterialTheme.colors.surface
     val defaultDominantTextColor = MaterialTheme.colors.onSurface
     var dominantColor by remember { mutableStateOf(defaultDominantColor) }
     var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
+
+    val imagePainter = rememberImagePainter(data = movieDetails?.backdropPath?.loadImage())
 
     ConstraintLayout(
         modifier = modifier
@@ -268,8 +298,6 @@ fun MoviePoster(
     ) {
 
         val (imageMovie, boxFadingEdge, textViewRunTime, textViewTitle) = createRefs()
-
-        val imagePainter = rememberImagePainter(data = movieDetails?.backdropPath?.loadImage())
 
         //region Movie Poster
         if (imagePainter.state is ImagePainter.State.Success) {
@@ -285,15 +313,12 @@ fun MoviePoster(
             }
         }
 
-
         Image(
             painter = imagePainter,
             contentDescription = stringResource(R.string.movie_poster),
             modifier = Modifier
                 .fillMaxSize()
-                .graphicsLayer {
-                    alpha = scrollOffset
-                }
+                .graphicsLayer { alpha = scrollOffset }
                 .constrainAs(imageMovie) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)

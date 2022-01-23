@@ -3,7 +3,6 @@ package com.vickikbt.notflix.ui.screens.details
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,10 +12,7 @@ import com.vickikbt.domain.models.Cast
 import com.vickikbt.domain.models.MovieDetails
 import com.vickikbt.domain.models.MovieVideo
 import com.vickikbt.domain.models.SimilarMovies
-
 import com.vickikbt.repository.repository.movie_details_repository.MovieDetailsRepository
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -24,9 +20,6 @@ import timber.log.Timber
 class DetailsViewModel(
     private val movieDetailsRepository: MovieDetailsRepository
 ) : ViewModel() {
-
-    private val _movieIsFavorite: MutableStateFlow<Boolean?> = MutableStateFlow(false)
-    val movieIsFavorite: StateFlow<Boolean?> get() = _movieIsFavorite
 
     private val _movieDetails = MutableLiveData<MovieDetails>()
     val movieDetails: LiveData<MovieDetails> get() = _movieDetails
@@ -39,6 +32,9 @@ class DetailsViewModel(
 
     private val _similarMovies = MutableLiveData<SimilarMovies>()
     val similarMovies: LiveData<SimilarMovies> get() = _similarMovies
+
+    private val _movieIsFavorite = MutableLiveData<Boolean>()
+    val movieIsFavorite: LiveData<Boolean?> get() = _movieIsFavorite
 
     fun getMovieDetails(movieId: Int) = viewModelScope.launch {
         movieDetailsRepository.getMovieDetails(movieId).collect {
@@ -96,9 +92,12 @@ class DetailsViewModel(
         }
     }
 
-    fun isMovieFavorite(movieId: Int) = viewModelScope.launch {
-        movieDetailsRepository.isMovieFavorite(movieId).collect {
-            _movieIsFavorite.value = it
+    fun getIsMovieFavorite(movieId: Int) {
+        viewModelScope.launch {
+            movieDetailsRepository.isMovieFavorite(movieId).collect {
+                _movieIsFavorite.value = it
+            }
         }
     }
+
 }
