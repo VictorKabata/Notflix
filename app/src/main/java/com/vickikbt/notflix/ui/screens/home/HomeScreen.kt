@@ -2,7 +2,6 @@ package com.vickikbt.notflix.ui.screens.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -31,7 +30,7 @@ import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemNowPlayingMovies
 import com.vickikbt.notflix.ui.components.ItemPopularMovies
-import com.vickikbt.notflix.ui.components.ItemRecentlyPlayedAlbum
+import com.vickikbt.notflix.ui.components.ItemTrendingMovies
 import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Gray
@@ -167,7 +166,7 @@ fun TrendingMovies(navController: NavController, movies: Flow<PagingData<Movie>>
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         items(items = moviesList) { item ->
-            ItemRecentlyPlayedAlbum(
+            ItemTrendingMovies(
                 modifier = Modifier.placeholder(
                     visible = moviesList.itemCount == null,
                     color = Gray,
@@ -252,7 +251,7 @@ fun UpcomingMovies(
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(items = moviesList) { item ->
-                ItemRecentlyPlayedAlbum(
+                ItemTrendingMovies(
                     modifier = Modifier.placeholder(
                         visible = moviesList.itemCount == null,
                         color = Gray,

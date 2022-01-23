@@ -46,6 +46,11 @@
     <string name="def">Default</string>
 
     <string name="cancel">Cancel</string>
+    <string name="movie_poster">Movie poster</string>
+    <string name="unknown_movie">Unknown movie</string>
+    <string name="rating">Rating</string>
+    <string name="unknown_actor">Unknown Actor</string>
+    <string name="unknown_character">Unknown character</string>
 
 
 </resources>
