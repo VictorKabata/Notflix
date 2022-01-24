@@ -11,6 +11,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -24,10 +25,10 @@ import com.vickikbt.notflix.ui.navigation.Navigation
 import com.vickikbt.notflix.ui.navigation.NavigationItem
 import com.vickikbt.notflix.ui.screens.settings.SettingsViewModel
 import com.vickikbt.notflix.ui.theme.NotflixTheme
+import com.vickikbt.notflix.util.ChangeSystemBarColorOnNetChange
 import com.vickikbt.notflix.util.LocaleManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
-import timber.log.Timber
 import java.util.*
 
 @ExperimentalAnimationApi
@@ -36,12 +37,20 @@ import java.util.*
 class MainActivity : ComponentActivity() {
 
     private val localeUtil by inject<LocaleManager>()
+    private val viewModel by inject<MainViewModel>()
 
     @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.registerCallback()
         setContent {
             val settingsViewModel: SettingsViewModel = getViewModel()
+            val systemUiController = rememberSystemUiController()
+            val useDarkTheme = when (settingsViewModel.selectedTheme.observeAsState().value) {
+                stringResource(id = R.string.light_theme) -> false
+                stringResource(id = R.string.dark_theme) -> true
+                else -> isSystemInDarkTheme()
+            }
 
             localeUtil.setLocale(
                 context = LocalContext.current,
@@ -49,14 +58,10 @@ class MainActivity : ComponentActivity() {
                     ?: Locale.getDefault().displayLanguage
             )
 
-
-            val useDarkTheme = when (settingsViewModel.selectedTheme.observeAsState().value) {
-                stringResource(id = R.string.light_theme) -> false
-                stringResource(id = R.string.dark_theme) -> true
-                else -> isSystemInDarkTheme()
-            }
-
-            val systemUiController = rememberSystemUiController()
+            ChangeSystemBarColorOnNetChange(
+                key = viewModel.isNetworkOn.collectAsState().value,
+                systemUiController = systemUiController,
+            )
 
             NotflixTheme(darkTheme = useDarkTheme, systemUiController = systemUiController) {
                 Surface(color = MaterialTheme.colors.surface) {
