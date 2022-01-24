@@ -23,4 +23,4 @@ jobs: # groups the jobs to be executed in this workflow
         run: chmod +x ./gradlew
 
       - name: Build with gradle
-        run: bash ./gradlew build
+        run: ./gradlew build
