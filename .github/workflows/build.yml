@@ -15,10 +15,9 @@ jobs: # groups the jobs to be executed in this workflow
         uses: actions/checkout@v2 # specifies which version of action to run
 
       - name: Set Up JDK 11
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v1
         with:
-          distribution: 'adopt'
-          java-version: '11'
+          java-version: 11
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
