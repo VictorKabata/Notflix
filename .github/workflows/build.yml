@@ -1,0 +1,26 @@
+name: Build # name of the workflow
+
+on:
+  push: # specifies events to trigger the workflow
+    branches: [ main, develop ] # branches that trigger the workflow
+
+jobs: # groups the jobs to be executed in this workflow
+
+  build: # defines a job called build
+    name: 🔨 Build # [optional] name of the job
+    runs-on: ubuntu-latest # the job will be executed on ubuntu runner. Other include: Microsoft Windows & MacOS runners
+    steps: # groups together all the steps that run in build job
+
+      - uses: actions/checkout@v2 # specifies which version of action to run
+        name: Checkout code # [optional] specifies the name of the step
+
+      - uses: actions/setup-java@v2
+        name: Set Up JDK 11
+        with:
+          java-version: 11
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew build -x test
