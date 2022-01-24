@@ -1,70 +1,26 @@
-name: Push Pipeline
+name: Build # name of the workflow
 
 on:
-  pull_request:
-    branches: [ develop ]
+  pull_request: # specifies events to trigger the workflow
+    branches: [ main, develop ] # branches that trigger the workflow
 
-jobs:
-  lint:
-    name: 🔍 Lint
-    runs-on: ubuntu-latest
-    steps:
+jobs: # groups the jobs to be executed in this workflow
 
-      - name: Checkout code
-        uses: actions/checkout@v2
+  build: # defines a job called build
+    name: 🔨 Build # [optional] name of the job
+    runs-on: ubuntu-latest # the job will be executed on ubuntu runner. Other include: Microsoft Windows & MacOS runners
+    steps: # groups together all the steps that run in build job
 
-      - name: Lint
-        run: bash ./gradlew lintDebug
+      - name: Checkout code # [optional] specifies the name of the step
+        uses: actions/checkout@v2 # specifies which version of action to run
 
-      - name: Generate lint report
-        uses: actions/upload-artifact@v2
-        with:
-          name: lint_report.html
-          path: app/build/reports/lint-results-debug.html
-
-  unit-test:
-    name: 🧪 Unit Test
-    needs: [ lint ]
-    runs-on: ubuntu-latest
-    steps:
-
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up JDK
+      - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
           java-version: 11
 
-      - name: Execute unit tests
-        run: bash ./gradlew test --stacktrace
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
 
-      - name: Generate test report
-        uses: actions/upload-artifact@v2
-        with:
-          name: unit_test_report.html
-          path: app/build/reports/tests/testDebugUnitTest/
-
-  build:
-    name: 🔨 Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-
-      - name: Cache Gradle and wrapper
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      - name: Build with Gradle
+      - name: Build with gradle
         run: bash ./gradlew build
