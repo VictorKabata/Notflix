@@ -1,7 +1,7 @@
 name: Deploy to Firebase App Distribution
 
 on:
-  pull_request:
+  push:
     branches: [ develop ]
 
 jobs:
