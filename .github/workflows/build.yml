@@ -19,8 +19,8 @@ jobs: # groups the jobs to be executed in this workflow
         with:
           java-version: 11
 
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
+#      - name: Make gradlew executable
+#        run: chmod +x ./gradlew
 
       - name: Build with gradle
         run: ./gradlew build
