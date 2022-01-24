@@ -1,7 +1,7 @@
 name: Push Pipeline
 
 on:
-  push:
+  pull_request:
     branches: [ develop ]
 
 jobs:
