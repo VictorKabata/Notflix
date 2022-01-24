@@ -25,12 +25,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.vickikbt.domain.utils.Constants
 import com.vickikbt.notflix.R
-import com.vickikbt.notflix.ui.components.AppBar
+import com.vickikbt.notflix.ui.components.app_bars.AppBar
 import com.vickikbt.notflix.ui.components.preferences.DialogPreferenceSelection
 import com.vickikbt.notflix.ui.components.preferences.PreferencesGroup
 import com.vickikbt.notflix.ui.components.preferences.TextPreference
-import com.vickikbt.notflix.util.LocaleManager
-import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
 
 @Composable

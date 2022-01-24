@@ -2,7 +2,6 @@ package com.vickikbt.notflix.ui.screens.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -31,13 +30,12 @@ import com.vickikbt.domain.models.Movie
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemNowPlayingMovies
 import com.vickikbt.notflix.ui.components.ItemPopularMovies
-import com.vickikbt.notflix.ui.components.ItemRecentlyPlayedAlbum
+import com.vickikbt.notflix.ui.components.ItemTrendingMovies
 import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Gray
 import kotlinx.coroutines.flow.Flow
 import org.koin.androidx.compose.getViewModel
-import timber.log.Timber
 
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
@@ -99,8 +97,6 @@ fun NowPlayingMovies(
 ) {
     val pagerState = rememberPagerState()
 
-    Timber.e("Now playing: $movies")
-
     HorizontalPager(
         modifier = Modifier
             .fillMaxWidth()
@@ -121,7 +117,7 @@ fun NowPlayingMovies(
             movie = movies[page]
         ) {
             val movie = movies[page]
-            navController.navigate("details/" + movie.id!! + "/" + movie.cacheId!!)
+            navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
         }
     }
 
@@ -146,7 +142,6 @@ fun NowPlayingMovies(
 
 @Composable
 fun TrendingMovies(navController: NavController, movies: Flow<PagingData<Movie>>) {
-
     val moviesList = movies.collectAsLazyPagingItems()
 
     SectionSeparator(
@@ -167,7 +162,7 @@ fun TrendingMovies(navController: NavController, movies: Flow<PagingData<Movie>>
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         items(items = moviesList) { item ->
-            ItemRecentlyPlayedAlbum(
+            ItemTrendingMovies(
                 modifier = Modifier.placeholder(
                     visible = moviesList.itemCount == null,
                     color = Gray,
@@ -175,8 +170,8 @@ fun TrendingMovies(navController: NavController, movies: Flow<PagingData<Movie>>
                     highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
                 ),
                 movie = item!!,
-                onItemClick = {
-//                    navController.navigate("details/" + movie.id!! + "/" + movie.cacheId!!)
+                onItemClick = { movie ->
+                    navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
                 }
             )
         }
@@ -219,7 +214,8 @@ fun PopularMovies(
                 ),
                 viewModel = viewModel,
                 movie = item!!,
-                onClickItem = {
+                onClickItem = { movie ->
+                    navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
                 }
             )
         }
@@ -252,7 +248,7 @@ fun UpcomingMovies(
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(items = moviesList) { item ->
-                ItemRecentlyPlayedAlbum(
+                ItemTrendingMovies(
                     modifier = Modifier.placeholder(
                         visible = moviesList.itemCount == null,
                         color = Gray,
@@ -260,8 +256,8 @@ fun UpcomingMovies(
                         highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
                     ),
                     movie = item!!,
-                    onItemClick = {
-                        // ToDo: OnItemClicked-Navigate to movie details
+                    onItemClick = { movie ->
+                        navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
                     }
                 )
             }
