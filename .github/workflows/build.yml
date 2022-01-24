@@ -1,7 +1,7 @@
 name: Build # name of the workflow
 
 on:
-  push: # specifies events to trigger the workflow
+  pull_request: # specifies events to trigger the workflow
     branches: [ main, develop ] # branches that trigger the workflow
 
 jobs: # groups the jobs to be executed in this workflow
