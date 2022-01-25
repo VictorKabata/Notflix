@@ -33,14 +33,15 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-            - name: Build with Gradle
-            run: bash ./gradlew build
 
   deploy:
     name: 🚀 Firebase App Distribution
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+    
       - name: Build Debug APK
         run: ./gradlew assembleDebug --stacktrace
 
