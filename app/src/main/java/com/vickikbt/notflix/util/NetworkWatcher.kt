@@ -7,7 +7,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.SystemUiController
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
+import com.vickikbt.notflix.ui.theme.DarkSurface
 import com.vickikbt.notflix.ui.theme.PrimaryColor
+import com.vickikbt.notflix.ui.theme.Surface
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
