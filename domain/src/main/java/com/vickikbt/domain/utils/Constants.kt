@@ -10,25 +10,29 @@ object Constants {
 
     const val IMAGE_PREFIX = "https://image.tmdb.org/t/p/"
 
-    const val SHARED_PREF_NAME = "Time Preferences"
+    const val CATEGORY_POPULAR_MOVIES = "popular"
+    const val CATEGORY_NOW_PLAYING_MOVIES = "now_playing"
+    const val CATEGORY_TRENDING_MOVIES = "trending"
+    const val CATEGORY_UPCOMING_MOVIES = "upcoming"
 
     const val TIME_DATASTORE_NAME = "Time Datastore"
     const val TIME_DATASTORE_KEY = "Time Key"
 
-    const val THEME_DATASTORE_NAME = "Theme Datastore"
-    const val THEME_DATASTORE_KEY = "Theme Key"
+    const val KEY_THEME = "Theme"
+    const val KEY_LANGUAGE = "Language"
+    const val KEY_IMAGE_QUALITY = "Image Quality"
+
+    // const val LIGHT_THEME = "Light Theme"
+    // const val DARK_THEME = "Dark Theme"
+    // const val SYSTEM_THEME = "System Default"
 
     const val TimeInterval = 24L
 
     const val STARTING_PAGE_INDEX = 1
-    const val PAGING_SIZE = 50
+    const val PAGING_SIZE = 5
 
     const val SOURCE_CODE_URL = "https://github.com/VictorKabata/Notflix"
 
     const val BUG_REPORT_EMAIL = "victorbro14@gmail.com"
-    const val BUG_REPORT_SUBJECT = "Notflix Bug Report"
-
-    const val YT_VIDEO_URL = "https://www.youtube.com/watch?v="
-    const val VIMEO_VIDEO_URL = "https://vimeo.com/"
-
+    const val BUG_REPORT_SUBJECT = "Notflix-Bug report or feature request"
 }

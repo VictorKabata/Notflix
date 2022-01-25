@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Notflix</string>
+
+    <string name="title_home">Heim</string>
+    <string name="title_search">Suche</string>
+    <string name="title_favorites">Favoriten</string>
+    <string name="title_settings">Einstellungen</string>
+    <string name="title_details">Einzelheiten</string>
+
+    <string name="trending_movies">Angesagte Filme</string>
+    <string name="popular_movies">Beliebte Filme</string>
+    <string name="upcoming_movies">Kommende Filme</string>
+    <string name="view_all">Alle ansehen</string>
+
+    <string name="placeholder_movie_title" translatable="false">Pirates of The Caribbean: Some Villan\'s Revenge.</string>
+    <string name="placeholder_movie_duration" translatable="false">4hrs 20mins</string>
+    <string name="placeholder_movie_overview" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius neque odio, at tincidunt lacus auctor id. Aenean consequat, lectus vel rhoncus faucibus, lectus nulla pretium nunc, at suscipit libero nunc et sapien. Mauris a dolor et turpis tempus scelerisque.</string>
+    <string name="placeholder_genre" translatable="false">Action</string>
+    <string name="placeholder_actor_name" translatable="false">Johnny Cage</string>
+
+    <!--Preference Titles-->
+    <string name="title_personalisation">Personalisierung</string>
+    <string name="title_extras">Extras</string>
+
+    <!--Preference Headers-->
+    <string name="change_theme">Thema ändern</string>
+    <string name="change_language">Sprache ändern</string>
+    <string name="change_image_quality">Bildqualität ändern</string>
+    <string name="report_bug">Fehler melden</string>
+    <string name="report_bug_description">Fehler melden oder feature anfordern</string>
+    <string name="source_code">Quellcode</string>
+    <string name="source_code_description">App-Quellcode anzeigen</string>
+
+    <string name="light_theme">Leichtes thema</string>
+    <string name="dark_theme">Dunkles thema</string>
+    <string name="system_default">System default</string>
+
+    <string name="popularity">Popularität</string>
+    <string name="overview">Überblick</string>
+    <string name="cast">Filmdarsteller</string>
+    <string name="trailer">Trailer</string>
+    <string name="similar_movies">Ähnliche Filme</string>
+
+    <string name="def">Standard</string>
+
+    <string name="cancel">Abbrechen</string>
+</resources>

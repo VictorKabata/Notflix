@@ -21,7 +21,6 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -33,16 +32,22 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {
     api project(":domain")
     api project(":data:cache")
 
-    implementation appDependencies.kotlin
-    implementation appDependencies.androidCore
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$androidCore_version"
 
-    implementation appDependencies.koinAndroid
+    implementation "io.insert-koin:koin-android:$koin_version"
 
-    implementation appDependencies.liveData
+    //Paging 3
+    api "androidx.paging:paging-compose:$paging_compose"
 }

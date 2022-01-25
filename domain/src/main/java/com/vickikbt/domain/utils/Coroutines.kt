@@ -1,8 +1,6 @@
 package com.vickikbt.domain.utils
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 object Coroutines {
 
@@ -16,12 +14,12 @@ object Coroutines {
             work()
         }
 
-    /* fun <T> lazyDeferred(block: suspend CoroutineScope.() -> T): Lazy<Deferred<T>> {
+     fun <T> lazyDeferred(block: suspend CoroutineScope.() -> T): Lazy<Deferred<T>> {
          return lazy {
              GlobalScope.async(start = CoroutineStart.LAZY) {
                  block.invoke(this)
              }
          }
-     }*/
+     }
 
 }

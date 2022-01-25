@@ -1,12 +1,12 @@
 package com.vickikbt.notflix.util
 
 import android.annotation.SuppressLint
-import android.view.View
-import com.vickikbt.cache.preferences.ImagesPreferences
+import com.vickikbt.cache.preferences.PreferenceManager
 import com.vickikbt.domain.utils.Constants
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.text.SimpleDateFormat
+import java.util.*
 
 
 inline fun <reified T> getKoinInstance(): T {
@@ -15,41 +15,28 @@ inline fun <reified T> getKoinInstance(): T {
     }.value
 }
 
-private val imagesPreferences: ImagesPreferences = getKoinInstance()
+private val preferenceManager: PreferenceManager = getKoinInstance()
 
 /**
  * Append the image url with string to determine the image quality to be loaded
  */
 fun String.loadImage(): String {
     var imageQuality: String? = null
-    imagesPreferences.imageQuality.observeForever {
-        when (it) {
-            "high_quality" -> {
-                imageQuality = "${Constants.IMAGE_PREFIX}/original/$this"
+    preferenceManager.imageQuality.observeForever {
+        imageQuality = when (it) {
+            "High quality" -> {
+                "${Constants.IMAGE_PREFIX}/original/$this"
             }
-            "medium_quality" -> {
-                imageQuality = "${Constants.IMAGE_PREFIX}/w500/$this"
+            "Medium quality" -> {
+                "${Constants.IMAGE_PREFIX}/w500/$this"
             }
-            "low_quality" -> {
-                imageQuality = "${Constants.IMAGE_PREFIX}/w500/$this" //ToDo: Lower image quality value
-            }else->imageQuality = "${Constants.IMAGE_PREFIX}/w500/$this"
+            "Low quality" -> {
+                "${Constants.IMAGE_PREFIX}/w500/$this"
+            }
+            else -> "${Constants.IMAGE_PREFIX}/w500/$this"
         }
     }
     return imageQuality!!
-}
-
-/**
- * Sets view visibility to visible
- */
-fun View.show(){
-    visibility=View.VISIBLE
-}
-
-/**
- * Sets view visibility to gone
- */
-fun View.hide(){
-    visibility=View.GONE
 }
 
 //Original- 1998-11-19
@@ -79,15 +66,15 @@ fun Int.getMovieDuration(): String {
     val startTime = "00:00"
     val hours = this / 60 + startTime.substring(0, 1).toInt()
     val mins = this % 60 + startTime.substring(3, 4).toInt()
-    return "${hours}hrs : ${mins}mins"
+    return "${hours}hrs ${mins}mins"
 }
 
-/*fun getYoutubeVideoFromUrl(inUrl: String): String? {
-    if (inUrl.lowercase(Locale.getDefault()).contains("youtu.eb")) {
-        return inUrl.substring(inUrl.lastIndexOf("/") + 1)
+fun String.getLanguageName(): String {
+    return when (this) {
+        "English" -> "en"
+        "Spanish" -> "es"
+        "French" -> "fr"
+        "German" -> "de"
+        else -> Locale.getDefault().language
     }
-    val pattern = "(?<=watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*"
-    val compiledPattern = Pattern.compile(pattern)
-    val matcher = compiledPattern.matcher(inUrl)
-    return if (matcher.find()) matcher.group() else null
-}*/
+}

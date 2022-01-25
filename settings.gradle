@@ -1,12 +1,7 @@
 include ':app'
 rootProject.name = "Notflix"
-include ':feature:home'
-include ':feature:search'
-include ':feature:favorites'
-include ':feature:details'
 include ':domain'
 include ':data'
 include ':data:cache'
 include ':data:network'
 include ':data:repository'
-include ':feature:settings'
