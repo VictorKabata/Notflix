@@ -66,7 +66,7 @@ fun Int.getMovieDuration(): String {
     val startTime = "00:00"
     val hours = this / 60 + startTime.substring(0, 1).toInt()
     val mins = this % 60 + startTime.substring(3, 4).toInt()
-    return "${hours}hrs : ${mins}mins"
+    return "${hours}hrs ${mins}mins"
 }
 
 fun String.getLanguageName(): String {
