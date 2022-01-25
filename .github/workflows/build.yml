@@ -24,3 +24,16 @@ jobs: # groups the jobs to be executed in this workflow
 
       - name: Build with gradle
         run: ./gradlew build
+
+      - name: Cache Gradle and wrapper
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+            - name: Build with Gradle
+            run: bash ./gradlew build
+
