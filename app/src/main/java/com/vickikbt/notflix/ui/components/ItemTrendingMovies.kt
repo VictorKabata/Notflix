@@ -22,7 +22,7 @@ import com.vickikbt.notflix.R
 import com.vickikbt.notflix.util.loadImage
 
 @Composable
-fun ItemRecentlyPlayedAlbum(
+fun ItemTrendingMovies(
     modifier: Modifier = Modifier,
     movie: Movie,
     onItemClick: (Movie) -> Unit

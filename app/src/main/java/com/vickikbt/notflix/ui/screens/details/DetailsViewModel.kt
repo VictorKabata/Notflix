@@ -3,7 +3,6 @@ package com.vickikbt.notflix.ui.screens.details
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,19 +12,14 @@ import com.vickikbt.domain.models.Cast
 import com.vickikbt.domain.models.MovieDetails
 import com.vickikbt.domain.models.MovieVideo
 import com.vickikbt.domain.models.SimilarMovies
-
 import com.vickikbt.repository.repository.movie_details_repository.MovieDetailsRepository
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class DetailsViewModel(
     private val movieDetailsRepository: MovieDetailsRepository
 ) : ViewModel() {
-
-    private val _movieIsFavorite: MutableStateFlow<Boolean?> = MutableStateFlow(false)
-    val movieIsFavorite: StateFlow<Boolean?> get() = _movieIsFavorite
 
     private val _movieDetails = MutableLiveData<MovieDetails>()
     val movieDetails: LiveData<MovieDetails> get() = _movieDetails
@@ -39,19 +33,22 @@ class DetailsViewModel(
     private val _similarMovies = MutableLiveData<SimilarMovies>()
     val similarMovies: LiveData<SimilarMovies> get() = _similarMovies
 
-    fun fetchMovieDetails(movieId: Int) = viewModelScope.launch {
+    private val _movieIsFavorite = MutableLiveData<Boolean>()
+    val movieIsFavorite: LiveData<Boolean?> get() = _movieIsFavorite
+
+    fun getMovieDetails(movieId: Int) = viewModelScope.launch {
         movieDetailsRepository.getMovieDetails(movieId).collect {
             _movieDetails.value = it
         }
     }
 
-    fun fetchMovieCast(movieId: Int) = viewModelScope.launch {
+    fun getMovieCast(movieId: Int) = viewModelScope.launch {
         movieDetailsRepository.getMovieCast(movieId).collect {
             _movieCast.value = it
         }
     }
 
-    fun fetchMovieVideo(movieId: Int) = viewModelScope.launch {
+    fun getMovieVideo(movieId: Int) = viewModelScope.launch {
         movieDetailsRepository.getMovieVideos(movieId).collect {
             _movieVideo.value = it
         }
@@ -88,17 +85,19 @@ class DetailsViewModel(
             }
         }
 
-    fun updateFavorite(cacheId: Int, isFavorite: Boolean) = viewModelScope.launch {
-        movieDetailsRepository.updateMovieIsFavorite(cacheId, isFavorite)
-    }
-
-    fun checkIfMovieIsFavorite(movieId: Int) = viewModelScope.launch {
-        movieDetailsRepository.isMovieFavorite(movieId).collect {
-            _movieIsFavorite.value = it
+    fun updateFavorite(cacheId: Int, isFavorite: Boolean) {
+        Timber.e("Updating : $cacheId to $isFavorite")
+        viewModelScope.launch {
+            movieDetailsRepository.updateMovieIsFavorite(cacheId, isFavorite)
         }
     }
 
-    fun logThis(something: Any) {
-        Log.d("Det", "The value of favorite is $something")
+    fun getIsMovieFavorite(movieId: Int) {
+        viewModelScope.launch {
+            movieDetailsRepository.isMovieFavorite(movieId).collect {
+                _movieIsFavorite.value = it
+            }
+        }
     }
+
 }

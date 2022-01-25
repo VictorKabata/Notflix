@@ -1,0 +1,41 @@
+name: Deploy to Firebase App Distribution
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    name: 🔨 Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout code
+
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew build -x test
+
+  deploy:
+    name: 🚀 Firebase App Distribution
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Debug APK
+        run: bash ./gradlew assembleDebug
+
+      - name: Upload Artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.2.2
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          groups: testers
+          file: app/build/outputs/apk/debug/app-debug.apk

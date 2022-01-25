@@ -1,7 +1,6 @@
 package com.vickikbt.notflix.ui.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -9,89 +8,80 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.fade
 import com.google.accompanist.placeholder.placeholder
-import com.google.accompanist.placeholder.shimmer
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.theme.Gray
-import com.vickikbt.notflix.ui.theme.Surface
+import com.vickikbt.notflix.ui.theme.TextPrimary
 import com.vickikbt.notflix.ui.theme.TextSecondary
 
 @Composable
-fun MovieRatingSection(popularity: String?, voteAverage: Float?, modifier: Modifier) {
+fun MovieRatingSection(popularity: String?, voteAverage: Float?) {
     Row(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .placeholder(
                 visible = popularity.isNullOrEmpty(),
                 color = Gray,
-                highlight = PlaceholderHighlight.shimmer(highlightColor = TextSecondary)
+                highlight = PlaceholderHighlight.fade(highlightColor = TextSecondary)
             ),
-        horizontalArrangement = Arrangement.Center,
+        horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        ConstraintLayout(Modifier.wrapContentHeight().fillMaxWidth()) {
-            val (image, popularityRef, popularityText, divider, rating) = createRefs()
+
+        //region Popularity
+        Column(
+            modifier = Modifier,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
             Text(
                 text = "$popularity",
                 style = MaterialTheme.typography.h6,
                 fontSize = 42.sp,
-                modifier = Modifier.constrainAs(popularityRef) {
-                    top.linkTo(parent.top)
-                    start.linkTo(popularityText.start)
-                    end.linkTo(popularityText.end)
-                }
+                color = MaterialTheme.colors.onSurface,
             )
 
             Text(
-                text = "Popularity", style = MaterialTheme.typography.h6, fontSize = 18.sp,
-                modifier = Modifier.constrainAs(popularityText) {
-                    top.linkTo(popularityRef.bottom,)
-                    end.linkTo(divider.start, margin = 15.dp)
-                }
+                text = stringResource(id = R.string.popularity),
+                style = MaterialTheme.typography.h6,
+                fontSize = 18.sp,
+                color = MaterialTheme.colors.onSurface,
             )
+        }
+        //endregion
 
-            Divider(
-                thickness = 2.dp,
-                modifier = modifier
-                    .fillMaxHeight(0.7f)
-                    .width(2.dp)
-                    .constrainAs(divider) {
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                        top.linkTo(parent.top)
-                        bottom.linkTo(parent.bottom, margin = 10.dp)
-                        height = Dimension.fillToConstraints
-                    },
-                color = MaterialTheme.colors.onSurface
-            )
+        Divider(
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(2.dp),
+            color = MaterialTheme.colors.onSurface
+        )
 
+        //region Rating
+        Column(
+            modifier = Modifier,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_rating_star),
-                contentDescription = "rating star",
-                modifier = modifier.constrainAs(image) {
-                    bottom.linkTo(popularityRef.bottom)
-                    start.linkTo(rating.start)
-                    end.linkTo(rating.end)
-                }
+                contentDescription = stringResource(R.string.rating)
             )
 
             Text(
                 text = "$voteAverage/5.0",
                 style = MaterialTheme.typography.h6,
                 fontSize = 20.sp,
-                modifier = Modifier.constrainAs(rating) {
-                    start.linkTo(divider.end, margin = 15.dp)
-                    top.linkTo(popularityText.top)
-                }
+                color = MaterialTheme.colors.onSurface,
             )
         }
+        //endregion
     }
 }
