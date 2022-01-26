@@ -1,12 +1,12 @@
 package com.vickikbt.notflix.util
 
 import android.annotation.SuppressLint
+import android.content.Context
 import com.vickikbt.cache.preferences.PreferenceManager
-import com.vickikbt.domain.utils.Constants
+import com.vickikbt.notflix.R
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.text.SimpleDateFormat
-import java.util.*
 
 
 inline fun <reified T> getKoinInstance(): T {
@@ -20,20 +20,17 @@ private val preferenceManager: PreferenceManager = getKoinInstance()
 /**
  * Append the image url with string to determine the image quality to be loaded
  */
-fun String.loadImage(): String {
+fun String.loadImage(context: Context): String {
     var imageQuality: String? = null
-    preferenceManager.imageQuality.observeForever {
-        imageQuality = when (it) {
-            "High quality" -> {
-                "${Constants.IMAGE_PREFIX}/original/$this"
-            }
-            "Medium quality" -> {
-                "${Constants.IMAGE_PREFIX}/w500/$this"
-            }
-            "Low quality" -> {
-                "${Constants.IMAGE_PREFIX}/w500/$this"
-            }
-            else -> "${Constants.IMAGE_PREFIX}/w500/$this"
+    preferenceManager.imageQuality.observeForever { languageSelection ->
+        val languageEntry =
+            context.resources.getStringArray(R.array.image_quality_entries)[languageSelection]
+
+        imageQuality = when (languageSelection) {
+            0 -> "$languageEntry$this"
+            1 -> "$languageEntry$this"
+            2 -> "$languageEntry$this"
+            else -> "$languageEntry$this"
         }
     }
     return imageQuality!!
@@ -67,14 +64,4 @@ fun Int.getMovieDuration(): String {
     val hours = this / 60 + startTime.substring(0, 1).toInt()
     val mins = this % 60 + startTime.substring(3, 4).toInt()
     return "${hours}hrs ${mins}mins"
-}
-
-fun String.getLanguageName(): String {
-    return when (this) {
-        "English" -> "en"
-        "Spanish" -> "es"
-        "French" -> "fr"
-        "German" -> "de"
-        else -> Locale.getDefault().language
-    }
 }

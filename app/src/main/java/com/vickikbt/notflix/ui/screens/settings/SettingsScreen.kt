@@ -36,13 +36,18 @@ fun SettingsScreen(navController: NavController, viewModel: SettingsViewModel = 
 
     val context = LocalContext.current
 
-    val currentTheme = viewModel.selectedTheme.observeAsState().value
-    val currentLanguage = viewModel.selectedLanguage.observeAsState().value
-    val currentImageQuality = viewModel.selectedImageQuality.observeAsState().value
+    val currentTheme = viewModel.selectedTheme.observeAsState().value!!
+    val currentLanguage = viewModel.selectedLanguage.observeAsState().value!!
+    val currentImageQuality = viewModel.selectedImageQuality.observeAsState().value!!
 
     val showThemeDialog = remember { mutableStateOf(false) }
     val showLanguageDialog = remember { mutableStateOf(false) }
     val showImageQualityDialog = remember { mutableStateOf(false) }
+
+    val themeLabel = stringArrayResource(id = R.array.theme_labels)[currentTheme]
+    val languageLabel = stringArrayResource(id = R.array.language_labels)[currentLanguage]
+    val imageQualityLabel =
+        stringArrayResource(id = R.array.image_quality_labels)[currentImageQuality]
 
     Scaffold(topBar = { AppBar(stringResource(id = R.string.title_settings)) }) {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
@@ -53,40 +58,40 @@ fun SettingsScreen(navController: NavController, viewModel: SettingsViewModel = 
                     TextPreference(
                         icon = painterResource(id = R.drawable.ic_theme),
                         title = stringResource(id = R.string.change_theme),
-                        subTitle = currentTheme ?: stringResource(id = R.string.def),
+                        subTitle = themeLabel,
                         onClick = { showThemeDialog.value = !showThemeDialog.value }
                     )
 
                     if (showThemeDialog.value) ChangeTheme(
                         viewModel = viewModel,
                         showDialog = showThemeDialog,
-                        currentValue = currentTheme
+                        currentValue = themeLabel
                     )
 
                     TextPreference(
                         icon = painterResource(id = R.drawable.ic_language),
                         title = stringResource(id = R.string.change_language),
-                        subTitle = currentLanguage,
+                        subTitle = languageLabel,
                         onClick = { showLanguageDialog.value = !showLanguageDialog.value }
                     )
 
                     if (showLanguageDialog.value) ChangeLanguage(
                         viewModel = viewModel,
                         showDialog = showLanguageDialog,
-                        currentValue = currentLanguage
+                        currentValue = languageLabel
                     )
 
                     TextPreference(
                         icon = painterResource(id = R.drawable.ic_image_quality),
                         title = stringResource(id = R.string.change_image_quality),
-                        subTitle = currentImageQuality,
+                        subTitle = imageQualityLabel,
                         onClick = { showImageQualityDialog.value = !showImageQualityDialog.value }
                     )
 
                     if (showImageQualityDialog.value) ChangeImageQuality(
                         viewModel = viewModel,
                         showDialog = showImageQualityDialog,
-                        currentValue = currentImageQuality
+                        currentValue = imageQualityLabel
                     )
                 }
 
@@ -128,8 +133,9 @@ private fun ChangeTheme(
         showDialog = showDialog.value,
         title = stringResource(id = R.string.change_theme),
         currentValue = currentValue ?: stringResource(id = R.string.def),
-        options = stringArrayResource(id = R.array.theme_options),
-        onNegativeClick = { showDialog.value = false }) { theme ->
+        labels = stringArrayResource(id = R.array.theme_labels),
+        onNegativeClick = { showDialog.value = false }
+    ) { theme ->
         viewModel.savePreferenceSelection(key = Constants.KEY_THEME, selection = theme)
     }
 }
@@ -143,8 +149,8 @@ private fun ChangeLanguage(
     DialogPreferenceSelection(
         showDialog = showDialog.value,
         title = stringResource(id = R.string.change_language),
-        currentValue = currentValue ?: stringResource(id = R.string.def),
-        options = stringArrayResource(id = R.array.language_options),
+        currentValue = currentValue ?: stringResource(id = R.string.language_eg),
+        labels = stringArrayResource(id = R.array.language_labels),
         onNegativeClick = { showDialog.value = false }
     ) { language ->
         viewModel.savePreferenceSelection(key = Constants.KEY_LANGUAGE, selection = language)
@@ -161,8 +167,9 @@ private fun ChangeImageQuality(
         showDialog = showDialog.value,
         title = stringResource(id = R.string.change_image_quality),
         currentValue = currentValue ?: stringResource(id = R.string.def),
-        options = stringArrayResource(id = R.array.image_quality_options),
-        onNegativeClick = { showDialog.value = false }) { imageQuality ->
+        labels = stringArrayResource(id = R.array.image_quality_labels),
+        onNegativeClick = { showDialog.value = false }
+    ) { imageQuality ->
         viewModel.savePreferenceSelection(
             key = Constants.KEY_IMAGE_QUALITY,
             selection = imageQuality

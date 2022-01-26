@@ -22,9 +22,9 @@ fun DialogPreferenceSelection(
     showDialog: Boolean,
     title: String,
     currentValue: String? = null,
-    options: Array<String>,
+    labels: Array<String>,
     onNegativeClick: () -> Unit,
-    onOptionSelected: (String) -> Unit
+    onOptionSelected: (Int) -> Unit
 ) {
 
     if (showDialog) {
@@ -49,13 +49,13 @@ fun DialogPreferenceSelection(
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        options.forEach { option ->
+                        labels.forEachIndexed { index, option ->
 
                             ItemPreferenceOption(
                                 optionText = option,
                                 selectedOption = option == currentValue
                             ) {
-                                onOptionSelected(option)
+                                onOptionSelected(index)
                                 onNegativeClick()
                             }
                         }

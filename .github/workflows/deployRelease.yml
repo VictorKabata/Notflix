@@ -33,8 +33,6 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-            - name: Build with Gradle
-            run: bash ./gradlew build
 
   deploy:
     name: 🚀 Firebase App Distribution

@@ -284,7 +284,8 @@ fun MoviePoster(
     var dominantColor by remember { mutableStateOf(defaultDominantColor) }
     var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
 
-    val imagePainter = rememberImagePainter(data = movieDetails?.backdropPath?.loadImage())
+    val imagePainter =
+        rememberImagePainter(data = movieDetails?.backdropPath?.loadImage(LocalContext.current))
 
     ConstraintLayout(
         modifier = modifier

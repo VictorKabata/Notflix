@@ -44,6 +44,7 @@
     <string name="similar_movies">Similar Movies</string>
 
     <string name="def">Default</string>
+    <string name="language_eg" translatable="false">No Russian</string>
 
     <string name="cancel">Cancel</string>
     <string name="movie_poster">Movie poster</string>
