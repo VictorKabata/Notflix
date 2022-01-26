@@ -128,7 +128,7 @@ private fun ChangeTheme(
         showDialog = showDialog.value,
         title = stringResource(id = R.string.change_theme),
         currentValue = currentValue ?: stringResource(id = R.string.def),
-        options = stringArrayResource(id = R.array.theme_options),
+        labels = stringArrayResource(id = R.array.theme_labels),
         onNegativeClick = { showDialog.value = false }) { theme ->
         viewModel.savePreferenceSelection(key = Constants.KEY_THEME, selection = theme)
     }
@@ -144,7 +144,7 @@ private fun ChangeLanguage(
         showDialog = showDialog.value,
         title = stringResource(id = R.string.change_language),
         currentValue = currentValue ?: stringResource(id = R.string.def),
-        options = stringArrayResource(id = R.array.language_options),
+        labels = stringArrayResource(id = R.array.language_labels),
         onNegativeClick = { showDialog.value = false }
     ) { language ->
         viewModel.savePreferenceSelection(key = Constants.KEY_LANGUAGE, selection = language)
@@ -161,7 +161,7 @@ private fun ChangeImageQuality(
         showDialog = showDialog.value,
         title = stringResource(id = R.string.change_image_quality),
         currentValue = currentValue ?: stringResource(id = R.string.def),
-        options = stringArrayResource(id = R.array.image_quality_options),
+        labels = stringArrayResource(id = R.array.image_quality_labels),
         onNegativeClick = { showDialog.value = false }) { imageQuality ->
         viewModel.savePreferenceSelection(
             key = Constants.KEY_IMAGE_QUALITY,
