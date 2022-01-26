@@ -16,10 +16,10 @@
 
     <!--region Language Options -->
     <string-array name="language_labels">
-        <item>English</item>
-        <item>Spanish</item>
-        <item>French</item>
-        <item>German</item>
+        <item>Englisch</item>
+        <item>Spanisch</item>
+        <item>Französisch</item>
+        <item>Deutsch</item>
     </string-array>
 
     <string-array name="language_entries">

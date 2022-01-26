@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -26,7 +27,7 @@ import com.vickikbt.notflix.util.loadImage
 
 @Composable
 fun ItemSimilarMovies(movie: Movie) {
-    val painter = rememberImagePainter(data = movie.backdropPath?.loadImage())
+    val painter = rememberImagePainter(data = movie.backdropPath?.loadImage(LocalContext.current))
 
     Column {
         Card(

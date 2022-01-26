@@ -8,8 +8,8 @@ import kotlinx.coroutines.launch
 class SettingsViewModel constructor(private val preferenceManager: PreferenceManager) :
     ViewModel() {
 
-    fun savePreferenceSelection(key: String, selection: String) = viewModelScope.launch {
-        preferenceManager.setString(key, selection)
+    fun savePreferenceSelection(key: String, selection: Int) = viewModelScope.launch {
+        preferenceManager.setInt(key, selection)
     }
 
     val selectedTheme = preferenceManager.appTheme

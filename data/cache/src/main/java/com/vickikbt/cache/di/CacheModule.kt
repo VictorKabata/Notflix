@@ -2,7 +2,6 @@ package com.vickikbt.cache.di
 
 import androidx.room.Room
 import com.vickikbt.cache.datastore.TimeDatastore
-import com.vickikbt.cache.preferences.LanguagePreferences
 import com.vickikbt.cache.preferences.PreferenceManager
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
@@ -22,9 +21,5 @@ val cacheModule = module {
     //ToDo: Remove other datastore instances
     single {
         TimeDatastore(androidApplication())
-    }
-
-    single {
-        LanguagePreferences(androidApplication())
     }
 }

@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.stringArrayResource
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -46,16 +46,20 @@ class MainActivity : ComponentActivity() {
         setContent {
             val settingsViewModel: SettingsViewModel = getViewModel()
             val systemUiController = rememberSystemUiController()
-            val useDarkTheme = when (settingsViewModel.selectedTheme.observeAsState().value) {
-                stringResource(id = R.string.light_theme) -> false
-                stringResource(id = R.string.dark_theme) -> true
-                else -> isSystemInDarkTheme()
-            }
 
+            val currentTheme = settingsViewModel.selectedTheme.observeAsState().value!!
+            val useDarkTheme =
+                when (stringArrayResource(id = R.array.theme_entries)[currentTheme]) {
+                    "light_theme" -> false
+                    "dark_theme" -> true
+                    else -> isSystemInDarkTheme()
+                }
+
+            val currentLanguage = settingsViewModel.selectedLanguage.observeAsState().value!!
+            val languageEntry= stringArrayResource(id = R.array.language_entries)[currentLanguage]
             localeUtil.setLocale(
                 context = LocalContext.current,
-                language = settingsViewModel.selectedLanguage.observeAsState().value
-                    ?: Locale.getDefault().displayLanguage
+                language = languageEntry ?: Locale.getDefault().language
             )
 
             ChangeSystemBarColorOnNetChange(
