@@ -39,7 +39,6 @@ object Versions {
     const val lifecycle_version = "2.3.1"
     const val coil_version = "1.4.0"
     const val palette_version = "28.0.0"
-    const val timber_version = "5.0.1"
     const val paging_version = "3.0.0"
     const val coroutines_version = "1.5.2"
     const val firebase_bom_version = "29.0.3"

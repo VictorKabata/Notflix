@@ -95,9 +95,6 @@ dependencies {
     implementation(Libraries.koinAndroid)
     implementation(Libraries.koinCompose)
 
-    // Timber-Logging
-    implementation(Libraries.timber)
-
     // Compose Navigation-Navigation between various screens
     implementation(Libraries.composeNavigation)
 

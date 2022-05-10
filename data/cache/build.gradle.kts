@@ -29,7 +29,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-
 }
 
 dependencies {
@@ -39,21 +38,18 @@ dependencies {
     implementation(Libraries.kotlin)
     implementation(Libraries.androidCore)
 
-    //Room
+    // Room
     api(Libraries.roomRuntime)
     kapt(Libraries.roomCompiler)
     api(Libraries.roomKtx)
 
-    //DataStore
+    // DataStore
     implementation(Libraries.datastore)
 
     implementation(Libraries.koinAndroid)
 
     implementation(Libraries.gsonConvertor)
 
-    //Timber-Logging
-    implementation(Libraries.timber)
-
-    //Paging 3
+    // Paging 3
     implementation(Libraries.paging)
 }

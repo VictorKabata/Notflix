@@ -15,7 +15,6 @@ import com.vickikbt.domain.models.SimilarMovies
 import com.vickikbt.repository.repository.movie_details_repository.MovieDetailsRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class DetailsViewModel(
     private val movieDetailsRepository: MovieDetailsRepository
@@ -86,7 +85,7 @@ class DetailsViewModel(
         }
 
     fun updateFavorite(cacheId: Int, isFavorite: Boolean) {
-        Timber.e("Updating : $cacheId to $isFavorite")
+        //Timber.e("Updating : $cacheId to $isFavorite")
         viewModelScope.launch {
             movieDetailsRepository.updateMovieIsFavorite(cacheId, isFavorite)
         }

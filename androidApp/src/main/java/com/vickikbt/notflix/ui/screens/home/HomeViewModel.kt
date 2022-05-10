@@ -15,7 +15,6 @@ import com.vickikbt.repository.repository.movies_repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class HomeViewModel constructor(
     private val moviesRepository: MoviesRepository
@@ -47,7 +46,7 @@ class HomeViewModel constructor(
                 _nowPlayingMovies.value = it
             }
         } catch (e: Exception) {
-            Timber.e("Error fetching now playing movies: ${e.localizedMessage}")
+            // Timber.e("Error fetching now playing movies: ${e.localizedMessage}")
         }
     }
 
@@ -56,7 +55,7 @@ class HomeViewModel constructor(
             _trendingMovies.value =
                 moviesRepository.fetchMovies(category = Constants.CATEGORY_TRENDING_MOVIES)
         } catch (e: Exception) {
-            Timber.e("Error fetching trending movies: ${e.localizedMessage}")
+            // Timber.e("Error fetching trending movies: ${e.localizedMessage}")
         }
     }
 
@@ -65,7 +64,7 @@ class HomeViewModel constructor(
             _popularMovies.value =
                 moviesRepository.fetchMovies(category = Constants.CATEGORY_POPULAR_MOVIES)
         } catch (e: Exception) {
-            Timber.e("Error fetching popular movies: ${e.localizedMessage}")
+            // Timber.e("Error fetching popular movies: ${e.localizedMessage}")
         }
     }
 
@@ -73,9 +72,8 @@ class HomeViewModel constructor(
         try {
             _upcomingMovies.value =
                 moviesRepository.fetchMovies(category = Constants.CATEGORY_UPCOMING_MOVIES)
-
         } catch (e: Exception) {
-            Timber.e("Error fetching upcoming movies: ${e.localizedMessage}")
+            // Timber.e("Error fetching upcoming movies: ${e.localizedMessage}")
         }
     }
 
@@ -92,5 +90,4 @@ class HomeViewModel constructor(
             }
         }
     }
-
 }

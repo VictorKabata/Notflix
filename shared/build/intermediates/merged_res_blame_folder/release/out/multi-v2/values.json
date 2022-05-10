@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\Projects\\Kotlin\\Notflix\\shared\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values\\values.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-3\\e9489ff6d43fbd94be1367b9b7a6b276\\transformed\\jetified-startup-runtime-1.1.0\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "82",
+                        "endOffsets": "133"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "D:\\Projects\\Kotlin\\Notflix\\shared\\build\\intermediates\\merged_res\\release\\values\\values.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-3\\e9489ff6d43fbd94be1367b9b7a6b276\\transformed\\jetified-startup-runtime-1.1.0\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "82",
+                        "endOffsets": "133"
+                    }
+                }
+            ]
+        }
+    ]
+}

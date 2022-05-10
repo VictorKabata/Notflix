@@ -54,7 +54,6 @@ import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
-import timber.log.Timber
 import kotlin.math.min
 
 @Composable
@@ -78,12 +77,12 @@ fun DetailsScreen(
     val movieVideo = detailsViewModel.movieVideo.observeAsState().value
     val isMovieFavorite = detailsViewModel.movieIsFavorite.observeAsState().value
 
-    Timber.e("Is movie fav: $isMovieFavorite")
+    // Timber.e("Is movie fav: $isMovieFavorite")
 
     LaunchedEffect(key1 = Unit) {
         launch {
             if (movieDetails != null && movieCast != null) {
-                Timber.e("Saving movie details")
+                // Timber.e("Saving movie details")
                 detailsViewModel.saveMovieDetails(
                     movieDetails = movieDetails,
                     cast = movieCast,
@@ -211,7 +210,7 @@ fun DetailsScreen(
                         shape = RoundedCornerShape(8.dp),
                         backgroundColor = TextSecondary
                     ) {
-                        //ToDo: Card content
+                        // ToDo: Card content
                     }
                 }
                 //endregion
@@ -238,7 +237,6 @@ fun DetailsScreen(
                     }
                 }
                 //endregion
-
             }
 
             //region App Bar
@@ -261,7 +259,8 @@ fun DetailsScreen(
                             cacheId = cacheId
                         )
                     }
-                })
+                }
+            )
             //endregion
         }
     }
@@ -395,4 +394,3 @@ private fun shareMovie(context: Context, movieId: Int) {
         )
     )
 }
-

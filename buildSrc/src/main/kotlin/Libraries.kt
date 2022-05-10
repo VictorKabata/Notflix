@@ -46,9 +46,6 @@ object Libraries {
     const val coroutinesCore =
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines_version}"
 
-    // Timber-Logging
-    const val timber = "com.jakewharton.timber:timber:${Versions.timber_version}"
-
     // Compose Navigation-Navigation between various screens
     const val composeNavigation =
         "androidx.navigation:navigation-compose:${Versions.navigation_version}"
