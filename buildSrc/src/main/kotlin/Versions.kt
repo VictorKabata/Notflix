@@ -24,9 +24,9 @@ object Versions {
     const val timber_version = "5.0.1"
     const val paging_version = "3.0.0"
     const val coroutines_version = "1.5.2"
-    const val firebase_bom = "29.0.3"
+    const val firebase_bom_version = "29.0.3"
     const val rating_bar_version = "1.1.1"
-    const val paging_compose = "1.0.0-alpha14"
+    const val paging_compose_version = "1.0.0-alpha14"
 
     const val room_version = "2.4.0-alpha02"
     const val datastore_version = "1.0.0"

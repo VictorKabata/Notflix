@@ -2,7 +2,7 @@ object Libraries {
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
     const val androidCore = "androidx.core:core-ktx:${Versions.androidCore_version}"
 
-    const val firebaseBOM = "com.google.firebase:firebase-bom:${Versions.firebase_bom}"
+    const val firebaseBOM = "com.google.firebase:firebase-bom:${Versions.firebase_bom_version}"
     const val firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx"
     const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics-ktx"
 
@@ -61,6 +61,24 @@ object Libraries {
 
     // Gowtham Compose Rating Bar
     const val ratingBar = "com.github.a914-gowtham:compose-ratingbar:${Versions.rating_bar_version}"
+
+    // Room
+    const val roomRuntime = "androidx.room:room-runtime:${Versions.room_version}"
+    const val roomCompiler = "androidx.room:room-compiler:${Versions.room_version}"
+    const val roomKtx = "androidx.room:room-ktx:${Versions.room_version}"
+
+    // DataStore
+    const val datastore = "androidx.datastore:datastore-preferences:${Versions.datastore_version}"
+
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit_version}"
+    const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp_version}"
+    const val loggingInterceptor =
+        "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptor_version}"
+    const val gsonConvertor = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_version}"
+
+    // Paging 3
+    const val paging = "androidx.paging:paging-runtime:${Versions.paging_version}"
+    const val pagingCompose = "androidx.paging:paging-compose:${Versions.paging_compose_version}"
 
     // Test Libs
     const val jUnit = "junit:junit:${Versions.jUnit_version}"

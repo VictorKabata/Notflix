@@ -1,7 +1,0 @@
-include ':app'
-rootProject.name = "Notflix"
-include ':domain'
-include ':data'
-include ':data:cache'
-include ':data:network'
-include ':data:repository'

@@ -107,6 +107,9 @@ dependencies {
     // Palette-Used to extract color palette from images
     implementation(Libraries.palette)
 
+    implementation(Libraries.paging)
+    implementation(Libraries.pagingCompose)
+
     // Gowtham Compose Rating Bar
     implementation(Libraries.ratingBar)
 
