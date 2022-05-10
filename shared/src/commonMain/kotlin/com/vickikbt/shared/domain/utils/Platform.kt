@@ -1,4 +1,4 @@
-package com.vickikbt.shared
+package com.vickikbt.shared.domain.utils
 
 expect class Platform() {
     val platform: String
