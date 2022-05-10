@@ -1,9 +1,10 @@
 object BuildPlugins {
-    const val kotlinAndroid = "org.jetbrains.kotlin.android"
+    const val kotlinAndroid = "kotlin-android"
     const val androidApplication = "com.android.application"
     const val androidLibrary = "com.android.library"
     const val kotlinKapt = "kotlin-kapt"
     const val kotlin = "kotlin"
+    const val java = "java-library"
     const val dynamicFeature = "com.android.dynamic-feature"
     const val realmAndroid = "realm-android"
     const val googleServices = "com.google.gms.google-services"
