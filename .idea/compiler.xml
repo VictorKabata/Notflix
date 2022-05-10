@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="Notflix.app" target="11" />
+      <module name="Notflix.buildSrc" target="11" />
       <module name="Notflix.core" target="15" />
       <module name="Notflix.data.cache" target="11" />
       <module name="Notflix.data.network" target="11" />
