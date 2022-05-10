@@ -1,0 +1,25 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml:2:1-43
+INJECTED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml:2:1-43
+INJECTED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml:2:1-43
+	package
+		ADDED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml:2:11-40
+		INJECTED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml
+		INJECTED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml:2:1-43
+uses-sdk
+INJECTED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml
+INJECTED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml
+INJECTED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml
+INJECTED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml
+		ADDED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml
+		INJECTED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml
+		ADDED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml
+		INJECTED from D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml

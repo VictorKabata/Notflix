@@ -22,7 +22,6 @@ class NotflixApplication : Application() {
         initKoin()
 
         if (BuildConfig.DEBUG) Timber.plant(DebugTree())
-
     }
 
     private fun initKoin() {

@@ -15,6 +15,7 @@
       <module name="Notflix.feature.settings" target="11" />
       <module name="Notflix.library.cache" target="15" />
       <module name="Notflix.library.network" target="15" />
+      <module name="Notflix.shared" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

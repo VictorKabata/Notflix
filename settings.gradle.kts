@@ -13,3 +13,4 @@ include(BuildModules.Repository)
 include(BuildModules.Network)
 include(BuildModules.Cache)
 rootProject.name = "Notflix"*/
+include(":shared")
