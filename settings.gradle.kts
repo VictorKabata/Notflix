@@ -1,4 +1,6 @@
 include(":androidApp")
+include(":shared")
+
 include(":domain")
 include(":data")
 include(":data:cache")
@@ -13,4 +15,3 @@ include(BuildModules.Repository)
 include(BuildModules.Network)
 include(BuildModules.Cache)
 rootProject.name = "Notflix"*/
-include(":shared")
