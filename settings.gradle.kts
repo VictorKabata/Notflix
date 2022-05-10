@@ -1,4 +1,4 @@
-include(":app")
+include(":androidApp")
 include(":domain")
 include(":data")
 include(":data:cache")
