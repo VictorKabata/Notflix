@@ -8,8 +8,8 @@ import androidx.room.withTransaction
 import com.vickikbt.cache.AppDatabase
 import com.vickikbt.cache.models.MovieEntity
 import com.vickikbt.cache.models.RemoteKey
-import com.vickikbt.domain.utils.Constants
-import com.vickikbt.domain.utils.Constants.STARTING_PAGE_INDEX
+import com.vickikbt.shared.domain.utils.Constants
+import com.vickikbt.shared.domain.utils.Constants.STARTING_PAGE_INDEX
 import com.vickikbt.network.ApiService
 import com.vickikbt.network.models.PopularMoviesDto
 import com.vickikbt.network.models.TrendingMoviesDto

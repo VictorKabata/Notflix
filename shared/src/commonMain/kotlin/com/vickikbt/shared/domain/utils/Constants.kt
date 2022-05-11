@@ -1,4 +1,4 @@
-package com.vickikbt.domain.utils
+package com.vickikbt.shared.domain.utils
 
 object Constants {
 

@@ -1,6 +1,6 @@
 package com.vickikbt.network.di
 
-import com.vickikbt.domain.utils.Constants.BASE_URL
+import com.vickikbt.shared.domain.utils.Constants.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module

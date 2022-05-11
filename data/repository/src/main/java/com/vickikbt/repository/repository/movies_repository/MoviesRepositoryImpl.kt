@@ -7,7 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.vickikbt.cache.AppDatabase
 import com.vickikbt.cache.models.MovieEntity
-import com.vickikbt.domain.utils.Constants
+import com.vickikbt.shared.domain.utils.Constants
 import com.vickikbt.domain.utils.Coroutines
 import com.vickikbt.network.ApiService
 import com.vickikbt.network.utils.SafeApiRequest

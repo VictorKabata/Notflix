@@ -1,8 +1,8 @@
 package com.vickikbt.network
 
-import com.vickikbt.domain.utils.Constants.API_KEY
-import com.vickikbt.domain.utils.Constants.STARTING_PAGE_INDEX
 import com.vickikbt.network.models.*
+import com.vickikbt.shared.domain.utils.Constants.API_KEY
+import com.vickikbt.shared.domain.utils.Constants.STARTING_PAGE_INDEX
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

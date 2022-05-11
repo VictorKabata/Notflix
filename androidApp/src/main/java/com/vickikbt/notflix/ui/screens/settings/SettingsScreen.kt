@@ -23,7 +23,7 @@ import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.vickikbt.domain.utils.Constants
+import com.vickikbt.shared.domain.utils.Constants
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.app_bars.AppBar
 import com.vickikbt.notflix.ui.components.preferences.DialogPreferenceSelection

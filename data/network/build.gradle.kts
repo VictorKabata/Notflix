@@ -37,6 +37,8 @@ dependencies {
     implementation(Libraries.kotlin)
     implementation(Libraries.androidCore)
 
+    implementation(project(BuildModules.Shared))
+
     // Retrofit/Networking
     api(Libraries.retrofit)
     api(Libraries.okhttp)

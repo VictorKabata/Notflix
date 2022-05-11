@@ -3,7 +3,7 @@ package com.vickikbt.repository.repository.movies_repository
 import androidx.paging.PagingData
 import com.vickikbt.cache.models.MovieEntity
 import com.vickikbt.shared.domain.models.Movie
-import com.vickikbt.domain.utils.Constants
+import com.vickikbt.shared.domain.utils.Constants
 import kotlinx.coroutines.flow.Flow
 
 interface MoviesRepository {
