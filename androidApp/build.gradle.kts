@@ -66,6 +66,7 @@ dependencies {
 
     api(project(BuildModules.Domain))
     api(project(BuildModules.Repository))
+    api(project(BuildModules.Shared))
 
     implementation(Libraries.kotlin)
     implementation(Libraries.androidCore)
