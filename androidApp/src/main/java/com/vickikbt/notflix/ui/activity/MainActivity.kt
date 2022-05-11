@@ -27,7 +27,6 @@ import com.vickikbt.notflix.ui.screens.settings.SettingsViewModel
 import com.vickikbt.notflix.ui.theme.NotflixTheme
 import com.vickikbt.notflix.util.ChangeSystemBarColorOnNetChange
 import com.vickikbt.notflix.util.LocaleManager
-import io.github.aakira.napier.Napier
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 

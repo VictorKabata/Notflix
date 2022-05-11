@@ -1,7 +1,6 @@
 package com.vickikbt.repository.mappers
 
 import com.vickikbt.cache.models.*
-import com.vickikbt.domain.models.*
 import com.vickikbt.shared.domain.models.*
 
 fun MovieDetails.toEntity(): MovieDetailsEntity {

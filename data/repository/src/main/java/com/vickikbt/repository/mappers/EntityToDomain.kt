@@ -1,18 +1,17 @@
 package com.vickikbt.repository.mappers
 
 import com.vickikbt.cache.models.*
-import com.vickikbt.domain.models.*
-import com.vickikbt.network.models.*
+import com.vickikbt.shared.domain.models.*
 
-fun DatesEntity.toDomain(): com.vickikbt.shared.domain.models.Dates {
-    return com.vickikbt.shared.domain.models.Dates(
+fun DatesEntity.toDomain(): Dates {
+    return Dates(
         this.maximum,
         this.minimum
     )
 }
 
-fun MovieEntity.toDomain(): com.vickikbt.shared.domain.models.Movie {
-    return com.vickikbt.shared.domain.models.Movie(
+fun MovieEntity.toDomain(): Movie {
+    return Movie(
         this.adult,
         this.backdropPath,
         this.genreIds,
@@ -33,8 +32,8 @@ fun MovieEntity.toDomain(): com.vickikbt.shared.domain.models.Movie {
     )
 }
 
-fun NowPlayingMoviesEntity.toDomain(): com.vickikbt.shared.domain.models.NowPlayingMovies {
-    return com.vickikbt.shared.domain.models.NowPlayingMovies(
+fun NowPlayingMoviesEntity.toDomain(): NowPlayingMovies {
+    return NowPlayingMovies(
         this.dates?.toDomain(),
         this.page,
         this.movies?.map { it.toDomain() },
@@ -43,8 +42,8 @@ fun NowPlayingMoviesEntity.toDomain(): com.vickikbt.shared.domain.models.NowPlay
     )
 }
 
-fun PopularMoviesEntity.toDomain(): com.vickikbt.shared.domain.models.PopularMovies {
-    return com.vickikbt.shared.domain.models.PopularMovies(
+fun PopularMoviesEntity.toDomain(): PopularMovies {
+    return PopularMovies(
         this.page,
         this.movies?.map { it.toDomain() },
         this.totalPages,
@@ -52,8 +51,8 @@ fun PopularMoviesEntity.toDomain(): com.vickikbt.shared.domain.models.PopularMov
     )
 }
 
-fun TrendingMoviesEntity.toDomain(): com.vickikbt.shared.domain.models.TrendingMovies {
-    return com.vickikbt.shared.domain.models.TrendingMovies(
+fun TrendingMoviesEntity.toDomain(): TrendingMovies {
+    return TrendingMovies(
         this.page,
         this.movies?.map { it.toDomain() },
         this.totalPages,
@@ -61,8 +60,8 @@ fun TrendingMoviesEntity.toDomain(): com.vickikbt.shared.domain.models.TrendingM
     )
 }
 
-fun UpcomingMoviesEntity.toDomain(): com.vickikbt.shared.domain.models.UpcomingMovies {
-    return com.vickikbt.shared.domain.models.UpcomingMovies(
+fun UpcomingMoviesEntity.toDomain(): UpcomingMovies {
+    return UpcomingMovies(
         this.dates?.toDomain(),
         this.page,
         this.movies?.map { it.toDomain() },
@@ -71,23 +70,23 @@ fun UpcomingMoviesEntity.toDomain(): com.vickikbt.shared.domain.models.UpcomingM
     )
 }
 
-fun GenreEntity.toDomain(): com.vickikbt.shared.domain.models.Genre {
-    return com.vickikbt.shared.domain.models.Genre(
+fun GenreEntity.toDomain(): Genre {
+    return Genre(
         this.id,
         this.name
     )
 }
 
-fun SpokenLanguageEntity.toDomain(): com.vickikbt.shared.domain.models.SpokenLanguage {
-    return com.vickikbt.shared.domain.models.SpokenLanguage(
+fun SpokenLanguageEntity.toDomain(): SpokenLanguage {
+    return SpokenLanguage(
         this.englishName,
         this.iso6391,
         this.name
     )
 }
 
-fun MovieDetailsEntity.toDomain(): com.vickikbt.shared.domain.models.MovieDetails {
-    return com.vickikbt.shared.domain.models.MovieDetails(
+fun MovieDetailsEntity.toDomain(): MovieDetails {
+    return MovieDetails(
         this.adult,
         this.backdropPath,
         this.genres?.map { it.toDomain() },
@@ -111,27 +110,27 @@ fun MovieDetailsEntity.toDomain(): com.vickikbt.shared.domain.models.MovieDetail
     )
 }
 
-fun ActorEntity.toDomain(): com.vickikbt.shared.domain.models.Actor {
-    return com.vickikbt.shared.domain.models.Actor(
+fun ActorEntity.toDomain(): Actor {
+    return Actor(
         this.castId,
         this.character,
         this.creditId,
         this.id,
         this.name,
         this.originalName,
-        this?.profilePath
+        this.profilePath
     )
 }
 
-fun CastEntity.toDomain(): com.vickikbt.shared.domain.models.Cast {
-    return com.vickikbt.shared.domain.models.Cast(
+fun CastEntity.toDomain(): Cast {
+    return Cast(
         this.actor?.map { it.toDomain() },
         this.id
     )
 }
 
-fun VideoEntity.toDomain(): com.vickikbt.shared.domain.models.Video {
-    return com.vickikbt.shared.domain.models.Video(
+fun VideoEntity.toDomain(): Video {
+    return Video(
         this.id,
         this.iso31661,
         this.iso6391,
@@ -145,15 +144,15 @@ fun VideoEntity.toDomain(): com.vickikbt.shared.domain.models.Video {
     )
 }
 
-fun MovieVideoEntity.toDomain(): com.vickikbt.shared.domain.models.MovieVideo {
-    return com.vickikbt.shared.domain.models.MovieVideo(
+fun MovieVideoEntity.toDomain(): MovieVideo {
+    return MovieVideo(
         this.id,
         this.videos?.map { it.toDomain() }
     )
 }
 
-fun SimilarMoviesEntity.toDomain(): com.vickikbt.shared.domain.models.SimilarMovies {
-    return com.vickikbt.shared.domain.models.SimilarMovies(
+fun SimilarMoviesEntity.toDomain(): SimilarMovies {
+    return SimilarMovies(
         this.page,
         this.movies?.map { it.toDomain() },
         this.totalPages,

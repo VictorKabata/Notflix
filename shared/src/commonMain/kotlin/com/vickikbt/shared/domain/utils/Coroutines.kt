@@ -1,4 +1,4 @@
-package com.vickikbt.domain.utils
+package com.vickikbt.shared.domain.utils
 
 import kotlinx.coroutines.*
 
@@ -9,8 +9,8 @@ object Coroutines {
             work()
         }
 
-    fun io(work: suspend (() -> Unit)) =
-        CoroutineScope(Dispatchers.IO).launch {
+    fun default(work: suspend (() -> Unit)) =
+        CoroutineScope(Dispatchers.Default).launch {
             work()
         }
 

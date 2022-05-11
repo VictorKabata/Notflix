@@ -1,6 +1,5 @@
 package com.vickikbt.repository.repository.movie_details_repository
 
-import com.vickikbt.domain.models.*
 import kotlinx.coroutines.flow.Flow
 
 interface MovieDetailsRepository {

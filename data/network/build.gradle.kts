@@ -34,10 +34,10 @@ android {
 dependencies {
     api(project(BuildModules.Domain))
 
+    implementation(project(BuildModules.Shared))
+
     implementation(Libraries.kotlin)
     implementation(Libraries.androidCore)
-
-    implementation(project(BuildModules.Shared))
 
     // Retrofit/Networking
     api(Libraries.retrofit)

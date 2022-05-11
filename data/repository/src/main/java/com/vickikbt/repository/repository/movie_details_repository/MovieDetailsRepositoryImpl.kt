@@ -6,11 +6,7 @@ import com.vickikbt.cache.AppDatabase
 import com.vickikbt.cache.models.CastEntity
 import com.vickikbt.cache.models.MovieDetailsEntity
 import com.vickikbt.cache.models.MovieVideoEntity
-import com.vickikbt.shared.domain.models.Cast
-import com.vickikbt.shared.domain.models.MovieDetails
-import com.vickikbt.shared.domain.models.MovieVideo
-import com.vickikbt.shared.domain.models.SimilarMovies
-import com.vickikbt.domain.utils.Coroutines
+import com.vickikbt.shared.domain.utils.Coroutines
 import com.vickikbt.network.ApiService
 import com.vickikbt.network.utils.SafeApiRequest
 import com.vickikbt.repository.mappers.toDomain
@@ -30,15 +26,15 @@ class MovieDetailsRepositoryImpl constructor(
 
     init {
         _movieDetails.observeForever { movieDetails ->
-            Coroutines.io { saveMovieDetails(movieDetails.toDomain()) }
+            Coroutines.default { saveMovieDetails(movieDetails.toDomain()) }
         }
 
         _cast.observeForever { cast ->
-            Coroutines.io { saveMovieCast(cast.toDomain()) }
+            Coroutines.default { saveMovieCast(cast.toDomain()) }
         }
 
         _videos.observeForever { videos ->
-            Coroutines.io { saveMovieVideos(videos.toDomain()) }
+            Coroutines.default { saveMovieVideos(videos.toDomain()) }
         }
     }
 

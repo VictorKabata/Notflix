@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.vickikbt.cache.models.MovieEntity
-import com.vickikbt.shared.domain.utils.Constants
+import com.vickikbt.shared.domain.utils.Constants.CATEGORY_NOW_PLAYING_MOVIES
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -16,7 +16,7 @@ interface MoviesDao {
     suspend fun saveMovies(movieEntities: List<MovieEntity>)
 
     @Query("SELECT * FROM `Movies Table` WHERE category=:category")
-    fun getNowPlayingMovies(category: String = com.vickikbt.shared.domain.utils.Constants.CATEGORY_NOW_PLAYING_MOVIES): Flow<List<MovieEntity>>
+    fun getNowPlayingMovies(category: String = CATEGORY_NOW_PLAYING_MOVIES): Flow<List<MovieEntity>>
 
     @Query("SELECT * FROM `Movies Table` WHERE category=:category")
     fun getMovies(category: String): PagingSource<Int, MovieEntity>

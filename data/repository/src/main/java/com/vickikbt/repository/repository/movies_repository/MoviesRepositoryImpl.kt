@@ -8,7 +8,7 @@ import androidx.paging.PagingData
 import com.vickikbt.cache.AppDatabase
 import com.vickikbt.cache.models.MovieEntity
 import com.vickikbt.shared.domain.utils.Constants
-import com.vickikbt.domain.utils.Coroutines
+import com.vickikbt.shared.domain.utils.Coroutines
 import com.vickikbt.network.ApiService
 import com.vickikbt.network.utils.SafeApiRequest
 import com.vickikbt.repository.mappers.toDomain
@@ -29,7 +29,7 @@ class MoviesRepositoryImpl constructor(
 
     init {
         _movieMutableLiveData.observeForever { movies ->
-            Coroutines.io { saveMovies(movieEntities = movies) }
+            Coroutines.default { saveMovies(movieEntities = movies) }
         }
     }
 
