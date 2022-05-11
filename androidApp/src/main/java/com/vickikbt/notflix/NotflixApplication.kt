@@ -7,6 +7,7 @@ import com.vickikbt.network.di.networkModule
 import com.vickikbt.notflix.di.presentationModule
 import com.vickikbt.repository.di.repositoryModule
 import com.vickikbt.shared.di.initKoin
+import com.vickikbt.shared.domain.utils.NapierInit
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.logger.Level
@@ -18,11 +19,12 @@ class NotflixApplication : Application() {
         super.onCreate()
 
         val appModules = listOf(networkModule, cacheModule, repositoryModule, presentationModule)
-
         initKoin {
             androidLogger(level = if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(androidContext = this@NotflixApplication)
             modules(appModules)
         }
+
+        if (BuildConfig.DEBUG) NapierInit().init()
     }
 }

@@ -27,9 +27,9 @@ import com.vickikbt.notflix.ui.screens.settings.SettingsViewModel
 import com.vickikbt.notflix.ui.theme.NotflixTheme
 import com.vickikbt.notflix.util.ChangeSystemBarColorOnNetChange
 import com.vickikbt.notflix.util.LocaleManager
+import io.github.aakira.napier.Napier
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
-import java.util.*
 
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
@@ -43,6 +43,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.registerCallback()
+        Napier.e("Starting Notflix Application")
         setContent {
             val settingsViewModel: SettingsViewModel = getViewModel()
             val systemUiController = rememberSystemUiController()
@@ -59,7 +60,7 @@ class MainActivity : ComponentActivity() {
             val languageEntry = stringArrayResource(id = R.array.language_entries)[currentLanguage]
             localeUtil.setLocale(
                 context = LocalContext.current,
-                language = languageEntry ?: Locale.getDefault().language
+                language = languageEntry
             )
 
             ChangeSystemBarColorOnNetChange(
