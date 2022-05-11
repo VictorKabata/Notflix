@@ -1,6 +1,6 @@
-package com.vickikbt.domain.models
+package com.vickikbt.shared.domain.models
 
-data class NowPlayingMovies(
+data class UpcomingMovies(
 
     val dates: Dates?,
 

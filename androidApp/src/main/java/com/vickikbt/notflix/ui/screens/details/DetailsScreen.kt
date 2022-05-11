@@ -40,7 +40,7 @@ import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.fade
 import com.google.accompanist.placeholder.placeholder
 import com.google.accompanist.placeholder.shimmer
-import com.vickikbt.domain.models.MovieDetails
+import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemMovieCast
 import com.vickikbt.notflix.ui.components.ItemSimilarMovies

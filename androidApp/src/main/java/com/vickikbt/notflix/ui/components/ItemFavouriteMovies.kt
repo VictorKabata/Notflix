@@ -13,7 +13,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import com.vickikbt.domain.models.Movie
+import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.notflix.util.loadImage
 
 @Composable

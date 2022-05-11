@@ -1,7 +1,7 @@
 package com.vickikbt.repository.repository.favorites_repository
 
 import com.vickikbt.cache.AppDatabase
-import com.vickikbt.domain.models.Movie
+import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.network.utils.SafeApiRequest
 import com.vickikbt.repository.mappers.toDomain
 import kotlinx.coroutines.flow.Flow
@@ -19,7 +19,7 @@ class FavoriteMovieRepositoryImpl constructor(
     override suspend fun updateIsMovieFavorite(cacheId: Int, isFavorite: Boolean) =
         movieDao.updateMovieIsFavorite(cacheId, isFavorite)
 
-    override suspend fun getFavoriteMovies(): Flow<List<Movie>> {
+    override suspend fun getFavoriteMovies(): Flow<List<com.vickikbt.shared.domain.models.Movie>> {
         return movieDao.getFavoriteMovies().map { it.map { it.toDomain() } }
     }
 }

@@ -1,14 +1,13 @@
 package com.vickikbt.repository.paging
 
-import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.vickikbt.cache.AppDatabase
+import com.vickikbt.cache.models.MovieEntity
 import com.vickikbt.cache.models.RemoteKey
-import com.vickikbt.domain.models.Movie
 import com.vickikbt.domain.utils.Constants
 import com.vickikbt.domain.utils.Constants.STARTING_PAGE_INDEX
 import com.vickikbt.network.ApiService
@@ -24,14 +23,14 @@ class MoviesRemoteMediator constructor(
     private val category: String,
     private val apiService: ApiService,
     private val appDatabase: AppDatabase
-) : RemoteMediator<Int, Movie>() {
+) : RemoteMediator<Int, MovieEntity>() {
 
     private val moviesDao = appDatabase.moviesDao()
     private val remoteKeyDao = appDatabase.remoteKeyDao()
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, Movie>
+        state: PagingState<Int, MovieEntity>
     ): MediatorResult {
         val pageKeyData = getPagedData(loadType, state)
 
@@ -84,8 +83,6 @@ class MoviesRemoteMediator constructor(
                 else -> true
             }
 
-            Log.e("VickiKbt", "Current page: $page")
-
             appDatabase.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     remoteKeyDao.deleteRemoteKeys()
@@ -97,9 +94,6 @@ class MoviesRemoteMediator constructor(
                 val keys = movies?.map {
                     RemoteKey(movieId = it.id!!, prevKey = prevKey, nextKey = nextKey)
                 }
-
-                Log.e("VickiKbt", "Prev Key: $prevKey")
-                Log.e("VickiKbt", "Next Key: $nextKey")
 
                 remoteKeyDao.saveRemoteKeys(remoteKeys = keys!!)
                 moviesDao.saveMovies(movieEntities = movies.map { it.toEntity(category = category) })
@@ -128,7 +122,7 @@ class MoviesRemoteMediator constructor(
     // ToDo: Remove log statements
     private suspend fun getPagedData(
         loadType: LoadType,
-        pagingState: PagingState<Int, Movie>
+        pagingState: PagingState<Int, MovieEntity>
     ): Any {
         return when (loadType) {
             LoadType.REFRESH -> {
@@ -140,8 +134,6 @@ class MoviesRemoteMediator constructor(
                 val remoteKey = getLastRemoteKey(pagingState)
                 val nextKey = remoteKey?.nextKey
 
-                Log.e("VickiKbt", "Next Key in LoadType.APPEND: $nextKey")
-
                 nextKey ?: MediatorResult.Success(endOfPaginationReached = false)
             }
 
@@ -149,14 +141,12 @@ class MoviesRemoteMediator constructor(
                 val remoteKey = getFirstRemoteKey(pagingState)
                 val prevKey = remoteKey?.prevKey
 
-                Log.e("VickiKbt", "Prev Key in LoadType.PREPEND: $prevKey")
-
                 prevKey ?: MediatorResult.Success(endOfPaginationReached = false)
             }
         }
     }
 
-    private suspend fun getRemoteKeyClosestToCurrentPosition(pagingState: PagingState<Int, Movie>): RemoteKey? {
+    private suspend fun getRemoteKeyClosestToCurrentPosition(pagingState: PagingState<Int, MovieEntity>): RemoteKey? {
         return pagingState.anchorPosition?.let { position ->
             pagingState.closestItemToPosition(position)?.id?.let { movieId ->
                 appDatabase.remoteKeyDao().getRemoteKey(movieId = movieId)
@@ -164,14 +154,14 @@ class MoviesRemoteMediator constructor(
         }
     }
 
-    private suspend fun getLastRemoteKey(pagingState: PagingState<Int, Movie>): RemoteKey? {
+    private suspend fun getLastRemoteKey(pagingState: PagingState<Int, MovieEntity>): RemoteKey? {
         return pagingState.pages
             .lastOrNull { it.data.isNotEmpty() }
             ?.data?.lastOrNull()
             ?.let { movie -> appDatabase.remoteKeyDao().getRemoteKey(movieId = movie.id!!) }
     }
 
-    private suspend fun getFirstRemoteKey(pagingState: PagingState<Int, Movie>): RemoteKey? {
+    private suspend fun getFirstRemoteKey(pagingState: PagingState<Int, MovieEntity>): RemoteKey? {
         return pagingState.pages
             .firstOrNull { it.data.isNotEmpty() }
             ?.data?.firstOrNull()

@@ -1,6 +1,6 @@
-package com.vickikbt.domain.models
+package com.vickikbt.shared.domain.models
 
-data class SimilarMovies(
+data class PopularMovies(
 
     val page: Int?,
 

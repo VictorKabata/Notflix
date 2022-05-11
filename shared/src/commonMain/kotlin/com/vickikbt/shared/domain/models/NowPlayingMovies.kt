@@ -1,6 +1,8 @@
-package com.vickikbt.domain.models
+package com.vickikbt.shared.domain.models
 
-data class PopularMovies(
+data class NowPlayingMovies(
+
+    val dates: Dates?,
 
     val page: Int?,
 

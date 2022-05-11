@@ -1,6 +1,6 @@
 package com.vickikbt.repository.repository.favorites_repository
 
-import com.vickikbt.domain.models.Movie
+import com.vickikbt.shared.domain.models.Movie
 import kotlinx.coroutines.flow.Flow
 
 interface FavoritesRepository {
@@ -9,5 +9,5 @@ interface FavoritesRepository {
 
     suspend fun updateIsMovieFavorite(cacheId: Int, isFavorite: Boolean)
 
-    suspend fun getFavoriteMovies(): Flow<List<Movie>>
+    suspend fun getFavoriteMovies(): Flow<List<com.vickikbt.shared.domain.models.Movie>>
 }

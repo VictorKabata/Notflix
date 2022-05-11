@@ -1,9 +1,6 @@
-package com.vickikbt.domain.models
+package com.vickikbt.shared.domain.models
 
-data class UpcomingMovies(
-
-    val dates: Dates?,
-
+data class TrendingMovies(
     val page: Int?,
 
     val movies: List<Movie>?,

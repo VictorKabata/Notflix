@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.palette.graphics.Palette
-import com.vickikbt.domain.models.Movie
+import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.domain.utils.Constants
 import com.vickikbt.repository.repository.movies_repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow

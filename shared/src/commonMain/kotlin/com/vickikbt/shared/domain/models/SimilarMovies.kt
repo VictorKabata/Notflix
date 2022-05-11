@@ -1,6 +1,7 @@
-package com.vickikbt.domain.models
+package com.vickikbt.shared.domain.models
 
-data class TrendingMovies(
+data class SimilarMovies(
+
     val page: Int?,
 
     val movies: List<Movie>?,

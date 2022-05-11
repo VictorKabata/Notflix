@@ -1,4 +1,4 @@
-package com.vickikbt.domain.models
+package com.vickikbt.shared.domain.models
 
 data class Video(
 

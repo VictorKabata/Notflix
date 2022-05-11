@@ -43,7 +43,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.registerCallback()
-        Napier.e("Starting Notflix Application")
         setContent {
             val settingsViewModel: SettingsViewModel = getViewModel()
             val systemUiController = rememberSystemUiController()

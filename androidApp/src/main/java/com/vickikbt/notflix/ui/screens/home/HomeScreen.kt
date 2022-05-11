@@ -26,7 +26,7 @@ import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.fade
 import com.google.accompanist.placeholder.placeholder
-import com.vickikbt.domain.models.Movie
+import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemNowPlayingMovies
 import com.vickikbt.notflix.ui.components.ItemPopularMovies

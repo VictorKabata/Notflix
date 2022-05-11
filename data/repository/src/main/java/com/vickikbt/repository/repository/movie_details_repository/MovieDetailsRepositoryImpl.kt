@@ -6,10 +6,10 @@ import com.vickikbt.cache.AppDatabase
 import com.vickikbt.cache.models.CastEntity
 import com.vickikbt.cache.models.MovieDetailsEntity
 import com.vickikbt.cache.models.MovieVideoEntity
-import com.vickikbt.domain.models.Cast
-import com.vickikbt.domain.models.MovieDetails
-import com.vickikbt.domain.models.MovieVideo
-import com.vickikbt.domain.models.SimilarMovies
+import com.vickikbt.shared.domain.models.Cast
+import com.vickikbt.shared.domain.models.MovieDetails
+import com.vickikbt.shared.domain.models.MovieVideo
+import com.vickikbt.shared.domain.models.SimilarMovies
 import com.vickikbt.domain.utils.Coroutines
 import com.vickikbt.network.ApiService
 import com.vickikbt.network.utils.SafeApiRequest
@@ -42,11 +42,11 @@ class MovieDetailsRepositoryImpl constructor(
         }
     }
 
-    override suspend fun saveMovieDetails(movieDetails: MovieDetails) {
+    override suspend fun saveMovieDetails(movieDetails: com.vickikbt.shared.domain.models.MovieDetails) {
         appDatabase.movieDetailsDao().saveMovieDetails(movieDetails.toEntity())
     }
 
-    override suspend fun getMovieDetails(movieId: Int): Flow<MovieDetails> {
+    override suspend fun getMovieDetails(movieId: Int): Flow<com.vickikbt.shared.domain.models.MovieDetails> {
         val isMovieDetailsCacheAvailable = movieDetailsDao.isMovieDetailsAvailable(movieId) > 0
 
         return try {
@@ -67,11 +67,11 @@ class MovieDetailsRepositoryImpl constructor(
         }
     }
 
-    override suspend fun saveMovieCast(cast: Cast) {
+    override suspend fun saveMovieCast(cast: com.vickikbt.shared.domain.models.Cast) {
         appDatabase.castDao().saveMovieCast(cast.toEntity())
     }
 
-    override suspend fun getMovieCast(movieId: Int): Flow<Cast> {
+    override suspend fun getMovieCast(movieId: Int): Flow<com.vickikbt.shared.domain.models.Cast> {
         val isMovieCacheAvailable = appDatabase.castDao().isMovieCastAvailable(movieId) > 0
 
         return try {
@@ -95,11 +95,11 @@ class MovieDetailsRepositoryImpl constructor(
         }
     }
 
-    override suspend fun saveMovieVideos(movieVideo: MovieVideo) {
+    override suspend fun saveMovieVideos(movieVideo: com.vickikbt.shared.domain.models.MovieVideo) {
         appDatabase.videosDao().saveMovieVideo(movieVideo.toEntity())
     }
 
-    override suspend fun getMovieVideos(movieId: Int): Flow<MovieVideo> {
+    override suspend fun getMovieVideos(movieId: Int): Flow<com.vickikbt.shared.domain.models.MovieVideo> {
         val isMovieVideoCacheAvailable =
             appDatabase.videosDao().isMovieVideoCacheAvailable(movieId) > 0
 
@@ -121,7 +121,7 @@ class MovieDetailsRepositoryImpl constructor(
         }
     }
 
-    override suspend fun fetchSimilarMovies(movieId: Int): Flow<SimilarMovies> {
+    override suspend fun fetchSimilarMovies(movieId: Int): Flow<com.vickikbt.shared.domain.models.SimilarMovies> {
         val similarMoviesDto = safeApiRequest { apiService.fetchSimilarMovies(movieId) }
         return try {
             flow { emit(similarMoviesDto.toEntity().toDomain()) }

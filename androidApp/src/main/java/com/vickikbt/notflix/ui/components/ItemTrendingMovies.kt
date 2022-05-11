@@ -18,7 +18,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
-import com.vickikbt.domain.models.Movie
+import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.util.loadImage
 

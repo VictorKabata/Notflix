@@ -28,7 +28,7 @@ import coil.compose.rememberImagePainter
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
-import com.vickikbt.domain.models.Movie
+import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.notflix.ui.screens.home.HomeViewModel
 import com.vickikbt.notflix.ui.theme.Black
 import com.vickikbt.notflix.ui.theme.Golden

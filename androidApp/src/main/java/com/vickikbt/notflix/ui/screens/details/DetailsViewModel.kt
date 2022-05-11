@@ -8,12 +8,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.palette.graphics.Palette
-import com.vickikbt.domain.models.Cast
-import com.vickikbt.domain.models.MovieDetails
-import com.vickikbt.domain.models.MovieVideo
-import com.vickikbt.domain.models.SimilarMovies
+import com.vickikbt.shared.domain.models.Cast
+import com.vickikbt.shared.domain.models.MovieDetails
+import com.vickikbt.shared.domain.models.MovieVideo
+import com.vickikbt.shared.domain.models.SimilarMovies
 import com.vickikbt.repository.repository.movie_details_repository.MovieDetailsRepository
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(
