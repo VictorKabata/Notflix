@@ -29,6 +29,4 @@ val repositoryModule = module {
     single<FavoritesRepository> {
         FavoriteMovieRepositoryImpl(appDatabase = get())
     }
-
-
 }

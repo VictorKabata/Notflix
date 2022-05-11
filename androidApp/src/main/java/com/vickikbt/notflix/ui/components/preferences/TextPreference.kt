@@ -72,8 +72,6 @@ fun TextPreference(
                     textAlign = TextAlign.Start
                 )
             }
-
         }
     }
-
 }

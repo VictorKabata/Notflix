@@ -19,15 +19,14 @@ import com.vickikbt.notflix.util.loadImage
 @Composable
 fun ItemFavoriteMovie(movie: Movie) {
     Column(Modifier.fillMaxWidth(0.4f).height(100.dp), horizontalAlignment = Alignment.Start) {
-        val painter = rememberImagePainter(data = movie.backdropPath?.loadImage(LocalContext.current)){
+        val painter = rememberImagePainter(data = movie.backdropPath?.loadImage(LocalContext.current)) {
             crossfade(true)
         }
         Image(
             painter = painter,
             contentDescription = "favorite movie image",
             modifier = Modifier
-                .fillMaxWidth().height(70.dp)
-                ,
+                .fillMaxWidth().height(70.dp),
             contentScale = ContentScale.Crop
         )
         Text(text = movie.title ?: " ", style = MaterialTheme.typography.h6, maxLines = 2)

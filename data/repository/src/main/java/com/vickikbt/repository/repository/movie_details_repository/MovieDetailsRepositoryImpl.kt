@@ -133,7 +133,7 @@ class MovieDetailsRepositoryImpl constructor(
 
     override suspend fun isMovieFavorite(movieId: Int): Flow<Boolean?> {
         appDatabase.moviesDao().isMovieFavorite(movieId).collect {
-            Log.d("Movdet", "Value of isFavorite is: ${it.toString()}")
+            Log.d("Movdet", "Value of isFavorite is: $it")
         }
 //        appDatabase.moviesDao().getFavoriteMovies().collect {
 //            Log.d("Movdet", (it.size.toString()))

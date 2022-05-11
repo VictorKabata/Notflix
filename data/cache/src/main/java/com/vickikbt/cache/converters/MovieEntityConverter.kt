@@ -24,5 +24,4 @@ class MovieEntityConverter {
         val type = object : TypeToken<List<MovieEntity>?>() {}.type
         return gson.fromJson(movieEntityString, type)
     }
-
 }

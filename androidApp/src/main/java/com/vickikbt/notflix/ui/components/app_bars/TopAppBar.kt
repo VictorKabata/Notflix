@@ -15,9 +15,11 @@ fun AppBar(title: String, navigationIcon: Painter? = null, onClickNavigationIcon
 
     TopAppBar(backgroundColor = MaterialTheme.colors.surface, elevation = 0.dp) {
         if (navigationIcon != null) {
-            IconButton(modifier = Modifier
-                .size(40.dp),
-                onClick = { onClickNavigationIcon() }) {
+            IconButton(
+                modifier = Modifier
+                    .size(40.dp),
+                onClick = { onClickNavigationIcon() }
+            ) {
                 Icon(
                     painter = navigationIcon,
                     contentDescription = "Navigation icon",

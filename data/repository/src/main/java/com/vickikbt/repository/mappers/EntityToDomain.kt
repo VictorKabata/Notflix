@@ -33,7 +33,6 @@ internal fun MovieEntity.toDomain(): Movie {
     )
 }
 
-
 internal fun NowPlayingMoviesEntity.toDomain(): NowPlayingMovies {
     return NowPlayingMovies(
         this.dates?.toDomain(),

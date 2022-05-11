@@ -5,9 +5,9 @@
       resolved="io.ktor:ktor-client-android:1.6.7"/>
   <library
       name="com.squareup.sqldelight:android-driver:1.5.3@aar"
-      jars="C:\Users\Admin\.gradle\caches\transforms-3\89789b6ced36ecb01c795f76df2cdefc\transformed\jetified-android-driver-1.5.3\jars\classes.jar"
+      jars="C:\Users\Admin\.gradle\caches\transforms-3\c82e66aa791eebd617b6e1185a504c3a\transformed\jetified-android-driver-1.5.3\jars\classes.jar"
       resolved="com.squareup.sqldelight:android-driver:1.5.3"
-      folder="C:\Users\Admin\.gradle\caches\transforms-3\89789b6ced36ecb01c795f76df2cdefc\transformed\jetified-android-driver-1.5.3"
+      folder="C:\Users\Admin\.gradle\caches\transforms-3\c82e66aa791eebd617b6e1185a504c3a\transformed\jetified-android-driver-1.5.3"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -26,9 +26,9 @@
       resolved="com.squareup.sqldelight:runtime-jvm:1.5.3"/>
   <library
       name="io.github.aakira:napier-android-debug:2.4.0@aar"
-      jars="C:\Users\Admin\.gradle\caches\transforms-3\67a7dfc1c3db651ea3c6996925c63737\transformed\jetified-napier-debug\jars\classes.jar"
+      jars="C:\Users\Admin\.gradle\caches\transforms-3\cde1850896a255fa813db8167ddabbe2\transformed\jetified-napier-debug\jars\classes.jar"
       resolved="io.github.aakira:napier-android-debug:2.4.0"
-      folder="C:\Users\Admin\.gradle\caches\transforms-3\67a7dfc1c3db651ea3c6996925c63737\transformed\jetified-napier-debug"
+      folder="C:\Users\Admin\.gradle\caches\transforms-3\cde1850896a255fa813db8167ddabbe2\transformed\jetified-napier-debug"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -87,9 +87,9 @@
       resolved="io.insert-koin:koin-core-jvm:3.1.2"/>
   <library
       name="com.russhwolf:multiplatform-settings-no-arg-android-debug:0.8.1@aar"
-      jars="C:\Users\Admin\.gradle\caches\transforms-3\4c298383f0b76ff03078443b52e1a829\transformed\jetified-multiplatform-settings-no-arg-debug\jars\classes.jar"
+      jars="C:\Users\Admin\.gradle\caches\transforms-3\d4c62faddae2f4b8cfda8fa3d58d7c8c\transformed\jetified-multiplatform-settings-no-arg-debug\jars\classes.jar"
       resolved="com.russhwolf:multiplatform-settings-no-arg-android-debug:0.8.1"
-      folder="C:\Users\Admin\.gradle\caches\transforms-3\4c298383f0b76ff03078443b52e1a829\transformed\jetified-multiplatform-settings-no-arg-debug"
+      folder="C:\Users\Admin\.gradle\caches\transforms-3\d4c62faddae2f4b8cfda8fa3d58d7c8c\transformed\jetified-multiplatform-settings-no-arg-debug"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -100,9 +100,9 @@
       proguardRules="proguard.txt"/>
   <library
       name="com.russhwolf:multiplatform-settings-android-debug:0.8.1@aar"
-      jars="C:\Users\Admin\.gradle\caches\transforms-3\6ff2ad6db65486d56b6a3b56b78bc088\transformed\jetified-multiplatform-settings-debug\jars\classes.jar"
+      jars="C:\Users\Admin\.gradle\caches\transforms-3\dcc551e6efca2f6082c3d1013c93a408\transformed\jetified-multiplatform-settings-debug\jars\classes.jar"
       resolved="com.russhwolf:multiplatform-settings-android-debug:0.8.1"
-      folder="C:\Users\Admin\.gradle\caches\transforms-3\6ff2ad6db65486d56b6a3b56b78bc088\transformed\jetified-multiplatform-settings-debug"
+      folder="C:\Users\Admin\.gradle\caches\transforms-3\dcc551e6efca2f6082c3d1013c93a408\transformed\jetified-multiplatform-settings-debug"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -149,9 +149,9 @@
       resolved="org.slf4j:slf4j-api:1.7.32"/>
   <library
       name="androidx.sqlite:sqlite:2.1.0@aar"
-      jars="C:\Users\Admin\.gradle\caches\transforms-3\e591149f001436f95cbdd6c482c810a5\transformed\sqlite-2.1.0\jars\classes.jar"
+      jars="C:\Users\Admin\.gradle\caches\transforms-3\040ebfbf223e2c54df626d310af5c929\transformed\sqlite-2.1.0\jars\classes.jar"
       resolved="androidx.sqlite:sqlite:2.1.0"
-      folder="C:\Users\Admin\.gradle\caches\transforms-3\e591149f001436f95cbdd6c482c810a5\transformed\sqlite-2.1.0"
+      folder="C:\Users\Admin\.gradle\caches\transforms-3\040ebfbf223e2c54df626d310af5c929\transformed\sqlite-2.1.0"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -166,9 +166,9 @@
       resolved="androidx.annotation:annotation:1.1.0"/>
   <library
       name="androidx.sqlite:sqlite-framework:2.1.0@aar"
-      jars="C:\Users\Admin\.gradle\caches\transforms-3\b778b772151870c5a28b15669f27e53b\transformed\sqlite-framework-2.1.0\jars\classes.jar"
+      jars="C:\Users\Admin\.gradle\caches\transforms-3\d6584dd412ddee64c2f18c6e5356fe4a\transformed\sqlite-framework-2.1.0\jars\classes.jar"
       resolved="androidx.sqlite:sqlite-framework:2.1.0"
-      folder="C:\Users\Admin\.gradle\caches\transforms-3\b778b772151870c5a28b15669f27e53b\transformed\sqlite-framework-2.1.0"
+      folder="C:\Users\Admin\.gradle\caches\transforms-3\d6584dd412ddee64c2f18c6e5356fe4a\transformed\sqlite-framework-2.1.0"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -179,9 +179,9 @@
       proguardRules="proguard.txt"/>
   <library
       name="androidx.startup:startup-runtime:1.1.0@aar"
-      jars="C:\Users\Admin\.gradle\caches\transforms-3\e9489ff6d43fbd94be1367b9b7a6b276\transformed\jetified-startup-runtime-1.1.0\jars\classes.jar"
+      jars="C:\Users\Admin\.gradle\caches\transforms-3\0d0da89c03b4e07202581a1155120c90\transformed\jetified-startup-runtime-1.1.0\jars\classes.jar"
       resolved="androidx.startup:startup-runtime:1.1.0"
-      folder="C:\Users\Admin\.gradle\caches\transforms-3\e9489ff6d43fbd94be1367b9b7a6b276\transformed\jetified-startup-runtime-1.1.0"
+      folder="C:\Users\Admin\.gradle\caches\transforms-3\0d0da89c03b4e07202581a1155120c90\transformed\jetified-startup-runtime-1.1.0"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -192,9 +192,9 @@
       proguardRules="proguard.txt"/>
   <library
       name="androidx.tracing:tracing:1.0.0@aar"
-      jars="C:\Users\Admin\.gradle\caches\transforms-3\d4dfd1e2767755685cba5b22d8630c07\transformed\jetified-tracing-1.0.0\jars\classes.jar"
+      jars="C:\Users\Admin\.gradle\caches\transforms-3\b37e1a9a25f29d8c2dbaf8ce5de35592\transformed\jetified-tracing-1.0.0\jars\classes.jar"
       resolved="androidx.tracing:tracing:1.0.0"
-      folder="C:\Users\Admin\.gradle\caches\transforms-3\d4dfd1e2767755685cba5b22d8630c07\transformed\jetified-tracing-1.0.0"
+      folder="C:\Users\Admin\.gradle\caches\transforms-3\b37e1a9a25f29d8c2dbaf8ce5de35592\transformed\jetified-tracing-1.0.0"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -205,9 +205,9 @@
       proguardRules="proguard.txt"/>
   <library
       name="D:\Projects\Kotlin\Notflix@@:shared::debug"
-      jars="D:\Projects\Kotlin\Notflix\shared\build\.transforms\e1c47fded770b623b3fd7ae3d7e17275\transformed\out\jars\classes.jar"
+      jars="D:\Projects\Kotlin\Notflix\shared\build\.transforms\98c45e7817bf05b61f9e91eec38017eb\transformed\out\jars\classes.jar"
       resolved="Notflix:shared:unspecified"
-      folder="D:\Projects\Kotlin\Notflix\shared\build\.transforms\e1c47fded770b623b3fd7ae3d7e17275\transformed\out"
+      folder="D:\Projects\Kotlin\Notflix\shared\build\.transforms\98c45e7817bf05b61f9e91eec38017eb\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

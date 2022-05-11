@@ -18,7 +18,7 @@ val cacheModule = module {
 
     single { PreferenceManager(androidApplication()) }
 
-    //ToDo: Remove other datastore instances
+    // ToDo: Remove other datastore instances
     single {
         TimeDatastore(androidApplication())
     }

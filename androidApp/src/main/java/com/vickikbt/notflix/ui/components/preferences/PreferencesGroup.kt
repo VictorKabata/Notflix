@@ -52,5 +52,4 @@ fun PreferencesGroup(
 
         if (!isLast) Divider(color = Color.Gray.copy(alpha = 0.7f), thickness = 1.dp)
     }
-
 }

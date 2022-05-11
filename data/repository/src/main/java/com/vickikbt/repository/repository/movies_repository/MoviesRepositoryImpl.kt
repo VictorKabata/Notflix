@@ -1,6 +1,5 @@
 package com.vickikbt.repository.repository.movies_repository
 
-import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
@@ -43,11 +42,10 @@ class MoviesRepositoryImpl constructor(
         } else {
             val networkResponse = safeApiRequest { apiService.fetchNowPlayingMovies() }.movies
             val nowPlayingMoviesEntity = networkResponse?.map { it.toEntity(category = category) }
-            _movieMutableLiveData.value = nowPlayingMoviesEntity
+            _movieMutableLiveData.value = nowPlayingMoviesEntity!!
 
             moviesDao.getNowPlayingMovies()
         }
-
     }
 
     override suspend fun fetchMovies(category: String): Flow<PagingData<Movie>> {
@@ -72,6 +70,4 @@ class MoviesRepositoryImpl constructor(
             pagingSourceFactory = moviesPagingSource
         ).flow
     }
-
-
 }

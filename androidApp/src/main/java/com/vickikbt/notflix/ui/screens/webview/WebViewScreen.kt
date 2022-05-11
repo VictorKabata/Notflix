@@ -21,5 +21,4 @@ fun WebViewScreen(url: String) {
     }, update = {
         it.loadUrl(url)
     })
-
 }

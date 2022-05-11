@@ -15,5 +15,4 @@ sealed class NavigationItem(
     object Settings : NavigationItem("settings", R.string.title_settings, R.drawable.ic_settings)
     object Details : NavigationItem("details/{movieId}/{cacheId}", R.string.title_details, null)
     object Splash : NavigationItem("splash", R.string.def, null)
-
 }

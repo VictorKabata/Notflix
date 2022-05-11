@@ -117,7 +117,6 @@ class MoviesRemoteMediator constructor(
                 }
                 else -> MediatorResult.Success(endOfPaginationReached = true)
             }
-
         } catch (exception: IOException) {
             val error = IOException("Please Check Internet Connection")
             return MediatorResult.Error(error)
@@ -126,7 +125,7 @@ class MoviesRemoteMediator constructor(
         }
     }
 
-    //ToDo: Remove log statements
+    // ToDo: Remove log statements
     private suspend fun getPagedData(
         loadType: LoadType,
         pagingState: PagingState<Int, Movie>
@@ -178,5 +177,4 @@ class MoviesRemoteMediator constructor(
             ?.data?.firstOrNull()
             ?.let { movie -> appDatabase.remoteKeyDao().getRemoteKey(movieId = movie.id!!) }
     }
-
 }

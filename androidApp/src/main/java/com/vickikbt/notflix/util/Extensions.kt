@@ -8,7 +8,6 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.text.SimpleDateFormat
 
-
 inline fun <reified T> getKoinInstance(): T {
     return object : KoinComponent {
         val value: T by inject()
@@ -36,8 +35,8 @@ fun String.loadImage(context: Context): String {
     return imageQuality!!
 }
 
-//Original- 1998-11-19
-//Target- Nov, 1998
+// Original- 1998-11-19
+// Target- Nov, 1998
 fun String.getReleaseDate(): String {
     val originalFormat = SimpleDateFormat("yyyy-MM-dd").parse(this)
     val targetFormat = SimpleDateFormat("MMM, yyyy")
@@ -45,8 +44,8 @@ fun String.getReleaseDate(): String {
     return targetFormat.format(originalFormat!!)
 }
 
-//Original- 1998-11-19
-//Target- 1998
+// Original- 1998-11-19
+// Target- 1998
 @SuppressLint("SimpleDateFormat")
 fun String.getReleaseYear(): String {
     val originalFormat = SimpleDateFormat("yyyy-MM-dd").parse(this)

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vickikbt.shared.AndroidGreetingTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-05-10T20:02:27" hostname="KYOSK-ANHQ-01" time="0.066">
+<testsuite name="com.vickikbt.shared.AndroidGreetingTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-05-11T06:24:06" hostname="KYOSK-ANHQ-01" time="0.06">
   <properties/>
-  <testcase name="testExample" classname="com.vickikbt.shared.AndroidGreetingTest" time="0.066"/>
+  <testcase name="testExample" classname="com.vickikbt.shared.AndroidGreetingTest" time="0.06"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -22,7 +22,6 @@ import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.theme.TextSecondary
 import com.vickikbt.notflix.util.loadImage
 
-
 @Composable
 fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
 
@@ -58,7 +57,5 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
             textAlign = TextAlign.Center,
             maxLines = 1
         )
-
     }
-
 }

@@ -1,8 +1,6 @@
 package com.vickikbt.network
 
-
 import com.vickikbt.domain.utils.Constants.API_KEY
-import com.vickikbt.domain.utils.Constants.PAGING_SIZE
 import com.vickikbt.domain.utils.Constants.STARTING_PAGE_INDEX
 import com.vickikbt.network.models.*
 import retrofit2.Response
@@ -69,6 +67,4 @@ interface ApiService {
         @Query("page") page: Int = STARTING_PAGE_INDEX,
         @Query("language") language: String = "en"
     ): Response<SimilarMoviesDto>
-
-
 }

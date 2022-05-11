@@ -19,6 +19,8 @@ android {
         versionName = AndroidSDK.versionName
 
         testInstrumentationRunner = AndroidSDK.testInstrumentationRunner
+
+        multiDexEnabled = true
     }
 
     buildTypes {
@@ -60,6 +62,8 @@ android {
 }
 
 dependencies {
+    implementation("com.android.support:multidex:2.0.1")
+
     api(project(BuildModules.Domain))
     api(project(BuildModules.Repository))
 

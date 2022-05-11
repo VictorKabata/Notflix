@@ -12,7 +12,7 @@ class TimeDatastore constructor(private val context: Context) {
 
     private val Context.dataStore by preferencesDataStore(name = TIME_DATASTORE_NAME)
 
-    //Saves sync time to Datastore.
+    // Saves sync time to Datastore.
     suspend fun saveSyncTime(time: Long) {
         val dataStoreKey = stringPreferencesKey(TIME_DATASTORE_KEY)
         context.dataStore.edit { syncTime ->
@@ -20,13 +20,11 @@ class TimeDatastore constructor(private val context: Context) {
         }
     }
 
-    //Gets last sync time to Datastore.
+    // Gets last sync time to Datastore.
     suspend fun getSyncTime(): Long {
         val dataStoreKey = stringPreferencesKey(TIME_DATASTORE_KEY)
         val syncTime = context.dataStore.data.first()
         val lastSyncTime = syncTime[dataStoreKey]?.toLong()
         return lastSyncTime ?: 0
     }
-
-
 }

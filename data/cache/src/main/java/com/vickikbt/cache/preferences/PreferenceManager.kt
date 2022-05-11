@@ -77,5 +77,4 @@ class PreferenceManager constructor(private val context: Context) {
         _imageQualityMutableLiveData.value = _imageQuality
         preferences.registerOnSharedPreferenceChangeListener(preferenceChangedListener)
     }
-
 }

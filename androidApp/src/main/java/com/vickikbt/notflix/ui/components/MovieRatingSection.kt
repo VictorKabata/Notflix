@@ -17,7 +17,6 @@ import com.google.accompanist.placeholder.fade
 import com.google.accompanist.placeholder.placeholder
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.theme.Gray
-import com.vickikbt.notflix.ui.theme.TextPrimary
 import com.vickikbt.notflix.ui.theme.TextSecondary
 
 @Composable

@@ -24,5 +24,4 @@ class SpokenLanguageEntityConverter {
         val type = object : TypeToken<List<SpokenLanguageEntity>?>() {}.type
         return gson.fromJson(spokenLanguageEntityString, type)
     }
-
 }

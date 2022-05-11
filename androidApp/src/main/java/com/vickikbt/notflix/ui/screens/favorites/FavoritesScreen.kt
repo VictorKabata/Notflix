@@ -19,8 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.vickikbt.notflix.R
-import com.vickikbt.notflix.ui.components.app_bars.AppBar
 import com.vickikbt.notflix.ui.components.ItemFavoriteMovie
+import com.vickikbt.notflix.ui.components.app_bars.AppBar
 import org.koin.androidx.compose.getViewModel
 
 @ExperimentalFoundationApi

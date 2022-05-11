@@ -10,5 +10,4 @@ interface MoviesRepository {
     suspend fun fetchNowPlayingMovies(category: String = Constants.CATEGORY_NOW_PLAYING_MOVIES): Flow<List<Movie>>
 
     suspend fun fetchMovies(category: String): Flow<PagingData<Movie>>
-
 }

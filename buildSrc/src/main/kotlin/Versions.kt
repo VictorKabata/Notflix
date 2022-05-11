@@ -18,7 +18,7 @@ object Versions {
     const val desugaring = "1.1.5"
 
     // Plugins
-    const val ktlint_version = "9.2.1"
+    const val ktlint_version = "10.2.1"
     const val appDistribution_version = "2.1.2"
 
     // Project-Level Dependencies

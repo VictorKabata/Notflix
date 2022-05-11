@@ -22,6 +22,4 @@ class FavoriteMovieRepositoryImpl constructor(
     override suspend fun getFavoriteMovies(): Flow<List<Movie>> {
         return movieDao.getFavoriteMovies().map { it.map { it.toDomain() } }
     }
-
-
 }

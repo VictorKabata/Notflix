@@ -39,16 +39,18 @@ fun ItemTrendingMovies(
             elevation = 8.dp,
             shape = RoundedCornerShape(4.dp)
         ) {
-            Image(modifier = Modifier.fillMaxSize(),
+            Image(
+                modifier = Modifier.fillMaxSize(),
                 painter = rememberImagePainter(
                     data = movie.backdropPath?.loadImage(LocalContext.current),
                     builder = { crossfade(true) }
                 ),
                 alignment = Alignment.Center,
                 contentScale = ContentScale.Crop,
-                contentDescription = stringResource(id = R.string.trending_movies))
+                contentDescription = stringResource(id = R.string.trending_movies)
+            )
         }
-        
+
         Spacer(modifier = Modifier.height(3.dp))
 
         Text(
@@ -62,5 +64,4 @@ fun ItemTrendingMovies(
             textAlign = TextAlign.Start
         )
     }
-
 }

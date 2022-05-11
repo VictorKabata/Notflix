@@ -24,5 +24,4 @@ class ActorEntityConverter {
         val type = object : TypeToken<List<ActorEntity>>() {}.type
         return gson.fromJson(actorItemEntitiesString, type)
     }
-
 }

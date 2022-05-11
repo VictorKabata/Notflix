@@ -82,5 +82,4 @@ fun DialogPreferenceSelection(
             }
         }
     }
-
 }

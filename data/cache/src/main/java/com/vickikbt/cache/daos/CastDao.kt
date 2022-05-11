@@ -16,11 +16,10 @@ interface CastDao {
     @Query("SELECT * FROM `Casts Table` WHERE id=:movieId")
     fun getMovieCast(movieId: Int): Flow<CastEntity>
 
-    //TODO: setup WorkManager to delete movie cast after 30 days
+    // TODO: setup WorkManager to delete movie cast after 30 days
     @Query("DELETE FROM `Casts Table`")
     suspend fun deleteAllMovieCast()
 
     @Query("SELECT COUNT(*) FROM `Casts Table` WHERE id=:movieId")
-    suspend fun isMovieCastAvailable(movieId: Int):Int
-
+    suspend fun isMovieCastAvailable(movieId: Int): Int
 }

@@ -116,11 +116,9 @@ fun SettingsScreen(navController: NavController, viewModel: SettingsViewModel = 
                         onClick = { openSourceCode(context) }
                     )
                 }
-
             }
         }
     }
-
 }
 
 @Composable

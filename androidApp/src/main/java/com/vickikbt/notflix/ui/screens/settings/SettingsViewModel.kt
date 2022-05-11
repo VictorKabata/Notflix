@@ -15,6 +15,4 @@ class SettingsViewModel constructor(private val preferenceManager: PreferenceMan
     val selectedTheme = preferenceManager.appTheme
     val selectedLanguage = preferenceManager.appLanguage
     val selectedImageQuality = preferenceManager.imageQuality
-
-
 }

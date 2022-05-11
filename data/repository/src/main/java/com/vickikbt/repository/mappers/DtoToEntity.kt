@@ -31,7 +31,6 @@ internal fun MovieDto.toEntity(category: String? = null): MovieEntity {
     )
 }
 
-
 internal fun NowPlayingMoviesDto.toEntity(): NowPlayingMoviesEntity {
     return NowPlayingMoviesEntity(
         this.dates?.toEntity(),

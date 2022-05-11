@@ -24,5 +24,4 @@ class GenreEntityConverter {
         val type = object : TypeToken<List<GenreEntity>>() {}.type
         return gson.fromJson(genreEntitiesString, type)
     }
-
 }

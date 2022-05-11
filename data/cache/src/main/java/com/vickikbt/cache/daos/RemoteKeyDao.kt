@@ -17,5 +17,4 @@ interface RemoteKeyDao {
 
     @Query("DELETE FROM Remote_Key_Table")
     suspend fun deleteRemoteKeys()
-
 }

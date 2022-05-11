@@ -56,7 +56,7 @@ class MainActivity : ComponentActivity() {
                 }
 
             val currentLanguage = settingsViewModel.selectedLanguage.observeAsState().value!!
-            val languageEntry= stringArrayResource(id = R.array.language_entries)[currentLanguage]
+            val languageEntry = stringArrayResource(id = R.array.language_entries)[currentLanguage]
             localeUtil.setLocale(
                 context = LocalContext.current,
                 language = languageEntry ?: Locale.getDefault().language

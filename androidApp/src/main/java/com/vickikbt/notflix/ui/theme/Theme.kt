@@ -48,5 +48,4 @@ fun NotflixTheme(
         shapes = Shapes,
         content = content
     )
-
 }

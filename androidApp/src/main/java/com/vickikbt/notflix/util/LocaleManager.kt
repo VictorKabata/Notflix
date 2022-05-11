@@ -3,7 +3,6 @@ package com.vickikbt.notflix.util
 import android.content.Context
 import java.util.*
 
-
 class LocaleManager {
 
     fun setLocale(context: Context, language: String) {

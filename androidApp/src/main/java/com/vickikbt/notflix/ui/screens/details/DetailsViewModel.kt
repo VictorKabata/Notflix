@@ -85,7 +85,7 @@ class DetailsViewModel(
         }
 
     fun updateFavorite(cacheId: Int, isFavorite: Boolean) {
-        //Timber.e("Updating : $cacheId to $isFavorite")
+        // Timber.e("Updating : $cacheId to $isFavorite")
         viewModelScope.launch {
             movieDetailsRepository.updateMovieIsFavorite(cacheId, isFavorite)
         }
@@ -98,5 +98,4 @@ class DetailsViewModel(
             }
         }
     }
-
 }
