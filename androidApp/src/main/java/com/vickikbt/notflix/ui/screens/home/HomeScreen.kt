@@ -26,7 +26,7 @@ import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.fade
 import com.google.accompanist.placeholder.placeholder
-import com.vickikbt.shared.domain.models.Movie
+import com.vickikbt.cache.models.MovieEntity
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemNowPlayingMovies
 import com.vickikbt.notflix.ui.components.ItemPopularMovies
@@ -34,6 +34,7 @@ import com.vickikbt.notflix.ui.components.ItemTrendingMovies
 import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Gray
+import com.vickikbt.shared.domain.models.Movie
 import kotlinx.coroutines.flow.Flow
 import org.koin.androidx.compose.getViewModel
 
@@ -141,7 +142,7 @@ fun NowPlayingMovies(
 }
 
 @Composable
-fun TrendingMovies(navController: NavController, movies: Flow<PagingData<Movie>>) {
+fun TrendingMovies(navController: NavController, movies: Flow<PagingData<MovieEntity>>) {
     val moviesList = movies.collectAsLazyPagingItems()
 
     SectionSeparator(
@@ -171,7 +172,7 @@ fun TrendingMovies(navController: NavController, movies: Flow<PagingData<Movie>>
                 ),
                 movie = item!!,
                 onItemClick = { movie ->
-                    navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
+                    navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                 }
             )
         }
@@ -183,7 +184,7 @@ fun TrendingMovies(navController: NavController, movies: Flow<PagingData<Movie>>
 fun PopularMovies(
     navController: NavController,
     viewModel: HomeViewModel,
-    movies: Flow<PagingData<Movie>>
+    movies: Flow<PagingData<MovieEntity>>
 ) {
     val moviesList = movies.collectAsLazyPagingItems()
 
@@ -225,7 +226,7 @@ fun PopularMovies(
 @Composable
 fun UpcomingMovies(
     navController: NavController,
-    movies: Flow<PagingData<Movie>>
+    movies: Flow<PagingData<MovieEntity>>
 ) {
     val moviesList = movies.collectAsLazyPagingItems()
 
@@ -257,7 +258,7 @@ fun UpcomingMovies(
                     ),
                     movie = item!!,
                     onItemClick = { movie ->
-                        navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
+                        navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                     }
                 )
             }

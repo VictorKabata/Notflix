@@ -3,14 +3,14 @@ package com.vickikbt.repository.mappers
 import com.vickikbt.cache.models.*
 import com.vickikbt.network.models.*
 
-internal fun DatesDto.toEntity(): DatesEntity {
+fun DatesDto.toEntity(): DatesEntity {
     return DatesEntity(
         this.maximum,
         this.minimum
     )
 }
 
-internal fun MovieDto.toEntity(category: String? = null): MovieEntity {
+fun MovieDto.toEntity(category: String? = null): MovieEntity {
     return MovieEntity(
         this.adult,
         this.backdropPath,
@@ -31,7 +31,7 @@ internal fun MovieDto.toEntity(category: String? = null): MovieEntity {
     )
 }
 
-internal fun NowPlayingMoviesDto.toEntity(): NowPlayingMoviesEntity {
+fun NowPlayingMoviesDto.toEntity(): NowPlayingMoviesEntity {
     return NowPlayingMoviesEntity(
         this.dates?.toEntity(),
         this.page,
@@ -41,7 +41,7 @@ internal fun NowPlayingMoviesDto.toEntity(): NowPlayingMoviesEntity {
     )
 }
 
-internal fun PopularMoviesDto.toEntity(): PopularMoviesEntity {
+fun PopularMoviesDto.toEntity(): PopularMoviesEntity {
     return PopularMoviesEntity(
         this.page,
         this.movies?.map { it.toEntity() },
@@ -50,7 +50,7 @@ internal fun PopularMoviesDto.toEntity(): PopularMoviesEntity {
     )
 }
 
-internal fun TrendingMoviesDto.toEntity(): TrendingMoviesEntity {
+fun TrendingMoviesDto.toEntity(): TrendingMoviesEntity {
     return TrendingMoviesEntity(
         this.page,
         this.movies?.map { it.toEntity() },
@@ -59,7 +59,7 @@ internal fun TrendingMoviesDto.toEntity(): TrendingMoviesEntity {
     )
 }
 
-internal fun UpcomingMoviesDto.toEntity(): UpcomingMoviesEntity {
+fun UpcomingMoviesDto.toEntity(): UpcomingMoviesEntity {
     return UpcomingMoviesEntity(
         this.dates?.toEntity(),
         this.page,
@@ -69,14 +69,14 @@ internal fun UpcomingMoviesDto.toEntity(): UpcomingMoviesEntity {
     )
 }
 
-internal fun GenreDto.toEntity(): GenreEntity {
+fun GenreDto.toEntity(): GenreEntity {
     return GenreEntity(
         this.id,
         this.name
     )
 }
 
-internal fun SpokenLanguageDto.toEntity(): SpokenLanguageEntity {
+fun SpokenLanguageDto.toEntity(): SpokenLanguageEntity {
     return SpokenLanguageEntity(
         this.englishName,
         this.iso6391,
@@ -84,7 +84,7 @@ internal fun SpokenLanguageDto.toEntity(): SpokenLanguageEntity {
     )
 }
 
-internal fun MovieDetailsDto.toEntity(): MovieDetailsEntity {
+fun MovieDetailsDto.toEntity(): MovieDetailsEntity {
     return MovieDetailsEntity(
         this.adult,
         this.backdropPath,
@@ -109,7 +109,7 @@ internal fun MovieDetailsDto.toEntity(): MovieDetailsEntity {
     )
 }
 
-internal fun ActorDto.toEntity(): ActorEntity {
+fun ActorDto.toEntity(): ActorEntity {
     return ActorEntity(
         this.castId,
         this.character,
@@ -121,14 +121,14 @@ internal fun ActorDto.toEntity(): ActorEntity {
     )
 }
 
-internal fun CastDto.toEntity(): CastEntity {
+fun CastDto.toEntity(): CastEntity {
     return CastEntity(
         this.actor?.map { it.toEntity() },
         this.id
     )
 }
 
-internal fun VideoDto.toEntity(): VideoEntity {
+fun VideoDto.toEntity(): VideoEntity {
     return VideoEntity(
         this.id,
         this.iso31661,
@@ -143,14 +143,14 @@ internal fun VideoDto.toEntity(): VideoEntity {
     )
 }
 
-internal fun MovieVideoDto.toEntity(): MovieVideoEntity {
+fun MovieVideoDto.toEntity(): MovieVideoEntity {
     return MovieVideoEntity(
         this.id,
         this.videos?.map { it.toEntity() }
     )
 }
 
-internal fun SimilarMoviesDto.toEntity(): SimilarMoviesEntity {
+fun SimilarMoviesDto.toEntity(): SimilarMoviesEntity {
     return SimilarMoviesEntity(
         this.page,
         this.movies?.map { it.toEntity() },

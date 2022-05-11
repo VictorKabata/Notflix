@@ -9,9 +9,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.palette.graphics.Palette
-import com.vickikbt.shared.domain.models.Movie
+import com.vickikbt.cache.models.MovieEntity
 import com.vickikbt.domain.utils.Constants
 import com.vickikbt.repository.repository.movies_repository.MoviesRepository
+import com.vickikbt.shared.domain.models.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -23,14 +24,14 @@ class HomeViewModel constructor(
     private val _nowPlayingMovies = MutableLiveData<List<Movie>>()
     val nowPlayingMovies: LiveData<List<Movie>> get() = _nowPlayingMovies
 
-    private val _trendingMovies = MutableLiveData<Flow<PagingData<Movie>>>()
-    val trendingMovies: LiveData<Flow<PagingData<Movie>>> get() = _trendingMovies
+    private val _trendingMovies = MutableLiveData<Flow<PagingData<MovieEntity>>>()
+    val trendingMovies: LiveData<Flow<PagingData<MovieEntity>>> get() = _trendingMovies
 
-    private val _popularMovies = MutableLiveData<Flow<PagingData<Movie>>>()
-    val popularMovies: LiveData<Flow<PagingData<Movie>>> get() = _popularMovies
+    private val _popularMovies = MutableLiveData<Flow<PagingData<MovieEntity>>>()
+    val popularMovies: LiveData<Flow<PagingData<MovieEntity>>> get() = _popularMovies
 
-    private val _upcomingMovies = MutableLiveData<Flow<PagingData<Movie>>>()
-    val upcomingMovies: LiveData<Flow<PagingData<Movie>>> get() = _upcomingMovies
+    private val _upcomingMovies = MutableLiveData<Flow<PagingData<MovieEntity>>>()
+    val upcomingMovies: LiveData<Flow<PagingData<MovieEntity>>> get() = _upcomingMovies
 
     init {
         fetchNowPlayingMovies()

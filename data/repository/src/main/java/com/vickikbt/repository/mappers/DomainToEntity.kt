@@ -4,7 +4,7 @@ import com.vickikbt.cache.models.*
 import com.vickikbt.domain.models.*
 import com.vickikbt.shared.domain.models.*
 
-internal fun MovieDetails.toEntity(): MovieDetailsEntity {
+fun MovieDetails.toEntity(): MovieDetailsEntity {
     return MovieDetailsEntity(
         this.adult,
         this.backdropPath,
@@ -29,14 +29,14 @@ internal fun MovieDetails.toEntity(): MovieDetailsEntity {
     )
 }
 
-internal fun Genre.toEntity(): GenreEntity {
+fun Genre.toEntity(): GenreEntity {
     return GenreEntity(
         this.id,
         this.name
     )
 }
 
-internal fun SpokenLanguage.toEntity(): SpokenLanguageEntity {
+fun SpokenLanguage.toEntity(): SpokenLanguageEntity {
     return SpokenLanguageEntity(
         this.englishName,
         this.iso6391,
@@ -44,14 +44,14 @@ internal fun SpokenLanguage.toEntity(): SpokenLanguageEntity {
     )
 }
 
-internal fun Cast.toEntity(): CastEntity {
+fun Cast.toEntity(): CastEntity {
     return CastEntity(
         this.actor?.map { it.toEntity() },
         this.id
     )
 }
 
-internal fun Actor.toEntity(): ActorEntity {
+fun Actor.toEntity(): ActorEntity {
     return ActorEntity(
         this.castId,
         this.character,
@@ -63,10 +63,10 @@ internal fun Actor.toEntity(): ActorEntity {
     )
 }
 
-internal fun MovieVideo.toEntity(): MovieVideoEntity {
+fun MovieVideo.toEntity(): MovieVideoEntity {
     return MovieVideoEntity(id, videos?.map { it.toEntity() })
 }
 
-internal fun Video.toEntity(): VideoEntity {
+fun Video.toEntity(): VideoEntity {
     return VideoEntity(id, iso31661, iso6391, key, name, official, publishedAt, site, size, type)
 }
