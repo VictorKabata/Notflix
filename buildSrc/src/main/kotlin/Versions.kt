@@ -23,14 +23,14 @@ object Versions {
 
     // Project-Level Dependencies
     const val gradle_version = "7.0.3"
-    const val kotlin_version = "1.5.30"
+    const val kotlin_version = "1.6.10"
     const val googleService_version = "4.3.10"
     const val crashlytics_version = "2.8.1"
 
     // Dependencies
     const val androidCore_version = "1.7.0"
     const val material_version = "1.4.0"
-    const val compose_version = "1.0.3"
+    const val compose_version = "1.1.1"
     const val compose_activity_version = "1.4.0"
     const val compose_constraint_version = "1.0.0-rc01"
     const val accompanist_version = "0.20.0"

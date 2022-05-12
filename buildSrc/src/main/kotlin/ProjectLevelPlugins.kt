@@ -4,4 +4,5 @@ object ProjectLevelPlugins {
     const val firebaseCrashlyitics = "com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlytics_version}"
     const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_version}"
     const val ktLint = "org.jlleitschuh.gradle:ktlint-gradle:${Versions.ktlint_version}"
+    const val sqlDelight="com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}"
 }
