@@ -91,9 +91,9 @@ android {
     }
 }
 
-/*sqldelight {
+sqldelight {
     database(name = "AppDatabase") {
         packageName = "com.vickikbt.devtyme.data.cache.sqldelight"
         sourceFolders = listOf("kotlin")
     }
-}*/
+}

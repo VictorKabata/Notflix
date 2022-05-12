@@ -12,6 +12,7 @@ buildscript {
         classpath(ProjectLevelPlugins.firebaseCrashlyitics)
         classpath(ProjectLevelPlugins.googleServices)
         classpath(ProjectLevelPlugins.ktLint)
+        classpath(ProjectLevelPlugins.sqlDelight)
     }
 }
 
