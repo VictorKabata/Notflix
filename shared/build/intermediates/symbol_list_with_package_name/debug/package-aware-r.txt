@@ -1,0 +1,2 @@
+com.vickikbt.shared
+string androidx_startup
