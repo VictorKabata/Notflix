@@ -4,9 +4,9 @@ object Constants {
 
     const val TAG = "VickiKbt"
 
-    const val BASE_URL = "https://api.themoviedb.org/3/"
+    const val BASE_URL = "api.themoviedb.org/3"
 
-    const val API_KEY = "423f0418a6d6586755fe3d7227327ef2"
+    const val API_KEY = "423f0418a6d6586755fe3d7227327ef2" // ToDo: Replace and hide
 
     const val IMAGE_PREFIX = "https://image.tmdb.org/t/p/"
 

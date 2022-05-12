@@ -2,6 +2,7 @@ package com.vickikbt.shared.di
 
 import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.data.network.ApiServiceImpl
+import com.vickikbt.shared.domain.utils.Constants.API_KEY
 import com.vickikbt.shared.domain.utils.Constants.BASE_URL
 import io.github.aakira.napier.Napier
 import io.ktor.client.*
@@ -9,7 +10,6 @@ import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
-import io.ktor.client.request.*
 import io.ktor.http.*
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -25,8 +25,11 @@ val commonModule = module {
     single {
         HttpClient {
             defaultRequest {
-                host = BASE_URL
-                url { protocol = URLProtocol.HTTPS }
+                url {
+                    host = BASE_URL
+                    url { protocol = URLProtocol.HTTPS }
+                    parameters.append("api_key", API_KEY)
+                }
             }
 
             install(Logging) {

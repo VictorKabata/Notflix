@@ -37,9 +37,7 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
         page: Int
     ): TrendingMoviesDto? {
         return try {
-            httpClient.get<TrendingMoviesDto>(urlString = "trending/{media_type}/{time_window}") {
-                parameter("media_type", mediaType)
-                parameter("time_window", timeWindow)
+            httpClient.get<TrendingMoviesDto>(urlString = "trending/$mediaType/$timeWindow") {
                 parameter("page", page)
             }
         } catch (e: Exception) {

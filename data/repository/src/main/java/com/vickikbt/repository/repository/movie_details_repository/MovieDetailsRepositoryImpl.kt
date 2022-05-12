@@ -10,6 +10,7 @@ import com.vickikbt.shared.domain.utils.Coroutines
 import com.vickikbt.network.utils.SafeApiRequest
 import com.vickikbt.repository.mappers.toDomain
 import com.vickikbt.repository.mappers.toEntity
+import com.vickikbt.shared.data.network.ApiService
 import kotlinx.coroutines.flow.*
 
 class MovieDetailsRepositoryImpl constructor(
@@ -49,10 +50,9 @@ class MovieDetailsRepositoryImpl constructor(
                 val movieDetailsCacheResponse = movieDetailsDao.getMovieDetails(movieId)
                 movieDetailsCacheResponse.map { it.toDomain() }
             } else {
-                val movieDetailsNetworkResponse =
-                    safeApiRequest { apiService.fetchMovieDetails(movieId) }
+                val movieDetailsNetworkResponse = apiService.fetchMovieDetails(movieId)
 
-                _movieDetails.value = movieDetailsNetworkResponse.toEntity()
+                _movieDetails.value = movieDetailsNetworkResponse?.toEntity()
 
                 val movieDetailsCacheResponse = movieDetailsDao.getMovieDetails(movieId)
                 movieDetailsCacheResponse.map { it.toDomain() }
@@ -74,12 +74,11 @@ class MovieDetailsRepositoryImpl constructor(
                 val movieCastCacheResponse = appDatabase.castDao().getMovieCast(movieId)
                 movieCastCacheResponse.map { it.toDomain() }
             } else {
-                val movieCastNetworkResponse =
-                    safeApiRequest { apiService.fetchMovieCast(movieId) }
+                val movieCastNetworkResponse = apiService.fetchMovieCast(movieId)
 
                 Log.e("MovieDetails", "Movie Cast Network Response: $movieCastNetworkResponse")
 
-                _cast.value = movieCastNetworkResponse.toEntity()
+                _cast.value = movieCastNetworkResponse?.toEntity()
 
                 val movieCastCacheResponse = appDatabase.castDao().getMovieCast(movieId)
                 movieCastCacheResponse.map { it.toDomain() }
@@ -103,12 +102,11 @@ class MovieDetailsRepositoryImpl constructor(
                 val movieVideosCacheResponse = appDatabase.videosDao().getMovieVideo(movieId)
                 movieVideosCacheResponse.map { it.toDomain() }
             } else {
-                val movieVideosNetworkResponse =
-                    safeApiRequest { apiService.fetchMovieVideos(movieId) }
+                val movieVideosNetworkResponse = apiService.fetchMovieVideos(movieId)
 
-                _videos.value = movieVideosNetworkResponse.toEntity()
+                _videos.value = movieVideosNetworkResponse?.toEntity()
 
-                flow { emit(movieVideosNetworkResponse.toEntity().toDomain()) }
+                flow { emit(movieVideosNetworkResponse?.toEntity()!!.toDomain()) }
             }
         } catch (e: Exception) {
             Log.e("MovieDetails", "${e.message}")
@@ -117,9 +115,9 @@ class MovieDetailsRepositoryImpl constructor(
     }
 
     override suspend fun fetchSimilarMovies(movieId: Int): Flow<com.vickikbt.shared.domain.models.SimilarMovies> {
-        val similarMoviesDto = safeApiRequest { apiService.fetchSimilarMovies(movieId) }
+        val similarMoviesDto = apiService.fetchSimilarMovies(movieId)
         return try {
-            flow { emit(similarMoviesDto.toEntity().toDomain()) }
+            flow { emit(similarMoviesDto?.toEntity()!!.toDomain()) }
         } catch (e: Exception) {
             Log.e("MovieDetails", "${e.message}")
             flowOf()

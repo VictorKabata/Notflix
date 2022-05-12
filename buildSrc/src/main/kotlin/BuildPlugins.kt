@@ -18,5 +18,7 @@ object BuildPlugins {
     const val gradleVersions = "com.github.ben-manes.versions"
     const val firebasePerformance = "com.google.firebase.firebase-perf"
     const val kotlinParcelize = "kotlin-parcelize"
+
     const val multiplatform="multiplatform"
+    const val kotlinXSerialization="plugin.serialization"
 }
