@@ -7,13 +7,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
 import androidx.palette.graphics.Palette
 import com.vickikbt.cache.models.MovieEntity
-import com.vickikbt.shared.domain.utils.Constants
 import com.vickikbt.repository.repository.movies_repository.MoviesRepository
 import com.vickikbt.shared.domain.models.Movie
-import kotlinx.coroutines.flow.Flow
+import com.vickikbt.shared.domain.utils.Constants
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -24,14 +22,14 @@ class HomeViewModel constructor(
     private val _nowPlayingMovies = MutableLiveData<List<Movie>>()
     val nowPlayingMovies: LiveData<List<Movie>> get() = _nowPlayingMovies
 
-    private val _trendingMovies = MutableLiveData<Flow<PagingData<MovieEntity>>>()
-    val trendingMovies: LiveData<Flow<PagingData<MovieEntity>>> get() = _trendingMovies
+    private val _trendingMovies = MutableLiveData<List<MovieEntity>>()
+    val trendingMovies: LiveData<List<MovieEntity>> get() = _trendingMovies
 
-    private val _popularMovies = MutableLiveData<Flow<PagingData<MovieEntity>>>()
-    val popularMovies: LiveData<Flow<PagingData<MovieEntity>>> get() = _popularMovies
+    private val _popularMovies = MutableLiveData<List<MovieEntity>>()
+    val popularMovies: LiveData<List<MovieEntity>> get() = _popularMovies
 
-    private val _upcomingMovies = MutableLiveData<Flow<PagingData<MovieEntity>>>()
-    val upcomingMovies: LiveData<Flow<PagingData<MovieEntity>>> get() = _upcomingMovies
+    private val _upcomingMovies = MutableLiveData<List<MovieEntity>>()
+    val upcomingMovies: LiveData<List<MovieEntity>> get() = _upcomingMovies
 
     init {
         fetchNowPlayingMovies()
@@ -52,29 +50,41 @@ class HomeViewModel constructor(
     }
 
     private fun fetchTrendingMovies() = viewModelScope.launch {
-        try {
-            _trendingMovies.value =
+        viewModelScope.launch {
+            try {
                 moviesRepository.fetchMovies(category = Constants.CATEGORY_TRENDING_MOVIES)
-        } catch (e: Exception) {
-            // Timber.e("Error fetching trending movies: ${e.localizedMessage}")
+                    .collectLatest {
+                        _trendingMovies.value = it
+                    }
+            } catch (e: Exception) {
+                // Timber.e("Error fetching trending movies: ${e.localizedMessage}")
+            }
         }
     }
 
     private fun fetchPopularMovies() = viewModelScope.launch {
-        try {
-            _popularMovies.value =
+        viewModelScope.launch {
+            try {
                 moviesRepository.fetchMovies(category = Constants.CATEGORY_POPULAR_MOVIES)
-        } catch (e: Exception) {
-            // Timber.e("Error fetching popular movies: ${e.localizedMessage}")
+                    .collectLatest {
+                        _popularMovies.value = it
+                    }
+            } catch (e: Exception) {
+                // Timber.e("Error fetching popular movies: ${e.localizedMessage}")
+            }
         }
     }
 
     private fun fetchUpcomingMovies() = viewModelScope.launch {
-        try {
-            _upcomingMovies.value =
+        viewModelScope.launch {
+            try {
                 moviesRepository.fetchMovies(category = Constants.CATEGORY_UPCOMING_MOVIES)
-        } catch (e: Exception) {
-            // Timber.e("Error fetching upcoming movies: ${e.localizedMessage}")
+                    .collectLatest {
+                        _upcomingMovies.value = it
+                    }
+            } catch (e: Exception) {
+                // Timber.e("Error fetching upcoming movies: ${e.localizedMessage}")
+            }
         }
     }
 

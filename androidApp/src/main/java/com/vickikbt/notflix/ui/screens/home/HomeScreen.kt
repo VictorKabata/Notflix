@@ -2,6 +2,7 @@ package com.vickikbt.notflix.ui.screens.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -16,9 +17,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.paging.PagingData
-import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
@@ -35,7 +33,6 @@ import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.shared.domain.models.Movie
-import kotlinx.coroutines.flow.Flow
 import org.koin.androidx.compose.getViewModel
 
 @ExperimentalMaterialApi
@@ -142,8 +139,7 @@ fun NowPlayingMovies(
 }
 
 @Composable
-fun TrendingMovies(navController: NavController, movies: Flow<PagingData<MovieEntity>>) {
-    val moviesList = movies.collectAsLazyPagingItems()
+fun TrendingMovies(navController: NavController, movies: List<MovieEntity>) {
 
     SectionSeparator(
         modifier = Modifier
@@ -162,15 +158,15 @@ fun TrendingMovies(navController: NavController, movies: Flow<PagingData<MovieEn
         contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        items(items = moviesList) { item ->
+        items(items = movies) { item ->
             ItemTrendingMovies(
                 modifier = Modifier.placeholder(
-                    visible = moviesList.itemCount == null,
+                    visible = movies.isNullOrEmpty(),
                     color = Gray,
                     shape = RoundedCornerShape(4.dp),
                     highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
                 ),
-                movie = item!!,
+                movie = item,
                 onItemClick = { movie ->
                     navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                 }
@@ -184,10 +180,8 @@ fun TrendingMovies(navController: NavController, movies: Flow<PagingData<MovieEn
 fun PopularMovies(
     navController: NavController,
     viewModel: HomeViewModel,
-    movies: Flow<PagingData<MovieEntity>>
+    movies: List<MovieEntity>
 ) {
-    val moviesList = movies.collectAsLazyPagingItems()
-
     SectionSeparator(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 12.dp)
@@ -205,18 +199,18 @@ fun PopularMovies(
         contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(14.dp)
     ) {
-        items(items = moviesList) { item ->
+        items(items = movies) { item ->
             ItemPopularMovies(
                 modifier = Modifier.placeholder(
-                    visible = moviesList.itemCount == null,
+                    visible = movies.isNullOrEmpty(),
                     color = Gray,
                     shape = RoundedCornerShape(4.dp),
                     highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
                 ),
                 viewModel = viewModel,
-                movie = item!!,
+                movie = item,
                 onClickItem = { movie ->
-                    navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
+                    navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                 }
             )
         }
@@ -226,10 +220,8 @@ fun PopularMovies(
 @Composable
 fun UpcomingMovies(
     navController: NavController,
-    movies: Flow<PagingData<MovieEntity>>
+    movies: List<MovieEntity>
 ) {
-    val moviesList = movies.collectAsLazyPagingItems()
-
     Column(modifier = Modifier.padding(bottom = 90.dp)) {
         SectionSeparator(
             modifier = Modifier
@@ -248,15 +240,15 @@ fun UpcomingMovies(
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            items(items = moviesList) { item ->
+            items(items = movies) { item ->
                 ItemTrendingMovies(
                     modifier = Modifier.placeholder(
-                        visible = moviesList.itemCount == null,
+                        visible = movies.isNullOrEmpty(),
                         color = Gray,
                         shape = RoundedCornerShape(4.dp),
                         highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
                     ),
-                    movie = item!!,
+                    movie = item,
                     onItemClick = { movie ->
                         navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                     }
