@@ -1,5 +1,16 @@
 package com.vickikbt.shared.di
 
+import com.vickikbt.shared.data.network.ApiService
+import com.vickikbt.shared.data.network.ApiServiceImpl
+import com.vickikbt.shared.domain.utils.Constants.BASE_URL
+import io.github.aakira.napier.Napier
+import io.ktor.client.*
+import io.ktor.client.features.*
+import io.ktor.client.features.json.*
+import io.ktor.client.features.json.serializer.*
+import io.ktor.client.features.logging.*
+import io.ktor.client.request.*
+import io.ktor.http.*
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -11,10 +22,11 @@ val commonModule = module {
      * Creates a http client for Ktor that is provided to the
      * API client via constructor injection
      */
-    /*single {
+    single {
         HttpClient {
             defaultRequest {
-                header("Authorization", TokenInterceptor().invoke())
+                host = BASE_URL
+                url { protocol = URLProtocol.HTTPS }
             }
 
             install(Logging) {
@@ -27,16 +39,15 @@ val commonModule = module {
             }
 
             install(JsonFeature) {
-                serializer = KotlinxSerializer(
-                    kotlinx.serialization.json.Json {
-                        isLenient = true
-                        ignoreUnknownKeys = true
-                    }
-                )
+                serializer = KotlinxSerializer()
+                kotlinx.serialization.json.Json {
+                    isLenient = true
+                    ignoreUnknownKeys = true
+                }
             }
         }
-    }*/
-    /*single<ApiService> { ApiServiceImpl(httpClient = get()) }*/
+    }
+    single<ApiService> { ApiServiceImpl(httpClient = get()) }
 
     /*single { AccessTokenDao(databaseDriverFactory = get()) }*/
     /*single { DailyGoalDao(databaseDriverFactory = get()) }*/

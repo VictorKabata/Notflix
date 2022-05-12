@@ -7,7 +7,6 @@ import com.vickikbt.cache.models.CastEntity
 import com.vickikbt.cache.models.MovieDetailsEntity
 import com.vickikbt.cache.models.MovieVideoEntity
 import com.vickikbt.shared.domain.utils.Coroutines
-import com.vickikbt.network.ApiService
 import com.vickikbt.network.utils.SafeApiRequest
 import com.vickikbt.repository.mappers.toDomain
 import com.vickikbt.repository.mappers.toEntity
