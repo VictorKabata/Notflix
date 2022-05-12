@@ -1,2 +1,0 @@
-com/vickikbt/shared/BuildConfig.java
- com.vickikbt.shared.BuildConfig

@@ -1,0 +1,65 @@
+CREATE TABLE MovieEntity(
+adult TEXT AS Boolean DEFAULT NULL,
+backdropPath TEXT DEFAULT NULL,
+id INTEGER DEFAULT NULL,
+originalLanguage TEXT DEFAULT NULL,
+originalTitle TEXT DEFAULT NULL,
+overview TEXT DEFAULT NULL,
+popularity TEXT AS Double DEFAULT NULL,
+posterPath TEXT DEFAULT NULL,
+releaseDate TEXT DEFAULT NULL,
+title TEXT DEFAULT NULL,
+video TEXT AS Boolean DEFAULT NULL,
+voteAverage TEXT AS Double DEFAULT NULL,
+voteCount INTEGER DEFAULT NULL,
+category TEXT DEFAULT NULL,
+isFavourite TEXT AS Boolean DEFAULT TRUE,
+cacheId INTEGER DEFAULT 0 PRIMARY KEY
+);
+
+CREATE TABLE MovieDetailsEntity(
+adult TEXT AS Boolean DEFAULT NULL,
+backdropPath TEXT DEFAULT NULL,
+homePage TEXT DEFAULT NULL,
+id INTEGER NOT NULL PRIMARY KEY,
+imdbId TEXT DEFAULT NULL,
+originalLanguage TEXT DEFAULT NULL,
+originalTitle TEXT DEFAULT NULL,
+overview TEXT DEFAULT NULL,
+popularity TEXT AS Double DEFAULT NULL,
+posterPath TEXT DEFAULT NULL,
+releaseDate TEXT DEFAULT NULL,
+runtime INTEGER DEFAULT NULL,
+status TEXT DEFAULT NULL,
+tagline TEXT DEFAULT NULL,
+title TEXT DEFAULT NULL,
+video TEXT AS Boolean DEFAULT NULL,
+voteAverage TEXT AS Double DEFAULT NULL,
+voteCount INTEGER DEFAULT NULL
+);
+
+saveMovies:
+INSERT OR REPLACE INTO MovieEntity(adult, backdropPath,id,originalLanguage,originalTitle,overview,popularity,posterPath,releaseDate,title,video,voteAverage,voteCount,category,isFavourite,cacheId)
+VALUES ?;
+
+getNowPlayingMovies:
+SELECT * FROM MovieEntity WHERE category=?;
+
+getmMovies:
+SELECT * FROM MovieEntity WHERE category=?;
+
+deleteMovies:
+DELETE FROM MovieEntity WHERE category=? AND isFavourite IS NOT TRUE;
+
+isCategoryCacheAvailable:
+SELECT COUNT(*) FROM MovieEntity WHERE category=?;
+
+getFavouriteMovies:
+SELECT * FROM MovieEntity WHERE isFavourite=TRUE;
+
+isMovieFavourite:
+SELECT isFavourite FROM MovieEntity WHERE id=? AND isFavourite=TRUE;
+
+updateIsMovieFavorite:
+INSERT OR REPLACE INTO MovieEntity(isFavourite) SELECT cacheId=? WHERE changes()=0;
+
