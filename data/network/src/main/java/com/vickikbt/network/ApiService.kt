@@ -1,6 +1,6 @@
 package com.vickikbt.network
 
-import com.vickikbt.network.models.*
+import com.vickikbt.shared.data.network.models.*
 import com.vickikbt.shared.domain.utils.Constants.API_KEY
 import com.vickikbt.shared.domain.utils.Constants.STARTING_PAGE_INDEX
 import retrofit2.Response

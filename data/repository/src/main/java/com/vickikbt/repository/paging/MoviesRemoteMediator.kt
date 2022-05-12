@@ -11,9 +11,9 @@ import com.vickikbt.cache.models.RemoteKey
 import com.vickikbt.shared.domain.utils.Constants
 import com.vickikbt.shared.domain.utils.Constants.STARTING_PAGE_INDEX
 import com.vickikbt.network.ApiService
-import com.vickikbt.network.models.PopularMoviesDto
-import com.vickikbt.network.models.TrendingMoviesDto
-import com.vickikbt.network.models.UpcomingMoviesDto
+import com.vickikbt.shared.data.network.models.PopularMoviesDto
+import com.vickikbt.shared.data.network.models.TrendingMoviesDto
+import com.vickikbt.shared.data.network.models.UpcomingMoviesDto
 import com.vickikbt.repository.mappers.toEntity
 import retrofit2.HttpException
 import java.io.IOException

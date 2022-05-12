@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vickikbt.shared.CommonGreetingTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-05-11T06:24:06" hostname="KYOSK-ANHQ-01" time="0.177">
-  <properties/>
-  <testcase name="testExample" classname="com.vickikbt.shared.CommonGreetingTest" time="0.177"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

@@ -1,7 +1,7 @@
 package com.vickikbt.repository.mappers
 
 import com.vickikbt.cache.models.*
-import com.vickikbt.network.models.*
+import com.vickikbt.shared.data.network.models.*
 
 fun DatesDto.toEntity(): DatesEntity {
     return DatesEntity(
