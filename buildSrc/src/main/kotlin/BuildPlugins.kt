@@ -21,4 +21,5 @@ object BuildPlugins {
 
     const val multiplatform="multiplatform"
     const val kotlinXSerialization="plugin.serialization"
+    const val sqlDelight="com.squareup.sqldelight"
 }
