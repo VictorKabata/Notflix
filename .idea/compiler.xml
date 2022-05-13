@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.7">
-      <module name="Notflix.androidApp" target="11" />
-      <module name="Notflix.buildSrc" target="11" />
-      <module name="Notflix.buildSrc.main" target="11" />
-      <module name="Notflix.buildSrc.test" target="11" />
+    <bytecodeTargetLevel target="11">
       <module name="Notflix.core" target="15" />
-      <module name="Notflix.data.cache" target="11" />
       <module name="Notflix.data.network" target="11" />
-      <module name="Notflix.data.repository" target="11" />
       <module name="Notflix.feature.details" target="11" />
       <module name="Notflix.feature.favorites" target="11" />
       <module name="Notflix.feature.home" target="11" />
@@ -17,7 +11,6 @@
       <module name="Notflix.feature.settings" target="11" />
       <module name="Notflix.library.cache" target="15" />
       <module name="Notflix.library.network" target="15" />
-      <module name="Notflix.shared" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

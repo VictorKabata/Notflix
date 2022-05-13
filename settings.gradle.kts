@@ -1,10 +1,8 @@
 include(":androidApp")
 include(":shared")
 
-include(":domain")
 include(":data")
 include(":data:cache")
-include(":data:network")
 include(":data:repository")
 
 rootProject.name = "Notflix"

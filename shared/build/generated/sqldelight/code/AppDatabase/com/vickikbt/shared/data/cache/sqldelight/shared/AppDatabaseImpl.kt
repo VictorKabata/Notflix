@@ -1,11 +1,11 @@
-package com.vickikbt.devtyme.`data`.cache.sqldelight.shared
+package com.vickikbt.shared.`data`.cache.sqldelight.shared
 
 import com.squareup.sqldelight.Query
 import com.squareup.sqldelight.TransacterImpl
 import com.squareup.sqldelight.`internal`.copyOnWriteList
 import com.squareup.sqldelight.db.SqlCursor
 import com.squareup.sqldelight.db.SqlDriver
-import com.vickikbt.devtyme.`data`.cache.sqldelight.AppDatabase
+import com.vickikbt.shared.`data`.cache.sqldelight.AppDatabase
 import com.vickikbt.shared.`data`.cache.sqldelight.AppDatabaseQueries
 import com.vickikbt.shared.`data`.cache.sqldelight.IsMovieFavourite
 import com.vickikbt.shared.`data`.cache.sqldelight.MovieEntity

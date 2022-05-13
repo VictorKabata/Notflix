@@ -1,22 +1,25 @@
 package com.vickikbt.shared.`data`.cache.sqldelight
 
+import kotlin.Boolean
+import kotlin.Double
+import kotlin.Int
 import kotlin.Long
 import kotlin.String
 
 public data class MovieEntity(
-  public val adult: String?,
+  public val adult: Boolean?,
   public val backdropPath: String?,
-  public val id: Long?,
+  public val id: Int?,
   public val originalLanguage: String?,
   public val originalTitle: String?,
   public val overview: String?,
-  public val popularity: String?,
+  public val popularity: Double?,
   public val posterPath: String?,
   public val releaseDate: String?,
   public val title: String?,
-  public val video: String?,
-  public val voteAverage: String?,
-  public val voteCount: Long?,
+  public val video: Boolean?,
+  public val voteAverage: Double?,
+  public val voteCount: Int?,
   public val category: String?,
   public val isFavourite: String?,
   public val cacheId: Long

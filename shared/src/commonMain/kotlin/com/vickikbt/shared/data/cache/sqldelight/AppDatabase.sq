@@ -1,41 +1,20 @@
 CREATE TABLE MovieEntity(
-adult TEXT DEFAULT NULL,
+adult TEXT AS Boolean DEFAULT NULL,
 backdropPath TEXT DEFAULT NULL,
-id INTEGER DEFAULT NULL,
+id INTEGER AS Int DEFAULT NULL,
 originalLanguage TEXT DEFAULT NULL,
 originalTitle TEXT DEFAULT NULL,
 overview TEXT DEFAULT NULL,
-popularity TEXT DEFAULT NULL,
+popularity REAL DEFAULT NULL,
 posterPath TEXT DEFAULT NULL,
 releaseDate TEXT DEFAULT NULL,
 title TEXT DEFAULT NULL,
-video TEXT DEFAULT NULL,
-voteAverage TEXT DEFAULT NULL,
-voteCount INTEGER DEFAULT NULL,
+video TEXT AS Boolean DEFAULT NULL,
+voteAverage REAL DEFAULT NULL,
+voteCount INTEGER AS Int DEFAULT NULL,
 category TEXT DEFAULT NULL,
-isFavourite TEXT DEFAULT NULL,
+isFavourite TEXT DEFAULT FALSE,
 cacheId INTEGER DEFAULT 0 PRIMARY KEY
-);
-
-CREATE TABLE MovieDetailsEntity(
-adult TEXT DEFAULT NULL,
-backdropPath TEXT DEFAULT NULL,
-homePage TEXT DEFAULT NULL,
-id INTEGER NOT NULL PRIMARY KEY,
-imdbId TEXT DEFAULT NULL,
-originalLanguage TEXT DEFAULT NULL,
-originalTitle TEXT DEFAULT NULL,
-overview TEXT DEFAULT NULL,
-popularity TEXT DEFAULT NULL,
-posterPath TEXT DEFAULT NULL,
-releaseDate TEXT DEFAULT NULL,
-runtime INTEGER DEFAULT NULL,
-status TEXT DEFAULT NULL,
-tagline TEXT DEFAULT NULL,
-title TEXT DEFAULT NULL,
-video TEXT DEFAULT NULL,
-voteAverage TEXT DEFAULT NULL,
-voteCount INTEGER DEFAULT NULL
 );
 
 saveMovies:
@@ -45,7 +24,7 @@ VALUES ?;
 getNowPlayingMovies:
 SELECT * FROM MovieEntity WHERE category=?;
 
-getmMovies:
+getMovies:
 SELECT * FROM MovieEntity WHERE category=?;
 
 deleteMovies:
@@ -62,4 +41,41 @@ SELECT isFavourite FROM MovieEntity WHERE id=? AND isFavourite=TRUE;
 
 updateIsMovieFavorite:
 INSERT OR REPLACE INTO MovieEntity(isFavourite) SELECT cacheId=? WHERE changes()=0;
+
+
+
+
+CREATE TABLE MovieDetailsEntity(
+adult TEXT AS Boolean DEFAULT NULL,
+backdropPath TEXT DEFAULT NULL,
+homePage TEXT DEFAULT NULL,
+id INTEGER AS Int UNIQUE NOT NULL PRIMARY KEY,
+imdbId TEXT DEFAULT NULL,
+originalLanguage TEXT DEFAULT NULL,
+originalTitle TEXT DEFAULT NULL,
+overview TEXT DEFAULT NULL,
+popularity REAL DEFAULT NULL,
+posterPath TEXT DEFAULT NULL,
+releaseDate TEXT DEFAULT NULL,
+runtime INTEGER AS Int DEFAULT NULL,
+status TEXT DEFAULT NULL,
+tagline TEXT DEFAULT NULL,
+title TEXT DEFAULT NULL,
+video TEXT AS Boolean  DEFAULT NULL,
+voteAverage REAL DEFAULT NULL,
+voteCount INTEGER AS Int DEFAULT NULL
+);
+
+saveMovieDetails:
+INSERT OR REPLACE INTO MovieDetailsEntity(adult, backdropPath,homePage,id,imdbId,originalLanguage,originalTitle,overview,popularity,posterPath,releaseDate,runtime,status,tagline,title,video,voteAverage,voteCount)
+VALUES ?;
+
+getMovieDetails:
+SELECT * FROM MovieDetailsEntity WHERE id=?;
+
+deleteAllMovieDetais:
+DELETE FROM MovieDetailsEntity;
+
+isMovieDetailsAvailable:
+SELECT COUNT(*) FROM MovieDetailsEntity WHERE id=?;
 

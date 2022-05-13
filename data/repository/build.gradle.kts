@@ -32,7 +32,6 @@ android {
 }
 
 dependencies {
-    api(project(BuildModules.Domain))
     api(project(BuildModules.Cache))
 
     implementation(project(BuildModules.Shared))
