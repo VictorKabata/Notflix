@@ -9,5 +9,5 @@ interface FavoritesRepository {
 
     suspend fun updateIsMovieFavorite(cacheId: Int, isFavorite: Boolean)
 
-    suspend fun getFavoriteMovies(): Flow<List<com.vickikbt.shared.domain.models.Movie>>
+    suspend fun getFavoriteMovies(): Flow<List<Movie>>
 }
