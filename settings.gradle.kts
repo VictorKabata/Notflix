@@ -3,7 +3,6 @@ include(":shared")
 
 include(":data")
 include(":data:cache")
-include(":data:repository")
 
 rootProject.name = "Notflix"
 
