@@ -1,6 +1,8 @@
-package com.vickikbt.shared.data.cache.sqldelight
+package com.vickikbt.shared.data.cache.sqldelight.daos
 
 import com.squareup.sqldelight.runtime.coroutines.asFlow
+import com.vickikbt.shared.data.cache.sqldelight.AppDatabase
+import com.vickikbt.shared.data.cache.sqldelight.MovieEntity
 import com.vickikbt.shared.domain.utils.Constants.CATEGORY_NOW_PLAYING_MOVIES
 import com.vickikbt.shared.domain.utils.DatabaseDriverFactory
 import kotlinx.coroutines.flow.map
@@ -26,8 +28,7 @@ class MoviesDao constructor(private val databaseDriverFactory: DatabaseDriverFac
     fun deleteMovies(category: String) = dbQuery.deleteMovies(category = category)
 
     fun isCategoryCacheAvailable(category: String) =
-        dbQuery.isCategoryCacheAvailable(category = category).asFlow()
-            .map { it.executeAsOneOrNull() }
+        dbQuery.isCategoryCacheAvailable(category = category).executeAsOneOrNull()
 
     val getFavouriteMovies = dbQuery.getFavouriteMovies().asFlow().map { it.executeAsList() }
 

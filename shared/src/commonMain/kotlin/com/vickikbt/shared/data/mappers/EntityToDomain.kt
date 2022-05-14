@@ -1,7 +1,10 @@
 package com.vickikbt.shared.data.mappers
 
 import com.vickikbt.cache.models.*
+import com.vickikbt.shared.data.cache.sqldelight.MovieDetailsEntity
 import com.vickikbt.shared.data.cache.sqldelight.MovieEntity
+import com.vickikbt.shared.data.cache.sqldelight.models.SimilarMoviesEntity
+import com.vickikbt.shared.data.cache.sqldelight.models.UpcomingMoviesEntity
 import com.vickikbt.shared.domain.models.*
 
 fun MovieEntity.toDomain(): Movie {
@@ -82,7 +85,6 @@ fun MovieDetailsEntity.toDomain(): MovieDetails {
     return MovieDetails(
         this.adult,
         this.backdropPath,
-        this.genres?.map { it.toDomain() },
         this.homepage,
         this.id,
         this.imdbId,
@@ -93,7 +95,6 @@ fun MovieDetailsEntity.toDomain(): MovieDetails {
         this.posterPath,
         this.releaseDate,
         this.runtime,
-        this.spokenLanguages?.map { it.toDomain() },
         this.status,
         this.tagline,
         this.title,
@@ -150,5 +151,12 @@ fun SimilarMoviesEntity.toDomain(): SimilarMovies {
         this.movies?.map { it.toDomain() },
         this.totalPages,
         this.totalResults
+    )
+}
+
+internal fun DatesEntity.toDomain(): Dates {
+    return Dates(
+        this.maximum,
+        this.minimum
     )
 }

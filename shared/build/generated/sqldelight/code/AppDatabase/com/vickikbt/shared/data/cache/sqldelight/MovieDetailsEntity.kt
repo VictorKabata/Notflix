@@ -8,7 +8,7 @@ import kotlin.String
 public data class MovieDetailsEntity(
   public val adult: Boolean?,
   public val backdropPath: String?,
-  public val homePage: String?,
+  public val homepage: String?,
   public val id: Int,
   public val imdbId: String?,
   public val originalLanguage: String?,
@@ -29,7 +29,7 @@ public data class MovieDetailsEntity(
   |MovieDetailsEntity [
   |  adult: $adult
   |  backdropPath: $backdropPath
-  |  homePage: $homePage
+  |  homepage: $homepage
   |  id: $id
   |  imdbId: $imdbId
   |  originalLanguage: $originalLanguage

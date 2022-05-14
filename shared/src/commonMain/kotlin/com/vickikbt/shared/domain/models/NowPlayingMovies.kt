@@ -2,13 +2,13 @@ package com.vickikbt.shared.domain.models
 
 data class NowPlayingMovies(
 
-    val dates: Dates?,
+    val dates: Dates? = null,
 
-    val page: Int?,
+    val page: Int? = null,
 
-    val movies: List<Movie>?,
+    val movies: List<Movie>? = null,
 
-    val totalPages: Int?,
+    val totalPages: Int? = null,
 
-    val totalResults: Int?
+    val totalResults: Int? = null
 )

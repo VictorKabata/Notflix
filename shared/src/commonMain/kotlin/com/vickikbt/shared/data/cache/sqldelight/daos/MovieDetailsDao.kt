@@ -1,6 +1,8 @@
-package com.vickikbt.shared.data.cache.sqldelight
+package com.vickikbt.shared.data.cache.sqldelight.daos
 
 import com.squareup.sqldelight.runtime.coroutines.asFlow
+import com.vickikbt.shared.data.cache.sqldelight.AppDatabase
+import com.vickikbt.shared.data.cache.sqldelight.MovieDetailsEntity
 import com.vickikbt.shared.domain.utils.DatabaseDriverFactory
 import kotlinx.coroutines.flow.map
 

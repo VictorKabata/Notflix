@@ -61,7 +61,7 @@ private class AppDatabaseImpl(
           |CREATE TABLE MovieDetailsEntity(
           |adult INTEGER DEFAULT NULL,
           |backdropPath TEXT DEFAULT NULL,
-          |homePage TEXT DEFAULT NULL,
+          |homepage TEXT DEFAULT NULL,
           |id INTEGER UNIQUE NOT NULL PRIMARY KEY,
           |imdbId TEXT DEFAULT NULL,
           |originalLanguage TEXT DEFAULT NULL,
@@ -123,7 +123,7 @@ private class AppDatabaseQueriesImpl(
     voteAverage: Double?,
     voteCount: Int?,
     category: String?,
-    isFavourite: Int?,
+    isFavourite: Boolean?,
     cacheId: Int
   ) -> T): Query<T> = GetNowPlayingMoviesQuery(category) { cursor ->
     mapper(
@@ -141,7 +141,7 @@ private class AppDatabaseQueriesImpl(
       cursor.getDouble(11),
       cursor.getLong(12)?.toInt(),
       cursor.getString(13),
-      cursor.getLong(14)?.toInt(),
+      cursor.getLong(14)?.let { it == 1L },
       cursor.getLong(15)!!.toInt()
     )
   }
@@ -185,7 +185,7 @@ private class AppDatabaseQueriesImpl(
     voteAverage: Double?,
     voteCount: Int?,
     category: String?,
-    isFavourite: Int?,
+    isFavourite: Boolean?,
     cacheId: Int
   ) -> T): Query<T> = GetMoviesQuery(category) { cursor ->
     mapper(
@@ -203,7 +203,7 @@ private class AppDatabaseQueriesImpl(
       cursor.getDouble(11),
       cursor.getLong(12)?.toInt(),
       cursor.getString(13),
-      cursor.getLong(14)?.toInt(),
+      cursor.getLong(14)?.let { it == 1L },
       cursor.getLong(15)!!.toInt()
     )
   }
@@ -251,7 +251,7 @@ private class AppDatabaseQueriesImpl(
     voteAverage: Double?,
     voteCount: Int?,
     category: String?,
-    isFavourite: Int?,
+    isFavourite: Boolean?,
     cacheId: Int
   ) -> T): Query<T> = Query(-2013212026, getFavouriteMovies, driver, "AppDatabase.sq",
       "getFavouriteMovies", "SELECT * FROM MovieEntity WHERE isFavourite=TRUE") { cursor ->
@@ -270,7 +270,7 @@ private class AppDatabaseQueriesImpl(
       cursor.getDouble(11),
       cursor.getLong(12)?.toInt(),
       cursor.getString(13),
-      cursor.getLong(14)?.toInt(),
+      cursor.getLong(14)?.let { it == 1L },
       cursor.getLong(15)!!.toInt()
     )
   }
@@ -298,10 +298,10 @@ private class AppDatabaseQueriesImpl(
     )
   }
 
-  public override fun <T : Any> isMovieFavourite(id: Int?, mapper: (isFavourite: Int?) -> T):
+  public override fun <T : Any> isMovieFavourite(id: Int?, mapper: (isFavourite: Boolean?) -> T):
       Query<T> = IsMovieFavouriteQuery(id) { cursor ->
     mapper(
-      cursor.getLong(0)?.toInt()
+      cursor.getLong(0)?.let { it == 1L }
     )
   }
 
@@ -315,7 +315,7 @@ private class AppDatabaseQueriesImpl(
   public override fun <T : Any> getMovieDetails(id: Int, mapper: (
     adult: Boolean?,
     backdropPath: String?,
-    homePage: String?,
+    homepage: String?,
     id: Int,
     imdbId: String?,
     originalLanguage: String?,
@@ -355,13 +355,13 @@ private class AppDatabaseQueriesImpl(
   }
 
   public override fun getMovieDetails(id: Int): Query<MovieDetailsEntity> = getMovieDetails(id) {
-      adult, backdropPath, homePage, id_, imdbId, originalLanguage, originalTitle, overview,
+      adult, backdropPath, homepage, id_, imdbId, originalLanguage, originalTitle, overview,
       popularity, posterPath, releaseDate, runtime, status, tagline, title, video, voteAverage,
       voteCount ->
     MovieDetailsEntity(
       adult,
       backdropPath,
-      homePage,
+      homepage,
       id_,
       imdbId,
       originalLanguage,
@@ -404,7 +404,7 @@ private class AppDatabaseQueriesImpl(
       bindDouble(12, MovieEntity.voteAverage)
       bindLong(13, MovieEntity.voteCount?.let { it.toLong() })
       bindString(14, MovieEntity.category)
-      bindLong(15, MovieEntity.isFavourite?.let { it.toLong() })
+      bindLong(15, MovieEntity.isFavourite?.let { if (it) 1L else 0L })
       bindLong(16, MovieEntity.cacheId.toLong())
     }
     notifyQueries(46047888, {database.appDatabaseQueries.getFavouriteMovies +
@@ -439,12 +439,12 @@ private class AppDatabaseQueriesImpl(
 
   public override fun saveMovieDetails(MovieDetailsEntity: MovieDetailsEntity): Unit {
     driver.execute(-337419649, """
-    |INSERT OR REPLACE INTO MovieDetailsEntity(adult, backdropPath,homePage,id,imdbId,originalLanguage,originalTitle,overview,popularity,posterPath,releaseDate,runtime,status,tagline,title,video,voteAverage,voteCount)
+    |INSERT OR REPLACE INTO MovieDetailsEntity(adult, backdropPath,homepage,id,imdbId,originalLanguage,originalTitle,overview,popularity,posterPath,releaseDate,runtime,status,tagline,title,video,voteAverage,voteCount)
     |VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """.trimMargin(), 18) {
       bindLong(1, MovieDetailsEntity.adult?.let { if (it) 1L else 0L })
       bindString(2, MovieDetailsEntity.backdropPath)
-      bindString(3, MovieDetailsEntity.homePage)
+      bindString(3, MovieDetailsEntity.homepage)
       bindLong(4, MovieDetailsEntity.id.toLong())
       bindString(5, MovieDetailsEntity.imdbId)
       bindString(6, MovieDetailsEntity.originalLanguage)

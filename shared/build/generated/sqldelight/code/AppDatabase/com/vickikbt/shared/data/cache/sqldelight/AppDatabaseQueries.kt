@@ -83,7 +83,7 @@ public interface AppDatabaseQueries : Transacter {
   public fun <T : Any> getMovieDetails(id: Int, mapper: (
     adult: Boolean?,
     backdropPath: String?,
-    homePage: String?,
+    homepage: String?,
     id: Int,
     imdbId: String?,
     originalLanguage: String?,

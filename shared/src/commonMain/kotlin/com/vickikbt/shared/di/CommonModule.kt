@@ -1,7 +1,7 @@
 package com.vickikbt.shared.di
 
-import com.vickikbt.shared.data.cache.sqldelight.MovieDetailsDao
-import com.vickikbt.shared.data.cache.sqldelight.MoviesDao
+import com.vickikbt.shared.data.cache.sqldelight.daos.MovieDetailsDao
+import com.vickikbt.shared.data.cache.sqldelight.daos.MoviesDao
 import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.data.network.ApiServiceImpl
 import com.vickikbt.shared.domain.utils.Constants.API_KEY

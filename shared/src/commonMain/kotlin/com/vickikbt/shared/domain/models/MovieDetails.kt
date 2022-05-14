@@ -6,8 +6,6 @@ data class MovieDetails(
 
     val backdropPath: String? = null,
 
-    val genres: List<Genre>? = null,
-
     val homepage: String? = null,
 
     val id: Int,
@@ -27,8 +25,6 @@ data class MovieDetails(
     val releaseDate: String? = null,
 
     val runtime: Int? = null,
-
-    val spokenLanguages: List<SpokenLanguage>? = null,
 
     val status: String? = null,
 

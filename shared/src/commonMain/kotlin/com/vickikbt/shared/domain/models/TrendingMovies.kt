@@ -1,11 +1,11 @@
 package com.vickikbt.shared.domain.models
 
 data class TrendingMovies(
-    val page: Int?,
+    val page: Int? = null,
 
-    val movies: List<Movie>?,
+    val movies: List<Movie>? = null,
 
-    val totalPages: Int?,
+    val totalPages: Int? = null,
 
-    val totalResults: Int?
+    val totalResults: Int? = null
 )

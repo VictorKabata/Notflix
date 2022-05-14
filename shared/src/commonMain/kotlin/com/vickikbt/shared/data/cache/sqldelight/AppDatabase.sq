@@ -48,7 +48,7 @@ INSERT OR REPLACE INTO MovieEntity(isFavourite) SELECT cacheId=? WHERE changes()
 CREATE TABLE MovieDetailsEntity(
 adult INTEGER AS Boolean DEFAULT NULL,
 backdropPath TEXT DEFAULT NULL,
-homePage TEXT DEFAULT NULL,
+homepage TEXT DEFAULT NULL,
 id INTEGER AS Int UNIQUE NOT NULL PRIMARY KEY,
 imdbId TEXT DEFAULT NULL,
 originalLanguage TEXT DEFAULT NULL,
@@ -67,7 +67,7 @@ voteCount INTEGER AS Int DEFAULT NULL
 );
 
 saveMovieDetails:
-INSERT OR REPLACE INTO MovieDetailsEntity(adult, backdropPath,homePage,id,imdbId,originalLanguage,originalTitle,overview,popularity,posterPath,releaseDate,runtime,status,tagline,title,video,voteAverage,voteCount)
+INSERT OR REPLACE INTO MovieDetailsEntity(adult, backdropPath,homepage,id,imdbId,originalLanguage,originalTitle,overview,popularity,posterPath,releaseDate,runtime,status,tagline,title,video,voteAverage,voteCount)
 VALUES ?;
 
 getMovieDetails:
