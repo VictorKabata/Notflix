@@ -1,4 +1,4 @@
-package com.vickikbt.repository.repository.favorites_repository
+package com.vickikbt.shared.domain.repositories
 
 import com.vickikbt.shared.domain.models.Movie
 import kotlinx.coroutines.flow.Flow

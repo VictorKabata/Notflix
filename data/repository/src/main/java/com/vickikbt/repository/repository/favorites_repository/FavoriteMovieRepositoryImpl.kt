@@ -3,6 +3,7 @@ package com.vickikbt.repository.repository.favorites_repository
 import com.vickikbt.cache.AppDatabase
 import com.vickikbt.network.utils.SafeApiRequest
 import com.vickikbt.shared.data.mappers.toDomain
+import com.vickikbt.shared.domain.repositories.FavoritesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

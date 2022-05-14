@@ -11,6 +11,7 @@ import com.vickikbt.network.utils.SafeApiRequest
 import com.vickikbt.shared.data.mappers.toDomain
 import com.vickikbt.shared.data.mappers.toEntity
 import com.vickikbt.shared.data.network.ApiService
+import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import kotlinx.coroutines.flow.*
 
 class MovieDetailsRepositoryImpl constructor(

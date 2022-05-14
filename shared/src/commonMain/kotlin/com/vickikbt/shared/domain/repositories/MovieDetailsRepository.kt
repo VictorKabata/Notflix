@@ -1,4 +1,4 @@
-package com.vickikbt.repository.repository.movie_details_repository
+package com.vickikbt.shared.domain.repositories
 
 import kotlinx.coroutines.flow.Flow
 

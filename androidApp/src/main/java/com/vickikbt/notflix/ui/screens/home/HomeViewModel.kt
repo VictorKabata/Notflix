@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.palette.graphics.Palette
 import com.vickikbt.cache.models.MovieEntity
-import com.vickikbt.repository.repository.movies_repository.MoviesRepository
+import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.utils.Constants
 import kotlinx.coroutines.flow.collectLatest

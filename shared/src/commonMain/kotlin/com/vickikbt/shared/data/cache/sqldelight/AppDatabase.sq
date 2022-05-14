@@ -80,18 +80,18 @@ isMovieDetailsAvailable:
 SELECT COUNT(*) FROM MovieDetailsEntity WHERE id=?;
 
 
-CREATE TABLE CastEntity(
-actor TEXT AS List<ActorEntity>,
-id INTEGER AS Int UNIQUE NOT NULL PRIMARY KEY
-);
-
-CREATE TABLE ActorEntity(
-castId INTEGER AS Int DEFAULT NULL,
-character TEXT DEFAULT NULL,
-creditId TEXT DEFAULT NULL,
-id INTEGER AS Int DEFAULT NULL,
-name TEXT DEFAULT NULL,
-originalName TEXT DEFAULT NULL,
-profilePath TEXT DEFAULT NULL
-);
+-- CREATE TABLE CastEntity(
+-- actor TEXT AS List<ActorEntity>,
+-- id INTEGER AS Int UNIQUE NOT NULL PRIMARY KEY
+-- );
+--
+-- CREATE TABLE ActorEntity(
+-- castId INTEGER AS Int DEFAULT NULL,
+-- character TEXT DEFAULT NULL,
+-- creditId TEXT DEFAULT NULL,
+-- id INTEGER AS Int DEFAULT NULL,
+-- name TEXT DEFAULT NULL,
+-- originalName TEXT DEFAULT NULL,
+-- profilePath TEXT DEFAULT NULL
+-- );
 

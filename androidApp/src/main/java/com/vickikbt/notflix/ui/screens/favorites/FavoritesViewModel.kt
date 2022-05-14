@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vickikbt.shared.domain.models.Movie
-import com.vickikbt.repository.repository.favorites_repository.FavoritesRepository
+import com.vickikbt.shared.domain.repositories.FavoritesRepository
 import kotlinx.coroutines.launch
 
 class FavoritesViewModel(

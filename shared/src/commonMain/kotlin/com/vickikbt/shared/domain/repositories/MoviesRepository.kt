@@ -1,4 +1,4 @@
-package com.vickikbt.repository.repository.movies_repository
+package com.vickikbt.shared.domain.repositories
 
 import androidx.paging.PagingData
 import com.vickikbt.cache.models.MovieEntity

@@ -12,7 +12,7 @@ import com.vickikbt.shared.domain.models.Cast
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.models.MovieVideo
 import com.vickikbt.shared.domain.models.SimilarMovies
-import com.vickikbt.repository.repository.movie_details_repository.MovieDetailsRepository
+import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(
