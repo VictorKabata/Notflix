@@ -8,9 +8,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.palette.graphics.Palette
-import com.vickikbt.cache.models.MovieEntity
-import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.models.Movie
+import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.utils.Constants
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -22,14 +21,14 @@ class HomeViewModel constructor(
     private val _nowPlayingMovies = MutableLiveData<List<Movie>>()
     val nowPlayingMovies: LiveData<List<Movie>> get() = _nowPlayingMovies
 
-    private val _trendingMovies = MutableLiveData<List<MovieEntity>>()
-    val trendingMovies: LiveData<List<MovieEntity>> get() = _trendingMovies
+    private val _trendingMovies = MutableLiveData<List<Movie>>()
+    val trendingMovies: LiveData<List<Movie>> get() = _trendingMovies
 
-    private val _popularMovies = MutableLiveData<List<MovieEntity>>()
-    val popularMovies: LiveData<List<MovieEntity>> get() = _popularMovies
+    private val _popularMovies = MutableLiveData<List<Movie>>()
+    val popularMovies: LiveData<List<Movie>> get() = _popularMovies
 
-    private val _upcomingMovies = MutableLiveData<List<MovieEntity>>()
-    val upcomingMovies: LiveData<List<MovieEntity>> get() = _upcomingMovies
+    private val _upcomingMovies = MutableLiveData<List<Movie>>()
+    val upcomingMovies: LiveData<List<Movie>> get() = _upcomingMovies
 
     init {
         fetchNowPlayingMovies()

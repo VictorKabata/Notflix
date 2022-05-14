@@ -24,7 +24,6 @@ import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.fade
 import com.google.accompanist.placeholder.placeholder
-import com.vickikbt.cache.models.MovieEntity
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemNowPlayingMovies
 import com.vickikbt.notflix.ui.components.ItemPopularMovies
@@ -139,7 +138,7 @@ fun NowPlayingMovies(
 }
 
 @Composable
-fun TrendingMovies(navController: NavController, movies: List<MovieEntity>) {
+fun TrendingMovies(navController: NavController, movies: List<Movie>) {
 
     SectionSeparator(
         modifier = Modifier
@@ -180,7 +179,7 @@ fun TrendingMovies(navController: NavController, movies: List<MovieEntity>) {
 fun PopularMovies(
     navController: NavController,
     viewModel: HomeViewModel,
-    movies: List<MovieEntity>
+    movies: List<Movie>
 ) {
     SectionSeparator(
         modifier = Modifier
@@ -220,7 +219,7 @@ fun PopularMovies(
 @Composable
 fun UpcomingMovies(
     navController: NavController,
-    movies: List<MovieEntity>
+    movies: List<Movie>
 ) {
     Column(modifier = Modifier.padding(bottom = 90.dp)) {
         SectionSeparator(

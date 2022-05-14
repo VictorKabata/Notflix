@@ -2,6 +2,8 @@ package com.vickikbt.shared.data.mappers
 
 import com.vickikbt.cache.models.*
 import com.vickikbt.shared.data.cache.sqldelight.MovieDetailsEntity
+import com.vickikbt.shared.data.cache.sqldelight.models.CastEntity
+import com.vickikbt.shared.data.cache.sqldelight.models.MovieVideoEntity
 import com.vickikbt.shared.domain.models.*
 
 fun MovieDetails.toEntity(): MovieDetailsEntity {

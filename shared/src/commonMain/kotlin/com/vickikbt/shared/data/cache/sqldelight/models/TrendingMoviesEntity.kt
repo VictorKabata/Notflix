@@ -1,5 +1,7 @@
 package com.vickikbt.cache.models
 
+import com.vickikbt.shared.data.cache.sqldelight.MovieEntity
+
 data class TrendingMoviesEntity(
 
     val page: Int?,

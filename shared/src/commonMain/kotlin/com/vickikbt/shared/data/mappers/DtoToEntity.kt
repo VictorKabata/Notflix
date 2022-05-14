@@ -3,8 +3,7 @@ package com.vickikbt.shared.data.mappers
 import com.vickikbt.cache.models.*
 import com.vickikbt.shared.data.cache.sqldelight.MovieDetailsEntity
 import com.vickikbt.shared.data.cache.sqldelight.MovieEntity
-import com.vickikbt.shared.data.cache.sqldelight.models.SimilarMoviesEntity
-import com.vickikbt.shared.data.cache.sqldelight.models.UpcomingMoviesEntity
+import com.vickikbt.shared.data.cache.sqldelight.models.*
 import com.vickikbt.shared.data.network.models.*
 
 fun MovieDto.toEntity(category: String? = null): MovieEntity {

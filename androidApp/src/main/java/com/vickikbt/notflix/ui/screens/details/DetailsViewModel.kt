@@ -75,7 +75,7 @@ class DetailsViewModel(
     fun saveMovieDetails(movieDetails: MovieDetails, cast: Cast, movieVideo: MovieVideo?) =
         viewModelScope.launch {
             movieDetailsRepository.apply {
-                saveMovieDetails(movieDetails)
+                // saveMovieDetails(movieDetails) ToDo: Investigate
                 saveMovieCast(cast)
                 if (movieVideo != null) {
                     saveMovieVideos(movieVideo)

@@ -33,11 +33,11 @@ class MoviesDao constructor(private val databaseDriverFactory: DatabaseDriverFac
     val getFavouriteMovies = dbQuery.getFavouriteMovies().asFlow().map { it.executeAsList() }
 
     fun isMovieFavorite(movieId: Int) =
-        dbQuery.isMovieFavourite(id = movieId).asFlow().map { it.executeAsOneOrNull() }
+        dbQuery.isMovieFavourite(id = movieId).asFlow().map { it.executeAsOneOrNull()?.isFavourite }
 
-    fun updateIsMovieFavorite(cacheId: Int) {
+    fun updateIsMovieFavorite(cacheId: Int, isFavourite: Boolean) {
         dbQuery.transaction {
-            dbQuery.updateIsMovieFavorite(cacheId = cacheId)
+            dbQuery.updateIsMovieFavorite(cacheId = cacheId, isFavourite = isFavourite)
         }
     }
 }

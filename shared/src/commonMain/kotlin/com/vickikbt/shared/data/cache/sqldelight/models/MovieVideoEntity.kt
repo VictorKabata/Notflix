@@ -1,12 +1,9 @@
-package com.vickikbt.cache.models
+package com.vickikbt.shared.data.cache.sqldelight.models
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import com.vickikbt.cache.models.VideoEntity
 
-@Entity(tableName = "Movie Videos Table")
 data class MovieVideoEntity(
 
-    @PrimaryKey(autoGenerate = false)
     val id: Int?,
 
     val videos: List<VideoEntity>?

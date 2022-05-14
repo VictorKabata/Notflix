@@ -1,13 +1,6 @@
 package com.vickikbt.cache.daos
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import com.vickikbt.cache.models.MovieVideoEntity
-import kotlinx.coroutines.flow.Flow
-
-@Dao
+/*@Dao
 interface VideosDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -22,4 +15,4 @@ interface VideosDao {
 
     @Query("SELECT COUNT(*) FROM `Movie Videos Table` WHERE id=:movieId")
     suspend fun isMovieVideoCacheAvailable(movieId: Int): Int
-}
+}*/

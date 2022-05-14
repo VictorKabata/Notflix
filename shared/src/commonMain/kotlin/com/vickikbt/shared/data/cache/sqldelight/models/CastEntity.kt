@@ -1,13 +1,10 @@
-package com.vickikbt.cache.models
+package com.vickikbt.shared.data.cache.sqldelight.models
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import com.vickikbt.cache.models.ActorEntity
 
-@Entity(tableName = "Casts Table")
 data class CastEntity(
 
     val actor: List<ActorEntity>?,
 
-    @PrimaryKey(autoGenerate = false)
     val id: Int?
 )

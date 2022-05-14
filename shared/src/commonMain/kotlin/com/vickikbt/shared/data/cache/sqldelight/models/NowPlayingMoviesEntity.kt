@@ -1,4 +1,7 @@
-package com.vickikbt.cache.models
+package com.vickikbt.shared.data.cache.sqldelight.models
+
+import com.vickikbt.cache.models.DatesEntity
+import com.vickikbt.shared.data.cache.sqldelight.MovieEntity
 
 data class NowPlayingMoviesEntity(
 

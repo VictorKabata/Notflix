@@ -109,7 +109,7 @@ public interface AppDatabaseQueries : Transacter {
 
   public fun deleteMovies(category: String?): Unit
 
-  public fun updateIsMovieFavorite(cacheId: Int?): Unit
+  public fun updateIsMovieFavorite(isFavourite: Boolean?, cacheId: Int): Unit
 
   public fun saveMovieDetails(MovieDetailsEntity: MovieDetailsEntity): Unit
 

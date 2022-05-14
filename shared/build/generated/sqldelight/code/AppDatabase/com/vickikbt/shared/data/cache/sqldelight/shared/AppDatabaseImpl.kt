@@ -425,11 +425,13 @@ private class AppDatabaseQueriesImpl(
         database.appDatabaseQueries.getNowPlayingMovies})
   }
 
-  public override fun updateIsMovieFavorite(cacheId: Int?): Unit {
-    driver.execute(null,
-        """INSERT OR REPLACE INTO MovieEntity(isFavourite) SELECT cacheId${ if (cacheId == null) " IS " else "=" }? WHERE changes()=0""",
-        1) {
-      bindLong(1, cacheId?.let { it.toLong() })
+  public override fun updateIsMovieFavorite(isFavourite: Boolean?, cacheId: Int): Unit {
+    driver.execute(-138599831, """
+    |UPDATE MovieEntity
+    |SET `isFavourite`=? WHERE cacheId=?
+    """.trimMargin(), 2) {
+      bindLong(1, isFavourite?.let { if (it) 1L else 0L })
+      bindLong(2, cacheId.toLong())
     }
     notifyQueries(-138599831, {database.appDatabaseQueries.getFavouriteMovies +
         database.appDatabaseQueries.isMovieFavourite + database.appDatabaseQueries.getMovies +

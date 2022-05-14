@@ -1,15 +1,6 @@
 package com.vickikbt.cache.daos
 
-import androidx.paging.PagingSource
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import com.vickikbt.cache.models.MovieEntity
-import com.vickikbt.shared.domain.utils.Constants.CATEGORY_NOW_PLAYING_MOVIES
-import kotlinx.coroutines.flow.Flow
-
-@Dao
+/*@Dao
 interface MoviesDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -35,4 +26,4 @@ interface MoviesDao {
 
     @Query("UPDATE `Movies Table` SET isFavorite=:isFavorite WHERE cacheId=:cacheId")
     suspend fun updateMovieIsFavorite(cacheId: Int, isFavorite: Boolean)
-}
+}*/

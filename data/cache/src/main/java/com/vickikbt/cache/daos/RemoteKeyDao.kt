@@ -1,12 +1,6 @@
 package com.vickikbt.cache.daos
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import com.vickikbt.cache.models.RemoteKey
-
-@Dao
+/*@Dao
 interface RemoteKeyDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -17,4 +11,4 @@ interface RemoteKeyDao {
 
     @Query("DELETE FROM Remote_Key_Table")
     suspend fun deleteRemoteKeys()
-}
+}*/

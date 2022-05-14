@@ -18,15 +18,15 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
-import com.vickikbt.cache.models.MovieEntity
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.util.loadImage
+import com.vickikbt.shared.domain.models.Movie
 
 @Composable
 fun ItemTrendingMovies(
     modifier: Modifier = Modifier,
-    movie: MovieEntity,
-    onItemClick: (MovieEntity) -> Unit
+    movie: Movie,
+    onItemClick: (Movie) -> Unit
 ) {
 
     Column {

@@ -1,13 +1,6 @@
 package com.vickikbt.cache.daos
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import com.vickikbt.cache.models.CastEntity
-import kotlinx.coroutines.flow.Flow
-
-@Dao
+/*@Dao
 interface CastDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -22,4 +15,4 @@ interface CastDao {
 
     @Query("SELECT COUNT(*) FROM `Casts Table` WHERE id=:movieId")
     suspend fun isMovieCastAvailable(movieId: Int): Int
-}
+}*/

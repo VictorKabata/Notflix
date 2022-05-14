@@ -40,8 +40,8 @@ isMovieFavourite:
 SELECT isFavourite FROM MovieEntity WHERE id=? AND isFavourite=TRUE;
 
 updateIsMovieFavorite:
-INSERT OR REPLACE INTO MovieEntity(isFavourite) SELECT cacheId=? WHERE changes()=0;
-
+UPDATE MovieEntity
+SET `isFavourite`=? WHERE cacheId=?;
 
 
 

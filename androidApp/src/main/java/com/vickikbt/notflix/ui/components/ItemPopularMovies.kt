@@ -27,13 +27,13 @@ import coil.compose.rememberImagePainter
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
-import com.vickikbt.cache.models.MovieEntity
 import com.vickikbt.notflix.ui.screens.home.HomeViewModel
 import com.vickikbt.notflix.ui.theme.Golden
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.getReleaseDate
 import com.vickikbt.notflix.util.loadImage
+import com.vickikbt.shared.domain.models.Movie
 import kotlinx.coroutines.launch
 
 @ExperimentalMaterialApi
@@ -41,8 +41,8 @@ import kotlinx.coroutines.launch
 fun ItemPopularMovies(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel,
-    movie: MovieEntity,
-    onClickItem: (MovieEntity) -> Unit
+    movie: Movie,
+    onClickItem: (Movie) -> Unit
 ) {
     val defaultDominantColor = MaterialTheme.colors.surface
     val defaultDominantTextColor = MaterialTheme.colors.onSurface

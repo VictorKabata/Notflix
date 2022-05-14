@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package com.vickikbt.notflix.ui.activity
 
 import android.os.Bundle
@@ -38,7 +40,6 @@ class MainActivity : ComponentActivity() {
     private val localeUtil by inject<LocaleManager>()
     private val viewModel by inject<MainViewModel>()
 
-    @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.registerCallback()

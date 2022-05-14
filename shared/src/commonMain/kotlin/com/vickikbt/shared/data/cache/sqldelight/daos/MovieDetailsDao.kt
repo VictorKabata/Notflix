@@ -24,5 +24,5 @@ class MovieDetailsDao constructor(private val databaseDriverFactory: DatabaseDri
         dbQuery.deleteAllMovieDetais()
     }
 
-    fun isMovieDetailsAvailable(movieId: Int) = dbQuery.isMovieDetailsAvailable(id = movieId)
+    fun isMovieDetailsAvailable(movieId: Int) = dbQuery.isMovieDetailsAvailable(id = movieId).executeAsOneOrNull()
 }

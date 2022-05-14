@@ -2,8 +2,14 @@ package com.vickikbt.shared.di
 
 import com.vickikbt.shared.data.cache.sqldelight.daos.MovieDetailsDao
 import com.vickikbt.shared.data.cache.sqldelight.daos.MoviesDao
+import com.vickikbt.shared.data.data_sources.FavoriteMovieRepositoryImpl
+import com.vickikbt.shared.data.data_sources.MovieDetailsRepositoryImpl
+import com.vickikbt.shared.data.data_sources.MoviesRepositoryImpl
 import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.data.network.ApiServiceImpl
+import com.vickikbt.shared.domain.repositories.FavoritesRepository
+import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
+import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.utils.Constants.API_KEY
 import com.vickikbt.shared.domain.utils.Constants.BASE_URL
 import io.github.aakira.napier.Napier
@@ -57,9 +63,15 @@ val commonModule = module {
     single { MoviesDao(databaseDriverFactory = get()) }
     single { MovieDetailsDao(databaseDriverFactory = get()) }
 
-    /*single<AuthRepository> { AuthRepositoryImpl(apiService = get(), accessTokenDao = get()) }
-    single<DateTimeRepository> { DateTimeRepositoryImpl() }
-    single<SummariesRepository> { SummariesRepositoryImpl(apiService = get(), dailyGoalDao = get()) }*/
+    single<FavoritesRepository> { FavoriteMovieRepositoryImpl(moviesDao = get()) }
+    single<MovieDetailsRepository> {
+        MovieDetailsRepositoryImpl(
+            apiService = get(),
+            moviesDao = get(),
+            movieDetailsDao = get()
+        )
+    }
+    single<MoviesRepository> { MoviesRepositoryImpl(apiService = get(), moviesDao = get()) }
 }
 
 expect fun platformModule(): Module
