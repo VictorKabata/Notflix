@@ -27,7 +27,7 @@ public interface AppDatabaseQueries : Transacter {
     voteCount: Int?,
     category: String?,
     isFavourite: String?,
-    cacheId: Long
+    cacheId: Int
   ) -> T): Query<T>
 
   public fun getNowPlayingMovies(category: String?): Query<MovieEntity>
@@ -48,7 +48,7 @@ public interface AppDatabaseQueries : Transacter {
     voteCount: Int?,
     category: String?,
     isFavourite: String?,
-    cacheId: Long
+    cacheId: Int
   ) -> T): Query<T>
 
   public fun getMovies(category: String?): Query<MovieEntity>
@@ -71,7 +71,7 @@ public interface AppDatabaseQueries : Transacter {
     voteCount: Int?,
     category: String?,
     isFavourite: String?,
-    cacheId: Long
+    cacheId: Int
   ) -> T): Query<T>
 
   public fun getFavouriteMovies(): Query<MovieEntity>
@@ -109,7 +109,7 @@ public interface AppDatabaseQueries : Transacter {
 
   public fun deleteMovies(category: String?): Unit
 
-  public fun updateIsMovieFavorite(cacheId: Long?): Unit
+  public fun updateIsMovieFavorite(cacheId: Int?): Unit
 
   public fun saveMovieDetails(MovieDetailsEntity: MovieDetailsEntity): Unit
 

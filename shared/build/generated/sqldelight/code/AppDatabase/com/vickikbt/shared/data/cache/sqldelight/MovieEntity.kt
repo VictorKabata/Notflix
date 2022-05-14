@@ -3,7 +3,6 @@ package com.vickikbt.shared.`data`.cache.sqldelight
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Int
-import kotlin.Long
 import kotlin.String
 
 public data class MovieEntity(
@@ -22,7 +21,7 @@ public data class MovieEntity(
   public val voteCount: Int?,
   public val category: String?,
   public val isFavourite: String?,
-  public val cacheId: Long
+  public val cacheId: Int
 ) {
   public override fun toString(): String = """
   |MovieEntity [

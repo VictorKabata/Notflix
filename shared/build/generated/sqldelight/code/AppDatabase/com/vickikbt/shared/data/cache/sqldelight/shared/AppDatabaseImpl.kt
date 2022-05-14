@@ -8,8 +8,11 @@ import com.squareup.sqldelight.db.SqlDriver
 import com.vickikbt.shared.`data`.cache.sqldelight.AppDatabase
 import com.vickikbt.shared.`data`.cache.sqldelight.AppDatabaseQueries
 import com.vickikbt.shared.`data`.cache.sqldelight.IsMovieFavourite
+import com.vickikbt.shared.`data`.cache.sqldelight.MovieDetailsEntity
 import com.vickikbt.shared.`data`.cache.sqldelight.MovieEntity
 import kotlin.Any
+import kotlin.Boolean
+import kotlin.Double
 import kotlin.Int
 import kotlin.Long
 import kotlin.String
@@ -42,15 +45,15 @@ private class AppDatabaseImpl(
           |originalLanguage TEXT DEFAULT NULL,
           |originalTitle TEXT DEFAULT NULL,
           |overview TEXT DEFAULT NULL,
-          |popularity TEXT DEFAULT NULL,
+          |popularity REAL DEFAULT NULL,
           |posterPath TEXT DEFAULT NULL,
           |releaseDate TEXT DEFAULT NULL,
           |title TEXT DEFAULT NULL,
           |video TEXT DEFAULT NULL,
-          |voteAverage TEXT DEFAULT NULL,
+          |voteAverage REAL DEFAULT NULL,
           |voteCount INTEGER DEFAULT NULL,
           |category TEXT DEFAULT NULL,
-          |isFavourite TEXT DEFAULT NULL,
+          |isFavourite TEXT DEFAULT FALSE,
           |cacheId INTEGER DEFAULT 0 PRIMARY KEY
           |)
           """.trimMargin(), 0)
@@ -59,20 +62,20 @@ private class AppDatabaseImpl(
           |adult TEXT DEFAULT NULL,
           |backdropPath TEXT DEFAULT NULL,
           |homePage TEXT DEFAULT NULL,
-          |id INTEGER NOT NULL PRIMARY KEY,
+          |id INTEGER UNIQUE NOT NULL PRIMARY KEY,
           |imdbId TEXT DEFAULT NULL,
           |originalLanguage TEXT DEFAULT NULL,
           |originalTitle TEXT DEFAULT NULL,
           |overview TEXT DEFAULT NULL,
-          |popularity TEXT DEFAULT NULL,
+          |popularity REAL DEFAULT NULL,
           |posterPath TEXT DEFAULT NULL,
           |releaseDate TEXT DEFAULT NULL,
           |runtime INTEGER DEFAULT NULL,
           |status TEXT DEFAULT NULL,
           |tagline TEXT DEFAULT NULL,
           |title TEXT DEFAULT NULL,
-          |video TEXT DEFAULT NULL,
-          |voteAverage TEXT DEFAULT NULL,
+          |video TEXT  DEFAULT NULL,
+          |voteAverage REAL DEFAULT NULL,
           |voteCount INTEGER DEFAULT NULL
           |)
           """.trimMargin(), 0)
@@ -93,7 +96,7 @@ private class AppDatabaseQueriesImpl(
 ) : TransacterImpl(driver), AppDatabaseQueries {
   internal val getNowPlayingMovies: MutableList<Query<*>> = copyOnWriteList()
 
-  internal val getmMovies: MutableList<Query<*>> = copyOnWriteList()
+  internal val getMovies: MutableList<Query<*>> = copyOnWriteList()
 
   internal val isCategoryCacheAvailable: MutableList<Query<*>> = copyOnWriteList()
 
@@ -101,41 +104,45 @@ private class AppDatabaseQueriesImpl(
 
   internal val isMovieFavourite: MutableList<Query<*>> = copyOnWriteList()
 
+  internal val getMovieDetails: MutableList<Query<*>> = copyOnWriteList()
+
+  internal val isMovieDetailsAvailable: MutableList<Query<*>> = copyOnWriteList()
+
   public override fun <T : Any> getNowPlayingMovies(category: String?, mapper: (
-    adult: String?,
+    adult: Boolean?,
     backdropPath: String?,
-    id: Long?,
+    id: Int?,
     originalLanguage: String?,
     originalTitle: String?,
     overview: String?,
-    popularity: String?,
+    popularity: Double?,
     posterPath: String?,
     releaseDate: String?,
     title: String?,
-    video: String?,
-    voteAverage: String?,
-    voteCount: Long?,
+    video: Boolean?,
+    voteAverage: Double?,
+    voteCount: Int?,
     category: String?,
     isFavourite: String?,
-    cacheId: Long
+    cacheId: Int
   ) -> T): Query<T> = GetNowPlayingMoviesQuery(category) { cursor ->
     mapper(
-      cursor.getString(0),
+      cursor.getString(0)?.let { it == 1L },
       cursor.getString(1),
-      cursor.getLong(2),
+      cursor.getLong(2)?.toInt(),
       cursor.getString(3),
       cursor.getString(4),
       cursor.getString(5),
-      cursor.getString(6),
+      cursor.getDouble(6),
       cursor.getString(7),
       cursor.getString(8),
       cursor.getString(9),
-      cursor.getString(10),
-      cursor.getString(11),
-      cursor.getLong(12),
+      cursor.getString(10)?.let { it == 1L },
+      cursor.getDouble(11),
+      cursor.getLong(12)?.toInt(),
       cursor.getString(13),
       cursor.getString(14),
-      cursor.getLong(15)!!
+      cursor.getLong(15)!!.toInt()
     )
   }
 
@@ -163,45 +170,45 @@ private class AppDatabaseQueriesImpl(
     )
   }
 
-  public override fun <T : Any> getmMovies(category: String?, mapper: (
-    adult: String?,
+  public override fun <T : Any> getMovies(category: String?, mapper: (
+    adult: Boolean?,
     backdropPath: String?,
-    id: Long?,
+    id: Int?,
     originalLanguage: String?,
     originalTitle: String?,
     overview: String?,
-    popularity: String?,
+    popularity: Double?,
     posterPath: String?,
     releaseDate: String?,
     title: String?,
-    video: String?,
-    voteAverage: String?,
-    voteCount: Long?,
+    video: Boolean?,
+    voteAverage: Double?,
+    voteCount: Int?,
     category: String?,
     isFavourite: String?,
-    cacheId: Long
-  ) -> T): Query<T> = GetmMoviesQuery(category) { cursor ->
+    cacheId: Int
+  ) -> T): Query<T> = GetMoviesQuery(category) { cursor ->
     mapper(
-      cursor.getString(0),
+      cursor.getString(0)?.let { it == 1L },
       cursor.getString(1),
-      cursor.getLong(2),
+      cursor.getLong(2)?.toInt(),
       cursor.getString(3),
       cursor.getString(4),
       cursor.getString(5),
-      cursor.getString(6),
+      cursor.getDouble(6),
       cursor.getString(7),
       cursor.getString(8),
       cursor.getString(9),
-      cursor.getString(10),
-      cursor.getString(11),
-      cursor.getLong(12),
+      cursor.getString(10)?.let { it == 1L },
+      cursor.getDouble(11),
+      cursor.getLong(12)?.toInt(),
       cursor.getString(13),
       cursor.getString(14),
-      cursor.getLong(15)!!
+      cursor.getLong(15)!!.toInt()
     )
   }
 
-  public override fun getmMovies(category: String?): Query<MovieEntity> = getmMovies(category) {
+  public override fun getMovies(category: String?): Query<MovieEntity> = getMovies(category) {
       adult, backdropPath, id, originalLanguage, originalTitle, overview, popularity, posterPath,
       releaseDate, title, video, voteAverage, voteCount, category_, isFavourite, cacheId ->
     MovieEntity(
@@ -230,41 +237,41 @@ private class AppDatabaseQueriesImpl(
   }
 
   public override fun <T : Any> getFavouriteMovies(mapper: (
-    adult: String?,
+    adult: Boolean?,
     backdropPath: String?,
-    id: Long?,
+    id: Int?,
     originalLanguage: String?,
     originalTitle: String?,
     overview: String?,
-    popularity: String?,
+    popularity: Double?,
     posterPath: String?,
     releaseDate: String?,
     title: String?,
-    video: String?,
-    voteAverage: String?,
-    voteCount: Long?,
+    video: Boolean?,
+    voteAverage: Double?,
+    voteCount: Int?,
     category: String?,
     isFavourite: String?,
-    cacheId: Long
+    cacheId: Int
   ) -> T): Query<T> = Query(-2013212026, getFavouriteMovies, driver, "AppDatabase.sq",
       "getFavouriteMovies", "SELECT * FROM MovieEntity WHERE isFavourite=TRUE") { cursor ->
     mapper(
-      cursor.getString(0),
+      cursor.getString(0)?.let { it == 1L },
       cursor.getString(1),
-      cursor.getLong(2),
+      cursor.getLong(2)?.toInt(),
       cursor.getString(3),
       cursor.getString(4),
       cursor.getString(5),
-      cursor.getString(6),
+      cursor.getDouble(6),
       cursor.getString(7),
       cursor.getString(8),
       cursor.getString(9),
-      cursor.getString(10),
-      cursor.getString(11),
-      cursor.getLong(12),
+      cursor.getString(10)?.let { it == 1L },
+      cursor.getDouble(11),
+      cursor.getLong(12)?.toInt(),
       cursor.getString(13),
       cursor.getString(14),
-      cursor.getLong(15)!!
+      cursor.getLong(15)!!.toInt()
     )
   }
 
@@ -291,18 +298,91 @@ private class AppDatabaseQueriesImpl(
     )
   }
 
-  public override fun <T : Any> isMovieFavourite(id: Long?, mapper: (isFavourite: String?) -> T):
+  public override fun <T : Any> isMovieFavourite(id: Int?, mapper: (isFavourite: String?) -> T):
       Query<T> = IsMovieFavouriteQuery(id) { cursor ->
     mapper(
       cursor.getString(0)
     )
   }
 
-  public override fun isMovieFavourite(id: Long?): Query<IsMovieFavourite> = isMovieFavourite(id) {
+  public override fun isMovieFavourite(id: Int?): Query<IsMovieFavourite> = isMovieFavourite(id) {
       isFavourite ->
     IsMovieFavourite(
       isFavourite
     )
+  }
+
+  public override fun <T : Any> getMovieDetails(id: Int, mapper: (
+    adult: Boolean?,
+    backdropPath: String?,
+    homePage: String?,
+    id: Int,
+    imdbId: String?,
+    originalLanguage: String?,
+    originalTitle: String?,
+    overview: String?,
+    popularity: Double?,
+    posterPath: String?,
+    releaseDate: String?,
+    runtime: Int?,
+    status: String?,
+    tagline: String?,
+    title: String?,
+    video: Boolean?,
+    voteAverage: Double?,
+    voteCount: Int?
+  ) -> T): Query<T> = GetMovieDetailsQuery(id) { cursor ->
+    mapper(
+      cursor.getString(0)?.let { it == 1L },
+      cursor.getString(1),
+      cursor.getString(2),
+      cursor.getLong(3)!!.toInt(),
+      cursor.getString(4),
+      cursor.getString(5),
+      cursor.getString(6),
+      cursor.getString(7),
+      cursor.getDouble(8),
+      cursor.getString(9),
+      cursor.getString(10),
+      cursor.getLong(11)?.toInt(),
+      cursor.getString(12),
+      cursor.getString(13),
+      cursor.getString(14),
+      cursor.getString(15)?.let { it == 1L },
+      cursor.getDouble(16),
+      cursor.getLong(17)?.toInt()
+    )
+  }
+
+  public override fun getMovieDetails(id: Int): Query<MovieDetailsEntity> = getMovieDetails(id) {
+      adult, backdropPath, homePage, id_, imdbId, originalLanguage, originalTitle, overview,
+      popularity, posterPath, releaseDate, runtime, status, tagline, title, video, voteAverage,
+      voteCount ->
+    MovieDetailsEntity(
+      adult,
+      backdropPath,
+      homePage,
+      id_,
+      imdbId,
+      originalLanguage,
+      originalTitle,
+      overview,
+      popularity,
+      posterPath,
+      releaseDate,
+      runtime,
+      status,
+      tagline,
+      title,
+      video,
+      voteAverage,
+      voteCount
+    )
+  }
+
+  public override fun isMovieDetailsAvailable(id: Int): Query<Long> =
+      IsMovieDetailsAvailableQuery(id) { cursor ->
+    cursor.getLong(0)!!
   }
 
   public override fun saveMovies(MovieEntity: MovieEntity): Unit {
@@ -310,25 +390,25 @@ private class AppDatabaseQueriesImpl(
     |INSERT OR REPLACE INTO MovieEntity(adult, backdropPath,id,originalLanguage,originalTitle,overview,popularity,posterPath,releaseDate,title,video,voteAverage,voteCount,category,isFavourite,cacheId)
     |VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """.trimMargin(), 16) {
-      bindString(1, MovieEntity.adult)
+      bindString(1, MovieEntity.adult?.let { if (it) 1L else 0L })
       bindString(2, MovieEntity.backdropPath)
-      bindLong(3, MovieEntity.id)
+      bindLong(3, MovieEntity.id?.let { it.toLong() })
       bindString(4, MovieEntity.originalLanguage)
       bindString(5, MovieEntity.originalTitle)
       bindString(6, MovieEntity.overview)
-      bindString(7, MovieEntity.popularity)
+      bindDouble(7, MovieEntity.popularity)
       bindString(8, MovieEntity.posterPath)
       bindString(9, MovieEntity.releaseDate)
       bindString(10, MovieEntity.title)
-      bindString(11, MovieEntity.video)
-      bindString(12, MovieEntity.voteAverage)
-      bindLong(13, MovieEntity.voteCount)
+      bindString(11, MovieEntity.video?.let { if (it) 1L else 0L })
+      bindDouble(12, MovieEntity.voteAverage)
+      bindLong(13, MovieEntity.voteCount?.let { it.toLong() })
       bindString(14, MovieEntity.category)
       bindString(15, MovieEntity.isFavourite)
-      bindLong(16, MovieEntity.cacheId)
+      bindLong(16, MovieEntity.cacheId.toLong())
     }
     notifyQueries(46047888, {database.appDatabaseQueries.getFavouriteMovies +
-        database.appDatabaseQueries.isMovieFavourite + database.appDatabaseQueries.getmMovies +
+        database.appDatabaseQueries.isMovieFavourite + database.appDatabaseQueries.getMovies +
         database.appDatabaseQueries.isCategoryCacheAvailable +
         database.appDatabaseQueries.getNowPlayingMovies})
   }
@@ -340,21 +420,55 @@ private class AppDatabaseQueriesImpl(
       bindString(1, category)
     }
     notifyQueries(530640958, {database.appDatabaseQueries.getFavouriteMovies +
-        database.appDatabaseQueries.isMovieFavourite + database.appDatabaseQueries.getmMovies +
+        database.appDatabaseQueries.isMovieFavourite + database.appDatabaseQueries.getMovies +
         database.appDatabaseQueries.isCategoryCacheAvailable +
         database.appDatabaseQueries.getNowPlayingMovies})
   }
 
-  public override fun updateIsMovieFavorite(cacheId: Long?): Unit {
+  public override fun updateIsMovieFavorite(cacheId: Int?): Unit {
     driver.execute(null,
         """INSERT OR REPLACE INTO MovieEntity(isFavourite) SELECT cacheId${ if (cacheId == null) " IS " else "=" }? WHERE changes()=0""",
         1) {
-      bindLong(1, cacheId)
+      bindLong(1, cacheId?.let { it.toLong() })
     }
     notifyQueries(-138599831, {database.appDatabaseQueries.getFavouriteMovies +
-        database.appDatabaseQueries.isMovieFavourite + database.appDatabaseQueries.getmMovies +
+        database.appDatabaseQueries.isMovieFavourite + database.appDatabaseQueries.getMovies +
         database.appDatabaseQueries.isCategoryCacheAvailable +
         database.appDatabaseQueries.getNowPlayingMovies})
+  }
+
+  public override fun saveMovieDetails(MovieDetailsEntity: MovieDetailsEntity): Unit {
+    driver.execute(-337419649, """
+    |INSERT OR REPLACE INTO MovieDetailsEntity(adult, backdropPath,homePage,id,imdbId,originalLanguage,originalTitle,overview,popularity,posterPath,releaseDate,runtime,status,tagline,title,video,voteAverage,voteCount)
+    |VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """.trimMargin(), 18) {
+      bindString(1, MovieDetailsEntity.adult?.let { if (it) 1L else 0L })
+      bindString(2, MovieDetailsEntity.backdropPath)
+      bindString(3, MovieDetailsEntity.homePage)
+      bindLong(4, MovieDetailsEntity.id.toLong())
+      bindString(5, MovieDetailsEntity.imdbId)
+      bindString(6, MovieDetailsEntity.originalLanguage)
+      bindString(7, MovieDetailsEntity.originalTitle)
+      bindString(8, MovieDetailsEntity.overview)
+      bindDouble(9, MovieDetailsEntity.popularity)
+      bindString(10, MovieDetailsEntity.posterPath)
+      bindString(11, MovieDetailsEntity.releaseDate)
+      bindLong(12, MovieDetailsEntity.runtime?.let { it.toLong() })
+      bindString(13, MovieDetailsEntity.status)
+      bindString(14, MovieDetailsEntity.tagline)
+      bindString(15, MovieDetailsEntity.title)
+      bindString(16, MovieDetailsEntity.video?.let { if (it) 1L else 0L })
+      bindDouble(17, MovieDetailsEntity.voteAverage)
+      bindLong(18, MovieDetailsEntity.voteCount?.let { it.toLong() })
+    }
+    notifyQueries(-337419649, {database.appDatabaseQueries.isMovieDetailsAvailable +
+        database.appDatabaseQueries.getMovieDetails})
+  }
+
+  public override fun deleteAllMovieDetais(): Unit {
+    driver.execute(-737358526, """DELETE FROM MovieDetailsEntity""", 0)
+    notifyQueries(-737358526, {database.appDatabaseQueries.isMovieDetailsAvailable +
+        database.appDatabaseQueries.getMovieDetails})
   }
 
   private inner class GetNowPlayingMoviesQuery<out T : Any>(
@@ -370,17 +484,17 @@ private class AppDatabaseQueriesImpl(
     public override fun toString(): String = "AppDatabase.sq:getNowPlayingMovies"
   }
 
-  private inner class GetmMoviesQuery<out T : Any>(
+  private inner class GetMoviesQuery<out T : Any>(
     public val category: String?,
     mapper: (SqlCursor) -> T
-  ) : Query<T>(getmMovies, mapper) {
+  ) : Query<T>(getMovies, mapper) {
     public override fun execute(): SqlCursor = driver.executeQuery(null,
         """SELECT * FROM MovieEntity WHERE category${ if (category == null) " IS " else "=" }?""",
         1) {
       bindString(1, category)
     }
 
-    public override fun toString(): String = "AppDatabase.sq:getmMovies"
+    public override fun toString(): String = "AppDatabase.sq:getMovies"
   }
 
   private inner class IsCategoryCacheAvailableQuery<out T : Any>(
@@ -397,15 +511,39 @@ private class AppDatabaseQueriesImpl(
   }
 
   private inner class IsMovieFavouriteQuery<out T : Any>(
-    public val id: Long?,
+    public val id: Int?,
     mapper: (SqlCursor) -> T
   ) : Query<T>(isMovieFavourite, mapper) {
     public override fun execute(): SqlCursor = driver.executeQuery(null,
         """SELECT isFavourite FROM MovieEntity WHERE id${ if (id == null) " IS " else "=" }? AND isFavourite=TRUE""",
         1) {
-      bindLong(1, id)
+      bindLong(1, id?.let { it.toLong() })
     }
 
     public override fun toString(): String = "AppDatabase.sq:isMovieFavourite"
+  }
+
+  private inner class GetMovieDetailsQuery<out T : Any>(
+    public val id: Int,
+    mapper: (SqlCursor) -> T
+  ) : Query<T>(getMovieDetails, mapper) {
+    public override fun execute(): SqlCursor = driver.executeQuery(-1867289096,
+        """SELECT * FROM MovieDetailsEntity WHERE id=?""", 1) {
+      bindLong(1, id.toLong())
+    }
+
+    public override fun toString(): String = "AppDatabase.sq:getMovieDetails"
+  }
+
+  private inner class IsMovieDetailsAvailableQuery<out T : Any>(
+    public val id: Int,
+    mapper: (SqlCursor) -> T
+  ) : Query<T>(isMovieDetailsAvailable, mapper) {
+    public override fun execute(): SqlCursor = driver.executeQuery(-2118992515,
+        """SELECT COUNT(*) FROM MovieDetailsEntity WHERE id=?""", 1) {
+      bindLong(1, id.toLong())
+    }
+
+    public override fun toString(): String = "AppDatabase.sq:isMovieDetailsAvailable"
   }
 }
