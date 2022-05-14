@@ -1,5 +1,7 @@
 package com.vickikbt.shared.di
 
+import com.vickikbt.shared.data.cache.sqldelight.MovieDetailsDao
+import com.vickikbt.shared.data.cache.sqldelight.MoviesDao
 import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.data.network.ApiServiceImpl
 import com.vickikbt.shared.domain.utils.Constants.API_KEY
@@ -52,8 +54,8 @@ val commonModule = module {
     }
     single<ApiService> { ApiServiceImpl(httpClient = get()) }
 
-    /*single { AccessTokenDao(databaseDriverFactory = get()) }*/
-    /*single { DailyGoalDao(databaseDriverFactory = get()) }*/
+    single { MoviesDao(databaseDriverFactory = get()) }
+    single { MovieDetailsDao(databaseDriverFactory = get()) }
 
     /*single<AuthRepository> { AuthRepositoryImpl(apiService = get(), accessTokenDao = get()) }
     single<DateTimeRepository> { DateTimeRepositoryImpl() }
