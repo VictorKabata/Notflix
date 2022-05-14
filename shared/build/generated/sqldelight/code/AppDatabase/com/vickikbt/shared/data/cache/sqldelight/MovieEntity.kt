@@ -20,7 +20,7 @@ public data class MovieEntity(
   public val voteAverage: Double?,
   public val voteCount: Int?,
   public val category: String?,
-  public val isFavourite: String?,
+  public val isFavourite: Boolean?,
   public val cacheId: Int
 ) {
   public override fun toString(): String = """

@@ -13,7 +13,7 @@ import com.vickikbt.shared.domain.utils.Constants.STARTING_PAGE_INDEX
 import com.vickikbt.shared.data.network.models.PopularMoviesDto
 import com.vickikbt.shared.data.network.models.TrendingMoviesDto
 import com.vickikbt.shared.data.network.models.UpcomingMoviesDto
-import com.vickikbt.repository.mappers.toEntity
+import com.vickikbt.shared.data.mappers.toEntity
 import com.vickikbt.shared.data.network.ApiService
 import retrofit2.HttpException
 import java.io.IOException

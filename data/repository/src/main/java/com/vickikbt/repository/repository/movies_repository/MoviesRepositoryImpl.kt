@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.ExperimentalPagingApi
 import com.vickikbt.cache.AppDatabase
 import com.vickikbt.cache.models.MovieEntity
-import com.vickikbt.repository.mappers.toDomain
-import com.vickikbt.repository.mappers.toEntity
+import com.vickikbt.shared.data.mappers.toDomain
+import com.vickikbt.shared.data.mappers.toEntity
 import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.utils.Constants
@@ -36,13 +36,13 @@ class MoviesRepositoryImpl constructor(
         val isCategoryCacheAvailable = moviesDao.isCategoryCacheAvailable(category) > 0
 
         return if (isCategoryCacheAvailable) {
-            moviesDao.getNowPlayingMovies().map { movies -> movies.map { it.toDomain() } }
+            moviesDao.getNowPlayingMovies().map { movies -> movies.map { com.vickikbt.shared.data.mappers.toDomain() } }
         } else {
             val networkResponse = apiService.fetchNowPlayingMovies()?.movies
             val nowPlayingMoviesEntity = networkResponse?.map { it.toEntity(category = category) }
             _movieMutableLiveData.value = nowPlayingMoviesEntity!!
 
-            moviesDao.getNowPlayingMovies().map { movies -> movies.map { it.toDomain() } }
+            moviesDao.getNowPlayingMovies().map { movies -> movies.map { com.vickikbt.shared.data.mappers.toDomain() } }
         }
     }
 

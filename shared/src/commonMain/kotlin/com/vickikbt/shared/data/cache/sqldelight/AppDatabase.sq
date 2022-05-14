@@ -1,5 +1,5 @@
 CREATE TABLE MovieEntity(
-adult TEXT AS Boolean DEFAULT NULL,
+adult INTEGER AS Boolean DEFAULT NULL,
 backdropPath TEXT DEFAULT NULL,
 id INTEGER AS Int DEFAULT NULL,
 originalLanguage TEXT DEFAULT NULL,
@@ -9,11 +9,11 @@ popularity REAL DEFAULT NULL,
 posterPath TEXT DEFAULT NULL,
 releaseDate TEXT DEFAULT NULL,
 title TEXT DEFAULT NULL,
-video TEXT AS Boolean DEFAULT NULL,
+video INTEGER AS Boolean DEFAULT NULL,
 voteAverage REAL DEFAULT NULL,
 voteCount INTEGER AS Int DEFAULT NULL,
 category TEXT DEFAULT NULL,
-isFavourite TEXT DEFAULT FALSE,
+isFavourite INTEGER AS Boolean DEFAULT FALSE,
 cacheId INTEGER AS Int DEFAULT 0 PRIMARY KEY
 );
 
@@ -46,7 +46,7 @@ INSERT OR REPLACE INTO MovieEntity(isFavourite) SELECT cacheId=? WHERE changes()
 
 
 CREATE TABLE MovieDetailsEntity(
-adult TEXT AS Boolean DEFAULT NULL,
+adult INTEGER AS Boolean DEFAULT NULL,
 backdropPath TEXT DEFAULT NULL,
 homePage TEXT DEFAULT NULL,
 id INTEGER AS Int UNIQUE NOT NULL PRIMARY KEY,
@@ -61,7 +61,7 @@ runtime INTEGER AS Int DEFAULT NULL,
 status TEXT DEFAULT NULL,
 tagline TEXT DEFAULT NULL,
 title TEXT DEFAULT NULL,
-video TEXT AS Boolean  DEFAULT NULL,
+video INTEGER AS Boolean  DEFAULT NULL,
 voteAverage REAL DEFAULT NULL,
 voteCount INTEGER AS Int DEFAULT NULL
 );
@@ -78,4 +78,20 @@ DELETE FROM MovieDetailsEntity;
 
 isMovieDetailsAvailable:
 SELECT COUNT(*) FROM MovieDetailsEntity WHERE id=?;
+
+
+CREATE TABLE CastEntity(
+actor TEXT AS List<ActorEntity>,
+id INTEGER AS Int UNIQUE NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE ActorEntity(
+castId INTEGER AS Int DEFAULT NULL,
+character TEXT DEFAULT NULL,
+creditId TEXT DEFAULT NULL,
+id INTEGER AS Int DEFAULT NULL,
+name TEXT DEFAULT NULL,
+originalName TEXT DEFAULT NULL,
+profilePath TEXT DEFAULT NULL
+);
 

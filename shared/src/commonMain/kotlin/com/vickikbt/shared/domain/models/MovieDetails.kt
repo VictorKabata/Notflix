@@ -2,43 +2,43 @@ package com.vickikbt.shared.domain.models
 
 data class MovieDetails(
 
-    val adult: Boolean?,
+    val adult: Boolean? = null,
 
-    val backdropPath: String?,
+    val backdropPath: String? = null,
 
-    val genres: List<Genre>?,
+    val genres: List<Genre>? = null,
 
-    val homepage: String?,
+    val homepage: String? = null,
 
-    val id: Int?,
+    val id: Int,
 
-    val imdbId: String?,
+    val imdbId: String? = null,
 
-    val originalLanguage: String?,
+    val originalLanguage: String? = null,
 
-    val originalTitle: String?,
+    val originalTitle: String? = null,
 
-    val overview: String?,
+    val overview: String? = null,
 
-    val popularity: Double?,
+    val popularity: Double? = null,
 
-    val posterPath: String?,
+    val posterPath: String? = null,
 
-    val releaseDate: String?,
+    val releaseDate: String? = null,
 
-    val runtime: Int?,
+    val runtime: Int? = null,
 
-    val spokenLanguages: List<SpokenLanguage>?,
+    val spokenLanguages: List<SpokenLanguage>? = null,
 
-    val status: String?,
+    val status: String? = null,
 
-    val tagline: String?,
+    val tagline: String? = null,
 
-    val title: String?,
+    val title: String? = null,
 
-    val video: Boolean?,
+    val video: Boolean? = null,
 
-    val voteAverage: Double?,
+    val voteAverage: Double? = null,
 
     val voteCount: Int?
 )

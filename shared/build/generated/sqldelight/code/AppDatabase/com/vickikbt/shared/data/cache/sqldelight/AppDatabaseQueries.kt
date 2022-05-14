@@ -26,7 +26,7 @@ public interface AppDatabaseQueries : Transacter {
     voteAverage: Double?,
     voteCount: Int?,
     category: String?,
-    isFavourite: String?,
+    isFavourite: Boolean?,
     cacheId: Int
   ) -> T): Query<T>
 
@@ -47,7 +47,7 @@ public interface AppDatabaseQueries : Transacter {
     voteAverage: Double?,
     voteCount: Int?,
     category: String?,
-    isFavourite: String?,
+    isFavourite: Boolean?,
     cacheId: Int
   ) -> T): Query<T>
 
@@ -70,13 +70,13 @@ public interface AppDatabaseQueries : Transacter {
     voteAverage: Double?,
     voteCount: Int?,
     category: String?,
-    isFavourite: String?,
+    isFavourite: Boolean?,
     cacheId: Int
   ) -> T): Query<T>
 
   public fun getFavouriteMovies(): Query<MovieEntity>
 
-  public fun <T : Any> isMovieFavourite(id: Int?, mapper: (isFavourite: String?) -> T): Query<T>
+  public fun <T : Any> isMovieFavourite(id: Int?, mapper: (isFavourite: Boolean?) -> T): Query<T>
 
   public fun isMovieFavourite(id: Int?): Query<IsMovieFavourite>
 

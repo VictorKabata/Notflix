@@ -8,8 +8,8 @@ import com.vickikbt.cache.models.MovieDetailsEntity
 import com.vickikbt.cache.models.MovieVideoEntity
 import com.vickikbt.shared.domain.utils.Coroutines
 import com.vickikbt.network.utils.SafeApiRequest
-import com.vickikbt.repository.mappers.toDomain
-import com.vickikbt.repository.mappers.toEntity
+import com.vickikbt.shared.data.mappers.toDomain
+import com.vickikbt.shared.data.mappers.toEntity
 import com.vickikbt.shared.data.network.ApiService
 import kotlinx.coroutines.flow.*
 
@@ -26,15 +26,15 @@ class MovieDetailsRepositoryImpl constructor(
 
     init {
         _movieDetails.observeForever { movieDetails ->
-            Coroutines.default { saveMovieDetails(movieDetails.toDomain()) }
+            Coroutines.default { saveMovieDetails(com.vickikbt.shared.data.mappers.toDomain()) }
         }
 
         _cast.observeForever { cast ->
-            Coroutines.default { saveMovieCast(cast.toDomain()) }
+            Coroutines.default { saveMovieCast(com.vickikbt.shared.data.mappers.toDomain()) }
         }
 
         _videos.observeForever { videos ->
-            Coroutines.default { saveMovieVideos(videos.toDomain()) }
+            Coroutines.default { saveMovieVideos(com.vickikbt.shared.data.mappers.toDomain()) }
         }
     }
 
@@ -48,14 +48,14 @@ class MovieDetailsRepositoryImpl constructor(
         return try {
             if (isMovieDetailsCacheAvailable) {
                 val movieDetailsCacheResponse = movieDetailsDao.getMovieDetails(movieId)
-                movieDetailsCacheResponse.map { it.toDomain() }
+                movieDetailsCacheResponse.map { com.vickikbt.shared.data.mappers.toDomain() }
             } else {
                 val movieDetailsNetworkResponse = apiService.fetchMovieDetails(movieId)
 
                 _movieDetails.value = movieDetailsNetworkResponse?.toEntity()
 
                 val movieDetailsCacheResponse = movieDetailsDao.getMovieDetails(movieId)
-                movieDetailsCacheResponse.map { it.toDomain() }
+                movieDetailsCacheResponse.map { com.vickikbt.shared.data.mappers.toDomain() }
             }
         } catch (e: Exception) {
             flowOf()
@@ -72,7 +72,7 @@ class MovieDetailsRepositoryImpl constructor(
         return try {
             if (isMovieCacheAvailable) {
                 val movieCastCacheResponse = appDatabase.castDao().getMovieCast(movieId)
-                movieCastCacheResponse.map { it.toDomain() }
+                movieCastCacheResponse.map { com.vickikbt.shared.data.mappers.toDomain() }
             } else {
                 val movieCastNetworkResponse = apiService.fetchMovieCast(movieId)
 
@@ -81,7 +81,7 @@ class MovieDetailsRepositoryImpl constructor(
                 _cast.value = movieCastNetworkResponse?.toEntity()
 
                 val movieCastCacheResponse = appDatabase.castDao().getMovieCast(movieId)
-                movieCastCacheResponse.map { it.toDomain() }
+                movieCastCacheResponse.map { com.vickikbt.shared.data.mappers.toDomain() }
             }
         } catch (e: Exception) {
             Log.e("MovieDetails", "${e.message}")
@@ -100,7 +100,7 @@ class MovieDetailsRepositoryImpl constructor(
         return try {
             if (isMovieVideoCacheAvailable) {
                 val movieVideosCacheResponse = appDatabase.videosDao().getMovieVideo(movieId)
-                movieVideosCacheResponse.map { it.toDomain() }
+                movieVideosCacheResponse.map { com.vickikbt.shared.data.mappers.toDomain() }
             } else {
                 val movieVideosNetworkResponse = apiService.fetchMovieVideos(movieId)
 

@@ -19,7 +19,7 @@ data class MovieDetailsDto(
     val homepage: String? = null,
 
     @SerialName("id")
-    val id: Int? = null,
+    val id: Int,
 
     @SerialName("imdb_id")
     val imdbId: String? = null,

@@ -1,34 +1,27 @@
-package com.vickikbt.repository.mappers
+package com.vickikbt.shared.data.mappers
 
 import com.vickikbt.cache.models.*
+import com.vickikbt.shared.data.cache.sqldelight.MovieEntity
 import com.vickikbt.shared.domain.models.*
-
-fun DatesEntity.toDomain(): Dates {
-    return Dates(
-        this.maximum,
-        this.minimum
-    )
-}
 
 fun MovieEntity.toDomain(): Movie {
     return Movie(
-        this.adult,
-        this.backdropPath,
-        this.genreIds,
-        this.id,
-        this.originalLanguage,
-        this.originalTitle,
-        this.overview,
-        this.popularity,
-        this.posterPath,
-        this.releaseDate,
-        this.title,
-        this.video,
-        this.voteAverage,
-        this.voteCount,
+        adult = this.adult,
+        backdropPath = this.backdropPath,
+        id = this.id,
+        originalLanguage = this.originalLanguage,
+        originalTitle = this.originalTitle,
+        overview = this.overview,
+        popularity = this.popularity,
+        posterPath = this.posterPath,
+        releaseDate = this.releaseDate,
+        title = this.title,
+        video = this.video,
+        voteAverage = this.voteAverage,
+        voteCount = this.voteCount,
         category = null,
         isFavorite = null,
-        this.cacheId
+        cacheId = this.cacheId
     )
 }
 
