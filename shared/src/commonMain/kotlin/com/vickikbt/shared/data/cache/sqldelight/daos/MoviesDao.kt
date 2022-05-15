@@ -28,7 +28,7 @@ class MoviesDao constructor(private val databaseDriverFactory: DatabaseDriverFac
     fun deleteMovies(category: String) = dbQuery.deleteMovies(category = category)
 
     fun isCategoryCacheAvailable(category: String) =
-        dbQuery.isCategoryCacheAvailable(category = category).executeAsOneOrNull()
+        dbQuery.isCategoryCacheAvailable(category = category).executeAsOne()
 
     val getFavouriteMovies = dbQuery.getFavouriteMovies().asFlow().map { it.executeAsList() }
 

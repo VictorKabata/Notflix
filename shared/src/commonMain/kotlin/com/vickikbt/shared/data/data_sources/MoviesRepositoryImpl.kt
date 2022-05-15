@@ -7,8 +7,10 @@ import com.vickikbt.shared.data.mappers.toEntity
 import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.repositories.MoviesRepository
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 
 class MoviesRepositoryImpl constructor(
     private val apiService: ApiService,
@@ -16,23 +18,31 @@ class MoviesRepositoryImpl constructor(
 ) : MoviesRepository {
 
     private suspend fun saveMovies(movieEntities: List<MovieEntity>) {
+        /*Napier.e("Saving movies")
         movieEntities.forEach {
+            Napier.e("Caching movie: ${it.title}")
             moviesDao.saveMovies(movieEntity = it)
-        }
+        }*/
     }
 
     override suspend fun fetchNowPlayingMovies(category: String): Flow<List<Movie>?> {
-        val isCategoryCacheAvailable =
-            (moviesDao.isCategoryCacheAvailable(category)?.toInt() ?: 0) > 0
-        val networkResponse = apiService.fetchNowPlayingMovies()?.movies
+        //val networkResponse = apiService.fetchNowPlayingMovies()?.movies?.map { it.toEntity(category = category) }
 
-        return flowOf(networkResponse?.map { it.toEntity().toDomain() })
+        //Napier.e("From network: $networkResponse")
+
+        //networkResponse?.let { saveMovies(movieEntities = it) }
+
+        val cacheResponse = moviesDao.getNowPlayingMovies
+        return cacheResponse.map { it.map { movies -> movies.toDomain() } }
     }
 
     override suspend fun fetchMovies(category: String): Flow<List<Movie>?> {
-        val isCategoryCacheAvailable = (moviesDao.isCategoryCacheAvailable(category) ?: 0) > 0
-        val response = apiService.fetchUpcomingMovies()?.movies
+        val isCategoryCacheAvailable = moviesDao.isCategoryCacheAvailable(category) > 0
+        val networkResponse =
+            apiService.fetchUpcomingMovies()?.movies?.map { it.toEntity(category = category) }
 
-        return flowOf(response?.map { it.toEntity().toDomain() })
+        // networkResponse?.let { saveMovies(movieEntities = it) }
+
+        return flowOf(networkResponse?.map { it.toDomain() })
     }
 }
