@@ -75,18 +75,13 @@ class DetailsViewModel(
     fun saveMovieDetails(movieDetails: MovieDetails, cast: Cast, movieVideo: MovieVideo?) =
         viewModelScope.launch {
             movieDetailsRepository.apply {
-                // saveMovieDetails(movieDetails) ToDo: Investigate
-                saveMovieCast(cast)
-                if (movieVideo != null) {
-                    saveMovieVideos(movieVideo)
-                }
+
             }
         }
 
     fun updateFavorite(cacheId: Int, isFavorite: Boolean) {
         // Timber.e("Updating : $cacheId to $isFavorite")
         viewModelScope.launch {
-            movieDetailsRepository.updateMovieIsFavorite(cacheId, isFavorite)
         }
     }
 

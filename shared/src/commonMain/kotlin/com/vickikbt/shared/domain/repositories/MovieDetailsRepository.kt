@@ -1,6 +1,5 @@
 package com.vickikbt.shared.domain.repositories
 
-import com.vickikbt.shared.data.cache.sqldelight.MovieDetailsEntity
 import com.vickikbt.shared.domain.models.Cast
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.models.MovieVideo
@@ -32,19 +31,19 @@ interface MovieDetailsRepository {
     /**
      * Save movie details to local storage
      */
-    suspend fun saveMovieDetails(movieDetailsEntity: MovieDetailsEntity)
+    // suspend fun saveMovieDetails(movieDetailsEntity: MovieDetailsEntity)
 
     /**
      * Save movie cast details to local storage
      */
-    suspend fun saveMovieCast(cast: Cast)
+    // suspend fun saveMovieCast(cast: Cast)
 
     /**
      * Save movie videos to local storage
      */
-    suspend fun saveMovieVideos(movieVideo: MovieVideo)
+    // suspend fun saveMovieVideos(movieVideo: MovieVideo)
 
     suspend fun isMovieFavorite(movieId: Int): Flow<Boolean?>
 
-    suspend fun updateMovieIsFavorite(cacheId: Int, isFavourite: Boolean)
+    // suspend fun updateMovieIsFavorite(cacheId: Int, isFavourite: Boolean)
 }

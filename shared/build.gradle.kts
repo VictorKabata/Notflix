@@ -2,7 +2,6 @@ plugins {
     kotlin(BuildPlugins.multiplatform)
     id(BuildPlugins.androidLibrary)
     kotlin(BuildPlugins.kotlinXSerialization) version Versions.kotlinSerialization
-    id("com.squareup.sqldelight")
 }
 
 kotlin {
@@ -32,9 +31,6 @@ kotlin {
                 implementation(KmmDependencies.ktorLogging)
                 implementation(KmmDependencies.ktorClientAuth)
 
-                implementation(KmmDependencies.sqlDelight)
-                implementation(KmmDependencies.sqlDelightCoroutine)
-
                 api(KmmDependencies.napier)
 
                 implementation(KmmDependencies.kotlinxDateTime)
@@ -46,7 +42,6 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(KmmDependencies.ktorAndroid)
-                implementation(KmmDependencies.sqlDelightAndroid)
             }
         }
 
@@ -59,7 +54,6 @@ kotlin {
 
             dependencies {
                 implementation(KmmDependencies.ktoriOS)
-                implementation(KmmDependencies.sqlDelightIos)
             }
         }
 
@@ -88,12 +82,5 @@ android {
     defaultConfig {
         minSdk = AndroidSDK.minSdkVersion
         targetSdk = AndroidSDK.targetSdkVersion
-    }
-}
-
-sqldelight {
-    database(name = "AppDatabase") {
-        packageName = "com.vickikbt.shared.data.cache.sqldelight"
-        sourceFolders = listOf("kotlin")
     }
 }

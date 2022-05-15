@@ -1,7 +1,5 @@
 package com.vickikbt.shared.di
 
-import com.vickikbt.shared.data.cache.sqldelight.daos.MovieDetailsDao
-import com.vickikbt.shared.data.cache.sqldelight.daos.MoviesDao
 import com.vickikbt.shared.data.data_sources.FavoriteMovieRepositoryImpl
 import com.vickikbt.shared.data.data_sources.MovieDetailsRepositoryImpl
 import com.vickikbt.shared.data.data_sources.MoviesRepositoryImpl
@@ -60,18 +58,11 @@ val commonModule = module {
     }
     single<ApiService> { ApiServiceImpl(httpClient = get()) }
 
-    single { MoviesDao(databaseDriverFactory = get()) }
-    single { MovieDetailsDao(databaseDriverFactory = get()) }
-
-    single<FavoritesRepository> { FavoriteMovieRepositoryImpl(moviesDao = get()) }
+    single<FavoritesRepository> { FavoriteMovieRepositoryImpl() }
     single<MovieDetailsRepository> {
-        MovieDetailsRepositoryImpl(
-            apiService = get(),
-            moviesDao = get(),
-            movieDetailsDao = get()
-        )
+        MovieDetailsRepositoryImpl(apiService = get())
     }
-    single<MoviesRepository> { MoviesRepositoryImpl(apiService = get(), moviesDao = get()) }
+    single<MoviesRepository> { MoviesRepositoryImpl(apiService = get()) }
 }
 
 expect fun platformModule(): Module
