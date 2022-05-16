@@ -60,7 +60,7 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
 
     override suspend fun fetchMovieDetails(movieId: Int, language: String): MovieDetailsDto? {
         return try {
-            httpClient.get<MovieDetailsDto>(urlString = "movie/{movie_id}") {
+            httpClient.get<MovieDetailsDto>(urlString = "movie/$movieId") {
                 parameter("movie_id", movieId)
                 parameter("language", language)
             }
@@ -72,7 +72,7 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
 
     override suspend fun fetchMovieCast(movieId: Int, language: String): CastDto? {
         return try {
-            httpClient.get<CastDto>(urlString = "movie/{movie_id}/credits") {
+            httpClient.get<CastDto>(urlString = "movie/$movieId/credits") {
                 parameter("movie_id", movieId)
                 parameter("language", language)
             }
@@ -84,7 +84,7 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
 
     override suspend fun fetchMovieVideos(movieId: Int, language: String): MovieVideoDto? {
         return try {
-            httpClient.get<MovieVideoDto>(urlString = "movie/{movie_id}/videos") {
+            httpClient.get<MovieVideoDto>(urlString = "movie/$movieId/videos") {
                 parameter("movie_id", movieId)
                 parameter("language", language)
             }
@@ -94,9 +94,13 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
         }
     }
 
-    override suspend fun fetchSimilarMovies(page: Int, language: String): SimilarMoviesDto? {
+    override suspend fun fetchSimilarMovies(
+        movieId: Int,
+        page: Int,
+        language: String
+    ): SimilarMoviesDto? {
         return try {
-            httpClient.get<SimilarMoviesDto>(urlString = "movie/{movie_id}/similar") {
+            httpClient.get<SimilarMoviesDto>(urlString = "movie/$movieId/similar") {
                 parameter("page", page)
                 parameter("language", language)
             }

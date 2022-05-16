@@ -13,6 +13,7 @@ import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.models.MovieVideo
 import com.vickikbt.shared.domain.models.SimilarMovies
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(
@@ -35,6 +36,7 @@ class DetailsViewModel(
     val movieIsFavorite: LiveData<Boolean?> get() = _movieIsFavorite
 
     fun getMovieDetails(movieId: Int) = viewModelScope.launch {
+        Napier.e("Getting movie details")
         movieDetailsRepository.getMovieDetails(movieId).collect {
             _movieDetails.value = it
         }
@@ -79,7 +81,7 @@ class DetailsViewModel(
         }
 
     fun updateFavorite(cacheId: Int, isFavorite: Boolean) {
-        // Timber.e("Updating : $cacheId to $isFavorite")
+        Napier.e("Updating : $cacheId to $isFavorite")
         viewModelScope.launch {
         }
     }

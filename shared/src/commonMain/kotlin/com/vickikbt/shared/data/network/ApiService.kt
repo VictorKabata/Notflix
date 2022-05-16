@@ -42,6 +42,7 @@ interface ApiService {
     ): MovieVideoDto?
 
     suspend fun fetchSimilarMovies(
+        movieId: Int,
         page: Int = STARTING_PAGE_INDEX,
         language: String = "en"
     ): SimilarMoviesDto?
