@@ -48,11 +48,12 @@ val commonModule = module {
             }
 
             install(JsonFeature) {
-                serializer = KotlinxSerializer()
-                kotlinx.serialization.json.Json {
-                    isLenient = true
-                    ignoreUnknownKeys = true
-                }
+                serializer = KotlinxSerializer(
+                    kotlinx.serialization.json.Json {
+                        ignoreUnknownKeys = true
+                        isLenient = true
+                    }
+                )
             }
         }
     }

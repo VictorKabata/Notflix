@@ -20,7 +20,8 @@ fun MovieDto.toDomain(category: String? = null): Movie {
         voteCount = this.voteCount,
         category = category,
         isFavorite = null,
-        cacheId = 0
+        cacheId = 0,
+        mediaType = this.mediaType
     )
 }
 

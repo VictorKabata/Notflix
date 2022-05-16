@@ -31,5 +31,7 @@ data class Movie(
 
     val isFavorite: Boolean?,
 
-    val cacheId: Int?
+    val cacheId: Int?,
+
+    val mediaType: String?
 )
