@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vickikbt.shared.AndroidGreetingTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-05-16T06:50:35" hostname="KYOSK-ANHQ-01" time="0.034">
-  <properties/>
-  <testcase name="testExample" classname="com.vickikbt.shared.AndroidGreetingTest" time="0.034"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
