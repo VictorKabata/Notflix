@@ -9,6 +9,9 @@ object Versions {
     const val kotlinxDateTime = "0.3.2"
     const val multiplatformSettings = "0.8.1"
 
+    // KMM Desktop Libs
+    const val composeDesktop = "1.1.0"
+
     // KMM test libs
     const val mockk = "1.12.3"
 

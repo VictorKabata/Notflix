@@ -7,11 +7,7 @@ plugins {
 kotlin {
     android()
 
-    jvm("desktop"){
-        compilations.all {
-            kotlinOptions.jvmTarget = "11"
-        }
-    }
+    jvm()
 
     listOf(
         iosX64(),
@@ -48,6 +44,12 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(KmmDependencies.ktorAndroid)
+            }
+        }
+
+        val jvmMain by getting{
+            dependencies {
+                implementation(KmmDependencies.ktorCore)
             }
         }
 

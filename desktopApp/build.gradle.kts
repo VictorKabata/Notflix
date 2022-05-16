@@ -2,17 +2,17 @@ import org.jetbrains.compose.compose
 
 plugins {
     kotlin("jvm")
-    id("org.jetbrains.compose") version "1.1.0"
+    id("org.jetbrains.compose") version Versions.composeDesktop
 }
 
 repositories {
     mavenCentral()
-    gradlePluginPortal()
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-    google()
 }
 
 dependencies {
+    implementation(project(":shared"))
+
     implementation(compose.desktop.currentOs)
 }
 
