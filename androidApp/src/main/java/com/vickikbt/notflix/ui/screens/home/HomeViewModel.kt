@@ -11,6 +11,7 @@ import androidx.palette.graphics.Palette
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.utils.Constants
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -39,12 +40,12 @@ class HomeViewModel constructor(
 
     private fun fetchNowPlayingMovies() = viewModelScope.launch {
         try {
-            val response = moviesRepository.fetchNowPlayingMovies()
-            response.collectLatest {
-                _nowPlayingMovies.value = it
-            }
+            moviesRepository.fetchMovies(category = Constants.CATEGORY_NOW_PLAYING_MOVIES)
+                .collectLatest {
+                    _nowPlayingMovies.value = it
+                }
         } catch (e: Exception) {
-            // Timber.e("Error fetching now playing movies: ${e.localizedMessage}")
+            Napier.e("Error fetching trending movies: ${e.localizedMessage}")
         }
     }
 
@@ -56,7 +57,7 @@ class HomeViewModel constructor(
                         _trendingMovies.value = it
                     }
             } catch (e: Exception) {
-                // Timber.e("Error fetching trending movies: ${e.localizedMessage}")
+                Napier.e("Error fetching trending movies: ${e.localizedMessage}")
             }
         }
     }
@@ -69,7 +70,7 @@ class HomeViewModel constructor(
                         _popularMovies.value = it
                     }
             } catch (e: Exception) {
-                // Timber.e("Error fetching popular movies: ${e.localizedMessage}")
+                Napier.e("Error fetching popular movies: ${e.localizedMessage}")
             }
         }
     }
@@ -82,7 +83,7 @@ class HomeViewModel constructor(
                         _upcomingMovies.value = it
                     }
             } catch (e: Exception) {
-                // Timber.e("Error fetching upcoming movies: ${e.localizedMessage}")
+                Napier.e("Error fetching upcoming movies: ${e.localizedMessage}")
             }
         }
     }
