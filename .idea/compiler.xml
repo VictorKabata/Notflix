@@ -11,10 +11,12 @@
       <module name="Notflix.feature.settings" target="11" />
       <module name="Notflix.library.cache" target="15" />
       <module name="Notflix.library.network" target="15" />
-      <module name="Notflix.shared.commonMain" target="11" />
-      <module name="Notflix.shared.commonTest" target="11" />
+      <module name="Notflix.shared.commonMain" target="1.8" />
+      <module name="Notflix.shared.commonTest" target="1.8" />
       <module name="Notflix.shared.desktopMain" target="11" />
       <module name="Notflix.shared.desktopTest" target="11" />
+      <module name="Notflix.shared.jvmMain" target="1.8" />
+      <module name="Notflix.shared.jvmTest" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
