@@ -8,23 +8,23 @@ interface ApiService {
     suspend fun fetchNowPlayingMovies(
         page: Int = STARTING_PAGE_INDEX,
         language: String = "en"
-    ): NowPlayingMoviesDto?
+    ): MovieResultsDto?
 
     suspend fun fetchPopularMovies(
         page: Int = STARTING_PAGE_INDEX,
         language: String = "en"
-    ): PopularMoviesDto?
+    ): MovieResultsDto?
 
     suspend fun fetchTrendingMovies(
         mediaType: String = "movies",
         timeWindow: String = "week",
         page: Int = STARTING_PAGE_INDEX,
-    ): TrendingMoviesDto?
+    ): MovieResultsDto?
 
     suspend fun fetchUpcomingMovies(
         page: Int = STARTING_PAGE_INDEX,
         language: String = "en"
-    ): UpcomingMoviesDto?
+    ): MovieResultsDto?
 
     suspend fun fetchMovieDetails(
         movieId: Int,

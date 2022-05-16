@@ -25,37 +25,8 @@ fun MovieDto.toDomain(category: String? = null): Movie {
     )
 }
 
-fun NowPlayingMoviesDto.toDomain(): NowPlayingMovies {
-    return NowPlayingMovies(
-        this.dates?.toDomain(),
-        this.page,
-        this.movies?.map { it.toDomain() },
-        this.totalPages,
-        this.totalResults
-    )
-}
-
-fun PopularMoviesDto.toDomain(): PopularMovies {
-    return PopularMovies(
-        this.page,
-        this.movies?.map { it.toDomain() },
-        this.totalPages,
-        this.totalResults
-    )
-}
-
-fun TrendingMoviesDto.toDomain(): TrendingMovies {
-    return TrendingMovies(
-        this.page,
-        this.movies?.map { it.toDomain() },
-        this.totalPages,
-        this.totalResults
-    )
-}
-
-fun UpcomingMoviesDto.toDomain(): UpcomingMovies {
-    return UpcomingMovies(
-        this.dates?.toDomain(),
+fun MovieResultsDto.toDomain(): MovieResults {
+    return MovieResults(
         this.page,
         this.movies?.map { it.toDomain() },
         this.totalPages,

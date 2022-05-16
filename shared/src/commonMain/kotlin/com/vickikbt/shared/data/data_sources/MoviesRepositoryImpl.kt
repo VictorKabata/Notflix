@@ -27,7 +27,8 @@ class MoviesRepositoryImpl constructor(
                 apiService.fetchPopularMovies()?.movies?.map { it.toDomain(category = category) }
             }
             CATEGORY_TRENDING_MOVIES -> {
-                apiService.fetchTrendingMovies()?.movies?.map { it.toDomain(category = category) }
+                apiService.fetchTrendingMovies()?.movies?.filter { it.mediaType == "movie" }
+                    ?.map { it.toDomain(category = category) }
             }
             else -> null
         }

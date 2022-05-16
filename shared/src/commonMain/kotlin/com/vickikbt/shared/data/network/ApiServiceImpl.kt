@@ -7,9 +7,9 @@ import io.ktor.client.request.*
 
 class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiService {
 
-    override suspend fun fetchNowPlayingMovies(page: Int, language: String): NowPlayingMoviesDto? {
+    override suspend fun fetchNowPlayingMovies(page: Int, language: String): MovieResultsDto? {
         return try {
-            httpClient.get<NowPlayingMoviesDto>(urlString = "movie/now_playing") {
+            httpClient.get<MovieResultsDto>(urlString = "movie/now_playing") {
                 parameter("page", page)
                 parameter("language", language)
             }
@@ -19,9 +19,9 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
         }
     }
 
-    override suspend fun fetchPopularMovies(page: Int, language: String): PopularMoviesDto? {
+    override suspend fun fetchPopularMovies(page: Int, language: String): MovieResultsDto? {
         return try {
-            httpClient.get<PopularMoviesDto>(urlString = "movie/popular") {
+            httpClient.get<MovieResultsDto>(urlString = "movie/popular") {
                 parameter("page", page)
                 parameter("language", language)
             }
@@ -35,9 +35,9 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
         mediaType: String,
         timeWindow: String,
         page: Int
-    ): TrendingMoviesDto? {
+    ): MovieResultsDto? {
         return try {
-            httpClient.get<TrendingMoviesDto>(urlString = "trending/$mediaType/$timeWindow") {
+            httpClient.get<MovieResultsDto>(urlString = "trending/$mediaType/$timeWindow") {
                 parameter("page", page)
             }
         } catch (e: Exception) {
@@ -46,9 +46,9 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
         }
     }
 
-    override suspend fun fetchUpcomingMovies(page: Int, language: String): UpcomingMoviesDto? {
+    override suspend fun fetchUpcomingMovies(page: Int, language: String): MovieResultsDto? {
         return try {
-            httpClient.get<UpcomingMoviesDto>(urlString = "movie/upcoming") {
+            httpClient.get<MovieResultsDto>(urlString = "movie/upcoming") {
                 parameter("page", page)
                 parameter("language", language)
             }

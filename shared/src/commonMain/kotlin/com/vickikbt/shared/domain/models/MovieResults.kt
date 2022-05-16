@@ -1,8 +1,6 @@
 package com.vickikbt.shared.domain.models
 
-data class NowPlayingMovies(
-
-    val dates: Dates? = null,
+data class MovieResults(
 
     val page: Int? = null,
 

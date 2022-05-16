@@ -4,8 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TrendingMoviesDto(
-
+data class MovieResultsDto(
     @SerialName("page")
     val page: Int? = null,
 
