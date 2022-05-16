@@ -75,7 +75,6 @@ class DetailsViewModel(
     fun saveMovieDetails(movieDetails: MovieDetails, cast: Cast, movieVideo: MovieVideo?) =
         viewModelScope.launch {
             movieDetailsRepository.apply {
-
             }
         }
 
