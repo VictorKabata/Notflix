@@ -25,7 +25,11 @@ fun main() = application {
         val count = remember { mutableStateOf(0) }
 
         MaterialTheme {
-            Column(Modifier.fillMaxSize().background(Color.Black), Arrangement.Center, Alignment.CenterHorizontally) {
+            Column(
+                modifier = Modifier.fillMaxSize().background(Color.Black),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Button(modifier = Modifier.align(Alignment.CenterHorizontally), onClick = {
                     count.value++
                 }) {
