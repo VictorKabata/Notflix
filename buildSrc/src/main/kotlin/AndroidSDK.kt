@@ -1,4 +1,6 @@
 object AndroidSDK {
+    const val appName = "Notflix"
+
     const val applicationId = "com.vickikbt.notflix"
 
     const val buildToolVersion = "30.0.3"

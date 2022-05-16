@@ -3,4 +3,6 @@ object BuildModules {
     const val Shared = ":shared"
 
     const val Cache = ":data:cache"
+
+    const val Desktop = ":desktopApp"
 }
