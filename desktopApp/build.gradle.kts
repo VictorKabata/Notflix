@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":shared"))
+    implementation(project(BuildModules.Shared))
 
     implementation(compose.desktop.currentOs)
 }
