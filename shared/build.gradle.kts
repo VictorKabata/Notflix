@@ -2,6 +2,7 @@ plugins {
     kotlin(BuildPlugins.multiplatform)
     id(BuildPlugins.androidLibrary)
     kotlin(BuildPlugins.kotlinXSerialization) version Versions.kotlinSerialization
+    id(BuildPlugins.nativeCoroutines)
 }
 
 kotlin {

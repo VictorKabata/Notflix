@@ -19,7 +19,8 @@ object BuildPlugins {
     const val firebasePerformance = "com.google.firebase.firebase-perf"
     const val kotlinParcelize = "kotlin-parcelize"
 
-    const val multiplatform="multiplatform"
-    const val kotlinXSerialization="plugin.serialization"
-    const val sqlDelight="com.squareup.sqldelight"
+    const val multiplatform = "multiplatform"
+    const val kotlinXSerialization = "plugin.serialization"
+    const val sqlDelight = "com.squareup.sqldelight"
+    const val nativeCoroutines = "com.rickclephas.kmp.nativecoroutines"
 }

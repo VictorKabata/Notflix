@@ -14,8 +14,6 @@ dependencies {
     implementation(project(BuildModules.Shared))
 
     implementation(compose.desktop.currentOs)
-
-    // implementation(Libraries.ratingBar)
 }
 
 compose.desktop {

@@ -14,6 +14,7 @@ import ui.theme.NotflixDesktopTheme
 
 @Composable
 fun MainScreen(applicationScope: ApplicationScope) {
+
     Window(
         onCloseRequest = { applicationScope.exitApplication() },
         title = "Notflix",

@@ -13,6 +13,7 @@ buildscript {
         classpath(ProjectLevelPlugins.googleServices)
         classpath(ProjectLevelPlugins.ktLint)
         classpath(ProjectLevelPlugins.sqlDelight)
+        classpath(ProjectLevelPlugins.kmpNativeCoroutines)
     }
 }
 

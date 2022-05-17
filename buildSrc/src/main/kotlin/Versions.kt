@@ -8,9 +8,10 @@ object Versions {
     const val napier = "2.4.0"
     const val kotlinxDateTime = "0.3.2"
     const val multiplatformSettings = "0.8.1"
+    const val kmpNativeCoroutines = "0.12.1-new-mm"
 
     // KMM Desktop Libs
-    const val composeDesktop = "1.1.0"
+    const val composeDesktop = "1.2.0-alpha01-dev683"
 
     // KMM test libs
     const val mockk = "1.12.3"

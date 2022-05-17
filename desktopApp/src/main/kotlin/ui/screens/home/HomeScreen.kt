@@ -3,21 +3,31 @@ package ui.screens.home
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import com.vickikbt.shared.di.initKoin
+import com.vickikbt.shared.presentation.viewmodels.HomeViewModel
 import ui.components.ItemNowPlayingMovies
 
 @Composable
 fun HomeScreen() {
+
+    val koinDi = initKoin().koin
+
+    val viewModel = koinDi.get<HomeViewModel>()
+
+    val nowPlayingMovies = viewModel.nowPlayingMovies.collectAsState()
+
     Column(modifier = Modifier.fillMaxSize()) {
 
-        ItemNowPlayingMovies(modifier = Modifier, movie = FakeMovie()) {
+        println("Now playing movies: ${nowPlayingMovies.value}")
+
+        ItemNowPlayingMovies(modifier = Modifier, movie = nowPlayingMovies.value!![0]) {
             println("Clicked movie: ${it.title}")
         }
 
+        /*if (!nowPlayingMovies.value.isNullOrEmpty()) {
+
+        }*/
     }
 }
-
-data class FakeMovie(
-    val posterPath: String = "https://image.tmdb.org/t/p/original/AdyJH8kDm8xT8IKTlgpEC15ny4u.jpg",
-    val title: String = "Dr. Strange and the Multiverse of Madness"
-)

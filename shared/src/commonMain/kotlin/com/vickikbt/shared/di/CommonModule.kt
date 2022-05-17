@@ -10,6 +10,7 @@ import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.utils.Constants.API_KEY
 import com.vickikbt.shared.domain.utils.Constants.BASE_URL
+import com.vickikbt.shared.presentation.viewmodels.HomeViewModel
 import io.github.aakira.napier.Napier
 import io.ktor.client.*
 import io.ktor.client.features.*
@@ -60,10 +61,10 @@ val commonModule = module {
     single<ApiService> { ApiServiceImpl(httpClient = get()) }
 
     single<FavoritesRepository> { FavoriteMovieRepositoryImpl() }
-    single<MovieDetailsRepository> {
-        MovieDetailsRepositoryImpl(apiService = get())
-    }
+    single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(apiService = get()) }
     single<MoviesRepository> { MoviesRepositoryImpl(apiService = get()) }
+
+    single { HomeViewModel(moviesRepository = get()) }
 }
 
 expect fun platformModule(): Module
