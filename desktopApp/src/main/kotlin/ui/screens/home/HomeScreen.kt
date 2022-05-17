@@ -1,11 +1,18 @@
 package ui.screens.home
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Modifier
+import com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel
+import koin
+import ui.components.ItemNowPlayingMovies
 
 @Composable
 fun HomeScreen() {
 
-    /*val viewModel = koinDi.get<SharedHomeViewModel>()
+    val viewModel = koin.get<SharedHomeViewModel>()
 
     val nowPlayingMovies = viewModel.nowPlayingMovies.collectAsState()
 
@@ -17,8 +24,9 @@ fun HomeScreen() {
             println("Clicked movie: ${it.title}")
         }
 
-        *//*if (!nowPlayingMovies.value.isNullOrEmpty()) {
+        /*if (!nowPlayingMovies.value.isNullOrEmpty()) {
 
         }*//*
     }*/
+    }
 }

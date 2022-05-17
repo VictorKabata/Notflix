@@ -1,10 +1,15 @@
 import androidx.compose.ui.window.application
 import com.vickikbt.shared.di.initKoin
+import org.koin.core.Koin
 import ui.screens.main.MainScreen
 
-val koinDi = initKoin(enableNetworkLogs = false).koin
+lateinit var koin: Koin
 
-fun main() = application {
+fun main() {
 
-    MainScreen(applicationScope = this)
+    koin = initKoin().koin
+
+    return application {
+        MainScreen(applicationScope = this)
+    }
 }

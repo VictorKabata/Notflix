@@ -34,7 +34,7 @@ object Versions {
     const val compose_activity_version = "1.4.0"
     const val compose_constraint_version = "1.0.0-rc01"
     const val accompanist_version = "0.20.0"
-    const val koin_version = "3.1.2"
+    const val koin_version = "3.2.0"
     const val navigation_version = "2.4.0-alpha02"
     const val lifecycle_version = "2.3.1"
     const val coil_version = "1.4.0"
