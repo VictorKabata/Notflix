@@ -11,6 +11,7 @@ import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.rememberWindowState
 import ui.screens.splash.SplashScreen
+import ui.theme.NotflixDesktopTheme
 
 @Composable
 fun MainScreen(applicationScope: ApplicationScope) {
@@ -21,7 +22,7 @@ fun MainScreen(applicationScope: ApplicationScope) {
     ) {
         val backgroundColor = if (MaterialTheme.colors.isLight) Color.Black else Color.White
 
-        MaterialTheme {
+        NotflixDesktopTheme {
             Surface(modifier = Modifier.background(color = backgroundColor)) {
                 SplashScreen()
             }
