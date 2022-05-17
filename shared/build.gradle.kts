@@ -25,7 +25,7 @@ kotlin {
 
                 implementation(KmmDependencies.kotlinxCoroutines)
 
-                implementation(KmmDependencies.koinCore)
+                api(KmmDependencies.koinCore)
 
                 implementation(KmmDependencies.kotlinxSerialization)
 
