@@ -42,7 +42,7 @@ import org.koin.androidx.compose.getViewModel
 fun HomeScreen(
     navController: NavController,
     viewModel: HomeViewModel = getViewModel(),
-    sharedViewModel: com.vickikbt.shared.presentation.viewmodels.HomeViewModel = get()
+    sharedViewModel: com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel = get()
 ) {
 
     val scrollState = rememberScrollState()

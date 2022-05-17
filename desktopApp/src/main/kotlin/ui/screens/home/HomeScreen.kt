@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import com.vickikbt.shared.di.initKoin
-import com.vickikbt.shared.presentation.viewmodels.HomeViewModel
+import com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel
 import ui.components.ItemNowPlayingMovies
 
 @Composable
@@ -14,7 +14,7 @@ fun HomeScreen() {
 
     val koinDi = initKoin().koin
 
-    val viewModel = koinDi.get<HomeViewModel>()
+    val viewModel = koinDi.get<SharedHomeViewModel>()
 
     val nowPlayingMovies = viewModel.nowPlayingMovies.collectAsState()
 
