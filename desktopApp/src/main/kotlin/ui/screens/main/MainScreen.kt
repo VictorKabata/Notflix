@@ -1,16 +1,15 @@
 package ui.screens.main
 
-import androidx.compose.foundation.background
-import androidx.compose.material.MaterialTheme
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.rememberWindowState
-import ui.screens.splash.SplashScreen
+import ui.components.NavigationRailBar
+import ui.navigation.NavigationItem
+import ui.screens.home.SplashScreen
 import ui.theme.NotflixDesktopTheme
 
 @Composable
@@ -20,11 +19,20 @@ fun MainScreen(applicationScope: ApplicationScope) {
         title = "Notflix",
         state = rememberWindowState(width = 800.dp, height = 600.dp)
     ) {
-        val backgroundColor = if (MaterialTheme.colors.isLight) Color.Black else Color.White
+
+        val topLevelDestinations = listOf(
+            NavigationItem.Home,
+            NavigationItem.Favorites,
+            NavigationItem.Settings
+        )
 
         NotflixDesktopTheme {
-            Surface(modifier = Modifier.background(color = backgroundColor)) {
-                SplashScreen()
+            Surface {
+                Row {
+                    NavigationRailBar(navRailItems = topLevelDestinations)
+
+                    SplashScreen()
+                }
             }
         }
     }

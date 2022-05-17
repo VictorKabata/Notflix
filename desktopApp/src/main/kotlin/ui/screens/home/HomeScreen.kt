@@ -1,4 +1,4 @@
-package ui.screens.splash
+package ui.screens.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -21,8 +21,9 @@ import utils.koil
 @Composable
 fun SplashScreen() {
     Box(modifier = Modifier.fillMaxSize().background(Color.Black)) {
-        val imageAsset = koil(url = "https://image.tmdb.org/t/p/original/AdyJH8kDm8xT8IKTlgpEC15ny4u.jpg")
-        
+        val imageAsset =
+            koil(url = "https://image.tmdb.org/t/p/original/AdyJH8kDm8xT8IKTlgpEC15ny4u.jpg")
+
         imageAsset?.let {
             Image(
                 modifier = Modifier.fillMaxSize().align(Alignment.Center),
@@ -33,7 +34,8 @@ fun SplashScreen() {
         }
 
         Text(
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 60.dp).align(Alignment.BottomStart),
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 60.dp)
+                .align(Alignment.BottomStart),
             text = "Doctor Strange in the Multiverse of Madness",
             fontSize = 48.sp,
             maxLines = 2,
