@@ -9,7 +9,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.rememberWindowState
 import ui.components.NavigationRailBar
 import ui.navigation.NavigationItem
-import ui.screens.home.SplashScreen
+import ui.screens.home.HomeScreen
 import ui.theme.NotflixDesktopTheme
 
 @Composable
@@ -31,7 +31,7 @@ fun MainScreen(applicationScope: ApplicationScope) {
                 Row {
                     NavigationRailBar(navRailItems = topLevelDestinations)
 
-                    SplashScreen()
+                    HomeScreen()
                 }
             }
         }
