@@ -1,19 +1,16 @@
 package ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.NavigationRail
-import androidx.compose.material.NavigationRailItem
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import ui.navigation.NavigationItem
 import ui.theme.Gray
 import ui.theme.PrimaryColor
-import utils.koil
 
 @Composable
 fun NavigationRailBar(modifier: Modifier = Modifier, navRailItems: List<NavigationItem>) {
@@ -22,6 +19,9 @@ fun NavigationRailBar(modifier: Modifier = Modifier, navRailItems: List<Navigati
         modifier = modifier.fillMaxHeight().alpha(0.95F),
         backgroundColor = MaterialTheme.colors.surface,
         elevation = 0.dp,
+        header = {
+            Icon(modifier = Modifier.size(42.dp), painter = painterResource("n_logo.png"), contentDescription = "Logo")
+        },
         contentColor = PrimaryColor
     ) {
         navRailItems.forEachIndexed { index, item ->
@@ -29,23 +29,17 @@ fun NavigationRailBar(modifier: Modifier = Modifier, navRailItems: List<Navigati
 
             NavigationRailItem(
                 icon = {
-                    val image =
-                        koil(url = "https://github.com/JetBrains/compose-jb/raw/master/artwork/idea-logo.svg")
-                    image?.let {
-                        Image(
-                            bitmap = it,
-                            contentDescription = ""
+                    item.icon?.let {
+                        Icon(
+                            painter = painterResource(it),
+                            contentDescription = item.title
                         )
                     }
-                    /*Icon(
-                         painter = pain,
-                        contentDescription = item.title
-                    )*/
                 },
                 label = { Text(text = item.title) },
                 selectedContentColor = PrimaryColor,
                 unselectedContentColor = Gray,
-                alwaysShowLabel = selectedItem == index,
+                alwaysShowLabel = false,
                 selected = selectedItem == index,
                 onClick = {
                     selectedItem = index
