@@ -3,7 +3,6 @@ package com.vickikbt.notflix.ui.screens.home
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,22 +19,22 @@ class HomeViewModel constructor(
 ) : ViewModel() {
 
     private val _nowPlayingMovies = MutableLiveData<List<Movie>>()
-    val nowPlayingMovies: LiveData<List<Movie>> get() = _nowPlayingMovies
+//    val nowPlayingMovies: LiveData<List<Movie>> get() = _nowPlayingMovies
 
     private val _trendingMovies = MutableLiveData<List<Movie>>()
-    val trendingMovies: LiveData<List<Movie>> get() = _trendingMovies
+//    val trendingMovies: LiveData<List<Movie>> get() = _trendingMovies
 
     private val _popularMovies = MutableLiveData<List<Movie>>()
-    val popularMovies: LiveData<List<Movie>> get() = _popularMovies
+//    val popularMovies: LiveData<List<Movie>> get() = _popularMovies
 
     private val _upcomingMovies = MutableLiveData<List<Movie>>()
-    val upcomingMovies: LiveData<List<Movie>> get() = _upcomingMovies
+//    val upcomingMovies: LiveData<List<Movie>> get() = _upcomingMovies
 
     init {
-        fetchNowPlayingMovies()
+        /*fetchNowPlayingMovies()
         fetchTrendingMovies()
         fetchPopularMovies()
-        fetchUpcomingMovies()
+        fetchUpcomingMovies()*/
     }
 
     private fun fetchNowPlayingMovies() = viewModelScope.launch {
