@@ -13,7 +13,7 @@ val presentationModule = module {
 
     single { LocaleManager() }
 
-    viewModel { HomeViewModel(get()) }
+    viewModel { HomeViewModel() }
     viewModel { MainViewModel(get()) }
 
     viewModel { SettingsViewModel(get()) }
