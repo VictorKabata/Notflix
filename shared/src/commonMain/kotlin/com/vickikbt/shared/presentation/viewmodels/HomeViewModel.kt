@@ -10,8 +10,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
 
-class HomeViewModel constructor(private val moviesRepository: MoviesRepository) {
+class HomeViewModel constructor(private val moviesRepository: MoviesRepository) : KoinComponent {
 
     @NativeCoroutineScope
     private val viewModelScope = CoroutineScope(Dispatchers.Default)
@@ -84,5 +85,4 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
             }
         }
     }
-
 }
