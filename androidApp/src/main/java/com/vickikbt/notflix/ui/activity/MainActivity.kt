@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
                 systemUiController = systemUiController,
             )
 
-            NotflixAndroidTheme(darkTheme = useDarkTheme, systemUiController = systemUiController) {
+            NotflixAndroidTheme(darkTheme = true, systemUiController = systemUiController) {
                 Surface(color = MaterialTheme.colors.surface) {
                     MainScreen()
                 }
