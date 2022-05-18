@@ -21,9 +21,9 @@ import utils.koil
 
 @Composable
 fun ItemNowPlayingMovies(modifier: Modifier = Modifier, movie: Movie, onItemClick: (Movie) -> Unit) {
-    val painter = koil(url = "https://image.tmdb.org/t/p/original/${movie.posterPath}")
+    val painter = koil(url = "https://image.tmdb.org/t/p/original/${movie.backdropPath}")
 
-    println("Loading image: https://image.tmdb.org/t/p/original/${movie.posterPath}")
+    println("Loading image: https://image.tmdb.org/t/p/original/${movie.backdropPath}")
 
     Box(modifier = modifier) {
         painter?.let {
