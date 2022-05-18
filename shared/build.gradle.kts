@@ -24,19 +24,16 @@ kotlin {
             dependencies {
 
                 implementation(KmmDependencies.kotlinxCoroutines)
+                implementation(KmmDependencies.kotlinxSerialization)
+                implementation(KmmDependencies.kotlinxDateTime)
 
                 api(KmmDependencies.koinCore)
-
-                implementation(KmmDependencies.kotlinxSerialization)
 
                 implementation(KmmDependencies.ktorCore)
                 implementation(KmmDependencies.ktorSerialization)
                 implementation(KmmDependencies.ktorLogging)
-                implementation(KmmDependencies.ktorClientAuth)
 
                 api(KmmDependencies.napier)
-
-                implementation(KmmDependencies.kotlinxDateTime)
 
                 implementation(KmmDependencies.multiplatformSettings)
             }
@@ -48,9 +45,9 @@ kotlin {
             }
         }
 
-        val jvmMain by getting{
+        val jvmMain by getting {
             dependencies {
-                implementation(KmmDependencies.ktorCore)
+                implementation(KmmDependencies.ktorJvm)
             }
         }
 

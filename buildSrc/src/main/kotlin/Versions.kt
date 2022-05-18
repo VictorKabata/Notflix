@@ -1,6 +1,6 @@
 object Versions {
     // KMM Libs
-    const val ktor = "2.0.0"
+    const val ktor = "1.6.7"
     const val kotlinSerialization = "1.6.10"
     const val kotlinxSerialization = "1.2.2"
     const val kotlinxCoroutines = "1.6.0"
