@@ -13,6 +13,7 @@ import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.utils.Constants.API_KEY
 import com.vickikbt.shared.domain.utils.Constants.BASE_URL
 import com.vickikbt.shared.presentation.viewmodels.SharedDetailsViewModel
+import com.vickikbt.shared.presentation.viewmodels.SharedFavouritesViewModel
 import com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel
 import com.vickikbt.shared.presentation.viewmodels.SharedSettingsViewModel
 import io.github.aakira.napier.Napier
@@ -73,6 +74,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
 
     single { SharedHomeViewModel(moviesRepository = get()) }
     single { SharedDetailsViewModel(movieDetailsRepository = get()) }
+    single { SharedFavouritesViewModel(favouritesRepository = get()) }
     single { SharedSettingsViewModel(preferenceManager = get()) }
 }
 

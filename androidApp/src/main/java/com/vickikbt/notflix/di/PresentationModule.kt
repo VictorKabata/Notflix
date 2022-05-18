@@ -1,7 +1,6 @@
 package com.vickikbt.notflix.di
 
 import com.vickikbt.notflix.ui.activity.MainViewModel
-import com.vickikbt.notflix.ui.screens.favorites.FavoritesViewModel
 import com.vickikbt.notflix.ui.screens.home.HomeViewModel
 import com.vickikbt.notflix.util.LocaleManager
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -13,5 +12,4 @@ val presentationModule = module {
 
     viewModel { HomeViewModel() }
     viewModel { MainViewModel(get()) }
-    viewModel { FavoritesViewModel(get()) }
 }
