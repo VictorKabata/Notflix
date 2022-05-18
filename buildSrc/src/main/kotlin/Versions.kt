@@ -8,6 +8,10 @@ object Versions {
     const val napier = "2.4.0"
     const val kotlinxDateTime = "0.3.2"
     const val multiplatformSettings = "0.8.1"
+    const val kmpNativeCoroutines = "0.12.1-new-mm"
+
+    // KMM Desktop Libs
+    const val composeDesktop = "1.2.0-alpha01-dev683"
 
     // KMM test libs
     const val mockk = "1.12.3"
@@ -16,25 +20,21 @@ object Versions {
     const val kotlin = "1.6.10"
     const val detekt = "1.19.0"
     const val desugaring = "1.1.5"
+    const val googleService = "4.3.10"
+    const val crashlytics = "2.8.1"
 
     // Plugins
     const val ktlint_version = "10.2.1"
     const val appDistribution_version = "2.1.2"
 
-    // Project-Level Dependencies
-    const val gradle_version = "7.0.3"
-    const val kotlin_version = "1.6.10"
-    const val googleService_version = "4.3.10"
-    const val crashlytics_version = "2.8.1"
-
     // Dependencies
     const val androidCore_version = "1.7.0"
     const val material_version = "1.4.0"
-    const val compose_version = "1.1.1"
+    const val compose_version = "1.2.0-alpha08"
     const val compose_activity_version = "1.4.0"
     const val compose_constraint_version = "1.0.0-rc01"
     const val accompanist_version = "0.20.0"
-    const val koin_version = "3.1.2"
+    const val koin_version = "3.2.0"
     const val navigation_version = "2.4.0-alpha02"
     const val lifecycle_version = "2.3.1"
     const val coil_version = "1.4.0"

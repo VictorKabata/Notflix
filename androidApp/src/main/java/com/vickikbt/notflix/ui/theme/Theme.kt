@@ -23,7 +23,7 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun NotflixTheme(
+fun NotflixAndroidTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     systemUiController: SystemUiController,
     content: @Composable () -> Unit

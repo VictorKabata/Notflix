@@ -1,5 +1,5 @@
 object Libraries {
-    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
+    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
     const val androidCore = "androidx.core:core-ktx:${Versions.androidCore_version}"
 
     const val firebaseBOM = "com.google.firebase:firebase-bom:${Versions.firebase_bom_version}"

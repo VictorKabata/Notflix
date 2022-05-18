@@ -10,6 +10,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,19 +33,24 @@ import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.shared.domain.models.Movie
+import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
 
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
 @Composable
-fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewModel()) {
+fun HomeScreen(
+    navController: NavController,
+    viewModel: HomeViewModel = getViewModel(),
+    sharedViewModel: com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel = get()
+) {
 
     val scrollState = rememberScrollState()
 
-    val nowPlayingMovies = viewModel.nowPlayingMovies.observeAsState().value
-    val trendingMovies = viewModel.trendingMovies.observeAsState().value
-    val popularMovies = viewModel.popularMovies.observeAsState().value
-    val upcomingMovies = viewModel.upcomingMovies.observeAsState().value
+    val nowPlayingMovies = sharedViewModel.nowPlayingMovies.collectAsState().value
+    val trendingMovies = sharedViewModel.trendingMovies.collectAsState().value
+    val popularMovies = sharedViewModel.popularMovies.collectAsState().value
+    val upcomingMovies = sharedViewModel.upcomingMovies.collectAsState().value
 
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
         Column(

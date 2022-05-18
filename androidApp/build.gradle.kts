@@ -49,15 +49,9 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "${Versions.compose_version}"
-        kotlinCompilerVersion = "1.5.21"
+        kotlinCompilerExtensionVersion = Versions.compose_version
+        // kotlinCompilerVersion = "1.5.21"
     }
-
-    /*packagingOptions {
-        resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
-        }
-    }*/
 }
 
 dependencies {

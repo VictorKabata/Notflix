@@ -10,6 +10,7 @@ import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.utils.Constants.API_KEY
 import com.vickikbt.shared.domain.utils.Constants.BASE_URL
+import com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel
 import io.github.aakira.napier.Napier
 import io.ktor.client.*
 import io.ktor.client.features.*
@@ -20,7 +21,7 @@ import io.ktor.http.*
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-val commonModule = module {
+fun commonModule(enableNetworkLogs: Boolean) = module {
 
     /*single { Settings() }*/
 
@@ -38,11 +39,13 @@ val commonModule = module {
                 }
             }
 
-            install(Logging) {
-                level = LogLevel.HEADERS
-                logger = object : Logger {
-                    override fun log(message: String) {
-                        Napier.e(tag = "Http Client", message = message)
+            if (enableNetworkLogs) {
+                install(Logging) {
+                    level = LogLevel.HEADERS
+                    logger = object : Logger {
+                        override fun log(message: String) {
+                            Napier.e(tag = "Http Client", message = message)
+                        }
                     }
                 }
             }
@@ -60,10 +63,10 @@ val commonModule = module {
     single<ApiService> { ApiServiceImpl(httpClient = get()) }
 
     single<FavoritesRepository> { FavoriteMovieRepositoryImpl() }
-    single<MovieDetailsRepository> {
-        MovieDetailsRepositoryImpl(apiService = get())
-    }
+    single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(apiService = get()) }
     single<MoviesRepository> { MoviesRepositoryImpl(apiService = get()) }
+
+    single { SharedHomeViewModel(moviesRepository = get()) }
 }
 
 expect fun platformModule(): Module

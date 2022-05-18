@@ -26,7 +26,7 @@ import com.vickikbt.notflix.ui.components.BottomNavBar
 import com.vickikbt.notflix.ui.navigation.Navigation
 import com.vickikbt.notflix.ui.navigation.NavigationItem
 import com.vickikbt.notflix.ui.screens.settings.SettingsViewModel
-import com.vickikbt.notflix.ui.theme.NotflixTheme
+import com.vickikbt.notflix.ui.theme.NotflixAndroidTheme
 import com.vickikbt.notflix.util.ChangeSystemBarColorOnNetChange
 import com.vickikbt.notflix.util.LocaleManager
 import org.koin.android.ext.android.inject
@@ -67,7 +67,7 @@ class MainActivity : ComponentActivity() {
                 systemUiController = systemUiController,
             )
 
-            NotflixTheme(darkTheme = useDarkTheme, systemUiController = systemUiController) {
+            NotflixAndroidTheme(darkTheme = useDarkTheme, systemUiController = systemUiController) {
                 Surface(color = MaterialTheme.colors.surface) {
                     MainScreen()
                 }

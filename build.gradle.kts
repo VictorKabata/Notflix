@@ -13,6 +13,7 @@ buildscript {
         classpath(ProjectLevelPlugins.googleServices)
         classpath(ProjectLevelPlugins.ktLint)
         classpath(ProjectLevelPlugins.sqlDelight)
+        classpath(ProjectLevelPlugins.kmpNativeCoroutines)
     }
 }
 
@@ -26,6 +27,7 @@ allprojects {
         google()
         mavenCentral()
         maven("https://jitpack.io")
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 
     apply(plugin = BuildPlugins.ktlintPlugin)
