@@ -1,5 +1,6 @@
 package com.vickikbt.notflix.ui.screens.settings
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -11,11 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -23,22 +20,24 @@ import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.vickikbt.shared.domain.utils.Constants
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.app_bars.AppBar
 import com.vickikbt.notflix.ui.components.preferences.DialogPreferenceSelection
 import com.vickikbt.notflix.ui.components.preferences.PreferencesGroup
 import com.vickikbt.notflix.ui.components.preferences.TextPreference
-import org.koin.androidx.compose.getViewModel
+import com.vickikbt.shared.domain.utils.Constants
+import com.vickikbt.shared.presentation.viewmodels.SharedSettingsViewModel
+import org.koin.androidx.compose.get
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun SettingsScreen(navController: NavController, viewModel: SettingsViewModel = getViewModel()) {
+fun SettingsScreen(navController: NavController, viewModel: SharedSettingsViewModel = get()) {
 
     val context = LocalContext.current
 
-    val currentTheme = viewModel.selectedTheme.observeAsState().value!!
-    val currentLanguage = viewModel.selectedLanguage.observeAsState().value!!
-    val currentImageQuality = viewModel.selectedImageQuality.observeAsState().value!!
+    val currentTheme = viewModel.selectedTheme.collectAsState().value ?: 0
+    val currentLanguage = viewModel.selectedLanguage.collectAsState().value ?: 0
+    val currentImageQuality = viewModel.selectedImageQuality.collectAsState().value ?: 0
 
     val showThemeDialog = remember { mutableStateOf(false) }
     val showLanguageDialog = remember { mutableStateOf(false) }
@@ -123,7 +122,7 @@ fun SettingsScreen(navController: NavController, viewModel: SettingsViewModel = 
 
 @Composable
 private fun ChangeTheme(
-    viewModel: SettingsViewModel,
+    viewModel: SharedSettingsViewModel,
     showDialog: MutableState<Boolean>,
     currentValue: String?
 ) {
@@ -140,7 +139,7 @@ private fun ChangeTheme(
 
 @Composable
 private fun ChangeLanguage(
-    viewModel: SettingsViewModel,
+    viewModel: SharedSettingsViewModel,
     showDialog: MutableState<Boolean>,
     currentValue: String?
 ) {
@@ -157,7 +156,7 @@ private fun ChangeLanguage(
 
 @Composable
 private fun ChangeImageQuality(
-    viewModel: SettingsViewModel,
+    viewModel: SharedSettingsViewModel,
     showDialog: MutableState<Boolean>,
     currentValue: String?
 ) {

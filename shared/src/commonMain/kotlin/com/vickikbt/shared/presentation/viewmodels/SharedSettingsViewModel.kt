@@ -5,6 +5,7 @@ import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager
 import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
 import com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE
 import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -34,6 +35,7 @@ class SharedSettingsViewModel constructor(private val preferenceManager: Prefere
     }
 
     fun savePreferenceSelection(key: String, selection: Int) = viewModelScope.launch {
+        Napier.e("Saving preference $key as $selection")
         preferenceManager.setInt(key, selection)
     }
 

@@ -2,6 +2,7 @@
 
 package com.vickikbt.notflix.ui.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,7 +15,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringArrayResource
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -25,12 +25,12 @@ import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.BottomNavBar
 import com.vickikbt.notflix.ui.navigation.Navigation
 import com.vickikbt.notflix.ui.navigation.NavigationItem
-import com.vickikbt.notflix.ui.screens.settings.SettingsViewModel
 import com.vickikbt.notflix.ui.theme.NotflixAndroidTheme
 import com.vickikbt.notflix.util.ChangeSystemBarColorOnNetChange
 import com.vickikbt.notflix.util.LocaleManager
+import com.vickikbt.shared.presentation.viewmodels.SharedSettingsViewModel
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
@@ -44,19 +44,20 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         viewModel.registerCallback()
         setContent {
-            val settingsViewModel: SettingsViewModel = getViewModel()
+            val settingsViewModel: SharedSettingsViewModel = get()
             val systemUiController = rememberSystemUiController()
 
-            val currentTheme = settingsViewModel.selectedTheme.observeAsState().value!!
+            val currentTheme = settingsViewModel.selectedTheme.collectAsState().value
             val useDarkTheme =
-                when (stringArrayResource(id = R.array.theme_entries)[currentTheme]) {
+                when (stringArrayResource(id = R.array.theme_entries)[currentTheme ?: 0]) {
                     "light_theme" -> false
                     "dark_theme" -> true
                     else -> isSystemInDarkTheme()
                 }
 
-            val currentLanguage = settingsViewModel.selectedLanguage.observeAsState().value!!
-            val languageEntry = stringArrayResource(id = R.array.language_entries)[currentLanguage]
+            val currentLanguage = settingsViewModel.selectedLanguage.collectAsState().value
+            val languageEntry =
+                stringArrayResource(id = R.array.language_entries)[currentLanguage ?: 0]
             localeUtil.setLocale(
                 context = LocalContext.current,
                 language = languageEntry
@@ -76,6 +77,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
