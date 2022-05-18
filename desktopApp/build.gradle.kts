@@ -1,5 +1,4 @@
 import org.jetbrains.compose.compose
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm")
@@ -17,9 +16,9 @@ dependencies {
     implementation(compose.desktop.currentOs)
 }
 
-tasks.withType<KotlinCompile> {
+/*tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
-}
+}*/
 
 compose.desktop {
     application {

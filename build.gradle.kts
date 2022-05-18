@@ -11,14 +11,14 @@ buildscript {
         classpath(ProjectLevelPlugins.kotlin)
         classpath(ProjectLevelPlugins.firebaseCrashlyitics)
         classpath(ProjectLevelPlugins.googleServices)
-        classpath(ProjectLevelPlugins.ktLint)
+        // classpath(ProjectLevelPlugins.ktLint)
         classpath(ProjectLevelPlugins.sqlDelight)
         classpath(ProjectLevelPlugins.kmpNativeCoroutines)
     }
 }
 
 plugins {
-    id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
+    // id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
 }
 
 allprojects {
@@ -30,16 +30,16 @@ allprojects {
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 
-    apply(plugin = BuildPlugins.ktlintPlugin)
-    ktlint {
-        debug.set(true)
-        verbose.set(true)
-        android.set(false)
-        filter {
-            exclude("**/generated/**")
-            include("**/kotlin/**")
-        }
-    }
+//    apply(plugin = BuildPlugins.ktlintPlugin)
+//    ktlint {
+//        debug.set(true)
+//        verbose.set(true)
+//        android.set(false)
+//        filter {
+//            exclude("**/generated/**")
+//            include("**/kotlin/**")
+//        }
+//    }
 }
 
 tasks.register("clean").configure {

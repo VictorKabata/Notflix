@@ -7,14 +7,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion(AndroidSDK.compileSdkVersion)
+    compileSdk = AndroidSDK.compileSdkVersion
     buildToolsVersion(AndroidSDK.buildToolVersion)
 
     defaultConfig {
         applicationId = AndroidSDK.applicationId
 
-        minSdkVersion(AndroidSDK.minSdkVersion)
-        targetSdkVersion(AndroidSDK.targetSdkVersion)
+        minSdk = AndroidSDK.minSdkVersion
+        targetSdk = AndroidSDK.targetSdkVersion
         versionCode = AndroidSDK.versionCode
         versionName = AndroidSDK.versionName
 
@@ -50,7 +50,6 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.compose_version
-        // kotlinCompilerVersion = "1.5.21"
     }
 }
 
