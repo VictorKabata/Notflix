@@ -11,7 +11,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,6 +32,7 @@ import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.shared.domain.models.Movie
+import com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel
 import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
 
@@ -42,7 +42,7 @@ import org.koin.androidx.compose.getViewModel
 fun HomeScreen(
     navController: NavController,
     viewModel: HomeViewModel = getViewModel(),
-    sharedViewModel: com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel = get()
+    sharedViewModel: SharedHomeViewModel = get()
 ) {
 
     val scrollState = rememberScrollState()

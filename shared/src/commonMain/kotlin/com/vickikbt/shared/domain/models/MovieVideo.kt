@@ -1,7 +1,7 @@
 package com.vickikbt.shared.domain.models
 
 data class MovieVideo(
-    val id: Int?,
+    val id: Int? = null,
 
-    val videos: List<Video>?
+    val videos: List<Video>? = null
 )

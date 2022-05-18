@@ -10,6 +10,7 @@ import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.utils.Constants.API_KEY
 import com.vickikbt.shared.domain.utils.Constants.BASE_URL
+import com.vickikbt.shared.presentation.viewmodels.SharedDetailsViewModel
 import com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel
 import io.github.aakira.napier.Napier
 import io.ktor.client.*
@@ -67,6 +68,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     single<MoviesRepository> { MoviesRepositoryImpl(apiService = get()) }
 
     single { SharedHomeViewModel(moviesRepository = get()) }
+    single { SharedDetailsViewModel(movieDetailsRepository = get()) }
 }
 
 expect fun platformModule(): Module

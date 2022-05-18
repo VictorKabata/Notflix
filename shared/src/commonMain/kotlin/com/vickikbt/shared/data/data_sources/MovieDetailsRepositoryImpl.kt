@@ -3,9 +3,9 @@ package com.vickikbt.shared.data.data_sources
 import com.vickikbt.shared.data.mappers.toDomain
 import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.domain.models.Cast
+import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.models.MovieVideo
-import com.vickikbt.shared.domain.models.SimilarMovies
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -32,9 +32,9 @@ class MovieDetailsRepositoryImpl constructor(
         return flowOf(movieVideosNetworkResponse?.toDomain())
     }
 
-    override suspend fun fetchSimilarMovies(movieId: Int): Flow<SimilarMovies?> {
-        val similarMoviesDto = apiService.fetchSimilarMovies(movieId)
-        return flowOf(similarMoviesDto?.toDomain())
+    override suspend fun fetchSimilarMovies(movieId: Int): Flow<List<Movie>?> {
+        val similarMoviesDto = apiService.fetchSimilarMovies(movieId)?.movies
+        return flowOf(similarMoviesDto?.map { it.toDomain() })
     }
 
     override suspend fun isMovieFavorite(movieId: Int): Flow<Boolean?> {

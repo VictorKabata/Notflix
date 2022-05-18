@@ -18,7 +18,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -34,13 +33,11 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
-import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.fade
 import com.google.accompanist.placeholder.placeholder
 import com.google.accompanist.placeholder.shimmer
-import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemMovieCast
 import com.vickikbt.notflix.ui.components.ItemSimilarMovies
@@ -52,14 +49,17 @@ import com.vickikbt.notflix.util.getMovieDuration
 import com.vickikbt.notflix.util.getPopularity
 import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
+import com.vickikbt.shared.domain.models.MovieDetails
+import com.vickikbt.shared.presentation.viewmodels.SharedDetailsViewModel
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.get
 import kotlin.math.min
 
 @Composable
 fun DetailsScreen(
     navController: NavController,
-    detailsViewModel: DetailsViewModel = getViewModel(),
+    detailsViewModel: SharedDetailsViewModel = get(),
     movieId: Int,
     cacheId: Int,
 ) {
@@ -71,18 +71,18 @@ fun DetailsScreen(
         fetchSimilarMovies(movieId)
     }
 
-    val movieDetails = detailsViewModel.movieDetails.observeAsState().value
-    val movieCast = detailsViewModel.movieCast.observeAsState().value
-    val similarMovies = detailsViewModel.similarMovies.observeAsState().value
-    val movieVideo = detailsViewModel.movieVideo.observeAsState().value
-    val isMovieFavorite = detailsViewModel.movieIsFavorite.observeAsState().value
+    val movieDetails = detailsViewModel.movieDetails.collectAsState().value
+    val movieCast = detailsViewModel.movieCast.collectAsState().value
+    val similarMovies = detailsViewModel.similarMovies.collectAsState().value
+    val movieVideo = detailsViewModel.movieVideo.collectAsState().value
+    val isMovieFavorite = detailsViewModel.movieIsFavorite.collectAsState().value
 
-    // Timber.e("Is movie fav: $isMovieFavorite")
+    Napier.e("Is movie fav: $isMovieFavorite")
 
     LaunchedEffect(key1 = Unit) {
         launch {
             if (movieDetails != null && movieCast != null) {
-                // Timber.e("Saving movie details")
+                Napier.e("Saving movie details")
                 detailsViewModel.saveMovieDetails(
                     movieDetails = movieDetails,
                     cast = movieCast,
@@ -229,8 +229,8 @@ fun DetailsScreen(
                         contentPadding = PaddingValues(horizontal = 16.dp),
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
-                        if (similarMovies?.movies != null) {
-                            items(similarMovies.movies!!) { movie ->
+                        if (similarMovies != null) {
+                            items(similarMovies) { movie ->
                                 ItemSimilarMovies(movie = movie)
                             }
                         }
@@ -270,7 +270,6 @@ fun DetailsScreen(
 fun MoviePoster(
     modifier: Modifier = Modifier,
     movieDetails: MovieDetails?,
-    viewModel: DetailsViewModel = getViewModel(),
     scrollOffset: Float
 ) {
     val imageSize by animateDpAsState(
@@ -300,7 +299,7 @@ fun MoviePoster(
         val (imageMovie, boxFadingEdge, textViewRunTime, textViewTitle) = createRefs()
 
         //region Movie Poster
-        if (imagePainter.state is ImagePainter.State.Success) {
+        /*if (imagePainter.state is ImagePainter.State.Success) {
             LaunchedEffect(key1 = imagePainter) {
                 launch {
                     val imageDrawable =
@@ -311,7 +310,7 @@ fun MoviePoster(
                     }
                 }
             }
-        }
+        }*/
 
         Image(
             painter = imagePainter,
@@ -379,7 +378,11 @@ fun MoviePoster(
     }
 }
 
-private fun updateMovieFavorite(isFavorite: Boolean, cacheId: Int, viewModel: DetailsViewModel) =
+private fun updateMovieFavorite(
+    isFavorite: Boolean,
+    cacheId: Int,
+    viewModel: SharedDetailsViewModel
+) =
     viewModel.updateFavorite(cacheId = cacheId, isFavorite = isFavorite)
 
 private fun shareMovie(context: Context, movieId: Int) {

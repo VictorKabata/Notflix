@@ -1,9 +1,9 @@
 package com.vickikbt.shared.domain.repositories
 
 import com.vickikbt.shared.domain.models.Cast
+import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.models.MovieVideo
-import com.vickikbt.shared.domain.models.SimilarMovies
 import kotlinx.coroutines.flow.Flow
 
 interface MovieDetailsRepository {
@@ -26,7 +26,7 @@ interface MovieDetailsRepository {
     /**
      * Gets similar movies from network
      */
-    suspend fun fetchSimilarMovies(movieId: Int): Flow<SimilarMovies?>
+    suspend fun fetchSimilarMovies(movieId: Int): Flow<List<Movie>?>
 
     /**
      * Save movie details to local storage

@@ -113,15 +113,6 @@ fun MovieVideoDto.toDomain(): MovieVideo {
     )
 }
 
-fun SimilarMoviesDto.toDomain(): SimilarMovies {
-    return SimilarMovies(
-        this.page,
-        this.movies?.map { it.toDomain() },
-        this.totalPages,
-        this.totalResults
-    )
-}
-
 internal fun DatesDto.toDomain(): Dates {
     return Dates(
         this.maximum,

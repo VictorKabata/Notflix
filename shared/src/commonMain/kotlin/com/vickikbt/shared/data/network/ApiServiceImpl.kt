@@ -1,6 +1,9 @@
 package com.vickikbt.shared.data.network
 
-import com.vickikbt.shared.data.network.models.*
+import com.vickikbt.shared.data.network.models.CastDto
+import com.vickikbt.shared.data.network.models.MovieDetailsDto
+import com.vickikbt.shared.data.network.models.MovieResultsDto
+import com.vickikbt.shared.data.network.models.MovieVideoDto
 import io.github.aakira.napier.Napier
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -98,9 +101,9 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
         movieId: Int,
         page: Int,
         language: String
-    ): SimilarMoviesDto? {
+    ): MovieResultsDto? {
         return try {
-            httpClient.get<SimilarMoviesDto>(urlString = "movie/$movieId/similar") {
+            httpClient.get<MovieResultsDto>(urlString = "movie/$movieId/similar") {
                 parameter("page", page)
                 parameter("language", language)
             }

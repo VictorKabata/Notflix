@@ -1,6 +1,9 @@
 package com.vickikbt.shared.data.network
 
-import com.vickikbt.shared.data.network.models.*
+import com.vickikbt.shared.data.network.models.CastDto
+import com.vickikbt.shared.data.network.models.MovieDetailsDto
+import com.vickikbt.shared.data.network.models.MovieResultsDto
+import com.vickikbt.shared.data.network.models.MovieVideoDto
 import com.vickikbt.shared.domain.utils.Constants.STARTING_PAGE_INDEX
 
 interface ApiService {
@@ -45,5 +48,5 @@ interface ApiService {
         movieId: Int,
         page: Int = STARTING_PAGE_INDEX,
         language: String = "en"
-    ): SimilarMoviesDto?
+    ): MovieResultsDto?
 }
