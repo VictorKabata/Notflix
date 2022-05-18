@@ -75,16 +75,18 @@ fun ItemPopularMovies(
                 //endregion
 
                 //region Movie Release Date
-                /*Text(
-                    modifier = Modifier,
-                    text = movie.releaseDate!!.getReleaseDate(),
-                    fontSize = 14.sp,
-                    maxLines = 1,
-                    style = MaterialTheme.typography.h5,
-                    overflow = TextOverflow.Ellipsis,
-                    textAlign = TextAlign.Start,
-                    color = dominantSubTextColor.value
-                )*/
+                movie.releaseDate?.let {
+                    Text(
+                        modifier = Modifier,
+                        text = it,
+                        fontSize = 16.sp,
+                        maxLines = 1,
+                        style = MaterialTheme.typography.h5,
+                        overflow = TextOverflow.Ellipsis,
+                        textAlign = TextAlign.Start,
+                        color = dominantSubTextColor.value
+                    )
+                }
                 //endregion
             }
         }
