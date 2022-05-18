@@ -2,7 +2,6 @@ package ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
@@ -20,7 +19,11 @@ import com.vickikbt.shared.domain.models.Movie
 import utils.koil
 
 @Composable
-fun ItemNowPlayingMovies(modifier: Modifier = Modifier, movie: Movie, onItemClick: (Movie) -> Unit) {
+fun ItemNowPlayingMovies(
+    modifier: Modifier = Modifier,
+    movie: Movie,
+    onItemClick: (Movie) -> Unit
+) {
     val painter = koil(url = "https://image.tmdb.org/t/p/original/${movie.backdropPath}")
 
     println("Loading image: https://image.tmdb.org/t/p/original/${movie.backdropPath}")
@@ -30,7 +33,6 @@ fun ItemNowPlayingMovies(modifier: Modifier = Modifier, movie: Movie, onItemClic
             Image(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight(.65F)
                     .align(Alignment.Center),
                 alignment = Alignment.Center,
                 contentScale = ContentScale.Crop,
@@ -41,7 +43,8 @@ fun ItemNowPlayingMovies(modifier: Modifier = Modifier, movie: Movie, onItemClic
 
         //region Movie Title
         Text(
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 16.dp).align(Alignment.BottomStart),
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 16.dp)
+                .align(Alignment.BottomStart),
             text = movie.title ?: "Unknown Movie",
             fontSize = 48.sp,
             maxLines = 2,
@@ -51,7 +54,5 @@ fun ItemNowPlayingMovies(modifier: Modifier = Modifier, movie: Movie, onItemClic
             color = MaterialTheme.colors.onSurface
         )
         //endregion
-
-
     }
 }
