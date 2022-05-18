@@ -14,7 +14,6 @@ import com.vickikbt.notflix.ui.screens.details.DetailsScreen
 import com.vickikbt.notflix.ui.screens.favorites.FavoritesScreen
 import com.vickikbt.notflix.ui.screens.home.HomeScreen
 import com.vickikbt.notflix.ui.screens.settings.SettingsScreen
-import com.vickikbt.notflix.ui.screens.splash.NotflixSplashScreen
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
@@ -28,10 +27,7 @@ fun Navigation(navController: NavHostController) {
     // val slideDefaultInitialOffset = 1800
     // val slideDefaultTargetOffset = 1500
 
-    NavHost(navController = navController, startDestination = NavigationItem.Splash.route) {
-        composable(route = NavigationItem.Splash.route) {
-            NotflixSplashScreen(navController = navController)
-        }
+    NavHost(navController = navController, startDestination = NavigationItem.Home.route) {
         composable(route = NavigationItem.Home.route) {
             HomeScreen(navController = navController)
         }
