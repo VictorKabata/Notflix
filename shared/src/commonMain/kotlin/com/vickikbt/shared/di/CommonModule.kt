@@ -21,7 +21,7 @@ import io.ktor.http.*
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-val commonModule = module {
+fun commonModule(enableNetworkLogs: Boolean) = module {
 
     /*single { Settings() }*/
 
@@ -39,11 +39,13 @@ val commonModule = module {
                 }
             }
 
-            install(Logging) {
-                level = LogLevel.HEADERS
-                logger = object : Logger {
-                    override fun log(message: String) {
-                        Napier.e(tag = "Http Client", message = message)
+            if (enableNetworkLogs) {
+                install(Logging) {
+                    level = LogLevel.HEADERS
+                    logger = object : Logger {
+                        override fun log(message: String) {
+                            Napier.e(tag = "Http Client", message = message)
+                        }
                     }
                 }
             }
@@ -64,7 +66,7 @@ val commonModule = module {
     single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(apiService = get()) }
     single<MoviesRepository> { MoviesRepositoryImpl(apiService = get()) }
 
-     single { SharedHomeViewModel(moviesRepository = get()) }
+    single { SharedHomeViewModel(moviesRepository = get()) }
 }
 
 expect fun platformModule(): Module

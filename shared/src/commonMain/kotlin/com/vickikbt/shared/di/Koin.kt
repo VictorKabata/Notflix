@@ -3,20 +3,11 @@ package com.vickikbt.shared.di
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
+fun initKoin(enableNetworkLogs: Boolean = false, appDeclaration: KoinAppDeclaration = {}) =
     startKoin {
-        val sharedModules = listOf(commonModule, platformModule())
-
         appDeclaration()
-        modules(sharedModules)
+        modules(commonModule(enableNetworkLogs), platformModule())
     }
 
-/*fun initKoin(): KoinApplication = startKoin {
-    val sharedModules = listOf(commonModule, platformModule())
-    modules(sharedModules)
-}*/
-
-/**
- * Called by iOS etc
- */
-// fun initKoin() = initKoin {}
+// called by iOS etc
+fun initKoin() = initKoin(enableNetworkLogs = false) {}
