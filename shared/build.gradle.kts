@@ -36,6 +36,7 @@ kotlin {
                 api(KmmDependencies.napier)
 
                 implementation(KmmDependencies.multiplatformSettings)
+                implementation(KmmDependencies.multiplatformSettingsCoroutines)
             }
         }
 
