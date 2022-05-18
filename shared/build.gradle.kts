@@ -1,86 +1,10 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 plugins {
     kotlin(BuildPlugins.multiplatform)
     id(BuildPlugins.androidLibrary)
     kotlin(BuildPlugins.kotlinXSerialization) version Versions.kotlinSerialization
     id(BuildPlugins.nativeCoroutines)
-}
-
-kotlin {
-    android()
-
-    jvm()
-
-    listOf(
-        iosX64(),
-        iosArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "shared"
-        }
-    }
-
-    sourceSets {
-        val commonMain by getting {
-            dependencies {
-
-                implementation(KmmDependencies.kotlinxCoroutines)
-                implementation(KmmDependencies.kotlinxSerialization)
-                implementation(KmmDependencies.kotlinxDateTime)
-
-                api(KmmDependencies.koinCore)
-
-                implementation(KmmDependencies.ktorCore)
-                implementation(KmmDependencies.ktorSerialization)
-                implementation(KmmDependencies.ktorLogging)
-
-                api(KmmDependencies.napier)
-
-                implementation(KmmDependencies.multiplatformSettings)
-                implementation(KmmDependencies.multiplatformSettingsCoroutines)
-            }
-        }
-
-        val androidMain by getting {
-            dependencies {
-                implementation(KmmDependencies.ktorAndroid)
-            }
-        }
-
-        val jvmMain by getting {
-            dependencies {
-                implementation(KmmDependencies.ktorJvm)
-            }
-        }
-
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-
-            dependencies {
-                implementation(KmmDependencies.ktoriOS)
-            }
-        }
-
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-                // implementation(KmmDependencies.mockk)
-            }
-        }
-
-        val androidTest by getting
-
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        val iosTest by creating {
-            dependsOn(commonTest)
-            iosX64Test.dependsOn(this)
-            iosArm64Test.dependsOn(this)
-        }
-    }
 }
 
 android {
@@ -89,5 +13,58 @@ android {
     defaultConfig {
         minSdk = AndroidSDK.minSdkVersion
         targetSdk = AndroidSDK.targetSdkVersion
+    }
+}
+
+kotlin {
+    android()
+
+    jvm()
+
+    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
+        System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
+        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
+        else -> ::iosX64
+    }
+    iosTarget("iOS") {}
+
+    sourceSets {
+        sourceSets["commonMain"].dependencies {
+            implementation(KmmDependencies.kotlinxCoroutines)
+            implementation(KmmDependencies.kotlinxSerialization)
+            implementation(KmmDependencies.kotlinxDateTime)
+
+            api(KmmDependencies.koinCore)
+
+            implementation(KmmDependencies.ktorCore)
+            implementation(KmmDependencies.ktorSerialization)
+            implementation(KmmDependencies.ktorLogging)
+
+            api(KmmDependencies.napier)
+
+            implementation(KmmDependencies.multiplatformSettings)
+            implementation(KmmDependencies.multiplatformSettingsCoroutines)
+        }
+
+        sourceSets["commonTest"].dependencies {
+            implementation(kotlin("test"))
+            // implementation(KmmDependencies.mockk)
+        }
+
+        sourceSets["androidMain"].dependencies {
+            implementation(KmmDependencies.ktorAndroid)
+        }
+
+        sourceSets["androidTest"].dependencies {}
+
+        sourceSets["jvmMain"].dependencies {
+            implementation(KmmDependencies.ktorJvm)
+        }
+
+        sourceSets["iOSMain"].dependencies {
+            implementation(KmmDependencies.ktoriOS)
+        }
+
+        sourceSets["iOSTest"].dependencies {}
     }
 }

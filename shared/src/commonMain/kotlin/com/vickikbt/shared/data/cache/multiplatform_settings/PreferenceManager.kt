@@ -1,9 +1,9 @@
 package com.vickikbt.shared.data.cache.multiplatform_settings
 
-import com.russhwolf.settings.Settings
+import com.russhwolf.settings.ObservableSettings
 import kotlinx.coroutines.flow.flowOf
 
-class PreferenceManager constructor(private val settings: Settings) {
+class PreferenceManager constructor(private val settings: ObservableSettings) {
 
     fun setString(key: String, value: String) = settings.putString(key, value)
 
