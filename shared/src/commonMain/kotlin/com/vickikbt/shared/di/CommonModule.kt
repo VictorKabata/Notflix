@@ -14,6 +14,7 @@ import com.vickikbt.shared.domain.utils.Constants.API_KEY
 import com.vickikbt.shared.domain.utils.Constants.BASE_URL
 import com.vickikbt.shared.presentation.viewmodels.SharedDetailsViewModel
 import com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel
+import com.vickikbt.shared.presentation.viewmodels.SharedSettingsViewModel
 import io.github.aakira.napier.Napier
 import io.ktor.client.*
 import io.ktor.client.features.*
@@ -72,6 +73,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
 
     single { SharedHomeViewModel(moviesRepository = get()) }
     single { SharedDetailsViewModel(movieDetailsRepository = get()) }
+    single { SharedSettingsViewModel(preferenceManager = get()) }
 }
 
 expect fun platformModule(): Module
