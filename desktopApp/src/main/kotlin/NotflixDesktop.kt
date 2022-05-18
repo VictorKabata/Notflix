@@ -3,7 +3,7 @@ import com.vickikbt.shared.di.initKoin
 import org.koin.core.Koin
 import ui.screens.main.MainScreen
 
-var koin: Koin? = null
+lateinit var koin: Koin
 
 fun main() {
 

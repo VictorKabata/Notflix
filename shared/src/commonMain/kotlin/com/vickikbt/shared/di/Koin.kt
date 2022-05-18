@@ -6,8 +6,8 @@ import org.koin.dsl.KoinAppDeclaration
 fun initKoin(enableNetworkLogs: Boolean = false, appDeclaration: KoinAppDeclaration = {}) =
     startKoin {
         appDeclaration()
-        modules(commonModule(enableNetworkLogs), platformModule())
+        modules(commonModule(enableNetworkLogs))
     }
 
 // called by iOS etc
-fun initKoin() = initKoin(enableNetworkLogs = false) {}
+// fun initKoin() = initKoin(enableNetworkLogs = false) {}

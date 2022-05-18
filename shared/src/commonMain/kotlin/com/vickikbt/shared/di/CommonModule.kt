@@ -23,7 +23,6 @@ import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
 import io.ktor.http.*
-import org.koin.core.module.Module
 import org.koin.dsl.module
 
 fun commonModule(enableNetworkLogs: Boolean) = module {
@@ -77,5 +76,3 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     single { SharedFavouritesViewModel(favouritesRepository = get()) }
     single { SharedSettingsViewModel(preferenceManager = get()) }
 }
-
-expect fun platformModule(): Module
