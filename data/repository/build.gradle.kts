@@ -36,11 +36,11 @@ dependencies {
 
     implementation(project(BuildModules.Shared))
 
-    implementation(Libraries.kotlin)
-    implementation(Libraries.androidCore)
+    implementation(AndroidDependencies.kotlin)
+    implementation(AndroidDependencies.androidCore)
 
-    implementation(Libraries.koinAndroid)
+    implementation(AndroidDependencies.koinAndroid)
 
     // Paging 3
-    implementation(Libraries.paging)
+    implementation(AndroidDependencies.paging)
 }

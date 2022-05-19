@@ -59,58 +59,54 @@ dependencies {
     api(project(BuildModules.Shared))
     api(project(BuildModules.Cache))
 
-    implementation(Libraries.kotlin)
-    implementation(Libraries.androidCore)
+    implementation(AndroidDependencies.kotlin)
+    implementation(AndroidDependencies.androidCore)
 
-    implementation(platform(Libraries.firebaseBOM))
-    implementation(Libraries.firebaseAnalytics)
-    implementation(Libraries.firebaseCrashlytics)
+    implementation(platform(AndroidDependencies.firebaseBOM))
+    implementation(AndroidDependencies.firebaseAnalytics)
+    implementation(AndroidDependencies.firebaseCrashlytics)
 
-    implementation(Libraries.material)
+    implementation(AndroidDependencies.material)
 
-    implementation(Libraries.composeUI)
-    implementation(Libraries.composeMaterial)
-    implementation(Libraries.composeTooling)
-    implementation(Libraries.composeRuntime)
-    implementation(Libraries.composeUtil)
-    implementation(Libraries.composeConstraintLayout)
-    implementation(Libraries.composeActivity)
+    implementation(AndroidDependencies.composeUI)
+    implementation(AndroidDependencies.composeMaterial)
+    implementation(AndroidDependencies.composeTooling)
+    implementation(AndroidDependencies.composeRuntime)
+    implementation(AndroidDependencies.composeUtil)
+    implementation(AndroidDependencies.composeConstraintLayout)
+    implementation(AndroidDependencies.composeActivity)
 
-    implementation(Libraries.accompanistPager)
-    implementation(Libraries.accompanistPermissions)
-    implementation(Libraries.accompanistInsets)
-    implementation(Libraries.accompanistAnimation)
-    implementation(Libraries.accompanistSystemUIController)
-    implementation(Libraries.accompanistMaterialPlaceHolder)
-    implementation(Libraries.accompanistPagerIndicator)
+    implementation(AndroidDependencies.accompanistPager)
+    implementation(AndroidDependencies.accompanistPermissions)
+    implementation(AndroidDependencies.accompanistInsets)
+    implementation(AndroidDependencies.accompanistAnimation)
+    implementation(AndroidDependencies.accompanistSystemUIController)
+    implementation(AndroidDependencies.accompanistMaterialPlaceHolder)
+    implementation(AndroidDependencies.accompanistPagerIndicator)
 
-    implementation(Libraries.lifecycleLiveData)
-    implementation(Libraries.lifecycleRuntime)
+    implementation(AndroidDependencies.lifecycleLiveData)
+    implementation(AndroidDependencies.lifecycleRuntime)
 
     // Koin-Dependency injection
-    implementation(Libraries.koinAndroid)
-    implementation(Libraries.koinCompose)
+    implementation(AndroidDependencies.koinAndroid)
+    implementation(AndroidDependencies.koinCompose)
 
     // Compose Navigation-Navigation between various screens
-    implementation(Libraries.composeNavigation)
+    implementation(AndroidDependencies.composeNavigation)
 
     // Coil-Image Loader
-    implementation(Libraries.coil)
+    implementation(AndroidDependencies.coil)
 
     // Palette-Used to extract color palette from images
-    implementation(Libraries.palette)
-
-    implementation(Libraries.paging)
-    implementation(Libraries.pagingCompose)
+    implementation(AndroidDependencies.palette)
 
     // Gowtham Compose Rating Bar
-    implementation(Libraries.ratingBar)
+    implementation(AndroidDependencies.ratingBar)
 
-    testImplementation(Libraries.jUnit)
-    testImplementation(Libraries.googleTruth)
-    testImplementation(Libraries.coroutinesTest)
-    testImplementation(Libraries.mockWebServer)
+    testImplementation(AndroidDependencies.jUnit)
+    testImplementation(AndroidDependencies.googleTruth)
+    testImplementation(AndroidDependencies.coroutinesTest)
 
-    androidTestImplementation(Libraries.testRules)
-    androidTestImplementation(Libraries.testRunner)
+    androidTestImplementation(AndroidDependencies.testRules)
+    androidTestImplementation(AndroidDependencies.testRunner)
 }

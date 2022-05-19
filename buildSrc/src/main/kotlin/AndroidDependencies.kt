@@ -1,4 +1,4 @@
-object Libraries {
+object AndroidDependencies {
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
     const val androidCore = "androidx.core:core-ktx:${Versions.androidCore_version}"
 
@@ -43,9 +43,6 @@ object Libraries {
     const val koinAndroid = "io.insert-koin:koin-android:${Versions.koin_version}"
     const val koinCompose = "io.insert-koin:koin-androidx-compose:${Versions.koin_version}"
 
-    const val coroutinesCore =
-        "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines_version}"
-
     // Compose Navigation-Navigation between various screens
     const val composeNavigation =
         "androidx.navigation:navigation-compose:${Versions.navigation_version}"
@@ -59,31 +56,12 @@ object Libraries {
     // Gowtham Compose Rating Bar
     const val ratingBar = "com.github.a914-gowtham:compose-ratingbar:${Versions.rating_bar_version}"
 
-    // Room
-    const val roomRuntime = "androidx.room:room-runtime:${Versions.room_version}"
-    const val roomCompiler = "androidx.room:room-compiler:${Versions.room_version}"
-    const val roomKtx = "androidx.room:room-ktx:${Versions.room_version}"
-
-    // DataStore
-    const val datastore = "androidx.datastore:datastore-preferences:${Versions.datastore_version}"
-
-    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit_version}"
-    const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp_version}"
-    const val loggingInterceptor =
-        "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptor_version}"
-    const val gsonConvertor = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_version}"
-
-    // Paging 3
-    const val paging = "androidx.paging:paging-runtime:${Versions.paging_version}"
-    const val pagingCompose = "androidx.paging:paging-compose:${Versions.paging_compose_version}"
-
     // Test Libs
     const val jUnit = "junit:junit:${Versions.jUnit_version}"
     const val googleTruth = "com.google.truth:truth:${Versions.truth_version}"
     const val coroutinesTest =
         "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutinesTest_version}"
     const val robolectric = "org.robolectric:robolectric:${Versions.robolectric_version}"
-    const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.mockWebServer_version}"
     const val jUnitKtx = "androidx.test.ext:junit-ktx:${Versions.jUnitKtx}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     const val testCore = "androidx.test:core-ktx:${Versions.testCore}"

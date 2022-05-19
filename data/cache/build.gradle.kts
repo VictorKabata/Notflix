@@ -34,21 +34,8 @@ android {
 dependencies {
     implementation(project(BuildModules.Shared))
 
-    implementation(Libraries.kotlin)
-    implementation(Libraries.androidCore)
+    implementation(AndroidDependencies.kotlin)
+    implementation(AndroidDependencies.androidCore)
 
-    // Room
-    api(Libraries.roomRuntime)
-    kapt(Libraries.roomCompiler)
-    api(Libraries.roomKtx)
-
-    // DataStore
-    implementation(Libraries.datastore)
-
-    implementation(Libraries.koinAndroid)
-
-    implementation(Libraries.gsonConvertor)
-
-    // Paging 3
-    implementation(Libraries.paging)
+    implementation(AndroidDependencies.koinAndroid)
 }

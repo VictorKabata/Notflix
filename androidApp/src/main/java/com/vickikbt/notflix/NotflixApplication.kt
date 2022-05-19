@@ -1,7 +1,6 @@
 package com.vickikbt.notflix
 
 import android.app.Application
-import androidx.paging.ExperimentalPagingApi
 import com.vickikbt.cache.di.cacheModule
 import com.vickikbt.notflix.di.presentationModule
 import com.vickikbt.shared.di.initKoin
@@ -10,7 +9,6 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.logger.Level
 
-@ExperimentalPagingApi
 class NotflixApplication : Application() {
 
     override fun onCreate() {
