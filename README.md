@@ -17,6 +17,7 @@ An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlan
 
 ## Table Of Content
 
+- [Table Of Content](#table-of-content)
 - [Prerequisite](#prerequisite)
 - [App Structure](#app-structure)
 - [Architecture](#architecture)
@@ -26,7 +27,7 @@ An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlan
 - [Extras](#extras)
 - [Demo](#demo)
 - [Android App](#android-app)
-- [Desktop App](#desktop-app)
+- [Desktop](#desktop)
 - [Related Resources](#related-resources)
   - [Videos 📽️](#videos-️)
   - [Articles/Blogs 📖](#articlesblogs-)
@@ -42,11 +43,11 @@ In order to be able to build the application you'll need to change the api key i
 
 ## App Structure
 
-// ToDo ?:)
+// ToDo
 
 ## Architecture
 
-// ToDo :)
+// ToDo
 
 ## Libraries
 
@@ -83,17 +84,21 @@ In order to be able to build the application you'll need to change the api key i
 
 ## Android App
 
-<img src="assets/img1.png" width="250"/>
+<img src="assets/img0.png" width="250"/>
 
-<img src="assets/img2.png" width="250"/> <img src="assets/img3.png" width="250"/> <img src="assets/img4.png" width="250"/>
+<img src="assets/img1.png" width="250"/> <img src="assets/img2.png" width="250"/>
 
-<img src="assets/img5.png" width="250"/> <img src="assets/img6.png" width="250"/> <img src="assets/img7.png" width="250"/>
+<img src="assets/img3.png" width="250"/> <img src="assets/img4.png" width="250"/>
 
-<img src="assets/img8.png" width="250"/>
+<img src="assets/img5.png" width="250"/>
 
-<img src="assets/img9.png" width="250"/> <img src="assets/img10.png" width="250"/> <img src="assets/img11.png" width="250"/> <img src="assets/img12.png" width="250"/> <img src="assets/img13.png" width="250"/>
+</p>
 
-## Desktop App
+## Desktop
+
+<img src="assets/img6.png" width="460"/>
+
+<img src="assets/img7.png" width="460"/> <img src="assets/img8.png" width="460"/>
 
 ## Related Resources
 
