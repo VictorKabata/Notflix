@@ -7,19 +7,17 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="11" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/androidApp" />
+            <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/cache" />
-            <option value="$PROJECT_DIR$/data/network" />
-            <option value="$PROJECT_DIR$/data/repository" />
-            <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/desktopApp" />
+            <option value="$PROJECT_DIR$/shared" />
           </set>
         </option>
-        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DesignSurface">
-    <option name="filePathToZoomLevelMap">
-      <map>
-        <entry key="..\:/Projects/Kotlin/Notflix/app/src/main/res/drawable/ic_favourite.xml" value="0.290625" />
-        <entry key="..\:/Projects/Kotlin/Notflix/app/src/main/res/drawable/ic_github.xml" value="0.2175925925925926" />
-        <entry key="..\:/Projects/Kotlin/Notflix/app/src/main/res/drawable/ic_share.xml" value="0.2175925925925926" />
-        <entry key="..\:/Projects/Kotlin/Notflix/app/src/main/res/drawable/splash_image.xml" value="0.22962962962962963" />
-        <entry key="..\:/Projects/Kotlin/Notflix/app/src/main/res/layout/activity_main.xml" value="0.27447916666666666" />
-        <entry key="..\:/Projects/Kotlin/Notflix/feature/home/src/main/res/layout/item_home_viewpager.xml" value="0.264" />
-      </map>
-    </option>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

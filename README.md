@@ -2,209 +2,139 @@
 <p align="center"><img src="assets/logo_notflix.png" alt="NotFlix" height="31px"></p>
 
 <p align="center">
-<img  src="https://img.shields.io/badge/-KOTLIN-E50914?logo=kotlin&logoColor=white&style=for-the-badge">&nbsp;
-<img  src="https://img.shields.io/badge/-ANDROID-E50914?logo=android&logoColor=white&style=for-the-badge">&nbsp;
-<img  src="https://img.shields.io/badge/-LICENSE:%20MIT-E50914?logo=licenselogoColor=white&style=for-the-badge">&nbsp;
+<img  src="https://img.shields.io/badge/-KOTLIN-E50914?logo=kotlin&logoColor=white&style=for-the-badge">
+<img  src="https://img.shields.io/badge/-ANDROID-E50914?logo=android&logoColor=white&style=for-the-badge">
+<img  src="https://img.shields.io/badge/-WINDOWS-E50914?logo=windows&logoColor=white&style=for-the-badge">
+<img  src="https://img.shields.io/badge/-LINUX-E50914?logo=linux&logoColor=white&style=for-the-badge">
+<img  src="https://img.shields.io/badge/-LICENSE:%20MIT-E50914?logo=licenselogoColor=white&style=for-the-badge">
 </p>
 
-
 # Notflix
-# 🛠️Migrating to Compose - Develop Branch 🛠
 
- An android app built using Kotlin that consumes [TMDB API]("https://developers.themoviedb.org/3") to display current trending, upcoming and popular movies🍿 and tvshows🎬. It has been built following Clean Architecture Principle, Repository Pattern, MVVM Architecture in the presentation layer as well as jetpack components.
+# 🛠️Migrating to KMP - [Develop Branch](https://youtu.be/dQw4w9WgXcQ) 🛠
 
- I created this repository for a few reasons:
- 1. To learn the approch of implementing clean architecture and [SOLID principles](https://en.wikipedia.org/wiki/SOLID#:~:text=The%20SOLID%20concepts%20are%3A,%2C%20but%20closed%20for%20modification.%22) in an android app.
- 2. To learn libraries/tools supported by Google and most of the android development communities.
- 3. To experiment with modularization and dynamic feature modules.
- 4. To learn implementation of Picture-in-Picture.
- 5. Demonstrate best developement practices by utilizing up to date tech-stack .
+An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlang.org/docs/multiplatform.html) that consumes [TMDB API]("https://developers.themoviedb.org/3") to display current trending, upcoming and popular movies🍿 and tvshows🎬.
 
- ## Table Of Content.
+## Table Of Content
 
+- [Table Of Content](#table-of-content)
 - [Prerequisite](#prerequisite)
-    - [Disclaimer](##disclaimer)
-- [App Structure](##app-structure)
-    - [Dynamic Feature Modules and Dynamic Delivery](###dynamic-feature-modules-and-dynamic-delivery?)
+- [App Structure](#app-structure)
 - [Architecture](#architecture)
-    - [What is Clean Architecture](##why-clean-architecture)
-    - [Why Clean Architecture](##why-clean-architecture)
-    - [S.O.L.I.D Principles](##s.o.l.i.d-principles)
-    - [Layers](##layers)
-        - [Domain](###domain)
-        - [Data](###data)
-        - [Presentation](###presentation)
-- [Tech Stack](#techstack)
-    - [Libraries](##libraries)
-    - [Extras](##extras)
-- [Related Resources](#related-resources)
-- [Other Helpful Resources](#other_helpful_posts)
+- [Libraries](#libraries)
+  - [Shared](#shared)
+  - [Android](#android)
+- [Extras](#extras)
 - [Demo](#demo)
-- [Work In Progress](#work-in-progress)
+- [Android App](#android-app)
+- [Desktop](#desktop)
+- [Related Resources](#related-resources)
+  - [Videos 📽️](#videos-️)
+  - [Articles/Blogs 📖](#articlesblogs-)
+  - [Sample Projects 🤖](#sample-projects-)
+- [Other Helpful Resources](#other-helpful-resources)
+  - [Videos 📽️](#videos-️-1)
+  - [Articles/Blogs 📖](#articlesblogs--1)
+  - [Sample Projects 🤖](#sample-projects--1)
 
-## Prerequisite.
+## Prerequisite
 
-In order to be able to build the application you'll need to change the api key in [`gradle.properties`](link_to_gradle.properties_file). First and formost you need to generate your own api key by [creating](https://www.themoviedb.org/signup) an IMDB account and [generating](https://www.themoviedb.org/settings/api) an api key.
-
-## Disclaimer.
-
-- Complex architectures like the pure clean architecture can also increase code complexity since decoupling your code also means creating lots of data transformations(mappers) and models,that may end up increasing the learning curve of your code to a point where it would be better to use a simpler architecture like MVVM.
-
-- When using dynamic delivery you'll need a Playstore Developer Account in order to test the dynamic delivery feature However, there is a work around by using [GloballyDynamic](https://globallydynamic.io/) which provides the same dynamic delivery capabilities as Playstore with other added advantages well suited for testing. [Read More](https://proandroiddev.com/globallydynamic-dynamic-delivery-during-development-f28093ed184f).
-
-- Dynamic feature modules require use of Android App Bundles which at the moment are not supported by all app distribution platforms and the platforms that support app bundles have diffrent integrations. However, this can be solved by using [GloballyDynamic](https://globallydynamic.io/).
-
-So let's get started ...
+In order to be able to build the application you'll need to change the api key in [`gradle.properties`](link_to_gradle.properties_file). First and formost you need to generate your own api key by [creating](https://www.themoviedb.org/signup) a TMDB account and [generating](https://www.themoviedb.org/settings/api) an api key.
 
 ## App Structure
-### Dynamic Feature Modules and Dynamic Delivery?
 
-`Dynamic feature modules` allow separation of certain features and resources from the base module of the app and include them in the app bundle. User can then download and install these modules later when they are required(on demand) even after the app has already been installed.E.g. In Notflix the Favorites feature/module is not installed when the app is first installed since not all user use that feature but later on the can opt to download it when the need arises. These features/modules can also be uninstalled later without installing the entire app
+// ToDo
 
-`Dynamic Delivery` is Google Play's app serving model that uses [Android App Bundles](https://developer.android.com/guide/app-bundle) to generate and server optimized APKs for each user's device configuration so that users download only the feature and resources the need to run the app.
+## Architecture
 
-Play Feature Delivery allow certain features of the app to be delivered conditionally (depending on user's language, location/country, paying or free user etc.) or downloaded on demand.
+// ToDo
 
-<p align="center"><img src="assets/notflix_arch.png" alt="Notflix App Structure"></p>
+## Libraries
 
+### Shared
 
-## Architecture.
+- [Koin](https://insert-koin.io/docs/setup/v3.1) - Kotin dependency injection library with multiplatform support.
+- [Ktor](https://ktor.io/docs/http-client-multiplatform.html) - Provides multiplatform libraries required to make network calls to the REST API.
+- [Realm](https://github.com/realm/realm-kotlin) - Caching of application data from network responses.
+- [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings) - This is a Kotlin library for Multiplatform apps, so that common code can persist key-value data.
+- [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library support for Kotlin coroutines with multiplatform support.
+- [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) - Provides sets of libraries for various serialization formats eg. JSON, protocol buffers, CBOR etc.
+- [kotlinx.datetime](https://github.com/Kotlin/kotlinx-datetime) - A multiplatform Kotlin library for working with date and time.
+- [Napier](https://github.com/AAkira/Napier) -  Logger library for Kotlin Multiplatform.
+- [Mockk](https://github.com/mockk/mockk) - Library for creating mocks for tests.
 
-### What is Clean Architecture?
+### Android
 
-A well planned architecture is extremely important for an app to scale and all architectures have one common goal- to manage complexity of your app. This isn't something to be worried about in smaller apps however it may prove very useful when working on apps with longer development lifecycle and a bigger team.
+- [Jetpack Compose](https://developer.android.com/jetpack/compose?gclid=Cj0KCQiA95aRBhCsARIsAC2xvfwC4pw6JG3r8U_4zVVSzwfCSIMMM8MKPMGAOTRoMjpkfpimPVz1FwoaAqlUEALw_wcB&gclsrc=aw.ds) - Modern toolkit for building native UI.
+- [Coil](https://coil-kt.github.io/coil/) - An image loading library for Android backed by kotlin coroutines.
+- [Splash Screen API](https://developer.android.com/guide/topics/ui/splash-screen) - Splash screen API reduces boilerplate code required to create a splash screen.
+- [Accompanist Navigation Animation](https://google.github.io/accompanist/navigation-animation/) - Add animation support when navigating between screens using Compose navigation component.
+- [Accompanist Pager](https://google.github.io/accompanist/pager/) - A library which provides paging layouts for Jetpack Compose. If you've used Android's ViewPager before, it has similar properties.
+- [Accompanist Insets](https://google.github.io/accompanist/insets/)
+- [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller/) - A library that provides easy-to-use utilities for updating the System UI bar colors within Jetpack Compose.
+- [Accompanist Material Placeholder](https://google.github.io/accompanist/placeholder/) -
+- [Accompanist Pager Indicator](https://google.github.io/accompanist/api/pager-indicators/com.google.accompanist.pager/-horizontal-pager-indicator.html) - A horizontally laid out indicator for a HorizontalPager or VerticalPager, representing the currently active page and total pages drawn using shape.
 
-Clean architecture was proposed by [Robert C. Martin](https://en.wikipedia.org/wiki/Robert_C._Martin) in 2012 in the [Clean Code Blog](http://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and it follow the SOLID principle.
+## Extras
 
-<p align="center"><img src="assets/clean_arch.png" alt="Clean Architecture Diagram"></p>
-
-The circles represent different layers of your app. Note that:
-
-- The center circle is the most abstract, and the outer circle is the most concrete. This is called the [Abstraction Principle](https://en.wikipedia.org/wiki/Abstraction_principle_(computer_programming)). The Abstraction Principle specifies that inner circles should contain business logic, and outer circles should contain implementation details.
-
-- Another principle of Clean Architecture is the [Dependency Inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle). This rule specifies that each circle can depend only on the nearest inward circle ie. low-level modules do not depend on high-level modules but the other way around.
-
-### Why Clean Architecture?
-- Loose coupling between the code - The code can easily be modified without affecting any or a large part of the app's codebase.
-- Easier to test code.
-- Separation of Concern - Different modules have specific responsibilities making it easier for modification and maintenance.
-
-### S.O.L.I.D Principles.
-
-- [__Single Responsibility__](https://en.wikipedia.org/wiki/Single-responsibility_principle): Each software component should have only one reason to change – one responsibility.
-
-- [__Open-Closed__](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle#:~:text=In%20object%2Doriented%20programming%2C%20the,without%20modifying%20its%20source%20code.): You should be able to extend the behavior of a component, without breaking its usage, or modifying its extensions.
-
-- [__Liskov Substitution__](https://en.wikipedia.org/wiki/Liskov_substitution_principle): If you have a class of one type, and any subclasses of that class, you should be able to represent the base class usage with the subclass, without breaking the app.
-
-- [__Interface Segregation__](https://en.wikipedia.org/wiki/Interface_segregation_principle): It’s better to have many smaller interfaces than a large one, to prevent the class from implementing the methods that it doesn’t need.
-
-- [__Dependency Inversion__](https://en.wikipedia.org/wiki/Dependency_inversion_principle): Components should depend on abstractions rather than concrete implementations. Also higher level modules shouldn’t depend on lower level modules.
-
-## Layers.
-
-### 1. Domain.
-This is the core layer of the application. The ```domain``` layer is independent of any other layers thus ] domain models and business logic can be independent from other layers.This means that changes in other layers will have no effect on domain layer eg.  screen UI (presentation layer) or changing database (data layer) will not result in any code change withing domain layer.
-
-Components of domain layer include:
-- __Models__: Defines the core structure of the data that will be used within the application.
-
-- __Repositories__: Interfaces used by the use cases. Implemented in the data layer.
-
-- __Use cases/Interactors__: They enclose a single action, like getting data from a database or posting to a service. They use the repositories to resolve the action they are supposed to do. They usually override the operator “invoke”, so they can be called as a function.
-
-### 2. Data.
-The ```data``` layer is responsibile for selecting the proper data source for the domain layer. It contains the implementations of the repositories declared in the domain layer. 
-
-Components of data layer include:
-- __Models__
-
-    -__Dto Models__: Defines POJO of network responses.
-
-    -__Entity Models__: Defines the schema of SQLite database.
-
-- __Repositories__: Responsible for exposing data to the domain layer.
-
-- __Mappers__: They perform data transformation between ```domain```, ```dto``` and ```entity``` models.
-
-- __Network__: This is responsible for performing network operations eg. defining API endpoints using [Retrofit](https://square.github.io/retrofit/).
-
-- __Cache__: This is responsible for performing caching operations using [Room](https://developer.android.com/training/data-storage/room).
-
-- __Data Source__:  Responsible for deciding which data source (network or cache) will be used when fetching data.
-
-
-
-### 3. Presentation.
-The ```presentation``` layer contains components involved in showing information to the user. The main part of this layer are the views and viewModels.
-
-## Tech Stack.
-This project uses many of the popular libraries, plugins and tools of the android ecosystem.
-
-### Libraries.
-
-- [Hilt](https://github.com/google/hilt) - Dependency Injection library.
-- [Jetpack](https://developer.android.com/jetpack)
-  -   [Android KTX](https://developer.android.com/kotlin/ktx.html) - Provide concise, idiomatic Kotlin to Jetpack and Android platform APIs.
-    - [AndroidX](https://developer.android.com/jetpack/androidx) - Major improvement to the original Android [Support Library](https://developer.android.com/topic/libraries/support-library/index), which is no longer maintained.
-    -   [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle) - Perform actions in response to a change in the lifecycle status of another component, such as activities and fragments.
-    - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Lifecycle-aware, meaning it respects the lifecycle of other app components, such as activities, fragments, or services.
-    -   [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Designed to store and manage UI-related data in a lifecycle conscious way. The ViewModel class allows data to survive configuration changes such as screen rotations.
-     - [Data Binding](https://developer.android.com/topic/libraries/data-binding/) - Allows you to bind UI components in your layouts to data sources in your app using a declarative format rather than programmatically.
-    - [Room](https://developer.android.com/training/data-storage/room) - Provides an abstraction layer over SQLite used for offline data caching.
-    - [Navigation Component](https://developer.android.com/guide/navigation/navigation-getting-started)-Component that allows easier implementation of navigation from simple button clicks to more complex patterns.
-
-- [MotionLayout](https://medium.com/google-developers/introduction-to-motionlayout-part-i-29208674b10d) - Helps create and manage beautiful UI animations.
-- [Retrofit](https://square.github.io/retrofit/) - Type-safe http client 
-and supports coroutines out of the box.  
-- [GSON](https://github.com/square/gson) - JSON Parser,used to parse 
-requests on the data layer for Entities and understands Kotlin non-nullable 
-and default parameters.
-- [OkHttp-Logging-Interceptor](https://github.com/square/okhttp/blob/master/okhttp-logging-interceptor/README.md) - Logs HTTP request and response data.
-- [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines.
-- [Flow](https://developer.android.com/kotlin/flow) - Flows are built on top of coroutines and can provide multiple values. A flow is conceptually a stream of data that can be computed asynchronously.
-- [Timber](https://github.com/JakeWharton/timber)-Library for easier logging.
-- [Material Design](https://material.io/develop/android/docs/getting-started/) - Build awesome beautiful UIs.
-- [Glide](https://github.com/bumptech/glide)- Image Library from loading images from the database and cacheing in memory.
-- [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines,provides runBlocking coroutine builder used in tests.
-- [Truth](https://truth.dev/) - Assertions Library,provides readability as far as assertions are concerned.
-- [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver) - Web server for testing HTTP clients, verify requests and responses on the TMDB API with the retrofit client.
-
-### Plugins
-- [GitHub Actions](https://github.com/VictorKabata/Notflix/actions) - GitHub actions is used in this project to check for syntax correctness using KtLint, execute the unit tests and generate a new package when pushing chanes to the main branch.
+- [GitHub Actions](https://docs.github.com/en/actions) -The project uses GitHub actions for CI/CD operations such as running automated builds, tests and deploying applications.
 - [KtLint](https://github.com/pinterest/ktlint) - The project uses KtLint to check for syntax correctness.
 
-
-## Related Resources.
-In this section i've included some resources ie. articles and GitHub reposirtories that i used to learn about Clean Architecture:
-
-1. [The clean code blog](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) by Robert C. Martin.
-2. [A detailed guide on developing android apps using clean architecture pattern](https://medium.com/@dmilicic/a-detailed-guide-on-developing-android-apps-using-the-clean-architecture-pattern-d38d71e94029) Medium article.
-3. [Clean Architecture Component Boilerplater](https://github.com/bufferapp/clean-architecture-components-boilerplate) GitHub repo .
-4. [The Force](https://github.com/odaridavid/Clean-MVVM-ArchComponents) GitHub repo by [David Odari](https://twitter.com/_davidodari) demonstrating using clean architecture pattern  
-5. [Clean architecture tutorial for android](https://www.raywenderlich.com/3595916-clean-architecture-tutorial-for-android-getting-started) article by Raywenderlich which is really beginner friendly.
-6. [Clean architecture in android](https://medium.com/swlh/clean-architecture-in-android-a-beginner-approach-be0ce00d806b) Medium article.
-7. [Intro to app architecture](https://proandroiddev.com/intro-to-app-architecture-922b392b21b2) and [Intro to app modularization](https://proandroiddev.com/intro-to-app-modularization-42411e4c421e) articles by ProAndroidDev.
-
-## Other Helpful Resources.
-In this section i've included resources that are not related to clean architecture but were really helpful in learning other android components and tools:
-
-1. [Pokedex](https://github.com/ronnieotieno/PokeApi-Pokedex) GitHub repo by [Ronnie Otieno](https://twitter.com/ronnieonly) demonstrating how to use various jetpack components.
-2. [Fundamentals of testing](https://developer.android.com/training/testing/fundamentals) from the official [android developers](https://developer.android.com/) site.
-3. [Android MotionLayout Tutorial – Collapsing View](https://riggaroo.dev/android-motionlayout-tutorial-collapsing-view/) blog post on how to create a collapsing view with MotionLayout.
-4. [MotionLayout – Collapsing Toolbar](https://blog.stylingandroid.com/motionlayout-collapsing-toolbar-part-1/) blog post demonstrating how to create a collapsing toolbar using MotionLayout
-5. [Introduction to Github Actions for Android](https://blog.mindorks.com/github-actions-for-android) blog by [Mindorks](https://mindorks.com/) on how to set up GitHub actions for an android project.
-
 ## Demo
-These are the app's screenshots:
 
+## Android App
 
-<img src="assets/img1.png" width="250"/> 
+<img src="assets/img0.png" width="250"/>
 
-<img src="assets/img2.png" width="250"/> <img src="assets/img3.png" width="250"/> <img src="assets/img4.png" width="250"/>
+<img src="assets/img1.png" width="250"/> <img src="assets/img2.png" width="250"/>
 
-<img src="assets/img5.png" width="250"/> <img src="assets/img6.png" width="250"/> <img src="assets/img7.png" width="250"/>
+<img src="assets/img3.png" width="250"/> <img src="assets/img4.png" width="250"/>
 
-<img src="assets/img8.png" width="250"/>
+<img src="assets/img5.png" width="250"/>
 
-<img src="assets/img9.png" width="250"/> <img src="assets/img10.png" width="250"/> <img src="assets/img11.png" width="250"/> <img src="assets/img12.png" width="250"/> <img src="assets/img13.png" width="250"/>
+</p>
+
+## Desktop
+
+<img src="assets/img6.png" width="460"/>
+
+<img src="assets/img7.png" width="460"/> <img src="assets/img8.png" width="460"/>
+
+## Related Resources
+
+In this section I've included some resources ie. articles and GitHub reposirtories that i used to learn about kotlin mutltiplatform mobile:
+
+### Videos 📽️
+
+- [Your First Kotlin Multiplatform Mobile App Tutorial](https://www.youtube.com/watch?v=GcqFhoUuNNI)
+- [Sharing Code between iOS and Android with Kotlin #1](https://www.youtube.com/watch?v=mdN6P6RI__k&t=13s)
+
+### Articles/Blogs 📖
+
+- [Kotlin Multiplatform Hands-on: Networking and Data Storage](https://play.kotlinlang.org/hands-on/Networking%20and%20Data%20Storage%20with%20Kotlin%20Multiplatfrom%20Mobile/01_Introduction)
+- [KaMPKit General Architecture](https://github.com/touchlab/KaMPKit/blob/main/docs/GENERAL_ARCHITECTURE.md)
+- [Using Koin in a Kotlin Multiplatform Project](https://johnoreilly.dev/posts/kotlinmultiplatform-koin/)
+- [Create your first cross-platform mobile app – tutorial](https://kotlinlang.org/docs/multiplatform-mobile-create-first-app.html) - Learn how to create and run your first Kotlin Multiplatform Mobile application.
+- [Kotlin Multiplatform. Very beginner’s guide (part 1-3)](https://medium.com/proandroiddev/kotlin-multiplatform-very-beginners-guide-part-1-6419f74afa0f)
+- [Using Realm persistence library in a Kotlin Multiplatform project](https://johnoreilly.dev/posts/realm-kotlinmultiplatform/)
+
+### Sample Projects 🤖
+
+- [KMM Sample](https://github.com/KaterinaPetrova/kmm-sample) - A sample project for experiments with Kotlin Multiplatform mobile.
+- [Fantasy Premier League](https://github.com/joreilly/FantasyPremierLeague) - Kotlin Multiplatform project with Jetpack Compose, Compose for Desktop and SwiftUI clients (and using Ktor for remote API requests and Realm for persistence).
+- [KaMPKit](https://github.com/touchlab/KaMPKit)
+- [People In Space](https://github.com/joreilly/PeopleInSpace) - Minimal Kotlin Multiplatform project with SwiftUI, Jetpack Compose, Compose for Wear OS, Compose for Desktop, Compose for Web, and Kotlin/JS + React clients along with Ktor backend.
+
+## Other Helpful Resources
+
+In this section I've included resources that are not related to kotin multiplatform mobile but were really helpful in learning other android components and tools:
+
+### Videos 📽️
+
+- ToDo
+
+### Articles/Blogs 📖
+
+- [Introduction to Github Actions for Android](https://blog.mindorks.com/github-actions-for-android) blog by [Mindorks](https://mindorks.com/) on how to set up GitHub actions for an android project.
+
+### Sample Projects 🤖

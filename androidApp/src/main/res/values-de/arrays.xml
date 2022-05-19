@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- region Preferences Options -->
+    <string-array name="theme_labels">
+        <item>Leichtes thema</item>
+        <item>Dunkles thema</item>
+        <item>System default</item>
+    </string-array>
+
+    <string-array name="theme_entries">
+        <item>light_theme</item>
+        <item>dark_theme</item>
+        <item>system_default</item>
+    </string-array>
+    <!--endregion-->
+
+    <!--region Language Options -->
+    <string-array name="language_labels">
+        <item>Englisch</item>
+        <item>Spanisch</item>
+        <item>Französisch</item>
+        <item>Deutsch</item>
+    </string-array>
+
+    <string-array name="language_entries">
+        <item>en</item>
+        <item>es</item>
+        <item>fr</item>
+        <item>de</item>
+    </string-array>
+    <!--endregion-->
+
+    <!--region Language Options -->
+    <string-array name="image_quality_labels">
+        <item>Hohe qualität</item>
+        <item>Mittlere qualität</item>
+        <item>Geringe qualität</item>
+    </string-array>
+
+    <string-array name="image_quality_entries">
+        <item>https://image.tmdb.org/t/p/original/</item>
+        <item>https://image.tmdb.org/t/p/w500/</item>
+        <item>https://image.tmdb.org/t/p/w500/</item>
+    </string-array>
+    <!--endregion-->
+</resources>
