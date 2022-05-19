@@ -21,8 +21,6 @@ object AndroidDependencies {
 
     const val accompanistPager =
         "com.google.accompanist:accompanist-pager:${Versions.accompanist_version}"
-    const val accompanistPermissions =
-        "com.google.accompanist:accompanist-permissions:${Versions.accompanist_version}"
     const val accompanistInsets =
         "com.google.accompanist:accompanist-insets:${Versions.accompanist_version}"
     const val accompanistAnimation =
