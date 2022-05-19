@@ -13,31 +13,28 @@
 
 # 🛠️Migrating to KMP - [Develop Branch](https://youtu.be/dQw4w9WgXcQ) 🛠
 
- An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlang.org/docs/multiplatform.html) that consumes [TMDB API]("https://developers.themoviedb.org/3") to display current trending, upcoming and popular movies🍿 and tvshows🎬.
+An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlang.org/docs/multiplatform.html) that consumes [TMDB API]("https://developers.themoviedb.org/3") to display current trending, upcoming and popular movies🍿 and tvshows🎬.
 
 ## Table Of Content
 
-- [Notflix](#notflix)
-- [🛠️Migrating to KMP - Develop Branch 🛠](#️migrating-to-kmp---develop-branch-)
-  - [Table Of Content](#table-of-content)
-  - [Prerequisite](#prerequisite)
-  - [App Structure](#app-structure)
-  - [Architecture](#architecture)
-  - [Libraries](#libraries)
-    - [Shared](#shared)
-    - [Android](#android)
-  - [Extras](#extras)
-  - [Demo](#demo)
-  - [Android App](#android-app)
-  - [Desktop App](#desktop-app)
-  - [Related Resources](#related-resources)
-    - [Videos 📽️](#videos-️)
-    - [Articles/Blogs 📖](#articlesblogs-)
-    - [Sample Projects 🤖](#sample-projects-)
-  - [Other Helpful Resources](#other-helpful-resources)
-    - [Videos 📽️](#videos-️-1)
-    - [Articles/Blogs 📖](#articlesblogs--1)
-    - [Sample Projects 🤖](#sample-projects--1)
+- [Prerequisite](#prerequisite)
+- [App Structure](#app-structure)
+- [Architecture](#architecture)
+- [Libraries](#libraries)
+  - [Shared](#shared)
+  - [Android](#android)
+- [Extras](#extras)
+- [Demo](#demo)
+- [Android App](#android-app)
+- [Desktop App](#desktop-app)
+- [Related Resources](#related-resources)
+  - [Videos 📽️](#videos-️)
+  - [Articles/Blogs 📖](#articlesblogs-)
+  - [Sample Projects 🤖](#sample-projects-)
+- [Other Helpful Resources](#other-helpful-resources)
+  - [Videos 📽️](#videos-️-1)
+  - [Articles/Blogs 📖](#articlesblogs--1)
+  - [Sample Projects 🤖](#sample-projects--1)
 
 ## Prerequisite
 
