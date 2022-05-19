@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.vickikbt.domain.utils.Constants
+import com.vickikbt.shared.domain.utils.Constants
 
 class PreferenceManager constructor(private val context: Context) {
 
@@ -37,13 +37,13 @@ class PreferenceManager constructor(private val context: Context) {
     fun getLong(key: String, defaultValue: Long) = preferences.getLong(key, defaultValue)
 
     private val _appTheme: Int
-        get() = getInt(Constants.KEY_THEME)
+        get() = getInt(com.vickikbt.shared.domain.utils.Constants.KEY_THEME)
 
     private val _appLanguage: Int
-        get() = getInt(Constants.KEY_LANGUAGE)
+        get() = getInt(com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE)
 
     private val _imageQuality: Int
-        get() = getInt(Constants.KEY_IMAGE_QUALITY)
+        get() = getInt(com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY)
 
     private val _appThemeMutableLiveData: MutableLiveData<Int> = MutableLiveData()
     val appTheme: LiveData<Int> get() = _appThemeMutableLiveData
@@ -57,15 +57,15 @@ class PreferenceManager constructor(private val context: Context) {
     private val preferenceChangedListener =
         SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
             when (key) {
-                Constants.KEY_THEME -> {
+                com.vickikbt.shared.domain.utils.Constants.KEY_THEME -> {
                     _appThemeMutableLiveData.value = _appTheme
                 }
 
-                Constants.KEY_LANGUAGE -> {
+                com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE -> {
                     _appLanguageMutableLiveData.value = _appLanguage
                 }
 
-                Constants.KEY_IMAGE_QUALITY -> {
+                com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY -> {
                     _imageQualityMutableLiveData.value = _imageQuality
                 }
             }
@@ -77,5 +77,4 @@ class PreferenceManager constructor(private val context: Context) {
         _imageQualityMutableLiveData.value = _imageQuality
         preferences.registerOnSharedPreferenceChangeListener(preferenceChangedListener)
     }
-
 }

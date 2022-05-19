@@ -17,5 +17,4 @@ object TimeUtil {
 
         return difference > interval
     }
-
 }
