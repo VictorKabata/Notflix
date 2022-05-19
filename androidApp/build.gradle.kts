@@ -77,7 +77,6 @@ dependencies {
     implementation(AndroidDependencies.composeActivity)
 
     implementation(AndroidDependencies.accompanistPager)
-    implementation(AndroidDependencies.accompanistPermissions)
     implementation(AndroidDependencies.accompanistInsets)
     implementation(AndroidDependencies.accompanistAnimation)
     implementation(AndroidDependencies.accompanistSystemUIController)
