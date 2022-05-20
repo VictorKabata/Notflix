@@ -26,8 +26,6 @@ fun ItemNowPlayingMovies(
 ) {
     val painter = koil(url = "https://image.tmdb.org/t/p/original/${movie.backdropPath}")
 
-    println("Loading image: https://image.tmdb.org/t/p/original/${movie.backdropPath}")
-
     Box(modifier = modifier) {
         painter?.let {
             Image(

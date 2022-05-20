@@ -3,7 +3,7 @@ object Versions {
     const val ktor = "1.6.7"
     const val kotlinSerialization = "1.6.10"
     const val kotlinxSerialization = "1.2.2"
-    const val kotlinxCoroutines = "1.6.0"
+    const val kotlinxCoroutines = "1.6.0-native-mt"
     const val sqlDelight = "1.5.3"
     const val napier = "2.4.0"
     const val kotlinxDateTime = "0.3.2"

@@ -1,18 +1,14 @@
 package utils
 
-import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.toComposeImageBitmap
+import io.ktor.client.*
+import io.ktor.client.request.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.jetbrains.skia.Image
-import java.awt.image.BufferedImage
-import java.io.ByteArrayOutputStream
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
-import javax.imageio.ImageIO
 
-
-@Composable
+/*@Composable
 fun koil(url: String): ImageBitmap? {
     var image by remember(url) { mutableStateOf<ImageBitmap?>(null) }
 
@@ -45,4 +41,17 @@ fun toByteArray(bitmap: BufferedImage): ByteArray {
     val baos = ByteArrayOutputStream()
     ImageIO.write(bitmap, "png", baos)
     return baos.toByteArray()
+}*/
+
+suspend fun koil(url: String): ImageBitmap? {
+    val image = withContext(Dispatchers.IO) {
+        try {
+            HttpClient().use {
+                it.get<ByteArray>(url)
+            }
+        } catch (e: Exception) {
+            null
+        }
+    }
+    return image?.let { Image.makeFromEncoded(it).toComposeImageBitmap() }
 }
