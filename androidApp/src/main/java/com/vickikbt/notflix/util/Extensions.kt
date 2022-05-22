@@ -2,8 +2,6 @@ package com.vickikbt.notflix.util
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.vickikbt.cache.preferences.PreferenceManager
-import com.vickikbt.notflix.R
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.text.SimpleDateFormat
@@ -14,13 +12,13 @@ inline fun <reified T> getKoinInstance(): T {
     }.value
 }
 
-private val preferenceManager: PreferenceManager = getKoinInstance()
+// private val preferenceManager: PreferenceManager = getKoinInstance()
 
 /**
  * Append the image url with string to determine the image quality to be loaded
  */
 fun String.loadImage(context: Context? = null): String {
-    return if (context != null) {
+    /*return if (context != null) {
         var imageQuality: String? = null
         preferenceManager.imageQuality.observeForever { languageSelection ->
             val languageEntry =
@@ -36,7 +34,8 @@ fun String.loadImage(context: Context? = null): String {
         return imageQuality!!
     } else {
         "https://image.tmdb.org/t/p/original/"
-    }
+    }*/
+    return "https://image.tmdb.org/t/p/original/"
 }
 
 // Original- 1998-11-19
