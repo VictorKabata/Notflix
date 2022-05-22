@@ -16,7 +16,7 @@ import ui.theme.DarkPrimaryColor
 @Composable
 fun SectionSeparator(modifier: Modifier = Modifier, sectionTitle: String, onItemClick: () -> Unit) {
     Row(
-        modifier = modifier.clickable { onItemClick() },
+        modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
@@ -30,6 +30,7 @@ fun SectionSeparator(modifier: Modifier = Modifier, sectionTitle: String, onItem
         )
 
         Text(
+            modifier = Modifier.clickable { onItemClick() },
             text = "View All",
             color = DarkPrimaryColor,
             fontWeight = FontWeight.SemiBold,
