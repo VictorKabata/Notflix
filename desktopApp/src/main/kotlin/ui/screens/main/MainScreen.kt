@@ -3,6 +3,7 @@ package ui.screens.main
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
@@ -15,9 +16,12 @@ import ui.theme.NotflixDesktopTheme
 @Composable
 fun MainScreen(applicationScope: ApplicationScope) {
 
+    val appIcon = painterResource("n_logo.png")
+
     Window(
         onCloseRequest = { applicationScope.exitApplication() },
         title = "Notflix",
+        icon = appIcon,
         state = rememberWindowState(width = 800.dp, height = 600.dp)
     ) {
 
