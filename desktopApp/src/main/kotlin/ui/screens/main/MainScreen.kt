@@ -3,10 +3,12 @@ package ui.screens.main
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import ui.components.NavigationRailBar
 import ui.navigation.NavigationItem
@@ -22,7 +24,11 @@ fun MainScreen(applicationScope: ApplicationScope) {
         onCloseRequest = { applicationScope.exitApplication() },
         title = "Notflix",
         icon = appIcon,
-        state = rememberWindowState(width = 800.dp, height = 600.dp)
+        state = rememberWindowState(
+            position = WindowPosition.Aligned(Alignment.Center),
+            width = Dp.Unspecified,
+            height = Dp.Unspecified,
+        )
     ) {
 
         val topLevelDestinations = listOf(

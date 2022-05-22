@@ -36,7 +36,7 @@ fun ItemNowPlayingMovies(
             load = { loadImageBitmap(imageUrl) },
             painterFor = { remember { BitmapPainter(it) } },
             contentDescription = "Movie Backdrop Poster",
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.FillWidth
         )
 
         //region Movie Title
