@@ -14,11 +14,8 @@ dependencies {
     implementation(project(BuildModules.Shared))
 
     implementation(compose.desktop.currentOs)
+    implementation(DesktopDependencies.kamel)
 }
-
-/*tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
-}*/
 
 compose.desktop {
     application {

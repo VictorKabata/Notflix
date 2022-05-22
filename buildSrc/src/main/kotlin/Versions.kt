@@ -12,6 +12,7 @@ object Versions {
 
     // KMM Desktop Libs
     const val composeDesktop = "1.2.0-alpha01-dev683"
+    const val kamel = "0.2.2"
 
     // KMM test libs
     const val mockk = "1.12.3"
