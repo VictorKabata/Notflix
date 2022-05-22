@@ -1,7 +1,6 @@
 package com.vickikbt.notflix.util
 
 import android.annotation.SuppressLint
-import android.content.Context
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.text.SimpleDateFormat
@@ -17,26 +16,7 @@ inline fun <reified T> getKoinInstance(): T {
 /**
  * Append the image url with string to determine the image quality to be loaded
  */
-fun String.loadImage(context: Context? = null): String {
-    /*return if (context != null) {
-        var imageQuality: String? = null
-        preferenceManager.imageQuality.observeForever { languageSelection ->
-            val languageEntry =
-                context.resources.getStringArray(R.array.image_quality_entries)[languageSelection]
-
-            imageQuality = when (languageSelection) {
-                0 -> "$languageEntry$this"
-                1 -> "$languageEntry$this"
-                2 -> "$languageEntry$this"
-                else -> "$languageEntry$this"
-            }
-        }
-        return imageQuality!!
-    } else {
-        "https://image.tmdb.org/t/p/original/"
-    }*/
-    return "https://image.tmdb.org/t/p/original/"
-}
+fun String.loadImage(): String = "https://image.tmdb.org/t/p/original/$this"
 
 // Original- 1998-11-19
 // Target- Nov, 1998

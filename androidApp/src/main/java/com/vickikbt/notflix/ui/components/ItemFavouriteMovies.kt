@@ -10,16 +10,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.notflix.util.loadImage
+import com.vickikbt.shared.domain.models.Movie
 
 @Composable
 fun ItemFavoriteMovie(movie: Movie) {
     Column(Modifier.fillMaxWidth(0.4f).height(100.dp), horizontalAlignment = Alignment.Start) {
-        val painter = rememberImagePainter(data = movie.backdropPath?.loadImage(LocalContext.current)) {
+        val painter = rememberImagePainter(data = movie.backdropPath?.loadImage()) {
             crossfade(true)
         }
         Image(
