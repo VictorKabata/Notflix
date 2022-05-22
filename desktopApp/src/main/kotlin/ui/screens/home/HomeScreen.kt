@@ -114,9 +114,7 @@ fun PopularMovies(movies: List<Movie>) {
     ) {
         items(items = movies) { item ->
             ItemPopularMovies(
-                modifier = Modifier
-                    .width(480.dp)
-                    .height(346.dp),
+                modifier = Modifier,
                 movie = item
             ) {
                 // ToDo: On movie clicked

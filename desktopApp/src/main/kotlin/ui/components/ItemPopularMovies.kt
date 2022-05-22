@@ -37,13 +37,14 @@ fun ItemPopularMovies(
 
     val imageUrl = "https://image.tmdb.org/t/p/original/${movie.backdropPath}"
 
-    var cardAspectRatio by remember { mutableStateOf(1F) }
+    // var cardAspectRatio by remember { mutableStateOf(1F) }
 
     TooltipMovieTitle(title = movie.title) {
         Card(
             modifier = modifier
+                .width(480.dp)
+                .height(320.dp)
                 .clickable { onClickItem(movie) }
-                .aspectRatio(cardAspectRatio)
             /*.onPointerEvent(PointerEventType.Enter) {
                 cardAspectRatio = 1.5f
             }.onPointerEvent(PointerEventType.Exit) {

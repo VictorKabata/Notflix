@@ -21,4 +21,8 @@ compose.desktop {
     application {
         mainClass = "NotflixDesktopKt"
     }
+
+    /*nativeDistributions {
+        targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+    }*/
 }
