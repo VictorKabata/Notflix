@@ -6,48 +6,118 @@
 <img  src="https://img.shields.io/badge/-ANDROID-E50914?logo=android&logoColor=white&style=for-the-badge">
 <img  src="https://img.shields.io/badge/-WINDOWS-E50914?logo=windows&logoColor=white&style=for-the-badge">
 <img  src="https://img.shields.io/badge/-LINUX-E50914?logo=linux&logoColor=white&style=for-the-badge">
-<img  src="https://img.shields.io/badge/-LICENSE:%20MIT-E50914?logo=licenselogoColor=white&style=for-the-badge">
 </p>
 
 # Notflix
 
-# 🛠️Migrating to KMP - [Develop Branch](https://youtu.be/dQw4w9WgXcQ) 🛠
+# 🛠️Migrating to KMP - [Develop Branch](https://youtu.be/dQw4w9WgXcQ)
 
-An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlang.org/docs/multiplatform.html) that consumes [TMDB API]("https://developers.themoviedb.org/3") to display current trending, upcoming and popular movies🍿 and tvshows🎬.
+ An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlang.org/docs/multiplatform.html) that consumes [TMDB API]("https://developers.themoviedb.org/3") to display current trending, upcoming and popular movies🍿 and tvshows🎬.
+
+[Kotlin Multiplatform]() is a framework of Kotlin that allows for sharing of a single codebase for business logic across different [targets]()/platforms. Some of the targets supported by kotlin are: Android, iOS, Kotlin/JVM, Kotlin/JS, Android NDK, Windows, Linux, macOS etc.
+
+[Compose Multiplatform]() is a UI framework mabe by Jetbrains that allow for simple and accelerated desktop application and web development using [compose](). Compose multiplatform also allows sharing compose UI code between diffrent platforms. eg android, desktop(Windows, Linux, MacOS) and web.
 
 ## Table Of Content
 
-- [Table Of Content](#table-of-content)
-- [Prerequisite](#prerequisite)
-- [App Structure](#app-structure)
-- [Architecture](#architecture)
-- [Libraries](#libraries)
-  - [Shared](#shared)
-  - [Android](#android)
-- [Extras](#extras)
-- [Demo](#demo)
-- [Android App](#android-app)
-- [Desktop](#desktop)
-- [Related Resources](#related-resources)
-  - [Videos 📽️](#videos-️)
-  - [Articles/Blogs 📖](#articlesblogs-)
-  - [Sample Projects 🤖](#sample-projects-)
-- [Other Helpful Resources](#other-helpful-resources)
-  - [Videos 📽️](#videos-️-1)
-  - [Articles/Blogs 📖](#articlesblogs--1)
-  - [Sample Projects 🤖](#sample-projects--1)
+- [Notflix](#notflix)
+- [🛠️Migrating to KMP - Develop Branch](#️migrating-to-kmp---develop-branch)
+  - [Table Of Content](#table-of-content)
+  - [Prerequisite](#prerequisite)
+  - [Disclaimer](#disclaimer)
+  - [Pros of KMP/KMM](#pros-of-kmpkmm)
+  - [App Structure](#app-structure)
+    - [1. androidApp](#1-androidapp)
+    - [2. desktopApp](#2-desktopapp)
+  - [3. shared](#3-shared)
+    - [__Domain__](#domain)
+    - [2. Data](#2-data)
+  - [Libraries](#libraries)
+    - [Shared](#shared)
+    - [Android](#android)
+  - [Extras](#extras)
+  - [Demo](#demo)
+  - [Android App](#android-app)
+  - [Desktop](#desktop)
+  - [Related Resources](#related-resources)
+    - [Videos 📽️](#videos-️)
+    - [Articles/Blogs 📖](#articlesblogs-)
+    - [Sample Projects 🤖](#sample-projects-)
+  - [Other Helpful Resources](#other-helpful-resources)
+    - [Videos 📽️](#videos-️-1)
+    - [Articles/Blogs 📖](#articlesblogs--1)
+    - [Sample Projects 🤖](#sample-projects--1)
 
 ## Prerequisite
 
 In order to be able to build the application you'll need to change the api key in [`gradle.properties`](link_to_gradle.properties_file). First and formost you need to generate your own api key by [creating](https://www.themoviedb.org/signup) a TMDB account and [generating](https://www.themoviedb.org/settings/api) an api key.
 
+## Disclaimer
+
+- Koltin Multiplatform is still in alpha phase at the time of writting this however it's still being used by some well known [companies](https://kotlinlang.org/lp/mobile/case-studies/) around the world.
+
+- Kotlin multiplatform and Compose multiplatform are two diffrent concepts that aim to so achieve multiplatform programming. Kotlin multiplatform is all about sharing business logic(at times presentation logic too but only "viewmodels") across diffrent platforms while compose multiplatform is about using/sharing compose UI across diffrent platforms.
+
+- When starting out a KMP/KMM project some knownledge of [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) or similar design patterns, SOLID principles, separation of concern and modularization might go a long way into reducing the learning curve. i have discussed the usage of above concepts in a [previous iteration](https://github.com/VictorKabata/Notflix/tree/xml-archive) of this project.
+
+- When using KMP/KMM some knowledge of other programming language such as [Swift](https://developer.apple.com/swift/) or [Javascript](https://kotlinlang.org/docs/js-overview.html) is still required since only the business logic is shared but the UI code is in the native programming language of the targetted platform.
+- Kotlin multiplatform and compose multiplatform have limited learning resources and a relatively small community at the time of writting. However learning resources have been attached at the end of this doc and you can find a fast diverse Kotlin community on [Kotlin Official slack](https://kotlinlang.slack.com/messages/kotlin-logging/) or [Android254 twitter](https://twitter.com/254androiddevs?s=20&t=R1PZIGpj8zURaxTzS59yXw).
+
+## Pros of KMP/KMM
+
+- Faster development since you only need to write most of the businness logic and tests only once.
+- Improve code quality.
+- Highly maintainable and testable code due to separation of concern in the codebase.
+
 ## App Structure
 
-// ToDo
+<p align="center"><img src="assets/project_structure.png" alt="Project Structure"></p>
 
-## Architecture
+The project currently has 3 main modules:
 
-// ToDo
+### 1. [androidApp](https://github.com/VictorKabata/Notflix/tree/main/androidApp)
+
+ This module contains the android application's UI built using [Jetpack compose](https://developer.android.com/jetpack/compose).
+
+### 2. [desktopApp](https://github.com/VictorKabata/Notflix/tree/main/desktopApp)
+
+This module contains the desktop application's UI built using [Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/).
+
+## 3. [shared](https://github.com/VictorKabata/Notflix/tree/main/shared)
+
+This module contains shared code that holds the domain and data layers and some part of the presentation logic ie.shared viewmodels
+
+### __Domain__
+
+This is the core layer of the application. The ```domain``` layer is independent of any other layers this means that changes in other layers will have no effect on domain layer eg.  screen UI (presentation layer) or changing database (data layer) will not result in any code change withing domain layer.
+
+Components of domain layer include:
+
+- __Models__: Defines the core structure of the data that will be used within the application.
+
+- __Repositories__: Interfaces used by the use cases. Implemented in the data layer.
+
+### 2. Data
+
+The ```data``` layer is responsibile for selecting the proper data source for the domain layer. It contains the implementations of the repositories declared in the domain layer.
+
+Components of data layer include:
+
+- __Models__
+
+    -__Dto Models__: Defines POJO of network responses.
+
+    -__Entity Models__: Defines the schema of the database.
+
+- __Mappers__: They perform data transformation between ```domain```, ```dto``` and ```entity``` models.
+
+- __Network__: This is responsible for performing network operations eg. defining API endpoints using [Ktor](https://ktor.io/).
+
+- __Cache__: This is responsible for performing caching operations using [Realm](https://github.com/realm/realm-kotlin).
+
+- __Data Sources__:  Responsible for deciding which data source (network or cache) will be used when fetching data and presenting the data to viewmodels.
+
+<p align="center"><img src="assets/clean_arch.png" alt="Clean Architecture Diagram"></p>
 
 ## Libraries
 
@@ -96,9 +166,9 @@ In order to be able to build the application you'll need to change the api key i
 
 ## Desktop
 
-<img src="assets/img6.png" width="460"/>
+<img src="assets/img6.png" width="660" height=400/>
 
-<img src="assets/img7.png" width="460"/> <img src="assets/img8.png" width="460"/>
+<img src="assets/img7.png" width="660" height=400/> <img src="assets/img8.png" width="660" height=400/>
 
 ## Related Resources
 

@@ -2,8 +2,6 @@ include(":androidApp")
 include(":shared")
 include(":desktopApp")
 
-include(":data:cache")
-
 rootProject.name = "Notflix"
 
 /*include(BuildModules.App)

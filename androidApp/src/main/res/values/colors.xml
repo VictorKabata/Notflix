@@ -14,5 +14,5 @@
     <color name="text_grey">#808080</color>
     <color name="golden">#FFCA28</color>
 
-    <color name="ic_launcher_background">#FFFFFF</color>
+    <!--<color name="ic_launcher_background">#000000</color>-->
 </resources>

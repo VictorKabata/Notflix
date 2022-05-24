@@ -31,6 +31,7 @@ kotlin {
     sourceSets {
         sourceSets["commonMain"].dependencies {
             implementation(KmmDependencies.kotlinxCoroutines)
+
             implementation(KmmDependencies.kotlinxSerialization)
             implementation(KmmDependencies.kotlinxDateTime)
 
@@ -58,7 +59,7 @@ kotlin {
         sourceSets["androidTest"].dependencies {}
 
         sourceSets["jvmMain"].dependencies {
-            implementation(KmmDependencies.ktorJvm)
+            api(KmmDependencies.ktorJvm)
         }
 
         sourceSets["iOSMain"].dependencies {

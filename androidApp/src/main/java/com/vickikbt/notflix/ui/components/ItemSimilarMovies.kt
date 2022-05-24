@@ -9,7 +9,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -19,15 +18,15 @@ import coil.compose.rememberImagePainter
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
-import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.notflix.ui.theme.Golden
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
+import com.vickikbt.shared.domain.models.Movie
 
 @Composable
 fun ItemSimilarMovies(movie: Movie) {
-    val painter = rememberImagePainter(data = movie.backdropPath?.loadImage(LocalContext.current))
+    val painter = rememberImagePainter(data = movie.backdropPath?.loadImage())
 
     Column {
         Card(

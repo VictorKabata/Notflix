@@ -120,7 +120,7 @@ fun NowPlayingMovies(
             movie = movies[page]
         ) {
             val movie = movies[page]
-            navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
+            // navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
         }
     }
 
@@ -173,7 +173,7 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
                 ),
                 movie = item,
                 onItemClick = { movie ->
-                    navController.navigate("details/${movie.id!!}/${movie.cacheId}")
+                    // navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                 }
             )
         }
@@ -215,7 +215,7 @@ fun PopularMovies(
                 viewModel = viewModel,
                 movie = item,
                 onClickItem = { movie ->
-                    navController.navigate("details/${movie.id!!}/${movie.cacheId}")
+                    // navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                 }
             )
         }
@@ -255,7 +255,7 @@ fun UpcomingMovies(
                     ),
                     movie = item,
                     onItemClick = { movie ->
-                        navController.navigate("details/${movie.id!!}/${movie.cacheId}")
+                        // navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                     }
                 )
             }
