@@ -12,7 +12,7 @@
 
 # 🛠️Migrating to KMP - [Develop Branch](https://youtu.be/dQw4w9WgXcQ)
 
- An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlang.org/docs/multiplatform.html) that consumes [TMDB API]("https://developers.themoviedb.org/3") to display current trending, upcoming and popular movies🍿 and tvshows🎬.
+An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlang.org/docs/multiplatform.html) that consumes [TMDB API]("https://developers.themoviedb.org/3") to display current trending, upcoming and popular movies🍿 and tvshows🎬.
 
 [Kotlin Multiplatform]() is a framework of Kotlin that allows for sharing of a single codebase for business logic across different [targets]()/platforms. Some of the targets supported by kotlin are: Android, iOS, Kotlin/JVM, Kotlin/JS, Android NDK, Windows, Linux, macOS etc.
 
@@ -20,33 +20,30 @@
 
 ## Table Of Content
 
-- [Notflix](#notflix)
-- [🛠️Migrating to KMP - Develop Branch](#️migrating-to-kmp---develop-branch)
-  - [Table Of Content](#table-of-content)
-  - [Prerequisite](#prerequisite)
-  - [Disclaimer](#disclaimer)
-  - [Pros of KMP/KMM](#pros-of-kmpkmm)
-  - [App Structure](#app-structure)
-    - [1. androidApp](#1-androidapp)
-    - [2. desktopApp](#2-desktopapp)
-  - [3. shared](#3-shared)
-    - [__Domain__](#domain)
-    - [2. Data](#2-data)
-  - [Libraries](#libraries)
-    - [Shared](#shared)
-    - [Android](#android)
-  - [Extras](#extras)
-  - [Demo](#demo)
-  - [Android App](#android-app)
-  - [Desktop](#desktop)
-  - [Related Resources](#related-resources)
-    - [Videos 📽️](#videos-️)
-    - [Articles/Blogs 📖](#articlesblogs-)
-    - [Sample Projects 🤖](#sample-projects-)
-  - [Other Helpful Resources](#other-helpful-resources)
-    - [Videos 📽️](#videos-️-1)
-    - [Articles/Blogs 📖](#articlesblogs--1)
-    - [Sample Projects 🤖](#sample-projects--1)
+- [Prerequisite](#prerequisite)
+- [Disclaimer](#disclaimer)
+- [Pros of KMP/KMM](#pros-of-kmpkmm)
+- [App Structure](#app-structure)
+  - [1. androidApp](#1-androidapp)
+  - [2. desktopApp](#2-desktopapp)
+- [3. shared](#3-shared)
+  - [__Domain__](#domain)
+  - [2. Data](#2-data)
+- [Libraries](#libraries)
+  - [Shared](#shared)
+  - [Android](#android)
+- [Extras](#extras)
+- [Demo](#demo)
+- [Android App](#android-app)
+- [Desktop](#desktop)
+- [Related Resources](#related-resources)
+  - [Videos 📽️](#videos-️)
+  - [Articles/Blogs 📖](#articlesblogs-)
+  - [Sample Projects 🤖](#sample-projects-)
+- [Other Helpful Resources](#other-helpful-resources)
+  - [Videos 📽️](#videos-️-1)
+  - [Articles/Blogs 📖](#articlesblogs--1)
+  - [Sample Projects 🤖](#sample-projects--1)
 
 ## Prerequisite
 
@@ -77,7 +74,7 @@ The project currently has 3 main modules:
 
 ### 1. [androidApp](https://github.com/VictorKabata/Notflix/tree/main/androidApp)
 
- This module contains the android application's UI built using [Jetpack compose](https://developer.android.com/jetpack/compose).
+This module contains the android application's UI built using [Jetpack compose](https://developer.android.com/jetpack/compose).
 
 ### 2. [desktopApp](https://github.com/VictorKabata/Notflix/tree/main/desktopApp)
 
@@ -105,9 +102,9 @@ Components of data layer include:
 
 - __Models__
 
-    -__Dto Models__: Defines POJO of network responses.
+  -__Dto Models__: Defines POJO of network responses.
 
-    -__Entity Models__: Defines the schema of the database.
+  -__Entity Models__: Defines the schema of the database.
 
 - __Mappers__: They perform data transformation between ```domain```, ```dto``` and ```entity``` models.
 
