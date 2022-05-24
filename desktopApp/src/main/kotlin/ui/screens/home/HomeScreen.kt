@@ -26,18 +26,22 @@ fun HomeScreen() {
     val popularMovies = viewModel.popularMovies.collectAsState()
     val upcomingMovies = viewModel.upcomingMovies.collectAsState()
 
-    val scrollState = rememberScrollState()
+    val parentScrollState = rememberScrollState(0)
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(state = scrollState),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .verticalScroll(state = parentScrollState)
     ) {
-        if (!nowPlayingMovies.value.isNullOrEmpty()) NowPlayingMovies(movies = nowPlayingMovies.value!!)
-        trendingMovies.value?.let { TrendingMovies(movies = it) }
-        popularMovies.value?.let { PopularMovies(movies = it) }
-        upcomingMovies.value?.let { UpcomingMovies(movies = it) }
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            if (!nowPlayingMovies.value.isNullOrEmpty()) NowPlayingMovies(movies = nowPlayingMovies.value!!)
+            trendingMovies.value?.let { TrendingMovies(movies = it) }
+            popularMovies.value?.let { PopularMovies(movies = it) }
+            upcomingMovies.value?.let { UpcomingMovies(movies = it) }
+        }
     }
 }
 
@@ -110,9 +114,7 @@ fun PopularMovies(movies: List<Movie>) {
     ) {
         items(items = movies) { item ->
             ItemPopularMovies(
-                modifier = Modifier
-                    .width(480.dp)
-                    .height(346.dp),
+                modifier = Modifier,
                 movie = item
             ) {
                 // ToDo: On movie clicked

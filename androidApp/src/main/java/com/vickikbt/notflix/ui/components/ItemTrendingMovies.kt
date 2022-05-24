@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -42,7 +41,7 @@ fun ItemTrendingMovies(
             Image(
                 modifier = Modifier.fillMaxSize(),
                 painter = rememberImagePainter(
-                    data = movie.backdropPath?.loadImage(LocalContext.current),
+                    data = movie.backdropPath?.loadImage(),
                     builder = { crossfade(true) }
                 ),
                 alignment = Alignment.Center,

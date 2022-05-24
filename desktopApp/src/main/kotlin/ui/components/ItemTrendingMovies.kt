@@ -1,6 +1,5 @@
 package ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -8,8 +7,9 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -17,7 +17,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.vickikbt.shared.domain.models.Movie
-import utils.koil
+import utils.AsyncImage
+import utils.loadImageBitmap
 
 @Composable
 fun ItemTrendingMovies(
@@ -25,7 +26,7 @@ fun ItemTrendingMovies(
     movie: Movie,
     onItemClick: (Movie) -> Unit
 ) {
-    val painter = koil(url = "https://image.tmdb.org/t/p/original/${movie.posterPath}")
+    val imageUrl = "https://image.tmdb.org/t/p/original/${movie.posterPath}"
 
     Column {
         Card(
@@ -36,15 +37,13 @@ fun ItemTrendingMovies(
             elevation = 8.dp,
             shape = RoundedCornerShape(4.dp)
         ) {
-            painter?.let {
-                Image(
-                    modifier = Modifier.fillMaxSize(),
-                    bitmap = it,
-                    alignment = Alignment.Center,
-                    contentScale = ContentScale.Crop,
-                    contentDescription = "Trending Movie"
-                )
-            }
+            AsyncImage(
+                modifier = Modifier.fillMaxSize(),
+                load = { loadImageBitmap(imageUrl) },
+                painterFor = { remember { BitmapPainter(it) } },
+                contentDescription = "Movie poster",
+                contentScale = ContentScale.Crop
+            )
         }
 
         Spacer(modifier = Modifier.height(6.dp))

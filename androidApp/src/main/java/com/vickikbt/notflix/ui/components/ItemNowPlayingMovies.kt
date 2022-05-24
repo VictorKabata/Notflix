@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,12 +27,12 @@ import coil.compose.rememberImagePainter
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
-import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.notflix.ui.screens.home.HomeViewModel
 import com.vickikbt.notflix.ui.theme.Black
 import com.vickikbt.notflix.ui.theme.Golden
 import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
+import com.vickikbt.shared.domain.models.Movie
 import kotlinx.coroutines.launch
 
 @Composable
@@ -53,7 +52,7 @@ fun ItemNowPlayingMovies(
             val (imageMovieCover, boxFadingEdge, textMovieTitle, ratingBarRanking) = createRefs()
 
             val painter = rememberImagePainter(
-                data = movie.backdropPath?.loadImage(LocalContext.current),
+                data = movie.backdropPath?.loadImage(),
                 builder = { crossfade(true) }
             )
 

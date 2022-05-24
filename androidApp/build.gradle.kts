@@ -57,7 +57,6 @@ dependencies {
     implementation("com.android.support:multidex:2.0.1")
 
     api(project(BuildModules.Shared))
-    api(project(BuildModules.Cache))
 
     implementation(AndroidDependencies.kotlin)
     implementation(AndroidDependencies.androidCore)

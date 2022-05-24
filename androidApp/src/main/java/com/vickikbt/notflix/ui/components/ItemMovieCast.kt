@@ -9,7 +9,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -17,15 +16,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
-import com.vickikbt.shared.domain.models.Actor
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.theme.TextSecondary
 import com.vickikbt.notflix.util.loadImage
+import com.vickikbt.shared.domain.models.Actor
 
 @Composable
 fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
 
-    val painter = rememberImagePainter(data = actor.profilePath?.loadImage(LocalContext.current)) {
+    val painter = rememberImagePainter(data = actor.profilePath?.loadImage()) {
         crossfade(true)
         transformations(CircleCropTransformation())
     }
