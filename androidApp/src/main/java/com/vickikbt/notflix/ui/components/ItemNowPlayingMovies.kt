@@ -33,11 +33,12 @@ import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.Movie
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.get
 
 @Composable
 fun ItemNowPlayingMovies(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel,
+    viewModel: HomeViewModel= get(),
     movie: Movie,
     onItemClick: () -> Unit
 ) {
