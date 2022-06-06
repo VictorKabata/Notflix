@@ -1,9 +1,9 @@
-object KmmDependencies {
+object MultiplatformDependencies {
 
     const val kotlinxCoroutines =
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinxCoroutines}"
 
-    const val koinCore = "io.insert-koin:koin-core:${Versions.koin_version}"
+    const val koinCore = "io.insert-koin:koin-core:${Versions.koin}"
 
     const val kotlinxSerialization =
         "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.kotlinxSerialization}"
