@@ -34,7 +34,6 @@ import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel
 import org.koin.androidx.compose.get
-import org.koin.androidx.compose.getViewModel
 
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
