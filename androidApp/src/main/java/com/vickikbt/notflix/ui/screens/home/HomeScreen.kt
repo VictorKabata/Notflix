@@ -31,6 +31,7 @@ import com.vickikbt.notflix.ui.components.ItemTrendingMovies
 import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Gray
+import com.vickikbt.notflix.util.disabledHorizontalPointerInputScroll
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel
 import org.koin.androidx.compose.get
@@ -100,7 +101,7 @@ fun NowPlayingMovies(
             .fillMaxWidth()
             .wrapContentHeight(),
         count = if (movies.size >= 5) 5 else movies.size,
-        state = pagerState
+        state = pagerState,
     ) { page ->
         ItemNowPlayingMovies(
             modifier = Modifier
@@ -108,7 +109,7 @@ fun NowPlayingMovies(
                 .height(360.dp),
             movie = movies[page]
         ) {
-            val movie = movies[page]
+            // val movie = movies[page]
             // navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
         }
     }

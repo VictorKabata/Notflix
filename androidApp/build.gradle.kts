@@ -17,8 +17,6 @@ android {
         versionName = AndroidSdk.versionName
 
         testInstrumentationRunner = AndroidSdk.testInstrumentationRunner
-
-        multiDexEnabled = true
     }
 
     buildTypes {
@@ -52,8 +50,6 @@ android {
 }
 
 dependencies {
-    implementation("com.android.support:multidex:2.0.1")
-
     api(project(BuildModules.shared))
 
     implementation(AndroidDependencies.kotlin)
