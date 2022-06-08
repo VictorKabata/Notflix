@@ -70,13 +70,13 @@ In order to be able to build the application you'll need to change the api key i
 
 ## App Structure
 
-<p align="center"><img src="assets/project_structure.png" alt="Project Structure"></p>
+<p align="center"><img src="assets/project_structuresss.png" alt="Project Structure"></p>
 
 The project currently has 3 main modules:
 
 ### 1. [androidApp](https://github.com/VictorKabata/Notflix/tree/main/androidApp)
 
- This module contains the android application's UI built using [Jetpack compose](https://developer.android.com/jetpack/compose).
+This module contains the android application's UI built using [Jetpack compose](https://developer.android.com/jetpack/compose).
 
 ### 2. [desktopApp](https://github.com/VictorKabata/Notflix/tree/main/desktopApp)
 
@@ -104,9 +104,9 @@ Components of data layer include:
 
 - __Models__
 
-    -__Dto Models__: Defines POJO of network responses.
+  -__Dto Models__: Defines POJO of network responses.
 
-    -__Entity Models__: Defines the schema of the database.
+  -__Entity Models__: Defines the schema of the database.
 
 - __Mappers__: They perform data transformation between ```domain```, ```dto``` and ```entity``` models.
 

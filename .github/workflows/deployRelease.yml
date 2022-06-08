@@ -39,6 +39,17 @@ jobs:
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v1
+
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+          
       - name: Build Debug APK
         run: ./gradlew assembleDebug --stacktrace
 
