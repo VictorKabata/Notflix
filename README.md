@@ -6,6 +6,7 @@
 <img  src="https://img.shields.io/badge/-ANDROID-E50914?logo=android&logoColor=white&style=for-the-badge">
 <img  src="https://img.shields.io/badge/-WINDOWS-E50914?logo=windows&logoColor=white&style=for-the-badge">
 <img  src="https://img.shields.io/badge/-LINUX-E50914?logo=linux&logoColor=white&style=for-the-badge">
+<img  src="https://img.shields.io/badge/-MACOS-E50914?logo=apple&logoColor=white&style=for-the-badge">
 </p>
 
 # Notflix
