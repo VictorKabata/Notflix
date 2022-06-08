@@ -1,5 +1,4 @@
 buildscript {
-
     repositories {
         google()
         mavenCentral()
@@ -7,18 +6,16 @@ buildscript {
     }
 
     dependencies {
-        classpath(ProjectLevelPlugins.gradle)
-        classpath(ProjectLevelPlugins.kotlin)
-        classpath(ProjectLevelPlugins.firebaseCrashlyitics)
-        classpath(ProjectLevelPlugins.googleServices)
-        // classpath(ProjectLevelPlugins.ktLint)
-        classpath(ProjectLevelPlugins.sqlDelight)
-        classpath(ProjectLevelPlugins.kmpNativeCoroutines)
+        classpath(Plugins.kotlin)
+        classpath(Plugins.gradle)
+        classpath(Plugins.kmpNativeCoroutines)
     }
 }
 
 plugins {
-    // id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
+    id(Plugins.ktLint) version Versions.ktLint
+    id(Plugins.detekt) version (Versions.detekt)
+    id(Plugins.gradleVersionUpdates) version (Versions.gradleVersionUpdate)
 }
 
 allprojects {
@@ -29,17 +26,33 @@ allprojects {
         maven("https://jitpack.io")
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
+}
 
-//    apply(plugin = BuildPlugins.ktlintPlugin)
-//    ktlint {
-//        debug.set(true)
-//        verbose.set(true)
-//        android.set(false)
-//        filter {
-//            exclude("**/generated/**")
-//            include("**/kotlin/**")
-//        }
-//    }
+subprojects {
+    apply(plugin = Plugins.ktLint)
+    ktlint {
+        debug.set(true)
+        verbose.set(true)
+        android.set(false)
+        outputToConsole.set(true)
+        outputColorName.set("RED")
+        filter {
+            exclude("**/generated/**")
+            include("**/kotlin/**")
+        }
+    }
+
+    apply(plugin = Plugins.detekt)
+    detekt {
+        parallel = true
+        config = files("${project.rootDir}/config/detekt/detekt.yml")
+    }
+
+    tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
+        checkForGradleUpdate = true
+        outputDir = "build/dependencyUpdates"
+        reportfileName = "report"
+    }
 }
 
 tasks.register("clean").configure {

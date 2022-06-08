@@ -18,4 +18,3 @@ val White = Color(0xFFFFFFFF)
 val Black = Color(0xFF000000)
 val Gray = Color(0xFF909090)
 val Golden = Color(0xFFFFCA28)
-

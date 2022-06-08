@@ -17,7 +17,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -34,11 +33,12 @@ import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.Movie
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.get
 
 @Composable
 fun ItemNowPlayingMovies(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel,
+    viewModel: HomeViewModel= get(),
     movie: Movie,
     onItemClick: () -> Unit
 ) {
@@ -141,9 +141,4 @@ fun ItemNowPlayingMovies(
             //endregion
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun Preview() {
 }

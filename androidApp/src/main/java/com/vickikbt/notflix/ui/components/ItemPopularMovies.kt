@@ -34,12 +34,13 @@ import com.vickikbt.notflix.util.getReleaseDate
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.Movie
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.get
 
 @ExperimentalMaterialApi
 @Composable
 fun ItemPopularMovies(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel,
+    viewModel: HomeViewModel = get(),
     movie: Movie,
     onClickItem: (Movie) -> Unit
 ) {

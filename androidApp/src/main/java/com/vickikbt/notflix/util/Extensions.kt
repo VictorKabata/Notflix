@@ -1,17 +1,13 @@
 package com.vickikbt.notflix.util
 
 import android.annotation.SuppressLint
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.unit.Velocity
 import java.text.SimpleDateFormat
-
-inline fun <reified T> getKoinInstance(): T {
-    return object : KoinComponent {
-        val value: T by inject()
-    }.value
-}
-
-// private val preferenceManager: PreferenceManager = getKoinInstance()
 
 /**
  * Append the image url with string to determine the image quality to be loaded
@@ -47,3 +43,19 @@ fun Int.getMovieDuration(): String {
     val mins = this % 60 + startTime.substring(3, 4).toInt()
     return "${hours}hrs ${mins}mins"
 }
+
+private val VerticalScrollConsumer = object : NestedScrollConnection {
+    override fun onPreScroll(available: Offset, source: NestedScrollSource) = available.copy(x = 0f)
+    override suspend fun onPreFling(available: Velocity) = available.copy(x = 0f)
+}
+
+private val HorizontalScrollConsumer = object : NestedScrollConnection {
+    override fun onPreScroll(available: Offset, source: NestedScrollSource) = available.copy(y = 0f)
+    override suspend fun onPreFling(available: Velocity) = available.copy(y = 0f)
+}
+
+fun Modifier.disabledVerticalPointerInputScroll(disabled: Boolean = true) =
+    if (disabled) this.nestedScroll(VerticalScrollConsumer) else this
+
+fun Modifier.disabledHorizontalPointerInputScroll(disabled: Boolean = true) =
+    if (disabled) this.nestedScroll(HorizontalScrollConsumer) else this

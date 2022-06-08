@@ -30,11 +30,11 @@ fun SectionSeparator(modifier: Modifier = Modifier, sectionTitle: String, onItem
             overflow = TextOverflow.Ellipsis
         )
 
-        Text(
+        /*Text(
             text = stringResource(id = R.string.view_all),
             color = DarkPrimaryColor,
             style = MaterialTheme.typography.h5,
             fontSize = 14.sp
-        )
+        )*/
     }
 }
