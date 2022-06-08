@@ -13,38 +13,39 @@
 
 # 🛠️Migrating to KMP - [Develop Branch](https://youtu.be/dQw4w9WgXcQ)
 
-An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlang.org/docs/multiplatform.html) that consumes [TMDB API]("https://developers.themoviedb.org/3") to display current trending, upcoming and popular movies🍿 and tvshows🎬.
+ An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlang.org/docs/multiplatform.html) that consumes [TMDB API]("https://developers.themoviedb.org/3") to display current trending, upcoming and popular movies🍿 and tvshows🎬.
 
-[Kotlin Multiplatform]() is a framework of Kotlin that allows for sharing of a single codebase for business logic across different [targets]()/platforms. Some of the targets supported by kotlin are: Android, iOS, Kotlin/JVM, Kotlin/JS, Android NDK, Windows, Linux, macOS etc.
+[Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html) is a framework of Kotlin that allows for sharing of a single codebase for business logic across different [targets](https://kotlinlang.org/docs/multiplatform-dsl-reference.html#targets)/platforms. Some of the targets supported by kotlin are: Android, iOS, Kotlin/JVM, Kotlin/JS, Android NDK, Windows, Linux, macOS etc.
 
-[Compose Multiplatform]() is a UI framework mabe by Jetbrains that allow for simple and accelerated desktop application and web development using [compose](). Compose multiplatform also allows sharing compose UI code between diffrent platforms. eg android, desktop(Windows, Linux, MacOS) and web.
+[Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/) is a UI framework mabe by Jetbrains that allow for simple and accelerated desktop application and web development using [compose](https://developer.android.com/jetpack/compose). Compose multiplatform also allows sharing compose UI code between diffrent platforms. eg android, desktop(Windows, Linux, MacOS) and web.
 
 ## Table Of Content
 
-- [Prerequisite](#prerequisite)
-- [Disclaimer](#disclaimer)
-- [Pros of KMP/KMM](#pros-of-kmpkmm)
-- [App Structure](#app-structure)
-  - [1. androidApp](#1-androidapp)
-  - [2. desktopApp](#2-desktopapp)
-- [3. shared](#3-shared)
-  - [__Domain__](#domain)
-  - [2. Data](#2-data)
-- [Libraries](#libraries)
-  - [Shared](#shared)
-  - [Android](#android)
-- [Extras](#extras)
-- [Demo](#demo)
-- [Android App](#android-app)
-- [Desktop](#desktop)
-- [Related Resources](#related-resources)
-  - [Videos 📽️](#videos-️)
-  - [Articles/Blogs 📖](#articlesblogs-)
-  - [Sample Projects 🤖](#sample-projects-)
-- [Other Helpful Resources](#other-helpful-resources)
-  - [Videos 📽️](#videos-️-1)
-  - [Articles/Blogs 📖](#articlesblogs--1)
-  - [Sample Projects 🤖](#sample-projects--1)
+- [Prerequisite](##prerequisite)
+- [Disclaimer](##disclaimer)
+- [Pros of KMP/KMM](##pros-of-kmpkmm)
+- [App Structure](##app-structure)
+  - [1. androidApp](###1-androidapp)
+  - [2. desktopApp](###2-desktopapp)
+  - [3. shared](###3-shared)
+    - [__Domain__](###domain)
+    - [__Data__](###data)
+    - [__Presentation__](###presentation)
+- [Libraries](##libraries)
+  - [Shared](###shared)
+  - [Android](###android)
+- [Extras](##extras)
+- [Demo](##demo)
+- [Android App](##android-app)
+- [Desktop](##desktop)
+- [Related Resources](##related-resources)
+  - [Videos 📽️](###videos-️)
+  - [Articles/Blogs 📖](###articlesblogs-)
+  - [Sample Projects 🤖](###sample-projects-)
+- [Other Helpful Resources](##other-helpful-resources)
+  - [Videos 📽️](###videos-️-1)
+  - [Articles/Blogs 📖](###articlesblogs--1)
+  - [Sample Projects 🤖](###sample-projects--1)
 
 ## Prerequisite
 
@@ -87,7 +88,7 @@ This module contains shared code that holds the domain and data layers and some 
 
 ### __Domain__
 
-This is the core layer of the application. The ```domain``` layer is independent of any other layers this means that changes in other layers will have no effect on domain layer eg.  screen UI (presentation layer) or changing database (data layer) will not result in any code change withing domain layer.
+This is the core layer of the application. The ```domain``` layer is independent of any other layers this means that changes in other layers will have no effect on domain layer eg. screen UI (presentation layer) or changing database (data layer) will not result in any code change withing domain layer.
 
 Components of domain layer include:
 
@@ -95,7 +96,7 @@ Components of domain layer include:
 
 - __Repositories__: Interfaces used by the use cases. Implemented in the data layer.
 
-### 2. Data
+### __Data__
 
 The ```data``` layer is responsibile for selecting the proper data source for the domain layer. It contains the implementations of the repositories declared in the domain layer.
 
@@ -116,6 +117,10 @@ Components of data layer include:
 - __Data Sources__:  Responsible for deciding which data source (network or cache) will be used when fetching data and presenting the data to viewmodels.
 
 <p align="center"><img src="assets/clean_arch.png" alt="Clean Architecture Diagram"></p>
+
+### __Presentation__
+
+The `presentation` package contains shared viewmodels.
 
 ## Libraries
 
@@ -164,9 +169,9 @@ Components of data layer include:
 
 ## Desktop
 
-<img src="assets/img6.png" width="660" height=400/>
+<img src="assets/img6.png" width="600" height=420/>
 
-<img src="assets/img7.png" width="660" height=400/> <img src="assets/img8.png" width="660" height=400/>
+<img src="assets/img7.png" width="600" height=420/> <img src="assets/img8.png" width="600" height=420/>
 
 ## Related Resources
 
