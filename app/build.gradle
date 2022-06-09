@@ -5,6 +5,7 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.jeppeman.globallydynamic'
     id 'com.google.firebase.appdistribution'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -74,6 +75,7 @@ dependencies {
 
     api "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
     api appDependencies.androidCore
+    api 'com.google.firebase:firebase-analytics-ktx:21.0.0'
     debugApi appDependencies.globallyDynamic
     api appDependencies.playCore
     api appDependencies.playCoreKtx

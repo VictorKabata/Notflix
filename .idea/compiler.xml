@@ -2,16 +2,16 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
-      <module name="Notflix.app" target="15" />
+      <module name="Notflix.app" target="1.8" />
       <module name="Notflix.core" target="15" />
-      <module name="Notflix.data.cache" target="15" />
-      <module name="Notflix.data.network" target="15" />
-      <module name="Notflix.data.repository" target="15" />
-      <module name="Notflix.feature.details" target="15" />
-      <module name="Notflix.feature.favorites" target="15" />
-      <module name="Notflix.feature.home" target="15" />
-      <module name="Notflix.feature.search" target="15" />
-      <module name="Notflix.feature.settings" target="15" />
+      <module name="Notflix.data.cache" target="1.8" />
+      <module name="Notflix.data.network" target="1.8" />
+      <module name="Notflix.data.repository" target="1.8" />
+      <module name="Notflix.feature.details" target="1.8" />
+      <module name="Notflix.feature.favorites" target="1.8" />
+      <module name="Notflix.feature.home" target="1.8" />
+      <module name="Notflix.feature.search" target="1.8" />
+      <module name="Notflix.feature.settings" target="1.8" />
       <module name="Notflix.library.cache" target="15" />
       <module name="Notflix.library.network" target="15" />
     </bytecodeTargetLevel>

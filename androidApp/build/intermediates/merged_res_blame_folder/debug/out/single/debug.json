@@ -1,0 +1,170 @@
+[
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_ic_report_bug.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/ic_report_bug.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/font_roboto_black.ttf.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/font/roboto_black.ttf"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_ic_back.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/ic_back.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_ic_play_circle.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/ic_play_circle.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_image_placeholder.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/image_placeholder.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_ic_theme.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/ic_theme.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/font_roboto_bold.ttf.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/font/roboto_bold.ttf"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_ic_favourite.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/ic_favourite.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_ic_share.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/ic_share.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_ic_image_quality.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/ic_image_quality.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_ic_home.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/ic_home.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_splash_image.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/splash_image.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_ic_github.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/ic_github.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_logo.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/logo.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-pngs-56:/drawable-anydpi-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_ic_play.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/ic_play.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_ic_settings.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/font_roboto_medium.ttf.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/font/roboto_medium.ttf"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_ic_actor.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/ic_actor.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_ic_favorite_selected.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/ic_favorite_selected.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_logo_n.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/logo_n.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_ic_language.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/ic_language.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/mipmap-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/drawable_ic_rating_star.xml.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/drawable/ic_rating_star.xml"
+    },
+    {
+        "merged": "com.vickikbt.notflix.androidApp-merged_res-61:/font_roboto_regular.ttf.flat",
+        "source": "com.vickikbt.notflix.androidApp-main-63:/font/roboto_regular.ttf"
+    }
+]

@@ -162,7 +162,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         classpath "com.jeppeman.globallydynamic.gradle:plugin:$globallyDynamic_version"
-        classpath "com.google.gms:google-services:$google_service_version"
+        classpath "com.google.gms:google-services:4.3.10"
         classpath "com.google.firebase:firebase-appdistribution-gradle:$appDistribution_version"
     }
 }
