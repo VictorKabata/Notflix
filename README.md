@@ -70,7 +70,7 @@ In order to be able to build the application you'll need to change the api key i
 
 ## App Structure
 
-<p align="center"><img src="assets/project_structure.png" alt="Project Structure"></p>
+<p align="center"><img src="assets/project_structuress.png" alt="Project Structure"></p>
 
 The project currently has 3 main modules:
 
