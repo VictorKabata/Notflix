@@ -58,8 +58,6 @@ fun DetailsScreen(
         detailsViewModel.getMovieDetails(movieId)
         detailsViewModel.fetchSimilarMovies(movieId)
         detailsViewModel.getMovieCast(movieId)
-        /*Napier.e("Is movie fav: $isMovieFavorite")
-        Napier.e("Fetching similar movies: $similarMovies")*/
     }
 
     val movieDetails = detailsViewModel.movieDetails.collectAsState().value

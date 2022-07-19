@@ -14,12 +14,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
 
-class SharedDetailsViewModel constructor(private val movieDetailsRepository: MovieDetailsRepository) {
+class SharedDetailsViewModel constructor(private val movieDetailsRepository: MovieDetailsRepository) :
+    KoinComponent {
 
     @NativeCoroutineScope
     private val viewModelScope = CoroutineScope(Dispatchers.Default)
     private val supervisorJob = MutableStateFlow<Job?>(null)
+
+    //ToDo: Add UI State class
 
     private val _movieDetails = MutableStateFlow<MovieDetails?>(null)
     val movieDetails get() = _movieDetails.asStateFlow()
@@ -37,6 +41,9 @@ class SharedDetailsViewModel constructor(private val movieDetailsRepository: Mov
     val movieIsFavorite get() = _movieIsFavorite.asStateFlow()
 
     fun getMovieDetails(movieId: Int) {
+        _movieDetails.value=null
+        Napier.e("Fetching movie details")
+
         val job = viewModelScope.launch {
             movieDetailsRepository.getMovieDetails(movieId).collectLatest {
                 _movieDetails.value = it
@@ -50,6 +57,8 @@ class SharedDetailsViewModel constructor(private val movieDetailsRepository: Mov
     }
 
     fun getMovieCast(movieId: Int) {
+        _movieCast.value=null
+
         val job = viewModelScope.launch {
             movieDetailsRepository.getMovieCast(movieId).collectLatest {
                 _movieCast.value = it
@@ -77,6 +86,8 @@ class SharedDetailsViewModel constructor(private val movieDetailsRepository: Mov
     }*/
 
     fun fetchSimilarMovies(movieId: Int) {
+        _similarMovies.value=null
+
         val job = viewModelScope.launch {
             movieDetailsRepository.fetchSimilarMovies(movieId).collectLatest {
                 _similarMovies.value = it
