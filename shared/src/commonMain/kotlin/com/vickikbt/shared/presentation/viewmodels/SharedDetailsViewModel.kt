@@ -11,31 +11,30 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
 
-class SharedDetailsViewModel constructor(private val movieDetailsRepository: MovieDetailsRepository) :
-    KoinComponent {
+class SharedDetailsViewModel constructor(private val movieDetailsRepository: MovieDetailsRepository) {
 
     @NativeCoroutineScope
     private val viewModelScope = CoroutineScope(Dispatchers.Default)
     private val supervisorJob = MutableStateFlow<Job?>(null)
 
-    private val _movieDetails = MutableStateFlow<MovieDetails?>(MovieDetails())
-    val movieDetails get() = _movieDetails
+    private val _movieDetails = MutableStateFlow<MovieDetails?>(null)
+    val movieDetails get() = _movieDetails.asStateFlow()
 
-    private val _movieCast = MutableStateFlow<Cast?>(Cast())
-    val movieCast get() = _movieCast
+    private val _movieCast = MutableStateFlow<Cast?>(null)
+    val movieCast get() = _movieCast.asStateFlow()
 
-    private val _movieVideo = MutableStateFlow<MovieVideo?>(MovieVideo())
-    val movieVideo get() = _movieVideo
+    private val _movieVideo = MutableStateFlow<MovieVideo?>(null)
+    val movieVideo get() = _movieVideo.asStateFlow()
 
     private val _similarMovies = MutableStateFlow<List<Movie>?>(emptyList())
-    val similarMovies get() = _similarMovies
+    val similarMovies get() = _similarMovies.asStateFlow()
 
     private val _movieIsFavorite = MutableStateFlow<Boolean>(false)
-    val movieIsFavorite get() = _movieIsFavorite
+    val movieIsFavorite get() = _movieIsFavorite.asStateFlow()
 
     fun getMovieDetails(movieId: Int) {
         val job = viewModelScope.launch {
@@ -46,7 +45,6 @@ class SharedDetailsViewModel constructor(private val movieDetailsRepository: Mov
 
         supervisorJob.value = job
         job.invokeOnCompletion {
-            supervisorJob.value?.cancel()
             supervisorJob.value = null
         }
     }
@@ -60,12 +58,11 @@ class SharedDetailsViewModel constructor(private val movieDetailsRepository: Mov
 
         supervisorJob.value = job
         job.invokeOnCompletion {
-            supervisorJob.value?.cancel()
             supervisorJob.value = null
         }
     }
 
-    fun getMovieVideo(movieId: Int) {
+    /*fun getMovieVideo(movieId: Int) {
         val job = viewModelScope.launch {
             movieDetailsRepository.getMovieVideos(movieId).collectLatest {
                 _movieVideo.value = it
@@ -77,11 +74,9 @@ class SharedDetailsViewModel constructor(private val movieDetailsRepository: Mov
             supervisorJob.value?.cancel()
             supervisorJob.value = null
         }
-    }
+    }*/
 
     fun fetchSimilarMovies(movieId: Int) {
-        Napier.e("Fetching similar movies of ID: $movieId")
-
         val job = viewModelScope.launch {
             movieDetailsRepository.fetchSimilarMovies(movieId).collectLatest {
                 _similarMovies.value = it
@@ -90,7 +85,6 @@ class SharedDetailsViewModel constructor(private val movieDetailsRepository: Mov
 
         supervisorJob.value = job
         job.invokeOnCompletion {
-            supervisorJob.value?.cancel()
             supervisorJob.value = null
         }
     }
@@ -103,7 +97,6 @@ class SharedDetailsViewModel constructor(private val movieDetailsRepository: Mov
 
         supervisorJob.value = job
         job.invokeOnCompletion {
-            supervisorJob.value?.cancel()
             supervisorJob.value = null
         }
     }
@@ -117,7 +110,6 @@ class SharedDetailsViewModel constructor(private val movieDetailsRepository: Mov
 
         supervisorJob.value = job
         job.invokeOnCompletion {
-            supervisorJob.value?.cancel()
             supervisorJob.value = null
         }
     }
@@ -131,7 +123,6 @@ class SharedDetailsViewModel constructor(private val movieDetailsRepository: Mov
 
         supervisorJob.value = job
         job.invokeOnCompletion {
-            supervisorJob.value?.cancel()
             supervisorJob.value = null
         }
     }
