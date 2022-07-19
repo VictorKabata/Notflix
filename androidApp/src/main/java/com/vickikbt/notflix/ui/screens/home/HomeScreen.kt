@@ -10,7 +10,6 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,10 +31,8 @@ import com.vickikbt.notflix.ui.components.ItemTrendingMovies
 import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Gray
-import com.vickikbt.notflix.util.disabledHorizontalPointerInputScroll
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel
-import io.github.aakira.napier.Napier
 import org.koin.androidx.compose.get
 
 @ExperimentalMaterialApi
@@ -52,13 +49,6 @@ fun HomeScreen(
     val trendingMovies = sharedViewModel.trendingMovies.collectAsState().value
     val popularMovies = sharedViewModel.popularMovies.collectAsState().value
     val upcomingMovies = sharedViewModel.upcomingMovies.collectAsState().value
-
-    LaunchedEffect(key1 = sharedViewModel){
-        Napier.e("Now playing: $nowPlayingMovies")
-        Napier.e("Trending: $trendingMovies")
-        Napier.e("Popular: $popularMovies")
-        Napier.e("Upcoming: $upcomingMovies")
-    }
 
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
         Column(
@@ -118,8 +108,8 @@ fun NowPlayingMovies(
                 .height(360.dp),
             movie = movies[page]
         ) {
-            // val movie = movies[page]
-            // navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
+            val movie = movies[page]
+            navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
         }
     }
 
@@ -172,7 +162,7 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
                 ),
                 movie = item,
                 onItemClick = { movie ->
-                    // navController.navigate("details/${movie.id!!}/${movie.cacheId}")
+                    navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                 }
             )
         }
@@ -212,7 +202,7 @@ fun PopularMovies(
                 ),
                 movie = item,
                 onClickItem = { movie ->
-                    // navController.navigate("details/${movie.id!!}/${movie.cacheId}")
+                    navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                 }
             )
         }
@@ -252,7 +242,7 @@ fun UpcomingMovies(
                     ),
                     movie = item,
                     onItemClick = { movie ->
-                        // navController.navigate("details/${movie.id!!}/${movie.cacheId}")
+                        navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                     }
                 )
             }

@@ -12,8 +12,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -52,7 +50,6 @@ import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.presentation.viewmodels.SharedDetailsViewModel
 import io.github.aakira.napier.Napier
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.get
 import kotlin.math.min
 
@@ -79,17 +76,8 @@ fun DetailsScreen(
 
     Napier.e("Is movie fav: $isMovieFavorite")
 
-    LaunchedEffect(key1 = Unit) {
-        launch {
-            if (movieDetails != null && movieCast != null) {
-                Napier.e("Saving movie details")
-                detailsViewModel.saveMovieDetails(
-                    movieDetails = movieDetails,
-                    cast = movieCast,
-                    movieVideo = movieVideo
-                )
-            }
-        }
+    LaunchedEffect(key1 = detailsViewModel) {
+        Napier.e("Fetching similar movies: $similarMovies")
     }
     val context = LocalContext.current
 
@@ -189,32 +177,6 @@ fun DetailsScreen(
                 }
                 //endregion
 
-                //region Movie Trailer
-                item {
-                    Text(
-                        modifier = Modifier.padding(horizontal = 16.dp),
-                        text = stringResource(id = R.string.trailer),
-                        style = MaterialTheme.typography.h6,
-                        fontSize = 20.sp,
-                        color = MaterialTheme.colors.onSurface
-                    )
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    Card(
-                        modifier = Modifier
-                            .padding(horizontal = 15.dp)
-                            .fillMaxWidth()
-                            .height(250.dp),
-                        elevation = 12.dp,
-                        shape = RoundedCornerShape(8.dp),
-                        backgroundColor = TextSecondary
-                    ) {
-                        // ToDo: Card content
-                    }
-                }
-                //endregion
-
                 //region Similar Movies
                 item {
                     Text(
@@ -246,19 +208,7 @@ fun DetailsScreen(
                 onNavigationIconClick = { navController.navigateUp() },
                 onShareIconClick = { shareMovie(context = context, movieId = movieId) },
                 onFavoriteIconClick = {
-                    if (isMovieFavorite != null && isMovieFavorite == true) {
-                        updateMovieFavorite(
-                            viewModel = detailsViewModel,
-                            isFavorite = false,
-                            cacheId = cacheId
-                        )
-                    } else if (isMovieFavorite != null && isMovieFavorite == false) {
-                        updateMovieFavorite(
-                            viewModel = detailsViewModel,
-                            isFavorite = true,
-                            cacheId = cacheId
-                        )
-                    }
+                    //ToDo: On Fav clicked
                 }
             )
             //endregion
@@ -377,13 +327,6 @@ fun MoviePoster(
         //endregion
     }
 }
-
-private fun updateMovieFavorite(
-    isFavorite: Boolean,
-    cacheId: Int,
-    viewModel: SharedDetailsViewModel
-) =
-    viewModel.updateFavorite(cacheId = cacheId, isFavorite = isFavorite)
 
 private fun shareMovie(context: Context, movieId: Int) {
     val shareIntent = Intent()

@@ -9,6 +9,7 @@ import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -19,6 +20,7 @@ class SharedDetailsViewModel constructor(private val movieDetailsRepository: Mov
 
     @NativeCoroutineScope
     private val viewModelScope = CoroutineScope(Dispatchers.Default)
+    private val supervisorJob = MutableStateFlow<Job?>(null)
 
     private val _movieDetails = MutableStateFlow<MovieDetails?>(MovieDetails())
     val movieDetails get() = _movieDetails
@@ -35,48 +37,102 @@ class SharedDetailsViewModel constructor(private val movieDetailsRepository: Mov
     private val _movieIsFavorite = MutableStateFlow<Boolean>(false)
     val movieIsFavorite get() = _movieIsFavorite
 
-    fun getMovieDetails(movieId: Int) = viewModelScope.launch {
-        Napier.e("Getting movie details")
-        movieDetailsRepository.getMovieDetails(movieId).collectLatest {
-            _movieDetails.value = it
+    fun getMovieDetails(movieId: Int) {
+        val job = viewModelScope.launch {
+            movieDetailsRepository.getMovieDetails(movieId).collectLatest {
+                _movieDetails.value = it
+            }
+        }
+
+        supervisorJob.value = job
+        job.invokeOnCompletion {
+            supervisorJob.value?.cancel()
+            supervisorJob.value = null
         }
     }
 
-    fun getMovieCast(movieId: Int) = viewModelScope.launch {
-        movieDetailsRepository.getMovieCast(movieId).collectLatest {
-            _movieCast.value = it
+    fun getMovieCast(movieId: Int) {
+        val job = viewModelScope.launch {
+            movieDetailsRepository.getMovieCast(movieId).collectLatest {
+                _movieCast.value = it
+            }
+        }
+
+        supervisorJob.value = job
+        job.invokeOnCompletion {
+            supervisorJob.value?.cancel()
+            supervisorJob.value = null
         }
     }
 
-    fun getMovieVideo(movieId: Int) = viewModelScope.launch {
-        movieDetailsRepository.getMovieVideos(movieId).collectLatest {
-            _movieVideo.value = it
+    fun getMovieVideo(movieId: Int) {
+        val job = viewModelScope.launch {
+            movieDetailsRepository.getMovieVideos(movieId).collectLatest {
+                _movieVideo.value = it
+            }
+        }
+
+        supervisorJob.value = job
+        job.invokeOnCompletion {
+            supervisorJob.value?.cancel()
+            supervisorJob.value = null
         }
     }
 
-    fun fetchSimilarMovies(movieId: Int) = viewModelScope.launch {
-        movieDetailsRepository.fetchSimilarMovies(movieId).collectLatest {
-            _similarMovies.value = it
+    fun fetchSimilarMovies(movieId: Int) {
+        Napier.e("Fetching similar movies of ID: $movieId")
+
+        val job = viewModelScope.launch {
+            movieDetailsRepository.fetchSimilarMovies(movieId).collectLatest {
+                _similarMovies.value = it
+            }
+        }
+
+        supervisorJob.value = job
+        job.invokeOnCompletion {
+            supervisorJob.value?.cancel()
+            supervisorJob.value = null
         }
     }
 
-    fun saveMovieDetails(movieDetails: MovieDetails, cast: Cast, movieVideo: MovieVideo?) =
-        viewModelScope.launch {
+    fun saveMovieDetails(movieDetails: MovieDetails, cast: Cast, movieVideo: MovieVideo?) {
+        val job = viewModelScope.launch {
             movieDetailsRepository.apply {
             }
         }
 
+        supervisorJob.value = job
+        job.invokeOnCompletion {
+            supervisorJob.value?.cancel()
+            supervisorJob.value = null
+        }
+    }
+
     fun updateFavorite(cacheId: Int, isFavorite: Boolean) {
         Napier.e("Updating : $cacheId to $isFavorite")
-        viewModelScope.launch {
+
+        val job = viewModelScope.launch {
+
+        }
+
+        supervisorJob.value = job
+        job.invokeOnCompletion {
+            supervisorJob.value?.cancel()
+            supervisorJob.value = null
         }
     }
 
     fun getIsMovieFavorite(movieId: Int) {
-        viewModelScope.launch {
+        val job = viewModelScope.launch {
             movieDetailsRepository.isMovieFavorite(movieId).collectLatest {
                 _movieIsFavorite.value = it ?: false
             }
+        }
+
+        supervisorJob.value = job
+        job.invokeOnCompletion {
+            supervisorJob.value?.cancel()
+            supervisorJob.value = null
         }
     }
 }
