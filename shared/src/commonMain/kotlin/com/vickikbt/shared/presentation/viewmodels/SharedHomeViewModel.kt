@@ -4,8 +4,10 @@ import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.utils.Constants
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -17,6 +19,7 @@ class SharedHomeViewModel constructor(private val moviesRepository: MoviesReposi
 
     @NativeCoroutineScope
     private val viewModelScope = CoroutineScope(Dispatchers.Default)
+    private val supervisorJob = MutableStateFlow<Job?>(null)
 
     private val _nowPlayingMovies = MutableStateFlow<List<Movie>?>(emptyList())
     val nowPlayingMovies get() = _nowPlayingMovies.asStateFlow()
@@ -34,14 +37,24 @@ class SharedHomeViewModel constructor(private val moviesRepository: MoviesReposi
     val error get() = _error.asStateFlow()
 
     init {
-        fetchNowPlayingMovies()
-        fetchTrendingMovies()
-        fetchPopularMovies()
-        fetchUpcomingMovies()
+        val job = viewModelScope.launch {
+            fetchNowPlayingMovies()
+            fetchPopularMovies()
+            fetchUpcomingMovies()
+            fetchTrendingMovies()
+        }
+
+        supervisorJob.value = job
+        job.invokeOnCompletion {
+            supervisorJob.value?.cancel()
+            supervisorJob.value = null
+        }
     }
 
-    private fun fetchNowPlayingMovies() = viewModelScope.launch {
+    private suspend fun fetchNowPlayingMovies() {
         try {
+            Napier.e("Fetching now playing movies")
+
             moviesRepository.fetchMovies(category = Constants.CATEGORY_NOW_PLAYING_MOVIES)
                 .collectLatest {
                     _nowPlayingMovies.value = it
@@ -51,42 +64,44 @@ class SharedHomeViewModel constructor(private val moviesRepository: MoviesReposi
         }
     }
 
-    private fun fetchTrendingMovies() = viewModelScope.launch {
-        viewModelScope.launch {
-            try {
-                moviesRepository.fetchMovies(category = Constants.CATEGORY_TRENDING_MOVIES)
-                    .collectLatest {
-                        _trendingMovies.value = it
-                    }
-            } catch (e: Exception) {
-                _error.value = e.message
-            }
+    private suspend fun fetchTrendingMovies() {
+        try {
+            Napier.e("Fetching trending movies")
+
+            moviesRepository.fetchMovies(category = Constants.CATEGORY_TRENDING_MOVIES)
+                .collectLatest {
+                    _trendingMovies.value = it
+                }
+        } catch (e: Exception) {
+            _error.value = e.message
         }
     }
 
-    private fun fetchPopularMovies() = viewModelScope.launch {
-        viewModelScope.launch {
-            try {
-                moviesRepository.fetchMovies(category = Constants.CATEGORY_POPULAR_MOVIES)
-                    .collectLatest {
-                        _popularMovies.value = it
-                    }
-            } catch (e: Exception) {
-                _error.value = e.message
-            }
+    private suspend fun fetchPopularMovies() {
+        try {
+            Napier.e("Fetching popular movies")
+
+            moviesRepository.fetchMovies(category = Constants.CATEGORY_POPULAR_MOVIES)
+                .collectLatest {
+                    _popularMovies.value = it
+                }
+        } catch (e: Exception) {
+            _error.value = e.message
         }
     }
 
-    private fun fetchUpcomingMovies() = viewModelScope.launch {
-        viewModelScope.launch {
-            try {
-                moviesRepository.fetchMovies(category = Constants.CATEGORY_UPCOMING_MOVIES)
-                    .collectLatest {
-                        _upcomingMovies.value = it
-                    }
-            } catch (e: Exception) {
-                _error.value = e.message
-            }
+    private suspend fun fetchUpcomingMovies() {
+        try {
+            Napier.e("Fetching upcoming movies")
+
+            moviesRepository.fetchMovies(category = Constants.CATEGORY_UPCOMING_MOVIES)
+                .collectLatest {
+                    _upcomingMovies.value = it
+                }
+        } catch (e: Exception) {
+            _error.value = e.message
         }
+
     }
+
 }
