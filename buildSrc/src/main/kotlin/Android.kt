@@ -72,6 +72,8 @@ object AndroidDependencies {
     // Gowtham Compose Rating Bar
     const val ratingBar = "com.github.a914-gowtham:compose-ratingbar:${Versions.rating_bar}"
 
+    const val leakCanary="com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
+
     //Firebase
     const val firebaseBOM = "com.google.firebase:firebase-bom:${Versions.firebase_bom}"
     const val firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx"
