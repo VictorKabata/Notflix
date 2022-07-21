@@ -8,6 +8,7 @@ import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -18,6 +19,7 @@ class SharedSettingsViewModel constructor(private val preferenceManager: Prefere
 
     @NativeCoroutineScope
     private val viewModelScope = CoroutineScope(Dispatchers.Default)
+    private val supervisorJob = MutableStateFlow<Job?>(null)
 
     private val _selectedTheme = MutableStateFlow<Int?>(0)
     val selectedTheme get() = _selectedTheme
@@ -34,13 +36,15 @@ class SharedSettingsViewModel constructor(private val preferenceManager: Prefere
         getImageQualityPreference()
     }
 
-    fun savePreferenceSelection(key: String, selection: Int) = viewModelScope.launch {
-        Napier.e("Saving preference $key as $selection")
-        preferenceManager.setInt(key, selection)
+    fun savePreferenceSelection(key: String, selection: Int) {
+        val job = viewModelScope.launch {
+            Napier.e("Saving preference $key as $selection")
+            preferenceManager.setInt(key, selection)
+        }
     }
 
     private fun getThemePreference() {
-        viewModelScope.launch {
+        val job = viewModelScope.launch {
             preferenceManager.getInt(KEY_THEME).collectLatest {
                 _selectedTheme.value = it
             }
@@ -48,7 +52,7 @@ class SharedSettingsViewModel constructor(private val preferenceManager: Prefere
     }
 
     private fun getLanguagePreference() {
-        viewModelScope.launch {
+        val job = viewModelScope.launch {
             preferenceManager.getInt(KEY_LANGUAGE).collectLatest {
                 _selectedTheme.value = it
             }
@@ -56,7 +60,7 @@ class SharedSettingsViewModel constructor(private val preferenceManager: Prefere
     }
 
     private fun getImageQualityPreference() {
-        viewModelScope.launch {
+        val job = viewModelScope.launch {
             preferenceManager.getInt(KEY_IMAGE_QUALITY).collectLatest {
                 _selectedTheme.value = it
             }

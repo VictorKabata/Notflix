@@ -1,21 +1,32 @@
 package com.vickikbt.shared.data.cache.multiplatform_settings
 
-import com.russhwolf.settings.Settings
-import kotlinx.coroutines.flow.flowOf
+import com.russhwolf.settings.coroutines.getIntOrNullFlow
+import com.russhwolf.settings.coroutines.getLongOrNullFlow
+import com.russhwolf.settings.coroutines.getStringOrNullFlow
+import com.vickikbt.shared.domain.utils.MultiplatformSettingsWrapper
 
-class PreferenceManager constructor(private val settings: Settings) {
+class PreferenceManager constructor(private val multiplatformSettingsWrapper: MultiplatformSettingsWrapper) {
 
-    fun setString(key: String, value: String) = settings.putString(key, value)
+    private val observableSettings = multiplatformSettingsWrapper.createSettings()
 
-    fun getString(key: String) = flowOf(settings.getStringOrNull(key))
+    fun setString(key: String, value: String) =
+        observableSettings.putString(key = key, value = value)
 
-    fun setLong(key: String, value: Long) = settings.putLong(key, value)
+    fun getString(key: String) = observableSettings.getStringOrNullFlow(key = key)
 
-    fun getLong(key: String) = flowOf(settings.getLongOrNull(key))
+    fun setLong(key: String, value: Long) = observableSettings.putLong(key = key, value = value)
 
-    fun setInt(key: String, value: Int) = settings.putInt(key, value)
+    fun getLong(key: String) = observableSettings.getLongOrNullFlow(key = key)
 
-    fun getInt(key: String) = flowOf(settings.getIntOrNull(key))
+    fun setInt(key: String, value: Int) = observableSettings.putInt(key = key, value = value)
 
-    fun clearPreferences() = settings.clear()
+    fun getInt(key: String) = observableSettings.getIntOrNullFlow(key = key)
+
+    fun clearPreferences() = observableSettings.clear()
+
+    companion object {
+        const val THEME_KEY = "theme"
+        const val LANGUAGE_KEY = "language"
+        const val IMAGE_QUALITY_KEY = "image_quality"
+    }
 }

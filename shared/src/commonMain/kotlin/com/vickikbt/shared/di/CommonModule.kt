@@ -1,6 +1,5 @@
 package com.vickikbt.shared.di
 
-import com.russhwolf.settings.Settings
 import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager
 import com.vickikbt.shared.data.data_sources.FavoriteMovieRepositoryImpl
 import com.vickikbt.shared.data.data_sources.MovieDetailsRepositoryImpl
@@ -23,12 +22,15 @@ import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
 import io.ktor.http.*
+import org.koin.core.module.Module
 import org.koin.dsl.module
 
 fun commonModule(enableNetworkLogs: Boolean) = module {
 
-    single { Settings() }
-    single { PreferenceManager(settings = get()) }
+    /**
+     * Multiplatform-Settings
+     */
+    single { PreferenceManager(multiplatformSettingsWrapper = get()) }
 
     /**
      * Creates a http client for Ktor that is provided to the
@@ -76,3 +78,5 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     single { SharedFavouritesViewModel(favouritesRepository = get()) }
     single { SharedSettingsViewModel(preferenceManager = get()) }
 }
+
+expect fun platformModule(): Module
