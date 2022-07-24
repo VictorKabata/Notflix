@@ -45,6 +45,7 @@ object Versions {
     const val coroutines = "1.5.2"
     const val firebase_bom = "29.0.3"
     const val rating_bar = "1.1.1"
+    const val leakCanary = "2.9.1"
     const val paging_compose = "1.0.0-alpha14"
 
     // Test Libraries

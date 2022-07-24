@@ -2,18 +2,13 @@ package com.vickikbt.notflix.ui.screens.details
 
 import android.content.Context
 import android.content.Intent
-import androidx.compose.animation.core.FastOutLinearInEasing
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -21,14 +16,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
@@ -42,7 +35,6 @@ import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemMovieCast
 import com.vickikbt.notflix.ui.components.ItemSimilarMovies
 import com.vickikbt.notflix.ui.components.MovieRatingSection
-import com.vickikbt.notflix.ui.components.app_bars.DetailsAppBar
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.ui.theme.TextSecondary
 import com.vickikbt.notflix.util.getMovieDuration
@@ -50,25 +42,22 @@ import com.vickikbt.notflix.util.getPopularity
 import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.MovieDetails
-import com.vickikbt.shared.presentation.viewmodels.SharedDetailsViewModel
-import io.github.aakira.napier.Napier
-import kotlinx.coroutines.launch
+import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
 import org.koin.androidx.compose.get
-import kotlin.math.min
 
 @Composable
 fun DetailsScreen(
     navController: NavController,
-    detailsViewModel: SharedDetailsViewModel = get(),
+    detailsViewModel: SharedDetailsPresenter = get(),
     movieId: Int,
     cacheId: Int,
 ) {
-    detailsViewModel.apply {
-        getIsMovieFavorite(movieId)
-        getMovieDetails(movieId)
-        getMovieCast(movieId)
-        getMovieVideo(movieId)
-        fetchSimilarMovies(movieId)
+
+    LaunchedEffect(key1 = detailsViewModel) {
+        detailsViewModel.getIsMovieFavorite(movieId)
+        detailsViewModel.getMovieDetails(movieId)
+        detailsViewModel.fetchSimilarMovies(movieId)
+        detailsViewModel.getMovieCast(movieId)
     }
 
     val movieDetails = detailsViewModel.movieDetails.collectAsState().value
@@ -77,29 +66,9 @@ fun DetailsScreen(
     val movieVideo = detailsViewModel.movieVideo.collectAsState().value
     val isMovieFavorite = detailsViewModel.movieIsFavorite.collectAsState().value
 
-    Napier.e("Is movie fav: $isMovieFavorite")
-
-    LaunchedEffect(key1 = Unit) {
-        launch {
-            if (movieDetails != null && movieCast != null) {
-                Napier.e("Saving movie details")
-                detailsViewModel.saveMovieDetails(
-                    movieDetails = movieDetails,
-                    cast = movieCast,
-                    movieVideo = movieVideo
-                )
-            }
-        }
-    }
     val context = LocalContext.current
 
-    val lazyListState = rememberLazyListState()
-    val scrollOffset = min(
-        1f.coerceAtMost(1f),
-        (1 - (lazyListState.firstVisibleItemScrollOffset / 600f + lazyListState.firstVisibleItemIndex)).coerceAtLeast(
-            0f
-        )
-    )
+    val scrollState = rememberScrollState()
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -107,161 +76,112 @@ fun DetailsScreen(
     ) {
         Box {
 
-            LazyColumn(
+            Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(bottom = 20.dp),
-                verticalArrangement = Arrangement.spacedBy(20.dp),
-                state = lazyListState
+                    .padding(bottom = 20.dp)
+                    .verticalScroll(state = scrollState),
+                verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
 
                 //region Movie Poster
-                item {
-                    MoviePoster(
-                        modifier = Modifier,
-                        movieDetails = movieDetails,
-                        scrollOffset = scrollOffset
-                    )
-                }
+                MoviePoster(
+                    modifier = Modifier,
+                    movieDetails = movieDetails
+                )
                 //endregion
 
                 //region Movie Ratings
-                item {
-                    val voteAverage = movieDetails?.voteAverage
-                    MovieRatingSection(
-                        popularity = voteAverage?.getPopularity(),
-                        voteAverage = voteAverage?.getRating()
-                    )
-                }
+                val voteAverage = movieDetails?.voteAverage
+                MovieRatingSection(
+                    popularity = voteAverage?.getPopularity(),
+                    voteAverage = voteAverage?.getRating()
+                )
                 //endregion
 
                 //region Movie Overview
-                item {
-                    Text(
-                        modifier = Modifier.padding(horizontal = 16.dp),
-                        text = stringResource(R.string.overview),
-                        style = MaterialTheme.typography.h6,
-                        fontSize = 20.sp,
-                        color = MaterialTheme.colors.onSurface,
-                    )
+                Text(
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                    text = stringResource(R.string.overview),
+                    style = MaterialTheme.typography.h6,
+                    fontSize = 20.sp,
+                    color = MaterialTheme.colors.onSurface,
+                )
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
-                    Text(
-                        modifier = Modifier
-                            .padding(horizontal = 16.dp)
-                            .placeholder(
-                                visible = movieDetails?.overview.isNullOrEmpty(),
-                                color = Gray,
-                                highlight = PlaceholderHighlight.fade(highlightColor = Color.Gray)
-                            ),
-                        text = movieDetails?.overview ?: "",
-                        style = MaterialTheme.typography.body1,
-                        color = MaterialTheme.colors.onSurface,
-                        fontSize = 15.sp,
-                        textAlign = TextAlign.Start,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                }
+                Text(
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .placeholder(
+                            visible = movieDetails?.overview.isNullOrEmpty(),
+                            color = Gray,
+                            highlight = PlaceholderHighlight.fade(highlightColor = Color.Gray)
+                        ),
+                    text = movieDetails?.overview ?: "",
+                    style = MaterialTheme.typography.body1,
+                    color = MaterialTheme.colors.onSurface,
+                    fontSize = 15.sp,
+                    textAlign = TextAlign.Start,
+                    overflow = TextOverflow.Ellipsis,
+                )
                 //endregion
 
                 //region Movie Cast
-                if (!movieCast?.actor.isNullOrEmpty()) {
-                    item {
-                        Text(
-                            modifier = Modifier.padding(horizontal = 16.dp),
-                            text = stringResource(id = R.string.cast),
-                            style = MaterialTheme.typography.h6,
-                            fontSize = 20.sp
-                        )
-
-                        Spacer(modifier = Modifier.height(8.dp))
-
-                        LazyRow(
-                            contentPadding = PaddingValues(horizontal = 16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(10.dp)
-                        ) {
-                            items(items = movieCast?.actor!!) { item ->
-                                ItemMovieCast(actor = item)
-                            }
-                        }
-                    }
-                }
-                //endregion
-
-                //region Movie Trailer
-                item {
+                movieCast?.actor?.let {
                     Text(
                         modifier = Modifier.padding(horizontal = 16.dp),
-                        text = stringResource(id = R.string.trailer),
+                        text = stringResource(id = R.string.cast),
                         style = MaterialTheme.typography.h6,
-                        fontSize = 20.sp,
-                        color = MaterialTheme.colors.onSurface
+                        fontSize = 20.sp
                     )
 
                     Spacer(modifier = Modifier.height(8.dp))
-
-                    Card(
-                        modifier = Modifier
-                            .padding(horizontal = 15.dp)
-                            .fillMaxWidth()
-                            .height(250.dp),
-                        elevation = 12.dp,
-                        shape = RoundedCornerShape(8.dp),
-                        backgroundColor = TextSecondary
-                    ) {
-                        // ToDo: Card content
-                    }
-                }
-                //endregion
-
-                //region Similar Movies
-                item {
-                    Text(
-                        modifier = Modifier.padding(horizontal = 16.dp),
-                        text = stringResource(id = R.string.similar_movies),
-                        style = MaterialTheme.typography.h6,
-                        fontSize = 20.sp,
-                        color = MaterialTheme.colors.onSurface
-                    )
 
                     LazyRow(
                         contentPadding = PaddingValues(horizontal = 16.dp),
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
-                        if (similarMovies != null) {
-                            items(similarMovies) { movie ->
-                                ItemSimilarMovies(movie = movie)
-                            }
+                        items(items = it) { item ->
+                            ItemMovieCast(actor = item)
+                        }
+                    }
+                }
+                //endregion
+
+                //region Similar Movies
+                Text(
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                    text = stringResource(id = R.string.similar_movies),
+                    style = MaterialTheme.typography.h6,
+                    fontSize = 20.sp,
+                    color = MaterialTheme.colors.onSurface
+                )
+
+                LazyRow(
+                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    similarMovies?.let {
+                        items(items = it) { movie ->
+                            ItemSimilarMovies(movie = movie)
                         }
                     }
                 }
                 //endregion
             }
 
-            //region App Bar
+            /*//region App Bar
             DetailsAppBar(
                 scrollOffset = scrollOffset,
                 title = movieDetails?.title,
                 onNavigationIconClick = { navController.navigateUp() },
                 onShareIconClick = { shareMovie(context = context, movieId = movieId) },
                 onFavoriteIconClick = {
-                    if (isMovieFavorite != null && isMovieFavorite == true) {
-                        updateMovieFavorite(
-                            viewModel = detailsViewModel,
-                            isFavorite = false,
-                            cacheId = cacheId
-                        )
-                    } else if (isMovieFavorite != null && isMovieFavorite == false) {
-                        updateMovieFavorite(
-                            viewModel = detailsViewModel,
-                            isFavorite = true,
-                            cacheId = cacheId
-                        )
-                    }
+                    //ToDo: On Fav clicked
                 }
             )
-            //endregion
+            //endregion*/
         }
     }
 }
@@ -269,14 +189,8 @@ fun DetailsScreen(
 @Composable
 fun MoviePoster(
     modifier: Modifier = Modifier,
-    movieDetails: MovieDetails?,
-    scrollOffset: Float
+    movieDetails: MovieDetails?
 ) {
-    val imageSize by animateDpAsState(
-        targetValue = max(56.dp, 350.dp * scrollOffset),
-        animationSpec = tween(easing = FastOutLinearInEasing)
-    )
-
     val defaultDominantColor = MaterialTheme.colors.surface
     val defaultDominantTextColor = MaterialTheme.colors.onSurface
     var dominantColor by remember { mutableStateOf(defaultDominantColor) }
@@ -288,7 +202,7 @@ fun MoviePoster(
     ConstraintLayout(
         modifier = modifier
             .fillMaxWidth()
-            .height(imageSize)
+            .height(350.dp)
             .placeholder(
                 visible = movieDetails == null,
                 color = Gray,
@@ -317,7 +231,6 @@ fun MoviePoster(
             contentDescription = stringResource(R.string.movie_poster),
             modifier = Modifier
                 .fillMaxSize()
-                .graphicsLayer { alpha = scrollOffset }
                 .constrainAs(imageMovie) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
@@ -334,7 +247,7 @@ fun MoviePoster(
                     Brush.verticalGradient(
                         listOf(
                             Color.Transparent,
-                            dominantColor.copy(alpha = scrollOffset)
+                            dominantColor
                         )
                     )
                 )
@@ -347,7 +260,7 @@ fun MoviePoster(
         //region Movie Duration
         Text(
             text = movieDetails?.runtime?.getMovieDuration() ?: "",
-            color = dominantTextColor.copy(alpha = scrollOffset),
+            color = dominantTextColor,
             style = MaterialTheme.typography.h5,
             fontSize = 15.sp,
             modifier = Modifier.constrainAs(textViewRunTime) {
@@ -371,19 +284,12 @@ fun MoviePoster(
             style = MaterialTheme.typography.h6,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
-            color = dominantTextColor.copy(alpha = (scrollOffset + 0.2f).coerceAtMost(1f)),
+            color = dominantTextColor,
             fontSize = 30.sp
         )
         //endregion
     }
 }
-
-private fun updateMovieFavorite(
-    isFavorite: Boolean,
-    cacheId: Int,
-    viewModel: SharedDetailsViewModel
-) =
-    viewModel.updateFavorite(cacheId = cacheId, isFavorite = isFavorite)
 
 private fun shareMovie(context: Context, movieId: Int) {
     val shareIntent = Intent()

@@ -31,9 +31,8 @@ import com.vickikbt.notflix.ui.components.ItemTrendingMovies
 import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Gray
-import com.vickikbt.notflix.util.disabledHorizontalPointerInputScroll
 import com.vickikbt.shared.domain.models.Movie
-import com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel
+import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
 import org.koin.androidx.compose.get
 
 @ExperimentalMaterialApi
@@ -41,7 +40,7 @@ import org.koin.androidx.compose.get
 @Composable
 fun HomeScreen(
     navController: NavController,
-    sharedViewModel: SharedHomeViewModel = get()
+    sharedViewModel: SharedHomePresenter = get()
 ) {
 
     val scrollState = rememberScrollState()
@@ -109,8 +108,8 @@ fun NowPlayingMovies(
                 .height(360.dp),
             movie = movies[page]
         ) {
-            // val movie = movies[page]
-            // navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
+            val movie = movies[page]
+            navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
         }
     }
 
@@ -163,7 +162,7 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
                 ),
                 movie = item,
                 onItemClick = { movie ->
-                    // navController.navigate("details/${movie.id!!}/${movie.cacheId}")
+                    navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                 }
             )
         }
@@ -203,7 +202,7 @@ fun PopularMovies(
                 ),
                 movie = item,
                 onClickItem = { movie ->
-                    // navController.navigate("details/${movie.id!!}/${movie.cacheId}")
+                    navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                 }
             )
         }
@@ -243,7 +242,7 @@ fun UpcomingMovies(
                     ),
                     movie = item,
                     onItemClick = { movie ->
-                        // navController.navigate("details/${movie.id!!}/${movie.cacheId}")
+                        navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                     }
                 )
             }
