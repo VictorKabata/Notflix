@@ -15,11 +15,13 @@ import ui.components.ItemNowPlayingMovies
 import ui.components.ItemPopularMovies
 import ui.components.ItemTrendingMovies
 import ui.components.SectionSeparator
+import ui.navigation.NavController
 
 @Composable
-fun HomeScreen() {
-
-    val viewModel = koin.get<SharedHomePresenter>()
+fun HomeScreen(
+    navController: NavController,
+    viewModel: SharedHomePresenter = koin.get()
+) {
 
     val nowPlayingMovies = viewModel.nowPlayingMovies.collectAsState()
     val trendingMovies = viewModel.trendingMovies.collectAsState()

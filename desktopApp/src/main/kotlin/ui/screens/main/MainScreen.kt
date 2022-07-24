@@ -1,8 +1,10 @@
 package ui.screens.main
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
@@ -11,10 +13,12 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import ui.components.NavigationRailBar
+import ui.navigation.Navigation
 import ui.navigation.NavigationItem
-import ui.screens.home.HomeScreen
+import ui.navigation.rememberNavController
 import ui.theme.NotflixDesktopTheme
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MainScreen(applicationScope: ApplicationScope) {
 
@@ -37,12 +41,17 @@ fun MainScreen(applicationScope: ApplicationScope) {
             NavigationItem.Settings
         )
 
+        val navController by rememberNavController(startDestination = NavigationItem.Home.route)
+
         NotflixDesktopTheme {
             Surface {
                 Row {
-                    NavigationRailBar(navRailItems = topLevelDestinations)
+                    NavigationRailBar(
+                        navController = navController,
+                        navRailItems = topLevelDestinations
+                    )
 
-                    HomeScreen()
+                    Navigation(navController = navController)
                 }
             }
         }
