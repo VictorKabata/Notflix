@@ -2,6 +2,7 @@ package ui.screens.main
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -51,7 +52,7 @@ fun MainScreen(applicationScope: ApplicationScope, viewModel: SharedMainPresente
         val navController by rememberNavController(startDestination = NavigationItem.Home.route)
 
         NotflixDesktopTheme(darkTheme = isDarkTheme) {
-            Surface {
+            Surface(color = MaterialTheme.colors.surface) {
                 Row {
                     NavigationRailBar(
                         navController = navController,

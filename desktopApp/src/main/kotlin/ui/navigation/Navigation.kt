@@ -2,7 +2,7 @@ package ui.navigation
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
-import ui.screens.SettingsScreen
+import ui.screens.settings.SettingsScreen
 import ui.screens.details.DetailsScreen
 import ui.screens.favourites.FavoritesScreen
 import ui.screens.home.HomeScreen

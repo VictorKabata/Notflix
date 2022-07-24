@@ -1,10 +1,7 @@
-package ui.screens
+package ui.screens.settings
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -53,71 +50,79 @@ fun SettingsScreen(navController: NavController, viewModel: SharedSettingsPresen
 
     Scaffold(topBar = { AppBar("Settings") }) {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
-            Column {
-                Spacer(modifier = Modifier.height(8.dp))
+            Row(modifier = Modifier.fillMaxSize()) {
+                Spacer(modifier = Modifier.weight(1f))
 
-                PreferencesGroup(title = "Personalization") {
-                    TextPreference(
-                        icon = painterResource("ic_theme.svg"),
-                        title = "Change Theme",
-                        subTitle = themeLabel,
-                        onClick = { showThemeDialog.value = !showThemeDialog.value }
-                    )
+                Column(modifier = Modifier.weight(3f)) {
+                    Spacer(modifier = Modifier.height(8.dp))
 
-                    if (showThemeDialog.value) ChangeTheme(
-                        viewModel = viewModel,
-                        showDialog = showThemeDialog,
-                        currentValue = themeLabel
-                    )
+                    PreferencesGroup(title = "Personalization") {
+                        TextPreference(
+                            icon = painterResource("ic_theme.svg"),
+                            title = "Change Theme",
+                            subTitle = themeLabel,
+                            onClick = { showThemeDialog.value = !showThemeDialog.value }
+                        )
 
-                    TextPreference(
-                        icon = painterResource("ic_language.svg"),
-                        title = "Change Language",
-                        subTitle = languageLabel,
-                        onClick = { showLanguageDialog.value = !showLanguageDialog.value }
-                    )
+                        if (showThemeDialog.value) ChangeTheme(
+                            viewModel = viewModel,
+                            showDialog = showThemeDialog,
+                            currentValue = themeLabel
+                        )
 
-                    if (showLanguageDialog.value) ChangeLanguage(
-                        viewModel = viewModel,
-                        showDialog = showLanguageDialog,
-                        currentValue = languageLabel
-                    )
+                        TextPreference(
+                            icon = painterResource("ic_language.svg"),
+                            title = "Change Language",
+                            subTitle = languageLabel,
+                            onClick = { showLanguageDialog.value = !showLanguageDialog.value }
+                        )
 
-                    TextPreference(
-                        icon = painterResource("ic_image_quality.svg"),
-                        title = "Change Image Quality",
-                        subTitle = imageQualityLabel,
-                        onClick = { showImageQualityDialog.value = !showImageQualityDialog.value }
-                    )
+                        if (showLanguageDialog.value) ChangeLanguage(
+                            viewModel = viewModel,
+                            showDialog = showLanguageDialog,
+                            currentValue = languageLabel
+                        )
 
-                    if (showImageQualityDialog.value) ChangeImageQuality(
-                        viewModel = viewModel,
-                        showDialog = showImageQualityDialog,
-                        currentValue = imageQualityLabel
-                    )
+                        TextPreference(
+                            icon = painterResource("ic_image_quality.svg"),
+                            title = "Change Image Quality",
+                            subTitle = imageQualityLabel,
+                            onClick = {
+                                showImageQualityDialog.value = !showImageQualityDialog.value
+                            }
+                        )
+
+                        if (showImageQualityDialog.value) ChangeImageQuality(
+                            viewModel = viewModel,
+                            showDialog = showImageQualityDialog,
+                            currentValue = imageQualityLabel
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    PreferencesGroup(
+                        title = "Extras",
+                        isLast = true
+                    ) {
+                        TextPreference(
+                            icon = painterResource("ic_bug.svg"),
+                            title = "Report Bug",
+                            subTitle = "Report bug or request feature",
+                            onClick = { reportBug() }
+                        )
+
+                        TextPreference(
+                            modifier = Modifier.clickable { },
+                            icon = painterResource("ic_code.svg"),
+                            title = "Source Code",
+                            subTitle = "View app source code",
+                            onClick = { openSourceCode() }
+                        )
+                    }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
-
-                PreferencesGroup(
-                    title = "Extras",
-                    isLast = true
-                ) {
-                    TextPreference(
-                        icon = painterResource("ic_bug.svg"),
-                        title = "Report Bug",
-                        subTitle = "Report bug or request feature",
-                        onClick = { reportBug() }
-                    )
-
-                    TextPreference(
-                        modifier = Modifier.clickable { },
-                        icon = painterResource("ic_code.svg"),
-                        title = "Source Code",
-                        subTitle = "View app source code",
-                        onClick = { openSourceCode() }
-                    )
-                }
+                Spacer(modifier = Modifier.weight(1f))
             }
         }
     }
