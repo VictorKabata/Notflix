@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
@@ -12,6 +13,8 @@ import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
+import com.vickikbt.shared.presentation.presenters.SharedMainPresenter
+import koin
 import ui.components.NavigationRailBar
 import ui.navigation.Navigation
 import ui.navigation.NavigationItem
@@ -20,9 +23,11 @@ import ui.theme.NotflixDesktopTheme
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MainScreen(applicationScope: ApplicationScope) {
+fun MainScreen(applicationScope: ApplicationScope, viewModel: SharedMainPresenter = koin.get()) {
 
     val appIcon = painterResource("n_logo.png")
+
+    val theme = viewModel.appTheme.collectAsState().value
 
     Window(
         onCloseRequest = { applicationScope.exitApplication() },
@@ -35,6 +40,8 @@ fun MainScreen(applicationScope: ApplicationScope) {
         )
     ) {
 
+        val isDarkTheme = theme != 0
+
         val topLevelDestinations = listOf(
             NavigationItem.Home,
             NavigationItem.Favorites,
@@ -43,7 +50,7 @@ fun MainScreen(applicationScope: ApplicationScope) {
 
         val navController by rememberNavController(startDestination = NavigationItem.Home.route)
 
-        NotflixDesktopTheme {
+        NotflixDesktopTheme(darkTheme = isDarkTheme) {
             Surface {
                 Row {
                     NavigationRailBar(
