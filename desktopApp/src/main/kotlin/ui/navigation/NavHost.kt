@@ -25,7 +25,6 @@ class NavHost(
     }
 }
 
-
 /**
  * Composable to build the Navigation Host
  */

@@ -41,7 +41,6 @@ class NavController constructor(
     }
 }
 
-
 /**
  * Composable to remember the state of the navcontroller
  */

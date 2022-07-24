@@ -5,4 +5,5 @@ import ui.navigation.NavController
 
 @Composable
 fun DetailsScreen(navController: NavController) {
+    // ToDo: Create details screen
 }

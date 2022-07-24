@@ -10,5 +10,4 @@ import ui.navigation.NavController
 fun FavoritesScreen(navController: NavController) {
 
     Box(modifier = Modifier.fillMaxSize())
-
 }

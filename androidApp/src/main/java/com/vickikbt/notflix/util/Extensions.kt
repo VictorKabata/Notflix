@@ -28,7 +28,6 @@ fun String.loadImage(): String {
     return "https://image.tmdb.org/t/p/$quality/$this"
 }
 
-
 // Original- 1998-11-19
 // Target- Nov, 1998
 fun String.getReleaseDate(): String {

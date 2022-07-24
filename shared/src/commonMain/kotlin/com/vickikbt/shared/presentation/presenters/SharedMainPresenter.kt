@@ -63,5 +63,4 @@ class SharedMainPresenter constructor(private val settingsRepository: SettingsRe
             supervisorJob.value = null
         }
     }
-
 }
