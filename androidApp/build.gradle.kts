@@ -95,7 +95,7 @@ dependencies {
     // Gowtham Compose Rating Bar
     implementation(AndroidDependencies.ratingBar)
 
-    //Leak Canary - Memory leaks
+    // Leak Canary - Memory leaks
     debugImplementation(AndroidDependencies.leakCanary)
 
     testImplementation(AndroidDependencies.jUnit)

@@ -101,7 +101,5 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
         } catch (e: Exception) {
             _error.value = e.message
         }
-
     }
-
 }

@@ -23,7 +23,7 @@ class SharedDetailsPresenter constructor(private val movieDetailsRepository: Mov
     private val viewModelScope = CoroutineScope(Dispatchers.Default)
     private val supervisorJob = MutableStateFlow<Job?>(null)
 
-    //ToDo: Add UI State class
+    // ToDo: Add UI State class
 
     private val _movieDetails = MutableStateFlow<MovieDetails?>(null)
     val movieDetails get() = _movieDetails.asStateFlow()
@@ -41,7 +41,7 @@ class SharedDetailsPresenter constructor(private val movieDetailsRepository: Mov
     val movieIsFavorite get() = _movieIsFavorite.asStateFlow()
 
     fun getMovieDetails(movieId: Int) {
-        _movieDetails.value=null
+        _movieDetails.value = null
         Napier.e("Fetching movie details")
 
         val job = viewModelScope.launch {
@@ -57,7 +57,7 @@ class SharedDetailsPresenter constructor(private val movieDetailsRepository: Mov
     }
 
     fun getMovieCast(movieId: Int) {
-        _movieCast.value=null
+        _movieCast.value = null
 
         val job = viewModelScope.launch {
             movieDetailsRepository.getMovieCast(movieId).collectLatest {
@@ -86,7 +86,7 @@ class SharedDetailsPresenter constructor(private val movieDetailsRepository: Mov
     }*/
 
     fun fetchSimilarMovies(movieId: Int) {
-        _similarMovies.value=null
+        _similarMovies.value = null
 
         val job = viewModelScope.launch {
             movieDetailsRepository.fetchSimilarMovies(movieId).collectLatest {
@@ -116,7 +116,6 @@ class SharedDetailsPresenter constructor(private val movieDetailsRepository: Mov
         Napier.e("Updating : $cacheId to $isFavorite")
 
         val job = viewModelScope.launch {
-
         }
 
         supervisorJob.value = job

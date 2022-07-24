@@ -38,7 +38,7 @@ import org.koin.androidx.compose.get
 @Composable
 fun ItemNowPlayingMovies(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel= get(),
+    viewModel: HomeViewModel = get(),
     movie: Movie,
     onItemClick: () -> Unit
 ) {
