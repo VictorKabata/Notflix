@@ -26,10 +26,8 @@ import com.vickikbt.notflix.ui.components.BottomNavBar
 import com.vickikbt.notflix.ui.navigation.Navigation
 import com.vickikbt.notflix.ui.navigation.NavigationItem
 import com.vickikbt.notflix.ui.theme.NotflixAndroidTheme
-import com.vickikbt.notflix.util.ChangeSystemBarColorOnNetChange
 import com.vickikbt.notflix.util.LocaleManager
-import com.vickikbt.shared.presentation.viewmodels.SharedSettingsViewModel
-import org.koin.android.ext.android.get
+import com.vickikbt.shared.presentation.presenters.SharedMainPresenter
 import org.koin.android.ext.android.inject
 
 @ExperimentalAnimationApi
@@ -38,24 +36,22 @@ import org.koin.android.ext.android.inject
 class MainActivity : ComponentActivity() {
 
     private val localeUtil by inject<LocaleManager>()
-    private val viewModel by inject<MainViewModel>()
+    private val viewModel by inject<SharedMainPresenter>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.registerCallback()
         setContent {
-            val settingsViewModel: SharedSettingsViewModel = get()
             val systemUiController = rememberSystemUiController()
 
-            val currentTheme = settingsViewModel.selectedTheme.collectAsState().value
-            val useDarkTheme =
+            val currentTheme = viewModel.appTheme.collectAsState().value
+            val isDarkTheme =
                 when (stringArrayResource(id = R.array.theme_entries)[currentTheme ?: 0]) {
                     "light_theme" -> false
                     "dark_theme" -> true
                     else -> isSystemInDarkTheme()
                 }
 
-            val currentLanguage = settingsViewModel.selectedLanguage.collectAsState().value
+            val currentLanguage = viewModel.appLanguage.collectAsState().value
             val languageEntry =
                 stringArrayResource(id = R.array.language_entries)[currentLanguage ?: 0]
             localeUtil.setLocale(
@@ -63,12 +59,12 @@ class MainActivity : ComponentActivity() {
                 language = languageEntry
             )
 
-            ChangeSystemBarColorOnNetChange(
+            /*ChangeSystemBarColorOnNetChange(
                 key = viewModel.isNetworkOn.collectAsState().value,
                 systemUiController = systemUiController,
-            )
+            )*/
 
-            NotflixAndroidTheme(darkTheme = true, systemUiController = systemUiController) {
+            NotflixAndroidTheme(darkTheme = isDarkTheme, systemUiController = systemUiController) {
                 Surface(color = MaterialTheme.colors.surface) {
                     MainScreen()
                 }

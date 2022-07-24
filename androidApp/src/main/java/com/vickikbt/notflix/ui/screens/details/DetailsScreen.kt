@@ -42,13 +42,13 @@ import com.vickikbt.notflix.util.getPopularity
 import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.MovieDetails
-import com.vickikbt.shared.presentation.viewmodels.SharedDetailsViewModel
+import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
 import org.koin.androidx.compose.get
 
 @Composable
 fun DetailsScreen(
     navController: NavController,
-    detailsViewModel: SharedDetailsViewModel = get(),
+    detailsViewModel: SharedDetailsPresenter = get(),
     movieId: Int,
     cacheId: Int,
 ) {

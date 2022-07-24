@@ -32,7 +32,7 @@ import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.shared.domain.models.Movie
-import com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel
+import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
 import org.koin.androidx.compose.get
 
 @ExperimentalMaterialApi
@@ -40,7 +40,7 @@ import org.koin.androidx.compose.get
 @Composable
 fun HomeScreen(
     navController: NavController,
-    sharedViewModel: SharedHomeViewModel = get()
+    sharedViewModel: SharedHomePresenter = get()
 ) {
 
     val scrollState = rememberScrollState()

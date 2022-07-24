@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.app_bars.AppBar
-import com.vickikbt.shared.presentation.viewmodels.SharedFavouritesViewModel
+import com.vickikbt.shared.presentation.presenters.SharedFavouritesPresenter
 import org.koin.androidx.compose.get
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -23,7 +23,7 @@ import org.koin.androidx.compose.get
 @Composable
 fun FavoritesScreen(
     navController: NavController,
-    favoritesViewModel: SharedFavouritesViewModel = get()
+    favoritesViewModel: SharedFavouritesPresenter = get()
 ) {
     val scrollState = rememberScrollState()
     val favouriteMovies = favoritesViewModel.favouriteMovies.collectAsState().value

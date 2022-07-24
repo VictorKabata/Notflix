@@ -1,10 +1,7 @@
 package com.vickikbt.shared.presentation.presenters
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager
-import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
-import com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE
-import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
+import com.vickikbt.shared.domain.repositories.SettingsRepository
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +11,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
-class SharedSettingsPresenter constructor(private val preferenceManager: PreferenceManager) :
+class SharedSettingsPresenter constructor(private val settingsRepository: SettingsRepository) :
     KoinComponent {
 
     @NativeCoroutineScope
@@ -39,31 +36,51 @@ class SharedSettingsPresenter constructor(private val preferenceManager: Prefere
     fun savePreferenceSelection(key: String, selection: Int) {
         val job = viewModelScope.launch {
             Napier.e("Saving preference $key as $selection")
-            preferenceManager.setInt(key, selection)
+            settingsRepository.savePreferenceSelection(key = key, selection = selection)
+        }
+
+        supervisorJob.value = job
+        job.invokeOnCompletion {
+            supervisorJob.value = null
         }
     }
 
     private fun getThemePreference() {
         val job = viewModelScope.launch {
-            preferenceManager.getInt(KEY_THEME).collectLatest {
+            settingsRepository.getThemePreference().collectLatest {
                 _selectedTheme.value = it
             }
+        }
+
+        supervisorJob.value = job
+        job.invokeOnCompletion {
+            supervisorJob.value = null
         }
     }
 
     private fun getLanguagePreference() {
         val job = viewModelScope.launch {
-            preferenceManager.getInt(KEY_LANGUAGE).collectLatest {
-                _selectedTheme.value = it
+            settingsRepository.getLanguagePreference().collectLatest {
+                _selectedLanguage.value = it
             }
+        }
+
+        supervisorJob.value = job
+        job.invokeOnCompletion {
+            supervisorJob.value = null
         }
     }
 
     private fun getImageQualityPreference() {
         val job = viewModelScope.launch {
-            preferenceManager.getInt(KEY_IMAGE_QUALITY).collectLatest {
-                _selectedTheme.value = it
+            settingsRepository.getImageQualityPreference().collectLatest {
+                _selectedImageQuality.value = it
             }
+        }
+
+        supervisorJob.value = job
+        job.invokeOnCompletion {
+            supervisorJob.value = null
         }
     }
 }
