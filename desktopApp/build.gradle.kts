@@ -11,10 +11,10 @@ repositories {
 }
 
 dependencies {
-    implementation(project(BuildModules.Shared))
+    implementation(project(BuildModules.shared))
 
     implementation(compose.desktop.currentOs)
-    implementation(DesktopDependencies.kamel)
+    // implementation(DesktopDependencies.kamel)
 }
 
 compose.desktop {

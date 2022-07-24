@@ -1,6 +1,6 @@
 object BuildModules {
-    const val App = ":app"
-    const val Desktop = ":desktopApp"
-
-    const val Shared = ":shared"
+    const val shared = ":shared"
+    const val androidApp = ":androidApp"
+    const val iOSApp = ":iOSApp"
+    const val desktopApp = ":desktopApp"
 }

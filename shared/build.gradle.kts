@@ -1,18 +1,18 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
-    kotlin(BuildPlugins.multiplatform)
-    id(BuildPlugins.androidLibrary)
-    kotlin(BuildPlugins.kotlinXSerialization) version Versions.kotlinSerialization
-    id(BuildPlugins.nativeCoroutines)
+    kotlin(Plugins.multiplatform)
+    id(Plugins.androidLibrary)
+    kotlin(Plugins.kotlinXSerialization) version Versions.kotlinSerialization
+    id(Plugins.nativeCoroutines)
 }
 
 android {
-    compileSdk = AndroidSDK.targetSdkVersion
+    compileSdk = AndroidSdk.compileSdkVersion
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = AndroidSDK.minSdkVersion
-        targetSdk = AndroidSDK.targetSdkVersion
+        minSdk = AndroidSdk.minSdkVersion
+        targetSdk = AndroidSdk.targetSdkVersion
     }
 }
 
@@ -30,21 +30,21 @@ kotlin {
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
-            implementation(KmmDependencies.kotlinxCoroutines)
+            implementation(MultiplatformDependencies.kotlinxCoroutines)
 
-            implementation(KmmDependencies.kotlinxSerialization)
-            implementation(KmmDependencies.kotlinxDateTime)
+            implementation(MultiplatformDependencies.kotlinxSerialization)
+            implementation(MultiplatformDependencies.kotlinxDateTime)
 
-            api(KmmDependencies.koinCore)
+            api(MultiplatformDependencies.koinCore)
 
-            implementation(KmmDependencies.ktorCore)
-            implementation(KmmDependencies.ktorSerialization)
-            implementation(KmmDependencies.ktorLogging)
+            implementation(MultiplatformDependencies.ktorCore)
+            implementation(MultiplatformDependencies.ktorSerialization)
+            implementation(MultiplatformDependencies.ktorLogging)
 
-            api(KmmDependencies.napier)
+            api(MultiplatformDependencies.napier)
 
-            implementation(KmmDependencies.multiplatformSettings)
-            implementation(KmmDependencies.multiplatformSettingsCoroutines)
+            implementation(MultiplatformDependencies.multiplatformSettings)
+            implementation(MultiplatformDependencies.multiplatformSettingsCoroutines)
         }
 
         sourceSets["commonTest"].dependencies {
@@ -53,17 +53,17 @@ kotlin {
         }
 
         sourceSets["androidMain"].dependencies {
-            implementation(KmmDependencies.ktorAndroid)
+            implementation(MultiplatformDependencies.ktorAndroid)
         }
 
         sourceSets["androidTest"].dependencies {}
 
         sourceSets["jvmMain"].dependencies {
-            api(KmmDependencies.ktorJvm)
+            api(MultiplatformDependencies.ktorJvm)
         }
 
         sourceSets["iOSMain"].dependencies {
-            implementation(KmmDependencies.ktoriOS)
+            implementation(MultiplatformDependencies.ktoriOS)
         }
 
         sourceSets["iOSTest"].dependencies {}

@@ -1,26 +1,22 @@
 plugins {
-    id(BuildPlugins.androidApplication)
-    id(BuildPlugins.kotlinAndroid)
-    id(BuildPlugins.kotlinKapt)
-    id(BuildPlugins.googleServices)
-    id(BuildPlugins.firebaseCrashlytics)
+    id(Plugins.androidApplication)
+    kotlin(Plugins.android)
+    // id(Plugins.googleServices)
+    // id(Plugins.firebaseCrashlytics)
 }
 
 android {
-    compileSdk = AndroidSDK.compileSdkVersion
-    buildToolsVersion(AndroidSDK.buildToolVersion)
+    compileSdk = AndroidSdk.compileSdkVersion
 
     defaultConfig {
-        applicationId = AndroidSDK.applicationId
+        applicationId = AndroidSdk.applicationId
 
-        minSdk = AndroidSDK.minSdkVersion
-        targetSdk = AndroidSDK.targetSdkVersion
-        versionCode = AndroidSDK.versionCode
-        versionName = AndroidSDK.versionName
+        minSdk = AndroidSdk.minSdkVersion
+        targetSdk = AndroidSdk.targetSdkVersion
+        versionCode = AndroidSdk.versionCode
+        versionName = AndroidSdk.versionName
 
-        testInstrumentationRunner = AndroidSDK.testInstrumentationRunner
-
-        multiDexEnabled = true
+        testInstrumentationRunner = AndroidSdk.testInstrumentationRunner
     }
 
     buildTypes {
@@ -49,14 +45,12 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.compose_version
+        kotlinCompilerExtensionVersion = Versions.compose
     }
 }
 
 dependencies {
-    implementation("com.android.support:multidex:2.0.1")
-
-    api(project(BuildModules.Shared))
+    api(project(BuildModules.shared))
 
     implementation(AndroidDependencies.kotlin)
     implementation(AndroidDependencies.androidCore)
@@ -100,6 +94,9 @@ dependencies {
 
     // Gowtham Compose Rating Bar
     implementation(AndroidDependencies.ratingBar)
+
+    //Leak Canary - Memory leaks
+    debugImplementation(AndroidDependencies.leakCanary)
 
     testImplementation(AndroidDependencies.jUnit)
     testImplementation(AndroidDependencies.googleTruth)

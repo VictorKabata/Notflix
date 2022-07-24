@@ -41,7 +41,7 @@ fun ItemTrendingMovies(
             Image(
                 modifier = Modifier.fillMaxSize(),
                 painter = rememberImagePainter(
-                    data = movie.backdropPath?.loadImage(),
+                    data = movie.posterPath?.loadImage(),
                     builder = { crossfade(true) }
                 ),
                 alignment = Alignment.Center,

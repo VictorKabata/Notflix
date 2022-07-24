@@ -32,17 +32,15 @@ import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.shared.domain.models.Movie
-import com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel
+import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
 import org.koin.androidx.compose.get
-import org.koin.androidx.compose.getViewModel
 
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: HomeViewModel = getViewModel(),
-    sharedViewModel: SharedHomeViewModel = get()
+    sharedViewModel: SharedHomePresenter = get()
 ) {
 
     val scrollState = rememberScrollState()
@@ -62,7 +60,6 @@ fun HomeScreen(
 
             NowPlayingMovies(
                 navController = navController,
-                viewModel = viewModel,
                 movies = nowPlayingMovies ?: listOf()
             )
 
@@ -76,7 +73,6 @@ fun HomeScreen(
             popularMovies?.let {
                 PopularMovies(
                     navController = navController,
-                    viewModel = viewModel,
                     movies = it
                 )
             }
@@ -95,7 +91,6 @@ fun HomeScreen(
 @Composable
 fun NowPlayingMovies(
     navController: NavController,
-    viewModel: HomeViewModel,
     movies: List<Movie>
 ) {
     val pagerState = rememberPagerState()
@@ -105,22 +100,16 @@ fun NowPlayingMovies(
             .fillMaxWidth()
             .wrapContentHeight(),
         count = if (movies.size >= 5) 5 else movies.size,
-        state = pagerState
+        state = pagerState,
     ) { page ->
         ItemNowPlayingMovies(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(360.dp)
-                .placeholder(
-                    visible = movies.isNullOrEmpty(),
-                    color = Gray,
-                    highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
-                ),
-            viewModel = viewModel,
+                .height(360.dp),
             movie = movies[page]
         ) {
             val movie = movies[page]
-            // navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
+            navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
         }
     }
 
@@ -173,7 +162,7 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
                 ),
                 movie = item,
                 onItemClick = { movie ->
-                    // navController.navigate("details/${movie.id!!}/${movie.cacheId}")
+                    navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                 }
             )
         }
@@ -184,7 +173,6 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
 @Composable
 fun PopularMovies(
     navController: NavController,
-    viewModel: HomeViewModel,
     movies: List<Movie>
 ) {
     SectionSeparator(
@@ -212,10 +200,9 @@ fun PopularMovies(
                     shape = RoundedCornerShape(4.dp),
                     highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
                 ),
-                viewModel = viewModel,
                 movie = item,
                 onClickItem = { movie ->
-                    // navController.navigate("details/${movie.id!!}/${movie.cacheId}")
+                    navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                 }
             )
         }
@@ -255,7 +242,7 @@ fun UpcomingMovies(
                     ),
                     movie = item,
                     onItemClick = { movie ->
-                        // navController.navigate("details/${movie.id!!}/${movie.cacheId}")
+                        navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                     }
                 )
             }

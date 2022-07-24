@@ -19,7 +19,7 @@ interface ApiService {
     ): MovieResultsDto?
 
     suspend fun fetchTrendingMovies(
-        mediaType: String = "movies",
+        mediaType: String = "movie",
         timeWindow: String = "week",
         page: Int = STARTING_PAGE_INDEX,
     ): MovieResultsDto?

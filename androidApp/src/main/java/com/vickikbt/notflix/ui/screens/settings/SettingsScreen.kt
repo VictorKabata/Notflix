@@ -25,13 +25,16 @@ import com.vickikbt.notflix.ui.components.app_bars.AppBar
 import com.vickikbt.notflix.ui.components.preferences.DialogPreferenceSelection
 import com.vickikbt.notflix.ui.components.preferences.PreferencesGroup
 import com.vickikbt.notflix.ui.components.preferences.TextPreference
+import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager.Companion.IMAGE_QUALITY_KEY
+import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager.Companion.LANGUAGE_KEY
+import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager.Companion.THEME_KEY
 import com.vickikbt.shared.domain.utils.Constants
-import com.vickikbt.shared.presentation.viewmodels.SharedSettingsViewModel
+import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import org.koin.androidx.compose.get
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun SettingsScreen(navController: NavController, viewModel: SharedSettingsViewModel = get()) {
+fun SettingsScreen(navController: NavController, viewModel: SharedSettingsPresenter = get()) {
 
     val context = LocalContext.current
 
@@ -122,7 +125,7 @@ fun SettingsScreen(navController: NavController, viewModel: SharedSettingsViewMo
 
 @Composable
 private fun ChangeTheme(
-    viewModel: SharedSettingsViewModel,
+    viewModel: SharedSettingsPresenter,
     showDialog: MutableState<Boolean>,
     currentValue: String?
 ) {
@@ -133,13 +136,13 @@ private fun ChangeTheme(
         labels = stringArrayResource(id = R.array.theme_labels),
         onNegativeClick = { showDialog.value = false }
     ) { theme ->
-        viewModel.savePreferenceSelection(key = Constants.KEY_THEME, selection = theme)
+        viewModel.savePreferenceSelection(key = THEME_KEY, selection = theme)
     }
 }
 
 @Composable
 private fun ChangeLanguage(
-    viewModel: SharedSettingsViewModel,
+    viewModel: SharedSettingsPresenter,
     showDialog: MutableState<Boolean>,
     currentValue: String?
 ) {
@@ -150,13 +153,13 @@ private fun ChangeLanguage(
         labels = stringArrayResource(id = R.array.language_labels),
         onNegativeClick = { showDialog.value = false }
     ) { language ->
-        viewModel.savePreferenceSelection(key = Constants.KEY_LANGUAGE, selection = language)
+        viewModel.savePreferenceSelection(key = LANGUAGE_KEY, selection = language)
     }
 }
 
 @Composable
 private fun ChangeImageQuality(
-    viewModel: SharedSettingsViewModel,
+    viewModel: SharedSettingsPresenter,
     showDialog: MutableState<Boolean>,
     currentValue: String?
 ) {
@@ -168,7 +171,7 @@ private fun ChangeImageQuality(
         onNegativeClick = { showDialog.value = false }
     ) { imageQuality ->
         viewModel.savePreferenceSelection(
-            key = Constants.KEY_IMAGE_QUALITY,
+            key = IMAGE_QUALITY_KEY,
             selection = imageQuality
         )
     }
