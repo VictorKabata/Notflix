@@ -10,11 +10,10 @@ import io.ktor.client.request.*
 
 class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiService {
 
-    override suspend fun fetchNowPlayingMovies(page: Int, language: String): MovieResultsDto? {
+    override suspend fun fetchNowPlayingMovies(page: Int): MovieResultsDto? {
         return try {
             httpClient.get<MovieResultsDto>(urlString = "movie/now_playing") {
                 parameter("page", page)
-                parameter("language", language)
             }
         } catch (e: Exception) {
             Napier.e("Error: ${e.message}")
@@ -22,11 +21,10 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
         }
     }
 
-    override suspend fun fetchPopularMovies(page: Int, language: String): MovieResultsDto? {
+    override suspend fun fetchPopularMovies(page: Int): MovieResultsDto? {
         return try {
             httpClient.get<MovieResultsDto>(urlString = "movie/popular") {
                 parameter("page", page)
-                parameter("language", language)
             }
         } catch (e: Exception) {
             Napier.e("Error: ${e.message}")
@@ -49,11 +47,10 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
         }
     }
 
-    override suspend fun fetchUpcomingMovies(page: Int, language: String): MovieResultsDto? {
+    override suspend fun fetchUpcomingMovies(page: Int): MovieResultsDto? {
         return try {
             httpClient.get<MovieResultsDto>(urlString = "movie/upcoming") {
                 parameter("page", page)
-                parameter("language", language)
             }
         } catch (e: Exception) {
             Napier.e("Error: ${e.message}")
@@ -61,11 +58,10 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
         }
     }
 
-    override suspend fun fetchMovieDetails(movieId: Int, language: String): MovieDetailsDto? {
+    override suspend fun fetchMovieDetails(movieId: Int): MovieDetailsDto? {
         return try {
             httpClient.get<MovieDetailsDto>(urlString = "movie/$movieId") {
                 parameter("movie_id", movieId)
-                parameter("language", language)
             }
         } catch (e: Exception) {
             Napier.e("Error: ${e.message}")
@@ -73,11 +69,10 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
         }
     }
 
-    override suspend fun fetchMovieCast(movieId: Int, language: String): CastDto? {
+    override suspend fun fetchMovieCast(movieId: Int): CastDto? {
         return try {
             httpClient.get<CastDto>(urlString = "movie/$movieId/credits") {
                 parameter("movie_id", movieId)
-                parameter("language", language)
             }
         } catch (e: Exception) {
             Napier.e("Error: ${e.message}")
@@ -85,11 +80,10 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
         }
     }
 
-    override suspend fun fetchMovieVideos(movieId: Int, language: String): MovieVideoDto? {
+    override suspend fun fetchMovieVideos(movieId: Int): MovieVideoDto? {
         return try {
             httpClient.get<MovieVideoDto>(urlString = "movie/$movieId/videos") {
                 parameter("movie_id", movieId)
-                parameter("language", language)
             }
         } catch (e: Exception) {
             Napier.e("Error: ${e.message}")
@@ -99,13 +93,11 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
 
     override suspend fun fetchSimilarMovies(
         movieId: Int,
-        page: Int,
-        language: String
+        page: Int
     ): MovieResultsDto? {
         return try {
             httpClient.get<MovieResultsDto>(urlString = "movie/$movieId/similar") {
                 parameter("page", page)
-                parameter("language", language)
             }
         } catch (e: Exception) {
             Napier.e("Error: ${e.message}")

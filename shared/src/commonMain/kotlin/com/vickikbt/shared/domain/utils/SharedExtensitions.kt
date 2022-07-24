@@ -1,5 +1,7 @@
 package com.vickikbt.shared.domain.utils
 
+import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -20,5 +22,18 @@ fun KoinComponent.viewModelScope(operation: suspend () -> Unit) {
     job.invokeOnCompletion {
         supervisorJob.value?.cancel()
         supervisorJob.value = null
+    }
+}
+
+fun getAppLanguage(settingsPresenter: SharedSettingsPresenter): String {
+
+    Napier.e("App language: ${settingsPresenter.selectedLanguage.value}")
+
+    return when (settingsPresenter.selectedLanguage.value) {
+        0 -> "en"
+        1 -> "es"
+        2 -> "fr"
+        3 -> "de"
+        else -> "en"
     }
 }
