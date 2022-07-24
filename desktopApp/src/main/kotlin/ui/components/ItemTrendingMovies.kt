@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.vickikbt.shared.domain.models.Movie
 import utils.AsyncImage
+import utils.loadImage
 import utils.loadImageBitmap
 
 @Composable
@@ -26,7 +27,7 @@ fun ItemTrendingMovies(
     movie: Movie,
     onItemClick: (Movie) -> Unit
 ) {
-    val imageUrl = "https://image.tmdb.org/t/p/original/${movie.posterPath}"
+    val imageUrl = movie.posterPath?.loadImage()
 
     Column {
         Card(

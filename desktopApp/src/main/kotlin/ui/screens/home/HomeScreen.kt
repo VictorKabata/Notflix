@@ -51,20 +51,13 @@ fun HomeScreen(
 fun NowPlayingMovies(movies: List<Movie>) {
     val movieNumber by remember { mutableStateOf((0..movies.size).random()) }
 
-    LazyRow(
-        contentPadding = PaddingValues(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
+    ItemNowPlayingMovies(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(450.dp),
+        movie = movies[0]
     ) {
-        item {
-            ItemNowPlayingMovies(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(450.dp),
-                movie = movies[0]
-            ) {
-                println("Clicked movie: ${it.title}")
-            }
-        }
+        println("Clicked movie: ${it.title}")
     }
 }
 

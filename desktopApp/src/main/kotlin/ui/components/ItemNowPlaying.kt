@@ -1,6 +1,8 @@
 package ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
@@ -18,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.vickikbt.shared.domain.models.Movie
 import utils.AsyncImage
+import utils.loadImage
 import utils.loadImageBitmap
 
 @Composable
@@ -26,17 +29,15 @@ fun ItemNowPlayingMovies(
     movie: Movie,
     onItemClick: (Movie) -> Unit
 ) {
-    val imageUrl = "https://image.tmdb.org/t/p/original/${movie.backdropPath}"
+    val imageUrl = movie.backdropPath?.loadImage()
 
-    Box(modifier = modifier) {
+    Box(modifier = modifier.fillMaxWidth().clickable { onItemClick(movie) }) {
         AsyncImage(
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.Center),
+            modifier = Modifier.fillMaxSize(),
             load = { loadImageBitmap(imageUrl) },
             painterFor = { remember { BitmapPainter(it) } },
             contentDescription = "Movie Backdrop Poster",
-            contentScale = ContentScale.FillWidth
+            contentScale = ContentScale.Crop
         )
 
         //region Movie Title
