@@ -108,8 +108,6 @@ fun DetailsScreen(
                     color = MaterialTheme.colors.onSurface,
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
-
                 Text(
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
@@ -135,8 +133,6 @@ fun DetailsScreen(
                         style = MaterialTheme.typography.h6,
                         fontSize = 20.sp
                     )
-
-                    Spacer(modifier = Modifier.height(8.dp))
 
                     LazyRow(
                         contentPadding = PaddingValues(horizontal = 16.dp),

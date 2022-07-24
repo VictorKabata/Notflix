@@ -10,7 +10,6 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.Velocity
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
-import io.github.aakira.napier.Napier
 import org.koin.androidx.compose.inject
 import java.text.SimpleDateFormat
 
@@ -25,8 +24,6 @@ fun String.loadImage(): String {
         0 -> "original"
         else -> "w500"
     }
-
-    Napier.e("Image quality: $quality")
 
     return "https://image.tmdb.org/t/p/$quality/$this"
 }
