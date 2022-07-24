@@ -11,10 +11,10 @@ import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.utils.Constants.API_KEY
 import com.vickikbt.shared.domain.utils.Constants.BASE_URL
-import com.vickikbt.shared.presentation.viewmodels.SharedDetailsViewModel
-import com.vickikbt.shared.presentation.viewmodels.SharedFavouritesViewModel
-import com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel
-import com.vickikbt.shared.presentation.viewmodels.SharedSettingsViewModel
+import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
+import com.vickikbt.shared.presentation.presenters.SharedFavouritesPresenter
+import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
+import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import io.github.aakira.napier.Napier
 import io.ktor.client.*
 import io.ktor.client.features.*
@@ -73,10 +73,10 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(apiService = get()) }
     single<MoviesRepository> { MoviesRepositoryImpl(apiService = get()) }
 
-    single { SharedHomeViewModel(moviesRepository = get()) }
-    single { SharedDetailsViewModel(movieDetailsRepository = get()) }
-    single { SharedFavouritesViewModel(favouritesRepository = get()) }
-    single { SharedSettingsViewModel(preferenceManager = get()) }
+    single { SharedHomePresenter(moviesRepository = get()) }
+    single { SharedDetailsPresenter(movieDetailsRepository = get()) }
+    single { SharedFavouritesPresenter(favouritesRepository = get()) }
+    single { SharedSettingsPresenter(preferenceManager = get()) }
 }
 
 expect fun platformModule(): Module

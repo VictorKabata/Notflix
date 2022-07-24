@@ -1,4 +1,4 @@
-package com.vickikbt.shared.presentation.viewmodels
+package com.vickikbt.shared.presentation.presenters
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
 import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
-class SharedSettingsViewModel constructor(private val preferenceManager: PreferenceManager) :
+class SharedSettingsPresenter constructor(private val preferenceManager: PreferenceManager) :
     KoinComponent {
 
     @NativeCoroutineScope

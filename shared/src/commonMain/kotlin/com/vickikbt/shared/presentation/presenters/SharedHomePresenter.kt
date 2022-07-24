@@ -1,4 +1,4 @@
-package com.vickikbt.shared.presentation.viewmodels
+package com.vickikbt.shared.presentation.presenters
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
 import com.vickikbt.shared.domain.models.Movie
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
-class SharedHomeViewModel constructor(private val moviesRepository: MoviesRepository) :
+class SharedHomePresenter constructor(private val moviesRepository: MoviesRepository) :
     KoinComponent {
 
     @NativeCoroutineScope

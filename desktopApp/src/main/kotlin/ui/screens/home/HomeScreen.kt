@@ -9,7 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.domain.models.Movie
-import com.vickikbt.shared.presentation.viewmodels.SharedHomeViewModel
+import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
 import koin
 import ui.components.ItemNowPlayingMovies
 import ui.components.ItemPopularMovies
@@ -19,7 +19,7 @@ import ui.components.SectionSeparator
 @Composable
 fun HomeScreen() {
 
-    val viewModel = koin.get<SharedHomeViewModel>()
+    val viewModel = koin.get<SharedHomePresenter>()
 
     val nowPlayingMovies = viewModel.nowPlayingMovies.collectAsState()
     val trendingMovies = viewModel.trendingMovies.collectAsState()
