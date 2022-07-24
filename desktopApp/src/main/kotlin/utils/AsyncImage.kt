@@ -44,5 +44,5 @@ fun <T> AsyncImage(
     }
 }
 
-fun loadImageBitmap(url: String): ImageBitmap =
+fun loadImageBitmap(url: String?): ImageBitmap =
     URL(url).openStream().buffered().use(::loadImageBitmap)

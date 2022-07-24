@@ -11,5 +11,4 @@ interface SettingsRepository {
     suspend fun getLanguagePreference(): Flow<Int?>
 
     suspend fun getImageQualityPreference(): Flow<Int?>
-
 }

@@ -8,15 +8,9 @@ import com.vickikbt.shared.domain.utils.Constants.STARTING_PAGE_INDEX
 
 interface ApiService {
 
-    suspend fun fetchNowPlayingMovies(
-        page: Int = STARTING_PAGE_INDEX,
-        language: String = "en"
-    ): MovieResultsDto?
+    suspend fun fetchNowPlayingMovies(page: Int = STARTING_PAGE_INDEX): MovieResultsDto?
 
-    suspend fun fetchPopularMovies(
-        page: Int = STARTING_PAGE_INDEX,
-        language: String = "en"
-    ): MovieResultsDto?
+    suspend fun fetchPopularMovies(page: Int = STARTING_PAGE_INDEX): MovieResultsDto?
 
     suspend fun fetchTrendingMovies(
         mediaType: String = "movie",
@@ -24,29 +18,13 @@ interface ApiService {
         page: Int = STARTING_PAGE_INDEX,
     ): MovieResultsDto?
 
-    suspend fun fetchUpcomingMovies(
-        page: Int = STARTING_PAGE_INDEX,
-        language: String = "en"
-    ): MovieResultsDto?
+    suspend fun fetchUpcomingMovies(page: Int = STARTING_PAGE_INDEX): MovieResultsDto?
 
-    suspend fun fetchMovieDetails(
-        movieId: Int,
-        language: String = "en"
-    ): MovieDetailsDto?
+    suspend fun fetchMovieDetails(movieId: Int): MovieDetailsDto?
 
-    suspend fun fetchMovieCast(
-        movieId: Int,
-        language: String = "en"
-    ): CastDto?
+    suspend fun fetchMovieCast(movieId: Int): CastDto?
 
-    suspend fun fetchMovieVideos(
-        movieId: Int,
-        language: String = "en"
-    ): MovieVideoDto?
+    suspend fun fetchMovieVideos(movieId: Int): MovieVideoDto?
 
-    suspend fun fetchSimilarMovies(
-        movieId: Int,
-        page: Int = STARTING_PAGE_INDEX,
-        language: String = "en"
-    ): MovieResultsDto?
+    suspend fun fetchSimilarMovies(movieId: Int, page: Int = STARTING_PAGE_INDEX): MovieResultsDto?
 }

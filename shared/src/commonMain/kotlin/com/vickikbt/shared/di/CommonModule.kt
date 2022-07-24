@@ -13,6 +13,7 @@ import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.repositories.SettingsRepository
 import com.vickikbt.shared.domain.utils.Constants.API_KEY
 import com.vickikbt.shared.domain.utils.Constants.BASE_URL
+import com.vickikbt.shared.domain.utils.getAppLanguage
 import com.vickikbt.shared.presentation.presenters.*
 import io.github.aakira.napier.Napier
 import io.ktor.client.*
@@ -42,6 +43,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
                     host = BASE_URL
                     url { protocol = URLProtocol.HTTPS }
                     parameters.append("api_key", API_KEY)
+                    parameters.append("language", getAppLanguage(settingsPresenter = get()))
                 }
             }
 
