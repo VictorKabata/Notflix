@@ -23,6 +23,9 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.material.placeholder
+import com.google.accompanist.placeholder.shimmer
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
@@ -53,14 +56,21 @@ fun ItemNowPlayingMovies(
 
             val painter = rememberImagePainter(
                 data = movie.backdropPath?.loadImage(),
-                builder = { crossfade(true) }
+                builder = {
+                    crossfade(true)
+                }
             )
 
             //region Movie Cover Image
             Image(
                 modifier = Modifier
                     .fillMaxSize()
-                    .constrainAs(imageMovieCover) {},
+                    .constrainAs(imageMovieCover) {}
+                    .placeholder(
+                    visible = false,
+                    color = Color.Gray,
+                    highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
+                ),
                 alignment = Alignment.Center,
                 contentScale = ContentScale.Crop,
                 painter = painter,

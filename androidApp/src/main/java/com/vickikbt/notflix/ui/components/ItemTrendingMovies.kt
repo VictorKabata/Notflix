@@ -1,6 +1,7 @@
 package com.vickikbt.notflix.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -17,29 +19,50 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.material.placeholder
+import com.google.accompanist.placeholder.shimmer
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.Movie
 
 @Composable
 fun ItemTrendingMovies(
-    modifier: Modifier = Modifier,
     movie: Movie,
     onItemClick: (Movie) -> Unit
 ) {
 
-    Column {
+    Column(
+        modifier = Modifier
+            .placeholder(
+                visible = false,
+                color = Color.Gray,
+                highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
+            )
+    ) {
 
         Card(
-            modifier = modifier
+            modifier = Modifier
                 .width(140.dp)
-                .height(180.dp)
-                .clickable { onItemClick(movie) },
+                .fillMaxHeight(0.9f)
+                .clickable { onItemClick(movie) }
+                .placeholder(
+                    visible = false,
+                    color = Color.Black,
+                    highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
+                )
+            ,
             elevation = 8.dp,
             shape = RoundedCornerShape(4.dp)
         ) {
             Image(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .placeholder(
+                        visible = false,
+                        color = Color.Gray,
+                        highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
+                    ),
                 painter = rememberImagePainter(
                     data = movie.posterPath?.loadImage(),
                     builder = { crossfade(true) }
@@ -53,7 +76,12 @@ fun ItemTrendingMovies(
         Spacer(modifier = Modifier.height(3.dp))
 
         Text(
-            modifier = Modifier.width(144.dp),
+            modifier = Modifier.width(144.dp)
+                .placeholder(
+                visible = false,
+                color = Color.Black,
+                highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
+            ),
             text = movie.title ?: "Unknown movie",
             style = MaterialTheme.typography.h5,
             color = MaterialTheme.colors.onSurface,
