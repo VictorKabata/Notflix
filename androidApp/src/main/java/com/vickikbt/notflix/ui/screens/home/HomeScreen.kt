@@ -23,7 +23,9 @@ import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.fade
-import com.google.accompanist.placeholder.placeholder
+import com.google.accompanist.placeholder.material.fade
+import com.google.accompanist.placeholder.material.placeholder
+import com.google.accompanist.placeholder.shimmer
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemNowPlayingMovies
 import com.vickikbt.notflix.ui.components.ItemPopularMovies
@@ -60,7 +62,7 @@ fun HomeScreen(
 
             NowPlayingMovies(
                 navController = navController,
-                movies = nowPlayingMovies ?: listOf()
+                movies = nowPlayingMovies ?: listOf(),
             )
 
             trendingMovies?.let {
@@ -70,12 +72,10 @@ fun HomeScreen(
                 )
             }
 
-            popularMovies?.let {
-                PopularMovies(
-                    navController = navController,
-                    movies = it
-                )
-            }
+            PopularMovies(
+                navController = navController,
+                movies = popularMovies ?: listOf()
+            )
 
             upcomingMovies?.let {
                 UpcomingMovies(
@@ -98,14 +98,18 @@ fun NowPlayingMovies(
     HorizontalPager(
         modifier = Modifier
             .fillMaxWidth()
-            .wrapContentHeight(),
+            .height(360.dp)
+            .placeholder(
+                visible = false,
+                color = Color.Gray,
+                highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
+            ),
         count = if (movies.size >= 5) 5 else movies.size,
         state = pagerState,
     ) { page ->
         ItemNowPlayingMovies(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(360.dp),
+                .fillMaxSize(),
             movie = movies[page]
         ) {
             val movie = movies[page]
@@ -118,10 +122,11 @@ fun NowPlayingMovies(
     HorizontalPagerIndicator(
         modifier = Modifier
             .padding(vertical = 4.dp)
+            .fillMaxWidth(0.15f)
             .placeholder(
-                visible = movies.isNullOrEmpty(),
-                color = Gray,
-                highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
+                visible = false,
+                color = Color.Gray,
+                highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
             ),
         pagerState = pagerState,
         indicatorHeight = 6.dp,
@@ -150,16 +155,16 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
 
     LazyRow(
         contentPadding = PaddingValues(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        modifier = Modifier.fillMaxWidth().height(200.dp).placeholder(
+            visible = false,
+            color = Gray,
+            shape = RoundedCornerShape(4.dp),
+            highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
+        )
     ) {
         items(items = movies) { item ->
             ItemTrendingMovies(
-                modifier = Modifier.placeholder(
-                    visible = movies.isNullOrEmpty(),
-                    color = Gray,
-                    shape = RoundedCornerShape(4.dp),
-                    highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
-                ),
                 movie = item,
                 onItemClick = { movie ->
                     navController.navigate("details/${movie.id!!}/${movie.cacheId}")
@@ -190,16 +195,11 @@ fun PopularMovies(
 
     LazyRow(
         contentPadding = PaddingValues(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(14.dp)
+        horizontalArrangement = Arrangement.spacedBy(14.dp),
+        modifier = Modifier.height(210.dp).placeholder(visible = false, color = Color.Gray, highlight = PlaceholderHighlight.fade())
     ) {
         items(items = movies) { item ->
             ItemPopularMovies(
-                modifier = Modifier.placeholder(
-                    visible = movies.isNullOrEmpty(),
-                    color = Gray,
-                    shape = RoundedCornerShape(4.dp),
-                    highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
-                ),
                 movie = item,
                 onClickItem = { movie ->
                     navController.navigate("details/${movie.id!!}/${movie.cacheId}")
@@ -230,16 +230,11 @@ fun UpcomingMovies(
 
         LazyRow(
             contentPadding = PaddingValues(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(10.dp)
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            modifier = Modifier.height(200.dp)
         ) {
             items(items = movies) { item ->
                 ItemTrendingMovies(
-                    modifier = Modifier.placeholder(
-                        visible = movies.isNullOrEmpty(),
-                        color = Gray,
-                        shape = RoundedCornerShape(4.dp),
-                        highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
-                    ),
                     movie = item,
                     onItemClick = { movie ->
                         navController.navigate("details/${movie.id!!}/${movie.cacheId}")
