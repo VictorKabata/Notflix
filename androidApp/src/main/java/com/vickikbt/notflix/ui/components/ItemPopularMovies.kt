@@ -23,6 +23,9 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.material.fade
+import com.google.accompanist.placeholder.material.placeholder
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
@@ -39,7 +42,6 @@ import org.koin.androidx.compose.get
 @ExperimentalMaterialApi
 @Composable
 fun ItemPopularMovies(
-    modifier: Modifier = Modifier,
     viewModel: HomeViewModel = get(),
     movie: Movie,
     onClickItem: (Movie) -> Unit
@@ -51,10 +53,11 @@ fun ItemPopularMovies(
     val dominantSubTextColor = remember { mutableStateOf(defaultDominantTextColor) }
 
     Card(
-        modifier = modifier
+        modifier = Modifier
             .width(300.dp)
-            .height(210.dp)
-            .clickable { onClickItem(movie) },
+            .fillMaxHeight()
+            .clickable { onClickItem(movie) }
+            .placeholder(visible = false, color = Color.Black, highlight = PlaceholderHighlight.fade()),
         elevation = 8.dp,
         shape = RoundedCornerShape(4.dp)
     ) {
@@ -71,6 +74,8 @@ fun ItemPopularMovies(
             Image(
                 modifier = Modifier
                     .fillMaxSize()
+                    .placeholder(visible = false, color = Color.Black, highlight = PlaceholderHighlight.fade())
+                    .background(color = Color.Gray)
                     .constrainAs(imageMovieCover) {},
                 alignment = Alignment.Center,
                 contentScale = ContentScale.Crop,
