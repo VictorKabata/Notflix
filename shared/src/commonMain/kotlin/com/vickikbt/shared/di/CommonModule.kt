@@ -67,7 +67,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
             }
         }
     }
-    single{ ApiService(httpClient = get()) }
+    single { ApiService(httpClient = get()) }
 
     single<FavoritesRepository> { FavoriteMovieRepositoryImpl() }
     single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(apiService = get()) }

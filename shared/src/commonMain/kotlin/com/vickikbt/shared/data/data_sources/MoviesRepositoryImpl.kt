@@ -18,7 +18,7 @@ class MoviesRepositoryImpl constructor(
     override suspend fun fetchMovies(category: String): Flow<List<Movie>?> {
         val networkResponse = when (category) {
             CATEGORY_NOW_PLAYING_MOVIES -> {
-                apiService.fetchNowPlayingMovies()?.movies?.map { it.toDomain(category = category) }
+                apiService.fetchNowPlayingMovies().movies?.map { it.toDomain(category = category) }
             }
             CATEGORY_UPCOMING_MOVIES -> {
                 apiService.fetchUpcomingMovies()?.movies?.map { it.toDomain(category = category) }
