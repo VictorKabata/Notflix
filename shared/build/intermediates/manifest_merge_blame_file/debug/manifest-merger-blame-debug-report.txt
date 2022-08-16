@@ -4,8 +4,8 @@
 4
 5    <uses-sdk
 6        android:minSdkVersion="21"
-6-->C:\Users\Charles Maina\AndroidStudioProjects\Notflix\shared\src\androidMain\AndroidManifest.xml
+6-->D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml
 7        android:targetSdkVersion="31" />
-7-->C:\Users\Charles Maina\AndroidStudioProjects\Notflix\shared\src\androidMain\AndroidManifest.xml
+7-->D:\Projects\Kotlin\Notflix\shared\src\androidMain\AndroidManifest.xml
 8
 9</manifest>

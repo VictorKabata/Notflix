@@ -50,10 +50,7 @@ object AndroidDependencies {
     const val accompanistPagerIndicator =
         "com.google.accompanist:accompanist-pager-indicators:0.22.0-rc"
 
-    const val lifecycleLiveData =
-        "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-    const val lifecycleRuntime =
-        "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
+    const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
 
     // Koin-Dependency injection
     const val koinAndroid = "io.insert-koin:koin-android:${Versions.koin}"
@@ -72,7 +69,7 @@ object AndroidDependencies {
     // Gowtham Compose Rating Bar
     const val ratingBar = "com.github.a914-gowtham:compose-ratingbar:${Versions.rating_bar}"
 
-    const val leakCanary="com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
+    const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
 
     //Firebase
     const val firebaseBOM = "com.google.firebase:firebase-bom:${Versions.firebase_bom}"

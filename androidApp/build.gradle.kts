@@ -1,8 +1,6 @@
 plugins {
     id(Plugins.androidApplication)
     kotlin(Plugins.android)
-    // id(Plugins.googleServices)
-    // id(Plugins.firebaseCrashlytics)
 }
 
 android {
@@ -22,7 +20,10 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
-            // proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
 
         getByName("debug") {
@@ -40,7 +41,6 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
         compose = true
     }
 
@@ -52,7 +52,6 @@ android {
 dependencies {
     api(project(BuildModules.shared))
 
-    implementation(AndroidDependencies.kotlin)
     implementation(AndroidDependencies.androidCore)
 
     implementation(platform(AndroidDependencies.firebaseBOM))
@@ -76,7 +75,6 @@ dependencies {
     implementation(AndroidDependencies.accompanistMaterialPlaceHolder)
     implementation(AndroidDependencies.accompanistPagerIndicator)
 
-    implementation(AndroidDependencies.lifecycleLiveData)
     implementation(AndroidDependencies.lifecycleRuntime)
 
     // Koin-Dependency injection
