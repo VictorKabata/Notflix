@@ -392,11 +392,4 @@ fabric.properties
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
 
-/shared/build/.transforms/
-/shared/build/generated/
-/shared/build/intermediates/
-/shared/build/kotlin/
-/shared/build/outputs/
-/shared/build/reports/
-/shared/build/snapshot/
-/shared/build/tmp/
+/shared/build/*
