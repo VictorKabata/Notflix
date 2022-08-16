@@ -6,7 +6,6 @@ import com.vickikbt.shared.data.data_sources.MovieDetailsRepositoryImpl
 import com.vickikbt.shared.data.data_sources.MoviesRepositoryImpl
 import com.vickikbt.shared.data.data_sources.SettingsRepositoryImpl
 import com.vickikbt.shared.data.network.ApiService
-import com.vickikbt.shared.data.network.ApiServiceImpl
 import com.vickikbt.shared.domain.repositories.FavoritesRepository
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickikbt.shared.domain.repositories.MoviesRepository
@@ -68,7 +67,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
             }
         }
     }
-    single<ApiService> { ApiServiceImpl(httpClient = get()) }
+    single{ ApiService(httpClient = get()) }
 
     single<FavoritesRepository> { FavoriteMovieRepositoryImpl() }
     single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(apiService = get()) }

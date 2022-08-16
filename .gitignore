@@ -19,7 +19,6 @@ gradle-app.setting
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
-/build
 */build
 /captures
 
@@ -390,3 +389,5 @@ fabric.properties
 
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
+/shared/build/
+/shared/build/
