@@ -20,10 +20,10 @@ class SharedFavouritesPresenter constructor(private val favouritesRepository: Mo
     private val _favouriteMovies = MutableStateFlow<List<Movie>?>(emptyList())
     val favouriteMovies get() = _favouriteMovies
 
-    private fun getFavoriteMovies() = viewModelScope.launch {
+    /*private fun getFavoriteMovies() = viewModelScope.launch {
         favouritesRepository.fetchMovies(category = Constants.CATEGORY_UPCOMING_MOVIES)
             .collectLatest { movies ->
                 _favouriteMovies.value = movies
             }
-    }
+    }*/
 }
