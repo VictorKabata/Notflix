@@ -19,6 +19,7 @@ gradle-app.setting
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+/build
 */build
 /captures
 
