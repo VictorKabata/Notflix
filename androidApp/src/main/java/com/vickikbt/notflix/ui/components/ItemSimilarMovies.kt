@@ -31,8 +31,8 @@ fun ItemSimilarMovies(movie: Movie) {
     Column {
         Card(
             modifier = Modifier
-                .height(210.dp)
-                .width(150.dp),
+                .width(150.dp)
+                .height(220.dp),
             shape = RoundedCornerShape(4.dp)
         ) {
             Image(

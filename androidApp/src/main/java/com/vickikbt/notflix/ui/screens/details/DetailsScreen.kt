@@ -26,6 +26,8 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.fade
@@ -37,10 +39,7 @@ import com.vickikbt.notflix.ui.components.ItemSimilarMovies
 import com.vickikbt.notflix.ui.components.MovieRatingSection
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.ui.theme.TextSecondary
-import com.vickikbt.notflix.util.getMovieDuration
-import com.vickikbt.notflix.util.getPopularity
-import com.vickikbt.notflix.util.getRating
-import com.vickikbt.notflix.util.loadImage
+import com.vickikbt.notflix.util.*
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
 import org.koin.androidx.compose.get
@@ -182,6 +181,7 @@ fun DetailsScreen(
     }
 }
 
+@ExperimentalCoilApi
 @Composable
 fun MoviePoster(
     modifier: Modifier = Modifier,
@@ -192,8 +192,19 @@ fun MoviePoster(
     var dominantColor by remember { mutableStateOf(defaultDominantColor) }
     var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
 
-    val imagePainter =
-        rememberImagePainter(data = movieDetails?.backdropPath?.loadImage())
+    val painter = rememberImagePainter(data = movieDetails?.backdropPath?.loadImage())
+
+    if (painter.state is ImagePainter.State.Success) {
+        LaunchedEffect(key1 = painter) {
+            val imageDrawable = painter.imageLoader.execute(painter.request).drawable
+            imageDrawable?.let {
+                PaletteGenerator.generateImagePalette(imageDrawable = it) { color ->
+                    dominantColor = Color(color.rgb)
+                    dominantTextColor = Color(color.titleTextColor)
+                }
+            }
+        }
+    }
 
     ConstraintLayout(
         modifier = modifier
@@ -209,21 +220,8 @@ fun MoviePoster(
         val (imageMovie, boxFadingEdge, textViewRunTime, textViewTitle) = createRefs()
 
         //region Movie Poster
-        /*if (imagePainter.state is ImagePainter.State.Success) {
-            LaunchedEffect(key1 = imagePainter) {
-                launch {
-                    val imageDrawable =
-                        imagePainter.imageLoader.execute(imagePainter.request).drawable
-                    viewModel.getImagePalette(imageDrawable!!) {
-                        dominantColor = Color(it.rgb)
-                        dominantTextColor = Color(it.titleTextColor)
-                    }
-                }
-            }
-        }*/
-
         Image(
-            painter = imagePainter,
+            painter = painter,
             contentDescription = stringResource(R.string.movie_poster),
             modifier = Modifier
                 .fillMaxSize()

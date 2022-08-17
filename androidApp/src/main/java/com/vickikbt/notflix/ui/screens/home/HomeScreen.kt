@@ -178,6 +178,7 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
     }
 }
 
+@ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
 fun PopularMovies(
