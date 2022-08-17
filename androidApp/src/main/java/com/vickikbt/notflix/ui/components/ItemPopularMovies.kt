@@ -6,10 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -32,6 +29,7 @@ import com.gowtham.ratingbar.StepSize
 import com.vickikbt.notflix.ui.screens.home.HomeViewModel
 import com.vickikbt.notflix.ui.theme.Golden
 import com.vickikbt.notflix.ui.theme.Gray
+import com.vickikbt.notflix.util.PaletteGenerator
 import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.getReleaseDate
 import com.vickikbt.notflix.util.loadImage
@@ -42,22 +40,24 @@ import org.koin.androidx.compose.get
 @ExperimentalMaterialApi
 @Composable
 fun ItemPopularMovies(
-    viewModel: HomeViewModel = get(),
     movie: Movie,
     onClickItem: (Movie) -> Unit
 ) {
-    val defaultDominantColor = MaterialTheme.colors.surface
     val defaultDominantTextColor = MaterialTheme.colors.onSurface
-    val dominantColor = remember { mutableStateOf(defaultDominantColor) }
-    val dominantTextColor = remember { mutableStateOf(defaultDominantTextColor) }
-    val dominantSubTextColor = remember { mutableStateOf(defaultDominantTextColor) }
+    var dominantColor by remember { mutableStateOf(Color.Transparent) }
+    var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
+    var dominantSubTextColor by remember { mutableStateOf(defaultDominantTextColor) }
 
     Card(
         modifier = Modifier
             .width(300.dp)
             .fillMaxHeight()
             .clickable { onClickItem(movie) }
-            .placeholder(visible = false, color = Color.Black, highlight = PlaceholderHighlight.fade()),
+            .placeholder(
+                visible = false,
+                color = Color.Black,
+                highlight = PlaceholderHighlight.fade()
+            ),
         elevation = 8.dp,
         shape = RoundedCornerShape(4.dp)
     ) {
@@ -70,11 +70,27 @@ fun ItemPopularMovies(
                 builder = { crossfade(true) }
             )
 
+            if (painter.state is ImagePainter.State.Success) {
+                LaunchedEffect(key1 = painter) {
+                    val imageDrawable = painter.imageLoader.execute(painter.request).drawable
+                    imageDrawable?.let {
+                        PaletteGenerator.generateImagePalette(imageDrawable = it) { color ->
+                            dominantColor = Color(color.rgb)
+                            dominantTextColor = Color(color.titleTextColor)
+                        }
+                    }
+                }
+            }
+
             //region Movie Cover
             Image(
                 modifier = Modifier
                     .fillMaxSize()
-                    .placeholder(visible = false, color = Color.Black, highlight = PlaceholderHighlight.fade())
+                    .placeholder(
+                        visible = false,
+                        color = Color.Black,
+                        highlight = PlaceholderHighlight.fade()
+                    )
                     .background(color = Color.Gray)
                     .constrainAs(imageMovieCover) {},
                 alignment = Alignment.Center,
@@ -85,19 +101,6 @@ fun ItemPopularMovies(
             //endregion
 
             //region Fading Edge
-            if (painter.state is ImagePainter.State.Success) {
-                LaunchedEffect(key1 = painter) {
-                    launch {
-                        val imageDrawable = painter.imageLoader.execute(painter.request).drawable
-                        viewModel.getImagePalette(imageDrawable!!) {
-                            dominantColor.value = Color(it.rgb)
-                            dominantTextColor.value = Color(it.titleTextColor)
-                            dominantSubTextColor.value = Color(it.bodyTextColor)
-                        }
-                    }
-                }
-            }
-
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -106,7 +109,7 @@ fun ItemPopularMovies(
                         Brush.verticalGradient(
                             listOf(
                                 Color.Transparent,
-                                dominantColor.value
+                                dominantColor
                             )
                         )
                     )
@@ -132,7 +135,7 @@ fun ItemPopularMovies(
                 style = MaterialTheme.typography.h6,
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Start,
-                color = dominantTextColor.value
+                color = dominantTextColor
             )
             //endregion
 
@@ -170,7 +173,7 @@ fun ItemPopularMovies(
                             .padding(horizontal = 4.dp)
                             .width(2.dp)
                             .height(13.dp),
-                        color = Gray.copy(alpha = .4f),
+                        color = dominantSubTextColor,
                     )
 
                     Text(
@@ -181,7 +184,7 @@ fun ItemPopularMovies(
                         style = MaterialTheme.typography.h5,
                         overflow = TextOverflow.Ellipsis,
                         textAlign = TextAlign.Start,
-                        color = dominantSubTextColor.value
+                        color = dominantSubTextColor
                     )
                 }
             }
