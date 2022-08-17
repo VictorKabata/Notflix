@@ -69,7 +69,7 @@ fun ItemPopularMovies(
     Card(
         modifier = Modifier
             .width(300.dp)
-            .fillMaxHeight()
+            .height(220.dp)
             .clickable { onClickItem(movie) }
             .placeholder(
                 visible = false,

@@ -158,12 +158,14 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
     LazyRow(
         contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
-        modifier = Modifier.fillMaxWidth().height(200.dp).placeholder(
-            visible = false,
-            color = Gray,
-            shape = RoundedCornerShape(4.dp),
-            highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
-        )
+        modifier = Modifier
+            .fillMaxWidth()
+            .placeholder(
+                visible = false,
+                color = Gray,
+                shape = RoundedCornerShape(4.dp),
+                highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
+            )
     ) {
         items(items = movies) { item ->
             ItemTrendingMovies(
@@ -198,7 +200,13 @@ fun PopularMovies(
     LazyRow(
         contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(14.dp),
-        modifier = Modifier.height(210.dp).placeholder(visible = false, color = Color.Gray, highlight = PlaceholderHighlight.fade())
+        modifier = Modifier
+            .wrapContentHeight()
+            .placeholder(
+                visible = false,
+                color = Color.Gray,
+                highlight = PlaceholderHighlight.fade()
+            )
     ) {
         items(items = movies) { item ->
             ItemPopularMovies(
@@ -233,7 +241,6 @@ fun UpcomingMovies(
         LazyRow(
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
-            modifier = Modifier.height(200.dp)
         ) {
             items(items = movies) { item ->
                 ItemTrendingMovies(
