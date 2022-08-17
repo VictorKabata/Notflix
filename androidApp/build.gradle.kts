@@ -1,6 +1,11 @@
 plugins {
     id(Plugins.androidApplication)
     kotlin(Plugins.android)
+
+    id(Plugins.googleService)
+    id(Plugins.appDistribution)
+    id(Plugins.crashlytics)
+    id(Plugins.performance)
 }
 
 android {
@@ -21,8 +26,8 @@ android {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
             )
         }
 
@@ -53,10 +58,6 @@ dependencies {
     api(project(BuildModules.shared))
 
     implementation(AndroidDependencies.androidCore)
-
-    implementation(platform(AndroidDependencies.firebaseBOM))
-    implementation(AndroidDependencies.firebaseAnalytics)
-    implementation(AndroidDependencies.firebaseCrashlytics)
 
     implementation(AndroidDependencies.material)
 
@@ -95,6 +96,12 @@ dependencies {
 
     // Leak Canary - Memory leaks
     debugImplementation(AndroidDependencies.leakCanary)
+
+    //Firebase
+    implementation(platform(AndroidDependencies.firebaseBOM))
+    implementation(AndroidDependencies.firebaseAnalytics)
+    implementation(AndroidDependencies.firebaseCrashlytics)
+    implementation(AndroidDependencies.firebasePerformance)
 
     testImplementation(AndroidDependencies.jUnit)
     testImplementation(AndroidDependencies.googleTruth)
