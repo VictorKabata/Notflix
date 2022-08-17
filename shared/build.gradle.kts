@@ -49,7 +49,7 @@ kotlin {
 
         sourceSets["commonTest"].dependencies {
             implementation(kotlin("test"))
-            // implementation(KmmDependencies.mockk)
+            implementation(MultiplatformDependencies.ktorMock)
         }
 
         sourceSets["androidMain"].dependencies {

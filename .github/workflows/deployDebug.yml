@@ -1,8 +1,8 @@
-name: Deploy to Firebase App Distribution
+name: Deploy Debug
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ master ]
 
 jobs:
 
@@ -10,44 +10,66 @@ jobs:
     name: 🔨 Build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew build --stacktrace
+
+  package:
+    name: 📦 Create Package
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    steps:
+
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v1
 
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
           java-version: 11
 
-      - name: Make gradlew executable
+      - name: Make gradle executable
         run: chmod +x ./gradlew
 
-      - name: Build with gradle
-        run: ./gradlew build
-
-      - name: Cache Gradle and wrapper
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-            - name: Build with Gradle
-            run: bash ./gradlew build
-
-  deploy:
-    name: 🚀 Firebase App Distribution
-    needs: [ build ]
-    runs-on: ubuntu-latest
-    steps:
       - name: Build Debug APK
         run: ./gradlew assembleDebug --stacktrace
 
-      - name: Upload Artifact to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1.2.2
+      - name: Upload APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: Notflix
+          path: app/build/outputs/apk/debug/app-debug.apk
+
+
+  deploy:
+    name: 🚀 Deploy to Firebase App Distribution
+    needs: [ package ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v1
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
+
+      - name: Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.3.4
         with:
           appId: ${{secrets.FIREBASE_APP_ID}}
           token: ${{secrets.FIREBASE_TOKEN}}
-          groups: testers
+          groups: production #testers
           file: app/build/outputs/apk/debug/app-debug.apk

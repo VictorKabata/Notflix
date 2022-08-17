@@ -1,7 +1,6 @@
 package com.vickikbt.notflix.ui.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -50,8 +49,7 @@ fun ItemTrendingMovies(
                     visible = false,
                     color = Color.Black,
                     highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
-                )
-            ,
+                ),
             elevation = 8.dp,
             shape = RoundedCornerShape(4.dp)
         ) {
@@ -78,10 +76,10 @@ fun ItemTrendingMovies(
         Text(
             modifier = Modifier.width(144.dp)
                 .placeholder(
-                visible = false,
-                color = Color.Black,
-                highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
-            ),
+                    visible = false,
+                    color = Color.Black,
+                    highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
+                ),
             text = movie.title ?: "Unknown movie",
             style = MaterialTheme.typography.h5,
             color = MaterialTheme.colors.onSurface,

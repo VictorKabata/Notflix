@@ -67,10 +67,10 @@ fun ItemNowPlayingMovies(
                     .fillMaxSize()
                     .constrainAs(imageMovieCover) {}
                     .placeholder(
-                    visible = false,
-                    color = Color.Gray,
-                    highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
-                ),
+                        visible = false,
+                        color = Color.Gray,
+                        highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
+                    ),
                 alignment = Alignment.Center,
                 contentScale = ContentScale.Crop,
                 painter = painter,

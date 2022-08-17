@@ -9,10 +9,10 @@ data class MovieResultsDto(
     val page: Int? = null,
 
     @SerialName("results")
-    val movies: List<MovieDto>? = null,
+    val movies: List<MovieDto>,
 
     @SerialName("total_pages")
-    val totalPages: Int? = null,
+    val totalPages: Int,
 
     @SerialName("total_results")
     val totalResults: Int? = null

@@ -9,6 +9,10 @@ buildscript {
         classpath(Plugins.kotlin)
         classpath(Plugins.gradle)
         classpath(Plugins.kmpNativeCoroutines)
+        classpath(Plugins.googleServices)
+        classpath(Plugins.firebaseAppDistribution)
+        classpath(Plugins.firebaseCrashlytics)
+        classpath(Plugins.firebasePerformance)
     }
 }
 
