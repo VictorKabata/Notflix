@@ -1,6 +1,11 @@
 plugins {
     id(Plugins.androidApplication)
     kotlin(Plugins.android)
+
+    id(Plugins.googleService)
+    id(Plugins.appDistribution)
+    id(Plugins.crashlytics)
+    id(Plugins.performance)
 }
 
 android {
@@ -54,10 +59,6 @@ dependencies {
 
     implementation(AndroidDependencies.androidCore)
 
-    implementation(platform(AndroidDependencies.firebaseBOM))
-    implementation(AndroidDependencies.firebaseAnalytics)
-    implementation(AndroidDependencies.firebaseCrashlytics)
-
     implementation(AndroidDependencies.material)
 
     implementation(AndroidDependencies.composeUI)
@@ -95,6 +96,12 @@ dependencies {
 
     // Leak Canary - Memory leaks
     debugImplementation(AndroidDependencies.leakCanary)
+
+    // Firebase
+    implementation(platform(AndroidDependencies.firebaseBOM))
+    implementation(AndroidDependencies.firebaseAnalytics)
+    implementation(AndroidDependencies.firebaseCrashlytics)
+    implementation(AndroidDependencies.firebasePerformance)
 
     testImplementation(AndroidDependencies.jUnit)
     testImplementation(AndroidDependencies.googleTruth)

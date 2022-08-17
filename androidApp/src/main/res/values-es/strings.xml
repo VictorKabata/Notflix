@@ -13,6 +13,8 @@
     <string name="upcoming_movies">Próximas Películas</string>
     <string name="view_all">Ver Todo</string>
 
+    <string name="share">Share</string>
+
     <string name="placeholder_movie_title" translatable="false">Pirates of The Caribbean: Some Villan\'s Revenge.</string>
     <string name="placeholder_movie_duration" translatable="false">4hrs 20mins</string>
     <string name="placeholder_movie_overview" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius neque odio, at tincidunt lacus auctor id. Aenean consequat, lectus vel rhoncus faucibus, lectus nulla pretium nunc, at suscipit libero nunc et sapien. Mauris a dolor et turpis tempus scelerisque.</string>
@@ -45,4 +47,10 @@
     <string name="def">Defecto</string>
 
     <string name="cancel">Cancelar</string>
+    <string name="movie_poster">Movie poster</string>
+    <string name="unknown_movie">Unknown movie</string>
+    <string name="rating">Rating</string>
+    <string name="unknown_actor">Unknown Actor</string>
+    <string name="unknown_character">Unknown character</string>
+    <string name="back">Back</string>
 </resources>

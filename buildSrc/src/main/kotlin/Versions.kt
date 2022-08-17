@@ -5,9 +5,10 @@ object Versions {
     const val ktLint = "10.3.0"
     const val detekt = "1.19.0"
     const val gradleVersionUpdate = "0.42.0"
-    const val googleService = "4.3.10"
-    const val crashlytics = "2.8.1"
-    const val appDistribution = "2.1.2"
+    const val googleServices="4.3.13"
+    const val firebaseAppDistribution="3.0.3"
+    const val firebaseCrashlytics="2.9.1"
+    const val firebasePerformance="1.4.1"
 
     // KMM Dependencies Version
     const val koin = "3.2.0"
@@ -43,7 +44,7 @@ object Versions {
     const val palette = "28.0.0"
     const val paging = "3.0.0"
     const val coroutines = "1.5.2"
-    const val firebase_bom = "29.0.3"
+    const val firebase_bom = "30.3.1"
     const val rating_bar = "1.1.1"
     const val leakCanary = "2.9.1"
     const val paging_compose = "1.0.0-alpha14"
