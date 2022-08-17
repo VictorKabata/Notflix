@@ -26,8 +26,8 @@ android {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
         }
 
@@ -97,7 +97,7 @@ dependencies {
     // Leak Canary - Memory leaks
     debugImplementation(AndroidDependencies.leakCanary)
 
-    //Firebase
+    // Firebase
     implementation(platform(AndroidDependencies.firebaseBOM))
     implementation(AndroidDependencies.firebaseAnalytics)
     implementation(AndroidDependencies.firebaseCrashlytics)
