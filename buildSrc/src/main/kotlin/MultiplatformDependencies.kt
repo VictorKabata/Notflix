@@ -14,6 +14,7 @@ object MultiplatformDependencies {
     const val ktorAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
     const val ktoriOS = "io.ktor:ktor-client-ios:${Versions.ktor}"
     const val ktorJvm = "io.ktor:ktor-client-java:${Versions.ktor}"
+    const val ktorMock = "io.ktor:ktor-client-mock:${Versions.ktor}"
 
     const val sqlDelight = "com.squareup.sqldelight:runtime:${Versions.sqlDelight}"
     const val sqlDelightCoroutine =

@@ -1,10 +1,10 @@
 package com.vickikbt.shared.presentation.presenters
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
+import com.vickikbt.shared.data.network.utils.NetworkResult
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.utils.Constants
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -53,11 +53,12 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
 
     private suspend fun fetchNowPlayingMovies() {
         try {
-            Napier.e("Fetching now playing movies")
-
             moviesRepository.fetchMovies(category = Constants.CATEGORY_NOW_PLAYING_MOVIES)
                 .collectLatest {
-                    _nowPlayingMovies.value = it
+                    when (it) {
+                        is NetworkResult.Success -> _nowPlayingMovies.value = it.data
+                        is NetworkResult.Error -> _error.value = it.errorMessage
+                    }
                 }
         } catch (e: Exception) {
             _error.value = e.message
@@ -66,11 +67,12 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
 
     private suspend fun fetchTrendingMovies() {
         try {
-            Napier.e("Fetching trending movies")
-
             moviesRepository.fetchMovies(category = Constants.CATEGORY_TRENDING_MOVIES)
                 .collectLatest {
-                    _trendingMovies.value = it
+                    when (it) {
+                        is NetworkResult.Success -> _trendingMovies.value = it.data
+                        is NetworkResult.Error -> _error.value = it.errorMessage
+                    }
                 }
         } catch (e: Exception) {
             _error.value = e.message
@@ -79,11 +81,12 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
 
     private suspend fun fetchPopularMovies() {
         try {
-            Napier.e("Fetching popular movies")
-
             moviesRepository.fetchMovies(category = Constants.CATEGORY_POPULAR_MOVIES)
                 .collectLatest {
-                    _popularMovies.value = it
+                    when (it) {
+                        is NetworkResult.Success -> _popularMovies.value = it.data
+                        is NetworkResult.Error -> _error.value = it.errorMessage
+                    }
                 }
         } catch (e: Exception) {
             _error.value = e.message
@@ -92,11 +95,12 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
 
     private suspend fun fetchUpcomingMovies() {
         try {
-            Napier.e("Fetching upcoming movies")
-
             moviesRepository.fetchMovies(category = Constants.CATEGORY_UPCOMING_MOVIES)
                 .collectLatest {
-                    _upcomingMovies.value = it
+                    when (it) {
+                        is NetworkResult.Success -> _upcomingMovies.value = it.data
+                        is NetworkResult.Error -> _error.value = it.errorMessage
+                    }
                 }
         } catch (e: Exception) {
             _error.value = e.message
