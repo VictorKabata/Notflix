@@ -28,25 +28,6 @@ fun String.loadImage(): String {
     return "https://image.tmdb.org/t/p/$quality/$this"
 }
 
-// Original- 1998-11-19
-// Target- Nov, 1998
-fun String.getReleaseDate(): String {
-    val originalFormat = SimpleDateFormat("yyyy-MM-dd").parse(this)
-    val targetFormat = SimpleDateFormat("MMM, yyyy")
-
-    return targetFormat.format(originalFormat!!)
-}
-
-// Original- 1998-11-19
-// Target- 1998
-@SuppressLint("SimpleDateFormat")
-fun String.getReleaseYear(): String {
-    val originalFormat = SimpleDateFormat("yyyy-MM-dd").parse(this)
-    val targetFormat = SimpleDateFormat("yyyy")
-
-    return targetFormat.format(originalFormat!!)
-}
-
 fun Double.getRating() = ((this.toFloat() * 5) / 10)
 
 fun Double.getPopularity() = ((this.toInt() * 100) / 10).toString()
@@ -57,19 +38,3 @@ fun Int.getMovieDuration(): String {
     val mins = this % 60 + startTime.substring(3, 4).toInt()
     return "${hours}hrs ${mins}mins"
 }
-
-private val VerticalScrollConsumer = object : NestedScrollConnection {
-    override fun onPreScroll(available: Offset, source: NestedScrollSource) = available.copy(x = 0f)
-    override suspend fun onPreFling(available: Velocity) = available.copy(x = 0f)
-}
-
-private val HorizontalScrollConsumer = object : NestedScrollConnection {
-    override fun onPreScroll(available: Offset, source: NestedScrollSource) = available.copy(y = 0f)
-    override suspend fun onPreFling(available: Velocity) = available.copy(y = 0f)
-}
-
-fun Modifier.disabledVerticalPointerInputScroll(disabled: Boolean = true) =
-    if (disabled) this.nestedScroll(VerticalScrollConsumer) else this
-
-fun Modifier.disabledHorizontalPointerInputScroll(disabled: Boolean = true) =
-    if (disabled) this.nestedScroll(HorizontalScrollConsumer) else this
