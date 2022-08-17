@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.google.accompanist.placeholder.PlaceholderHighlight
@@ -26,16 +27,14 @@ import com.google.accompanist.placeholder.shimmer
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
-import com.vickikbt.notflix.ui.screens.home.HomeViewModel
 import com.vickikbt.notflix.ui.theme.Black
 import com.vickikbt.notflix.ui.theme.Golden
 import com.vickikbt.notflix.util.PaletteGenerator
 import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.Movie
-import kotlinx.coroutines.launch
-import org.koin.androidx.compose.get
 
+@ExperimentalCoilApi
 @Composable
 fun ItemNowPlayingMovies(
     modifier: Modifier = Modifier,
@@ -47,28 +46,28 @@ fun ItemNowPlayingMovies(
     var dominantColor by remember { mutableStateOf(defaultDominantColor) }
     var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
 
+    val painter = rememberImagePainter(
+        data = movie.backdropPath?.loadImage(),
+        builder = {
+            crossfade(true)
+        }
+    )
+
+    if (painter.state is ImagePainter.State.Success) {
+        LaunchedEffect(key1 = painter) {
+            val imageDrawable = painter.imageLoader.execute(painter.request).drawable
+            imageDrawable?.let {
+                PaletteGenerator.generateImagePalette(imageDrawable = it) { color ->
+                    dominantColor = Color(color.rgb)
+                    dominantTextColor = Color(color.titleTextColor)
+                }
+            }
+        }
+    }
+
     Box(modifier = modifier.clickable { onItemClick() }) {
         ConstraintLayout(modifier = Modifier.fillMaxSize()) {
             val (imageMovieCover, boxFadingEdge, textMovieTitle, ratingBarRanking) = createRefs()
-
-            val painter = rememberImagePainter(
-                data = movie.backdropPath?.loadImage(),
-                builder = {
-                    crossfade(true)
-                }
-            )
-
-            if (painter.state is ImagePainter.State.Success) {
-                LaunchedEffect(key1 = painter) {
-                    val imageDrawable = painter.imageLoader.execute(painter.request).drawable
-                    imageDrawable?.let {
-                        PaletteGenerator.generateImagePalette(imageDrawable = it) { color ->
-                            dominantColor = Color(color.rgb)
-                            dominantTextColor = Color(color.titleTextColor)
-                        }
-                    }
-                }
-            }
 
             //region Movie Cover Image
             Image(

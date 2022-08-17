@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.google.accompanist.placeholder.PlaceholderHighlight
@@ -26,17 +27,16 @@ import com.google.accompanist.placeholder.material.placeholder
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
-import com.vickikbt.notflix.ui.screens.home.HomeViewModel
 import com.vickikbt.notflix.ui.theme.Golden
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.util.PaletteGenerator
 import com.vickikbt.notflix.util.getRating
-import com.vickikbt.notflix.util.getReleaseDate
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.Movie
-import kotlinx.coroutines.launch
-import org.koin.androidx.compose.get
+import com.vickikbt.shared.domain.utils.capitalizeEachWord
+import com.vickikbt.shared.domain.utils.getReleaseDate
 
+@ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
 fun ItemPopularMovies(
@@ -47,6 +47,24 @@ fun ItemPopularMovies(
     var dominantColor by remember { mutableStateOf(Color.Transparent) }
     var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
     var dominantSubTextColor by remember { mutableStateOf(defaultDominantTextColor) }
+
+    val painter = rememberImagePainter(
+        data = movie.backdropPath?.loadImage(),
+        builder = { crossfade(true) }
+    )
+
+    if (painter.state is ImagePainter.State.Success) {
+        LaunchedEffect(key1 = painter) {
+            val imageDrawable = painter.imageLoader.execute(painter.request).drawable
+            imageDrawable?.let {
+                PaletteGenerator.generateImagePalette(imageDrawable = it) { color ->
+                    dominantColor = Color(color.rgb)
+                    dominantTextColor = Color(color.titleTextColor)
+                    dominantSubTextColor=Color(color.bodyTextColor)
+                }
+            }
+        }
+    }
 
     Card(
         modifier = Modifier
@@ -64,23 +82,6 @@ fun ItemPopularMovies(
 
         ConstraintLayout(modifier = Modifier.fillMaxSize()) {
             val (imageMovieCover, boxFadingEdge, textMovieTitle, rowRankRelease) = createRefs()
-
-            val painter = rememberImagePainter(
-                data = movie.backdropPath?.loadImage(),
-                builder = { crossfade(true) }
-            )
-
-            if (painter.state is ImagePainter.State.Success) {
-                LaunchedEffect(key1 = painter) {
-                    val imageDrawable = painter.imageLoader.execute(painter.request).drawable
-                    imageDrawable?.let {
-                        PaletteGenerator.generateImagePalette(imageDrawable = it) { color ->
-                            dominantColor = Color(color.rgb)
-                            dominantTextColor = Color(color.titleTextColor)
-                        }
-                    }
-                }
-            }
 
             //region Movie Cover
             Image(
@@ -171,17 +172,17 @@ fun ItemPopularMovies(
                     Divider(
                         modifier = Modifier
                             .padding(horizontal = 4.dp)
-                            .width(2.dp)
+                            .width(1.dp)
                             .height(13.dp),
                         color = dominantSubTextColor,
                     )
 
                     Text(
                         modifier = Modifier,
-                        text = movie.releaseDate!!.getReleaseDate(),
+                        text = movie.releaseDate.getReleaseDate()?.capitalizeEachWord()!!,
                         fontSize = 14.sp,
                         maxLines = 1,
-                        style = MaterialTheme.typography.h5,
+                        style = MaterialTheme.typography.h4,
                         overflow = TextOverflow.Ellipsis,
                         textAlign = TextAlign.Start,
                         color = dominantSubTextColor
