@@ -19,6 +19,9 @@ jobs:
         with:
           java-version: 11
 
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
+
       - name: Build with gradle
         run: ./gradlew build --stacktrace
 
@@ -30,6 +33,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
+
       - name: Lint check
         run: ./gradlew lint --stacktrace
 
@@ -40,6 +46,9 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
 
       - name: Execute unit tests
         run: ./gradlew allTests --stacktrace
