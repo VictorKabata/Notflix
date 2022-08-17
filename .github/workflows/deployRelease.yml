@@ -34,6 +34,9 @@ jobs:
         with:
           java-version: 11
 
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
+
       - name: Build Debug APK
         run: ./gradlew assembleDebug --stacktrace
 
@@ -56,6 +59,9 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
 
       - name: Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1.3.4
