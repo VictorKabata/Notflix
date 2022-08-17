@@ -1,39 +1,66 @@
-name: Build # name of the workflow
+name: Build
 
 on:
-  pull_request: # specifies events to trigger the workflow
-    branches: [ main, develop ] # branches that trigger the workflow
+  pull_request:
+    branches: [ master, develop ]
 
-jobs: # groups the jobs to be executed in this workflow
+jobs:
 
-  build: # defines a job called build
-    name: 🔨 Build # [optional] name of the job
-    runs-on: ubuntu-latest # the job will be executed on ubuntu runner. Other include: Microsoft Windows & MacOS runners
-    steps: # groups together all the steps that run in build job
+  build:
+    name: 🔨 Build
+    runs-on: ubuntu-latest
+    steps:
 
-      - name: Checkout code # [optional] specifies the name of the step
-        uses: actions/checkout@v2 # specifies which version of action to run
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
-          java-version: 11
+          java-version: '11'
 
-      - name: Make gradlew executable
+      - name: Make gradle executable
         run: chmod +x ./gradlew
 
       - name: Build with gradle
-        run: ./gradlew build
+        run: ./gradlew build --stacktrace
 
-      - name: Cache Gradle and wrapper
-        uses: actions/cache@v2
+  lint-check:
+    name: 🔍 Lint
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
+
+      - name: Lint check
+        run: ./gradlew lint
+
+      - name: Generate lint report
+        uses: actions/upload-artifact@v2
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-            - name: Build with Gradle
-            run: bash ./gradlew build
+          name: lint_report.html
+          path: app/build/reports/lint-results-debug.html
 
+  unit-tests:
+    name: 🧪 Tests
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
+
+      - name: Execute unit tests
+        run: ./gradlew allTests --stacktrace
+
+      - name: Generate test report
+        uses: actions/upload-artifact@v2
+        with:
+          name: unit_tests_report.html
+          path: app/build/reports/tests/testDebugUnitTest/
