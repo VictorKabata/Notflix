@@ -14,14 +14,12 @@ class ApiService constructor(private val httpClient: HttpClient) {
         return httpClient.get<MovieResultsDto>(urlString = "movie/now_playing") {
             parameter("page", page)
         }
-
     }
 
     suspend fun fetchPopularMovies(page: Int = STARTING_PAGE_INDEX): MovieResultsDto {
         return httpClient.get<MovieResultsDto>(urlString = "movie/popular") {
             parameter("page", page)
         }
-
     }
 
     suspend fun fetchTrendingMovies(

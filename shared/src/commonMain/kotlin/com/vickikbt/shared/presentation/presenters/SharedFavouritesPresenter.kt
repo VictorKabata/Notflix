@@ -3,12 +3,9 @@ package com.vickikbt.shared.presentation.presenters
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.repositories.MoviesRepository
-import com.vickikbt.shared.domain.utils.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
 class SharedFavouritesPresenter constructor(private val favouritesRepository: MoviesRepository) :

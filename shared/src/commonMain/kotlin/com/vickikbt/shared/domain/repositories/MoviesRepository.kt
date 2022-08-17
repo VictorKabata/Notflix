@@ -8,5 +8,5 @@ interface MoviesRepository {
     /**
      * Fetch movies based on category
      */
-    suspend fun fetchMovies(category: String):  Flow<NetworkResult<List<Movie>>>
+    suspend fun fetchMovies(category: String): Flow<NetworkResult<List<Movie>>>
 }

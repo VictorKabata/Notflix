@@ -50,6 +50,4 @@ class ApiServiceTest {
         assertNotNull(actual = networkResponse)
         assertEquals(expected = expectedResponse, actual = networkResponse)
     }
-
-
 }

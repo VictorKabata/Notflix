@@ -56,5 +56,4 @@ class MockServer {
             networkSuccess = isSuccess
         }
     }
-
 }
