@@ -60,7 +60,7 @@ fun ItemPopularMovies(
                 PaletteGenerator.generateImagePalette(imageDrawable = it) { color ->
                     dominantColor = Color(color.rgb)
                     dominantTextColor = Color(color.titleTextColor)
-                    dominantSubTextColor=Color(color.bodyTextColor)
+                    dominantSubTextColor = Color(color.bodyTextColor)
                 }
             }
         }
