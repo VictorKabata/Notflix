@@ -44,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: Notflix
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: androidApp/build/outputs/apk/debug/androidApp-debug.apk
 
 
   deploy:
@@ -69,4 +69,4 @@ jobs:
           appId: ${{secrets.FIREBASE_APP_ID}}
           token: ${{secrets.FIREBASE_TOKEN}}
           groups: production
-          file: app/build/outputs/apk/debug/app-debug.apk
+          file: androidApp/build/outputs/apk/debug/androidApp-debug.apk
