@@ -40,7 +40,7 @@ import com.vickikbt.shared.domain.utils.getReleaseDate
 @ExperimentalMaterialApi
 @Composable
 fun ItemPopularMovies(
-    modifier:Modifier=Modifier,
+    modifier: Modifier = Modifier,
     movie: Movie,
     onClickItem: (Movie) -> Unit
 ) {
