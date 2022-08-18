@@ -40,6 +40,7 @@ import com.vickikbt.shared.domain.utils.getReleaseDate
 @ExperimentalMaterialApi
 @Composable
 fun ItemPopularMovies(
+    modifier:Modifier=Modifier,
     movie: Movie,
     onClickItem: (Movie) -> Unit
 ) {
@@ -67,9 +68,7 @@ fun ItemPopularMovies(
     }
 
     Card(
-        modifier = Modifier
-            .width(300.dp)
-            .height(220.dp)
+        modifier = modifier
             .clickable { onClickItem(movie) }
             .placeholder(
                 visible = false,
@@ -92,7 +91,7 @@ fun ItemPopularMovies(
                         color = Color.Black,
                         highlight = PlaceholderHighlight.fade()
                     )
-                    .background(color = Color.Gray)
+                    .background(color = Gray)
                     .constrainAs(imageMovieCover) {},
                 alignment = Alignment.Center,
                 contentScale = ContentScale.Crop,

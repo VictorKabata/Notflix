@@ -178,6 +178,7 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
     }
 }
 
+@ExperimentalPagerApi
 @ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
@@ -211,6 +212,9 @@ fun PopularMovies(
     ) {
         items(items = movies) { item ->
             ItemPopularMovies(
+                modifier = Modifier
+                    .width(300.dp)
+                    .height(245.dp),
                 movie = item,
                 onClickItem = { movie ->
                     navController.navigate("details/${movie.id!!}/${movie.cacheId}")
