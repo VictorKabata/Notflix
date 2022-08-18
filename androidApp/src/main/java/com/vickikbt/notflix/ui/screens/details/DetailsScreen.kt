@@ -37,11 +37,15 @@ import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemMovieCast
 import com.vickikbt.notflix.ui.components.ItemSimilarMovies
 import com.vickikbt.notflix.ui.components.MovieRatingSection
+import com.vickikbt.notflix.ui.components.app_bars.DetailsAppBar
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.ui.theme.TextSecondary
 import com.vickikbt.notflix.util.*
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
+import me.onebone.toolbar.CollapsingToolbarScaffold
+import me.onebone.toolbar.ScrollStrategy
+import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
 import org.koin.androidx.compose.get
 
 @Composable
@@ -68,13 +72,113 @@ fun DetailsScreen(
     val context = LocalContext.current
 
     val scrollState = rememberScrollState()
+    val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
 
-    Surface(
+    CollapsingToolbarScaffold(
+        modifier = Modifier.fillMaxSize(),
+        state = collapsingScrollState,
+        scrollStrategy = ScrollStrategy.ExitUntilCollapsed,
+        toolbar = {
+            DetailsAppBar(
+                modifier=Modifier.fillMaxWidth(),
+                collapsingScrollState=collapsingScrollState,
+                movieDetails = movieDetails,
+                onNavigationIconClick = { /*TODO*/ },
+                onShareIconClick = { /*TODO*/ }
+            ) {
+            }
+        }
+    ) {
+
+        Column(
+            modifier = Modifier
+                .padding(bottom = 20.dp)
+                .verticalScroll(state = scrollState),
+            verticalArrangement = Arrangement.spacedBy(14.dp)
+        ) {
+
+            //region Movie Ratings
+            val voteAverage = movieDetails?.voteAverage
+            MovieRatingSection(
+                popularity = voteAverage?.getPopularity(),
+                voteAverage = voteAverage?.getRating()
+            )
+            //endregion
+
+            //region Movie Overview
+            Text(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                text = stringResource(R.string.overview),
+                style = MaterialTheme.typography.h6,
+                fontSize = 20.sp,
+                color = MaterialTheme.colors.onSurface,
+            )
+
+            Text(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .placeholder(
+                        visible = movieDetails?.overview.isNullOrEmpty(),
+                        color = Gray,
+                        highlight = PlaceholderHighlight.fade(highlightColor = Color.Gray)
+                    ),
+                text = movieDetails?.overview ?: "",
+                style = MaterialTheme.typography.body1,
+                color = MaterialTheme.colors.onSurface,
+                fontSize = 15.sp,
+                textAlign = TextAlign.Start,
+                overflow = TextOverflow.Ellipsis,
+            )
+            //endregion
+
+            //region Movie Cast
+            movieCast?.actor?.let {
+                Text(
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                    text = stringResource(id = R.string.cast),
+                    style = MaterialTheme.typography.h6,
+                    fontSize = 20.sp
+                )
+
+                LazyRow(
+                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    items(items = it) { item ->
+                        ItemMovieCast(actor = item)
+                    }
+                }
+            }
+            //endregion
+
+            //region Similar Movies
+            Text(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                text = stringResource(id = R.string.similar_movies),
+                style = MaterialTheme.typography.h6,
+                fontSize = 20.sp,
+                color = MaterialTheme.colors.onSurface
+            )
+
+            LazyRow(
+                contentPadding = PaddingValues(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                similarMovies?.let {
+                    items(items = it) { movie ->
+                        ItemSimilarMovies(movie = movie)
+                    }
+                }
+            }
+            //endregion
+        }
+    }
+
+    /*Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.surface
     ) {
         Box {
-
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -165,124 +269,8 @@ fun DetailsScreen(
                 }
                 //endregion
             }
-
-            /*//region App Bar
-            DetailsAppBar(
-                scrollOffset = scrollOffset,
-                title = movieDetails?.title,
-                onNavigationIconClick = { navController.navigateUp() },
-                onShareIconClick = { shareMovie(context = context, movieId = movieId) },
-                onFavoriteIconClick = {
-                    //ToDo: On Fav clicked
-                }
-            )
-            //endregion*/
         }
-    }
-}
-
-@ExperimentalCoilApi
-@Composable
-fun MoviePoster(
-    modifier: Modifier = Modifier,
-    movieDetails: MovieDetails?
-) {
-    val defaultDominantColor = MaterialTheme.colors.surface
-    val defaultDominantTextColor = MaterialTheme.colors.onSurface
-    var dominantColor by remember { mutableStateOf(defaultDominantColor) }
-    var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
-
-    val painter = rememberImagePainter(data = movieDetails?.backdropPath?.loadImage())
-
-    if (painter.state is ImagePainter.State.Success) {
-        LaunchedEffect(key1 = painter) {
-            val imageDrawable = painter.imageLoader.execute(painter.request).drawable
-            imageDrawable?.let {
-                PaletteGenerator.generateImagePalette(imageDrawable = it) { color ->
-                    dominantColor = Color(color.rgb)
-                    dominantTextColor = Color(color.titleTextColor)
-                }
-            }
-        }
-    }
-
-    ConstraintLayout(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(350.dp)
-            .placeholder(
-                visible = movieDetails == null,
-                color = Gray,
-                highlight = PlaceholderHighlight.shimmer(highlightColor = TextSecondary)
-            )
-    ) {
-
-        val (imageMovie, boxFadingEdge, textViewRunTime, textViewTitle) = createRefs()
-
-        //region Movie Poster
-        Image(
-            painter = painter,
-            contentDescription = stringResource(R.string.movie_poster),
-            modifier = Modifier
-                .fillMaxSize()
-                .constrainAs(imageMovie) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                },
-            contentScale = ContentScale.Crop
-        )
-
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(210.dp)
-                .background(
-                    Brush.verticalGradient(
-                        listOf(
-                            Color.Transparent,
-                            dominantColor
-                        )
-                    )
-                )
-                .constrainAs(boxFadingEdge) {
-                    bottom.linkTo(parent.bottom)
-                }
-        )
-        //endregion
-
-        //region Movie Duration
-        Text(
-            text = movieDetails?.runtime?.getMovieDuration() ?: "",
-            color = dominantTextColor,
-            style = MaterialTheme.typography.h5,
-            fontSize = 15.sp,
-            modifier = Modifier.constrainAs(textViewRunTime) {
-                start.linkTo(textViewTitle.start)
-                bottom.linkTo(textViewTitle.top)
-            }
-        )
-        //endregion
-
-        //region Movie Title
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .constrainAs(textViewTitle) {
-                    width = Dimension.fillToConstraints
-                    start.linkTo(parent.start, margin = 6.dp)
-                    end.linkTo(parent.end, margin = 6.dp)
-                    bottom.linkTo(parent.bottom, margin = 10.dp)
-                },
-            text = movieDetails?.title ?: stringResource(R.string.unknown_movie),
-            style = MaterialTheme.typography.h6,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis,
-            color = dominantTextColor,
-            fontSize = 30.sp
-        )
-        //endregion
-    }
+    }*/
 }
 
 private fun shareMovie(context: Context, movieId: Int) {
