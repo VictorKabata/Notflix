@@ -34,7 +34,6 @@ fun String.capitalizeEachWord(): String {
 /**Returns formatted date for movie release date*/
 fun String?.getReleaseDate(): String? {
     val localDate = this?.toLocalDate()
-    Napier.e("Local date: $localDate")
 
     return "${localDate?.dayOfMonth} ${localDate?.month}, ${localDate?.year}"
 }

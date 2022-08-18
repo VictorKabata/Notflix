@@ -1,5 +1,9 @@
 package com.vickikbt.notflix.ui.components.app_bars
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,10 +12,11 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -27,6 +32,7 @@ import com.vickikbt.notflix.ui.screens.details.MoviePoster
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.ui.theme.TextSecondary
 import com.vickikbt.shared.domain.models.MovieDetails
+import io.github.aakira.napier.Napier
 import me.onebone.toolbar.CollapsingToolbarScaffoldState
 
 @ExperimentalCoilApi
@@ -40,12 +46,24 @@ fun DetailsAppBar(
     onFavoriteIconClick: () -> Unit
 ) {
 
-    val textSize = (18 + (30 - 12) * collapsingScrollState.toolbarState.progress).sp
+    // Return progress on collapsing toolbar - 1.0f=Expanded, 0.0f=Collapsed
+    val toolbarProgress = collapsingScrollState.toolbarState.progress
+
+    val imageHeight by animateDpAsState(
+        targetValue = 350.dp * toolbarProgress.coerceAtLeast(.16f),
+        animationSpec = tween(easing = FastOutLinearInEasing)
+    )
+    val backgroundColor by animateColorAsState(targetValue = MaterialTheme.colors.surface.copy(1 - toolbarProgress))
+    val contentColor by animateColorAsState(targetValue = if (toolbarProgress == 1f) MaterialTheme.colors.surface else Color.Transparent)
+
+    Napier.e("Toolbar progress: $toolbarProgress")
+    Napier.e("Image height: $imageHeight")
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(350.dp)
+            .graphicsLayer { alpha = toolbarProgress }
             .placeholder(
                 visible = movieDetails == null,
                 color = Gray,
@@ -55,8 +73,8 @@ fun DetailsAppBar(
         MoviePoster(
             modifier = Modifier
                 .fillMaxSize()
-                .align(Alignment.Center)
-                .alpha(if (textSize.value == 18f) 0f else 1f),
+                .graphicsLayer { alpha = toolbarProgress }
+                .align(Alignment.Center),
             movieDetails = movieDetails
         )
     }
@@ -65,7 +83,7 @@ fun DetailsAppBar(
         modifier = Modifier.fillMaxWidth(),
         title = {
             Text(
-                modifier = Modifier.alpha(if (textSize.value == 18f) 1f else 0f),
+                modifier = Modifier.graphicsLayer { alpha = 1 - toolbarProgress },
                 text = movieDetails?.title ?: stringResource(R.string.unknown_movie),
                 style = MaterialTheme.typography.h6,
                 fontSize = 20.sp,
@@ -101,8 +119,8 @@ fun DetailsAppBar(
                 )
             }
         },
-        contentColor = if (textSize.value == 18f) Color.Transparent else MaterialTheme.colors.onSurface,
-        backgroundColor = if (textSize.value == 18f) MaterialTheme.colors.surface else Color.Transparent,
+        contentColor = contentColor,
+        backgroundColor = backgroundColor,
         elevation = 0.dp
     )
 }
