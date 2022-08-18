@@ -75,7 +75,9 @@ object AndroidDependencies {
     const val firebaseBOM = "com.google.firebase:firebase-bom:${Versions.firebase_bom}"
     const val firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx"
     const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics-ktx"
-    const val firebasePerformance="com.google.firebase:firebase-perf"
+    const val firebasePerformance = "com.google.firebase:firebase-perf"
+
+    const val oneBoneToolbar = "me.onebone:toolbar-compose:${Versions.oneBoneToolbar}"
 
     // Test Libs
     const val jUnit = "junit:junit:${Versions.jUnit}"

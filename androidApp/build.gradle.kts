@@ -94,6 +94,9 @@ dependencies {
     // Gowtham Compose Rating Bar
     implementation(AndroidDependencies.ratingBar)
 
+    // Collapsing toolbar
+    implementation(AndroidDependencies.oneBoneToolbar)
+
     // Leak Canary - Memory leaks
     debugImplementation(AndroidDependencies.leakCanary)
 
