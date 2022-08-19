@@ -2,6 +2,7 @@ package com.vickikbt.notflix.ui.components.app_bars
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -35,7 +36,6 @@ import com.vickikbt.notflix.util.PaletteGenerator
 import com.vickikbt.notflix.util.getMovieDuration
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.MovieDetails
-import io.github.aakira.napier.Napier
 import me.onebone.toolbar.CollapsingToolbarScaffoldState
 
 @ExperimentalCoilApi
@@ -50,7 +50,7 @@ fun DetailsAppBar(
 ) {
 
     // Return progress on collapsing toolbar - 1.0f=Expanded, 0.0f=Collapsed
-    val toolbarProgress = collapsingScrollState.toolbarState.progress
+    val scrollProgress = collapsingScrollState.toolbarState.progress
 
     val defaultDominantColor = MaterialTheme.colors.surface
     val defaultDominantTextColor = MaterialTheme.colors.onSurface
@@ -72,20 +72,18 @@ fun DetailsAppBar(
     }
 
     val imageHeight by animateDpAsState(
-        targetValue = 350.dp * toolbarProgress.coerceAtLeast(.16f),
+        targetValue = 350.dp * scrollProgress.coerceAtLeast(.16f),
         animationSpec = tween(durationMillis = 3000)
     )
-    val backgroundColor by animateColorAsState(targetValue = MaterialTheme.colors.surface.copy(1 - toolbarProgress))
-    val contentColor by animateColorAsState(targetValue = if (toolbarProgress == 1f) MaterialTheme.colors.surface else Color.Transparent)
-
-    Napier.e("Toolbar progress: $toolbarProgress")
-    Napier.e("Image height: $imageHeight")
+    val imageAspectRatio by animateFloatAsState(targetValue = if (scrollProgress == 1f) 1f else .5f)
+    val backgroundColor by animateColorAsState(targetValue = MaterialTheme.colors.surface.copy(1 - scrollProgress))
+    val contentColor by animateColorAsState(targetValue = if (scrollProgress == 1f) MaterialTheme.colors.surface else Color.Transparent)
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(350.dp)
-            .graphicsLayer { alpha = toolbarProgress }
+            .graphicsLayer { alpha = scrollProgress }
             .placeholder(
                 visible = movieDetails == null,
                 color = Gray,
@@ -95,7 +93,8 @@ fun DetailsAppBar(
         Image(
             modifier = Modifier
                 .fillMaxSize()
-                .align(Alignment.Center),
+                .align(Alignment.Center)
+                .aspectRatio(scrollProgress.coerceAtLeast(.1f)),
             painter = painter,
             contentDescription = stringResource(R.string.movie_poster),
             contentScale = ContentScale.Crop
@@ -115,6 +114,7 @@ fun DetailsAppBar(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
+                .graphicsLayer { alpha = scrollProgress }
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 .align(Alignment.BottomCenter),
             verticalArrangement = Arrangement.Center,
@@ -145,7 +145,7 @@ fun DetailsAppBar(
         modifier = Modifier.fillMaxWidth(),
         title = {
             Text(
-                modifier = Modifier.graphicsLayer { alpha = 1 - toolbarProgress },
+                modifier = Modifier.graphicsLayer { alpha = 1 - scrollProgress },
                 text = movieDetails?.title ?: stringResource(R.string.unknown_movie),
                 style = MaterialTheme.typography.h6,
                 fontSize = 20.sp,
