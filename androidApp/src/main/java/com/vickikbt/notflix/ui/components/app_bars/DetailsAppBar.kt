@@ -1,22 +1,21 @@
 package com.vickikbt.notflix.ui.components.app_bars
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -24,13 +23,17 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
+import coil.compose.ImagePainter
+import coil.compose.rememberImagePainter
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.placeholder
 import com.google.accompanist.placeholder.shimmer
 import com.vickikbt.notflix.R
-import com.vickikbt.notflix.ui.screens.details.MoviePoster
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.ui.theme.TextSecondary
+import com.vickikbt.notflix.util.PaletteGenerator
+import com.vickikbt.notflix.util.getMovieDuration
+import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.MovieDetails
 import io.github.aakira.napier.Napier
 import me.onebone.toolbar.CollapsingToolbarScaffoldState
@@ -49,9 +52,28 @@ fun DetailsAppBar(
     // Return progress on collapsing toolbar - 1.0f=Expanded, 0.0f=Collapsed
     val toolbarProgress = collapsingScrollState.toolbarState.progress
 
+    val defaultDominantColor = MaterialTheme.colors.surface
+    val defaultDominantTextColor = MaterialTheme.colors.onSurface
+    var dominantColor by remember { mutableStateOf(defaultDominantColor) }
+    var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
+
+    val painter = rememberImagePainter(data = movieDetails?.backdropPath?.loadImage())
+
+    if (painter.state is ImagePainter.State.Success) {
+        LaunchedEffect(key1 = painter) {
+            val imageDrawable = painter.imageLoader.execute(painter.request).drawable
+            imageDrawable?.let {
+                PaletteGenerator.generateImagePalette(imageDrawable = it) { color ->
+                    dominantColor = Color(color.rgb)
+                    dominantTextColor = Color(color.titleTextColor)
+                }
+            }
+        }
+    }
+
     val imageHeight by animateDpAsState(
         targetValue = 350.dp * toolbarProgress.coerceAtLeast(.16f),
-        animationSpec = tween(easing = FastOutLinearInEasing)
+        animationSpec = tween(durationMillis = 3000)
     )
     val backgroundColor by animateColorAsState(targetValue = MaterialTheme.colors.surface.copy(1 - toolbarProgress))
     val contentColor by animateColorAsState(targetValue = if (toolbarProgress == 1f) MaterialTheme.colors.surface else Color.Transparent)
@@ -70,13 +92,53 @@ fun DetailsAppBar(
                 highlight = PlaceholderHighlight.shimmer(highlightColor = TextSecondary)
             )
     ) {
-        MoviePoster(
+        Image(
             modifier = Modifier
                 .fillMaxSize()
-                .graphicsLayer { alpha = toolbarProgress }
                 .align(Alignment.Center),
-            movieDetails = movieDetails
+            painter = painter,
+            contentDescription = stringResource(R.string.movie_poster),
+            contentScale = ContentScale.Crop
         )
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(210.dp)
+                .align(Alignment.BottomCenter)
+                .background(
+                    Brush.verticalGradient(listOf(Color.Transparent, dominantColor))
+                )
+        )
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .align(Alignment.BottomCenter),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.Start
+        )
+        {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = movieDetails?.title ?: stringResource(R.string.unknown_movie),
+                style = MaterialTheme.typography.h6,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                color = dominantTextColor,
+                fontSize = 32.sp
+            )
+
+            Text(
+                modifier = Modifier,
+                text = movieDetails?.runtime?.getMovieDuration() ?: "",
+                color = dominantTextColor,
+                style = MaterialTheme.typography.h5,
+                fontSize = 14.sp
+            )
+        }
     }
 
     TopAppBar(
