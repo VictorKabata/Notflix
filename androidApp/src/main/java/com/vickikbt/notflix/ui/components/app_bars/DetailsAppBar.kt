@@ -2,7 +2,6 @@ package com.vickikbt.notflix.ui.components.app_bars
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -33,9 +32,9 @@ import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.ui.theme.TextSecondary
 import com.vickikbt.notflix.util.PaletteGenerator
-import com.vickikbt.notflix.util.getMovieDuration
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.MovieDetails
+import com.vickikbt.shared.domain.utils.getMovieDuration
 import me.onebone.toolbar.CollapsingToolbarScaffoldState
 
 @ExperimentalCoilApi
@@ -75,7 +74,6 @@ fun DetailsAppBar(
         targetValue = 350.dp * scrollProgress.coerceAtLeast(.16f),
         animationSpec = tween(durationMillis = 3000)
     )
-    val imageAspectRatio by animateFloatAsState(targetValue = if (scrollProgress == 1f) 1f else .5f)
     val backgroundColor by animateColorAsState(targetValue = MaterialTheme.colors.surface.copy(1 - scrollProgress))
     val contentColor by animateColorAsState(targetValue = if (scrollProgress == 1f) MaterialTheme.colors.surface else Color.Transparent)
 

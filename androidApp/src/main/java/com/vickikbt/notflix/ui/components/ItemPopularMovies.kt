@@ -30,10 +30,10 @@ import com.gowtham.ratingbar.StepSize
 import com.vickikbt.notflix.ui.theme.Golden
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.util.PaletteGenerator
-import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.utils.capitalizeEachWord
+import com.vickikbt.shared.domain.utils.getRating
 import com.vickikbt.shared.domain.utils.getReleaseDate
 
 @ExperimentalCoilApi
@@ -155,7 +155,7 @@ fun ItemPopularMovies(
 
                 RatingBar(
                     modifier = Modifier,
-                    value = movie.voteAverage?.getRating() ?: 0f,
+                    value = movie.voteAverage?.getRating()?.toFloat() ?: 0f,
                     numStars = 5,
                     size = 15.dp,
                     stepSize = StepSize.HALF,

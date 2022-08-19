@@ -30,9 +30,9 @@ import com.gowtham.ratingbar.StepSize
 import com.vickikbt.notflix.ui.theme.Black
 import com.vickikbt.notflix.ui.theme.Golden
 import com.vickikbt.notflix.util.PaletteGenerator
-import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.Movie
+import com.vickikbt.shared.domain.utils.getRating
 
 @ExperimentalCoilApi
 @Composable
@@ -133,7 +133,7 @@ fun ItemNowPlayingMovies(
                         start.linkTo(parent.start)
                         bottom.linkTo(parent.bottom)
                     },
-                value = movie.voteAverage?.getRating() ?: 0f,
+                value = movie.voteAverage?.getRating()?.toFloat() ?: 0f,
                 numStars = 5,
                 size = 18.dp,
                 stepSize = StepSize.HALF,

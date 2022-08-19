@@ -18,9 +18,11 @@ import com.google.accompanist.placeholder.placeholder
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.ui.theme.TextSecondary
+import io.github.aakira.napier.Napier
 
 @Composable
-fun MovieRatingSection(popularity: String?, voteAverage: Float?) {
+fun MovieRatingSection(popularity: String?, voteAverage: String?) {
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -34,6 +36,9 @@ fun MovieRatingSection(popularity: String?, voteAverage: Float?) {
         verticalAlignment = Alignment.CenterVertically
     ) {
 
+        Napier.e("Popularity: $popularity")
+        Napier.e("Vote Average: $voteAverage")
+
         //region Popularity
         Column(
             modifier = Modifier,
@@ -41,7 +46,7 @@ fun MovieRatingSection(popularity: String?, voteAverage: Float?) {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "$popularity",
+                text = if (popularity.isNullOrEmpty()) "N/A" else popularity,
                 style = MaterialTheme.typography.h6,
                 fontSize = 42.sp,
                 color = MaterialTheme.colors.onSurface,
@@ -75,7 +80,7 @@ fun MovieRatingSection(popularity: String?, voteAverage: Float?) {
             )
 
             Text(
-                text = "$voteAverage/5.0",
+                text = if (voteAverage.isNullOrEmpty()) "N/A" else "${voteAverage}/5.0",
                 style = MaterialTheme.typography.h6,
                 fontSize = 20.sp,
                 color = MaterialTheme.colors.onSurface,

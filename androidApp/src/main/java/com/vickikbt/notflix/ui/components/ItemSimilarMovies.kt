@@ -20,9 +20,9 @@ import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
 import com.vickikbt.notflix.ui.theme.Golden
 import com.vickikbt.notflix.ui.theme.Gray
-import com.vickikbt.notflix.util.getRating
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.Movie
+import com.vickikbt.shared.domain.utils.getRating
 
 @Composable
 fun ItemSimilarMovies(movie: Movie) {
@@ -57,7 +57,7 @@ fun ItemSimilarMovies(movie: Movie) {
         // rating bar
         RatingBar(
             modifier = Modifier.fillMaxWidth(0.8f),
-            value = movie.voteAverage?.getRating() ?: 0f,
+            value = movie.voteAverage?.getRating()?.toFloat() ?: 0f,
             numStars = 5,
             size = 15.dp,
             stepSize = StepSize.HALF,

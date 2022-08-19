@@ -32,8 +32,8 @@ import com.vickikbt.notflix.ui.components.ItemSimilarMovies
 import com.vickikbt.notflix.ui.components.MovieRatingSection
 import com.vickikbt.notflix.ui.components.app_bars.DetailsAppBar
 import com.vickikbt.notflix.ui.theme.Gray
-import com.vickikbt.notflix.util.getPopularity
-import com.vickikbt.notflix.util.getRating
+import com.vickikbt.shared.domain.utils.getPopularity
+import com.vickikbt.shared.domain.utils.getRating
 import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
