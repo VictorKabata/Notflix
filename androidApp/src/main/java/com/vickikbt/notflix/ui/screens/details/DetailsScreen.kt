@@ -2,52 +2,45 @@ package com.vickikbt.notflix.ui.screens.details
 
 import android.content.Context
 import android.content.Intent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
-import coil.compose.ImagePainter
-import coil.compose.rememberImagePainter
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.fade
 import com.google.accompanist.placeholder.placeholder
-import com.google.accompanist.placeholder.shimmer
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemMovieCast
 import com.vickikbt.notflix.ui.components.ItemSimilarMovies
 import com.vickikbt.notflix.ui.components.MovieRatingSection
 import com.vickikbt.notflix.ui.components.app_bars.DetailsAppBar
 import com.vickikbt.notflix.ui.theme.Gray
-import com.vickikbt.notflix.ui.theme.TextSecondary
-import com.vickikbt.notflix.util.*
-import com.vickikbt.shared.domain.models.MovieDetails
+import com.vickikbt.notflix.util.getPopularity
+import com.vickikbt.notflix.util.getRating
 import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
 import org.koin.androidx.compose.get
 
+@ExperimentalCoilApi
 @Composable
 fun DetailsScreen(
     navController: NavController,
@@ -80,13 +73,22 @@ fun DetailsScreen(
         scrollStrategy = ScrollStrategy.ExitUntilCollapsed,
         toolbar = {
             DetailsAppBar(
-                modifier=Modifier.fillMaxWidth(),
-                collapsingScrollState=collapsingScrollState,
+                modifier = Modifier.fillMaxWidth(),
+                collapsingScrollState = collapsingScrollState,
                 movieDetails = movieDetails,
-                onNavigationIconClick = { /*TODO*/ },
-                onShareIconClick = { /*TODO*/ }
-            ) {
-            }
+                onNavigationIconClick = {
+                    navController.navigateUp()
+                },
+                onShareIconClick = {
+                    shareMovie(context = context, movieId = movieId)
+                },
+                onFavoriteIconClick = {
+                    // Add to favourites
+                    Toast.makeText(
+                        context, "Added ${movieDetails?.title} to favourites", Toast.LENGTH_SHORT
+                    ).show()
+                }
+            )
         }
     ) {
 
