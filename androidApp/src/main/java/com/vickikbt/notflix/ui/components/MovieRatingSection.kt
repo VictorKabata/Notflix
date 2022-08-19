@@ -80,7 +80,7 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
             )
 
             Text(
-                text = if (voteAverage.isNullOrEmpty()) "N/A" else "${voteAverage}/5.0",
+                text = if (voteAverage.isNullOrEmpty()) "N/A" else "$voteAverage/5.0",
                 style = MaterialTheme.typography.h6,
                 fontSize = 20.sp,
                 color = MaterialTheme.colors.onSurface,

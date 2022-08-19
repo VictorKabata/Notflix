@@ -117,8 +117,7 @@ fun DetailsAppBar(
                 .align(Alignment.BottomCenter),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.Start
-        )
-        {
+        ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = movieDetails?.title ?: stringResource(R.string.unknown_movie),
