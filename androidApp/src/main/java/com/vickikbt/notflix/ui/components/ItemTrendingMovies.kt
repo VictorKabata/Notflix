@@ -37,13 +37,14 @@ fun ItemTrendingMovies(
                 visible = false,
                 color = Color.Gray,
                 highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
-            )
+            ),
+        verticalArrangement = Arrangement.spacedBy(3.dp)
     ) {
 
         Card(
             modifier = Modifier
-                .width(140.dp)
-                .fillMaxHeight(0.9f)
+                .width(150.dp)
+                .fillMaxHeight()
                 .clickable { onItemClick(movie) }
                 .placeholder(
                     visible = false,
@@ -55,7 +56,8 @@ fun ItemTrendingMovies(
         ) {
             Image(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
+                    .height(220.dp)
                     .placeholder(
                         visible = false,
                         color = Color.Gray,
@@ -71,10 +73,9 @@ fun ItemTrendingMovies(
             )
         }
 
-        Spacer(modifier = Modifier.height(3.dp))
-
         Text(
-            modifier = Modifier.width(144.dp)
+            modifier = Modifier
+                .width(145.dp)
                 .placeholder(
                     visible = false,
                     color = Color.Black,
@@ -84,7 +85,7 @@ fun ItemTrendingMovies(
             style = MaterialTheme.typography.h5,
             color = MaterialTheme.colors.onSurface,
             fontSize = 14.sp,
-            maxLines = 2,
+            maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Start
         )

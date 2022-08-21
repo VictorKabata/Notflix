@@ -37,7 +37,7 @@ object Versions {
     const val composeMat3 = "1.0.0-alpha13"
     const val compose_activity = "1.4.0"
     const val compose_constraint = "1.0.0-rc01"
-    const val accompanist = "0.20.0"
+    const val accompanist = "0.25.1"
     const val navigation = "2.4.0-alpha02"
     const val lifecycle = "2.3.1"
     const val coil = "1.4.0"
@@ -48,13 +48,13 @@ object Versions {
     const val rating_bar = "1.1.1"
     const val leakCanary = "2.9.1"
     const val paging_compose = "1.0.0-alpha14"
+    const val oneBoneToolbar="2.3.4"
 
     // Test Libraries
     const val jUnit = "4.13.2"
     const val truth = "1.1.3"
     const val coroutinesTest = "1.5.0"
     const val robolectric = "4.5.1"
-    const val mockWebServer = "4.7.2"
     const val jUnitKtx = "1.1.2"
     const val espresso = "3.3.0"
     const val testCore = "1.3.0"

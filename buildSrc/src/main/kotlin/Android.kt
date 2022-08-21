@@ -6,7 +6,7 @@ object AndroidSdk {
     const val buildToolVersion = "30.0.3"
 
     const val minSdkVersion = 21
-    const val compileSdkVersion = 31
+    const val compileSdkVersion = 32
     const val targetSdkVersion = compileSdkVersion
 
     const val versionCode = 3
@@ -75,7 +75,9 @@ object AndroidDependencies {
     const val firebaseBOM = "com.google.firebase:firebase-bom:${Versions.firebase_bom}"
     const val firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx"
     const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics-ktx"
-    const val firebasePerformance="com.google.firebase:firebase-perf"
+    const val firebasePerformance = "com.google.firebase:firebase-perf"
+
+    const val oneBoneToolbar = "me.onebone:toolbar-compose:${Versions.oneBoneToolbar}"
 
     // Test Libs
     const val jUnit = "junit:junit:${Versions.jUnit}"
