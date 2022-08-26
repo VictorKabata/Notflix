@@ -66,7 +66,6 @@ dependencies {
     implementation(AndroidDependencies.composeTooling)
     implementation(AndroidDependencies.composeRuntime)
     implementation(AndroidDependencies.composeUtil)
-    implementation(AndroidDependencies.composeConstraintLayout)
     implementation(AndroidDependencies.composeActivity)
 
     implementation(AndroidDependencies.accompanistPager)
