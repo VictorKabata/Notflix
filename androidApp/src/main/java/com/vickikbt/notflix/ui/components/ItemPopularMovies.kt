@@ -16,8 +16,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
@@ -78,9 +76,7 @@ fun ItemPopularMovies(
         elevation = 8.dp,
         shape = RoundedCornerShape(4.dp)
     ) {
-
-        ConstraintLayout(modifier = Modifier.fillMaxSize()) {
-            val (imageMovieCover, boxFadingEdge, textMovieTitle, rowRankRelease) = createRefs()
+        Box(modifier = modifier) {
 
             //region Movie Cover
             Image(
@@ -91,8 +87,7 @@ fun ItemPopularMovies(
                         color = Color.Black,
                         highlight = PlaceholderHighlight.fade()
                     )
-                    .background(color = Gray)
-                    .constrainAs(imageMovieCover) {},
+                    .align(Alignment.Center),
                 alignment = Alignment.Center,
                 contentScale = ContentScale.Crop,
                 painter = painter,
@@ -113,82 +108,74 @@ fun ItemPopularMovies(
                             )
                         )
                     )
-                    .constrainAs(boxFadingEdge) {
-                        bottom.linkTo(parent.bottom)
-                    }
+                    .align(Alignment.BottomCenter)
             )
             //endregion
 
-            //region Movie Title
-            Text(
-                modifier = Modifier
-                    .padding(start = 8.dp, end = 8.dp)
-                    .constrainAs(textMovieTitle) {
-                        width = Dimension.fillToConstraints
-                        start.linkTo(parent.start)
-                        bottom.linkTo(rowRankRelease.top)
-                        end.linkTo(parent.end)
-                    },
-                text = movie.title ?: "Unknown movie",
-                fontSize = 18.sp,
-                maxLines = 2,
-                style = MaterialTheme.typography.h6,
-                overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Start,
-                color = dominantTextColor
-            )
-            //endregion
-
-            //region Movie Rating
-            Row(
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(horizontal = 8.dp, vertical = 4.dp)
-                    .constrainAs(rowRankRelease) {
-                        start.linkTo(parent.start)
-                        bottom.linkTo(parent.bottom)
-                    },
-                horizontalArrangement = Arrangement.Start,
-                verticalAlignment = Alignment.CenterVertically
+                    .padding(8.dp)
+                    .align(Alignment.BottomCenter)
             ) {
-
-                RatingBar(
-                    modifier = Modifier,
-                    value = movie.voteAverage?.getRating()?.toFloat() ?: 0f,
-                    numStars = 5,
-                    size = 15.dp,
-                    stepSize = StepSize.HALF,
-                    isIndicator = true,
-                    ratingBarStyle = RatingBarStyle.Normal,
-                    activeColor = Golden,
-                    inactiveColor = Gray,
-                    onValueChange = {},
-                    onRatingChanged = {}
+                //region Movie Title
+                Text(
+                    text = movie.title ?: "Unknown movie",
+                    fontSize = 18.sp,
+                    maxLines = 2,
+                    style = MaterialTheme.typography.h6,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Start,
+                    color = dominantTextColor
                 )
+                //endregion
 
-                if (!movie.releaseDate.isNullOrEmpty()) {
-                    Divider(
-                        modifier = Modifier
-                            .padding(horizontal = 4.dp)
-                            .width(1.dp)
-                            .height(13.dp),
-                        color = dominantSubTextColor,
-                    )
+                //region Movie Rating
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    horizontalArrangement = Arrangement.Start,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
 
-                    Text(
+                    RatingBar(
                         modifier = Modifier,
-                        text = movie.releaseDate.getReleaseDate()?.capitalizeEachWord()!!,
-                        fontSize = 14.sp,
-                        maxLines = 1,
-                        style = MaterialTheme.typography.h4,
-                        overflow = TextOverflow.Ellipsis,
-                        textAlign = TextAlign.Start,
-                        color = dominantSubTextColor
+                        value = movie.voteAverage?.getRating()?.toFloat() ?: 0f,
+                        numStars = 5,
+                        size = 15.dp,
+                        stepSize = StepSize.HALF,
+                        isIndicator = true,
+                        ratingBarStyle = RatingBarStyle.Normal,
+                        activeColor = Golden,
+                        inactiveColor = Gray,
+                        onValueChange = {},
+                        onRatingChanged = {}
                     )
+
+                    movie.releaseDate?.let {
+                        Divider(
+                            modifier = Modifier
+                                .padding(horizontal = 4.dp)
+                                .width(1.dp)
+                                .height(13.dp),
+                            color = dominantSubTextColor,
+                        )
+
+                        Text(
+                            modifier = Modifier,
+                            text = movie.releaseDate.getReleaseDate()?.capitalizeEachWord()!!,
+                            fontSize = 14.sp,
+                            maxLines = 1,
+                            style = MaterialTheme.typography.h4,
+                            overflow = TextOverflow.Ellipsis,
+                            textAlign = TextAlign.Start,
+                            color = dominantSubTextColor
+                        )
+                    }
                 }
+                //endregion
             }
-            //endregion
         }
     }
 }
