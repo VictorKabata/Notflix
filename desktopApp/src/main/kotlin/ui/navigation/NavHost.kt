@@ -1,6 +1,7 @@
 package ui.navigation
 
 import androidx.compose.runtime.Composable
+import io.github.aakira.napier.Napier
 
 /**
  * NavigationHost class
@@ -31,9 +32,11 @@ class NavHost(
 @Composable
 fun NavHost.NavigationGraphBuilder.composable(
     route: String,
-    content: @Composable () -> Unit
+    arguments: List<String> = emptyList(),
+    content: @Composable() (arguments: List<String>) -> Unit
 ) {
+    Napier.e("Navigating to: $route")
     if (navController.currentDestination.value == route) {
-        content()
+        content(arguments)
     }
 }

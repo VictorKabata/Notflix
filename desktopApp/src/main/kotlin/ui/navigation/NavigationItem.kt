@@ -9,6 +9,6 @@ sealed class NavigationItem(
     object Home : NavigationItem("home", "Home", "ic_home.svg")
     object Favorites : NavigationItem("favorites", "Favourites", "ic_favourite.svg")
     object Settings : NavigationItem("settings", "Settings", "ic_settings.svg")
-    object Details : NavigationItem("details/{movieId}/{cacheId}", "Movie Details", null)
+    object Details : NavigationItem("details/{movieId}", "Movie Details", null)
     object Splash : NavigationItem("splash", "", null)
 }
