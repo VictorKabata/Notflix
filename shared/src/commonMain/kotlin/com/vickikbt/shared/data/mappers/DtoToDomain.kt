@@ -25,29 +25,14 @@ fun MovieDto.toDomain(category: String? = null): Movie {
     )
 }
 
-fun MovieResultsDto.toDomain(): MovieResults {
+/*fun MovieResultsDto.toDomain(): MovieResults {
     return MovieResults(
         page = this.page,
         movies = this.movies.map { it.toDomain() },
         totalPages = this.totalPages,
         totalResults = this.totalResults
     )
-}
-
-fun GenreDto.toDomain(): Genre {
-    return Genre(
-        id = this.id,
-        name = this.name
-    )
-}
-
-fun SpokenLanguageDto.toDomain(): SpokenLanguage {
-    return SpokenLanguage(
-        englishName = this.englishName,
-        iso6391 = this.iso6391,
-        name = this.name
-    )
-}
+}*/
 
 fun MovieDetailsDto.toDomain(): MovieDetails {
     return MovieDetails(
@@ -110,12 +95,5 @@ fun MovieVideoDto.toDomain(): MovieVideo {
     return MovieVideo(
         id = this.id,
         videos = this.videos?.map { it.toDomain() }
-    )
-}
-
-internal fun DatesDto.toDomain(): Dates {
-    return Dates(
-        maximum = this.maximum,
-        minimum = this.minimum
     )
 }
