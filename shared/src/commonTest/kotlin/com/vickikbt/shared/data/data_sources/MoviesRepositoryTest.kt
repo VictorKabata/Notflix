@@ -108,5 +108,4 @@ class MoviesRepositoryTest {
 
         assertTrue(response is NetworkResult.Error)
     }
-
 }

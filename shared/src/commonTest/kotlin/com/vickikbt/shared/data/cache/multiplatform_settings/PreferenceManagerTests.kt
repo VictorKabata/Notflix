@@ -69,6 +69,4 @@ class PreferenceManagerTests {
             assertNull(result)
         }
     }
-
-
 }

@@ -10,12 +10,9 @@ class SettingsRepositoryImplTest {
 
     @BeforeTest
     fun setup() {
-
     }
 
     @AfterTest
     fun tearDown() {
-
     }
-
 }

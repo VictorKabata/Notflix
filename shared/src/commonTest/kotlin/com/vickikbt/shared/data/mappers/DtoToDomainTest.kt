@@ -170,5 +170,4 @@ class DtoToDomainTest {
 
         assertEquals(expected = expected, actual = result.toDomain())
     }
-
 }

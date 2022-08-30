@@ -56,7 +56,6 @@ class SharedExtensionsTests {
 
     @Test
     fun `getReleaseDate throws error on incorrect date format`() {
-
     }
 
     @Test
@@ -111,5 +110,4 @@ class SharedExtensionsTests {
 
         assertEquals(expected = "en", actual = subject)
     }
-
 }
