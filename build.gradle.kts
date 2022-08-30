@@ -19,6 +19,7 @@ buildscript {
 plugins {
     id(Plugins.ktLint) version Versions.ktLint
     id(Plugins.detekt) version (Versions.detekt)
+    id(Plugins.kotlinxTestResource) version (Versions.kotlinxTestResources)
     id(Plugins.gradleVersionUpdates) version (Versions.gradleVersionUpdate)
 }
 
@@ -51,6 +52,8 @@ subprojects {
         parallel = true
         config = files("${project.rootDir}/config/detekt/detekt.yml")
     }
+
+    apply(plugin = Plugins.kotlinxTestResource)
 
     tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
         checkForGradleUpdate = true

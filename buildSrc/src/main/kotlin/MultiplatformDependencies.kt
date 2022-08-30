@@ -32,4 +32,6 @@ object MultiplatformDependencies {
         "com.russhwolf:multiplatform-settings-coroutines:${Versions.multiplatformSettings}"
 
     const val mockk = "io.mockk:mockk:${Versions.mockk}"
+
+    const val kotlinxTestResources="com.goncalossilva:resources:${Versions.kotlinxTestResources}"
 }
