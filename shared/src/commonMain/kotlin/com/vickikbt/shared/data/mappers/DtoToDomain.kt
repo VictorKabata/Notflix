@@ -25,15 +25,6 @@ fun MovieDto.toDomain(category: String? = null): Movie {
     )
 }
 
-/*fun MovieResultsDto.toDomain(): MovieResults {
-    return MovieResults(
-        page = this.page,
-        movies = this.movies.map { it.toDomain() },
-        totalPages = this.totalPages,
-        totalResults = this.totalResults
-    )
-}*/
-
 fun MovieDetailsDto.toDomain(): MovieDetails {
     return MovieDetails(
         adult = this.adult,
