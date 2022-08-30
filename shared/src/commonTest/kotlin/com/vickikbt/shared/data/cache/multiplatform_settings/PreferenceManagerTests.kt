@@ -1,7 +1,6 @@
-package com.vickikbt.shared.data.cache
+package com.vickikbt.shared.data.cache.multiplatform_settings
 
 import com.russhwolf.settings.MockSettings
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test

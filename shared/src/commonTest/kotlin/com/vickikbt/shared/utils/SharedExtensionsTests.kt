@@ -1,10 +1,19 @@
 package com.vickikbt.shared.utils
 
+import com.russhwolf.settings.MockSettings
+import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager
+import com.vickikbt.shared.data.data_sources.SettingsRepositoryImpl
+import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class SharedExtensionsTests {
+
+    private val preferenceManager = PreferenceManager(MockSettings())
+    private val settingsPresenterTest =
+        SharedSettingsPresenter(settingsRepository = SettingsRepositoryImpl(preferenceManager = preferenceManager))
 
     @Test
     fun `capitalizeEachWord capitalizes lowercase strings`() {
@@ -55,6 +64,52 @@ class SharedExtensionsTests {
         val subject: String? = null
 
         assertNull(subject?.getReleaseDate())
+    }
+
+    @Test
+    fun `getMovieDuration returns correct time with single hour`() {
+        val subject = 90
+        val expected = "1hr 30mins"
+
+        assertEquals(expected = expected, actual = subject.getMovieDuration())
+    }
+
+    @Test
+    fun `getMovieDuration returns correct time with multiple hours`() {
+        val subject = 260
+        val expected = "4hrs 20mins"
+
+        assertEquals(expected = expected, actual = subject.getMovieDuration())
+    }
+
+    @Test
+    fun `getMovieDuration returns null with null`() {
+        val subject: Int? = null
+
+        assertNull(subject.getMovieDuration())
+    }
+
+    @Test
+    fun `getPopularity returns correct percentage`() {
+        val subject = 8.0
+        val expected = "80"
+
+        assertEquals(expected = expected, actual = subject.getPopularity())
+    }
+
+    @Test
+    fun `getRating returns correct rating`() {
+        val subject = 8.0
+        val expected = "4.0"
+
+        assertEquals(expected = expected, actual = subject.getRating())
+    }
+
+    @Test
+    fun `getAppLanguage returns default language value`() = runTest {
+        val subject = getAppLanguage(settingsPresenter = settingsPresenterTest)
+
+        assertEquals(expected = "en", actual = subject)
     }
 
 }
