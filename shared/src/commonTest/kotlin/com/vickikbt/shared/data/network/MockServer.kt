@@ -14,7 +14,7 @@ var networkSuccess: Boolean = true
 
 object MockServer {
 
-    val mockMoviesResponse =
+    private val mockMoviesResponse =
         Resource("src/commonTest/resources/movies_response.json").readText()
     private val mockMoviesResponseError =
         Resource("src/commonTest/resources/movies_response_error.json").readText()
@@ -37,8 +37,8 @@ object MockServer {
 
         engine {
             addHandler { request ->
-                when (request.url.encodedPath) {
-                    "/movie/now_playing" -> {
+                when {
+                    request.url.encodedPath.contains("/movie/now_playing") -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMoviesResponse)
                             else ByteReadChannel(mockMoviesResponseError),
@@ -46,7 +46,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    "/trending/movie/week" -> {
+                    request.url.encodedPath.contains("/trending/movie/week") -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMoviesResponse)
                             else ByteReadChannel(mockMoviesResponseError),
@@ -54,7 +54,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    "/popular" -> {
+                    request.url.encodedPath.contains("/movie/popular") -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMoviesResponse)
                             else ByteReadChannel(mockMoviesResponseError),
@@ -62,7 +62,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    "/movie/upcoming" -> {
+                    request.url.encodedPath.contains("/movie/upcoming") -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMoviesResponse)
                             else ByteReadChannel(mockMoviesResponseError),
@@ -70,7 +70,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    "/movie/{id}" -> {
+                    request.url.encodedPath.contains("/movie/{id}") -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMovieDetailsResponse)
                             else ByteReadChannel(mockMoviesResponseError),
@@ -78,7 +78,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    "/movie/{id}/credits" -> {
+                    request.url.encodedPath.contains("/movie/{id}/credits") -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMovieCastResponse)
                             else ByteReadChannel(mockMoviesResponseError),
@@ -86,7 +86,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    "/movie/{id}/similar" -> {
+                    request.url.encodedPath.contains("/movie/{id}/similar") -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMovieSimilarResponse)
                             else ByteReadChannel(mockMoviesResponseError),
