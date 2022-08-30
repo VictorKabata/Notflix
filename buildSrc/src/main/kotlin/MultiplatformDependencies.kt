@@ -30,10 +30,13 @@ object MultiplatformDependencies {
         "com.russhwolf:multiplatform-settings-no-arg:${Versions.multiplatformSettings}"
     const val multiplatformSettingsCoroutines =
         "com.russhwolf:multiplatform-settings-coroutines:${Versions.multiplatformSettings}"
+    const val multiplatformSettingsTest =
+        "com.russhwolf:multiplatform-settings-test:${Versions.multiplatformSettings}"
 
     const val mockk = "io.mockk:mockk:${Versions.mockk}"
 
-    const val kotlinxTestResources="com.goncalossilva:resources:${Versions.kotlinxTestResources}"
+    const val kotlinxTestResources = "com.goncalossilva:resources:${Versions.kotlinxTestResources}"
 
-    const val kotlinxCoroutinesTest="org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinxCoroutines}"
+    const val kotlinxCoroutinesTest =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinxCoroutines}"
 }
