@@ -1,7 +1,6 @@
-package com.vickikbt.shared.domain.utils
+package com.vickikbt.shared.utils
 
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -9,14 +8,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.datetime.toLocalDate
 import org.koin.core.component.KoinComponent
-
-/**
- * Returns the same string with each word capitalized
- *
- * eg. THE BIG brown wolf jumped Over => THE BIG BROWN WOLF JUMPED OVER
- */
-fun String.capitalizeWords(): String =
-    split(" ").joinToString(" ") { it.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() } }
 
 /**
  * Returns the same string with each starting letter of words capitalized
@@ -74,8 +65,6 @@ fun KoinComponent.viewModelScope(operation: suspend () -> Unit) {
 }
 
 fun getAppLanguage(settingsPresenter: SharedSettingsPresenter): String {
-
-    Napier.e("App language: ${settingsPresenter.selectedLanguage.value}")
 
     return when (settingsPresenter.selectedLanguage.value) {
         0 -> "en"

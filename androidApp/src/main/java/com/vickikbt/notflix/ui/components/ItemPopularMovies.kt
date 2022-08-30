@@ -30,9 +30,9 @@ import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.util.PaletteGenerator
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.Movie
-import com.vickikbt.shared.domain.utils.capitalizeEachWord
-import com.vickikbt.shared.domain.utils.getRating
-import com.vickikbt.shared.domain.utils.getReleaseDate
+import com.vickikbt.shared.utils.capitalizeEachWord
+import com.vickikbt.shared.utils.getRating
+import com.vickikbt.shared.utils.getReleaseDate
 
 @ExperimentalCoilApi
 @ExperimentalMaterialApi

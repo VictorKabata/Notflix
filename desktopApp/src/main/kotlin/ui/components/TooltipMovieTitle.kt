@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
-import com.vickikbt.shared.domain.utils.capitalizeWords
 
 @Composable
 fun TooltipMovieTitle(
@@ -31,7 +30,7 @@ fun TooltipMovieTitle(
                     shape = RoundedCornerShape(4.dp)
                 ) {
                     Text(
-                        text = title.capitalizeWords(),
+                        text = title.uppercase(),
                         modifier = Modifier.padding(8.dp),
                         color = MaterialTheme.colors.onSurface
                     )
