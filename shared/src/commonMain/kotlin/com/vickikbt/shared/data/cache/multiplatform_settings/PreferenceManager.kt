@@ -3,13 +3,11 @@
 package com.vickikbt.shared.data.cache.multiplatform_settings
 
 import com.russhwolf.settings.ExperimentalSettingsApi
+import com.russhwolf.settings.ObservableSettings
 import com.russhwolf.settings.coroutines.getIntOrNullFlow
-import com.vickikbt.shared.domain.utils.MultiplatformSettingsWrapper
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-class PreferenceManager constructor(private val multiplatformSettingsWrapper: MultiplatformSettingsWrapper) {
-
-    private val observableSettings = multiplatformSettingsWrapper.createSettings()
+class PreferenceManager constructor(private val observableSettings: ObservableSettings) {
 
     fun setInt(key: String, value: Int) = observableSettings.putInt(key = key, value = value)
 
