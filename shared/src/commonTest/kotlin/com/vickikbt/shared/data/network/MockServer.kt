@@ -37,8 +37,8 @@ object MockServer {
 
         engine {
             addHandler { request ->
-                when {
-                    request.url.encodedPath.contains("/movie/now_playing") -> {
+                when (request.url.encodedPath) {
+                    "/movie/now_playing" -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMoviesResponse)
                             else ByteReadChannel(mockMoviesResponseError),
@@ -46,7 +46,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    request.url.encodedPath.contains("/trending/movie/week") -> {
+                    "/trending/movie/week" -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMoviesResponse)
                             else ByteReadChannel(mockMoviesResponseError),
@@ -54,7 +54,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    request.url.encodedPath.contains("/movie/popular") -> {
+                    "/movie/popular" -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMoviesResponse)
                             else ByteReadChannel(mockMoviesResponseError),
@@ -62,7 +62,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    request.url.encodedPath.contains("/movie/upcoming") -> {
+                    "/movie/upcoming" -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMoviesResponse)
                             else ByteReadChannel(mockMoviesResponseError),
@@ -70,7 +70,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    request.url.encodedPath.contains("/movie/{id}") -> {
+                    "/movie/{id}" -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMovieDetailsResponse)
                             else ByteReadChannel(mockMoviesResponseError),
@@ -78,7 +78,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    request.url.encodedPath.contains("/movie/{id}/credits") -> {
+                    "/movie/{id}/credits" -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMovieCastResponse)
                             else ByteReadChannel(mockMoviesResponseError),
@@ -86,7 +86,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    request.url.encodedPath.contains("/movie/{id}/similar") -> {
+                    "/movie/{id}/similar" -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMovieSimilarResponse)
                             else ByteReadChannel(mockMoviesResponseError),
