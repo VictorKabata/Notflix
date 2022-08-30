@@ -14,7 +14,7 @@ var networkSuccess: Boolean = true
 
 object MockServer {
 
-    private val mockMoviesResponse =
+    val mockMoviesResponse =
         Resource("src/commonTest/resources/movies_response.json").readText()
     private val mockMoviesResponseError =
         Resource("src/commonTest/resources/movies_response_error.json").readText()
@@ -54,7 +54,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    "popular" -> {
+                    "/popular" -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMoviesResponse)
                             else ByteReadChannel(mockMoviesResponseError),
@@ -62,7 +62,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    "movie/upcoming" -> {
+                    "/movie/upcoming" -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMoviesResponse)
                             else ByteReadChannel(mockMoviesResponseError),
@@ -70,7 +70,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    "movie/{id}" -> {
+                    "/movie/{id}" -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMovieDetailsResponse)
                             else ByteReadChannel(mockMoviesResponseError),
@@ -78,7 +78,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    "movie/{id}/credits" -> {
+                    "/movie/{id}/credits" -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMovieCastResponse)
                             else ByteReadChannel(mockMoviesResponseError),
@@ -86,7 +86,7 @@ object MockServer {
                             headers = headersOf(HttpHeaders.ContentType, "application/json")
                         )
                     }
-                    "movie/{id}/similar" -> {
+                    "/movie/{id}/similar" -> {
                         respond(
                             content = if (networkSuccess) ByteReadChannel(mockMovieSimilarResponse)
                             else ByteReadChannel(mockMoviesResponseError),
