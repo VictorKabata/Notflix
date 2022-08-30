@@ -38,8 +38,6 @@ suspend fun <T : Any> safeApiCall(apiCall: suspend () -> T): NetworkResult<T> {
 }
 
 suspend fun getError(responseContent: ByteReadChannel): ApiError {
-    responseContent.readUTF8Line()?.let {
-        return kotlinx.serialization.json.Json.decodeFromString(string = it)
-    }
-    throw IllegalArgumentException("Not a parsable error")
+    return kotlinx.serialization.json.Json.decodeFromString(string = responseContent.toString())
+    // throw IllegalArgumentException("Not a parsable error")
 }

@@ -1,0 +1,71 @@
+{
+  "adult": false,
+  "backdrop_path": "/7ZO9yoEU2fAHKhmJWfAc2QIPWJg.jpg",
+  "belongs_to_collection": {
+    "id": 399,
+    "name": "Predator Collection",
+    "poster_path": "/6Z7lASptoiRVxiCFvZaFgH9qp7u.jpg",
+    "backdrop_path": "/fXVzk9OxQwROCuiWvd0Cv76qmZi.jpg"
+  },
+  "budget": 0,
+  "genres": [{
+    "id": 53,
+    "name": "Thriller"
+  },
+    {
+      "id": 28,
+      "name": "Action"
+    }
+  ],
+  "homepage": "https://www.20thcenturystudios.com/movies/prey",
+  "id": 766507,
+  "imdb_id": "tt11866324",
+  "original_language": "en",
+  "original_title": "Prey",
+  "overview": "When danger threatens her camp, the fierce and highly skilled Comanche warrior Naru sets out to protect her people. But the prey she stalks turns out to be a highly evolved alien predator with a technically advanced arsenal.",
+  "popularity": 5322.786,
+  "poster_path": "/ujr5pztc1oitbe7ViMUOilFaJ7s.jpg",
+  "production_companies": [{
+    "id": 840,
+    "logo_path": null,
+    "name": "Lawrence Gordon Productions",
+    "origin_country": "US"
+  },
+    {
+      "id": 1302,
+      "logo_path": "/zC3b70ixHh89qJIikLQPEvLqbPM.png",
+      "name": "Davis Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 127928,
+      "logo_path": "/h0rjX5vjW5r8yEnUBStFarjcLT4.png",
+      "name": "20th Century Studios",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [{
+    "iso_3166_1": "US",
+    "name": "United States of America"
+  }],
+  "release_date": "2022-08-02",
+  "revenue": 0,
+  "runtime": 100,
+  "spoken_languages": [{
+    "english_name": "English",
+    "iso_639_1": "en",
+    "name": "English"
+  },
+    {
+      "english_name": "French",
+      "iso_639_1": "fr",
+      "name": "Français"
+    }
+  ],
+  "status": "Released",
+  "tagline": "They hunt to live. It lives to hunt.",
+  "title": "Prey",
+  "video": false,
+  "vote_average": 8.038,
+  "vote_count": 3283
+}

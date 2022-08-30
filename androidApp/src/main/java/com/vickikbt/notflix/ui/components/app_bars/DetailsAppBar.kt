@@ -34,7 +34,7 @@ import com.vickikbt.notflix.ui.theme.TextSecondary
 import com.vickikbt.notflix.util.PaletteGenerator
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.MovieDetails
-import com.vickikbt.shared.domain.utils.getMovieDuration
+import com.vickikbt.shared.utils.getMovieDuration
 import me.onebone.toolbar.CollapsingToolbarScaffoldState
 
 @ExperimentalCoilApi

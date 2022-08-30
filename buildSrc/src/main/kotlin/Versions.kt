@@ -24,6 +24,8 @@ object Versions {
 
     const val mockk = "1.12.3"
 
+    const val kotlinxTestResources = "0.2.2"
+
     // Desktop Dependencies Version
     const val composeDesktop = "1.2.0-alpha01-dev683"
     const val kamel = "0.2.2"
