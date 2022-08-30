@@ -17,7 +17,7 @@ An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlan
 
 [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html) is a framework of Kotlin that allows for sharing of a single codebase for business logic across different [targets](https://kotlinlang.org/docs/multiplatform-dsl-reference.html#targets)/platforms. Some of the targets supported by kotlin are: Android, iOS, Kotlin/JVM, Kotlin/JS, Android NDK, Windows, Linux, macOS etc.
 
-[Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/) is a UI framework mabe by Jetbrains that allow for simple and accelerated desktop application and web development using [compose](https://developer.android.com/jetpack/compose). Compose multiplatform also allows sharing compose UI code between diffrent platforms. eg android, desktop(Windows, Linux, MacOS) and web.
+[Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/) is a UI framework maybe by Jetbrains that allow for simple and accelerated desktop application and web development using [compose](https://developer.android.com/jetpack/compose). Compose multiplatform also allows sharing compose UI code between diffrent platforms. eg android, desktop(Windows, Linux, MacOS) and web.
 
 ## Table Of Content
 
@@ -49,22 +49,22 @@ An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlan
 
 ## Prerequisite
 
-In order to be able to build the application you'll need to change the api key in [`gradle.properties`](link_to_gradle.properties_file). First and formost you need to generate your own api key by [creating](https://www.themoviedb.org/signup) a TMDB account and [generating](https://www.themoviedb.org/settings/api) an api key.
+In order to be able to build the application you'll need to change the api key in [`gradle.properties`](link_to_gradle.properties_file). First and foremost you need to generate your own api key by [creating](https://www.themoviedb.org/signup) a TMDB account and [generating](https://www.themoviedb.org/settings/api) an api key.
 
 ## Disclaimer
 
-- Koltin Multiplatform is still in alpha phase at the time of writting this however it's still being used by some well known [companies](https://kotlinlang.org/lp/mobile/case-studies/) around the world.
+- Kotlin Multiplatform is still in alpha phase at the time of writing this however it's still being used by some well known [companies](https://kotlinlang.org/lp/mobile/case-studies/) around the world.
 
-- Kotlin multiplatform and Compose multiplatform are two diffrent concepts that aim to so achieve multiplatform programming. Kotlin multiplatform is all about sharing business logic(at times presentation logic too but only "viewmodels") across diffrent platforms while compose multiplatform is about using/sharing compose UI across diffrent platforms.
+- Kotlin multiplatform and Compose multiplatform are two different concepts that aim to so achieve multiplatform programming. Kotlin multiplatform is all about sharing business logic(at times presentation logic too but only "viewmodels") across different platforms while compose multiplatform is about using/sharing compose UI across diffrent platforms.
 
-- When starting out a KMP/KMM project some knownledge of [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) or similar design patterns, SOLID principles, separation of concern and modularization might go a long way into reducing the learning curve. i have discussed the usage of above concepts in a [previous iteration](https://github.com/VictorKabata/Notflix/tree/xml-archive) of this project.
+- When starting out a KMP/KMM project some knowledge of [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) or similar design patterns, SOLID principles, separation of concern and modularization might go a long way into reducing the learning curve. i have discussed the usage of above concepts in a [previous iteration](https://github.com/VictorKabata/Notflix/tree/xml-archive) of this project.
 
-- When using KMP/KMM some knowledge of other programming language such as [Swift](https://developer.apple.com/swift/) or [Javascript](https://kotlinlang.org/docs/js-overview.html) is still required since only the business logic is shared but the UI code is in the native programming language of the targetted platform.
-- Kotlin multiplatform and compose multiplatform have limited learning resources and a relatively small community at the time of writting. However learning resources have been attached at the end of this doc and you can find a fast diverse Kotlin community on [Kotlin Official slack](https://kotlinlang.slack.com/messages/kotlin-logging/) or [Android254 twitter](https://twitter.com/254androiddevs?s=20&t=R1PZIGpj8zURaxTzS59yXw).
+- When using KMP/KMM some knowledge of other programming language such as [Swift](https://developer.apple.com/swift/) or [Javascript](https://kotlinlang.org/docs/js-overview.html) is still required since only the business logic is shared but the UI code is in the native programming language of the targeted platform.
+- Kotlin multiplatform and compose multiplatform have limited learning resources and a relatively small community at the time of writing. However learning resources have been attached at the end of this doc and you can find a fast diverse Kotlin community on [Kotlin Official slack](https://kotlinlang.slack.com/messages/kotlin-logging/) or [Android254 twitter](https://twitter.com/254androiddevs?s=20&t=R1PZIGpj8zURaxTzS59yXw).
 
 ## Pros of KMP/KMM
 
-- Faster development since you only need to write most of the businness logic and tests only once.
+- Faster development since you only need to write most of the business logic and tests only once.
 - Improve code quality.
 - Highly maintainable and testable code due to separation of concern in the codebase.
 
@@ -98,7 +98,7 @@ Components of domain layer include:
 
 ### __Data__
 
-The ```data``` layer is responsibile for selecting the proper data source for the domain layer. It contains the implementations of the repositories declared in the domain layer.
+The ```data``` layer is responsible for selecting the proper data source for the domain layer. It contains the implementations of the repositories declared in the domain layer.
 
 Components of data layer include:
 
@@ -174,7 +174,7 @@ The `presentation` package contains shared viewmodels code. eg.
 
 ## Related Resources
 
-In this section I've included some resources ie. articles and GitHub reposirtories that i used to learn about kotlin mutltiplatform mobile:
+In this section I've included some resources ie. articles and GitHub repositories that i used to learn about kotlin multiplatform mobile:
 
 ### Videos 📽️
 
@@ -199,7 +199,7 @@ In this section I've included some resources ie. articles and GitHub reposirtori
 
 ## Other Helpful Resources
 
-In this section I've included resources that are not related to kotin multiplatform mobile but were really helpful in learning other android components and tools:
+In this section I've included resources that are not related to kotlin multiplatform mobile but were really helpful in learning other android components and tools:
 
 ### Videos 📽️
 
