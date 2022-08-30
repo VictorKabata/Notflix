@@ -27,95 +27,95 @@ fun MovieDto.toDomain(category: String? = null): Movie {
 
 fun MovieResultsDto.toDomain(): MovieResults {
     return MovieResults(
-        this.page,
-        this.movies?.map { it.toDomain() },
-        this.totalPages,
-        this.totalResults
+        page = this.page,
+        movies = this.movies.map { it.toDomain() },
+        totalPages = this.totalPages,
+        totalResults = this.totalResults
     )
 }
 
 fun GenreDto.toDomain(): Genre {
     return Genre(
-        this.id,
-        this.name
+        id = this.id,
+        name = this.name
     )
 }
 
 fun SpokenLanguageDto.toDomain(): SpokenLanguage {
     return SpokenLanguage(
-        this.englishName,
-        this.iso6391,
-        this.name
+        englishName = this.englishName,
+        iso6391 = this.iso6391,
+        name = this.name
     )
 }
 
 fun MovieDetailsDto.toDomain(): MovieDetails {
     return MovieDetails(
-        this.adult,
-        this.backdropPath,
-        this.homepage,
-        this.id,
-        this.imdbId,
-        this.originalLanguage,
-        this.originalTitle,
-        this.overview,
-        this.popularity,
-        this.posterPath,
-        this.releaseDate,
-        this.runtime,
-        this.status,
-        this.tagline,
-        this.title,
-        this.video,
-        this.voteAverage,
-        this.voteCount
+        adult = this.adult,
+        backdropPath = this.backdropPath,
+        homepage = this.homepage,
+        id = this.id,
+        imdbId = this.imdbId,
+        originalLanguage = this.originalLanguage,
+        originalTitle = this.originalTitle,
+        overview = this.overview,
+        popularity = this.popularity,
+        posterPath = this.posterPath,
+        releaseDate = this.releaseDate,
+        runtime = this.runtime,
+        status = this.status,
+        tagline = this.tagline,
+        title = this.title,
+        video = this.video,
+        voteAverage = this.voteAverage,
+        voteCount = this.voteCount
     )
 }
 
 fun ActorDto.toDomain(): Actor {
     return Actor(
-        this.castId,
-        this.character,
-        this.creditId,
-        this.id,
-        this.name,
-        this.originalName,
-        this.profilePath
+        castId = this.castId,
+        character = this.character,
+        creditId = this.creditId,
+        id = this.id,
+        name = this.name,
+        originalName = this.originalName,
+        profilePath = this.profilePath
     )
 }
 
 fun CastDto.toDomain(): Cast {
     return Cast(
-        this.actor?.map { it.toDomain() },
-        this.id
+        actor = this.actor?.map { it.toDomain() },
+        id = this.id
     )
 }
 
 fun VideoDto.toDomain(): Video {
     return Video(
-        this.id,
-        this.iso31661,
-        this.iso6391,
-        this.key,
-        this.name,
-        this.official,
-        this.publishedAt,
-        this.site,
-        this.size,
-        this.type
+        id = this.id,
+        iso31661 = this.iso31661,
+        iso6391 = this.iso6391,
+        key = this.key,
+        name = this.name,
+        official = this.official,
+        publishedAt = this.publishedAt,
+        site = this.site,
+        size = this.size,
+        type = this.type
     )
 }
 
 fun MovieVideoDto.toDomain(): MovieVideo {
     return MovieVideo(
-        this.id,
-        this.videos?.map { it.toDomain() }
+        id = this.id,
+        videos = this.videos?.map { it.toDomain() }
     )
 }
 
 internal fun DatesDto.toDomain(): Dates {
     return Dates(
-        this.maximum,
-        this.minimum
+        maximum = this.maximum,
+        minimum = this.minimum
     )
 }
