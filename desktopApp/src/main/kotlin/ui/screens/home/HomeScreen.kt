@@ -39,16 +39,19 @@ fun HomeScreen(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            if (!nowPlayingMovies.value.isNullOrEmpty()) NowPlayingMovies(movies = nowPlayingMovies.value!!)
-            trendingMovies.value?.let { TrendingMovies(movies = it) }
-            popularMovies.value?.let { PopularMovies(movies = it) }
-            upcomingMovies.value?.let { UpcomingMovies(movies = it) }
+            if (!nowPlayingMovies.value.isNullOrEmpty()) NowPlayingMovies(
+                navController = navController,
+                movies = nowPlayingMovies.value!!
+            )
+            trendingMovies.value?.let { TrendingMovies(navController = navController, movies = it) }
+            popularMovies.value?.let { PopularMovies(navController = navController, movies = it) }
+            upcomingMovies.value?.let { UpcomingMovies(navController = navController, movies = it) }
         }
     }
 }
 
 @Composable
-fun NowPlayingMovies(movies: List<Movie>) {
+fun NowPlayingMovies(navController: NavController, movies: List<Movie>) {
     val movieNumber by remember { mutableStateOf((0..movies.size).random()) }
 
     ItemNowPlayingMovies(
@@ -62,7 +65,7 @@ fun NowPlayingMovies(movies: List<Movie>) {
 }
 
 @Composable
-fun TrendingMovies(movies: List<Movie>) {
+fun TrendingMovies(navController: NavController, movies: List<Movie>) {
     SectionSeparator(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 12.dp)
@@ -82,14 +85,14 @@ fun TrendingMovies(movies: List<Movie>) {
     ) {
         items(items = movies) { item ->
             ItemTrendingMovies(modifier = Modifier, movie = item) {
-                // ToDo: On movie clicked
+                navController.navigate("details/${it.id}")
             }
         }
     }
 }
 
 @Composable
-fun PopularMovies(movies: List<Movie>) {
+fun PopularMovies(navController: NavController, movies: List<Movie>) {
     SectionSeparator(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 12.dp)
@@ -112,14 +115,14 @@ fun PopularMovies(movies: List<Movie>) {
                 modifier = Modifier,
                 movie = item
             ) {
-                // ToDo: On movie clicked
+                navController.navigate("details/${it.id}")
             }
         }
     }
 }
 
 @Composable
-fun UpcomingMovies(movies: List<Movie>) {
+fun UpcomingMovies(navController: NavController, movies: List<Movie>) {
     SectionSeparator(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 12.dp)
@@ -139,7 +142,7 @@ fun UpcomingMovies(movies: List<Movie>) {
     ) {
         items(items = movies) { item ->
             ItemTrendingMovies(modifier = Modifier, movie = item) {
-                // ToDo: On movie clicked
+                navController.navigate("details/${it.id}")
             }
         }
     }

@@ -1,6 +1,5 @@
 package ui.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.MaterialTheme
@@ -11,14 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
-import ui.theme.DarkPrimaryColor
 
 @Composable
 fun SectionSeparator(modifier: Modifier = Modifier, sectionTitle: String, onItemClick: () -> Unit) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.Start,
     ) {
         Text(
             text = sectionTitle,
@@ -27,14 +25,6 @@ fun SectionSeparator(modifier: Modifier = Modifier, sectionTitle: String, onItem
             fontSize = 32.sp,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
-        )
-
-        Text(
-            modifier = Modifier.clickable { onItemClick() },
-            text = "View All",
-            color = DarkPrimaryColor,
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 16.sp
         )
     }
 }

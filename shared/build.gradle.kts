@@ -50,6 +50,9 @@ kotlin {
         sourceSets["commonTest"].dependencies {
             implementation(kotlin("test"))
             implementation(MultiplatformDependencies.ktorMock)
+            implementation(MultiplatformDependencies.kotlinxTestResources)
+            implementation(MultiplatformDependencies.kotlinxCoroutinesTest)
+            implementation(MultiplatformDependencies.multiplatformSettingsTest)
         }
 
         sourceSets["androidMain"].dependencies {

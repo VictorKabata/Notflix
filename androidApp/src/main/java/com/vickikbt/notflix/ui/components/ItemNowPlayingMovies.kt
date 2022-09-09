@@ -16,8 +16,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
@@ -32,7 +30,7 @@ import com.vickikbt.notflix.ui.theme.Golden
 import com.vickikbt.notflix.util.PaletteGenerator
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.Movie
-import com.vickikbt.shared.domain.utils.getRating
+import com.vickikbt.shared.utils.getRating
 
 @ExperimentalCoilApi
 @Composable
@@ -66,55 +64,49 @@ fun ItemNowPlayingMovies(
     }
 
     Box(modifier = modifier.clickable { onItemClick() }) {
-        ConstraintLayout(modifier = Modifier.fillMaxSize()) {
-            val (imageMovieCover, boxFadingEdge, textMovieTitle, ratingBarRanking) = createRefs()
+        //region Movie Cover Image
+        Image(
+            modifier = Modifier
+                .fillMaxSize()
+                .align(Alignment.Center)
+                .placeholder(
+                    visible = false,
+                    color = Color.Gray,
+                    highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
+                ),
+            alignment = Alignment.Center,
+            contentScale = ContentScale.Crop,
+            painter = painter,
+            contentDescription = null
+        )
+        //endregion
 
-            //region Movie Cover Image
-            Image(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .constrainAs(imageMovieCover) {}
-                    .placeholder(
-                        visible = false,
-                        color = Color.Gray,
-                        highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
-                    ),
-                alignment = Alignment.Center,
-                contentScale = ContentScale.Crop,
-                painter = painter,
-                contentDescription = null
-            )
-            //endregion
-
-            //region Fading Edge Box
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(210.dp)
-                    .background(
-                        Brush.verticalGradient(
-                            listOf(
-                                Color.Transparent,
-                                dominantColor
-                            )
+        //region Fading Edge Box
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(210.dp)
+                .align(Alignment.BottomCenter)
+                .background(
+                    Brush.verticalGradient(
+                        listOf(
+                            Color.Transparent,
+                            dominantColor
                         )
                     )
-                    .constrainAs(boxFadingEdge) {
-                        bottom.linkTo(parent.bottom)
-                    }
-            )
-            //endregion
+                )
+        )
+        //endregion
 
-            //region Movie Title
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 12.dp, vertical = 8.dp)
+                .align(Alignment.BottomCenter),
+            verticalArrangement = Arrangement.spacedBy(2.dp)
+        ) {
             Text(
-                modifier = Modifier
-                    .padding(start = 8.dp, end = 8.dp)
-                    .constrainAs(textMovieTitle) {
-                        width = Dimension.fillToConstraints
-                        start.linkTo(parent.start)
-                        bottom.linkTo(ratingBarRanking.top)
-                        end.linkTo(parent.end)
-                    },
+                modifier = Modifier,
                 text = movie.title ?: "Unknown movie",
                 fontSize = 32.sp,
                 maxLines = 2,
@@ -123,16 +115,9 @@ fun ItemNowPlayingMovies(
                 textAlign = TextAlign.Start,
                 color = dominantTextColor
             )
-            //endregion
 
-            //region Movie Rating
             RatingBar(
-                modifier = Modifier
-                    .padding(start = 8.dp, bottom = 6.dp)
-                    .constrainAs(ratingBarRanking) {
-                        start.linkTo(parent.start)
-                        bottom.linkTo(parent.bottom)
-                    },
+                modifier = Modifier,
                 value = movie.voteAverage?.getRating()?.toFloat() ?: 0f,
                 numStars = 5,
                 size = 18.dp,
@@ -144,7 +129,6 @@ fun ItemNowPlayingMovies(
                 onValueChange = {},
                 onRatingChanged = {}
             )
-            //endregion
         }
     }
 }

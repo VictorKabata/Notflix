@@ -1,0 +1,47 @@
+{
+  "page": 1,
+  "results": [{
+    "adult": false,
+    "backdrop_path": "/mXLVA0YL6tcXi6SJSuAh9ONXFj5.jpg",
+    "genre_ids": [
+      878,
+      12,
+      10751,
+      14
+    ],
+    "id": 601,
+    "original_language": "en",
+    "original_title": "E.T. the Extra-Terrestrial",
+    "overview": "After a gentle alien becomes stranded on Earth, the being is discovered and befriended by a young boy named Elliott. Bringing the extraterrestrial into his suburban California house, Elliott introduces E.T., as the alien is dubbed, to his brother and his little sister, Gertie, and the children decide to keep its existence a secret. Soon, however, E.T. falls ill, resulting in government intervention and a dire situation for both Elliott and the alien.",
+    "popularity": 38.281,
+    "poster_path": "/an0nD6uq6byfxXCfk6lQBzdL2J1.jpg",
+    "release_date": "1982-06-11",
+    "title": "E.T. the Extra-Terrestrial",
+    "video": false,
+    "vote_average": 7.506,
+    "vote_count": 9671
+  },
+    {
+      "adult": false,
+      "backdrop_path": "/uw4SnKFZ453Gxmj5XR5Susj8TNo.jpg",
+      "genre_ids": [
+        28,
+        12,
+        878
+      ],
+      "id": 602,
+      "original_language": "en",
+      "original_title": "Independence Day",
+      "overview": "On July 2, a giant alien mothership enters orbit around Earth and deploys several dozen saucer-shaped 'destroyer' spacecraft that quickly lay waste to major cities around the planet. On July 3, the United States conducts a coordinated counterattack that fails. On July 4, a plan is devised to gain access to the interior of the alien mothership in space, in order to plant a nuclear missile.",
+      "popularity": 54.169,
+      "poster_path": "/p0BPQGSPoSa8Ml0DAf2mB2kCU0R.jpg",
+      "release_date": "1996-06-25",
+      "title": "Independence Day",
+      "video": false,
+      "vote_average": 6.85,
+      "vote_count": 8204
+    }
+  ],
+  "total_pages": 500,
+  "total_results": 10000
+}

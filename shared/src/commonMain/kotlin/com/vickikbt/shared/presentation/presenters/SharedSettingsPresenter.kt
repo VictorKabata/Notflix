@@ -2,7 +2,6 @@ package com.vickikbt.shared.presentation.presenters
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
 import com.vickikbt.shared.domain.repositories.SettingsRepository
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -36,7 +35,6 @@ class SharedSettingsPresenter constructor(private val settingsRepository: Settin
 
     fun savePreferenceSelection(key: String, selection: Int) {
         val job = viewModelScope.launch {
-            Napier.e("Saving preference $key as $selection")
             settingsRepository.savePreferenceSelection(key = key, selection = selection)
         }
 
