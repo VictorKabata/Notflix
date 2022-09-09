@@ -30,7 +30,7 @@ import com.vickikbt.notflix.ui.theme.Golden
 import com.vickikbt.notflix.util.PaletteGenerator
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.Movie
-import com.vickikbt.shared.domain.utils.getRating
+import com.vickikbt.shared.utils.getRating
 
 @ExperimentalCoilApi
 @Composable
