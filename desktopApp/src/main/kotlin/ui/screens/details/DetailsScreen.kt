@@ -1,31 +1,10 @@
 package ui.screens.details
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.vickikbt.shared.domain.utils.getPopularity
-import com.vickikbt.shared.domain.utils.getRating
 import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
 import io.github.aakira.napier.Napier
 import koin
-import ui.components.ItemMovieCast
-import ui.components.ItemSimilarMovies
-import ui.components.MovieRatingSection
 import ui.navigation.NavController
 
 @Composable
