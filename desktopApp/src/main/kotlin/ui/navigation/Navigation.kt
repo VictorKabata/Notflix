@@ -2,10 +2,10 @@ package ui.navigation
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
-import ui.screens.settings.SettingsScreen
 import ui.screens.details.DetailsScreen
 import ui.screens.favourites.FavoritesScreen
 import ui.screens.home.HomeScreen
+import ui.screens.settings.SettingsScreen
 
 @ExperimentalMaterialApi
 @Composable
@@ -16,8 +16,9 @@ fun Navigation(navController: NavController) {
             HomeScreen(navController = navController)
         }
 
-        composable(route = NavigationItem.Details.route) {
-            DetailsScreen(navController = navController)
+        composable(route = NavigationItem.Details.route, arguments = listOf()) {
+            val movieId = it[0].toInt()
+            DetailsScreen(navController = navController, movieId = movieId)
         }
 
         composable(route = NavigationItem.Favorites.route) {
