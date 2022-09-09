@@ -18,7 +18,7 @@ fun SectionSeparator(modifier: Modifier = Modifier, sectionTitle: String, onItem
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.Start,
     ) {
         Text(
             text = sectionTitle,
@@ -27,14 +27,6 @@ fun SectionSeparator(modifier: Modifier = Modifier, sectionTitle: String, onItem
             fontSize = 32.sp,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
-        )
-
-        Text(
-            modifier = Modifier.clickable { onItemClick() },
-            text = "View All",
-            color = DarkPrimaryColor,
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 16.sp
         )
     }
 }
