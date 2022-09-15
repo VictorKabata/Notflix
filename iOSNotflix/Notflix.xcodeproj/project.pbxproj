@@ -16,6 +16,9 @@
 		660AD27C28D32B3F00FA14E6 /* commonMain in Resources */ = {isa = PBXBuildFile; fileRef = 660AD27A28D32B3F00FA14E6 /* commonMain */; };
 		660AD27D28D32B3F00FA14E6 /* iosMain in Resources */ = {isa = PBXBuildFile; fileRef = 660AD27B28D32B3F00FA14E6 /* iosMain */; };
 		660AD28428D32D0B00FA14E6 /* PreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660AD28328D32D0B00FA14E6 /* PreferencesViewModel.swift */; };
+		660AD28628D3617200FA14E6 /* PreferenceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660AD28528D3617200FA14E6 /* PreferenceScreen.swift */; };
+		660AD28828D361E200FA14E6 /* PresentationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660AD28728D361E200FA14E6 /* PresentationUtilities.swift */; };
+		660AD28A28D3627C00FA14E6 /* SupportEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660AD28928D3627C00FA14E6 /* SupportEmail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,9 @@
 		660AD27A28D32B3F00FA14E6 /* commonMain */ = {isa = PBXFileReference; lastKnownFileType = folder; name = commonMain; path = ../../shared/src/commonMain; sourceTree = "<group>"; };
 		660AD27B28D32B3F00FA14E6 /* iosMain */ = {isa = PBXFileReference; lastKnownFileType = folder; name = iosMain; path = ../../shared/src/iosMain; sourceTree = "<group>"; };
 		660AD28328D32D0B00FA14E6 /* PreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewModel.swift; sourceTree = "<group>"; };
+		660AD28528D3617200FA14E6 /* PreferenceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceScreen.swift; sourceTree = "<group>"; };
+		660AD28728D361E200FA14E6 /* PresentationUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationUtilities.swift; sourceTree = "<group>"; };
+		660AD28928D3627C00FA14E6 /* SupportEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportEmail.swift; sourceTree = "<group>"; };
 		AA978438B27B75F0C243E32C /* Pods-Notflix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notflix.debug.xcconfig"; path = "Target Support Files/Pods-Notflix/Pods-Notflix.debug.xcconfig"; sourceTree = "<group>"; };
 		B02F9B38A80F914DFA1A9AD1 /* Pods-Notflix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notflix.release.xcconfig"; path = "Target Support Files/Pods-Notflix/Pods-Notflix.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +96,8 @@
 		660AD27E28D32CAA00FA14E6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				660AD28728D361E200FA14E6 /* PresentationUtilities.swift */,
+				660AD28928D3627C00FA14E6 /* SupportEmail.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -97,23 +105,24 @@
 		660AD27F28D32CC100FA14E6 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				660AD28028D32CC900FA14E6 /* Screens */,
+				660AD28028D32CC900FA14E6 /* Features */,
 			);
 			path = UI;
 			sourceTree = "<group>";
 		};
-		660AD28028D32CC900FA14E6 /* Screens */ = {
+		660AD28028D32CC900FA14E6 /* Features */ = {
 			isa = PBXGroup;
 			children = (
 				660AD28128D32CD700FA14E6 /* Preferences */,
 			);
-			path = Screens;
+			path = Features;
 			sourceTree = "<group>";
 		};
 		660AD28128D32CD700FA14E6 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
 				660AD28328D32D0B00FA14E6 /* PreferencesViewModel.swift */,
+				660AD28528D3617200FA14E6 /* PreferenceScreen.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -254,7 +263,10 @@
 				660AD27928D327AA00FA14E6 /* Koin.swift in Sources */,
 				660AD26D28D31B9200FA14E6 /* ContentView.swift in Sources */,
 				660AD26B28D31B9200FA14E6 /* NotflixApp.swift in Sources */,
+				660AD28628D3617200FA14E6 /* PreferenceScreen.swift in Sources */,
+				660AD28828D361E200FA14E6 /* PresentationUtilities.swift in Sources */,
 				660AD28428D32D0B00FA14E6 /* PreferencesViewModel.swift in Sources */,
+				660AD28A28D3627C00FA14E6 /* SupportEmail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

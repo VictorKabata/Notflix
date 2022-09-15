@@ -9,9 +9,29 @@ import SwiftUI
 
 @main
 struct NotflixApp: App {
+    @StateObject var viewModel : PreferencesViewModel = PreferencesViewModel()
+    @Environment(\.colorScheme) var systemColorScheme: ColorScheme
     var body: some Scene {
         WindowGroup {
             ContentView()
+        }
+    }
+    
+    
+    var colorScheme:ColorScheme{
+        
+        withAnimation{
+        
+        switch viewModel.appTheme{
+        case .Dark:
+            return .dark
+            
+        case .Light:
+            return.light
+        case .System:
+            return systemColorScheme
+            
+        }
         }
     }
 }
