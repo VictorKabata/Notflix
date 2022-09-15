@@ -23,8 +23,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.PointerEventType
-import androidx.compose.ui.input.pointer.onPointerEvent
 import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
@@ -84,12 +82,9 @@ fun NowPlayingMovies(navController: NavController, movies: List<Movie>) {
                 ) {
                     println("Clicked movie: ${it.title}")
                 }
-
             }
-
         }
     }
-
 }
 
 @Composable

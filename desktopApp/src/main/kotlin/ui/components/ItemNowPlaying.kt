@@ -50,7 +50,6 @@ fun ItemNowPlayingMovies(
             .onPointerEvent(PointerEventType.Exit) { isHovered = false },
     ) {
 
-
         AsyncImage(
             modifier = Modifier.fillMaxSize(),
             load = { loadImageBitmap(imageUrl) },
