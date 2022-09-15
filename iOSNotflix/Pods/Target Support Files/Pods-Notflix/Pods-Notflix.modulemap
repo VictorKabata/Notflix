@@ -1,0 +1,6 @@
+framework module Pods_Notflix {
+  umbrella header "Pods-Notflix-umbrella.h"
+
+  export *
+  module * { export * }
+}
