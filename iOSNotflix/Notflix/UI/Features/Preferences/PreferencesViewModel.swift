@@ -27,6 +27,7 @@ class PreferencesViewModel : ObservableObject{
                 let stream  = asyncStream(for: presenter.selectedThemeNative)
                 
                 for try await theme in stream {
+                    print("the theme is \(theme)")
                     
                     if let theme  = theme{
                         appTheme = appTheme.getTheme(value: Int(truncating: theme))

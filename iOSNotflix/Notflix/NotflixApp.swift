@@ -14,23 +14,30 @@ struct NotflixApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .preferredColorScheme(colorScheme)
+                .onAppear{
+                   viewModel.observeTheme()
+                }.environmentObject(viewModel)
+            }
         }
-    }
+
     
     
-    var colorScheme:ColorScheme{
-        
+    var colorScheme:ColorScheme?{
+
+
         withAnimation{
-        
+
+
         switch viewModel.appTheme{
         case .Dark:
             return .dark
-            
+
         case .Light:
             return.light
-        case .System:
-            return systemColorScheme
-            
+        default:
+            return nil
+
         }
         }
     }

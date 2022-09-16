@@ -11,7 +11,7 @@ import shared
 struct PreferencesScreen: View {
     @Environment(\.openURL) var openURL
     
-    @StateObject var prefViewModel: PreferencesViewModel = PreferencesViewModel()
+   @EnvironmentObject var prefViewModel : PreferencesViewModel
     
     
     var body: some View {
@@ -32,19 +32,20 @@ struct PreferencesScreen: View {
                         
                         
                     }
+                   
                     
                 }
                 
                 Section(header: Text("Extras").bold()){
                     
-                    ExtraItem(image: "bug", title: "Report Bug", description: "Report a Bug or Request a feature"){
+                    ExtraItem(image: "bug_icon", title: "Report Bug", description: "Report a Bug or Request a feature"){
                         lauchPRIntent(openURL: openURL )
                         
                     }
                     
                     
                     //   Link(destination: URL(string: shared.Constants.shared.SOURCE_CODE_URL)!) {
-                    ExtraItem(image: "githubicon", title: "Source Code", description: "View App Source Code"){
+                    ExtraItem(image: "github_icon", title: "Source Code", description: "View App Source Code"){
                         openURL(URL(string: shared.Constants.shared.SOURCE_CODE_URL)!){ accepted in
                             if !accepted {
                                 debugPrint("failed")
@@ -69,8 +70,6 @@ struct PreferencesScreen: View {
             }
             
             
-        }.onAppear{
-            prefViewModel.observeTheme()
         }
     }
     

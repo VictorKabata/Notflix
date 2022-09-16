@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4AEB3AEF895A8830F54190D8 /* Pods_Notflix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6030111FBD57E0F5D0DA6835 /* Pods_Notflix.framework */; };
 		660AD26B28D31B9200FA14E6 /* NotflixApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660AD26A28D31B9200FA14E6 /* NotflixApp.swift */; };
 		660AD26D28D31B9200FA14E6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660AD26C28D31B9200FA14E6 /* ContentView.swift */; };
 		660AD26F28D31B9400FA14E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 660AD26E28D31B9400FA14E6 /* Assets.xcassets */; };
@@ -19,10 +18,12 @@
 		660AD28628D3617200FA14E6 /* PreferenceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660AD28528D3617200FA14E6 /* PreferenceScreen.swift */; };
 		660AD28828D361E200FA14E6 /* PresentationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660AD28728D361E200FA14E6 /* PresentationUtilities.swift */; };
 		660AD28A28D3627C00FA14E6 /* SupportEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660AD28928D3627C00FA14E6 /* SupportEmail.swift */; };
+		660AD28D28D3BE4800FA14E6 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 660AD28C28D3BE4800FA14E6 /* Launch Screen.storyboard */; };
+		915ABE35C29AE907DB899F2C /* Pods_Notflix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCB7F5A6BF082D376FC2EF6 /* Pods_Notflix.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6030111FBD57E0F5D0DA6835 /* Pods_Notflix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Notflix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B8B888FFEF702016448EE46 /* Pods-Notflix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notflix.release.xcconfig"; path = "Target Support Files/Pods-Notflix/Pods-Notflix.release.xcconfig"; sourceTree = "<group>"; };
 		660AD26728D31B9200FA14E6 /* Notflix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notflix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		660AD26A28D31B9200FA14E6 /* NotflixApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotflixApp.swift; sourceTree = "<group>"; };
 		660AD26C28D31B9200FA14E6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -35,8 +36,9 @@
 		660AD28528D3617200FA14E6 /* PreferenceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceScreen.swift; sourceTree = "<group>"; };
 		660AD28728D361E200FA14E6 /* PresentationUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationUtilities.swift; sourceTree = "<group>"; };
 		660AD28928D3627C00FA14E6 /* SupportEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportEmail.swift; sourceTree = "<group>"; };
-		AA978438B27B75F0C243E32C /* Pods-Notflix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notflix.debug.xcconfig"; path = "Target Support Files/Pods-Notflix/Pods-Notflix.debug.xcconfig"; sourceTree = "<group>"; };
-		B02F9B38A80F914DFA1A9AD1 /* Pods-Notflix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notflix.release.xcconfig"; path = "Target Support Files/Pods-Notflix/Pods-Notflix.release.xcconfig"; sourceTree = "<group>"; };
+		660AD28C28D3BE4800FA14E6 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		CBDCF34A4633D5528BECDFD5 /* Pods-Notflix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notflix.debug.xcconfig"; path = "Target Support Files/Pods-Notflix/Pods-Notflix.debug.xcconfig"; sourceTree = "<group>"; };
+		EFCB7F5A6BF082D376FC2EF6 /* Pods_Notflix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Notflix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,20 +46,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AEB3AEF895A8830F54190D8 /* Pods_Notflix.framework in Frameworks */,
+				915ABE35C29AE907DB899F2C /* Pods_Notflix.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		546766D416E8B4F22EC6982F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EFCB7F5A6BF082D376FC2EF6 /* Pods_Notflix.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		660AD25E28D31B9200FA14E6 = {
 			isa = PBXGroup;
 			children = (
 				660AD26928D31B9200FA14E6 /* Notflix */,
 				660AD26828D31B9200FA14E6 /* Products */,
 				CFC4AE895828B25900F0F470 /* Pods */,
-				DFBFE7BF183D83FF573871A5 /* Frameworks */,
+				546766D416E8B4F22EC6982F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,6 +123,7 @@
 		660AD28028D32CC900FA14E6 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				660AD28B28D3BE3200FA14E6 /* LaunchScreen */,
 				660AD28128D32CD700FA14E6 /* Preferences */,
 			);
 			path = Features;
@@ -127,21 +138,21 @@
 			path = Preferences;
 			sourceTree = "<group>";
 		};
+		660AD28B28D3BE3200FA14E6 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				660AD28C28D3BE4800FA14E6 /* Launch Screen.storyboard */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
 		CFC4AE895828B25900F0F470 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AA978438B27B75F0C243E32C /* Pods-Notflix.debug.xcconfig */,
-				B02F9B38A80F914DFA1A9AD1 /* Pods-Notflix.release.xcconfig */,
+				CBDCF34A4633D5528BECDFD5 /* Pods-Notflix.debug.xcconfig */,
+				5B8B888FFEF702016448EE46 /* Pods-Notflix.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		DFBFE7BF183D83FF573871A5 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6030111FBD57E0F5D0DA6835 /* Pods_Notflix.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,11 +162,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 660AD27528D31B9400FA14E6 /* Build configuration list for PBXNativeTarget "Notflix" */;
 			buildPhases = (
-				B039639760C97FB0F9E371FD /* [CP] Check Pods Manifest.lock */,
+				EC4BFE2C66D066D27B2B27FE /* [CP] Check Pods Manifest.lock */,
 				660AD26328D31B9200FA14E6 /* Sources */,
 				660AD26428D31B9200FA14E6 /* Frameworks */,
 				660AD26528D31B9200FA14E6 /* Resources */,
-				4E63A79C596729B72233D1FD /* [CP] Embed Pods Frameworks */,
+				D871EF9F3F3E660854006A2D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -207,6 +218,7 @@
 				660AD27228D31B9400FA14E6 /* Preview Assets.xcassets in Resources */,
 				660AD26F28D31B9400FA14E6 /* Assets.xcassets in Resources */,
 				660AD27C28D32B3F00FA14E6 /* commonMain in Resources */,
+				660AD28D28D3BE4800FA14E6 /* Launch Screen.storyboard in Resources */,
 				660AD27D28D32B3F00FA14E6 /* iosMain in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,7 +226,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4E63A79C596729B72233D1FD /* [CP] Embed Pods Frameworks */ = {
+		D871EF9F3F3E660854006A2D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -231,7 +243,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Notflix/Pods-Notflix-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B039639760C97FB0F9E371FD /* [CP] Check Pods Manifest.lock */ = {
+		EC4BFE2C66D066D27B2B27FE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -389,7 +401,7 @@
 		};
 		660AD27628D31B9400FA14E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA978438B27B75F0C243E32C /* Pods-Notflix.debug.xcconfig */;
+			baseConfigurationReference = CBDCF34A4633D5528BECDFD5 /* Pods-Notflix.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -402,6 +414,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -419,7 +432,7 @@
 		};
 		660AD27728D31B9400FA14E6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B02F9B38A80F914DFA1A9AD1 /* Pods-Notflix.release.xcconfig */;
+			baseConfigurationReference = 5B8B888FFEF702016448EE46 /* Pods-Notflix.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -432,6 +445,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

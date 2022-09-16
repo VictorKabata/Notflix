@@ -8,15 +8,16 @@
 import Foundation
 
 enum AppTheme : Int,CaseIterable{
+    case Light = 0
     case Dark = 1
-    case Light = 2
-    case System = 3
+    
+    case System = 2
     
     func getTheme(value: Int) -> AppTheme{
         switch value {
     case 1:
          return AppTheme.Dark
-    case 2:
+    case 0:
         return AppTheme.Light
     default:
         return AppTheme.System
