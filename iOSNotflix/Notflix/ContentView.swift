@@ -9,17 +9,48 @@ import SwiftUI
 
 
 struct ContentView: View {
+    @State var currentDestination : [Int] = []
+    
+    @State var navigation = NavigationPath()
+    @State var isLinkActive = false
+    
     var body: some View {
-        VStack {
+        NavigationStack(path: $currentDestination ){
             
-            PreferencesScreen()
-//            Image(systemName: "globe")
-//                .imageScale(.large)
-//                .foregroundColor(.accentColor)
-//            Text("Hello, world!")
+            TabView{
+                //NavigationLink(value: <#T##Hashable?#>, label: <#T##() -> View#>)
+                HomeScreen{ id in
+                    
+                    //print("the id of the movie is \(id)")
+                   // currentDestination.removeAll()
+                    currentDestination.append(id)
+                    
+                    
+                }.tabItem{
+                    Image(systemName: "house")
+                    
+                }
+                
+                Text("Hello Dev")
+                    .tabItem{
+                        Image(systemName: "heart")
+                    }
+                PreferencesScreen().tabItem{
+                    Image(systemName: "gear")
+                }
+                
+            }.navigationViewStyle(.stack)
+                .navigationDestination(for: Int.self){ id in
+                    DetailsScreen(movieId: id)
+                    
+                }
+            
+            
         }
-     
     }
+    
+    
+ 
 }
 
 struct ContentView_Previews: PreviewProvider {

@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct NotflixApp: App {
+    
+    init(){
+        KoinApplication.start()
+    }
     @StateObject var viewModel : PreferencesViewModel = PreferencesViewModel()
     @Environment(\.colorScheme) var systemColorScheme: ColorScheme
     var body: some Scene {
