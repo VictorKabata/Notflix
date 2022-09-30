@@ -27,8 +27,8 @@ An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlan
 - [App Structure](##app-structure)
   - [1. androidApp](###1-androidapp)
   - [2. desktopApp](###2-desktopapp)
-  - [3. shared](###3-shared)
-  - [4. iosApp](###4-iosApp)
+  - [3. iosApp](###3-iosApp)
+  - [4. shared](###4-shared)
     - [__Domain__](###domain)
     - [__Data__](###data)
     - [__Presentation__](###presentation)
@@ -83,11 +83,13 @@ This module contains the android application's UI built using [Jetpack compose](
 
 This module contains the desktop application's UI built using [Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/).
 
-## 3. [shared](https://github.com/VictorKabata/Notflix/tree/main/shared)
+## 3. [iOSApp](https://github.com/VictorKabata/Notflix/tree/main/iOSNotflix)
+This module contains iOS code that holds the iosApp  UI built using [Swift UI](https://developer.apple.com/xcode/swiftui/)
 
+
+### 4 . [shared](https://github.com/VictorKabata/Notflix/tree/main/shared)
 This module contains shared code that holds the domain and data layers and some part of the presentation logic ie.shared viewmodels
 
-### 4 . [iosApp](https://github.com/VictorKabata/Notflix/tree/main/iOSNotflix)
 
 ### __Domain__
 
