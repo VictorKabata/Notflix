@@ -19,6 +19,8 @@ class PreferencesViewModel : ObservableObject{
     
     @Published var appTheme: AppTheme = AppTheme.System
     
+    @Published var imageQuality : AppImageQuality = .Low
+    
     func observeTheme(){
         let _ = Task{
             
@@ -27,7 +29,7 @@ class PreferencesViewModel : ObservableObject{
                 let stream  = asyncStream(for: presenter.selectedThemeNative)
                 
                 for try await theme in stream {
-                    print("the theme is \(theme)")
+                   
                     
                     if let theme  = theme{
                         appTheme = appTheme.getTheme(value: Int(truncating: theme))
@@ -43,6 +45,22 @@ class PreferencesViewModel : ObservableObject{
         
      presenter.savePreferenceSelection(key: shared.PreferenceManager.companion.THEME_KEY, selection: Int32(newTheme)) 
             
+    }
+    
+    func observeImageQuality(){
+        Task{
+            let stream  = asyncStream(for: presenter.selectedImageQualityNative)
+            for try await quality in stream {
+                
+                if let quality{
+                    imageQuality =  imageQuality.getQuality(value: Int(truncating: quality))
+                }
+            }
+        }
+    }
+    
+    func setImageQuality(quality : Int){
+        presenter.savePreferenceSelection(key: shared.PreferenceManager.companion.IMAGE_QUALITY_KEY, selection: Int32(quality))
     }
     
     

@@ -15,8 +15,18 @@ struct PreferencesScreen: View {
     
     
     var body: some View {
-        VStack{
+        NavigationStack{
+        
             Form{
+                Text("Settings")
+                                .font(.largeTitle)
+                                .bold()
+                                .foregroundColor(.primary).frame(width: UIScreen.screenWidth)
+                                .multilineTextAlignment(.leading)
+              
+                
+                
+                
                 Section(header:  Text("Preferences").bold()){
                     
                     Picker("Change App Theme", selection: $prefViewModel.appTheme){
@@ -32,9 +42,31 @@ struct PreferencesScreen: View {
                         
                         
                     }
+                    
+                    Picker("Change Image Quality", selection: $prefViewModel.imageQuality){
+                        ForEach(AppImageQuality.allCases,id: \.self){ quality in
+                            
+                            Text(quality.getName())
+                                .tag(quality.rawValue)
+                            
+                        }
+                        
+                    }.onChange(of: prefViewModel.imageQuality){ id in
+                        prefViewModel.setImageQuality(quality: id.rawValue)
+                        
+                        
+                    }
                    
                     
                 }
+                
+           
+                    
+                  
+                   
+                    
+                
+
                 
                 Section(header: Text("Extras").bold()){
                     
@@ -57,20 +89,13 @@ struct PreferencesScreen: View {
                 
                 
                 
-                
-                // }
-                Button(action: {
-                    
-                }, label: {
-                    Text("Sign Out")
-                }).frame( alignment: .bottom)
-                
-                
-                
-            }
+            }.onAppear{
+                prefViewModel.observeImageQuality()
             
+        }.navigationTitle("Settings")
             
         }
+          
     }
     
     func lauchPRIntent(openURL: OpenURLAction) {
