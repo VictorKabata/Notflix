@@ -28,6 +28,7 @@ An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlan
   - [1. androidApp](###1-androidapp)
   - [2. desktopApp](###2-desktopapp)
   - [3. shared](###3-shared)
+  - [4. iosApp](###4-iosApp)
     - [__Domain__](###domain)
     - [__Data__](###data)
     - [__Presentation__](###presentation)
@@ -85,6 +86,8 @@ This module contains the desktop application's UI built using [Compose Multiplat
 ## 3. [shared](https://github.com/VictorKabata/Notflix/tree/main/shared)
 
 This module contains shared code that holds the domain and data layers and some part of the presentation logic ie.shared viewmodels
+
+### 4 . [iosApp](https://github.com/VictorKabata/Notflix/tree/main/iOSNotflix)
 
 ### __Domain__
 
@@ -151,6 +154,14 @@ The `presentation` package contains shared viewmodels code. eg.
 - [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller/) - A library that provides easy-to-use utilities for updating the System UI bar colors within Jetpack Compose.
 - [Accompanist Material Placeholder](https://google.github.io/accompanist/placeholder/) -
 - [Accompanist Pager Indicator](https://google.github.io/accompanist/api/pager-indicators/com.google.accompanist.pager/-horizontal-pager-indicator.html) - A horizontally laid out indicator for a HorizontalPager or VerticalPager, representing the currently active page and total pages drawn using shape.
+
+## iOS
+- [SwiftUI](https://developer.apple.com/xcode/swiftui/) - SwiftUI is Apple's brand new declarative UI Toolkit for building user interfaces for iOS, tvOS, macOS, and watchOS.
+- [Cached Async Image](https://github.com/lorenzofiamingo/swiftui-cached-async-image) - SwiftUI Image loading framework with caching capability.
+- [KMP Async](https://github.com/rickclephas/KMP-NativeCoroutines) - A library to use kotlin coroutines in Swift.
+- [Cocoa Pods](https://cocoapods.org/) - CocoaPods is a dependency manager for Swift and Objective-C Cocoa projects.
+- [UIimage Colors](https://github.com/jathu/UIImageColors) - Swift Library to extract colors from images.
+
 
 ## Extras
 
