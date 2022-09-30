@@ -19,3 +19,5 @@ fun String.loadImage(): String {
 
     return "https://image.tmdb.org/t/p/$quality/$this"
 }
+
+
