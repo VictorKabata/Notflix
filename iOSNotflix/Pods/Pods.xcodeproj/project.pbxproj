@@ -9,10 +9,9 @@
 /* Begin PBXAggregateTarget section */
 		8777C9F6889E59EFFD631D80AEE9048B /* shared */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 800B9C9B179A6C4AE6CA24F80C6B0601 /* Build configuration list for PBXAggregateTarget "shared" */;
+			buildConfigurationList = 4A85E56EFB3170251B1CB14EB8485EF5 /* Build configuration list for PBXAggregateTarget "shared" */;
 			buildPhases = (
-				C9BEC24459B2FFAF1F953F554664AD6D /* [CP-User] Build shared */,
-				5516DA76D8AEBE185753E21ED58215A9 /* [CP] Copy dSYMs */,
+				179B9B8F4A300C109F0453B82420AE1B /* [CP-User] Build shared */,
 			);
 			dependencies = (
 			);
@@ -71,10 +70,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1AA40E598616FA341AB6CCFA672C5C4D /* shared.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = shared.release.xcconfig; sourceTree = "<group>"; };
 		2A54F16B245767CB44582250E2E6FE8B /* NativeSuspend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NativeSuspend.swift; path = KMPNativeCoroutinesCore/NativeSuspend.swift; sourceTree = "<group>"; };
 		2E31E4F91EB767928ADC5C51DE0930A7 /* KMPNativeCoroutinesAsync-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KMPNativeCoroutinesAsync-dummy.m"; sourceTree = "<group>"; };
 		3641BB6FB47CC92EFA31957D0B369E0A /* Pods-Notflix-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Notflix-frameworks.sh"; sourceTree = "<group>"; };
 		3B44D339F1FC7006C92D40118BFA2DD2 /* KMPNativeCoroutinesAsync-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KMPNativeCoroutinesAsync-umbrella.h"; sourceTree = "<group>"; };
+		41F243C07537A50C98744EA8EE7D438F /* shared.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = shared.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		4716C60AFD399C156C8AA90D9E8F9DA8 /* KMPNativeCoroutinesCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KMPNativeCoroutinesCore.debug.xcconfig; sourceTree = "<group>"; };
 		4BEFB8BB54CE5758889A5E5DADFC8513 /* KMPNativeCoroutinesCore-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KMPNativeCoroutinesCore-umbrella.h"; sourceTree = "<group>"; };
 		539165C1392E7EBCCEA49BF587D6BF0B /* KMPNativeCoroutinesAsync-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KMPNativeCoroutinesAsync-prefix.pch"; sourceTree = "<group>"; };
@@ -85,8 +86,8 @@
 		6BEA8D436F26B2CEDD7886950C6899C4 /* NativeCallback.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NativeCallback.swift; path = KMPNativeCoroutinesCore/NativeCallback.swift; sourceTree = "<group>"; };
 		70B7FB7B4055563BE1BE9B0E156CFBC7 /* AsyncFunction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsyncFunction.swift; path = KMPNativeCoroutinesAsync/AsyncFunction.swift; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		82E572302E6E1927F47A74B217621231 /* shared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = shared.debug.xcconfig; sourceTree = "<group>"; };
 		88314F450B5ABB4371C9CD858D002538 /* Pods-Notflix.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Notflix.modulemap"; sourceTree = "<group>"; };
-		8B4C33BE38D37504F4CE4B640805A97F /* shared.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = shared.framework; path = build/cocoapods/framework/shared.framework; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DA017AAED5573EBB9D98AB5A65E444E /* KMPNativeCoroutinesAsync.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KMPNativeCoroutinesAsync.release.xcconfig; sourceTree = "<group>"; };
 		9EFEFB4FFAFEEB3BCC56B073408EB371 /* Pods-Notflix-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Notflix-Info.plist"; sourceTree = "<group>"; };
@@ -94,17 +95,14 @@
 		A4B7D1C74DC9AEA7CAC7F4332A067700 /* KMPNativeCoroutinesAsync-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "KMPNativeCoroutinesAsync-Info.plist"; sourceTree = "<group>"; };
 		A5B5D39ED04BF6760FC28847F03967AF /* KMPNativeCoroutinesCore-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KMPNativeCoroutinesCore-prefix.pch"; sourceTree = "<group>"; };
 		B11B4CE01F59B1D9A0D0C047B3433BB9 /* KMPNativeCoroutinesCore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KMPNativeCoroutinesCore.release.xcconfig; sourceTree = "<group>"; };
+		BEB95A55C9E74BCA8331F76109D02F1A /* shared.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = shared.framework; path = build/cocoapods/framework/shared.framework; sourceTree = "<group>"; };
 		C30CD244D3E96211A6F150CCEC673A46 /* Pods-Notflix-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Notflix-acknowledgements.plist"; sourceTree = "<group>"; };
 		C73B3A9B9F32EFCDE593B8E77C7634EF /* Pods-Notflix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Notflix.release.xcconfig"; sourceTree = "<group>"; };
 		CBB360F2822905300C310CBA06D6A093 /* KMPNativeCoroutinesAsync */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KMPNativeCoroutinesAsync; path = KMPNativeCoroutinesAsync.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E14508BA5F6CAB571C61E9BAF575B4F7 /* shared.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = shared.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E32954243B605448566BC0C0B0BCF70D /* KMPNativeCoroutinesCore */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KMPNativeCoroutinesCore; path = KMPNativeCoroutinesCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E81119979FE26773339A65907CDB744E /* shared.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = shared.release.xcconfig; sourceTree = "<group>"; };
 		E91F10AC3E67C02E450728A711E60D50 /* AsyncResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsyncResult.swift; path = KMPNativeCoroutinesAsync/AsyncResult.swift; sourceTree = "<group>"; };
 		E9207A1F4BE6F534A542C62AD334463B /* Pods-Notflix */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Notflix"; path = Pods_Notflix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA561F3C307F0583610B156317191878 /* shared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = shared.debug.xcconfig; sourceTree = "<group>"; };
 		ED5D1DB7C381E75CF7471EE7A5B13DFF /* KMPNativeCoroutinesCore-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KMPNativeCoroutinesCore-dummy.m"; sourceTree = "<group>"; };
-		EEBFB1957EE98D4E441C8F74B4208B03 /* shared-copy-dsyms.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "shared-copy-dsyms.sh"; sourceTree = "<group>"; };
 		F4AE6AF01F42F8CB387560588724E8A0 /* Pods-Notflix-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Notflix-dummy.m"; sourceTree = "<group>"; };
 		F5DF5459A68BD7362B661615905C976F /* Pods-Notflix-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Notflix-acknowledgements.markdown"; sourceTree = "<group>"; };
 		F71059C436137DB65C634FBB1C5F2F4D /* KMPNativeCoroutinesAsync.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = KMPNativeCoroutinesAsync.modulemap; sourceTree = "<group>"; };
@@ -156,21 +154,18 @@
 			path = "../Target Support Files/KMPNativeCoroutinesCore";
 			sourceTree = "<group>";
 		};
-		1EB0ECD58F6FFE56E6160656E6C45315 /* Support Files */ = {
+		216048E5A9D2360DE13F05B23D4FD86C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EEBFB1957EE98D4E441C8F74B4208B03 /* shared-copy-dsyms.sh */,
-				EA561F3C307F0583610B156317191878 /* shared.debug.xcconfig */,
-				E81119979FE26773339A65907CDB744E /* shared.release.xcconfig */,
+				BEB95A55C9E74BCA8331F76109D02F1A /* shared.framework */,
 			);
-			name = "Support Files";
-			path = "../iOSNotflix/Pods/Target Support Files/shared";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		313FE5FE915A4A924C55AAC02A910D61 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				77E3033BEA5947183C8E642B538447A9 /* shared */,
+				72468891A57798ECCF7810FA580DCF5A /* shared */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
@@ -183,14 +178,6 @@
 				E9207A1F4BE6F534A542C62AD334463B /* Pods-Notflix */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		570991E3712AA6E43E00D058110474FD /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				8B4C33BE38D37504F4CE4B640805A97F /* shared.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
@@ -218,12 +205,12 @@
 			path = "Target Support Files/Pods-Notflix";
 			sourceTree = "<group>";
 		};
-		77E3033BEA5947183C8E642B538447A9 /* shared */ = {
+		72468891A57798ECCF7810FA580DCF5A /* shared */ = {
 			isa = PBXGroup;
 			children = (
-				570991E3712AA6E43E00D058110474FD /* Frameworks */,
-				B7657DFA28E6748AE0BB5B02198F9D53 /* Pod */,
-				1EB0ECD58F6FFE56E6160656E6C45315 /* Support Files */,
+				216048E5A9D2360DE13F05B23D4FD86C /* Frameworks */,
+				FEA8DB8B6E4CEF9FCA1AFD50B6D30A6C /* Pod */,
+				EEF0944EE1FA80E5B33797855D553B42 /* Support Files */,
 			);
 			name = shared;
 			path = ../../shared;
@@ -242,14 +229,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/KMPNativeCoroutinesAsync";
-			sourceTree = "<group>";
-		};
-		B7657DFA28E6748AE0BB5B02198F9D53 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				E14508BA5F6CAB571C61E9BAF575B4F7 /* shared.podspec */,
-			);
-			name = Pod;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -297,6 +276,16 @@
 			path = KMPNativeCoroutinesAsync;
 			sourceTree = "<group>";
 		};
+		EEF0944EE1FA80E5B33797855D553B42 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				82E572302E6E1927F47A74B217621231 /* shared.debug.xcconfig */,
+				1AA40E598616FA341AB6CCFA672C5C4D /* shared.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../iOSNotflix/Pods/Target Support Files/shared";
+			sourceTree = "<group>";
+		};
 		F396F8E52A45B39311E8247396FEDDBE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,6 +301,14 @@
 				6A0D3BE7E257F974606BD132041DD307 /* Pods-Notflix */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		FEA8DB8B6E4CEF9FCA1AFD50B6D30A6C /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				41F243C07537A50C98744EA8EE7D438F /* shared.podspec */,
+			);
+			name = Pod;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -457,24 +454,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5516DA76D8AEBE185753E21ED58215A9 /* [CP] Copy dSYMs */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/shared/shared-copy-dsyms-input-files.xcfilelist",
-			);
-			name = "[CP] Copy dSYMs";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/shared/shared-copy-dsyms-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/shared/shared-copy-dsyms.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C9BEC24459B2FFAF1F953F554664AD6D /* [CP-User] Build shared */ = {
+		179B9B8F4A300C109F0453B82420AE1B /* [CP-User] Build shared */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -644,39 +624,6 @@
 			};
 			name = Debug;
 		};
-		653AAEED7EEA900DB044E84A13BCB71D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA561F3C307F0583610B156317191878 /* shared.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		7FBF7F1CAC62AE5C4A04ACA5A0832F5F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E81119979FE26773339A65907CDB744E /* shared.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		C86BD1A2B37E8D0DD8981D59789D7CC8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B11B4CE01F59B1D9A0D0C047B3433BB9 /* KMPNativeCoroutinesCore.release.xcconfig */;
@@ -784,6 +731,39 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		DE0D9B7EC2017BF48F3B2D9E3DCF992D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AA40E598616FA341AB6CCFA672C5C4D /* shared.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E28063A803C10859900C5E8AE513DB11 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82E572302E6E1927F47A74B217621231 /* shared.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 		F16BF70327BB02D275CDE3F9A3BA3258 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -936,20 +916,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		4A85E56EFB3170251B1CB14EB8485EF5 /* Build configuration list for PBXAggregateTarget "shared" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E28063A803C10859900C5E8AE513DB11 /* Debug */,
+				DE0D9B7EC2017BF48F3B2D9E3DCF992D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5CB83A5F237CEA212FFE13EE6C40F270 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesAsync" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F16BF70327BB02D275CDE3F9A3BA3258 /* Debug */,
 				DDF8B612D335AB2C1599762B3B726B06 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		800B9C9B179A6C4AE6CA24F80C6B0601 /* Build configuration list for PBXAggregateTarget "shared" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				653AAEED7EEA900DB044E84A13BCB71D /* Debug */,
-				7FBF7F1CAC62AE5C4A04ACA5A0832F5F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

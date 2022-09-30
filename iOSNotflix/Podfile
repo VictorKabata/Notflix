@@ -7,6 +7,10 @@ target 'Notflix' do
    platform :ios, '16.0'
    pod 'shared', :path => '../shared'
    pod 'KMPNativeCoroutinesAsync','0.12.2'
+   pod 'UIImageColors'
+
+
+
 
 
  end
