@@ -6,9 +6,8 @@ import com.vickikbt.shared.data.mappers.toEntity
 import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.repositories.MoviesRepository
-import com.vickikbt.shared.domain.utils.Constants.CATEGORY_NOW_PLAYING_MOVIES
-import com.vickikbt.shared.domain.utils.Constants.CATEGORY_POPULAR_MOVIES
-import com.vickikbt.shared.domain.utils.Constants.CATEGORY_UPCOMING_MOVIES
+import com.vickikbt.shared.domain.utils.Enums
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -30,15 +29,17 @@ class MoviesRepositoryImpl constructor(
 
     override suspend fun fetchMovies(category: String) {
         when (category) {
-            CATEGORY_NOW_PLAYING_MOVIES -> {
-                val networkResponse = apiService.fetchNowPlayingMovies().movies
+            Enums.MovieCategories.NOW_PLAYING.name -> {
+                val networkResponse = apiService.fetchNowPlayingMovies().movies.take(5)
+                Napier.e("Now playing network response: $networkResponse")
                 moviesDao.saveMovies(movies = networkResponse.map { it.toEntity(category = category) })
             }
-            CATEGORY_UPCOMING_MOVIES -> {
+            Enums.MovieCategories.UPCOMING.name -> {
                 val networkResponse = apiService.fetchUpcomingMovies().movies
+                Napier.e("Upcoming network response: $networkResponse")
                 moviesDao.saveMovies(movies = networkResponse.map { it.toEntity(category = category) })
             }
-            CATEGORY_POPULAR_MOVIES -> {
+            Enums.MovieCategories.POPULAR.name -> {
                 val networkResponse = apiService.fetchPopularMovies().movies
                 moviesDao.saveMovies(movies = networkResponse.map { it.toEntity(category = category) })
             }
