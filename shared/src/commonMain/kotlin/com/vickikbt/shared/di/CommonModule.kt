@@ -1,6 +1,7 @@
 package com.vickikbt.shared.di
 
 import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager
+import com.vickikbt.shared.data.cache.sqldelight.daos.MovieDao
 import com.vickikbt.shared.data.data_sources.FavoriteMovieRepositoryImpl
 import com.vickikbt.shared.data.data_sources.MovieDetailsRepositoryImpl
 import com.vickikbt.shared.data.data_sources.MoviesRepositoryImpl
@@ -12,15 +13,21 @@ import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.repositories.SettingsRepository
 import com.vickikbt.shared.domain.utils.Constants.API_KEY
 import com.vickikbt.shared.domain.utils.Constants.BASE_URL
+import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
+import com.vickikbt.shared.presentation.presenters.SharedFavouritesPresenter
+import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
+import com.vickikbt.shared.presentation.presenters.SharedMainPresenter
+import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import com.vickikbt.shared.utils.getAppLanguage
-import com.vickikbt.shared.presentation.presenters.*
 import io.github.aakira.napier.Napier
-import io.ktor.client.*
-import io.ktor.client.features.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
-import io.ktor.client.features.logging.*
-import io.ktor.http.*
+import io.ktor.client.HttpClient
+import io.ktor.client.features.defaultRequest
+import io.ktor.client.features.json.JsonFeature
+import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.features.logging.Logger
+import io.ktor.client.features.logging.Logging
+import io.ktor.http.URLProtocol
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -71,9 +78,11 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     }
     single { ApiService(httpClient = get()) }
 
+    single { MovieDao(databaseDriverFactory = get()) }
+
     single<FavoritesRepository> { FavoriteMovieRepositoryImpl() }
     single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(apiService = get()) }
-    single<MoviesRepository> { MoviesRepositoryImpl(apiService = get()) }
+    single<MoviesRepository> { MoviesRepositoryImpl(apiService = get(), moviesDao = get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(preferenceManager = get()) }
 
     single { SharedMainPresenter(settingsRepository = get()) }

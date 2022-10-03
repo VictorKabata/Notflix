@@ -1,6 +1,7 @@
 package com.vickikbt.shared.data.data_sources
 
 import com.vickikbt.shared.data.mappers.toDomain
+import com.vickikbt.shared.data.mappers.toEntity
 import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.domain.models.Cast
 import com.vickikbt.shared.domain.models.Movie
@@ -17,24 +18,24 @@ class MovieDetailsRepositoryImpl constructor(
     override suspend fun getMovieDetails(movieId: Int): Flow<MovieDetails?> {
         val networkResponse = apiService.fetchMovieDetails(movieId = movieId)
 
-        return flowOf(networkResponse?.toDomain())
+        return flowOf(networkResponse.toDomain())
     }
 
     override suspend fun getMovieCast(movieId: Int): Flow<Cast?> {
         val movieCastNetworkResponse = apiService.fetchMovieCast(movieId)
 
-        return flowOf(movieCastNetworkResponse?.toDomain())
+        return flowOf(movieCastNetworkResponse.toDomain())
     }
 
     override suspend fun getMovieVideos(movieId: Int): Flow<MovieVideo?> {
         val movieVideosNetworkResponse = apiService.fetchMovieVideos(movieId)
 
-        return flowOf(movieVideosNetworkResponse?.toDomain())
+        return flowOf(movieVideosNetworkResponse.toDomain())
     }
 
     override suspend fun fetchSimilarMovies(movieId: Int): Flow<List<Movie>?> {
-        val similarMoviesDto = apiService.fetchSimilarMovies(movieId)?.movies
-        return flowOf(similarMoviesDto?.map { it.toDomain() })
+        val similarMoviesDto = apiService.fetchSimilarMovies(movieId).movies.map { it.toEntity() }
+        return flowOf(similarMoviesDto.map { it.toDomain() })
     }
 
     override suspend fun isMovieFavorite(movieId: Int): Flow<Boolean?> {

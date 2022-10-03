@@ -1,17 +1,29 @@
 package com.vickikbt.shared.data.mappers
 
-import com.vickikbt.shared.data.network.models.ActorDto
-import com.vickikbt.shared.data.network.models.CastDto
-import com.vickikbt.shared.data.network.models.MovieDetailsDto
-import com.vickikbt.shared.data.network.models.MovieVideoDto
-import com.vickikbt.shared.data.network.models.VideoDto
-import com.vickikbt.shared.domain.models.Actor
-import com.vickikbt.shared.domain.models.Cast
-import com.vickikbt.shared.domain.models.MovieDetails
-import com.vickikbt.shared.domain.models.MovieVideo
-import com.vickikbt.shared.domain.models.Video
+import com.vickikbt.shared.data.cache.sqldelight.MovieEntity
+import com.vickikbt.shared.data.network.models.MovieDto
 
-fun MovieDetailsDto.toDomain(): MovieDetails {
+fun MovieDto.toEntity(category: String? = null): MovieEntity {
+    return MovieEntity(
+        adult = this.adult,
+        backdropPath = this.backdropPath,
+        id = this.id,
+        originalLanguage = this.originalLanguage,
+        originalTitle = this.originalTitle,
+        overview = this.overview,
+        popularity = this.popularity,
+        posterPath = this.posterPath,
+        releaseDate = this.releaseDate,
+        title = this.title,
+        video = this.video,
+        voteAverage = this.voteAverage,
+        voteCount = this.voteCount?.toLong(),
+        category = category ?: "",
+        mediaType = this.mediaType
+    )
+}
+
+/*fun MovieDetailsDto.toEntity(): MovieDetails {
     return MovieDetails(
         adult = this.adult,
         backdropPath = this.backdropPath,
@@ -34,7 +46,7 @@ fun MovieDetailsDto.toDomain(): MovieDetails {
     )
 }
 
-fun ActorDto.toDomain(): Actor {
+fun ActorDto.toEntity(): Actor {
     return Actor(
         castId = this.castId,
         character = this.character,
@@ -46,14 +58,14 @@ fun ActorDto.toDomain(): Actor {
     )
 }
 
-fun CastDto.toDomain(): Cast {
+fun CastDto.toEntity(): Cast {
     return Cast(
-        actor = this.actor?.map { it.toDomain() },
+        actor = this.actor?.map { it.toEntity() },
         id = this.id
     )
 }
 
-fun VideoDto.toDomain(): Video {
+fun VideoDto.toEntity(): Video {
     return Video(
         id = this.id,
         iso31661 = this.iso31661,
@@ -68,9 +80,9 @@ fun VideoDto.toDomain(): Video {
     )
 }
 
-fun MovieVideoDto.toDomain(): MovieVideo {
+fun MovieVideoDto.toEntity(): MovieVideo {
     return MovieVideo(
         id = this.id,
-        videos = this.videos?.map { it.toDomain() }
+        videos = this.videos?.map { it.toEntity() }
     )
-}
+}*/

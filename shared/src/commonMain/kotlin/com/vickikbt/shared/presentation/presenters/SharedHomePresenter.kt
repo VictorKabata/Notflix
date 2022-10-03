@@ -1,7 +1,6 @@
 package com.vickikbt.shared.presentation.presenters
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
-import com.vickikbt.shared.data.network.utils.NetworkResult
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.utils.Constants
@@ -53,12 +52,9 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
 
     private suspend fun fetchNowPlayingMovies() {
         try {
-            moviesRepository.fetchMovies(category = Constants.CATEGORY_NOW_PLAYING_MOVIES)
+            moviesRepository.getMovies(category = Constants.CATEGORY_NOW_PLAYING_MOVIES)
                 .collectLatest {
-                    when (it) {
-                        is NetworkResult.Success -> _nowPlayingMovies.value = it.data
-                        is NetworkResult.Error -> _error.value = it.errorMessage
-                    }
+                    _nowPlayingMovies.value = it
                 }
         } catch (e: Exception) {
             _error.value = e.message
@@ -67,13 +63,8 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
 
     private suspend fun fetchTrendingMovies() {
         try {
-            moviesRepository.fetchMovies(category = Constants.CATEGORY_TRENDING_MOVIES)
-                .collectLatest {
-                    when (it) {
-                        is NetworkResult.Success -> _trendingMovies.value = it.data
-                        is NetworkResult.Error -> _error.value = it.errorMessage
-                    }
-                }
+            moviesRepository.getMovies(category = Constants.CATEGORY_TRENDING_MOVIES)
+                .collectLatest { _trendingMovies.value = it }
         } catch (e: Exception) {
             _error.value = e.message
         }
@@ -81,13 +72,8 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
 
     private suspend fun fetchPopularMovies() {
         try {
-            moviesRepository.fetchMovies(category = Constants.CATEGORY_POPULAR_MOVIES)
-                .collectLatest {
-                    when (it) {
-                        is NetworkResult.Success -> _popularMovies.value = it.data
-                        is NetworkResult.Error -> _error.value = it.errorMessage
-                    }
-                }
+            moviesRepository.getMovies(category = Constants.CATEGORY_POPULAR_MOVIES)
+                .collectLatest { _popularMovies.value = it }
         } catch (e: Exception) {
             _error.value = e.message
         }
@@ -95,13 +81,8 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
 
     private suspend fun fetchUpcomingMovies() {
         try {
-            moviesRepository.fetchMovies(category = Constants.CATEGORY_UPCOMING_MOVIES)
-                .collectLatest {
-                    when (it) {
-                        is NetworkResult.Success -> _upcomingMovies.value = it.data
-                        is NetworkResult.Error -> _error.value = it.errorMessage
-                    }
-                }
+            moviesRepository.getMovies(category = Constants.CATEGORY_UPCOMING_MOVIES)
+                .collectLatest { _upcomingMovies.value = it }
         } catch (e: Exception) {
             _error.value = e.message
         }

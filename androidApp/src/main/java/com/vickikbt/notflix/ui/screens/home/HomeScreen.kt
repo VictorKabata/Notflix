@@ -1,6 +1,15 @@
 package com.vickikbt.notflix.ui.screens.home
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -36,6 +45,7 @@ import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
+import io.github.aakira.napier.Napier
 import org.koin.androidx.compose.get
 
 @ExperimentalMaterialApi
@@ -52,6 +62,11 @@ fun HomeScreen(
     val trendingMovies = sharedViewModel.trendingMovies.collectAsState().value
     val popularMovies = sharedViewModel.popularMovies.collectAsState().value
     val upcomingMovies = sharedViewModel.upcomingMovies.collectAsState().value
+
+    Napier.e("Now Playing: $nowPlayingMovies")
+    Napier.e("Trending: $trendingMovies")
+    Napier.e("Popular movies: $popularMovies")
+    Napier.e("Upcoming: $upcomingMovies")
 
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
         Column(

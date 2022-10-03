@@ -1,0 +1,25 @@
+CREATE TABLE  MovieEntity(
+adult INTEGER AS Boolean DEFAULT NULL,
+backdropPath TEXT DEFAULT NULL,
+id INTEGER AS Int NOT NULL PRIMARY KEY ,
+originalLanguage TEXT DEFAULT NULL,
+originalTitle TEXT DEFAULT NULL,
+overview TEXT DEFAULT NULL,
+popularity REAL DEFAULT NULL,
+posterPath TEXT DEFAULT NULL,
+releaseDate TEXT DEFAULT NULL,
+title TEXT DEFAULT NULL,
+video INTEGER AS Boolean DEFAULT NULL,
+voteAverage REAL DEFAULT NULL,
+voteCount INTEGER DEFAULT NULL,
+mediaType TEXT DEFAULT NULL,
+category TEXT NOT NULL
+);
+
+saveMovies:
+INSERT OR REPLACE INTO MovieEntity(adult, backdropPath, id, originalLanguage,originalTitle,overview,popularity,posterPath,releaseDate,title,video,voteAverage,voteCount,mediaType, category)
+VALUES ?;
+
+getMoviesByCategory:
+SELECT * FROM MovieEntity
+WHERE category=?;
