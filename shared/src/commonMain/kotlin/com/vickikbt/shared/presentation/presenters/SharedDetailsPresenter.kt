@@ -40,13 +40,19 @@ class SharedDetailsPresenter constructor(private val movieDetailsRepository: Mov
     private val _movieIsFavorite = MutableStateFlow<Boolean>(false)
     val movieIsFavorite get() = _movieIsFavorite.asStateFlow()
 
+    private val _error = MutableStateFlow<String?>(null)
+    val error get() = _error.asStateFlow()
+
     fun getMovieDetails(movieId: Int) {
         _movieDetails.value = null
-        Napier.e("Fetching movie details")
 
         val job = viewModelScope.launch {
-            movieDetailsRepository.getMovieDetails(movieId).collectLatest {
-                _movieDetails.value = it
+            try {
+                movieDetailsRepository.getMovieDetails(movieId).collectLatest {
+                    _movieDetails.value = it
+                }
+            }catch (e:Exception){
+                _error.value=e.message
             }
         }
 
@@ -60,8 +66,12 @@ class SharedDetailsPresenter constructor(private val movieDetailsRepository: Mov
         _movieCast.value = null
 
         val job = viewModelScope.launch {
-            movieDetailsRepository.getMovieCast(movieId).collectLatest {
-                _movieCast.value = it
+            try {
+                movieDetailsRepository.getMovieCast(movieId).collectLatest {
+                    _movieCast.value = it
+                }
+            }catch (e:Exception){
+                _error.value=e.message
             }
         }
 
@@ -71,26 +81,16 @@ class SharedDetailsPresenter constructor(private val movieDetailsRepository: Mov
         }
     }
 
-    /*fun getMovieVideo(movieId: Int) {
-        val job = viewModelScope.launch {
-            movieDetailsRepository.getMovieVideos(movieId).collectLatest {
-                _movieVideo.value = it
-            }
-        }
-
-        supervisorJob.value = job
-        job.invokeOnCompletion {
-            supervisorJob.value?.cancel()
-            supervisorJob.value = null
-        }
-    }*/
-
     fun fetchSimilarMovies(movieId: Int) {
         _similarMovies.value = null
 
         val job = viewModelScope.launch {
-            movieDetailsRepository.fetchSimilarMovies(movieId).collectLatest {
-                _similarMovies.value = it
+            try {
+                movieDetailsRepository.fetchSimilarMovies(movieId).collectLatest {
+                    _similarMovies.value = it
+                }
+            }catch (e:Exception){
+                _error.value=e.message
             }
         }
 

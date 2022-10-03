@@ -7,7 +7,6 @@ import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.utils.Enums
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -28,26 +27,21 @@ class MoviesRepositoryImpl constructor(
     }
 
     override suspend fun fetchMovies(category: String) {
-        when (category) {
+        val networkResponse = when (category) {
             Enums.MovieCategories.NOW_PLAYING.name -> {
-                val networkResponse = apiService.fetchNowPlayingMovies().movies.take(5)
-                Napier.e("Now playing network response: $networkResponse")
-                moviesDao.saveMovies(movies = networkResponse.map { it.toEntity(category = category) })
+                apiService.fetchNowPlayingMovies().movies.take(5)
             }
             Enums.MovieCategories.UPCOMING.name -> {
-                val networkResponse = apiService.fetchUpcomingMovies().movies
-                Napier.e("Upcoming network response: $networkResponse")
-                moviesDao.saveMovies(movies = networkResponse.map { it.toEntity(category = category) })
+                apiService.fetchUpcomingMovies().movies
             }
             Enums.MovieCategories.POPULAR.name -> {
-                val networkResponse = apiService.fetchPopularMovies().movies
-                moviesDao.saveMovies(movies = networkResponse.map { it.toEntity(category = category) })
+                apiService.fetchPopularMovies().movies
             }
             else -> {
-                val networkResponse =
-                    apiService.fetchTrendingMovies().movies.filter { it.mediaType == "movie" }
-                moviesDao.saveMovies(movies = networkResponse.map { it.toEntity(category = category) })
+                apiService.fetchTrendingMovies().movies.filter { it.mediaType == "movie" }
             }
         }
+
+        moviesDao.saveMovies(movies = networkResponse.map { it.toEntity(category = category) })
     }
 }
