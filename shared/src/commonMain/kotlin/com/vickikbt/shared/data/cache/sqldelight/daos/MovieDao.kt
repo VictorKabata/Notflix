@@ -23,5 +23,4 @@ class MovieDao constructor(private val databaseDriverFactory: DatabaseDriverFact
     /**Get cached movies from database*/
     suspend fun getMoviesByCategory(category: String) =
         dbQuery.getMoviesByCategory(category = category).asFlow().map { it.executeAsList() }
-
 }

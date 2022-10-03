@@ -51,8 +51,8 @@ class SharedDetailsPresenter constructor(private val movieDetailsRepository: Mov
                 movieDetailsRepository.getMovieDetails(movieId).collectLatest {
                     _movieDetails.value = it
                 }
-            }catch (e:Exception){
-                _error.value=e.message
+            } catch (e: Exception) {
+                _error.value = e.message
             }
         }
 
@@ -70,8 +70,8 @@ class SharedDetailsPresenter constructor(private val movieDetailsRepository: Mov
                 movieDetailsRepository.getMovieCast(movieId).collectLatest {
                     _movieCast.value = it
                 }
-            }catch (e:Exception){
-                _error.value=e.message
+            } catch (e: Exception) {
+                _error.value = e.message
             }
         }
 
@@ -89,8 +89,8 @@ class SharedDetailsPresenter constructor(private val movieDetailsRepository: Mov
                 movieDetailsRepository.fetchSimilarMovies(movieId).collectLatest {
                     _similarMovies.value = it
                 }
-            }catch (e:Exception){
-                _error.value=e.message
+            } catch (e: Exception) {
+                _error.value = e.message
             }
         }
 
