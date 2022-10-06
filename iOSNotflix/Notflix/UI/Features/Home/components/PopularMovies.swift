@@ -50,7 +50,7 @@ struct PopularMoviesItem : View{
     var body: some View{
         let movieImage = DomainExtensions.shared.loadImage(link: movie.backdropPath!)
 
-        ZStack(alignment : .bottomLeading){
+        ZStack(){
             
             CachedAsyncImage(url: URL(string : movieImage)){image in
                 image .resizable().scaledToFill().frame(maxWidth: 300,maxHeight: 216).cornerRadius(5)

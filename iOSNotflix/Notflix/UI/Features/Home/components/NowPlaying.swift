@@ -18,18 +18,20 @@ struct NowPlaying: View {
             NowPlayingPlaceholder()
         } else {
             TabView{
-                ForEach(nowPlayingMovies.prefix(5), id : \.id){ movie in
-                  NowPlayingItem(movie: movie,onClick: onClick).frame(alignment: .top)
-              
+         
+                    ForEach(nowPlayingMovies.prefix(5), id : \.id){ movie in
+                        
+                 NowPlayingItem(movie: movie,onClick: onClick).frame(alignment: .top)
+                        
+                        
+                        
+                    }
                     
-                    
-                }
-                
                 
                 
             }.tabViewStyle(PageTabViewStyle())
-                .indexViewStyle(.page(backgroundDisplayMode: .automatic))
-                .frame( height: 300,alignment: .top)
+                .indexViewStyle(.page(backgroundDisplayMode: .always))
+                .frame( height: 350,alignment: .top)
             
         }
     }
@@ -57,53 +59,72 @@ struct NowPlayingItem: View{
     let onClick : (Int) -> Void
     @State var gradientColor : Color = .primary
     @State var textColor : Color  = .primary
+    @State var showPLaceholder : Bool = true
     
     var body: some View{
         
         let movieImage = DomainExtensions.shared.loadImage(link: movie.backdropPath!)
-       
         
-    
+        ZStack(alignment : .top){
+        
         
         ZStack(alignment: .topLeading){
             
             CachedAsyncImage(url: URL(string: movieImage)){ image in
                 image
-                    .resizable().scaledToFill().frame(width: UIScreen.screenWidth,height: 300)
-                    .overlay(LinearGradient(gradient: Gradient(colors: [.clear,.clear, gradientColor.opacity(0.5),gradientColor]), startPoint: .top, endPoint: .bottom)).onAppear{
-                        
-                        image.asUIImage().getColors{ colors in
-                              if let colors{
-                                  withAnimation{
-                                      gradientColor = Color(colors.detail)
-                                      textColor = Color(colors.background)
-                                  }
-                              }
-                              
+                    .resizable().scaledToFill().frame(width: UIScreen.screenWidth ,height: 300).clipped().onAppear{
+                        let _ = image.asUIImage().getColors{ colors in
+                            if let colors{
+                                withAnimation{
+                                    gradientColor = Color(colors.detail)
+                                    textColor = Color(colors.background)
+                                }
+                            }
                             
-                              
-                              
-                          }
+                            
+                            
+                            
+                        }
+                        
+                        withAnimation{
+                            showPLaceholder = false
+                        }
                     }
+                
             } placeholder: {
-                Rectangle()
+                ProgressView()
+            } .overlay(LinearGradient(gradient: Gradient(colors: [.clear,.clear, gradientColor.opacity(0.5),gradientColor]), startPoint: .top, endPoint: .bottom)).onAppear{
+                
+                
             }
-           
+            
             VStack(alignment: .leading,spacing: 10){
                 Spacer()
-                Text(movie.title!).bold().font(.title)
+                Text(movie.title!).bold().font(.title).opacity(0.7)
                 FiveStarView(rating: Decimal(Double(truncating: movie.voteAverage ?? 0)/2), color: Color.yellow)
-                    .frame(width: (UIScreen.screenWidth/5), height: 20)
-           
+                    .frame(width:100, height: 10).padding(.bottom,8)
+                //                FiveStarView(rating: Decimal(Double(truncating: movie.voteAverage ?? 0)/2), color: Color.yellow)
+                //                    .frame(width: (UIScreen.screenWidth/5), height: 20)
+                
                 
             }.padding(4)
-              
+            
                 .frame(alignment: .leading)
                 .frame(height: 300)
-     
+            
+            
         }.onTapGesture {
-            onClick(Int(movie.id!))
-        }
+            if let id = movie.id{
+                onClick(Int(truncating: movie.id!))
+            } else {
+                print("id not found")
+            }
+            
+        }.padding(.bottom,50)
+                .frame(width: UIScreen.screenWidth - 5)
+        }.frame(height: 350)
+            .redacted(reason: showPLaceholder ? .placeholder : [])
         
     }
 }
+

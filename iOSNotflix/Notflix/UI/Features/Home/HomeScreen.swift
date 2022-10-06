@@ -18,7 +18,7 @@ struct HomeScreen: View {
             
                 
                
-                    NowPlaying(nowPlayingMovies: viewModel.nowPlayingMovies,onClick: navigatetoDetails)
+                NowPlaying(nowPlayingMovies: viewModel.nowPlayingMovies,onClick: navigatetoDetails).ignoresSafeArea()
                  
             
                 TrendingMovies(movies: viewModel.trendingMovies,onClick: navigatetoDetails).padding(.leading,10).padding(.top,10)

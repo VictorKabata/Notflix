@@ -62,7 +62,7 @@ struct TrendingMovieItem : View {
             
         }.frame(width: 150,height : 275 )
             .onTapGesture {
-                onClick(Int(movie.id!))
+                onClick(Int(truncating: movie.id!))
             }
         
         

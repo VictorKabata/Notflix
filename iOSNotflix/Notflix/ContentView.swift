@@ -9,23 +9,20 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @State var currentDestination : [Int] = []
+    @State var currentDestination : Array<Int> = []
     
     @State var navigation = NavigationPath()
     @State var isLinkActive = false
     
     var body: some View {
-        NavigationStack(path: $currentDestination ){
+        NavigationStack(path: $currentDestination){
+         
             
             TabView{
-                //NavigationLink(value: <#T##Hashable?#>, label: <#T##() -> View#>)
+                
                 HomeScreen{ id in
-                    
-                    //print("the id of the movie is \(id)")
-                   // currentDestination.removeAll()
                     currentDestination.append(id)
-                    
-                    
+                    //print("the id of the movie is \(id)")
                 }.tabItem{
                     Image(systemName: "house")
                     
@@ -39,18 +36,21 @@ struct ContentView: View {
                     Image(systemName: "gear")
                 }
                 
-            }.navigationViewStyle(.stack)
+                
+                
+                
+            }.accentColor(.red)
+                .navigationViewStyle(.stack)
                 .navigationDestination(for: Int.self){ id in
                     DetailsScreen(movieId: id)
                     
                 }
             
-            
         }
+        
+        
+        
     }
-    
-    
- 
 }
 
 struct ContentView_Previews: PreviewProvider {

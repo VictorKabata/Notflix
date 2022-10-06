@@ -15,7 +15,7 @@ struct PreferencesScreen: View {
     
     
     var body: some View {
-        NavigationStack{
+   
         
             Form{
                 Text("Settings")
@@ -94,7 +94,7 @@ struct PreferencesScreen: View {
             
         }.navigationTitle("Settings")
             
-        }
+        
           
     }
     
