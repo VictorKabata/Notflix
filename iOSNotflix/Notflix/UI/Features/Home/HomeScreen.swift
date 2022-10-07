@@ -18,7 +18,7 @@ struct HomeScreen: View {
             
                 
                
-                NowPlaying(nowPlayingMovies: viewModel.nowPlayingMovies,onClick: navigatetoDetails).ignoresSafeArea()
+                NowPlaying(nowPlayingMovies: viewModel.nowPlayingMovies,onClick: navigatetoDetails)
                  
             
                 TrendingMovies(movies: viewModel.trendingMovies,onClick: navigatetoDetails).padding(.leading,10).padding(.top,10)
@@ -30,7 +30,7 @@ struct HomeScreen: View {
                     
                 
             }
-        }.ignoresSafeArea(.container, edges: .top)
+        }
             .refreshable {
                 Task{
                     viewModel.observeContent()

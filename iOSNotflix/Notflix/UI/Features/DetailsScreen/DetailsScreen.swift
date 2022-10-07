@@ -15,7 +15,7 @@ struct DetailsScreen: View {
             VStack(spacing : 20){
                 DetailHeaderScreen(details: viewModel.movieDetails,isFavorite: false){id, isFav in
                     viewModel.toggleFavorites(movieId : id,isFav : isFav)
-                }.ignoresSafeArea()
+                }
                 RatingView(details: viewModel.movieDetails)
                 MovieOverview(overView: viewModel.movieDetails?.overview ?? "")
                 MovieCast(actors: viewModel.movieCast?.actor ?? [])
@@ -29,7 +29,7 @@ struct DetailsScreen: View {
         }.onAppear{
             getMovieDetails(id: movieId)
            
-        }.ignoresSafeArea(.container,edges: .top)
+        }
     }
     
  func getMovieDetails(id : Int){
