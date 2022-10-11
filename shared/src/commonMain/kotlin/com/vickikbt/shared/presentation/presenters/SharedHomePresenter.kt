@@ -37,6 +37,10 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
     val error get() = _error.asStateFlow()
 
     init {
+        fetchMovies()
+    }
+
+    fun fetchMovies() {
         val job = viewModelScope.launch {
             fetchNowPlayingMovies()
             fetchPopularMovies()

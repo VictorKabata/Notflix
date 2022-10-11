@@ -4,6 +4,7 @@
 <p align="center">
 <img  src="https://img.shields.io/badge/-KOTLIN-E50914?logo=kotlin&logoColor=white&style=for-the-badge">
 <img  src="https://img.shields.io/badge/-ANDROID-E50914?logo=android&logoColor=white&style=for-the-badge">
+<img  src="https://img.shields.io/badge/-IOS-E50914?logo=ios&logoColor=white&style=for-the-badge">
 <img  src="https://img.shields.io/badge/-WINDOWS-E50914?logo=windows&logoColor=white&style=for-the-badge">
 <img  src="https://img.shields.io/badge/-LINUX-E50914?logo=linux&logoColor=white&style=for-the-badge">
 <img  src="https://img.shields.io/badge/-MACOS-E50914?logo=apple&logoColor=white&style=for-the-badge">
@@ -22,12 +23,12 @@ An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlan
 ## Table Of Content
 
 - [Prerequisite](##prerequisite)
-- [Disclaimer](##disclaimer)
 - [Pros of KMP/KMM](##pros-of-kmpkmm)
 - [App Structure](##app-structure)
   - [1. androidApp](###1-androidapp)
   - [2. desktopApp](###2-desktopapp)
-  - [3. shared](###3-shared)
+  - [3. iosApp](###3-iosApp)
+  - [4. shared](###4-shared)
     - [__Domain__](###domain)
     - [__Data__](###data)
     - [__Presentation__](###presentation)
@@ -49,18 +50,7 @@ An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlan
 
 ## Prerequisite
 
-In order to be able to build the application you'll need to change the api key in [`gradle.properties`](link_to_gradle.properties_file). First and foremost you need to generate your own api key by [creating](https://www.themoviedb.org/signup) a TMDB account and [generating](https://www.themoviedb.org/settings/api) an api key.
-
-## Disclaimer
-
-- Kotlin Multiplatform is still in alpha phase at the time of writing this however it's still being used by some well known [companies](https://kotlinlang.org/lp/mobile/case-studies/) around the world.
-
-- Kotlin multiplatform and Compose multiplatform are two different concepts that aim to so achieve multiplatform programming. Kotlin multiplatform is all about sharing business logic(at times presentation logic too but only "viewmodels") across different platforms while compose multiplatform is about using/sharing compose UI across diffrent platforms.
-
-- When starting out a KMP/KMM project some knowledge of [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) or similar design patterns, SOLID principles, separation of concern and modularization might go a long way into reducing the learning curve. i have discussed the usage of above concepts in a [previous iteration](https://github.com/VictorKabata/Notflix/tree/xml-archive) of this project.
-
-- When using KMP/KMM some knowledge of other programming language such as [Swift](https://developer.apple.com/swift/) or [Javascript](https://kotlinlang.org/docs/js-overview.html) is still required since only the business logic is shared but the UI code is in the native programming language of the targeted platform.
-- Kotlin multiplatform and compose multiplatform have limited learning resources and a relatively small community at the time of writing. However learning resources have been attached at the end of this doc and you can find a fast diverse Kotlin community on [Kotlin Official slack](https://kotlinlang.slack.com/messages/kotlin-logging/) or [Android254 twitter](https://twitter.com/254androiddevs?s=20&t=R1PZIGpj8zURaxTzS59yXw).
+// ToDo
 
 ## Pros of KMP/KMM
 
@@ -82,9 +72,13 @@ This module contains the android application's UI built using [Jetpack compose](
 
 This module contains the desktop application's UI built using [Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/).
 
-## 3. [shared](https://github.com/VictorKabata/Notflix/tree/main/shared)
+## 3. [iOSApp](https://github.com/VictorKabata/Notflix/tree/main/iOSNotflix)
+This module contains iOS code that holds the iosApp  UI built using [Swift UI](https://developer.apple.com/xcode/swiftui/)
 
+
+### 4 . [shared](https://github.com/VictorKabata/Notflix/tree/main/shared)
 This module contains shared code that holds the domain and data layers and some part of the presentation logic ie.shared viewmodels
+
 
 ### __Domain__
 
@@ -120,11 +114,7 @@ Components of data layer include:
 
 ### __Presentation__
 
-The `presentation` package contains shared viewmodels code. eg.
-
-```kotlin
-
-```
+The `presentation` package contains shared viewmodels code.
 
 ## Libraries
 
@@ -152,6 +142,14 @@ The `presentation` package contains shared viewmodels code. eg.
 - [Accompanist Material Placeholder](https://google.github.io/accompanist/placeholder/) -
 - [Accompanist Pager Indicator](https://google.github.io/accompanist/api/pager-indicators/com.google.accompanist.pager/-horizontal-pager-indicator.html) - A horizontally laid out indicator for a HorizontalPager or VerticalPager, representing the currently active page and total pages drawn using shape.
 
+## iOS
+- [SwiftUI](https://developer.apple.com/xcode/swiftui/) - SwiftUI is Apple's brand new declarative UI Toolkit for building user interfaces for iOS, tvOS, macOS, and watchOS.
+- [Cached Async Image](https://github.com/lorenzofiamingo/swiftui-cached-async-image) - SwiftUI Image loading framework with caching capability.
+- [KMP Async](https://github.com/rickclephas/KMP-NativeCoroutines) - A library to use kotlin coroutines in Swift.
+- [Cocoa Pods](https://cocoapods.org/) - CocoaPods is a dependency manager for Swift and Objective-C Cocoa projects.
+- [UIimage Colors](https://github.com/jathu/UIImageColors) - Swift Library to extract colors from images.
+
+
 ## Extras
 
 - [GitHub Actions](https://docs.github.com/en/actions) -The project uses GitHub actions for CI/CD operations such as running automated builds, tests and deploying applications.
@@ -163,9 +161,11 @@ The `presentation` package contains shared viewmodels code. eg.
 
 <img src="assets/img0.png" width="250"/> <img src="assets/img1.png" width="250"/> <img src="assets/img2.png" width="250"/> <img src="assets/img3.png" width="250"/> <img src="assets/img4.png" width="250"/> <img src="assets/img5.png" width="250"/>
 
-</p>
+## iOS App
 
-## Desktop
+<img src="assets/img9.0.png" width="250"/> <img src="assets/img9.1.png" width="250"/> <img src="assets/img10.png" width="250"/> <img src="assets/img11.png" width="250"/> <img src="assets/img12.png" width="250"/> <img src="assets/img13.png" width="250"/>
+
+## Desktop App
 
 <img src="assets/img6.png" width="900" height=500/>
 
@@ -196,6 +196,7 @@ In this section I've included some resources ie. articles and GitHub repositorie
 - [Fantasy Premier League](https://github.com/joreilly/FantasyPremierLeague) - Kotlin Multiplatform project with Jetpack Compose, Compose for Desktop and SwiftUI clients (and using Ktor for remote API requests and Realm for persistence).
 - [KaMPKit](https://github.com/touchlab/KaMPKit)
 - [People In Space](https://github.com/joreilly/PeopleInSpace) - Minimal Kotlin Multiplatform project with SwiftUI, Jetpack Compose, Compose for Wear OS, Compose for Desktop, Compose for Web, and Kotlin/JS + React clients along with Ktor backend.
+- [Poetree](https://github.com/MamboBryan/poetree) - Poetree is a minimalistic poetry app that helps people freely access art from a global community full of poetry lovers.
 
 ## Other Helpful Resources
 
