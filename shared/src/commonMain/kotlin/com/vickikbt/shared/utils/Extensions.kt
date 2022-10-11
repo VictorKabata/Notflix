@@ -1,11 +1,10 @@
-package com.vickikbt.shared.domain.utils
+package com.vickikbt.shared.utils
 
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
-
-object DomainExtensions : KoinComponent {
+object Extensions : KoinComponent {
     private val settingsRepository: SharedSettingsPresenter = get()
 
     fun loadImage(link: String): String {

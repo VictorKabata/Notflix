@@ -3,5 +3,3 @@ include(":shared")
 include(":desktopApp")
 
 rootProject.name = "Notflix"
-
-
