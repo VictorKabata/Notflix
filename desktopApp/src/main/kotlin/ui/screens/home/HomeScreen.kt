@@ -38,7 +38,6 @@ fun HomeScreen(
     navController: NavController,
     viewModel: SharedHomePresenter = koin.get()
 ) {
-
     val nowPlayingMovies = viewModel.nowPlayingMovies.collectAsState()
     val trendingMovies = viewModel.trendingMovies.collectAsState()
     val popularMovies = viewModel.popularMovies.collectAsState()
@@ -69,11 +68,8 @@ fun HomeScreen(
 @Composable
 fun NowPlayingMovies(navController: NavController, movies: List<Movie>) {
     Row(modifier = Modifier.fillMaxWidth().height(600.dp)) {
-
         for (movie in movies.take(5)) {
-
             Box(Modifier.weight(1f)) {
-
                 ItemNowPlayingMovies(
                     modifier = Modifier
                         .fillMaxHeight()

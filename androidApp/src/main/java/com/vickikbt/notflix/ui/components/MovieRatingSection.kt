@@ -22,7 +22,6 @@ import io.github.aakira.napier.Napier
 
 @Composable
 fun MovieRatingSection(popularity: String?, voteAverage: String?) {
-
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -35,7 +34,6 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
-
         Napier.e("Popularity: $popularity")
         Napier.e("Vote Average: $voteAverage")
 

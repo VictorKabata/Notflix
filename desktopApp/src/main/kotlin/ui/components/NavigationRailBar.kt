@@ -21,7 +21,6 @@ fun NavigationRailBar(
     navController: NavController,
     navRailItems: List<NavigationItem>
 ) {
-
     NavigationRail(
         modifier = modifier.fillMaxHeight().alpha(0.95F),
         backgroundColor = MaterialTheme.colors.surface,

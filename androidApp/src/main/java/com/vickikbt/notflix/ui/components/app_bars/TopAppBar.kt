@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun AppBar(title: String, navigationIcon: Painter? = null, onClickNavigationIcon: () -> Unit = {}) {
-
     TopAppBar(backgroundColor = MaterialTheme.colors.surface, elevation = 0.dp) {
         if (navigationIcon != null) {
             IconButton(

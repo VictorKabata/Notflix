@@ -25,7 +25,6 @@ import ui.theme.NotflixDesktopTheme
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MainScreen(applicationScope: ApplicationScope, viewModel: SharedMainPresenter = koin.get()) {
-
     val appIcon = painterResource("n_logo.png")
 
     val theme = viewModel.appTheme.collectAsState().value
@@ -40,7 +39,6 @@ fun MainScreen(applicationScope: ApplicationScope, viewModel: SharedMainPresente
             height = Dp.Unspecified,
         )
     ) {
-
         val isDarkTheme = theme != 0
 
         val topLevelDestinations = listOf(

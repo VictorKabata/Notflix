@@ -8,6 +8,5 @@ import ui.navigation.NavController
 
 @Composable
 fun FavoritesScreen(navController: NavController) {
-
     Box(modifier = Modifier.fillMaxSize())
 }

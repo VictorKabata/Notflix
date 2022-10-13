@@ -20,7 +20,6 @@ fun PreferencesGroup(
     isLast: Boolean = false,
     content: @Composable ColumnScope.() -> Unit
 ) {
-
     Column {
         Row(
             modifier = modifier

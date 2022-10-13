@@ -55,7 +55,6 @@ fun DetailsScreen(
     movieId: Int,
     cacheId: Int,
 ) {
-
     LaunchedEffect(key1 = detailsViewModel) {
         detailsViewModel.getMovieDetails(movieId)
         detailsViewModel.fetchSimilarMovies(movieId)
@@ -99,14 +98,12 @@ fun DetailsScreen(
                 )
             }
         ) {
-
             Column(
                 modifier = Modifier
                     .padding(bottom = 20.dp)
                     .verticalScroll(state = scrollState),
                 verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
-
                 //region Movie Ratings
                 val voteAverage = movieDetails?.voteAverage
                 MovieRatingSection(

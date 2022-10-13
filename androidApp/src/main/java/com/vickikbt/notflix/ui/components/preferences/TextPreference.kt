@@ -22,7 +22,6 @@ fun TextPreference(
     subTitle: String? = null,
     onClick: () -> Unit
 ) {
-
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -44,7 +43,6 @@ fun TextPreference(
                 .weight(8f),
             verticalArrangement = Arrangement.Center
         ) {
-
             Text(
                 modifier = Modifier
                     .fillMaxWidth()

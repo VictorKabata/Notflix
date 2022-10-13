@@ -77,7 +77,6 @@ fun ItemPopularMovies(
         shape = RoundedCornerShape(4.dp)
     ) {
         Box(modifier = modifier) {
-
             //region Movie Cover
             Image(
                 modifier = Modifier
@@ -138,7 +137,6 @@ fun ItemPopularMovies(
                     horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-
                     RatingBar(
                         modifier = Modifier,
                         value = movie.voteAverage?.getRating()?.toFloat() ?: 0f,

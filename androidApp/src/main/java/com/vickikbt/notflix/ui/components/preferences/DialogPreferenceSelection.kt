@@ -26,7 +26,6 @@ fun DialogPreferenceSelection(
     onNegativeClick: () -> Unit,
     onOptionSelected: (Int) -> Unit
 ) {
-
     if (showDialog) {
         Dialog(onDismissRequest = { onNegativeClick() }) {
             Card(
@@ -34,7 +33,6 @@ fun DialogPreferenceSelection(
                 shape = RoundedCornerShape(8.dp)
             ) {
                 Column(modifier = Modifier.padding(vertical = 16.dp, horizontal = 24.dp)) {
-
                     Text(
                         modifier = Modifier.fillMaxWidth(),
                         text = title,

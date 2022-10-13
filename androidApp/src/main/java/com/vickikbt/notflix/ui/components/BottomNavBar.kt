@@ -24,7 +24,6 @@ fun BottomNavBar(
     navController: NavController,
     bottomNavItems: List<NavigationItem>
 ) {
-
     BottomAppBar(
         modifier = modifier
             .fillMaxWidth()
@@ -33,7 +32,6 @@ fun BottomNavBar(
         cutoutShape = RoundedCornerShape(70),
         elevation = 16.dp
     ) {
-
         BottomNavigation(
             modifier = Modifier.fillMaxWidth(),
             backgroundColor = Color.Transparent,

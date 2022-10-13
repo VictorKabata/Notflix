@@ -52,9 +52,7 @@ fun ItemPopularMovies(
         elevation = 8.dp,
         shape = RoundedCornerShape(4.dp)
     ) {
-
         Box(modifier = Modifier.fillMaxSize()) {
-
             //region Movie Cover
             AsyncImage(
                 modifier = Modifier.fillMaxSize(),

@@ -30,7 +30,6 @@ fun ItemTrendingMovies(
     movie: Movie,
     onItemClick: (Movie) -> Unit
 ) {
-
     Column(
         modifier = Modifier
             .placeholder(
@@ -40,7 +39,6 @@ fun ItemTrendingMovies(
             ),
         verticalArrangement = Arrangement.spacedBy(3.dp)
     ) {
-
         Card(
             modifier = Modifier
                 .width(150.dp)

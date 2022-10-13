@@ -1,4 +1,4 @@
-package ui.components.app_bars
+package ui.components.appBars
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun AppBar(title: String, navigationIcon: Painter? = null, onClickNavigationIcon: () -> Unit = {}) {
-
     TopAppBar(backgroundColor = MaterialTheme.colors.surface, elevation = 0.dp) {
         if (navigationIcon != null) {
             IconButton(

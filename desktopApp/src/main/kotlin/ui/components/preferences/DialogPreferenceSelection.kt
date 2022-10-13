@@ -24,16 +24,13 @@ fun DialogPreferenceSelection(
     onNegativeClick: () -> Unit,
     onOptionSelected: (Int) -> Unit
 ) {
-
     if (showDialog) {
-
         Dialog(onCloseRequest = { onNegativeClick() }, undecorated = true, resizable = true) {
         Column(
             modifier = Modifier.fillMaxSize()
                 .background(MaterialTheme.colors.surface)
                 .padding(vertical = 16.dp, horizontal = 24.dp)
         ) {
-
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = title,

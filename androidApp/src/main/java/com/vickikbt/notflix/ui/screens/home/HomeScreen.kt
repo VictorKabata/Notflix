@@ -55,7 +55,6 @@ fun HomeScreen(
     navController: NavController,
     sharedViewModel: SharedHomePresenter = get()
 ) {
-
     val scrollState = rememberScrollState()
 
     val nowPlayingMovies = sharedViewModel.nowPlayingMovies.collectAsState().value
@@ -75,7 +74,6 @@ fun HomeScreen(
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             NowPlayingMovies(
                 navController = navController,
                 movies = nowPlayingMovies ?: listOf(),
@@ -156,7 +154,6 @@ fun NowPlayingMovies(
 
 @Composable
 fun TrendingMovies(navController: NavController, movies: List<Movie>) {
-
     SectionSeparator(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 12.dp)

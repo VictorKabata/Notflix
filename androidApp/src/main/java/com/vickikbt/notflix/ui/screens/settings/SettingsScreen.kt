@@ -35,7 +35,6 @@ import org.koin.androidx.compose.get
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun SettingsScreen(navController: NavController, viewModel: SharedSettingsPresenter = get()) {
-
     val context = LocalContext.current
 
     val currentTheme = viewModel.selectedTheme.collectAsState().value ?: 0

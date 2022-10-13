@@ -47,7 +47,6 @@ fun DetailsAppBar(
     onShareIconClick: () -> Unit,
     onFavoriteIconClick: () -> Unit
 ) {
-
     // Return progress on collapsing toolbar - 1.0f=Expanded, 0.0f=Collapsed
     val scrollProgress = collapsingScrollState.toolbarState.progress
 
