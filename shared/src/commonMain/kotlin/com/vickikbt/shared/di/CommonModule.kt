@@ -29,6 +29,8 @@ import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.http.URLProtocol
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.factoryOf
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 fun commonModule(enableNetworkLogs: Boolean) = module {
@@ -36,9 +38,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     /**
      * Multiplatform-Settings
      */
-    single {
-        PreferenceManager(observableSettings = get())
-    }
+    singleOf(::PreferenceManager)
 
     /**
      * Creates a http client for Ktor that is provided to the
@@ -76,20 +76,20 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
             }
         }
     }
-    single { ApiService(httpClient = get()) }
+    singleOf(::ApiService)
 
-    single { MovieDao(databaseDriverFactory = get()) }
+    singleOf(::MovieDao)
 
     single<FavoritesRepository> { FavoriteMovieRepositoryImpl() }
     single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(apiService = get()) }
     single<MoviesRepository> { MoviesRepositoryImpl(apiService = get(), moviesDao = get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(preferenceManager = get()) }
 
-    single { SharedMainPresenter(settingsRepository = get()) }
-    single { SharedHomePresenter(moviesRepository = get()) }
-    single { SharedDetailsPresenter(movieDetailsRepository = get()) }
-    single { SharedFavouritesPresenter(favouritesRepository = get()) }
-    single { SharedSettingsPresenter(settingsRepository = get()) }
+    factoryOf(::SharedMainPresenter)
+    factoryOf(::SharedHomePresenter)
+    factoryOf(::SharedDetailsPresenter)
+    factoryOf(::SharedFavouritesPresenter)
+    factoryOf(::SharedSettingsPresenter)
 }
 
 expect fun platformModule(): Module
