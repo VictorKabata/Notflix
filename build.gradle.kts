@@ -43,6 +43,7 @@ subprojects {
         outputColorName.set("RED")
         filter {
             exclude("**/generated/**")
+            exclude("**/build/**")
             include("**/kotlin/**")
         }
     }
