@@ -27,10 +27,12 @@ class HomeViewModel : ObservableObject {
         observeTrendingMovies()
         observeUpcomingMovies()
         observePopularMovies()
+        observeErrors()
     }
     
     func resetError(){
         errorMessages = nil
+        showAlert = false
     }
     
     func observeErrors(){

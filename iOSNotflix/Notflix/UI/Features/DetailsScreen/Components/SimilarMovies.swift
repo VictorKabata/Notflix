@@ -41,10 +41,10 @@ struct SimilarMovieItem : View {
     let movie : Movie
     let onClick : (Int) -> Void
     var body: some View{
-        let movieImage = DomainExtensions.shared.loadImage(link: movie.posterPath ?? " ")
-        let _ = print("the image link is \(movieImage)")
+       
+     
         VStack(alignment : .leading){
-            CachedAsyncImage(url: URL(string: movieImage )){image in
+            CachedAsyncImage(url: URL(string: movie.posterPath!.getImageLink() )){image in
                 image.resizable().frame(width: 150,height : 225 ).aspectRatio(contentMode: .fill).cornerRadius(5).padding(2).shadow(radius: 4)
                 
             } placeholder: {

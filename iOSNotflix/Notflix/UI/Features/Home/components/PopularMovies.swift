@@ -48,11 +48,11 @@ struct PopularMoviesItem : View{
     
     
     var body: some View{
-        let movieImage = DomainExtensions.shared.loadImage(link: movie.backdropPath!)
+       
 
         ZStack(){
             
-            CachedAsyncImage(url: URL(string : movieImage)){image in
+            CachedAsyncImage(url: URL(string : movie.backdropPath!.getImageLink())){image in
                 image .resizable().scaledToFill().frame(maxWidth: 300,maxHeight: 216).cornerRadius(5)
                     .overlay(LinearGradient(gradient: Gradient(colors: [.clear,.clear, gradientColor.opacity(0.5),gradientColor]), startPoint: .top, endPoint: .bottom)).onAppear{
                         
