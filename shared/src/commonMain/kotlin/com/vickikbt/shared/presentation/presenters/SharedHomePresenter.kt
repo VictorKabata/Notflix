@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.cache
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
@@ -42,7 +43,8 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
     }
 
     private fun fetchNowPlayingMovies() {
-        val job = viewModelScope.launch {
+        println("Fetching Now Playing Movies")
+        val job = viewModelScope.launch(Dispatchers.Default) {
             try {
                 moviesRepository.getMovies(category = Enums.MovieCategories.NOW_PLAYING.name)
                     .collect { _nowPlayingMovies.value = it }
@@ -59,6 +61,7 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
     }
 
     private fun fetchTrendingMovies() {
+        println("Fetching Trending Movies")
         val job = viewModelScope.launch {
             try {
                 moviesRepository.getMovies(Enums.MovieCategories.TRENDING.name)
@@ -76,6 +79,7 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
     }
 
     private fun fetchPopularMovies() {
+        println("Fetching Popular Movies")
         val job = viewModelScope.launch {
             try {
                 moviesRepository.getMovies(category = Enums.MovieCategories.POPULAR.name)
@@ -93,6 +97,7 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
     }
 
     private fun fetchUpcomingMovies() {
+        println("Fetching Upcoming Movies")
         val job = viewModelScope.launch {
             try {
                 moviesRepository.getMovies(category = Enums.MovieCategories.UPCOMING.name)
