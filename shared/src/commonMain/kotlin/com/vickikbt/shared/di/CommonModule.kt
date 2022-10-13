@@ -44,7 +44,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
      * API client via constructor injection
      */
     single {
-        HttpClient {
+        HttpClient(get()) {
             defaultRequest {
                 url {
                     host = BASE_URL

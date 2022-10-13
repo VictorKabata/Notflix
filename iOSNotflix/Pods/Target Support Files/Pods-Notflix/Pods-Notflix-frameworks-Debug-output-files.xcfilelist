@@ -1,0 +1,3 @@
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KMPNativeCoroutinesAsync.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KMPNativeCoroutinesCore.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/shared.framework
