@@ -2,7 +2,7 @@ package com.vickikbt.shared.di
 
 import com.vickikbt.shared.domain.utils.DatabaseDriverFactory
 import com.vickikbt.shared.domain.utils.MultiplatformSettingsWrapper
-import io.ktor.client.engine.java.*
+import io.ktor.client.engine.java.Java
 import org.koin.core.module.Module
 import org.koin.dsl.module
 

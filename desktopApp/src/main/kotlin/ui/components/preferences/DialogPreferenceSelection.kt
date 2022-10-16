@@ -33,55 +33,55 @@ fun DialogPreferenceSelection(
 ) {
     if (showDialog) {
         Dialog(onCloseRequest = { onNegativeClick() }, undecorated = true, resizable = true) {
-            Column(
-                modifier = Modifier.fillMaxSize()
-                    .background(MaterialTheme.colors.surface)
-                    .padding(vertical = 16.dp, horizontal = 24.dp)
-            ) {
-                Text(
-                    modifier = Modifier.fillMaxWidth(),
-                    text = title,
-                    style = MaterialTheme.typography.h4,
-                    color = MaterialTheme.colors.onSurface,
-                    fontSize = 22.sp,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    textAlign = TextAlign.Start
-                )
+        Column(
+            modifier = Modifier.fillMaxSize()
+                .background(MaterialTheme.colors.surface)
+                .padding(vertical = 16.dp, horizontal = 24.dp)
+        ) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = title,
+                style = MaterialTheme.typography.h4,
+                color = MaterialTheme.colors.onSurface,
+                fontSize = 22.sp,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.Start
+            )
 
-                Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    labels.forEachIndexed { index, option ->
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                labels.forEachIndexed { index, option ->
 
-                        ItemPreferenceOption(
-                            optionText = option,
-                            selectedOption = option == currentValue
-                        ) {
-                            onOptionSelected(index)
-                            onNegativeClick()
-                        }
+                    ItemPreferenceOption(
+                        optionText = option,
+                        selectedOption = option == currentValue
+                    ) {
+                        onOptionSelected(index)
+                        onNegativeClick()
                     }
                 }
+            }
 
-                Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    Text(
-                        modifier = Modifier.clickable { onNegativeClick() },
-                        text = ("Cancel").uppercase(Locale.getDefault()),
-                        style = MaterialTheme.typography.h4,
-                        color = MaterialTheme.colors.primary,
-                        fontSize = 16.sp,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        textAlign = TextAlign.Center
-                    )
-                }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End
+            ) {
+                Text(
+                    modifier = Modifier.clickable { onNegativeClick() },
+                    text = ("Cancel").uppercase(Locale.getDefault()),
+                    style = MaterialTheme.typography.h4,
+                    color = MaterialTheme.colors.primary,
+                    fontSize = 16.sp,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Center
+                )
             }
         }
+    }
     }
 }

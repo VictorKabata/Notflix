@@ -4,7 +4,7 @@ import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.data.network.MockServer
 import com.vickikbt.shared.data.network.utils.NetworkResult
 import com.vickikbt.shared.domain.utils.Constants
-import io.ktor.client.*
+import io.ktor.client.HttpClient
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest

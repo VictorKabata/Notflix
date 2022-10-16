@@ -1,7 +1,17 @@
 package com.vickikbt.shared.data.mappers
 
-import com.vickikbt.shared.data.network.models.*
-import com.vickikbt.shared.domain.models.*
+import com.vickikbt.shared.data.network.models.ActorDto
+import com.vickikbt.shared.data.network.models.CastDto
+import com.vickikbt.shared.data.network.models.MovieDetailsDto
+import com.vickikbt.shared.data.network.models.MovieDto
+import com.vickikbt.shared.data.network.models.MovieVideoDto
+import com.vickikbt.shared.data.network.models.VideoDto
+import com.vickikbt.shared.domain.models.Actor
+import com.vickikbt.shared.domain.models.Cast
+import com.vickikbt.shared.domain.models.Movie
+import com.vickikbt.shared.domain.models.MovieDetails
+import com.vickikbt.shared.domain.models.MovieVideo
+import com.vickikbt.shared.domain.models.Video
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
