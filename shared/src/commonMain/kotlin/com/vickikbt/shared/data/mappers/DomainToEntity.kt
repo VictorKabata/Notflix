@@ -26,7 +26,8 @@ fun MovieDetails.toEntity(): MovieDetailsEntity {
         title = this.title,
         video = this.video,
         voteAverage = this.voteAverage?.toInt(),
-        voteCount = this.voteCount
+        voteCount = this.voteCount,
+        isFavourite = true
     )
 }
 

@@ -36,5 +36,7 @@ data class MovieDetails(
 
     val voteAverage: Double? = null,
 
-    val voteCount: Int? = null
+    val voteCount: Int? = null,
+
+    val isFavourite: Boolean? = null
 )

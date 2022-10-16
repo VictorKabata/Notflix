@@ -1,21 +1,37 @@
 package com.vickikbt.notflix.ui.components.app_bars
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -35,6 +51,7 @@ import com.vickikbt.notflix.util.PaletteGenerator
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.utils.getMovieDuration
+import io.github.aakira.napier.Napier
 import me.onebone.toolbar.CollapsingToolbarScaffoldState
 
 @ExperimentalCoilApi
@@ -55,6 +72,8 @@ fun DetailsAppBar(
     var dominantColor by remember { mutableStateOf(defaultDominantColor) }
     var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
 
+    var isFavourite = mutableStateOf(movieDetails?.isFavourite)
+
     val painter = rememberImagePainter(data = movieDetails?.backdropPath?.loadImage())
 
     if (painter.state is ImagePainter.State.Success) {
@@ -69,15 +88,15 @@ fun DetailsAppBar(
         }
     }
 
-    val imageHeight by animateDpAsState(
-        targetValue = 350.dp * scrollProgress.coerceAtLeast(.16f),
-        animationSpec = tween(durationMillis = 3000)
-    )
     val backgroundColor by animateColorAsState(targetValue = MaterialTheme.colors.surface.copy(1 - scrollProgress))
     val contentColor by animateColorAsState(targetValue = if (scrollProgress == 1f) MaterialTheme.colors.surface else Color.Transparent)
 
+
+    Napier.e("Is fav: ${movieDetails?.isFavourite}")
+    Napier.e("Is fav remembered: ${movieDetails?.isFavourite}")
+
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(350.dp)
             .graphicsLayer { alpha = scrollProgress }
@@ -169,11 +188,17 @@ fun DetailsAppBar(
                 )
             }
 
-            IconButton(onClick = { onFavoriteIconClick() }) {
+            IconButton(
+                onClick = {
+                    onFavoriteIconClick()
+                    isFavourite.value?.let { isFavourite.value = !it }
+                }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_favourite),
+                    painter = if (isFavourite.value == true) painterResource(id = R.drawable.ic_favourite_selected)
+                    else painterResource(id = R.drawable.ic_favourite),
                     contentDescription = stringResource(id = R.string.title_favorites),
-                    tint = MaterialTheme.colors.onSurface
+                    tint = if (isFavourite.value == true) colorResource(id = R.color.colorPrimary)
+                    else MaterialTheme.colors.onSurface
                 )
             }
         },

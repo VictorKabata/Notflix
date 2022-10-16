@@ -53,7 +53,7 @@ fun Navigation(navController: NavHostController) {
             val movieID = it.arguments?.getInt("movieId")
             val cacheId = it.arguments?.getInt("cacheId")
             if (movieID != null && cacheId != null) {
-                DetailsScreen(navController = navController, movieId = movieID, cacheId = cacheId)
+                DetailsScreen(navController = navController, movieId = movieID)
             }
         }
     }

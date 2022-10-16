@@ -50,7 +50,8 @@ fun MovieDetailsEntity.toDomain(): MovieDetails {
         title = this.title,
         video = this.video,
         voteAverage = this.voteAverage?.toDouble(),
-        voteCount = this.voteCount
+        voteCount = this.voteCount,
+        isFavourite = this.isFavourite
     )
 }
 
@@ -72,25 +73,3 @@ fun ActorEntity.toDomain(): Actor {
         profilePath = this.profilePath
     )
 }
-
-/*fun VideoEntity.toDomain(): Video {
-    return Video(
-        id = this.id,
-        iso31661 = this.iso31661,
-        iso6391 = this.iso6391,
-        key = this.key,
-        name = this.name,
-        official = this.official,
-        publishedAt = this.publishedAt,
-        site = this.site,
-        size = this.size,
-        type = this.type
-    )
-}
-
-fun MovieVideoEntity.toDomain(): MovieVideo {
-    return MovieVideo(
-        id = this.id,
-        videos = this.videos?.map { it.toDomain() }
-    )
-}*/

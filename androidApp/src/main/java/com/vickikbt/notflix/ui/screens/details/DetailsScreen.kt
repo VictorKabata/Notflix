@@ -40,6 +40,7 @@ import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
 import com.vickikbt.shared.utils.getPopularity
 import com.vickikbt.shared.utils.getRating
+import io.github.aakira.napier.Napier
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
@@ -50,8 +51,7 @@ import org.koin.androidx.compose.get
 fun DetailsScreen(
     navController: NavController,
     detailsViewModel: SharedDetailsPresenter = get(),
-    movieId: Int,
-    cacheId: Int,
+    movieId: Int
 ) {
     LaunchedEffect(key1 = detailsViewModel) {
         detailsViewModel.getMovieDetails(movieId)
@@ -69,6 +69,8 @@ fun DetailsScreen(
     val scrollState = rememberScrollState()
     val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
 
+    Napier.e("Is ${movieDetails?.title} favourite: ${movieDetails?.isFavourite}")
+
     CollapsingToolbarScaffold(
         modifier = Modifier.fillMaxSize(),
         state = collapsingScrollState,
@@ -85,13 +87,6 @@ fun DetailsScreen(
                     shareMovie(context = context, movieId = movieId)
                 },
                 onFavoriteIconClick = {
-                    // Add to favourites
-                    Toast.makeText(
-                        context,
-                        "Added ${movieDetails?.title} to favourites",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
                     movieDetails?.let { detailsViewModel.saveMovieDetails(movieDetails = it) }
                         .also {
                             movieCast?.let { detailsViewModel.saveMovieCast(cast = it) }
@@ -108,10 +103,12 @@ fun DetailsScreen(
         ) {
             //region Movie Ratings
             val voteAverage = movieDetails?.voteAverage
-            MovieRatingSection(
-                popularity = voteAverage?.getPopularity(),
-                voteAverage = voteAverage?.getRating()
-            )
+            voteAverage?.let {
+                MovieRatingSection(
+                    popularity = voteAverage.getPopularity(),
+                    voteAverage = voteAverage.getRating()
+                )
+            }
             //endregion
 
             //region Movie Overview

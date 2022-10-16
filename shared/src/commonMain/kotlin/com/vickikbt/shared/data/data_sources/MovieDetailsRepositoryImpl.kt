@@ -8,7 +8,6 @@ import com.vickikbt.shared.domain.models.Cast
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
@@ -26,10 +25,8 @@ class MovieDetailsRepositoryImpl constructor(
     override suspend fun getMovieDetails(id: Int): Flow<MovieDetails?> {
         val cacheResponse = movieDao.getMovieDetails(id = id).map { it?.toDomain() }
 
-        return if (cacheResponse.first() != null) {
-            Napier.e("Fetching from cache")
-            cacheResponse
-        } else fetchMovieDetails(movieId = id)
+        return if (cacheResponse.first() != null) cacheResponse
+        else fetchMovieDetails(movieId = id)
     }
 
     override suspend fun fetchMovieDetails(movieId: Int): Flow<MovieDetails> {
@@ -45,10 +42,8 @@ class MovieDetailsRepositoryImpl constructor(
     override suspend fun getMovieCast(id: Int): Flow<Cast?> {
         val cacheResponse = movieDao.getMovieCast(id = id).map { it?.toDomain() }
 
-        return if (cacheResponse.first() != null) {
-            Napier.e("Fetching from cache")
-            cacheResponse
-        } else fetchMovieCast(movieId = id)
+        return if (cacheResponse.first() != null) cacheResponse
+        else fetchMovieCast(movieId = id)
     }
 
     override suspend fun fetchMovieCast(movieId: Int): Flow<Cast?> {

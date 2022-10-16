@@ -30,7 +30,8 @@ fun MovieDetailsDto.toDomain(): MovieDetails {
         title = this.title,
         video = this.video,
         voteAverage = this.voteAverage,
-        voteCount = this.voteCount
+        voteCount = this.voteCount,
+        isFavourite = false
     )
 }
 
