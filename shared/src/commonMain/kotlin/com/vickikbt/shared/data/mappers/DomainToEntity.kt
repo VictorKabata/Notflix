@@ -1,8 +1,10 @@
 package com.vickikbt.shared.data.mappers
 
 import com.vickikbt.shared.data.cache.sqldelight.ActorEntity
+import com.vickikbt.shared.data.cache.sqldelight.CastEntity
 import com.vickikbt.shared.data.cache.sqldelight.MovieDetailsEntity
 import com.vickikbt.shared.domain.models.Actor
+import com.vickikbt.shared.domain.models.Cast
 import com.vickikbt.shared.domain.models.MovieDetails
 
 fun MovieDetails.toEntity(): MovieDetailsEntity {
@@ -25,6 +27,13 @@ fun MovieDetails.toEntity(): MovieDetailsEntity {
         video = this.video,
         voteAverage = this.voteAverage?.toInt(),
         voteCount = this.voteCount
+    )
+}
+
+fun Cast.toEntity(): CastEntity {
+    return CastEntity(
+        actor = this.actor!!.map { it.toEntity() },
+        id = this.id
     )
 }
 

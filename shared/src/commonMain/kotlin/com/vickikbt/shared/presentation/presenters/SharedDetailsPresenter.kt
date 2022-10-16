@@ -5,7 +5,6 @@ import com.vickikbt.shared.domain.models.Cast
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.models.MovieVideo
-import com.vickikbt.shared.domain.repositories.FavoritesRepository
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
@@ -17,10 +16,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
-class SharedDetailsPresenter constructor(
-    private val movieDetailsRepository: MovieDetailsRepository,
-    private val favoritesRepository: FavoritesRepository
-) : KoinComponent {
+class SharedDetailsPresenter constructor(private val movieDetailsRepository: MovieDetailsRepository) :
+    KoinComponent {
 
     @NativeCoroutineScope
     private val viewModelScope = CoroutineScope(Dispatchers.Default)
@@ -51,7 +48,7 @@ class SharedDetailsPresenter constructor(
 
         val job = viewModelScope.launch {
             try {
-                movieDetailsRepository.getMovieDetails(movieId).collectLatest {
+                movieDetailsRepository.getMovieDetails(id = movieId).collectLatest {
                     _movieDetails.value = it
                 }
             } catch (e: Exception) {
@@ -70,7 +67,7 @@ class SharedDetailsPresenter constructor(
 
         val job = viewModelScope.launch {
             try {
-                movieDetailsRepository.getMovieCast(movieId).collectLatest {
+                movieDetailsRepository.getMovieCast(id = movieId).collectLatest {
                     _movieCast.value = it
                 }
             } catch (e: Exception) {
@@ -103,15 +100,11 @@ class SharedDetailsPresenter constructor(
         }
     }
 
-    fun saveFavouriteMovie(
-        movieDetails: MovieDetails,
-        cast: Cast? = null,
-        movieVideo: MovieVideo? = null
-    ) {
+    fun saveMovieDetails(movieDetails: MovieDetails) {
         val job = viewModelScope.launch {
             try {
                 movieDetailsRepository.apply {
-                    favoritesRepository.saveFavouriteMovie(movieDetail = movieDetails)
+                    movieDetailsRepository.saveMovieDetails(movieDetail = movieDetails)
                 }
             } catch (e: Exception) {
                 Napier.e("Error saving movie: $e")
@@ -119,9 +112,26 @@ class SharedDetailsPresenter constructor(
         }
 
         supervisorJob.value = job
-        /*job.invokeOnCompletion {
+        job.invokeOnCompletion {
             supervisorJob.value = null
-        }*/
+        }
+    }
+
+    fun saveMovieCast(cast: Cast) {
+        val job = viewModelScope.launch {
+            try {
+                movieDetailsRepository.apply {
+                    movieDetailsRepository.saveMovieCast(actor = cast)
+                }
+            } catch (e: Exception) {
+                Napier.e("Error saving movie: $e")
+            }
+        }
+
+        supervisorJob.value = job
+        job.invokeOnCompletion {
+            supervisorJob.value = null
+        }
     }
 
     fun updateFavorite(cacheId: Int, isFavorite: Boolean) {

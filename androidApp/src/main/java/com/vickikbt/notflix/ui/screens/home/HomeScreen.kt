@@ -62,11 +62,6 @@ fun HomeScreen(
     val popularMovies = sharedViewModel.popularMovies.collectAsState().value
     val upcomingMovies = sharedViewModel.upcomingMovies.collectAsState().value
 
-    Napier.e("Now Playing: $nowPlayingMovies")
-    Napier.e("Trending: $trendingMovies")
-    Napier.e("Popular movies: $popularMovies")
-    Napier.e("Upcoming: $upcomingMovies")
-
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
         Column(
             modifier = Modifier

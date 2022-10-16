@@ -30,24 +30,29 @@ class MovieDao constructor(private val databaseDriverFactory: DatabaseDriverFact
     suspend fun getMoviesByCategory(category: String) =
         dbQuery.getMoviesByCategory(category = category).asFlow().map { it.executeAsList() }
 
+    /**Cache favourite movie detail*/
     suspend fun saveMovieDetails(movieDetailsEntity: MovieDetailsEntity) {
         dbQuery.transaction {
             dbQuery.saveMovieDetails(movieDetailsEntity)
         }
     }
 
+    /**Get a list of cached favourite movie*/
     suspend fun getFavouriteMovies() =
         dbQuery.getFavouriteMovies().asFlow().map { it.executeAsList() }
 
+    /**Get cached movie details based on ID*/
     suspend fun getMovieDetails(id: Int) =
-        dbQuery.getMovieDetails(id = id).asFlow().map { it.executeAsOne() }
+        dbQuery.getMovieDetails(id = id).asFlow().map { it.executeAsOneOrNull() }
 
+    /**Cache favourite movie cast*/
     suspend fun saveMovieCast(cast: CastEntity) {
         dbQuery.transaction {
             dbQuery.saveMovieCast(cast)
         }
     }
 
+    /**Get a list of favourite movie cast based on ID*/
     suspend fun getMovieCast(id: Int) =
-        dbQuery.getMovieCast(id = id).asFlow().map { it.executeAsOne() }
+        dbQuery.getMovieCast(id = id).asFlow().map { it.executeAsOneOrNull() }
 }
