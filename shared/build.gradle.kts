@@ -30,15 +30,14 @@ kotlin {
     }
     iosTarget("iOS") {}
 
-    /*cocoapods {
 
+    /*cocoapods {
         version = "1"
 
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
         *//* ios.deploymentTarget = "14.1"
          podfile = project.file("../Gistagram/Podfile")
-
          *//*
         framework {
             baseName = "shared"
