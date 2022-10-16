@@ -51,7 +51,6 @@ import com.vickikbt.notflix.util.PaletteGenerator
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.utils.getMovieDuration
-import io.github.aakira.napier.Napier
 import me.onebone.toolbar.CollapsingToolbarScaffoldState
 
 @ExperimentalCoilApi
@@ -90,10 +89,6 @@ fun DetailsAppBar(
 
     val backgroundColor by animateColorAsState(targetValue = MaterialTheme.colors.surface.copy(1 - scrollProgress))
     val contentColor by animateColorAsState(targetValue = if (scrollProgress == 1f) MaterialTheme.colors.surface else Color.Transparent)
-
-
-    Napier.e("Is fav: ${movieDetails?.isFavourite}")
-    Napier.e("Is fav remembered: ${movieDetails?.isFavourite}")
 
     Box(
         modifier = modifier

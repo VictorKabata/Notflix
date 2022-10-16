@@ -22,8 +22,6 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Napier.e("Popularity: $popularity")
-        Napier.e("Vote Average: $voteAverage")
 
         //region Popularity
         Column(

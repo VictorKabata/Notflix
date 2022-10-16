@@ -1,7 +1,13 @@
 package com.vickikbt.notflix.ui.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -18,7 +24,6 @@ import com.google.accompanist.placeholder.placeholder
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.notflix.ui.theme.TextSecondary
-import io.github.aakira.napier.Napier
 
 @Composable
 fun MovieRatingSection(popularity: String?, voteAverage: String?) {
@@ -34,9 +39,6 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Napier.e("Popularity: $popularity")
-        Napier.e("Vote Average: $voteAverage")
-
         //region Popularity
         Column(
             modifier = Modifier,

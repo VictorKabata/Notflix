@@ -110,7 +110,3 @@ fun DetailsScreen(
         //endregion
     }*/
 }
-
-private fun shareMovie(movieId: Int) {
-    Napier.e("Sharing movie: $movieId")
-}
