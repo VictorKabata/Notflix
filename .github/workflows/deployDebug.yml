@@ -2,7 +2,7 @@ name: Deploy Debug
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
 
 jobs:
 
