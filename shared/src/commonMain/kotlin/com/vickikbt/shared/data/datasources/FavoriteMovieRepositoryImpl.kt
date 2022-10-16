@@ -1,4 +1,4 @@
-package com.vickikbt.shared.data.data_sources
+package com.vickikbt.shared.data.datasources
 
 import com.vickikbt.shared.data.cache.sqldelight.daos.MovieDao
 import com.vickikbt.shared.data.mappers.toDomain
@@ -22,5 +22,4 @@ class FavoriteMovieRepositoryImpl constructor(private val movieDao: MovieDao) :
     override suspend fun deleteFavouriteMovie(movieId: Int) {
         movieDao.deleteMovieDetails(id = movieId)
     }
-
 }

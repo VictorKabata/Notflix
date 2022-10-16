@@ -33,7 +33,6 @@ import com.vickikbt.shared.utils.getRating
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ItemFavoriteMovie(movie: MovieDetails, onItemClick: (MovieDetails) -> Unit) {
-
     val painter = rememberImagePainter(data = movie.posterPath?.loadImage()) {
         crossfade(true)
     }
@@ -80,5 +79,4 @@ fun ItemFavoriteMovie(movie: MovieDetails, onItemClick: (MovieDetails) -> Unit) 
             onRatingChanged = {}
         )
     }
-
 }

@@ -45,7 +45,6 @@ import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
-import io.github.aakira.napier.Napier
 import org.koin.androidx.compose.get
 
 @ExperimentalMaterialApi

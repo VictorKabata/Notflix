@@ -1,4 +1,4 @@
-package com.vickikbt.notflix.ui.components.app_bars
+package com.vickikbt.notflix.ui.components.appbars
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Image
@@ -187,7 +187,8 @@ fun DetailsAppBar(
                 onClick = {
                     movieDetails?.let { onFavoriteIconClick(it) }
                     isFavourite.value?.let { isFavourite.value = !it }
-                }) {
+                }
+            ) {
                 Icon(
                     painter = if (isFavourite.value == true) painterResource(id = R.drawable.ic_favourite_selected)
                     else painterResource(id = R.drawable.ic_favourite),

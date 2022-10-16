@@ -1,4 +1,4 @@
-package com.vickikbt.shared.data.data_sources
+package com.vickikbt.shared.data.datasources
 
 import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager
 import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager.Companion.IMAGE_QUALITY_KEY

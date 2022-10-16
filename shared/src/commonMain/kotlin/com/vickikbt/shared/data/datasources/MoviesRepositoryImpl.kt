@@ -1,4 +1,4 @@
-package com.vickikbt.shared.data.data_sources
+package com.vickikbt.shared.data.datasources
 
 import com.vickikbt.shared.data.cache.sqldelight.daos.MovieDao
 import com.vickikbt.shared.data.mappers.toDomain

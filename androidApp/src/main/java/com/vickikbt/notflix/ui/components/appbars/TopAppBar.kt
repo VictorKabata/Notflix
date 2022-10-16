@@ -1,4 +1,4 @@
-package com.vickikbt.notflix.ui.components.app_bars
+package com.vickikbt.notflix.ui.components.appbars
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size

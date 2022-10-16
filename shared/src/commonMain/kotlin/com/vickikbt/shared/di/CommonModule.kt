@@ -2,10 +2,10 @@ package com.vickikbt.shared.di
 
 import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager
 import com.vickikbt.shared.data.cache.sqldelight.daos.MovieDao
-import com.vickikbt.shared.data.data_sources.FavoriteMovieRepositoryImpl
-import com.vickikbt.shared.data.data_sources.MovieDetailsRepositoryImpl
-import com.vickikbt.shared.data.data_sources.MoviesRepositoryImpl
-import com.vickikbt.shared.data.data_sources.SettingsRepositoryImpl
+import com.vickikbt.shared.data.datasources.FavoriteMovieRepositoryImpl
+import com.vickikbt.shared.data.datasources.MovieDetailsRepositoryImpl
+import com.vickikbt.shared.data.datasources.MoviesRepositoryImpl
+import com.vickikbt.shared.data.datasources.SettingsRepositoryImpl
 import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.domain.repositories.FavoritesRepository
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository

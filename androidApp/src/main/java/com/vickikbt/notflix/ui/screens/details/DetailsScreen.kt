@@ -34,12 +34,11 @@ import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemMovieCast
 import com.vickikbt.notflix.ui.components.ItemSimilarMovies
 import com.vickikbt.notflix.ui.components.MovieRatingSection
-import com.vickikbt.notflix.ui.components.app_bars.DetailsAppBar
+import com.vickikbt.notflix.ui.components.appbars.DetailsAppBar
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
 import com.vickikbt.shared.utils.getPopularity
 import com.vickikbt.shared.utils.getRating
-import io.github.aakira.napier.Napier
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState

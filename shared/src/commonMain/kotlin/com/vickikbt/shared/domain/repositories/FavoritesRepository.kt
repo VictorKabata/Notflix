@@ -13,6 +13,4 @@ interface FavoritesRepository {
 
     /**Removes cached favourite movie from DB*/
     suspend fun deleteFavouriteMovie(movieId: Int)
-
-
 }

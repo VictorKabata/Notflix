@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemFavoriteMovie
-import com.vickikbt.notflix.ui.components.app_bars.AppBar
+import com.vickikbt.notflix.ui.components.appbars.AppBar
 import com.vickikbt.shared.presentation.presenters.SharedFavouritesPresenter
 import org.koin.androidx.compose.get
 
@@ -33,9 +33,7 @@ fun FavoritesScreen(
     val favouriteMovies = favoritesViewModel.favouriteMovies.collectAsState().value
 
     Scaffold(topBar = { AppBar(stringResource(id = R.string.title_favorites)) }) {
-
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
-
             favouriteMovies?.let {
                 LazyVerticalGrid(
                     modifier = Modifier.padding(horizontal = 16.dp),
@@ -43,16 +41,13 @@ fun FavoritesScreen(
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-
                     items(favouriteMovies) { movie ->
                         ItemFavoriteMovie(movie = movie) {
                             navController.navigate("details/${it.id}/${0}")
                         }
                     }
-
                 }
             }
         }
-
     }
 }

@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import io.github.aakira.napier.Napier
 
 @Composable
 fun MovieRatingSection(popularity: String?, voteAverage: String?) {
@@ -22,7 +21,6 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
-
         //region Popularity
         Column(
             modifier = Modifier,
