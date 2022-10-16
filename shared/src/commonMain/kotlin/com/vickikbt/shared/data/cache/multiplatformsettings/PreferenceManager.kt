@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalCoroutinesApi::class, ExperimentalSettingsApi::class)
 
-package com.vickikbt.shared.data.cache.multiplatform_settings
+package com.vickikbt.shared.data.cache.multiplatformsettings
 
 import com.russhwolf.settings.ExperimentalSettingsApi
 import com.russhwolf.settings.ObservableSettings

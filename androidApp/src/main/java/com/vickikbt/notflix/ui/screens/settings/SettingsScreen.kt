@@ -25,9 +25,9 @@ import com.vickikbt.notflix.ui.components.appbars.AppBar
 import com.vickikbt.notflix.ui.components.preferences.DialogPreferenceSelection
 import com.vickikbt.notflix.ui.components.preferences.PreferencesGroup
 import com.vickikbt.notflix.ui.components.preferences.TextPreference
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager.Companion.IMAGE_QUALITY_KEY
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager.Companion.LANGUAGE_KEY
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager.Companion.THEME_KEY
+import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager.Companion.IMAGE_QUALITY_KEY
+import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager.Companion.LANGUAGE_KEY
+import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager.Companion.THEME_KEY
 import com.vickikbt.shared.domain.utils.Constants
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import org.koin.androidx.compose.get

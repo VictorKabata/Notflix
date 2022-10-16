@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.vickikbt.notflix.ui.components.preferences.PreferencesGroup
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager
+import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import koin
 import ui.components.appBars.AppBar

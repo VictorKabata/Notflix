@@ -1,7 +1,7 @@
 package com.vickikbt.shared.utils
 
 import com.russhwolf.settings.MockSettings
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager
+import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager
 import com.vickikbt.shared.data.datasources.SettingsRepositoryImpl
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import kotlinx.coroutines.test.runTest

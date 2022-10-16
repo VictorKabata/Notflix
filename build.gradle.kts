@@ -44,6 +44,7 @@ subprojects {
         filter {
             enableExperimentalRules.set(true)
             exclude { projectDir.toURI().relativize(it.file.toURI()).path.contains("/generated/") }
+            // include { projectDir.toURI().relativize(it.file.toURI()).path.contains("/kotlin/") }
             include("**/kotlin/**")
         }
     }

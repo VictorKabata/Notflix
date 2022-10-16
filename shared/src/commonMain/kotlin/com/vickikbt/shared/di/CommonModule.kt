@@ -1,6 +1,6 @@
 package com.vickikbt.shared.di
 
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager
+import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager
 import com.vickikbt.shared.data.cache.sqldelight.daos.MovieDao
 import com.vickikbt.shared.data.datasources.FavoriteMovieRepositoryImpl
 import com.vickikbt.shared.data.datasources.MovieDetailsRepositoryImpl
