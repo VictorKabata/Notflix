@@ -71,7 +71,7 @@ fun DetailsAppBar(
     var dominantColor by remember { mutableStateOf(defaultDominantColor) }
     var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
 
-    var isFavourite = mutableStateOf(movieDetails?.isFavourite)
+    var isFavourite by remember { mutableStateOf(movieDetails?.isFavourite) }
 
     val painter = rememberImagePainter(data = movieDetails?.backdropPath?.loadImage())
 
@@ -186,14 +186,14 @@ fun DetailsAppBar(
             IconButton(
                 onClick = {
                     movieDetails?.let { onFavoriteIconClick(it) }
-                    isFavourite.value?.let { isFavourite.value = !it }
+                    isFavourite?.let { isFavourite = !it }
                 }
             ) {
                 Icon(
-                    painter = if (isFavourite.value == true) painterResource(id = R.drawable.ic_favourite_selected)
+                    painter = if (isFavourite == true) painterResource(id = R.drawable.ic_favourite_selected)
                     else painterResource(id = R.drawable.ic_favourite),
                     contentDescription = stringResource(id = R.string.title_favorites),
-                    tint = if (isFavourite.value == true) colorResource(id = R.color.colorPrimary)
+                    tint = if (isFavourite == true) colorResource(id = R.color.colorPrimary)
                     else MaterialTheme.colors.onSurface
                 )
             }
