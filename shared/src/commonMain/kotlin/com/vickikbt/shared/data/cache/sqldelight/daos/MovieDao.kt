@@ -45,6 +45,9 @@ class MovieDao constructor(private val databaseDriverFactory: DatabaseDriverFact
     suspend fun getMovieDetails(id: Int) =
         dbQuery.getMovieDetails(id = id).asFlow().map { it.executeAsOneOrNull() }
 
+    suspend fun deleteMovieDetails(id: Int) =
+        dbQuery.transaction { dbQuery.deleteMovieDetails(id = id) }
+
     /**Cache favourite movie cast*/
     suspend fun saveMovieCast(cast: CastEntity) {
         dbQuery.transaction {

@@ -19,4 +19,8 @@ class FavoriteMovieRepositoryImpl constructor(private val movieDao: MovieDao) :
         }
     }
 
+    override suspend fun deleteFavouriteMovie(movieId: Int) {
+        movieDao.deleteMovieDetails(id = movieId)
+    }
+
 }

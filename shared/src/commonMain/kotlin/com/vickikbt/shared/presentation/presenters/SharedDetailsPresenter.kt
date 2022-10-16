@@ -5,6 +5,7 @@ import com.vickikbt.shared.domain.models.Cast
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.models.MovieVideo
+import com.vickikbt.shared.domain.repositories.FavoritesRepository
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
@@ -16,14 +17,14 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
-class SharedDetailsPresenter constructor(private val movieDetailsRepository: MovieDetailsRepository) :
-    KoinComponent {
+class SharedDetailsPresenter constructor(
+    private val movieDetailsRepository: MovieDetailsRepository,
+    private val favouritesPresenter: FavoritesRepository
+) : KoinComponent {
 
     @NativeCoroutineScope
     private val viewModelScope = CoroutineScope(Dispatchers.Default)
     private val supervisorJob = MutableStateFlow<Job?>(null)
-
-    // ToDo: Add UI State class
 
     private val _movieDetails = MutableStateFlow<MovieDetails?>(null)
     val movieDetails get() = _movieDetails.asStateFlow()
@@ -134,23 +135,9 @@ class SharedDetailsPresenter constructor(private val movieDetailsRepository: Mov
         }
     }
 
-    fun updateFavorite(cacheId: Int, isFavorite: Boolean) {
-        Napier.e("Updating : $cacheId to $isFavorite")
-
+    fun deleteFavouriteMovie(movieId: Int) {
         val job = viewModelScope.launch {
-        }
-
-        supervisorJob.value = job
-        job.invokeOnCompletion {
-            supervisorJob.value = null
-        }
-    }
-
-    fun getIsMovieFavorite(movieId: Int) {
-        val job = viewModelScope.launch {
-            movieDetailsRepository.isMovieFavorite(movieId).collectLatest {
-                _movieIsFavorite.value = it ?: false
-            }
+            favouritesPresenter.deleteFavouriteMovie(movieId = movieId)
         }
 
         supervisorJob.value = job

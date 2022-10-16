@@ -2,7 +2,6 @@ package com.vickikbt.notflix.ui.screens.details
 
 import android.content.Context
 import android.content.Intent
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -69,8 +68,6 @@ fun DetailsScreen(
     val scrollState = rememberScrollState()
     val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
 
-    Napier.e("Is ${movieDetails?.title} favourite: ${movieDetails?.isFavourite}")
-
     CollapsingToolbarScaffold(
         modifier = Modifier.fillMaxSize(),
         state = collapsingScrollState,
@@ -87,10 +84,13 @@ fun DetailsScreen(
                     shareMovie(context = context, movieId = movieId)
                 },
                 onFavoriteIconClick = {
-                    movieDetails?.let { detailsViewModel.saveMovieDetails(movieDetails = it) }
-                        .also {
-                            movieCast?.let { detailsViewModel.saveMovieCast(cast = it) }
-                        }
+                    if (it.isFavourite != true) {
+                        detailsViewModel.saveMovieDetails(movieDetails = it)
+                            .also { movieCast?.let { detailsViewModel.saveMovieCast(cast = it) } }
+                    } else {
+                        navController.navigateUp()
+                        detailsViewModel.deleteFavouriteMovie(movieId = movieId)
+                    }
                 }
             )
         }
