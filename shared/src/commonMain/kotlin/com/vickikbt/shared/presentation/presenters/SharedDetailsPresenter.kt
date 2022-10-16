@@ -5,6 +5,7 @@ import com.vickikbt.shared.domain.models.Cast
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.models.MovieVideo
+import com.vickikbt.shared.domain.repositories.FavoritesRepository
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
@@ -16,8 +17,10 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
-class SharedDetailsPresenter constructor(private val movieDetailsRepository: MovieDetailsRepository) :
-    KoinComponent {
+class SharedDetailsPresenter constructor(
+    private val movieDetailsRepository: MovieDetailsRepository,
+    private val favoritesRepository: FavoritesRepository
+) : KoinComponent {
 
     @NativeCoroutineScope
     private val viewModelScope = CoroutineScope(Dispatchers.Default)
@@ -100,16 +103,25 @@ class SharedDetailsPresenter constructor(private val movieDetailsRepository: Mov
         }
     }
 
-    fun saveMovieDetails(movieDetails: MovieDetails, cast: Cast, movieVideo: MovieVideo?) {
+    fun saveFavouriteMovie(
+        movieDetails: MovieDetails,
+        cast: Cast? = null,
+        movieVideo: MovieVideo? = null
+    ) {
         val job = viewModelScope.launch {
-            movieDetailsRepository.apply {
+            try {
+                movieDetailsRepository.apply {
+                    favoritesRepository.saveFavouriteMovie(movieDetail = movieDetails)
+                }
+            } catch (e: Exception) {
+                Napier.e("Error saving movie: $e")
             }
         }
 
         supervisorJob.value = job
-        job.invokeOnCompletion {
+        /*job.invokeOnCompletion {
             supervisorJob.value = null
-        }
+        }*/
     }
 
     fun updateFavorite(cacheId: Int, isFavorite: Boolean) {

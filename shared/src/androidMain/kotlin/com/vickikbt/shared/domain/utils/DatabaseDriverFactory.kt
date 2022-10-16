@@ -7,6 +7,6 @@ import com.vickikbt.shared.data.cache.sqldelight.AppDatabase
 
 actual class DatabaseDriverFactory(private val context: Context) {
     actual fun createDriver(): SqlDriver {
-        return AndroidSqliteDriver(AppDatabase.Schema, context, "notflix.db")
+        return AndroidSqliteDriver(AppDatabase.Schema, context, "Notflix.db")
     }
 }

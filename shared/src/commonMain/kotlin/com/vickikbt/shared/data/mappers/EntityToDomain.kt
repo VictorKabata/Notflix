@@ -1,7 +1,9 @@
 package com.vickikbt.shared.data.mappers
 
+import com.vickikbt.shared.data.cache.sqldelight.MovieDetailsEntity
 import com.vickikbt.shared.data.cache.sqldelight.MovieEntity
 import com.vickikbt.shared.domain.models.Movie
+import com.vickikbt.shared.domain.models.MovieDetails
 
 fun MovieEntity.toDomain(category: String? = null): Movie {
     return Movie(
@@ -25,7 +27,7 @@ fun MovieEntity.toDomain(category: String? = null): Movie {
     )
 }
 
-/*fun MovieDetailsEntity.toDomain(): MovieDetails {
+fun MovieDetailsEntity.toDomain(): MovieDetails {
     return MovieDetails(
         adult = this.adult,
         backdropPath = this.backdropPath,
@@ -35,7 +37,7 @@ fun MovieEntity.toDomain(category: String? = null): Movie {
         originalLanguage = this.originalLanguage,
         originalTitle = this.originalTitle,
         overview = this.overview,
-        popularity = this.popularity,
+        popularity = this.popularity?.toDouble(),
         posterPath = this.posterPath,
         releaseDate = this.releaseDate,
         runtime = this.runtime,
@@ -43,12 +45,12 @@ fun MovieEntity.toDomain(category: String? = null): Movie {
         tagline = this.tagline,
         title = this.title,
         video = this.video,
-        voteAverage = this.voteAverage,
+        voteAverage = this.voteAverage?.toDouble(),
         voteCount = this.voteCount
     )
 }
 
-fun ActorEntity.toDomain(): Actor {
+/*fun ActorEntity.toDomain(): Actor {
     return Actor(
         castId = this.castId,
         character = this.character,

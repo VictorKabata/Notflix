@@ -8,7 +8,7 @@ data class Actor(
 
     val creditId: String?,
 
-    val id: Int?,
+    val id: Int,
 
     val name: String?,
 

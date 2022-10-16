@@ -42,6 +42,7 @@ import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
 import com.vickikbt.shared.utils.getPopularity
 import com.vickikbt.shared.utils.getRating
+import io.github.aakira.napier.Napier
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
@@ -65,6 +66,8 @@ fun DetailsScreen(
     val movieCast = detailsViewModel.movieCast.collectAsState().value
     val similarMovies = detailsViewModel.similarMovies.collectAsState().value
     val error = detailsViewModel.error.collectAsState().value
+
+    Napier.e("Movie details: $movieDetails")
 
     val context = LocalContext.current
 
@@ -94,6 +97,8 @@ fun DetailsScreen(
                             "Added ${movieDetails?.title} to favourites",
                             Toast.LENGTH_SHORT
                         ).show()
+
+                        movieDetails?.let { detailsViewModel.saveFavouriteMovie(movieDetails = it) }
                     }
                 )
             }

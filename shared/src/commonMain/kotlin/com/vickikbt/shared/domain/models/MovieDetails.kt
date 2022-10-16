@@ -8,7 +8,7 @@ data class MovieDetails(
 
     val homepage: String? = null,
 
-    val id: Int? = null,
+    val id: Int,
 
     val imdbId: String? = null,
 
