@@ -1,26 +1,33 @@
 package ui.screens.settings
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.vickikbt.notflix.ui.components.preferences.PreferencesGroup
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager
+import ui.components.preferences.PreferencesGroup
+import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import koin
-import ui.components.app_bars.AppBar
+import ui.components.appBars.AppBar
 import ui.components.preferences.DialogPreferenceSelection
 import ui.components.preferences.TextPreference
 import ui.navigation.NavController
 
 @Composable
 fun SettingsScreen(navController: NavController, viewModel: SharedSettingsPresenter = koin.get()) {
-
     val currentTheme = viewModel.selectedTheme.collectAsState().value ?: 0
     val currentLanguage = viewModel.selectedLanguage.collectAsState().value ?: 0
     val currentImageQuality = viewModel.selectedImageQuality.collectAsState().value ?: 0

@@ -1,8 +1,10 @@
 package com.vickikbt.shared.data.network.utils
 
 import com.vickikbt.shared.data.network.models.ApiError
-import io.ktor.client.features.*
-import io.ktor.utils.io.*
+import io.ktor.client.features.ClientRequestException
+import io.ktor.client.features.RedirectResponseException
+import io.ktor.client.features.ServerResponseException
+import io.ktor.utils.io.ByteReadChannel
 import kotlinx.serialization.decodeFromString
 
 suspend fun <T : Any> safeApiCall(apiCall: suspend () -> T): NetworkResult<T> {

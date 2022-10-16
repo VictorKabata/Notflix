@@ -1,8 +1,12 @@
-package ui.components.app_bars
+package com.vickikbt.notflix.ui.components.appbars
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
@@ -12,7 +16,6 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun AppBar(title: String, navigationIcon: Painter? = null, onClickNavigationIcon: () -> Unit = {}) {
-
     TopAppBar(backgroundColor = MaterialTheme.colors.surface, elevation = 0.dp) {
         if (navigationIcon != null) {
             IconButton(

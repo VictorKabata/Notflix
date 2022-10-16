@@ -1,13 +1,17 @@
 package com.vickikbt.shared.data.network
 
 import com.goncalossilva.resources.Resource
-import io.ktor.client.*
-import io.ktor.client.engine.mock.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
-import io.ktor.http.*
-import io.ktor.utils.io.*
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.mock.MockEngine
+import io.ktor.client.engine.mock.respond
+import io.ktor.client.features.json.JsonFeature
+import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpStatusCode
+import io.ktor.http.headersOf
+import io.ktor.utils.io.ByteReadChannel
 import kotlin.native.concurrent.ThreadLocal
+import kotlinx.serialization.json.Json
 
 @ThreadLocal
 var networkSuccess: Boolean = true
@@ -28,7 +32,7 @@ object MockServer {
     val mockHttpClient = HttpClient(MockEngine) {
         install(JsonFeature) {
             serializer = KotlinxSerializer(
-                kotlinx.serialization.json.Json {
+                Json {
                     ignoreUnknownKeys = true
                     isLenient = true
                 }

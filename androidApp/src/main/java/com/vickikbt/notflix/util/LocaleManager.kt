@@ -1,7 +1,7 @@
 package com.vickikbt.notflix.util
 
 import android.content.Context
-import java.util.*
+import java.util.Locale
 
 class LocaleManager {
 

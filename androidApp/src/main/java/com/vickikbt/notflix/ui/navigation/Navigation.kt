@@ -21,7 +21,6 @@ import com.vickikbt.notflix.ui.screens.settings.SettingsScreen
 @ExperimentalMaterialApi
 @Composable
 fun Navigation(navController: NavHostController) {
-
     // val defaultEnterAnimationDuration = 600
     // val defaultExitAnimationDuration = 1100
     // val slideDefaultInitialOffset = 1800
@@ -54,7 +53,7 @@ fun Navigation(navController: NavHostController) {
             val movieID = it.arguments?.getInt("movieId")
             val cacheId = it.arguments?.getInt("cacheId")
             if (movieID != null && cacheId != null) {
-                DetailsScreen(navController = navController, movieId = movieID, cacheId = cacheId)
+                DetailsScreen(navController = navController, movieId = movieID)
             }
         }
     }

@@ -22,7 +22,6 @@ fun ItemPreferenceOption(
     selectedOption: Boolean = false,
     onOptionSelected: () -> Unit
 ) {
-
     Row(
         modifier = modifier.clickable { onOptionSelected() },
         verticalAlignment = Alignment.CenterVertically,

@@ -33,7 +33,7 @@ class NavHost(
 fun NavHost.NavigationGraphBuilder.composable(
     route: String,
     arguments: List<String> = emptyList(),
-    content: @Composable() (arguments: List<String>) -> Unit
+    content: @Composable (arguments: List<String>) -> Unit
 ) {
     Napier.e("Navigating to: $route")
     if (navController.currentDestination.value == route) {

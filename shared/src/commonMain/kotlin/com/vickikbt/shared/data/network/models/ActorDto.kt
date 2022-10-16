@@ -16,7 +16,7 @@ data class ActorDto(
     val creditId: String? = null,
 
     @SerialName("id")
-    val id: Int? = null,
+    val id: Int,
 
     @SerialName("name")
     val name: String? = null,

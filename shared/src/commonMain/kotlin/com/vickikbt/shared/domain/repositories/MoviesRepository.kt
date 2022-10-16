@@ -1,12 +1,17 @@
 package com.vickikbt.shared.domain.repositories
 
-import com.vickikbt.shared.data.network.utils.NetworkResult
 import com.vickikbt.shared.domain.models.Movie
 import kotlinx.coroutines.flow.Flow
 
 interface MoviesRepository {
+
     /**
-     * Fetch movies based on category
+     * Get movies based on category from cache
      */
-    suspend fun fetchMovies(category: String): Flow<NetworkResult<List<Movie>>>
+    suspend fun getMovies(category: String): Flow<List<Movie>>
+
+    /**
+     * Fetch movies based on category from network
+     */
+    suspend fun fetchMovies(category: String)
 }

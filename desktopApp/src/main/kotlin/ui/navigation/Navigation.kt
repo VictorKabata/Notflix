@@ -10,7 +10,6 @@ import ui.screens.settings.SettingsScreen
 @ExperimentalMaterialApi
 @Composable
 fun Navigation(navController: NavController) {
-
     NavHost(navController = navController) {
         composable(route = NavigationItem.Home.route) {
             HomeScreen(navController = navController)

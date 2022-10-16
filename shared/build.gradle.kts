@@ -2,10 +2,11 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin(Plugins.multiplatform)
-    kotlin(Plugins.nativeCocoaPods)
+    // kotlin(Plugins.nativeCocoaPods)
     id(Plugins.androidLibrary)
     kotlin(Plugins.kotlinXSerialization) version Versions.kotlinSerialization
     id(Plugins.nativeCoroutines)
+    id(Plugins.sqlDelight) version Versions.sqlDelight
 }
 
 android {
@@ -29,36 +30,38 @@ kotlin {
     }
     iosTarget("iOS") {}
 
-    cocoapods {
-
+    /*cocoapods {
         version = "1"
 
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
-        /* ios.deploymentTarget = "14.1"
+        *//* ios.deploymentTarget = "14.1"
          podfile = project.file("../Gistagram/Podfile")
-
-         */
+         *//*
         framework {
             baseName = "shared"
             isStatic = false
         }
-    }
+    }*/
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
             implementation(MultiplatformDependencies.kotlinxCoroutines)
 
             implementation(MultiplatformDependencies.kotlinxSerialization)
+
             implementation(MultiplatformDependencies.kotlinxDateTime)
 
             api(MultiplatformDependencies.koinCore)
+
+            api(MultiplatformDependencies.napier)
 
             implementation(MultiplatformDependencies.ktorCore)
             implementation(MultiplatformDependencies.ktorSerialization)
             implementation(MultiplatformDependencies.ktorLogging)
 
-            api(MultiplatformDependencies.napier)
+            implementation(MultiplatformDependencies.sqlDelight)
+            implementation(MultiplatformDependencies.sqlDelightCoroutine)
 
             implementation(MultiplatformDependencies.multiplatformSettings)
             implementation(MultiplatformDependencies.multiplatformSettingsCoroutines)
@@ -74,18 +77,28 @@ kotlin {
 
         sourceSets["androidMain"].dependencies {
             implementation(MultiplatformDependencies.ktorAndroid)
+            implementation(MultiplatformDependencies.sqlDelightAndroid)
         }
 
         sourceSets["androidTest"].dependencies {}
 
-        sourceSets["jvmMain"].dependencies {
-            api(MultiplatformDependencies.ktorJvm)
-        }
-
         sourceSets["iOSMain"].dependencies {
             implementation(MultiplatformDependencies.ktoriOS)
+            implementation(MultiplatformDependencies.sqlDelightNative)
         }
 
         sourceSets["iOSTest"].dependencies {}
+
+        sourceSets["jvmMain"].dependencies {
+            api(MultiplatformDependencies.ktorJvm)
+            implementation(MultiplatformDependencies.sqlDelightJVM)
+        }
+    }
+}
+
+sqldelight {
+    database(name = "AppDatabase") {
+        packageName = "com.vickikbt.shared.data.cache.sqldelight"
+        sourceFolders = listOf("kotlin")
     }
 }

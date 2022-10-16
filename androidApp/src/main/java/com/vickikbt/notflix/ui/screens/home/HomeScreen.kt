@@ -1,6 +1,15 @@
 package com.vickikbt.notflix.ui.screens.home
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -45,7 +54,6 @@ fun HomeScreen(
     navController: NavController,
     sharedViewModel: SharedHomePresenter = get()
 ) {
-
     val scrollState = rememberScrollState()
 
     val nowPlayingMovies = sharedViewModel.nowPlayingMovies.collectAsState().value
@@ -60,7 +68,6 @@ fun HomeScreen(
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             NowPlayingMovies(
                 navController = navController,
                 movies = nowPlayingMovies ?: listOf(),
@@ -141,7 +148,6 @@ fun NowPlayingMovies(
 
 @Composable
 fun TrendingMovies(navController: NavController, movies: List<Movie>) {
-
     SectionSeparator(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 12.dp)

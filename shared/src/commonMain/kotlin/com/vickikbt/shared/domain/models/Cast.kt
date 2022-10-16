@@ -4,5 +4,5 @@ data class Cast(
 
     val actor: List<Actor>? = null,
 
-    val id: Int? = null
+    val id: Int
 )

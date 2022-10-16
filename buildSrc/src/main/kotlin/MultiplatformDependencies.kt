@@ -20,7 +20,9 @@ object MultiplatformDependencies {
     const val sqlDelightCoroutine =
         "com.squareup.sqldelight:coroutines-extensions:${Versions.sqlDelight}"
     const val sqlDelightAndroid = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
-    const val sqlDelightIos = "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}"
+    const val sqlDelightNative =
+        "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}" // used by iOS
+    const val sqlDelightJVM = "com.squareup.sqldelight:sqlite-driver:${Versions.sqlDelight}"
 
     const val napier = "io.github.aakira:napier:${Versions.napier}"
 

@@ -10,5 +10,5 @@ data class CastDto(
     val actor: List<ActorDto>? = null,
 
     @SerialName("id")
-    val id: Int? = null
+    val id: Int
 )

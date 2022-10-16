@@ -1,0 +1,89 @@
+import com.vickikbt.shared.data.cache.sqldelight.ActorEntity;
+import java.lang.Boolean;
+import kotlin.collections.List;
+
+CREATE TABLE  MovieEntity(
+adult INTEGER AS Boolean DEFAULT NULL,
+backdropPath TEXT DEFAULT NULL,
+id INTEGER AS Int NOT NULL PRIMARY KEY ,
+originalLanguage TEXT DEFAULT NULL,
+originalTitle TEXT DEFAULT NULL,
+overview TEXT DEFAULT NULL,
+popularity REAL DEFAULT NULL,
+posterPath TEXT DEFAULT NULL,
+releaseDate TEXT DEFAULT NULL,
+title TEXT DEFAULT NULL,
+video INTEGER AS Boolean DEFAULT NULL,
+voteAverage REAL DEFAULT NULL,
+voteCount INTEGER DEFAULT NULL,
+mediaType TEXT DEFAULT NULL,
+category TEXT NOT NULL
+);
+
+CREATE TABLE MovieDetailsEntity(
+adult INTEGER AS Boolean DEFAULT NULL,
+backdropPath TEXT DEFAULT NULL,
+homepage TEXT DEFAULT NULL,
+id INTEGER AS Int NOT NULL PRIMARY KEY,
+imdbId TEXT NOT NULL,
+originalLanguage TEXT DEFAULT NULL,
+originalTitle TEXT DEFAULT NULL,
+overview TEXT DEFAULT NULL,
+popularity INTEGER AS Int DEFAULT NULL,
+posterPath TEXT DEFAULT NULL,
+releaseDate TEXT DEFAULT NULL,
+runtime INTEGER AS Int DEFAULT NULL,
+status TEXT DEFAULT NULL,
+tagline TEXT DEFAULT NULL,
+title TEXT DEFAULT NULL,
+video INTEGER AS Boolean DEFAULT NULL,
+voteAverage INTEGER AS Int DEFAULT NULL,
+voteCount INTEGER AS Int DEFAULT NULL,
+isFavourite INTEGER AS Boolean DEFAULT 1
+);
+
+CREATE TABLE CastEntity(
+id INTEGER AS Int NOT NULL PRIMARY KEY,
+actor TEXT AS List<ActorEntity> NOT NULL
+);
+
+CREATE TABLE ActorEntity(
+castId INTEGER AS Int DEFAULT NULL,
+character TEXT DEFAULT NULL,
+creditId TEXT DEFAULT NULL,
+id INTEGER AS Int NOT NULL PRIMARY KEY,
+name TEXT DEFAULT NULL,
+originalName TEXT DEFAULT NULL,
+profilePath TEXT DEFAULT NULL
+);
+
+saveMovies:
+INSERT OR REPLACE INTO MovieEntity(adult, backdropPath, id, originalLanguage,originalTitle,overview,popularity,posterPath,releaseDate,title,video,voteAverage,voteCount,mediaType, category)
+VALUES ?;
+
+getMoviesByCategory:
+SELECT * FROM MovieEntity
+WHERE category=?;
+
+saveMovieDetails:
+INSERT OR REPLACE INTO MovieDetailsEntity(adult,backdropPath,homepage,id,imdbId,originalLanguage,originalTitle,overview,popularity,posterPath,releaseDate,tagline,title,video,voteAverage,voteCount,isFavourite)
+VALUES ?;
+
+getFavouriteMovies:
+SELECT * FROM MovieDetailsEntity;
+
+getMovieDetails:
+SELECT * FROM MovieDetailsEntity
+WHERE id=?;
+
+deleteMovieDetails:
+DELETE FROM MovieDetailsEntity
+WHERE id=?;
+
+saveMovieCast:
+INSERT OR REPLACE INTO CastEntity(id,actor)
+VALUES ?;
+
+getMovieCast:
+SELECT * FROM CastEntity
+WHERE id=?;

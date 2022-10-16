@@ -1,7 +1,13 @@
 package com.vickikbt.notflix.ui.components.preferences
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -22,7 +28,6 @@ fun TextPreference(
     subTitle: String? = null,
     onClick: () -> Unit
 ) {
-
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -44,7 +49,6 @@ fun TextPreference(
                 .weight(8f),
             verticalArrangement = Arrangement.Center
         ) {
-
             Text(
                 modifier = Modifier
                     .fillMaxWidth()

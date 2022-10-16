@@ -2,7 +2,14 @@ package ui.components.preferences
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -13,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.vickikbt.notflix.ui.components.preferences.ItemPreferenceOption
-import java.util.*
+import java.util.Locale
 
 @Composable
 fun DialogPreferenceSelection(
@@ -24,16 +31,13 @@ fun DialogPreferenceSelection(
     onNegativeClick: () -> Unit,
     onOptionSelected: (Int) -> Unit
 ) {
-
     if (showDialog) {
-
         Dialog(onCloseRequest = { onNegativeClick() }, undecorated = true, resizable = true) {
         Column(
             modifier = Modifier.fillMaxSize()
                 .background(MaterialTheme.colors.surface)
                 .padding(vertical = 16.dp, horizontal = 24.dp)
         ) {
-
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = title,

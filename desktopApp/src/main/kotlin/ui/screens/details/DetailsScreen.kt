@@ -3,7 +3,6 @@ package ui.screens.details
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
-import io.github.aakira.napier.Napier
 import koin
 import ui.navigation.NavController
 
@@ -109,8 +108,4 @@ fun DetailsScreen(
         }
         //endregion
     }*/
-}
-
-private fun shareMovie(movieId: Int) {
-    Napier.e("Sharing movie: $movieId")
 }

@@ -1,9 +1,9 @@
-package com.vickikbt.shared.data.data_sources
+package com.vickikbt.shared.data.datasources
 
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager.Companion.IMAGE_QUALITY_KEY
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager.Companion.LANGUAGE_KEY
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager.Companion.THEME_KEY
+import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager
+import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager.Companion.IMAGE_QUALITY_KEY
+import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager.Companion.LANGUAGE_KEY
+import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager.Companion.THEME_KEY
 import com.vickikbt.shared.domain.repositories.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 

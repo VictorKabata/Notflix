@@ -12,7 +12,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -21,13 +25,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.vickikbt.notflix.R
-import com.vickikbt.notflix.ui.components.app_bars.AppBar
+import com.vickikbt.notflix.ui.components.appbars.AppBar
 import com.vickikbt.notflix.ui.components.preferences.DialogPreferenceSelection
 import com.vickikbt.notflix.ui.components.preferences.PreferencesGroup
 import com.vickikbt.notflix.ui.components.preferences.TextPreference
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager.Companion.IMAGE_QUALITY_KEY
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager.Companion.LANGUAGE_KEY
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager.Companion.THEME_KEY
+import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager.Companion.IMAGE_QUALITY_KEY
+import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager.Companion.LANGUAGE_KEY
+import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager.Companion.THEME_KEY
 import com.vickikbt.shared.domain.utils.Constants
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import org.koin.androidx.compose.get
@@ -35,7 +39,6 @@ import org.koin.androidx.compose.get
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun SettingsScreen(navController: NavController, viewModel: SharedSettingsPresenter = get()) {
-
     val context = LocalContext.current
 
     val currentTheme = viewModel.selectedTheme.collectAsState().value ?: 0

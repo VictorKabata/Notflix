@@ -1,4 +1,4 @@
-package com.vickikbt.shared.data.data_sources
+package com.vickikbt.shared.data.datasources
 
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest

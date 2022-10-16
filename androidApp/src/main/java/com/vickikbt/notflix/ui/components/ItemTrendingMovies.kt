@@ -2,7 +2,12 @@ package com.vickikbt.notflix.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -30,7 +35,6 @@ fun ItemTrendingMovies(
     movie: Movie,
     onItemClick: (Movie) -> Unit
 ) {
-
     Column(
         modifier = Modifier
             .placeholder(
@@ -40,7 +44,6 @@ fun ItemTrendingMovies(
             ),
         verticalArrangement = Arrangement.spacedBy(3.dp)
     ) {
-
         Card(
             modifier = Modifier
                 .width(150.dp)

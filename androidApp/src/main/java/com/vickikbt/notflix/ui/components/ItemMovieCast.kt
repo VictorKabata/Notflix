@@ -23,7 +23,6 @@ import com.vickikbt.shared.domain.models.Actor
 
 @Composable
 fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
-
     val painter = rememberImagePainter(data = actor.profilePath?.loadImage()) {
         crossfade(true)
         transformations(CircleCropTransformation())
@@ -32,7 +31,8 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Image(
             modifier = Modifier.size(80.dp),
-            painter = painter, contentDescription = stringResource(id = R.string.cast)
+            painter = painter,
+            contentDescription = stringResource(id = R.string.cast)
         )
 
         Text(
