@@ -73,6 +73,7 @@ kotlin {
             implementation(MultiplatformDependencies.kotlinxTestResources)
             implementation(MultiplatformDependencies.kotlinxCoroutinesTest)
             implementation(MultiplatformDependencies.multiplatformSettingsTest)
+            implementation(MultiplatformDependencies.sqlDelightJVM)
         }
 
         sourceSets["androidMain"].dependencies {

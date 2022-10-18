@@ -35,17 +35,6 @@ class MovieDetailsRepositoryImpl constructor(
         return flowOf(networkResponse.toDomain())
     }
 
-    override suspend fun saveMovieCast(actor: Cast) {
-        movieDao.saveMovieCast(cast = actor.toEntity())
-    }
-
-    override suspend fun getMovieCast(id: Int): Flow<Cast?> {
-        val cacheResponse = movieDao.getMovieCast(id = id).map { it?.toDomain() }
-
-        return if (cacheResponse.first() != null) cacheResponse
-        else fetchMovieCast(movieId = id)
-    }
-
     override suspend fun fetchMovieCast(movieId: Int): Flow<Cast?> {
         val movieCastNetworkResponse = apiService.fetchMovieCast(movieId)
 
@@ -55,9 +44,5 @@ class MovieDetailsRepositoryImpl constructor(
     override suspend fun fetchSimilarMovies(movieId: Int): Flow<List<Movie>?> {
         val similarMoviesDto = apiService.fetchSimilarMovies(movieId).movies.map { it.toEntity() }
         return flowOf(similarMoviesDto.map { it.toDomain() })
-    }
-
-    override suspend fun isMovieFavorite(movieId: Int): Flow<Boolean?> {
-        return flowOf(true)
     }
 }

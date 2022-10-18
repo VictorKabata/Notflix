@@ -68,7 +68,7 @@ class SharedDetailsPresenter constructor(
 
         val job = viewModelScope.launch {
             try {
-                movieDetailsRepository.getMovieCast(id = movieId).collectLatest {
+                movieDetailsRepository.fetchMovieCast(movieId = movieId).collectLatest {
                     _movieCast.value = it
                 }
             } catch (e: Exception) {
@@ -106,23 +106,6 @@ class SharedDetailsPresenter constructor(
             try {
                 movieDetailsRepository.apply {
                     movieDetailsRepository.saveMovieDetails(movieDetail = movieDetails)
-                }
-            } catch (e: Exception) {
-                Napier.e("Error saving movie: $e")
-            }
-        }
-
-        supervisorJob.value = job
-        job.invokeOnCompletion {
-            supervisorJob.value = null
-        }
-    }
-
-    fun saveMovieCast(cast: Cast) {
-        val job = viewModelScope.launch {
-            try {
-                movieDetailsRepository.apply {
-                    movieDetailsRepository.saveMovieCast(actor = cast)
                 }
             } catch (e: Exception) {
                 Napier.e("Error saving movie: $e")
