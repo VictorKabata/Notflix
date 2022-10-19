@@ -85,7 +85,6 @@ fun DetailsScreen(
                 onFavoriteIconClick = {
                     if (it.isFavourite != true) {
                         detailsViewModel.saveMovieDetails(movieDetails = it)
-                            .also { movieCast?.let { detailsViewModel.saveMovieCast(cast = it) } }
                     } else {
                         navController.navigateUp()
                         detailsViewModel.deleteFavouriteMovie(movieId = movieId)

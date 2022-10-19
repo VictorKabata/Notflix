@@ -93,6 +93,8 @@ kotlin {
             api(MultiplatformDependencies.ktorJvm)
             implementation(MultiplatformDependencies.sqlDelightJVM)
         }
+
+        sourceSets["jvmTest"].dependencies {}
     }
 }
 

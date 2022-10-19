@@ -1,11 +1,7 @@
 package com.vickikbt.shared.data.mappers
 
-import com.vickikbt.shared.data.cache.sqldelight.ActorEntity
-import com.vickikbt.shared.data.cache.sqldelight.CastEntity
 import com.vickikbt.shared.data.cache.sqldelight.MovieDetailsEntity
 import com.vickikbt.shared.data.cache.sqldelight.MovieEntity
-import com.vickikbt.shared.domain.models.Actor
-import com.vickikbt.shared.domain.models.Cast
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
 
@@ -52,24 +48,5 @@ fun MovieDetailsEntity.toDomain(): MovieDetails {
         voteAverage = this.voteAverage?.toDouble(),
         voteCount = this.voteCount,
         isFavourite = this.isFavourite
-    )
-}
-
-fun CastEntity.toDomain(): Cast {
-    return Cast(
-        actor = this.actor.map { it.toDomain() },
-        id = this.id
-    )
-}
-
-fun ActorEntity.toDomain(): Actor {
-    return Actor(
-        castId = this.castId,
-        character = this.character,
-        creditId = this.creditId,
-        id = this.id,
-        name = this.name,
-        originalName = this.originalName,
-        profilePath = this.profilePath
     )
 }
