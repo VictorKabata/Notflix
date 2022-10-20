@@ -38,12 +38,17 @@ struct HomeScreen: View {
             Task{
                 viewModel.observeContent()
             }
-        }.alert("Something Went Wrong", isPresented: $viewModel.showAlert) {
-            Button("OK", role: .cancel) {
+        }.alert("Something Went Wrong", isPresented: $viewModel.showAlert , actions: {
+            Button("Retry") {
                 viewModel.resetError()
+            
                 viewModel.observeContent()
             }
-        }//.frame(height: UIScreen.screenHeight)
+            Button("Cancel",role: .cancel){}
+            
+            
+        } ,message: {Text(viewModel.errorMessages ?? " ") }
+        )
         }
     }
 }

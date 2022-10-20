@@ -8,6 +8,7 @@
 import SwiftUI
 import shared
 import CachedAsyncImage
+import Shimmer
 
 struct NowPlaying: View {
     let nowPlayingMovies : [Movie]
@@ -39,7 +40,7 @@ struct NowPlaying: View {
 
 struct NowPlayingPlaceholder :View{
     var body: some View{
-        Rectangle().redacted(reason: .placeholder).frame(width: UIScreen.screenWidth - 30,height: 300).padding(50)
+        Rectangle().redacted(reason: .placeholder).frame(width: UIScreen.screenWidth - 30,height: 300).padding(50).shimmer()
     }
 }
 
@@ -63,14 +64,14 @@ struct NowPlayingItem: View{
     
     var body: some View{
         
-        let movieImage = DomainExtensions.shared.loadImage(link: movie.backdropPath!)
+       
         
         ZStack(alignment : .top){
         
         
         ZStack(alignment: .topLeading){
             
-            CachedAsyncImage(url: URL(string: movieImage)){ image in
+            CachedAsyncImage(url: URL(string: movie.backdropPath!.getImageLink())){ image in
                 image
                     .resizable().scaledToFill().frame(width: UIScreen.screenWidth ,height: 300).clipped().onAppear{
                         let _ = image.asUIImage().getColors{ colors in
@@ -92,7 +93,7 @@ struct NowPlayingItem: View{
                     }
                 
             } placeholder: {
-                ProgressView()
+                NowPlayingPlaceholder()
             } .overlay(LinearGradient(gradient: Gradient(colors: [.clear,.clear, gradientColor.opacity(0.5),gradientColor]), startPoint: .top, endPoint: .bottom)).onAppear{
                 
                 

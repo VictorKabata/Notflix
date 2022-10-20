@@ -26,6 +26,8 @@
 		660AD29A28D857E800FA14E6 /* RatingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660AD29928D857E800FA14E6 /* RatingBar.swift */; };
 		663E3EAC28E4828F00E8805D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 663E3EAE28E4828F00E8805D /* Localizable.strings */; };
 		663E3EB328E6C29600E8805D /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663E3EB228E6C29600E8805D /* Errors.swift */; };
+		663EE0F628F810B9005D3741 /* ShimmeringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663EE0F528F810B9005D3741 /* ShimmeringView.swift */; };
+		663EE0F928F811E6005D3741 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 663EE0F828F811E6005D3741 /* Shimmer */; };
 		6681A0AA28D9DC8400A789DE /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6681A0A928D9DC8400A789DE /* DetailsViewModel.swift */; };
 		6681A0AC28D9E8C100A789DE /* DetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6681A0AB28D9E8C100A789DE /* DetailsScreen.swift */; };
 		6681A0AF28D9EA9100A789DE /* DetailHeaderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6681A0AE28D9EA9100A789DE /* DetailHeaderScreen.swift */; };
@@ -68,6 +70,7 @@
 		663E3EB128E4847E00E8805D /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		663E3EB228E6C29600E8805D /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		663E3EB428E6DBE500E8805D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		663EE0F528F810B9005D3741 /* ShimmeringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmeringView.swift; sourceTree = "<group>"; };
 		6681A0A928D9DC8400A789DE /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		6681A0AB28D9E8C100A789DE /* DetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScreen.swift; sourceTree = "<group>"; };
 		6681A0AE28D9EA9100A789DE /* DetailHeaderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderScreen.swift; sourceTree = "<group>"; };
@@ -86,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				663EE0F928F811E6005D3741 /* Shimmer in Frameworks */,
 				66AA593E28E3309D00EB4752 /* UIImageColors in Frameworks */,
 				660AD29628D4BAAC00FA14E6 /* CachedAsyncImage in Frameworks */,
 				6FA8B6189C293142057CD276 /* Pods_Notflix.framework in Frameworks */,
@@ -146,6 +150,7 @@
 				660AD28928D3627C00FA14E6 /* SupportEmail.swift */,
 				660AD29928D857E800FA14E6 /* RatingBar.swift */,
 				66AA593A28E32CF700EB4752 /* UIimageView.swift */,
+				663EE0F528F810B9005D3741 /* ShimmeringView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 			packageProductDependencies = (
 				660AD29528D4BAAC00FA14E6 /* CachedAsyncImage */,
 				66AA593D28E3309D00EB4752 /* UIImageColors */,
+				663EE0F828F811E6005D3741 /* Shimmer */,
 			);
 			productName = Notflix;
 			productReference = 660AD26728D31B9200FA14E6 /* Notflix.app */;
@@ -303,6 +309,7 @@
 			packageReferences = (
 				660AD29428D4BAAC00FA14E6 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 				66AA593C28E3309D00EB4752 /* XCRemoteSwiftPackageReference "UIImageColors" */,
+				663EE0F728F811E6005D3741 /* XCRemoteSwiftPackageReference "Shimmer" */,
 			);
 			productRefGroup = 660AD26828D31B9200FA14E6 /* Products */;
 			projectDirPath = "";
@@ -389,6 +396,7 @@
 				66AA593B28E32CF700EB4752 /* UIimageView.swift in Sources */,
 				66DEF39128D88D9C00605FC1 /* PopularMovies.swift in Sources */,
 				660AD26B28D31B9200FA14E6 /* NotflixApp.swift in Sources */,
+				663EE0F628F810B9005D3741 /* ShimmeringView.swift in Sources */,
 				660AD29A28D857E800FA14E6 /* RatingBar.swift in Sources */,
 				660AD29028D4714E00FA14E6 /* HomeViewModel.swift in Sources */,
 				66DEF39328D89ABB00605FC1 /* UpcomingMovies.swift in Sources */,
@@ -635,6 +643,14 @@
 				kind = branch;
 			};
 		};
+		663EE0F728F811E6005D3741 /* XCRemoteSwiftPackageReference "Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/joshuajhomann/Shimmer";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		66AA593C28E3309D00EB4752 /* XCRemoteSwiftPackageReference "UIImageColors" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jathu/UIImageColors";
@@ -650,6 +666,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 660AD29428D4BAAC00FA14E6 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
 			productName = CachedAsyncImage;
+		};
+		663EE0F828F811E6005D3741 /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 663EE0F728F811E6005D3741 /* XCRemoteSwiftPackageReference "Shimmer" */;
+			productName = Shimmer;
 		};
 		66AA593D28E3309D00EB4752 /* UIImageColors */ = {
 			isa = XCSwiftPackageProductDependency;

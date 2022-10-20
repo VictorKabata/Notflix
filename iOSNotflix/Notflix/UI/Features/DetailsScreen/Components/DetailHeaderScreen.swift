@@ -20,7 +20,7 @@ struct DetailHeaderScreen: View {
     @State var textColor:Color = .green
     var body: some View {
         if let details{
-            let image  = DomainExtensions.shared.loadImage(link: details.backdropPath!)
+            
             
             let url = "https://com.vickibt.notflix/id?=\(Int32(truncating: details.id!))"
      
@@ -29,7 +29,7 @@ struct DetailHeaderScreen: View {
             ZStack(alignment : .topLeading){
                
                 ZStack{
-                    let images = CachedAsyncImage(url: URL(string: image)){ image in
+                    let images = CachedAsyncImage(url: URL(string: details.backdropPath!.getImageLink())){ image in
                         image.resizable().scaledToFill().frame(width : UIScreen.screenWidth, height: headerHeight)                            .overlay(LinearGradient(gradient: Gradient(colors: [.clear,.clear, gradientColor.opacity(0.5),gradientColor]), startPoint: .top, endPoint: .bottom)).onAppear{
                             
                             image.asUIImage().getColors{ colors in

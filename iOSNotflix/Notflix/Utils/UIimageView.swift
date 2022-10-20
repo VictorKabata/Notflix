@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import shared
 
 
 extension View {
@@ -40,8 +41,9 @@ extension UIView {
 }
 
 extension String{
-    
-    func doubleString() -> String {
-        return self + self
+    public func getImageLink() -> String {
+       return Extensions.shared.loadImage(link: self)
+        
     }
+ 
 }
