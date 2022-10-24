@@ -166,6 +166,7 @@
 		660AD28028D32CC900FA14E6 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				6683E8812906B39000F32A81 /* Favorites */,
 				6681A0A828D9DC3800A789DE /* DetailsScreen */,
 				660AD28E28D4712D00FA14E6 /* Home */,
 				660AD28B28D3BE3200FA14E6 /* LaunchScreen */,
@@ -233,6 +234,13 @@
 				6681A0B628DE2F4300A789DE /* SimilarMovies.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		6683E8812906B39000F32A81 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Favorites;
 			sourceTree = "<group>";
 		};
 		AD4CB34DC97A46F4DE1E052A /* Frameworks */ = {
