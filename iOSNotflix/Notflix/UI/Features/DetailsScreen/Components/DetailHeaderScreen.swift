@@ -22,7 +22,7 @@ struct DetailHeaderScreen: View {
         if let details{
             
             
-            let url = "https://com.vickibt.notflix/id?=\(Int32(truncating: details.id!))"
+            let url = "https://com.vickibt.notflix/id?=\(Int32(truncating: details.id as NSNumber))"
      
             
            
@@ -85,7 +85,7 @@ struct DetailHeaderScreen: View {
                     
             
                     Button(action: {
-                        toggleFav(Int(truncating:details.id!),!isFavorite)
+                        toggleFav(Int(truncating:details.id as NSNumber),!isFavorite)
                     }){
 Image(systemName: image).padding(4).background(.white.opacity(0.5)).clipShape(Circle())
                         
