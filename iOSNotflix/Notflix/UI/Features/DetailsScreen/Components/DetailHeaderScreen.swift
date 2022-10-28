@@ -13,13 +13,16 @@ import UIImageColors
 struct DetailHeaderScreen: View {
     let details : MovieDetails?
     var isFavorite  = false
-    let toggleFav : (Int,Bool)-> Void
+    let toggleFav : (MovieDetails)-> Void
     @State var expandedOverview: Bool = false
     @State var headerHeight : CGFloat = 320
     @State var gradientColor : Color = .primary
     @State var textColor:Color = .green
+    
     var body: some View {
         if let details{
+            
+        
             
             
             let url = "https://com.vickibt.notflix/id?=\(Int32(truncating: details.id as NSNumber))"
@@ -81,11 +84,12 @@ struct DetailHeaderScreen: View {
                 
                 ToolbarItemGroup(placement: .navigationBarTrailing){
                     
-                    let image = isFavorite ? "heart.fill" :  "heart"
+                    let image = details.isFavourite == true ? "heart.fill" :  "heart"
+                  
                     
             
                     Button(action: {
-                        toggleFav(Int(truncating:details.id as NSNumber),!isFavorite)
+                        toggleFav(details)
                     }){
 Image(systemName: image).padding(4).background(.white.opacity(0.5)).clipShape(Circle())
                         
@@ -104,7 +108,7 @@ Image(systemName: image).padding(4).background(.white.opacity(0.5)).clipShape(Ci
 
 struct DetailHeaderScreen_Previews: PreviewProvider {
     static var previews: some View {
-        DetailHeaderScreen(details: nil){id ,isFav in
+        DetailHeaderScreen(details: nil){id in
             
         }
     }

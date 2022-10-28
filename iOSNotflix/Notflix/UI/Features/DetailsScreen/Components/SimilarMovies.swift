@@ -44,14 +44,14 @@ struct SimilarMovieItem : View {
        
      
         VStack(alignment : .leading){
-            CachedAsyncImage(url: URL(string: movie.posterPath!.getImageLink() )){image in
-                image.resizable().frame(width: 150,height : 225 ).aspectRatio(contentMode: .fill).cornerRadius(5).padding(2).shadow(radius: 4)
+            CachedAsyncImage(url: URL(string: movie.backdropPath?.getImageLink() ?? "")){image in
+                image.resizable().scaledToFill().frame(width: 150,height : 225 ).cornerRadius(5).padding(2).shadow(radius: 4)
                 
             } placeholder: {
                 ProgressView()
             }
             
-            Text(movie.title ?? "") .lineLimit(1).multilineTextAlignment(.leading).bold().padding(.leading,4)
+            Text(movie.title ?? "") .lineLimit(1).multilineTextAlignment(.leading).bold().padding(.leading,4).font(.subheadline)
             FiveStarView(rating: Decimal(Double(truncating: movie.voteAverage ?? 0)/2), color: Color.yellow)
                 .frame(width: 60, height: 10, alignment: .leading).padding(.trailing,20).padding(.leading,4)
             

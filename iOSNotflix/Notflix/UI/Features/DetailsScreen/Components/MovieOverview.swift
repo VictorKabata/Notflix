@@ -15,15 +15,8 @@ struct MovieOverview: View {
           Text("Overview")
                 .font(.title2)
                 .bold()
-            Text(overView).lineLimit(showAllText ? 900 : 3)
-            
-            Button(action:{withAnimation{showAllText.toggle()}} ){
-//                let labelText = showAllText ? " Show Less" : "Show More"
-//               Text(labelText)
-                
-                Text(showAllText ? " Show Less" : "Show More")
-              
-            }
+            Text(overView).lineLimit(showAllText ? 900 : 3).onTapGesture {withAnimation{showAllText.toggle()}}
+
             
         }.padding(.horizontal,5)
     }
