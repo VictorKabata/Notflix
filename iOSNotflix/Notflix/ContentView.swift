@@ -28,7 +28,9 @@ struct ContentView: View {
                     
                 }
                 
-                Text("Hello Dev")
+                FavoritesScreen{ id in
+                    currentDestination.append(id)
+                }.navigationTitle("Favorites")
                     .tabItem{
                         Image(systemName: "heart")
                     }
@@ -42,7 +44,10 @@ struct ContentView: View {
             }.accentColor(.red)
                 .navigationViewStyle(.stack)
                 .navigationDestination(for: Int.self){ id in
-                    DetailsScreen(movieId: id)
+                    DetailsScreen(movieId: id){id in
+                        currentDestination.append(id)
+                        
+                    }
                     
                 }
             
