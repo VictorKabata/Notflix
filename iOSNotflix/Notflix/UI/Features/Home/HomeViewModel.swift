@@ -115,7 +115,7 @@ class HomeViewModel : ObservableObject {
     
     func observeContent(){
         print("refreshing content")
-        presenter.fetchMovies()
+       // presenter.fetchMovies()
      
     }
     

@@ -62,9 +62,23 @@ class DetailsViewModel : ObservableObject {
     }
     
     
-    func toggleFavorites(movieId : Int ,isFav : Bool){
-        print("saving to favorite")
-       // presenter.updateFavorite(cacheId: <#T##Int32#>, isFavorite: <#T##Bool#>)
+    func saveMovieDetails (for movie : MovieDetails){
+      
+        
+        presenter.saveMovieDetails(movieDetails: movie)
+    }
+    
+    func deleteSavedMovie(for id  : Int){
+        presenter.deleteFavouriteMovie(movieId: Int32(id))
+    }
+    
+    func toggleMovieFavorites(movie : MovieDetails){
+        if (movie.isFavourite == true ){
+            deleteSavedMovie(for: Int(movie.id))
+        } else {
+            saveMovieDetails(for: movie)
+        }
+        
     }
     
     

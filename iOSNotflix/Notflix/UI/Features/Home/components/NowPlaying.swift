@@ -101,7 +101,7 @@ struct NowPlayingItem: View{
             
             VStack(alignment: .leading,spacing: 10){
                 Spacer()
-                Text(movie.title!).bold().font(.title).opacity(0.7)
+                Text(movie.title!).bold().font(.title).opacity(0.7).transition(.moveAndFade)
                 FiveStarView(rating: Decimal(Double(truncating: movie.voteAverage ?? 0)/2), color: Color.yellow)
                     .frame(width:100, height: 10).padding(.bottom,8)
                 //                FiveStarView(rating: Decimal(Double(truncating: movie.voteAverage ?? 0)/2), color: Color.yellow)
@@ -116,7 +116,7 @@ struct NowPlayingItem: View{
             
         }.onTapGesture {
             if let id = movie.id{
-                onClick(Int(truncating: movie.id!))
+                onClick(Int(truncating: id))
             } else {
                 print("id not found")
             }
@@ -125,7 +125,18 @@ struct NowPlayingItem: View{
                 .frame(width: UIScreen.screenWidth - 5)
         }.frame(height: 350)
             .redacted(reason: showPLaceholder ? .placeholder : [])
+            
         
     }
 }
+
+extension AnyTransition {
+    static var moveAndFade: AnyTransition {
+        .asymmetric(
+            insertion: .move(edge: .trailing).combined(with: .opacity),
+            removal: .scale.combined(with: .opacity)
+        )
+    }
+}
+
 

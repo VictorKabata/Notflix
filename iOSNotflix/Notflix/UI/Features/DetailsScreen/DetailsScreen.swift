@@ -9,21 +9,28 @@ import SwiftUI
 
 struct DetailsScreen: View {
   var movieId : Int
+    var similarMovie : (Int)-> Void
     @StateObject var viewModel : DetailsViewModel = DetailsViewModel()
+   // an environment variable to programmatically dismiss a screen
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         ScrollView{
+            
             VStack(spacing : 20){
-                DetailHeaderScreen(details: viewModel.movieDetails,isFavorite: false){id, isFav in
-                    viewModel.toggleFavorites(movieId : id,isFav : isFav)
+                DetailHeaderScreen(details: viewModel.movieDetails,isFavorite: false){ movie in
+                  
+                    
+                    viewModel.toggleMovieFavorites(movie: movie)
+                    
+                    if (movie.isFavourite == true){ dismiss()}  else {
+                        viewModel.observeMovieDetails(for: Int(movie.id))
+                    }
+                    
                 }
                 RatingView(details: viewModel.movieDetails)
                 MovieOverview(overView: viewModel.movieDetails?.overview ?? "")
                 MovieCast(actors: viewModel.movieCast?.actor ?? [])
-                SimilarMovies(similarMovies: viewModel.similarMovies){ id in
-                    
-                    getMovieDetails(id: id)
-                    
-                }
+                SimilarMovies(similarMovies: viewModel.similarMovies,onMovieClick: similarMovie)
                 
             }
         }.onAppear{
@@ -42,6 +49,8 @@ struct DetailsScreen: View {
 
 struct DetailsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        DetailsScreen(movieId: 5)
+        DetailsScreen(movieId: 5){
+            id in
+        }
     }
 }

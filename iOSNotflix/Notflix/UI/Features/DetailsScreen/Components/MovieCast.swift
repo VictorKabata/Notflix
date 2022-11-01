@@ -40,7 +40,7 @@ struct ActorItem : View {
             
        
             
-            CachedAsyncImage(url: URL(string: actor.profilePath!.getImageLink())){image in
+            CachedAsyncImage(url: URL(string: actor.profilePath?.getImageLink() ?? "")){image in
                 image.resizable().scaledToFill().frame(width :  80 ,height: 80).clipShape(Circle())
                 
                 
