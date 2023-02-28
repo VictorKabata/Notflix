@@ -3,6 +3,7 @@ package com.vickikbt.shared.data.mappers
 import com.vickikbt.shared.data.cache.sqldelight.MovieEntity
 import com.vickikbt.shared.data.network.models.MovieDto
 
+@Deprecated("Pending caching implementation")
 fun MovieDto.toEntity(category: String? = null): MovieEntity {
     return MovieEntity(
         adult = this.adult,

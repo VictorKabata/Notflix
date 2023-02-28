@@ -8,6 +8,7 @@ import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.utils.Enums
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
@@ -26,7 +27,7 @@ class MoviesRepositoryImpl constructor(
         return cachedResponse
     }
 
-    override suspend fun fetchMovies(category: String) {
+    override suspend fun fetchMovies(category: String): Flow<List<Movie>> {
         val networkResponse = when (category) {
             Enums.MovieCategories.NOW_PLAYING.name -> {
                 apiService.fetchNowPlayingMovies().movies.take(5)
@@ -42,6 +43,7 @@ class MoviesRepositoryImpl constructor(
             }
         }
 
-        moviesDao.saveMovies(movies = networkResponse.map { it.toEntity(category = category) })
+        return flowOf(networkResponse.map { it.toDomain() })
+        // moviesDao.saveMovies(movies = networkResponse.map { it.toEntity(category = category) })
     }
 }
