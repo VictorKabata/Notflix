@@ -22,11 +22,11 @@ class MovieDetailsRepositoryImpl constructor(
         movieDao.saveMovieDetails(movieDetailsEntity = movieDetail.toEntity())
     }
 
-    override suspend fun getMovieDetails(id: Int): Flow<MovieDetails?> {
-        val cacheResponse = movieDao.getMovieDetails(id = id).map { it?.toDomain() }
+    override suspend fun getMovieDetails(movieId: Int): Flow<MovieDetails?> {
+        val cacheResponse = movieDao.getMovieDetails(id = movieId).map { it?.toDomain() }
 
         return if (cacheResponse.first() != null) cacheResponse
-        else fetchMovieDetails(movieId = id)
+        else fetchMovieDetails(movieId = movieId)
     }
 
     override suspend fun fetchMovieDetails(movieId: Int): Flow<MovieDetails> {

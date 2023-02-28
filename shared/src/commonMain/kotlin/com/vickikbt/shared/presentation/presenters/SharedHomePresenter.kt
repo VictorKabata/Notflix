@@ -45,7 +45,7 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
         println("Fetching Now Playing Movies")
         val job = viewModelScope.launch(Dispatchers.Default) {
             try {
-                moviesRepository.getMovies(category = Enums.MovieCategories.NOW_PLAYING.name)
+                moviesRepository.fetchMovies(category = Enums.MovieCategories.NOW_PLAYING.name)
                     .collect { _nowPlayingMovies.value = it }
             } catch (e: Exception) {
                 _error.value = e.message
@@ -63,7 +63,7 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
         println("Fetching Trending Movies")
         val job = viewModelScope.launch {
             try {
-                moviesRepository.getMovies(Enums.MovieCategories.TRENDING.name)
+                moviesRepository.fetchMovies(Enums.MovieCategories.TRENDING.name)
                     .collect { _trendingMovies.value = it }
             } catch (e: Exception) {
                 _error.value = e.message
@@ -81,7 +81,7 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
         println("Fetching Popular Movies")
         val job = viewModelScope.launch {
             try {
-                moviesRepository.getMovies(category = Enums.MovieCategories.POPULAR.name)
+                moviesRepository.fetchMovies(category = Enums.MovieCategories.POPULAR.name)
                     .collect { _popularMovies.value = it }
             } catch (e: Exception) {
                 _error.value = e.message
@@ -99,7 +99,7 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
         println("Fetching Upcoming Movies")
         val job = viewModelScope.launch {
             try {
-                moviesRepository.getMovies(category = Enums.MovieCategories.UPCOMING.name)
+                moviesRepository.fetchMovies(category = Enums.MovieCategories.UPCOMING.name)
                     .collect { _upcomingMovies.value = it }
             } catch (e: Exception) {
                 _error.value = e.message

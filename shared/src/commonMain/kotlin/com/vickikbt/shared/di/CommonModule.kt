@@ -28,6 +28,7 @@ import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.http.URLProtocol
+import kotlinx.serialization.json.Json
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
@@ -67,7 +68,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
 
             install(JsonFeature) {
                 serializer = KotlinxSerializer(
-                    kotlinx.serialization.json.Json {
+                    Json {
                         ignoreUnknownKeys = true
                         isLenient = true
                     }

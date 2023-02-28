@@ -49,7 +49,7 @@ class SharedDetailsPresenter constructor(
 
         val job = viewModelScope.launch {
             try {
-                movieDetailsRepository.getMovieDetails(id = movieId).collectLatest {
+                movieDetailsRepository.fetchMovieDetails(movieId = movieId).collectLatest {
                     _movieDetails.value = it
                 }
             } catch (e: Exception) {
