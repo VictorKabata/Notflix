@@ -1,6 +1,5 @@
 package com.vickikbt.shared.data.mappers
 
-import com.vickikbt.shared.data.cache.sqldelight.MovieEntity
 import com.vickikbt.shared.data.network.models.ActorDto
 import com.vickikbt.shared.data.network.models.CastDto
 import com.vickikbt.shared.data.network.models.MovieDetailsDto

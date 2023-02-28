@@ -33,6 +33,6 @@ internal suspend fun parseNetworkError(
     errorResponse: HttpResponse? = null,
     exception: Exception? = null
 ): Exception {
-    //throw errorResponse?.content<Exception>() ?: Exception()
+    // throw errorResponse?.content<Exception>() ?: Exception()
     throw Exception()
 }

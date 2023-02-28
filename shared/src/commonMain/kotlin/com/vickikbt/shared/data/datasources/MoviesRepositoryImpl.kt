@@ -2,7 +2,6 @@ package com.vickikbt.shared.data.datasources
 
 import com.vickikbt.shared.data.cache.sqldelight.daos.MovieDao
 import com.vickikbt.shared.data.mappers.toDomain
-import com.vickikbt.shared.data.mappers.toEntity
 import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.repositories.MoviesRepository
