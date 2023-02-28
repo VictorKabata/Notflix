@@ -1,45 +1,38 @@
 package com.vickikbt.shared.data.network.utils
 
-import com.vickikbt.shared.data.network.models.ApiError
-import io.ktor.client.features.ClientRequestException
-import io.ktor.client.features.RedirectResponseException
-import io.ktor.client.features.ServerResponseException
-import io.ktor.utils.io.ByteReadChannel
-import kotlinx.serialization.decodeFromString
+import io.ktor.client.call.body
+import io.ktor.client.plugins.ClientRequestException
+import io.ktor.client.plugins.RedirectResponseException
+import io.ktor.client.plugins.ServerResponseException
+import io.ktor.client.statement.HttpResponse
+import io.ktor.util.network.UnresolvedAddressException
 
-suspend fun <T : Any> safeApiCall(apiCall: suspend () -> T): NetworkResult<T> {
-    return try {
-        NetworkResult.Success(data = apiCall.invoke())
-    } catch (e: RedirectResponseException) { // 3xx errors
-        val networkError = getError(responseContent = e.response.content)
-
-        NetworkResult.Error(
-            errorCode = networkError.statusCode ?: e.response.status.value,
-            errorMessage = networkError.statusMessage ?: e.message
-        )
-    } catch (e: ClientRequestException) { // 4xx errors
-        val networkError = getError(responseContent = e.response.content)
-
-        NetworkResult.Error(
-            errorCode = networkError.statusCode ?: e.response.status.value,
-            errorMessage = networkError.statusMessage ?: e.message
-        )
-    } catch (e: ServerResponseException) { // 5xx errors
-        val networkError = getError(responseContent = e.response.content)
-
-        NetworkResult.Error(
-            errorCode = networkError.statusCode ?: e.response.status.value,
-            errorMessage = networkError.statusMessage ?: e.message
-        )
-    } catch (e: Exception) {
-        NetworkResult.Error(
-            errorCode = 0,
-            errorMessage = e.message ?: "An unknown error occurred"
-        )
-    }
+internal suspend fun <T : Any> safeApiCall(apiCall: suspend () -> T): Result<T> = try {
+    Result.success(apiCall.invoke())
+} catch (e: RedirectResponseException) {
+    val error = parseNetworkError(e.response.body())
+    Result.failure(exception = error)
+} catch (e: ClientRequestException) {
+    val error = parseNetworkError(e.response.body())
+    Result.failure(exception = error)
+} catch (e: ServerResponseException) {
+    val error = parseNetworkError(e.response.body())
+    Result.failure(exception = error)
+} catch (e: UnresolvedAddressException) {
+    val error = parseNetworkError(exception = e)
+    Result.failure(exception = error)
+} catch (e: Exception) {
+    val error = parseNetworkError(exception = e)
+    Result.failure(exception = error)
 }
 
-suspend fun getError(responseContent: ByteReadChannel): ApiError {
-    return kotlinx.serialization.json.Json.decodeFromString(string = responseContent.toString())
-    // throw IllegalArgumentException("Not a parsable error")
+/**Generate [Exception] from network or system error when making network calls
+ *
+ * @throws [Exception]
+ * */
+internal suspend fun parseNetworkError(
+    errorResponse: HttpResponse? = null,
+    exception: Exception? = null
+): Exception {
+    throw errorResponse?.body<Exception>() ?: Exception()
 }

@@ -17,16 +17,6 @@ class MoviesRepositoryImpl constructor(
     private val moviesDao: MovieDao
 ) : MoviesRepository {
 
-    override suspend fun getMovies(category: String): Flow<List<Movie>> {
-        val cachedResponse = moviesDao.getMoviesByCategory(category = category)
-            .map { it.map { movieEntity -> movieEntity.toDomain(category = category) } }
-            .onEach { movies ->
-                if (movies.isEmpty()) fetchMovies(category = category)
-            }
-
-        return cachedResponse
-    }
-
     override suspend fun fetchMovies(category: String): Flow<List<Movie>> {
         val networkResponse = when (category) {
             Enums.MovieCategories.NOW_PLAYING.name -> {
@@ -45,5 +35,15 @@ class MoviesRepositoryImpl constructor(
 
         return flowOf(networkResponse.map { it.toDomain() })
         // moviesDao.saveMovies(movies = networkResponse.map { it.toEntity(category = category) })
+    }
+
+    override suspend fun getMovies(category: String): Flow<List<Movie>> {
+        val cachedResponse = moviesDao.getMoviesByCategory(category = category)
+            .map { it.map { movieEntity -> movieEntity.toDomain(category = category) } }
+            .onEach { movies ->
+                if (movies.isEmpty()) fetchMovies(category = category)
+            }
+
+        return cachedResponse
     }
 }

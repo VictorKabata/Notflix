@@ -9,7 +9,8 @@ object MultiplatformDependencies {
         "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.kotlinxSerialization}"
 
     const val ktorCore = "io.ktor:ktor-client-core:${Versions.ktor}"
-    const val ktorSerialization = "io.ktor:ktor-client-serialization:${Versions.ktor}"
+    const val ktorContentNegotiation = "io.ktor:ktor-client-content-negotiation:${Versions.ktor}"
+    const val ktorJson = "io.ktor:ktor-serialization-kotlinx-json:${Versions.ktor}"
     const val ktorLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
     const val ktorAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
     const val ktoriOS = "io.ktor:ktor-client-ios:${Versions.ktor}"
