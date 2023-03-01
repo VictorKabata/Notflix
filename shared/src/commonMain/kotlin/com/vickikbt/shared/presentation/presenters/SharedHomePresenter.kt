@@ -42,14 +42,15 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
     }
 
     private fun fetchNowPlayingMovies() {
-        println("Fetching Now Playing Movies")
         val job = viewModelScope.launch(Dispatchers.Default) {
-            try {
-                moviesRepository.fetchMovies(category = Enums.MovieCategories.NOW_PLAYING.name)
-                    .collect { _nowPlayingMovies.value = it }
-            } catch (e: Exception) {
-                _error.value = e.message
-            }
+            moviesRepository.fetchMovies(category = Enums.MovieCategories.NOW_PLAYING)
+                .collect { moviesResult ->
+                    moviesResult.onSuccess {
+                        _nowPlayingMovies.value = it
+                    }.onFailure {
+                        _error.value = it.message
+                    }
+                }
         }
 
         supervisorJob.value = job
@@ -60,11 +61,16 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
     }
 
     private fun fetchTrendingMovies() {
-        println("Fetching Trending Movies")
         val job = viewModelScope.launch {
             try {
-                moviesRepository.fetchMovies(Enums.MovieCategories.TRENDING.name)
-                    .collect { _trendingMovies.value = it }
+                moviesRepository.fetchMovies(Enums.MovieCategories.TRENDING)
+                    .collect { moviesResult ->
+                        moviesResult.onSuccess {
+                            _trendingMovies.value = it
+                        }.onFailure {
+                            _error.value = it.message
+                        }
+                    }
             } catch (e: Exception) {
                 _error.value = e.message
             }
@@ -78,11 +84,16 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
     }
 
     private fun fetchPopularMovies() {
-        println("Fetching Popular Movies")
         val job = viewModelScope.launch {
             try {
-                moviesRepository.fetchMovies(category = Enums.MovieCategories.POPULAR.name)
-                    .collect { _popularMovies.value = it }
+                moviesRepository.fetchMovies(category = Enums.MovieCategories.POPULAR)
+                    .collect { moviesResult ->
+                        moviesResult.onSuccess {
+                            _popularMovies.value = it
+                        }.onFailure {
+                            _error.value = it.message
+                        }
+                    }
             } catch (e: Exception) {
                 _error.value = e.message
             }
@@ -96,11 +107,16 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
     }
 
     private fun fetchUpcomingMovies() {
-        println("Fetching Upcoming Movies")
         val job = viewModelScope.launch {
             try {
-                moviesRepository.fetchMovies(category = Enums.MovieCategories.UPCOMING.name)
-                    .collect { _upcomingMovies.value = it }
+                moviesRepository.fetchMovies(category = Enums.MovieCategories.UPCOMING)
+                    .collect { moviesResult ->
+                        moviesResult.onSuccess {
+                            _popularMovies.value = it
+                        }.onFailure {
+                            _error.value = it.message
+                        }
+                    }
             } catch (e: Exception) {
                 _error.value = e.message
             }
