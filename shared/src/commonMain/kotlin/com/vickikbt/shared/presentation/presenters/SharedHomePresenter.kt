@@ -112,7 +112,7 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
                 moviesRepository.fetchMovies(category = Enums.MovieCategories.UPCOMING)
                     .collect { moviesResult ->
                         moviesResult.onSuccess {
-                            _popularMovies.value = it
+                            _upcomingMovies.value = it
                         }.onFailure {
                             _error.value = it.message
                         }
