@@ -1,6 +1,5 @@
 package com.vickikbt.shared.data.datasources
 
-import com.vickikbt.shared.data.cache.sqldelight.daos.MovieDao
 import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.data.network.MockNotflixServer
 import com.vickikbt.shared.domain.utils.Enums
@@ -19,7 +18,6 @@ class MoviesRepositoryImplTest {
 
     private lateinit var mockKtorHttpClient: HttpClient
     private lateinit var apiServiceTest: ApiService
-    private lateinit var mockMoviesDao: MovieDao
 
     // Subject under test
     private lateinit var moviesRepository: MoviesRepositoryImpl
@@ -43,30 +41,43 @@ class MoviesRepositoryImplTest {
         val response =
             moviesRepository.fetchMovies(category = Enums.MovieCategories.NOW_PLAYING).first()
 
-        /*response.onSuccess {
+        response.onSuccess {
             assertNotNull(it)
         }.onFailure {
             assertNull(it)
-        }*/
-        assertNotNull(response.getOrNull())
+        }
     }
 
     /*@Test
     fun `now playing movies returns error on failure`() = runTest {
-        MockServer.expectSuccess(isSuccess = false)
+        // given
+        mockNotflixServer.throwError(
+            httpStatus = HttpStatusCode.InternalServerError,
+            response = mockNotflixServer.mock500ErrorResponse
+        )
 
-        val response = moviesRepository.fetchMovies(category = Constants.CATEGORY_NOW_PLAYING_MOVIES).first()
-
-        assertTrue(response is NetworkResult.Error)
-    }*/
-
-    /*@Test
-    fun `upcoming movies returns success on success`() = runBlocking {
         val response =
-            moviesRepository.fetchMovies(category = Constants.CATEGORY_UPCOMING_MOVIES).first()
+            moviesRepository.fetchMovies(category = Enums.MovieCategories.NOW_PLAYING).first()
 
-        assertTrue(response is NetworkResult.Success)
+        response.onSuccess {
+            assertNull(it)
+        }.onFailure {
+            assertNotNull(it)
+        }
+
     }*/
+
+    @Test
+    fun `upcoming movies returns success on success`() = runTest {
+        val response =
+            moviesRepository.fetchMovies(category = Enums.MovieCategories.UPCOMING).first()
+
+        response.onSuccess {
+            assertNotNull(it)
+        }.onFailure {
+            assertNull(it)
+        }
+    }
 
     /*@Test
     fun `upcoming movies returns error on failure`() = runTest {
@@ -78,13 +89,17 @@ class MoviesRepositoryImplTest {
         assertTrue(response is NetworkResult.Error)
     }*/
 
-    /*@Test
+    @Test
     fun `popular movies returns success on success`() = runTest {
         val response =
-            moviesRepository.fetchMovies(category = Constants.CATEGORY_POPULAR_MOVIES).first()
+            moviesRepository.fetchMovies(category = Enums.MovieCategories.POPULAR).first()
 
-        assertTrue(response is NetworkResult.Success)
-    }*/
+        response.onSuccess {
+            assertNotNull(it)
+        }.onFailure {
+            assertNull(it)
+        }
+    }
 
     /*@Test
     fun `popular movies returns error on failure`() = runTest {
@@ -96,13 +111,17 @@ class MoviesRepositoryImplTest {
         assertTrue(response is NetworkResult.Error)
     }*/
 
-    /*@Test
+    @Test
     fun `trending movies returns success on success`() = runTest {
         val response =
-            moviesRepository.fetchMovies(category = Constants.CATEGORY_TRENDING_MOVIES).first()
+            moviesRepository.fetchMovies(category = Enums.MovieCategories.TRENDING).first()
 
-        assertTrue(response is NetworkResult.Success)
-    }*/
+        response.onSuccess {
+            assertNotNull(it)
+        }.onFailure {
+            assertNull(it)
+        }
+    }
 
     /*@Test
     fun `trending movies returns error on failure`() = runTest {

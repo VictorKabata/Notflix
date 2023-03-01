@@ -15,7 +15,6 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
-import io.ktor.http.fullPath
 import io.ktor.http.headersOf
 import kotlinx.serialization.json.Json
 
@@ -42,6 +41,8 @@ internal class MockNotflixServer {
         Resource("src/commonTest/resources/movie_cast_response.json").readText()
     private val mockMovieSimilarResponse =
         Resource("src/commonTest/resources/movie_similar_response.json").readText()
+    val mock500ErrorResponse =
+        Resource("src/commonTest/resources/error_response.json").readText()
 
     val mockHttpClient = HttpClient(MockEngine) {
         engine {
