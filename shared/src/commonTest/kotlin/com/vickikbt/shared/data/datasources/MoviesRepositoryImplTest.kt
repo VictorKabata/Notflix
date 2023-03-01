@@ -2,16 +2,16 @@ package com.vickikbt.shared.data.datasources
 
 import com.vickikbt.shared.data.cache.sqldelight.daos.MovieDao
 import com.vickikbt.shared.data.network.ApiService
-import com.vickikbt.shared.data.network.MockServer
+import com.vickikbt.shared.data.network.MockNotflixServer
 import io.ktor.client.HttpClient
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 
-@OptIn(ExperimentalCoroutinesApi::class)
-class MoviesRepositoryTest {
+class MoviesRepositoryImplTest {
 
-    private lateinit var mockHttpClient: HttpClient
+    private val mockNotflixServer = MockNotflixServer()
+
+    private lateinit var mockKtorHttpClient: HttpClient
     private lateinit var apiServiceTest: ApiService
     private lateinit var mockMoviesDao: MovieDao
 
@@ -20,9 +20,9 @@ class MoviesRepositoryTest {
 
     @BeforeTest
     fun setup() {
-        mockHttpClient = MockServer.mockHttpClient
+        mockKtorHttpClient = mockNotflixServer.mockHttpClient
 
-        apiServiceTest = ApiService(httpClient = mockHttpClient)
+        apiServiceTest = ApiService(httpClient = mockKtorHttpClient)
 
         // mockMoviesDao= MovieDao(databaseDriverFactory = DatabaseDriverFactory())
 
@@ -32,7 +32,7 @@ class MoviesRepositoryTest {
 
     @AfterTest
     fun tearDown() {
-        mockHttpClient.close()
+        mockKtorHttpClient.close()
     }
 
     /*@Test
