@@ -87,7 +87,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
             movieDao = get()
         )
     }
-    single<MoviesRepository> { MoviesRepositoryImpl(apiService = get(), moviesDao = get()) }
+    single<MoviesRepository> { MoviesRepositoryImpl(apiService = get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(preferenceManager = get()) }
 
     factoryOf(::SharedMainPresenter)

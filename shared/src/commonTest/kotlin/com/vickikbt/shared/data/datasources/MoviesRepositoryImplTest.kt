@@ -3,9 +3,15 @@ package com.vickikbt.shared.data.datasources
 import com.vickikbt.shared.data.cache.sqldelight.daos.MovieDao
 import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.data.network.MockNotflixServer
+import com.vickikbt.shared.domain.utils.Enums
 import io.ktor.client.HttpClient
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.runTest
 
 class MoviesRepositoryImplTest {
 
@@ -24,10 +30,7 @@ class MoviesRepositoryImplTest {
 
         apiServiceTest = ApiService(httpClient = mockKtorHttpClient)
 
-        // mockMoviesDao= MovieDao(databaseDriverFactory = DatabaseDriverFactory())
-
-        moviesRepository =
-            MoviesRepositoryImpl(apiService = apiServiceTest, moviesDao = mockMoviesDao)
+        moviesRepository = MoviesRepositoryImpl(apiService = apiServiceTest)
     }
 
     @AfterTest
@@ -35,13 +38,18 @@ class MoviesRepositoryImplTest {
         mockKtorHttpClient.close()
     }
 
-    /*@Test
+    @Test
     fun `now playing movies returns success on success`() = runTest {
         val response =
-            moviesRepository.fetchMovies(category = Constants.CATEGORY_NOW_PLAYING_MOVIES).first()
+            moviesRepository.fetchMovies(category = Enums.MovieCategories.NOW_PLAYING).first()
 
-        assertTrue(response is NetworkResult.Success)
-    }*/
+        /*response.onSuccess {
+            assertNotNull(it)
+        }.onFailure {
+            assertNull(it)
+        }*/
+        assertNotNull(response.getOrNull())
+    }
 
     /*@Test
     fun `now playing movies returns error on failure`() = runTest {

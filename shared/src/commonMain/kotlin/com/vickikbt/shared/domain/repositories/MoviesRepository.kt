@@ -10,6 +10,6 @@ interface MoviesRepository {
     suspend fun fetchMovies(category: Enums.MovieCategories): Flow<Result<List<Movie>>>
 
     /** Get movies based on category from cache*/
-    @Deprecated("Pending caching implementation")
-    suspend fun getMovies(category: String): Flow<List<Movie>>
+    /*@Deprecated("Pending caching implementation")
+    suspend fun getMovies(category: String): Flow<List<Movie>>*/
 }

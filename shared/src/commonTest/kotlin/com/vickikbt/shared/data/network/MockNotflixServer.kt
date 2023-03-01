@@ -46,7 +46,7 @@ internal class MockNotflixServer {
     val mockHttpClient = HttpClient(MockEngine) {
         engine {
             addHandler { request ->
-                when (request.url.fullPath) {
+                when (request.url.encodedPath) {
                     "/movie/now_playing" -> {
                         respond(
                             content = responseContent ?: mockMoviesResponse,
