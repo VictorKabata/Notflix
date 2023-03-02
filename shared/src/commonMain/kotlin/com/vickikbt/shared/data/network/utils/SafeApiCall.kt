@@ -44,13 +44,16 @@ internal suspend fun parseNetworkError(
     errorResponse: ByteReadChannel? = null,
     exception: Exception? = null
 ): Exception {
-    val error = errorResponse?.readUTF8Line()?.let {
-        return@let Json.decodeFromString<ErrorResponseDto>(it).toDomain()
+    throw return try {
+        errorResponse?.readUTF8Line()?.let {
+            return@let Json.decodeFromString<ErrorResponseDto>(it).toDomain()
+        } ?: ErrorResponse(
+            success = false,
+            statusCode = 0,
+            statusMessage = exception?.message ?: "Error"
+        )
+    } catch (e: Exception) {
+        e
     }
-    throw error ?: ErrorResponse(
-        success = false,
-        statusCode = 0,
-        statusMessage = exception?.message ?: "Error"
-    )
 }
 
