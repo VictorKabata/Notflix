@@ -11,7 +11,9 @@ object Versions {
     const val firebasePerformance="1.4.1"
 
     // KMM Dependencies Version
-    const val koin = "3.2.0"
+    const val koinCore="3.3.3"
+    const val koinAndroid = "3.3.3"
+    const val koinCompose="3.4.2"
     const val kotlinSerialization = "1.6.10"
     const val kotlinxSerialization = "1.2.2"
     const val kotlinxCoroutines = "1.6.0-native-mt"
