@@ -1,6 +1,6 @@
 object Versions {
     // Project Level Plugins
-    const val kotlin = "1.6.20"
+    const val kotlin = "1.8.0"
     const val gradle = "7.2.0"
     const val ktLint = "10.3.0"
     const val detekt = "1.19.0"
@@ -18,7 +18,7 @@ object Versions {
     const val kotlinxDateTime = "0.3.2"
     const val napier = "2.4.0"
     const val ktor = "1.6.7"
-    const val sqlDelight = "1.5.3"
+    const val sqlDelight = "1.5.5"
     const val multiplatformSettings = "0.8.1"
     const val kmpNativeCoroutines = "0.12.1-new-mm"
 
@@ -27,7 +27,7 @@ object Versions {
     const val kotlinxTestResources = "0.2.2"
 
     // Desktop Dependencies Version
-    const val composeDesktop = "1.2.0-alpha01-dev683"
+    const val composeDesktop = "1.3.0"
     const val kamel = "0.2.2"
 
     // Android Dependencies

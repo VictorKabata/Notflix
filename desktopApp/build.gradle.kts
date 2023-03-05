@@ -1,7 +1,7 @@
 import org.jetbrains.compose.compose
 
 plugins {
-    kotlin("jvm")
+    kotlin("jvm")// version Versions.kotlin
     id("org.jetbrains.compose") version Versions.composeDesktop
 }
 
