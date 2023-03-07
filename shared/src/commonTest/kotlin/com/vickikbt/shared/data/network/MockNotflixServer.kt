@@ -18,7 +18,6 @@ import io.ktor.http.contentType
 import io.ktor.http.headersOf
 import kotlinx.serialization.json.Json
 
-
 internal class MockNotflixServer {
 
     private var httpStatusCode: HttpStatusCode = HttpStatusCode.OK
@@ -131,6 +130,4 @@ internal class MockNotflixServer {
             }
         }
     }
-
-
 }
