@@ -9,29 +9,28 @@ import com.vickikbt.shared.domain.utils.Enums
 import kotlinx.coroutines.flow.Flow
 
 class MoviesRepositoryImpl constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
     // private val moviesDao: MovieDao
 ) : MoviesRepository {
 
-    override suspend fun fetchMovies(category: Enums.MovieCategories): Flow<Result<List<Movie>>> =
-        safeApiCall {
-            val networkResponse = when (category) {
-                Enums.MovieCategories.NOW_PLAYING -> {
-                    apiService.fetchNowPlayingMovies().movies.take(5)
-                }
-                Enums.MovieCategories.UPCOMING -> {
-                    apiService.fetchUpcomingMovies().movies
-                }
-                Enums.MovieCategories.POPULAR -> {
-                    apiService.fetchPopularMovies().movies
-                }
-                else -> {
-                    apiService.fetchTrendingMovies().movies.filter { it.mediaType == "movie" }
-                }
+    override suspend fun fetchMovies(category: Enums.MovieCategories): Flow<Result<List<Movie>>> {
+        val networkResponse = when (category) {
+            Enums.MovieCategories.NOW_PLAYING -> {
+                apiService.fetchNowPlayingMovies().movies.take(5)
             }
-
-            return@safeApiCall networkResponse.map { it.toDomain() }
+            Enums.MovieCategories.UPCOMING -> {
+                apiService.fetchUpcomingMovies().movies
+            }
+            Enums.MovieCategories.POPULAR -> {
+                apiService.fetchPopularMovies().movies
+            }
+            else -> {
+                apiService.fetchTrendingMovies().movies.filter { it.mediaType == "movie" }
+            }
         }
+
+        return safeApiCall { networkResponse.map { it.toDomain() } }
+    }
 
     /*override suspend fun getMovies(category: String): Flow<List<Movie>> {
         val cachedResponse = moviesDao.getMoviesByCategory(category = category)

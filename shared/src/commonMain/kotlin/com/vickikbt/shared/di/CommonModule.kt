@@ -21,13 +21,13 @@ import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import com.vickikbt.shared.utils.getAppLanguage
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
-import io.ktor.client.features.defaultRequest
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.KotlinxSerializer
-import io.ktor.client.features.logging.LogLevel
-import io.ktor.client.features.logging.Logger
-import io.ktor.client.features.logging.Logging
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
 import io.ktor.http.URLProtocol
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.factoryOf
@@ -46,6 +46,8 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
      */
     single {
         HttpClient(get()) {
+            expectSuccess = true
+
             defaultRequest {
                 url {
                     host = BASE_URL
@@ -66,8 +68,8 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
                 }
             }
 
-            install(JsonFeature) {
-                serializer = KotlinxSerializer(
+            install(ContentNegotiation) {
+                json(
                     Json {
                         ignoreUnknownKeys = true
                         isLenient = true
