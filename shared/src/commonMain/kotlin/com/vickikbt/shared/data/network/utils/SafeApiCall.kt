@@ -3,36 +3,34 @@ package com.vickikbt.shared.data.network.utils
 import com.vickikbt.shared.data.mappers.toDomain
 import com.vickikbt.shared.data.network.models.ErrorResponseDto
 import com.vickikbt.shared.domain.models.ErrorResponse
-import io.ktor.client.features.ClientRequestException
-import io.ktor.client.features.RedirectResponseException
-import io.ktor.client.features.ServerResponseException
+import io.ktor.client.call.body
+import io.ktor.client.plugins.ClientRequestException
+import io.ktor.client.plugins.RedirectResponseException
+import io.ktor.client.plugins.ServerResponseException
+import io.ktor.client.statement.HttpResponse
 import io.ktor.util.network.UnresolvedAddressException
-import io.ktor.utils.io.ByteReadChannel
-import io.ktor.utils.io.readUTF8Line
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.channelFlow
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
+import kotlinx.coroutines.flow.flow
 
-internal suspend fun <T : Any> safeApiCall(apiCall: suspend () -> T): Flow<Result<T>> =
-    channelFlow {
+suspend fun <T : Any> safeApiCall(apiCall: suspend () -> T): Flow<Result<T>> =
+    flow {
         try {
-            send(Result.success(apiCall.invoke()))
+            emit(Result.success(apiCall.invoke()))
         } catch (e: RedirectResponseException) {
-            val error = parseNetworkError(e.response.content)
-            send(Result.failure(exception = error))
+            val error = parseNetworkError(e.response.body())
+            emit(Result.failure(exception = error))
         } catch (e: ClientRequestException) {
-            val error = parseNetworkError(e.response.content)
-            send(Result.failure(exception = error))
+            val error = parseNetworkError(e.response.body())
+            emit(Result.failure(exception = error))
         } catch (e: ServerResponseException) {
-            val error = parseNetworkError(e.response.content)
-            send(Result.failure(exception = error))
+            val error = parseNetworkError(e.response.body())
+            emit(Result.failure(exception = error))
         } catch (e: UnresolvedAddressException) {
             val error = parseNetworkError(exception = e)
-            send(Result.failure(exception = error))
+            emit(Result.failure(exception = error))
         } catch (e: Exception) {
             val error = parseNetworkError(exception = e)
-            send(Result.failure(exception = error))
+            emit(Result.failure(exception = error))
         }
     }
 
@@ -41,13 +39,11 @@ internal suspend fun <T : Any> safeApiCall(apiCall: suspend () -> T): Flow<Resul
  * @throws [Exception]
  * */
 internal suspend fun parseNetworkError(
-    errorResponse: ByteReadChannel? = null,
+    errorResponse: HttpResponse? = null,
     exception: Exception? = null
 ): Exception {
     throw return try {
-        errorResponse?.readUTF8Line()?.let {
-            return@let Json.decodeFromString<ErrorResponseDto>(it).toDomain()
-        } ?: ErrorResponse(
+        errorResponse?.body<ErrorResponseDto>()?.toDomain() ?: ErrorResponse(
             success = false,
             statusCode = 0,
             statusMessage = exception?.message ?: "Error"
