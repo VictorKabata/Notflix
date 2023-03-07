@@ -56,8 +56,9 @@ kotlin {
 
             api(MultiplatformDependencies.napier)
 
-            implementation(MultiplatformDependencies.ktorCore)
-            implementation(MultiplatformDependencies.ktorSerialization)
+            api(MultiplatformDependencies.ktorCore)
+            implementation(MultiplatformDependencies.ktorContentNegotiation)
+            implementation(MultiplatformDependencies.ktorJson)
             implementation(MultiplatformDependencies.ktorLogging)
 
             implementation(MultiplatformDependencies.sqlDelight)
