@@ -2,7 +2,8 @@ package com.vickikbt.shared.domain.utils
 
 object Constants {
 
-    const val BASE_URL = "api.themoviedb.org/3"
+    const val BASE_URL = "api.themoviedb.org"
+    const val URL_PATH="3/"
 
     const val API_KEY = "423f0418a6d6586755fe3d7227327ef2" // ToDo: Replace and hide
 

@@ -13,6 +13,7 @@ import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.repositories.SettingsRepository
 import com.vickikbt.shared.domain.utils.Constants.API_KEY
 import com.vickikbt.shared.domain.utils.Constants.BASE_URL
+import com.vickikbt.shared.domain.utils.Constants.URL_PATH
 import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
 import com.vickikbt.shared.presentation.presenters.SharedFavouritesPresenter
 import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
@@ -21,12 +22,15 @@ import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import com.vickikbt.shared.utils.getAppLanguage
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
+import io.ktor.client.engine.cio.CIO
+import io.ktor.client.plugins.addDefaultResponseValidation
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.http.URLProtocol
+import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.module.Module
@@ -45,13 +49,15 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
      * API client via constructor injection
      */
     single {
-        HttpClient {
+        HttpClient(engineFactory = CIO) {
             expectSuccess = true
+            addDefaultResponseValidation()
 
             defaultRequest {
                 url {
+                    protocol = URLProtocol.HTTPS
                     host = BASE_URL
-                    url { protocol = URLProtocol.HTTPS }
+                    path(URL_PATH)
                     parameters.append("api_key", API_KEY)
                     parameters.append("language", getAppLanguage(settingsPresenter = get()))
                 }
