@@ -5,8 +5,8 @@ object MultiplatformDependencies {
 
     const val koinCore = "io.insert-koin:koin-core:${Versions.koinCore}"
 
-    const val kotlinxSerialization =
-        "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.kotlinxSerialization}"
+    const val kotlinxSerializationJson =
+        "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.kotlinxSerializationJson}"
 
     const val ktorCore = "io.ktor:ktor-client-core:${Versions.ktor}"
     const val ktorSerialization = "io.ktor:ktor-client-serialization:${Versions.ktor}"
