@@ -6,7 +6,7 @@ import ui.screens.main.MainScreen
 lateinit var koin: Koin
 
 fun main() {
-    koin = initKoin(enableNetworkLogs = false).koin
+    koin = initKoin(enableNetworkLogs = true).koin
 
     return application {
         MainScreen(applicationScope = this)
