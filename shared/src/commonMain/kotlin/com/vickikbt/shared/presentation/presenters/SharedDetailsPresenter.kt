@@ -13,7 +13,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
@@ -48,13 +47,14 @@ class SharedDetailsPresenter constructor(
         _movieDetails.value = null
 
         val job = viewModelScope.launch {
-            try {
-                movieDetailsRepository.fetchMovieDetails(movieId = movieId).collectLatest {
-                    _movieDetails.value = it
+            movieDetailsRepository.fetchMovieDetails(movieId = movieId)
+                .collect { movieDetailsResult ->
+                    movieDetailsResult.onSuccess {
+                        _movieDetails.value = it
+                    }.onFailure {
+                        _error.value = it.message
+                    }
                 }
-            } catch (e: Exception) {
-                _error.value = e.message
-            }
         }
 
         supervisorJob.value = job
@@ -67,12 +67,12 @@ class SharedDetailsPresenter constructor(
         _movieCast.value = null
 
         val job = viewModelScope.launch {
-            try {
-                movieDetailsRepository.fetchMovieCast(movieId = movieId).collectLatest {
+            movieDetailsRepository.fetchMovieCast(movieId = movieId).collect { movieCastsResult ->
+                movieCastsResult.onSuccess {
                     _movieCast.value = it
+                }.onFailure {
+                    _error.value = it.message
                 }
-            } catch (e: Exception) {
-                _error.value = e.message
             }
         }
 
@@ -86,12 +86,12 @@ class SharedDetailsPresenter constructor(
         _similarMovies.value = null
 
         val job = viewModelScope.launch {
-            try {
-                movieDetailsRepository.fetchSimilarMovies(movieId).collectLatest {
+            movieDetailsRepository.fetchSimilarMovies(movieId).collect { moviesResult ->
+                moviesResult.onSuccess {
                     _similarMovies.value = it
+                }.onFailure {
+                    _error.value = it.message
                 }
-            } catch (e: Exception) {
-                _error.value = e.message
             }
         }
 
@@ -101,6 +101,7 @@ class SharedDetailsPresenter constructor(
         }
     }
 
+    @Deprecated("Pending caching implementation")
     fun saveMovieDetails(movieDetails: MovieDetails) {
         val job = viewModelScope.launch {
             try {
@@ -118,6 +119,7 @@ class SharedDetailsPresenter constructor(
         }
     }
 
+    @Deprecated("Pending caching implementation")
     fun deleteFavouriteMovie(movieId: Int) {
         val job = viewModelScope.launch {
             favouritesPresenter.deleteFavouriteMovie(movieId = movieId)

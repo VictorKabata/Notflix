@@ -16,14 +16,14 @@ interface MovieDetailsRepository {
      * if not available makes a network call to retrieve movie details from API
      */
     @Deprecated("Pending caching implementation")
-    suspend fun getMovieDetails(movieId: Int): Flow<MovieDetails?>
+    suspend fun getMovieDetails(movieId: Int): Flow<Result<MovieDetails>>
 
     /**Fetch movie details from network source*/
-    suspend fun fetchMovieDetails(movieId: Int): Flow<MovieDetails?>
+    suspend fun fetchMovieDetails(movieId: Int): Flow<Result<MovieDetails>>
 
     /**Fetch movie cast from network source*/
-    suspend fun fetchMovieCast(movieId: Int): Flow<Cast?>
+    suspend fun fetchMovieCast(movieId: Int): Flow<Result<Cast>>
 
     /** Fetches similar movies from network source*/
-    suspend fun fetchSimilarMovies(movieId: Int): Flow<List<Movie>?>
+    suspend fun fetchSimilarMovies(movieId: Int): Flow<Result<List<Movie>?>>
 }

@@ -43,7 +43,7 @@ fun BottomNavBar(
             elevation = 0.dp,
             contentColor = PrimaryColor
         ) {
-            bottomNavItems.forEach { item ->
+            bottomNavItems.iterator().forEach { item ->
                 val isSelected = item.route == backStackEntryState.value?.destination?.route
 
                 BottomNavigationItem(

@@ -4,7 +4,7 @@ plugins {
     kotlin(Plugins.multiplatform)
     kotlin(Plugins.nativeCocoaPods)
     id(Plugins.androidLibrary)
-    kotlin(Plugins.kotlinXSerialization) version Versions.kotlinSerialization
+    kotlin(Plugins.kotlinXSerialization) version Versions.kotlin
     id(Plugins.nativeCoroutines)
     id(Plugins.sqlDelight) version Versions.sqlDelight
 }
@@ -48,23 +48,25 @@ kotlin {
         sourceSets["commonMain"].dependencies {
             implementation(MultiplatformDependencies.kotlinxCoroutines)
 
-            implementation(MultiplatformDependencies.kotlinxSerialization)
-
-            implementation(MultiplatformDependencies.kotlinxDateTime)
-
             api(MultiplatformDependencies.koinCore)
 
-            api(MultiplatformDependencies.napier)
-
-            implementation(MultiplatformDependencies.ktorCore)
-            implementation(MultiplatformDependencies.ktorSerialization)
+            api(MultiplatformDependencies.ktorCore)
+            api(MultiplatformDependencies.ktorCio)
+            implementation(MultiplatformDependencies.ktorContentNegotiation)
+            implementation(MultiplatformDependencies.ktorJson)
             implementation(MultiplatformDependencies.ktorLogging)
+
+            implementation(MultiplatformDependencies.kotlinxSerializationJson)
 
             implementation(MultiplatformDependencies.sqlDelight)
             implementation(MultiplatformDependencies.sqlDelightCoroutine)
 
             implementation(MultiplatformDependencies.multiplatformSettings)
             implementation(MultiplatformDependencies.multiplatformSettingsCoroutines)
+
+            api(MultiplatformDependencies.napier)
+
+            implementation(MultiplatformDependencies.kotlinxDateTime)
         }
 
         sourceSets["commonTest"].dependencies {
@@ -76,21 +78,18 @@ kotlin {
         }
 
         sourceSets["androidMain"].dependencies {
-            implementation(MultiplatformDependencies.ktorAndroid)
             implementation(MultiplatformDependencies.sqlDelightAndroid)
         }
 
         sourceSets["androidTest"].dependencies {}
 
         sourceSets["iOSMain"].dependencies {
-            implementation(MultiplatformDependencies.ktoriOS)
             implementation(MultiplatformDependencies.sqlDelightNative)
         }
 
         sourceSets["iOSTest"].dependencies {}
 
         sourceSets["jvmMain"].dependencies {
-            api(MultiplatformDependencies.ktorJvm)
             implementation(MultiplatformDependencies.sqlDelightJVM)
         }
 

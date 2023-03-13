@@ -3,19 +3,17 @@ object MultiplatformDependencies {
     const val kotlinxCoroutines =
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinxCoroutines}"
 
-    const val koinCore = "io.insert-koin:koin-core:${Versions.koin}"
+    const val koinCore = "io.insert-koin:koin-core:${Versions.koinCore}"
 
-    const val kotlinxSerialization =
-        "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.kotlinxSerialization}"
+    const val kotlinxSerializationJson =
+        "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.kotlinxSerializationJson}"
 
     const val ktorCore = "io.ktor:ktor-client-core:${Versions.ktor}"
     const val ktorSerialization = "io.ktor:ktor-client-serialization:${Versions.ktor}"
     const val ktorContentNegotiation = "io.ktor:ktor-client-content-negotiation:${Versions.ktor}"
     const val ktorJson = "io.ktor:ktor-serialization-kotlinx-json:${Versions.ktor}"
     const val ktorLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
-    const val ktorAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
-    const val ktoriOS = "io.ktor:ktor-client-ios:${Versions.ktor}"
-    const val ktorJvm = "io.ktor:ktor-client-java:${Versions.ktor}"
+    const val ktorCio = "io.ktor:ktor-client-cio:${Versions.ktor}"
     const val ktorMock = "io.ktor:ktor-client-mock:${Versions.ktor}"
 
     const val sqlDelight = "com.squareup.sqldelight:runtime:${Versions.sqlDelight}"

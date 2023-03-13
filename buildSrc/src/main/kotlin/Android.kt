@@ -6,7 +6,7 @@ object AndroidSdk {
     const val buildToolVersion = "30.0.3"
 
     const val minSdkVersion = 21
-    const val compileSdkVersion = 32
+    const val compileSdkVersion = 33
     const val targetSdkVersion = compileSdkVersion
 
     const val versionCode = 3
@@ -53,8 +53,8 @@ object AndroidDependencies {
     const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
 
     // Koin-Dependency injection
-    const val koinAndroid = "io.insert-koin:koin-android:${Versions.koin}"
-    const val koinCompose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
+    const val koinAndroid = "io.insert-koin:koin-android:${Versions.koinAndroid}"
+    const val koinCompose = "io.insert-koin:koin-androidx-compose:${Versions.koinCompose}"
 
     // Compose Navigation-Navigation between various screens
     const val composeNavigation =
