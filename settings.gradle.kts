@@ -1,4 +1,4 @@
-include(":androidApp")
+include(":app-android")
 include(":shared")
 include(":desktopApp")
 
