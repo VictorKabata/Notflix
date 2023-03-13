@@ -51,6 +51,7 @@ kotlin {
             api(MultiplatformDependencies.koinCore)
 
             api(MultiplatformDependencies.ktorCore)
+            api(MultiplatformDependencies.ktorCio)
             implementation(MultiplatformDependencies.ktorContentNegotiation)
             implementation(MultiplatformDependencies.ktorJson)
             implementation(MultiplatformDependencies.ktorLogging)
@@ -77,21 +78,18 @@ kotlin {
         }
 
         sourceSets["androidMain"].dependencies {
-            implementation(MultiplatformDependencies.ktorAndroid)
             implementation(MultiplatformDependencies.sqlDelightAndroid)
         }
 
         sourceSets["androidTest"].dependencies {}
 
         sourceSets["iOSMain"].dependencies {
-            implementation(MultiplatformDependencies.ktoriOS)
             implementation(MultiplatformDependencies.sqlDelightNative)
         }
 
         sourceSets["iOSTest"].dependencies {}
 
         sourceSets["jvmMain"].dependencies {
-            api(MultiplatformDependencies.ktorJvm)
             implementation(MultiplatformDependencies.sqlDelightJVM)
         }
 

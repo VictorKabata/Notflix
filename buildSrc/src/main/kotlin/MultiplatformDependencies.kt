@@ -13,9 +13,7 @@ object MultiplatformDependencies {
     const val ktorContentNegotiation = "io.ktor:ktor-client-content-negotiation:${Versions.ktor}"
     const val ktorJson = "io.ktor:ktor-serialization-kotlinx-json:${Versions.ktor}"
     const val ktorLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
-    const val ktorAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
-    const val ktoriOS = "io.ktor:ktor-client-ios:${Versions.ktor}"
-    const val ktorJvm = "io.ktor:ktor-client-java:${Versions.ktor}"
+    const val ktorCio = "io.ktor:ktor-client-cio:${Versions.ktor}"
     const val ktorMock = "io.ktor:ktor-client-mock:${Versions.ktor}"
 
     const val sqlDelight = "com.squareup.sqldelight:runtime:${Versions.sqlDelight}"

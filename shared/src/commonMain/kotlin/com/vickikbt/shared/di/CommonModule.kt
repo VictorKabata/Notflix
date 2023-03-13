@@ -45,7 +45,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
      * API client via constructor injection
      */
     single {
-        HttpClient(get()) {
+        HttpClient {
             expectSuccess = true
 
             defaultRequest {
