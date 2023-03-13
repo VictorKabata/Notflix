@@ -58,7 +58,6 @@ class MoviesRepositoryImplTest {
             response = mockNotflixServer.mock500ErrorResponse
         )
 
-
         val response =
             moviesRepository.fetchMovies(category = Enums.MovieCategories.NOW_PLAYING).first()
 
@@ -68,7 +67,6 @@ class MoviesRepositoryImplTest {
             assertNotNull(it)
             assertEquals(actual = it.message, expected = "The ID is invalid.")
         }
-
     }
 
     @Test
