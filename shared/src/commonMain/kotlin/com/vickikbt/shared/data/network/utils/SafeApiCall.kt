@@ -10,27 +10,28 @@ import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.statement.HttpResponse
 import io.ktor.util.network.UnresolvedAddressException
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flow
 
 suspend fun <T : Any> safeApiCall(apiCall: suspend () -> T): Flow<Result<T>> =
-    flow {
+    channelFlow {
         try {
-            emit(Result.success(apiCall.invoke()))
+            send(Result.success(apiCall.invoke()))
         } catch (e: RedirectResponseException) {
             val error = parseNetworkError(e.response.body())
-            emit(Result.failure(exception = error))
+            send(Result.failure(exception = error))
         } catch (e: ClientRequestException) {
             val error = parseNetworkError(e.response.body())
-            emit(Result.failure(exception = error))
+            send(Result.failure(exception = error))
         } catch (e: ServerResponseException) {
             val error = parseNetworkError(e.response.body())
-            emit(Result.failure(exception = error))
+            send(Result.failure(exception = error))
         } catch (e: UnresolvedAddressException) {
             val error = parseNetworkError(exception = e)
-            emit(Result.failure(exception = error))
+            send(Result.failure(exception = error))
         } catch (e: Exception) {
             val error = parseNetworkError(exception = e)
-            emit(Result.failure(exception = error))
+            send(Result.failure(exception = error))
         }
     }
 
