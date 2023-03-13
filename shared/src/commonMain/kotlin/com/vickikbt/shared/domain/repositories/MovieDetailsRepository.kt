@@ -25,5 +25,5 @@ interface MovieDetailsRepository {
     suspend fun fetchMovieCast(movieId: Int): Flow<Result<Cast>>
 
     /** Fetches similar movies from network source*/
-    suspend fun fetchSimilarMovies(movieId: Int): Flow<Result<List<Movie>>>
+    suspend fun fetchSimilarMovies(movieId: Int): Flow<Result<List<Movie>?>>
 }

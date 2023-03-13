@@ -40,8 +40,8 @@ class MovieDetailsRepositoryImpl constructor(
         return@safeApiCall movieCastNetworkResponse.toDomain()
     }
 
-    override suspend fun fetchSimilarMovies(movieId: Int): Flow<Result<List<Movie>>> = safeApiCall {
-        val similarMoviesDto = apiService.fetchSimilarMovies(movieId).movies.map { it.toEntity() }
-        return@safeApiCall similarMoviesDto.map { it.toDomain() }
+    override suspend fun fetchSimilarMovies(movieId: Int): Flow<Result<List<Movie>?>> = safeApiCall {
+        val similarMoviesDto = apiService.fetchSimilarMovies(movieId).movies?.map { it.toEntity() }
+        return@safeApiCall similarMoviesDto?.map { it.toDomain() }
     }
 }

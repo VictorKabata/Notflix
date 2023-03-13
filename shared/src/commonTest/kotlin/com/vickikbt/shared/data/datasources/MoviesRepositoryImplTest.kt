@@ -4,9 +4,11 @@ import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.data.network.MockNotflixServer
 import com.vickikbt.shared.domain.utils.Enums
 import io.ktor.client.HttpClient
+import io.ktor.http.HttpStatusCode
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlinx.coroutines.flow.first
@@ -48,13 +50,14 @@ class MoviesRepositoryImplTest {
         }
     }
 
-    /*@Test
-    fun `now playing movies returns error on failure`() = runTest {
+    @Test
+    fun `now playing movies returns failure on http 500 error`() = runTest {
         // given
         mockNotflixServer.throwError(
             httpStatus = HttpStatusCode.InternalServerError,
             response = mockNotflixServer.mock500ErrorResponse
         )
+
 
         val response =
             moviesRepository.fetchMovies(category = Enums.MovieCategories.NOW_PLAYING).first()
@@ -63,9 +66,10 @@ class MoviesRepositoryImplTest {
             assertNull(it)
         }.onFailure {
             assertNotNull(it)
+            assertEquals(actual = it.message, expected = "The ID is invalid.")
         }
 
-    }*/
+    }
 
     @Test
     fun `upcoming movies returns success on success`() = runTest {

@@ -12,7 +12,7 @@ import io.ktor.util.network.UnresolvedAddressException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 
-suspend fun <T : Any> safeApiCall(apiCall: suspend () -> T): Flow<Result<T>> =
+suspend fun <T : Any?> safeApiCall(apiCall: suspend () -> T): Flow<Result<T>> =
     channelFlow {
         try {
             send(Result.success(apiCall.invoke()))
@@ -42,6 +42,8 @@ internal suspend fun parseNetworkError(
     errorResponse: HttpResponse? = null,
     exception: Exception? = null
 ): Exception {
+    println("Parsing network error: ${errorResponse?.body<ErrorResponseDto>()}")
+
     throw return try {
         errorResponse?.body<ErrorResponseDto>()?.toDomain() ?: ErrorResponse(
             success = false,

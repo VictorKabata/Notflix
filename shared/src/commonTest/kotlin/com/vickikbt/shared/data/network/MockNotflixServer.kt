@@ -107,7 +107,7 @@ internal class MockNotflixServer {
             }
         }
 
-        expectSuccess = true
+        expectSuccess = false
         addDefaultResponseValidation()
 
         defaultRequest { contentType(ContentType.Application.Json) }
