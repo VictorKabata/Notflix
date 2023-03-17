@@ -77,14 +77,14 @@ internal class MockNotflixServer {
                             headers = responseHeaders
                         )
                     }
-                    "/movie/{id}" -> {
+                    "/movie/1" -> {
                         respond(
                             content = responseContent ?: mockMovieDetailsResponse,
                             status = httpStatusCode,
                             headers = responseHeaders
                         )
                     }
-                    "/movie/{id}/credits" -> {
+                    "/movie/1/credits" -> {
                         respond(
                             content = responseContent ?: mockMovieCastResponse,
                             status = httpStatusCode,
