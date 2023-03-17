@@ -1,37 +1,64 @@
 package com.vickikbt.shared.data.datasources
 
 import com.vickikbt.shared.data.mappers.toDomain
-import com.vickikbt.shared.data.network.ApiService
+import com.vickikbt.shared.data.network.models.MovieResultsDto
 import com.vickikbt.shared.data.network.utils.safeApiCall
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.repositories.MoviesRepository
-import com.vickikbt.shared.domain.utils.Enums
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import io.ktor.client.request.parameter
 import kotlinx.coroutines.flow.Flow
 
 class MoviesRepositoryImpl constructor(
-    private val apiService: ApiService,
+    private val httpClient: HttpClient
     // private val moviesDao: MovieDao
 ) : MoviesRepository {
 
-    override suspend fun fetchMovies(category: Enums.MovieCategories): Flow<Result<List<Movie>?>> =
-        safeApiCall {
-            val networkResponse = when (category) {
-                Enums.MovieCategories.NOW_PLAYING -> {
-                    apiService.fetchNowPlayingMovies().movies?.take(5)
-                }
-                Enums.MovieCategories.UPCOMING -> {
-                    apiService.fetchUpcomingMovies().movies
-                }
-                Enums.MovieCategories.POPULAR -> {
-                    apiService.fetchPopularMovies().movies
-                }
-                else -> {
-                    apiService.fetchTrendingMovies().movies?.filter { it.mediaType == "movie" }
-                }
-            }
+    override suspend fun fetchNowPlayingMovies(page: Int): Flow<Result<List<Movie>?>> {
+        return safeApiCall {
+            val response = httpClient.get(urlString = "movie/now_playing") {
+                parameter("page", page)
+            }.body<MovieResultsDto>()
 
-            return@safeApiCall networkResponse?.map { it.toDomain() }
+            response.movies?.map { it.toDomain() }
         }
+    }
+
+    override suspend fun fetchTrendingMovies(
+        mediaType: String,
+        timeWindow: String,
+        page: Int
+    ): Flow<Result<List<Movie>?>> {
+        return safeApiCall {
+            val response = httpClient.get(urlString = "trending/$mediaType/$timeWindow") {
+                parameter("page", page)
+            }.body<MovieResultsDto>()
+
+            response.movies?.map { it.toDomain() }
+        }
+    }
+
+    override suspend fun fetchPopularMovies(page: Int): Flow<Result<List<Movie>?>> {
+        return safeApiCall {
+            val response = httpClient.get(urlString = "movie/popular") {
+                parameter("page", page)
+            }.body<MovieResultsDto>()
+
+            response.movies?.map { it.toDomain() }
+        }
+    }
+
+    override suspend fun fetchUpcomingMovies(page: Int): Flow<Result<List<Movie>?>> {
+        return safeApiCall {
+            val response = httpClient.get(urlString = "movie/upcoming") {
+                parameter("page", page)
+            }.body<MovieResultsDto>()
+
+            response.movies?.map { it.toDomain() }
+        }
+    }
 
     /*override suspend fun getMovies(category: String): Flow<List<Movie>> {
         val cachedResponse = moviesDao.getMoviesByCategory(category = category)

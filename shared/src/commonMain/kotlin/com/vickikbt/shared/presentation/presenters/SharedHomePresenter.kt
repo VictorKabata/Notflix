@@ -3,7 +3,6 @@ package com.vickikbt.shared.presentation.presenters
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.repositories.MoviesRepository
-import com.vickikbt.shared.domain.utils.Enums
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -43,14 +42,13 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
 
     private fun fetchNowPlayingMovies() {
         val job = viewModelScope.launch(Dispatchers.Default) {
-            moviesRepository.fetchMovies(category = Enums.MovieCategories.NOW_PLAYING)
-                .collect { moviesResult ->
-                    moviesResult.onSuccess {
-                        _nowPlayingMovies.value = it
-                    }.onFailure {
-                        _error.value = it.message
-                    }
+            moviesRepository.fetchNowPlayingMovies().collect { moviesResult ->
+                moviesResult.onSuccess {
+                    _nowPlayingMovies.value = it
+                }.onFailure {
+                    _error.value = it.message
                 }
+            }
         }
 
         supervisorJob.value = job
@@ -63,14 +61,13 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
     private fun fetchTrendingMovies() {
         val job = viewModelScope.launch {
             try {
-                moviesRepository.fetchMovies(Enums.MovieCategories.TRENDING)
-                    .collect { moviesResult ->
-                        moviesResult.onSuccess {
-                            _trendingMovies.value = it
-                        }.onFailure {
-                            _error.value = it.message
-                        }
+                moviesRepository.fetchTrendingMovies().collect { moviesResult ->
+                    moviesResult.onSuccess {
+                        _trendingMovies.value = it
+                    }.onFailure {
+                        _error.value = it.message
                     }
+                }
             } catch (e: Exception) {
                 _error.value = e.message
             }
@@ -86,14 +83,13 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
     private fun fetchPopularMovies() {
         val job = viewModelScope.launch {
             try {
-                moviesRepository.fetchMovies(category = Enums.MovieCategories.POPULAR)
-                    .collect { moviesResult ->
-                        moviesResult.onSuccess {
-                            _popularMovies.value = it
-                        }.onFailure {
-                            _error.value = it.message
-                        }
+                moviesRepository.fetchPopularMovies().collect { moviesResult ->
+                    moviesResult.onSuccess {
+                        _popularMovies.value = it
+                    }.onFailure {
+                        _error.value = it.message
                     }
+                }
             } catch (e: Exception) {
                 _error.value = e.message
             }
@@ -109,14 +105,13 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
     private fun fetchUpcomingMovies() {
         val job = viewModelScope.launch {
             try {
-                moviesRepository.fetchMovies(category = Enums.MovieCategories.UPCOMING)
-                    .collect { moviesResult ->
-                        moviesResult.onSuccess {
-                            _upcomingMovies.value = it
-                        }.onFailure {
-                            _error.value = it.message
-                        }
+                moviesRepository.fetchUpcomingMovies().collect { moviesResult ->
+                    moviesResult.onSuccess {
+                        _upcomingMovies.value = it
+                    }.onFailure {
+                        _error.value = it.message
                     }
+                }
             } catch (e: Exception) {
                 _error.value = e.message
             }

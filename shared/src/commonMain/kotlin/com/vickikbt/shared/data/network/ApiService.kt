@@ -12,34 +12,6 @@ import io.ktor.client.request.parameter
 
 class ApiService constructor(private val httpClient: HttpClient) {
 
-    suspend fun fetchNowPlayingMovies(page: Int = STARTING_PAGE_INDEX): MovieResultsDto {
-        return httpClient.get(urlString = "movie/now_playing") {
-            parameter("page", page)
-        }.body<MovieResultsDto>()
-    }
-
-    suspend fun fetchTrendingMovies(
-        mediaType: String = "movie",
-        timeWindow: String = "week",
-        page: Int = STARTING_PAGE_INDEX
-    ): MovieResultsDto {
-        return httpClient.get(urlString = "trending/$mediaType/$timeWindow") {
-            parameter("page", page)
-        }.body<MovieResultsDto>()
-    }
-
-    suspend fun fetchPopularMovies(page: Int = STARTING_PAGE_INDEX): MovieResultsDto {
-        return httpClient.get(urlString = "movie/popular") {
-            parameter("page", page)
-        }.body<MovieResultsDto>()
-    }
-
-    suspend fun fetchUpcomingMovies(page: Int = STARTING_PAGE_INDEX): MovieResultsDto {
-        return httpClient.get(urlString = "movie/upcoming") {
-            parameter("page", page)
-        }.body<MovieResultsDto>()
-    }
-
     suspend fun fetchMovieDetails(movieId: Int): MovieDetailsDto {
         return httpClient.get(urlString = "movie/$movieId").body<MovieDetailsDto>()
     }
