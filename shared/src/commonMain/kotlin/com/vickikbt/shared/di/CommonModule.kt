@@ -6,7 +6,6 @@ import com.vickikbt.shared.data.datasources.FavoriteMovieRepositoryImpl
 import com.vickikbt.shared.data.datasources.MovieDetailsRepositoryImpl
 import com.vickikbt.shared.data.datasources.MoviesRepositoryImpl
 import com.vickikbt.shared.data.datasources.SettingsRepositoryImpl
-import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.domain.repositories.FavoritesRepository
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickikbt.shared.domain.repositories.MoviesRepository
@@ -39,9 +38,8 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 fun commonModule(enableNetworkLogs: Boolean) = module {
-    /**
-     * Multiplatform-Settings
-     */
+
+    /** Multiplatform-Settings*/
     singleOf(::PreferenceManager)
 
     /**
@@ -84,13 +82,12 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
             }
         }
     }
-    singleOf(::ApiService)
 
     singleOf(::MovieDao)
 
-    single<FavoritesRepository> { FavoriteMovieRepositoryImpl(movieDao = get()) }
-    single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(apiService = get()) }
     single<MoviesRepository> { MoviesRepositoryImpl(httpClient = get()) }
+    single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(httpClient = get()) }
+    single<FavoritesRepository> { FavoriteMovieRepositoryImpl(movieDao = get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(preferenceManager = get()) }
 
     factoryOf(::SharedMainPresenter)
