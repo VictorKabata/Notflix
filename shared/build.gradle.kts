@@ -76,19 +76,16 @@ kotlin {
         }
 
         sourceSets["androidMain"].dependencies {
-
         }
 
         sourceSets["androidTest"].dependencies {}
 
         sourceSets["iOSMain"].dependencies {
-
         }
 
         sourceSets["iOSTest"].dependencies {}
 
         sourceSets["jvmMain"].dependencies {
-            
         }
 
         sourceSets["jvmTest"].dependencies {}
