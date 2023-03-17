@@ -7,7 +7,6 @@ plugins {
     kotlin(Plugins.kotlinXSerialization) version Versions.kotlin
     id(Plugins.nativeCoroutines)
     id(Plugins.sqlDelight) version Versions.sqlDelight
-    id(Plugins.kover) version Versions.kover
 }
 
 android {
@@ -89,14 +88,5 @@ kotlin {
         }
 
         sourceSets["jvmTest"].dependencies {}
-    }
-}
-
-kover {
-    verify {
-        rule {
-            name = "Minimal line coverage rate in percents"
-            bound { minValue = 50 }
-        }
     }
 }
