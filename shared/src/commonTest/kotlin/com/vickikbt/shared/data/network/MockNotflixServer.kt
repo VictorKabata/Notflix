@@ -34,8 +34,6 @@ internal class MockNotflixServer {
         Resource("src/commonTest/resources/movies_response.json").readText()
     private val mockTrendingMoviesResponse =
         Resource("src/commonTest/resources/trending_movies_response.json").readText()
-    private val mockMoviesResponseError =
-        Resource("src/commonTest/resources/movies_response_error.json").readText()
     private val mockMovieDetailsResponse =
         Resource("src/commonTest/resources/movie_details_response.json").readText()
     private val mockMovieCastResponse =
@@ -44,6 +42,8 @@ internal class MockNotflixServer {
         Resource("src/commonTest/resources/movie_similar_response.json").readText()
     val mock500ErrorResponse =
         Resource("src/commonTest/resources/error_response.json").readText()
+    private val mock404ErrorResponse =
+        Resource("src/commonTest/resources/movies_response_error.json").readText()
 
     val mockHttpClient = HttpClient(MockEngine) {
         engine {
@@ -100,7 +100,7 @@ internal class MockNotflixServer {
                     }
                     else -> {
                         respond(
-                            content = responseContent ?: mockMoviesResponseError,
+                            content = responseContent ?: mock404ErrorResponse,
                             status = HttpStatusCode.NotFound,
                             headers = responseHeaders
                         )
