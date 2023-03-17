@@ -122,5 +122,4 @@ class MovieDetailsRepositoryImplTest {
 
         assertEquals(actual = response, expected = errorResponse500)
     }
-
 }

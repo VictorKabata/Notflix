@@ -55,5 +55,4 @@ class MovieDetailsRepositoryImpl constructor(
             response.movies?.map { it.toDomain() }
         }
     }
-
 }
