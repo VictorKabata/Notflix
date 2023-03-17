@@ -8,15 +8,15 @@ import kotlinx.coroutines.flow.Flow
 interface MovieDetailsRepository {
 
     /**Save favourite movie details to local DB*/
-    @Deprecated("Pending caching implementation")
-    suspend fun saveMovieDetails(movieDetail: MovieDetails)
+    /*@Deprecated("Pending caching implementation")
+    suspend fun saveMovieDetails(movieDetail: MovieDetails)*/
 
     /**
      * Retrieves movie detail based on id from local DB
      * if not available makes a network call to retrieve movie details from API
      */
-    @Deprecated("Pending caching implementation")
-    suspend fun getMovieDetails(movieId: Int): Flow<Result<MovieDetails>>
+    /*@Deprecated("Pending caching implementation")
+    suspend fun getMovieDetails(movieId: Int): Flow<Result<MovieDetails>>*/
 
     /**Fetch movie details from network source*/
     suspend fun fetchMovieDetails(movieId: Int): Flow<Result<MovieDetails>>

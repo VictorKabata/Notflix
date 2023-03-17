@@ -14,10 +14,10 @@ import kotlinx.coroutines.flow.map
 
 class MovieDetailsRepositoryImpl constructor(
     private val apiService: ApiService,
-    private val movieDao: MovieDao
+    // private val movieDao: MovieDao
 ) : MovieDetailsRepository {
 
-    override suspend fun saveMovieDetails(movieDetail: MovieDetails) {
+    /*override suspend fun saveMovieDetails(movieDetail: MovieDetails) {
         movieDao.saveMovieDetails(movieDetailsEntity = movieDetail.toEntity())
     }
 
@@ -26,7 +26,7 @@ class MovieDetailsRepositoryImpl constructor(
 
         // return if (cacheResponse.first() != null) cacheResponse
         return fetchMovieDetails(movieId = movieId)
-    }
+    }*/
 
     override suspend fun fetchMovieDetails(movieId: Int): Flow<Result<MovieDetails>> = safeApiCall {
         val networkResponse = apiService.fetchMovieDetails(movieId = movieId)

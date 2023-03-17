@@ -89,12 +89,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     singleOf(::MovieDao)
 
     single<FavoritesRepository> { FavoriteMovieRepositoryImpl(movieDao = get()) }
-    single<MovieDetailsRepository> {
-        MovieDetailsRepositoryImpl(
-            apiService = get(),
-            movieDao = get()
-        )
-    }
+    single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(apiService = get()) }
     single<MoviesRepository> { MoviesRepositoryImpl(apiService = get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(preferenceManager = get()) }
 
