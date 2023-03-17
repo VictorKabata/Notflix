@@ -13,26 +13,25 @@ class MoviesRepositoryImpl constructor(
     // private val moviesDao: MovieDao
 ) : MoviesRepository {
 
-    override suspend fun fetchMovies(category: Enums.MovieCategories): Flow<Result<List<Movie>?>> {
-        val networkResponse = when (category) {
-            Enums.MovieCategories.NOW_PLAYING -> {
-                apiService.fetchNowPlayingMovies().movies?.take(5)
+    override suspend fun fetchMovies(category: Enums.MovieCategories): Flow<Result<List<Movie>?>> =
+        safeApiCall {
+            val networkResponse = when (category) {
+                Enums.MovieCategories.NOW_PLAYING -> {
+                    apiService.fetchNowPlayingMovies().movies?.take(5)
+                }
+                Enums.MovieCategories.UPCOMING -> {
+                    apiService.fetchUpcomingMovies().movies
+                }
+                Enums.MovieCategories.POPULAR -> {
+                    apiService.fetchPopularMovies().movies
+                }
+                else -> {
+                    apiService.fetchTrendingMovies().movies?.filter { it.mediaType == "movie" }
+                }
             }
-            Enums.MovieCategories.UPCOMING -> {
-                apiService.fetchUpcomingMovies().movies
-            }
-            Enums.MovieCategories.POPULAR -> {
-                apiService.fetchPopularMovies().movies
-            }
-            else -> {
-                apiService.fetchTrendingMovies().movies?.filter { it.mediaType == "movie" }
-            }
-        }
 
-        return safeApiCall {
-            networkResponse?.map { it.toDomain() }
+            return@safeApiCall networkResponse?.map { it.toDomain() }
         }
-    }
 
     /*override suspend fun getMovies(category: String): Flow<List<Movie>> {
         val cachedResponse = moviesDao.getMoviesByCategory(category = category)
