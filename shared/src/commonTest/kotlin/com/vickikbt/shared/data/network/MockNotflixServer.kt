@@ -32,8 +32,8 @@ internal class MockNotflixServer {
 
     private val mockMoviesResponse =
         Resource("src/commonTest/resources/movies_response.json").readText()
-    private val mockMoviesResponseError =
-        Resource("src/commonTest/resources/movies_response_error.json").readText()
+    private val mockTrendingMoviesResponse =
+        Resource("src/commonTest/resources/movies_response_trending.json").readText()
     private val mockMovieDetailsResponse =
         Resource("src/commonTest/resources/movie_details_response.json").readText()
     private val mockMovieCastResponse =
@@ -41,7 +41,9 @@ internal class MockNotflixServer {
     private val mockMovieSimilarResponse =
         Resource("src/commonTest/resources/movie_similar_response.json").readText()
     val mock500ErrorResponse =
-        Resource("src/commonTest/resources/error_response.json").readText()
+        Resource("src/commonTest/resources/error_response_500.json").readText()
+    private val mock404ErrorResponse =
+        Resource("src/commonTest/resources/error_response_404.json").readText()
 
     val mockHttpClient = HttpClient(MockEngine) {
         engine {
@@ -56,7 +58,7 @@ internal class MockNotflixServer {
                     }
                     "/trending/movie/week" -> {
                         respond(
-                            content = responseContent ?: mockMoviesResponse,
+                            content = responseContent ?: mockTrendingMoviesResponse,
                             status = httpStatusCode,
                             headers = responseHeaders
                         )
@@ -75,21 +77,21 @@ internal class MockNotflixServer {
                             headers = responseHeaders
                         )
                     }
-                    "/movie/{id}" -> {
+                    "/movie/1" -> {
                         respond(
                             content = responseContent ?: mockMovieDetailsResponse,
                             status = httpStatusCode,
                             headers = responseHeaders
                         )
                     }
-                    "/movie/{id}/credits" -> {
+                    "/movie/1/credits" -> {
                         respond(
                             content = responseContent ?: mockMovieCastResponse,
                             status = httpStatusCode,
                             headers = responseHeaders
                         )
                     }
-                    "/movie/{id}/similar" -> {
+                    "/movie/1/similar" -> {
                         respond(
                             content = responseContent ?: mockMovieSimilarResponse,
                             status = httpStatusCode,
@@ -98,8 +100,8 @@ internal class MockNotflixServer {
                     }
                     else -> {
                         respond(
-                            content = responseContent ?: mockMoviesResponseError,
-                            status = HttpStatusCode.InternalServerError,
+                            content = responseContent ?: mock404ErrorResponse,
+                            status = HttpStatusCode.NotFound,
                             headers = responseHeaders
                         )
                     }
@@ -107,7 +109,7 @@ internal class MockNotflixServer {
             }
         }
 
-        expectSuccess = false
+        expectSuccess = true
         addDefaultResponseValidation()
 
         defaultRequest { contentType(ContentType.Application.Json) }

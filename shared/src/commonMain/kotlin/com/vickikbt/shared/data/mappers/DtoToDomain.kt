@@ -5,14 +5,12 @@ import com.vickikbt.shared.data.network.models.CastDto
 import com.vickikbt.shared.data.network.models.ErrorResponseDto
 import com.vickikbt.shared.data.network.models.MovieDetailsDto
 import com.vickikbt.shared.data.network.models.MovieDto
-import com.vickikbt.shared.data.network.models.MovieVideoDto
 import com.vickikbt.shared.data.network.models.VideoDto
 import com.vickikbt.shared.domain.models.Actor
 import com.vickikbt.shared.domain.models.Cast
 import com.vickikbt.shared.domain.models.ErrorResponse
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
-import com.vickikbt.shared.domain.models.MovieVideo
 import com.vickikbt.shared.domain.models.Video
 
 fun MovieDto.toDomain(): Movie {
@@ -92,12 +90,12 @@ fun VideoDto.toDomain(): Video {
     )
 }
 
-fun MovieVideoDto.toDomain(): MovieVideo {
+/*fun MovieVideoDto.toDomain(): MovieVideo {
     return MovieVideo(
         id = this.id,
         videos = this.videos?.map { it.toDomain() }
     )
-}
+}*/
 
 fun ErrorResponseDto.toDomain(): ErrorResponse {
     return ErrorResponse(

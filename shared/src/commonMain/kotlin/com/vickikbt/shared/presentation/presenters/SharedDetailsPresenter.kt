@@ -106,7 +106,7 @@ class SharedDetailsPresenter constructor(
         val job = viewModelScope.launch {
             try {
                 movieDetailsRepository.apply {
-                    movieDetailsRepository.saveMovieDetails(movieDetail = movieDetails)
+                    // movieDetailsRepository.saveMovieDetails(movieDetail = movieDetails)
                 }
             } catch (e: Exception) {
                 Napier.e("Error saving movie: $e")

@@ -42,15 +42,9 @@ internal suspend fun parseNetworkError(
     errorResponse: HttpResponse? = null,
     exception: Exception? = null
 ): Exception {
-    println("Parsing network error: ${errorResponse?.body<ErrorResponseDto>()}")
-
-    throw return try {
-        errorResponse?.body<ErrorResponseDto>()?.toDomain() ?: ErrorResponse(
-            success = false,
-            statusCode = 0,
-            statusMessage = exception?.message ?: "Error"
-        )
-    } catch (e: Exception) {
-        e
-    }
+    throw errorResponse?.body<ErrorResponseDto>()?.toDomain() ?: ErrorResponse(
+        success = false,
+        statusCode = 0,
+        statusMessage = exception?.message ?: "Error"
+    )
 }
