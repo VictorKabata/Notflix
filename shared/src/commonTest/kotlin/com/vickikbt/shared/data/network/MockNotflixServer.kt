@@ -32,6 +32,8 @@ internal class MockNotflixServer {
 
     private val mockMoviesResponse =
         Resource("src/commonTest/resources/movies_response.json").readText()
+    private val mockTrendingMoviesResponse =
+        Resource("src/commonTest/resources/trending_movies_response.json").readText()
     private val mockMoviesResponseError =
         Resource("src/commonTest/resources/movies_response_error.json").readText()
     private val mockMovieDetailsResponse =
@@ -56,7 +58,7 @@ internal class MockNotflixServer {
                     }
                     "/trending/movie/week" -> {
                         respond(
-                            content = responseContent ?: mockMoviesResponse,
+                            content = responseContent ?: mockTrendingMoviesResponse,
                             status = httpStatusCode,
                             headers = responseHeaders
                         )
@@ -107,7 +109,7 @@ internal class MockNotflixServer {
             }
         }
 
-        expectSuccess = false
+        expectSuccess = true
         addDefaultResponseValidation()
 
         defaultRequest { contentType(ContentType.Application.Json) }
