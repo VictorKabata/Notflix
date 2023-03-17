@@ -59,9 +59,6 @@ kotlin {
 
             implementation(MultiplatformDependencies.kotlinxSerializationJson)
 
-            implementation(MultiplatformDependencies.sqlDelight)
-            implementation(MultiplatformDependencies.sqlDelightCoroutine)
-
             implementation(MultiplatformDependencies.multiplatformSettings)
             implementation(MultiplatformDependencies.multiplatformSettingsCoroutines)
 
@@ -79,19 +76,19 @@ kotlin {
         }
 
         sourceSets["androidMain"].dependencies {
-            implementation(MultiplatformDependencies.sqlDelightAndroid)
+
         }
 
         sourceSets["androidTest"].dependencies {}
 
         sourceSets["iOSMain"].dependencies {
-            implementation(MultiplatformDependencies.sqlDelightNative)
+
         }
 
         sourceSets["iOSTest"].dependencies {}
 
         sourceSets["jvmMain"].dependencies {
-            implementation(MultiplatformDependencies.sqlDelightJVM)
+            
         }
 
         sourceSets["jvmTest"].dependencies {}
@@ -104,12 +101,5 @@ kover {
             name = "Minimal line coverage rate in percents"
             bound { minValue = 50 }
         }
-    }
-}
-
-sqldelight {
-    database(name = "AppDatabase") {
-        packageName = "com.vickikbt.shared.data.cache.sqldelight"
-        sourceFolders = listOf("kotlin")
     }
 }

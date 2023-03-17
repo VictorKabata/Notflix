@@ -1,12 +1,9 @@
 package com.vickikbt.shared.di
 
 import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager
-import com.vickikbt.shared.data.cache.sqldelight.daos.MovieDao
-import com.vickikbt.shared.data.datasources.FavoriteMovieRepositoryImpl
 import com.vickikbt.shared.data.datasources.MovieDetailsRepositoryImpl
 import com.vickikbt.shared.data.datasources.MoviesRepositoryImpl
 import com.vickikbt.shared.data.datasources.SettingsRepositoryImpl
-import com.vickikbt.shared.domain.repositories.FavoritesRepository
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.repositories.SettingsRepository
@@ -19,6 +16,7 @@ import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
 import com.vickikbt.shared.presentation.presenters.SharedMainPresenter
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import com.vickikbt.shared.utils.getAppLanguage
+import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
@@ -68,6 +66,8 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
                             Napier.e(tag = "Http Client", message = message)
                         }
                     }
+                }.also {
+                    Napier.base(DebugAntilog())
                 }
             }
 
@@ -82,11 +82,9 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
         }
     }
 
-    singleOf(::MovieDao)
 
     single<MoviesRepository> { MoviesRepositoryImpl(httpClient = get()) }
     single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(httpClient = get()) }
-    single<FavoritesRepository> { FavoriteMovieRepositoryImpl(movieDao = get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(preferenceManager = get()) }
 
     factoryOf(::SharedMainPresenter)

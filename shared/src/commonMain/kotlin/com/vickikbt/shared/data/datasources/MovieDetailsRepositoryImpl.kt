@@ -15,21 +15,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import kotlinx.coroutines.flow.Flow
 
-class MovieDetailsRepositoryImpl constructor(
-    private val httpClient: HttpClient,
-    // private val movieDao: MovieDao
-) : MovieDetailsRepository {
-
-    /*override suspend fun saveMovieDetails(movieDetail: MovieDetails) {
-        movieDao.saveMovieDetails(movieDetailsEntity = movieDetail.toEntity())
-    }
-
-    override suspend fun getMovieDetails(movieId: Int): Flow<Result<MovieDetails>> {
-        val cacheResponse = movieDao.getMovieDetails(id = movieId).map { it?.toDomain() }
-
-        // return if (cacheResponse.first() != null) cacheResponse
-        return fetchMovieDetails(movieId = movieId)
-    }*/
+class MovieDetailsRepositoryImpl constructor(private val httpClient: HttpClient) : MovieDetailsRepository {
 
     override suspend fun fetchMovieDetails(movieId: Int): Flow<Result<MovieDetails>> {
         return safeApiCall {

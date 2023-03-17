@@ -92,12 +92,12 @@ fun VideoDto.toDomain(): Video {
     )
 }
 
-fun MovieVideoDto.toDomain(): MovieVideo {
+/*fun MovieVideoDto.toDomain(): MovieVideo {
     return MovieVideo(
         id = this.id,
         videos = this.videos?.map { it.toDomain() }
     )
-}
+}*/
 
 fun ErrorResponseDto.toDomain(): ErrorResponse {
     return ErrorResponse(

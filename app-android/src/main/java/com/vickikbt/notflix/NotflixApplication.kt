@@ -3,7 +3,6 @@ package com.vickikbt.notflix
 import android.app.Application
 import com.vickikbt.notflix.di.presentationModule
 import com.vickikbt.shared.di.initKoin
-import com.vickikbt.shared.domain.utils.NapierInit
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.logger.Level
@@ -19,7 +18,5 @@ class NotflixApplication : Application() {
             androidContext(androidContext = this@NotflixApplication)
             modules(appModules)
         }
-
-        if (BuildConfig.DEBUG) NapierInit().init()
     }
 }
