@@ -18,7 +18,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 
-@OptIn(ExperimentalCoroutinesApi::class)
+@ExperimentalCoroutinesApi
 class MoviesRepositoryImplTest {
 
     private val mockNotflixServer = MockNotflixServer()
@@ -50,7 +50,7 @@ class MoviesRepositoryImplTest {
     }
 
     @Test
-    fun `now playing movies returns success on success`() = runTest {
+    fun `now playing movies returns success on http 200`() = runTest {
         val response =
             moviesRepository.fetchMovies(category = Enums.MovieCategories.NOW_PLAYING).first()
 
@@ -74,7 +74,7 @@ class MoviesRepositoryImplTest {
     }
 
     @Test
-    fun `upcoming movies returns success on success`() = runTest {
+    fun `upcoming movies returns success on http 200`() = runTest {
         val response =
             moviesRepository.fetchMovies(category = Enums.MovieCategories.UPCOMING).first()
 
@@ -98,7 +98,7 @@ class MoviesRepositoryImplTest {
     }
 
     @Test
-    fun `popular movies returns success on success`() = runTest {
+    fun `popular movies returns success on http 200`() = runTest {
         val response =
             moviesRepository.fetchMovies(category = Enums.MovieCategories.POPULAR).first()
 
@@ -122,12 +122,9 @@ class MoviesRepositoryImplTest {
     }
 
     @Test
-    fun `trending movies returns success on success`() = runTest {
+    fun `trending movies returns success on http 200`() = runTest {
         val response =
             moviesRepository.fetchMovies(category = Enums.MovieCategories.TRENDING).first()
-
-
-        println("Response: ${response.getOrNull()}")
 
         assertNotNull(response.getOrNull())
         assertTrue(response.isSuccess)
