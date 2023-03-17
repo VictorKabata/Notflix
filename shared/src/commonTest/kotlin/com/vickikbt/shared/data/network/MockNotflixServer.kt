@@ -91,7 +91,7 @@ internal class MockNotflixServer {
                             headers = responseHeaders
                         )
                     }
-                    "/movie/{id}/similar" -> {
+                    "/movie/1/similar" -> {
                         respond(
                             content = responseContent ?: mockMovieSimilarResponse,
                             status = httpStatusCode,
@@ -101,7 +101,7 @@ internal class MockNotflixServer {
                     else -> {
                         respond(
                             content = responseContent ?: mockMoviesResponseError,
-                            status = HttpStatusCode.InternalServerError,
+                            status = HttpStatusCode.NotFound,
                             headers = responseHeaders
                         )
                     }

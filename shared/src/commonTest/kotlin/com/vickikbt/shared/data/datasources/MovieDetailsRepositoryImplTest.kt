@@ -98,4 +98,29 @@ class MovieDetailsRepositoryImplTest {
         assertEquals(actual = response, expected = errorResponse500)
     }
 
+    @Test
+    fun `fetchSimilarMovies returns success on http 200`() = runTest {
+        val response = movieDetailsRepository.fetchSimilarMovies(movieId = 1).first()
+
+        response.onSuccess {
+            assertNotNull(it)
+        }.onFailure {
+            assertNull(it)
+        }
+    }
+
+    @Test
+    fun `fetchSimilarMovies returns failure on http 500`() = runTest {
+        mockNotflixServer.throwError(
+            httpStatus = HttpStatusCode.InternalServerError,
+            response = mockNotflixServer.mock500ErrorResponse
+        )
+
+        val response = assertFailsWith<ErrorResponse> {
+            movieDetailsRepository.fetchSimilarMovies(movieId = 1).first()
+        }
+
+        assertEquals(actual = response, expected = errorResponse500)
+    }
+
 }
