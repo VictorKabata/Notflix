@@ -45,9 +45,7 @@ class ApiService constructor(private val httpClient: HttpClient) {
     }
 
     suspend fun fetchMovieCast(movieId: Int): CastDto {
-        return httpClient.get(urlString = "movie/$movieId/credits") {
-            parameter("movie_id", movieId)
-        }.body<CastDto>()
+        return httpClient.get(urlString = "movie/$movieId/credits").body<CastDto>()
     }
 
     suspend fun fetchMovieVideos(movieId: Int): MovieVideoDto {
