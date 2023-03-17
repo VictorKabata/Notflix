@@ -1,6 +1,5 @@
 package com.vickikbt.shared.data.datasources
 
-import com.vickikbt.shared.data.network.ApiService
 import com.vickikbt.shared.data.network.MockNotflixServer
 import com.vickikbt.shared.domain.models.ErrorResponse
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
@@ -23,7 +22,6 @@ class MovieDetailsRepositoryImplTest {
     private val mockNotflixServer = MockNotflixServer()
 
     private lateinit var mockKtorHttpClient: HttpClient
-    private lateinit var apiServiceTest: ApiService
 
     private val errorResponse500 = ErrorResponse(
         success = false,
@@ -38,9 +36,7 @@ class MovieDetailsRepositoryImplTest {
     fun setup() {
         mockKtorHttpClient = mockNotflixServer.mockHttpClient
 
-        apiServiceTest = ApiService(httpClient = mockKtorHttpClient)
-
-        movieDetailsRepository = MovieDetailsRepositoryImpl(apiService = apiServiceTest)
+        movieDetailsRepository = MovieDetailsRepositoryImpl(httpClient = mockKtorHttpClient)
     }
 
     @AfterTest
