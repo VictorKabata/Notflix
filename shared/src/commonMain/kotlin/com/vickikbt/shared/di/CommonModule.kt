@@ -27,13 +27,6 @@ import org.koin.dsl.module
 fun commonModule(enableNetworkLogs: Boolean) = module {
 
     /**
-     * Multiplatform-Settings
-     */
-    single {
-        PreferenceManager(observableSettings = get())
-    }
-
-    /**
      * Creates a http client for Ktor that is provided to the
      * API client via constructor injection
      */

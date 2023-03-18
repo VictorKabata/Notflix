@@ -18,4 +18,8 @@ object Constants {
 
     const val BUG_REPORT_EMAIL = "victorbro14@gmail.com"
     const val BUG_REPORT_SUBJECT = "Notflix-Bug report or feature request"
+
+    const val KEY_THEME = "theme"
+    const val KEY_LANGUAGE = "language"
+    const val KEY_IMAGE_QUALITY = "image_quality"
 }
