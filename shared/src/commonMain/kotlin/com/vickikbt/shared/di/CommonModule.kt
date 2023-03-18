@@ -1,6 +1,5 @@
 package com.vickikbt.shared.di
 
-import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager
 import com.vickikbt.shared.data.datasources.MovieDetailsRepositoryImpl
 import com.vickikbt.shared.data.datasources.MoviesRepositoryImpl
 import com.vickikbt.shared.data.datasources.SettingsRepositoryImpl
@@ -32,11 +31,9 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.factoryOf
-import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 fun commonModule(enableNetworkLogs: Boolean) = module {
-
     /**
      * Creates a http client for Ktor that is provided to the
      * API client via constructor injection
@@ -82,7 +79,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
 
     single<MoviesRepository> { MoviesRepositoryImpl(httpClient = get()) }
     single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(httpClient = get()) }
-    single<SettingsRepository> { SettingsRepositoryImpl(preferenceManager = get()) }
+    single<SettingsRepository> { SettingsRepositoryImpl(observableSettings = get()) }
 
     factoryOf(::SharedMainPresenter)
     factoryOf(::SharedHomePresenter)
