@@ -1,7 +1,7 @@
 object Versions {
     // Project Level Plugins
     const val kotlin = "1.8.0"
-    const val gradle = "7.2.0"
+    const val gradle = "7.4.2"
     const val ktLint = "10.3.0"
     const val detekt = "1.19.0"
     const val gradleVersionUpdate = "0.42.0"
