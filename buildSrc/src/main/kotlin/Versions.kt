@@ -22,6 +22,7 @@ object Versions {
     const val sqlDelight = "1.5.5"
     const val multiplatformSettings = "0.8.1"
     const val kmpNativeCoroutines = "0.12.1-new-mm"
+    const val buildKonfig="0.13.3"
     const val kover = "0.6.1"
 
     const val mockk = "1.12.3"

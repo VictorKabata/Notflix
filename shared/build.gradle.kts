@@ -8,7 +8,7 @@ plugins {
     kotlin(Plugins.kotlinXSerialization) version Versions.kotlin
     id(Plugins.nativeCoroutines)
     id(Plugins.sqlDelight) version Versions.sqlDelight
-    id("com.codingfeline.buildkonfig") version "0.13.3"
+    id(Plugins.buildKonfig) version Versions.buildKonfig
 }
 
 android {

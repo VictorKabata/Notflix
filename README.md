@@ -1,4 +1,3 @@
-<p align="center"><img src="assets/app_logo.png" alt="NotFlix" width="150px"></p>
 <p align="center"><img src="assets/logo_notflix.png" alt="NotFlix" height="31px"></p>
 
 <p align="center">
