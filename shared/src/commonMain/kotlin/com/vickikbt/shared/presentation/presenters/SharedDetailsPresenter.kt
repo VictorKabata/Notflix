@@ -5,7 +5,6 @@ import com.vickikbt.shared.domain.models.Cast
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.models.MovieVideo
-import com.vickikbt.shared.domain.repositories.FavoritesRepository
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
