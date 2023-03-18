@@ -5,8 +5,6 @@ object Constants {
     const val BASE_URL = "api.themoviedb.org"
     const val URL_PATH = "3/"
 
-    const val API_KEY = "423f0418a6d6586755fe3d7227327ef2" // ToDo: Replace and hide
-
     const val STARTING_PAGE_INDEX = 1
     const val PAGING_SIZE = 5
 

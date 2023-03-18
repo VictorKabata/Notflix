@@ -1,12 +1,12 @@
 package com.vickikbt.shared.di
 
+import com.vickikbt.shared.BuildKonfig
 import com.vickikbt.shared.data.datasources.MovieDetailsRepositoryImpl
 import com.vickikbt.shared.data.datasources.MoviesRepositoryImpl
 import com.vickikbt.shared.data.datasources.SettingsRepositoryImpl
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.repositories.SettingsRepository
-import com.vickikbt.shared.domain.utils.Constants.API_KEY
 import com.vickikbt.shared.domain.utils.Constants.BASE_URL
 import com.vickikbt.shared.domain.utils.Constants.URL_PATH
 import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
@@ -48,7 +48,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
                     protocol = URLProtocol.HTTPS
                     host = BASE_URL
                     path(URL_PATH)
-                    parameters.append("api_key", API_KEY)
+                    parameters.append("api_key", BuildKonfig.API_KEY)
                     parameters.append("language", getAppLanguage(settingsPresenter = get()))
                 }
             }

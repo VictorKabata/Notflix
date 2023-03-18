@@ -1,3 +1,4 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
@@ -7,6 +8,7 @@ plugins {
     kotlin(Plugins.kotlinXSerialization) version Versions.kotlin
     id(Plugins.nativeCoroutines)
     id(Plugins.sqlDelight) version Versions.sqlDelight
+    id("com.codingfeline.buildkonfig") version "0.13.3"
 }
 
 android {
@@ -88,5 +90,13 @@ kotlin {
         }
 
         sourceSets["jvmTest"].dependencies {}
+    }
+}
+
+buildkonfig {
+    packageName = "com.vickikbt.shared"
+
+    defaultConfigs {
+        buildConfigField(STRING, "API_KEY", properties["api_key"].toString())
     }
 }
