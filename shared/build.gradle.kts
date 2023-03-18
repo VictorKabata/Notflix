@@ -4,8 +4,9 @@ plugins {
     kotlin(Plugins.multiplatform)
     kotlin(Plugins.nativeCocoaPods)
     id(Plugins.androidLibrary)
-    kotlin(Plugins.kotlinXSerialization) version Versions.kotlinSerialization
+    kotlin(Plugins.kotlinXSerialization) version Versions.kotlin
     id(Plugins.nativeCoroutines)
+    id(Plugins.sqlDelight) version Versions.sqlDelight
 }
 
 android {
@@ -28,17 +29,15 @@ kotlin {
         else -> ::iosX64
     }
     iosTarget("iOS") {}
-
+    version = "1"
     cocoapods {
-
-        version = "1"
+        // version = "1"
 
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
-        /* ios.deploymentTarget = "14.1"
-         podfile = project.file("../Gistagram/Podfile")
+        // ios.deploymentTarget = "14.1"
+        podfile = project.file("../iOSNotflix/Podfile")
 
-         */
         framework {
             baseName = "shared"
             isStatic = false
@@ -49,19 +48,22 @@ kotlin {
         sourceSets["commonMain"].dependencies {
             implementation(MultiplatformDependencies.kotlinxCoroutines)
 
-            implementation(MultiplatformDependencies.kotlinxSerialization)
-            implementation(MultiplatformDependencies.kotlinxDateTime)
-
             api(MultiplatformDependencies.koinCore)
 
-            implementation(MultiplatformDependencies.ktorCore)
-            implementation(MultiplatformDependencies.ktorSerialization)
+            api(MultiplatformDependencies.ktorCore)
+            api(MultiplatformDependencies.ktorCio)
+            implementation(MultiplatformDependencies.ktorContentNegotiation)
+            implementation(MultiplatformDependencies.ktorJson)
             implementation(MultiplatformDependencies.ktorLogging)
 
-            api(MultiplatformDependencies.napier)
+            implementation(MultiplatformDependencies.kotlinxSerializationJson)
 
             implementation(MultiplatformDependencies.multiplatformSettings)
             implementation(MultiplatformDependencies.multiplatformSettingsCoroutines)
+
+            api(MultiplatformDependencies.napier)
+
+            implementation(MultiplatformDependencies.kotlinxDateTime)
         }
 
         sourceSets["commonTest"].dependencies {
@@ -73,19 +75,18 @@ kotlin {
         }
 
         sourceSets["androidMain"].dependencies {
-            implementation(MultiplatformDependencies.ktorAndroid)
         }
 
         sourceSets["androidTest"].dependencies {}
 
-        sourceSets["jvmMain"].dependencies {
-            api(MultiplatformDependencies.ktorJvm)
-        }
-
         sourceSets["iOSMain"].dependencies {
-            implementation(MultiplatformDependencies.ktoriOS)
         }
 
         sourceSets["iOSTest"].dependencies {}
+
+        sourceSets["jvmMain"].dependencies {
+        }
+
+        sourceSets["jvmTest"].dependencies {}
     }
 }

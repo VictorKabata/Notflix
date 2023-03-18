@@ -1,27 +1,38 @@
 package com.vickikbt.shared.di
 
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager
-import com.vickikbt.shared.data.data_sources.FavoriteMovieRepositoryImpl
-import com.vickikbt.shared.data.data_sources.MovieDetailsRepositoryImpl
-import com.vickikbt.shared.data.data_sources.MoviesRepositoryImpl
-import com.vickikbt.shared.data.data_sources.SettingsRepositoryImpl
-import com.vickikbt.shared.data.network.ApiService
-import com.vickikbt.shared.domain.repositories.FavoritesRepository
+import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager
+import com.vickikbt.shared.data.datasources.MovieDetailsRepositoryImpl
+import com.vickikbt.shared.data.datasources.MoviesRepositoryImpl
+import com.vickikbt.shared.data.datasources.SettingsRepositoryImpl
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.repositories.SettingsRepository
 import com.vickikbt.shared.domain.utils.Constants.API_KEY
 import com.vickikbt.shared.domain.utils.Constants.BASE_URL
+import com.vickikbt.shared.domain.utils.Constants.URL_PATH
+import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
+import com.vickikbt.shared.presentation.presenters.SharedFavouritesPresenter
+import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
+import com.vickikbt.shared.presentation.presenters.SharedMainPresenter
+import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import com.vickikbt.shared.utils.getAppLanguage
-import com.vickikbt.shared.presentation.presenters.*
+import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
-import io.ktor.client.*
-import io.ktor.client.features.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
-import io.ktor.client.features.logging.*
-import io.ktor.http.*
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.cio.CIO
+import io.ktor.client.plugins.addDefaultResponseValidation
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.http.URLProtocol
+import io.ktor.http.path
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.factoryOf
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 fun commonModule(enableNetworkLogs: Boolean) = module {
@@ -31,11 +42,15 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
      * API client via constructor injection
      */
     single {
-        HttpClient(get()) {
+        HttpClient(engineFactory = CIO) {
+            expectSuccess = true
+            addDefaultResponseValidation()
+
             defaultRequest {
                 url {
+                    protocol = URLProtocol.HTTPS
                     host = BASE_URL
-                    url { protocol = URLProtocol.HTTPS }
+                    path(URL_PATH)
                     parameters.append("api_key", API_KEY)
                     parameters.append("language", getAppLanguage(settingsPresenter = get()))
                 }
@@ -49,12 +64,14 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
                             Napier.e(tag = "Http Client", message = message)
                         }
                     }
+                }.also {
+                    Napier.base(DebugAntilog())
                 }
             }
 
-            install(JsonFeature) {
-                serializer = KotlinxSerializer(
-                    kotlinx.serialization.json.Json {
+            install(ContentNegotiation) {
+                json(
+                    Json {
                         ignoreUnknownKeys = true
                         isLenient = true
                     }
@@ -62,18 +79,16 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
             }
         }
     }
-    single { ApiService(httpClient = get()) }
 
-    single<FavoritesRepository> { FavoriteMovieRepositoryImpl() }
-    single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(apiService = get()) }
-    single<MoviesRepository> { MoviesRepositoryImpl(apiService = get()) }
+    single<MoviesRepository> { MoviesRepositoryImpl(httpClient = get()) }
+    single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(httpClient = get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(preferenceManager = get()) }
 
-    single { SharedMainPresenter(settingsRepository = get()) }
-    single { SharedHomePresenter(moviesRepository = get()) }
-    single { SharedDetailsPresenter(movieDetailsRepository = get()) }
-    single { SharedFavouritesPresenter(favouritesRepository = get()) }
-    single { SharedSettingsPresenter(settingsRepository = get()) }
+    factoryOf(::SharedMainPresenter)
+    factoryOf(::SharedHomePresenter)
+    factoryOf(::SharedDetailsPresenter)
+    factoryOf(::SharedFavouritesPresenter)
+    factoryOf(::SharedSettingsPresenter)
 }
 
 expect fun platformModule(): Module

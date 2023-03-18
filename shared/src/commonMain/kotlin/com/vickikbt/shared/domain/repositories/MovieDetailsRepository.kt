@@ -3,47 +3,31 @@ package com.vickikbt.shared.domain.repositories
 import com.vickikbt.shared.domain.models.Cast
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
-import com.vickikbt.shared.domain.models.MovieVideo
+import com.vickikbt.shared.domain.utils.Constants.STARTING_PAGE_INDEX
 import kotlinx.coroutines.flow.Flow
 
 interface MovieDetailsRepository {
+
+    /**Save favourite movie details to local DB*/
+    /*@Deprecated("Pending caching implementation")
+    suspend fun saveMovieDetails(movieDetail: MovieDetails)*/
+
     /**
-     * Retrieves movie detail based on id from SQLite
+     * Retrieves movie detail based on id from local DB
      * if not available makes a network call to retrieve movie details from API
      */
-    suspend fun getMovieDetails(movieId: Int): Flow<MovieDetails?>
+    /*@Deprecated("Pending caching implementation")
+    suspend fun getMovieDetails(movieId: Int): Flow<Result<MovieDetails>>*/
 
-    /**
-     * Gets movie cast from network and later local database
-     */
-    suspend fun getMovieCast(movieId: Int): Flow<Cast?>
+    /**Fetch movie details from network source*/
+    suspend fun fetchMovieDetails(movieId: Int): Flow<Result<MovieDetails>>
 
-    /**
-     * Gets movie videos from network and later local database
-     */
-    suspend fun getMovieVideos(movieId: Int): Flow<MovieVideo?>
+    /**Fetch movie cast from network source*/
+    suspend fun fetchMovieCast(movieId: Int): Flow<Result<Cast>>
 
-    /**
-     * Gets similar movies from network
-     */
-    suspend fun fetchSimilarMovies(movieId: Int): Flow<List<Movie>?>
-
-    /**
-     * Save movie details to local storage
-     */
-    // suspend fun saveMovieDetails(movieDetailsEntity: MovieDetailsEntity)
-
-    /**
-     * Save movie cast details to local storage
-     */
-    // suspend fun saveMovieCast(cast: Cast)
-
-    /**
-     * Save movie videos to local storage
-     */
-    // suspend fun saveMovieVideos(movieVideo: MovieVideo)
-
-    suspend fun isMovieFavorite(movieId: Int): Flow<Boolean?>
-
-    // suspend fun updateMovieIsFavorite(cacheId: Int, isFavourite: Boolean)
+    /** Fetches similar movies from network source*/
+    suspend fun fetchSimilarMovies(
+        movieId: Int,
+        page: Int = STARTING_PAGE_INDEX
+    ): Flow<Result<List<Movie>?>>
 }

@@ -1,5 +1,5 @@
-include(":androidApp")
+include(":app-android")
 include(":shared")
-include(":desktopApp")
+include(":app-desktop")
 
 rootProject.name = "Notflix"

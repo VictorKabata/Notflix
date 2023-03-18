@@ -1,16 +1,13 @@
 package com.vickikbt.shared.presentation.presenters
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
-import com.vickikbt.shared.data.network.utils.NetworkResult
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.repositories.MoviesRepository
-import com.vickikbt.shared.domain.utils.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
@@ -37,15 +34,21 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
     val error get() = _error.asStateFlow()
 
     init {
-        fetchMovies()
+        fetchNowPlayingMovies()
+        fetchTrendingMovies()
+        fetchPopularMovies()
+        fetchUpcomingMovies()
     }
 
-    fun fetchMovies() {
-        val job = viewModelScope.launch {
-            fetchNowPlayingMovies()
-            fetchPopularMovies()
-            fetchUpcomingMovies()
-            fetchTrendingMovies()
+    private fun fetchNowPlayingMovies() {
+        val job = viewModelScope.launch(Dispatchers.Default) {
+            moviesRepository.fetchNowPlayingMovies().collect { moviesResult ->
+                moviesResult.onSuccess {
+                    _nowPlayingMovies.value = it
+                }.onFailure {
+                    _error.value = it.message
+                }
+            }
         }
 
         supervisorJob.value = job
@@ -55,59 +58,69 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
         }
     }
 
-    private suspend fun fetchNowPlayingMovies() {
-        try {
-            moviesRepository.fetchMovies(category = Constants.CATEGORY_NOW_PLAYING_MOVIES)
-                .collectLatest {
-                    when (it) {
-                        is NetworkResult.Success -> _nowPlayingMovies.value = it.data
-                        is NetworkResult.Error -> _error.value = it.errorMessage
+    private fun fetchTrendingMovies() {
+        val job = viewModelScope.launch {
+            try {
+                moviesRepository.fetchTrendingMovies().collect { moviesResult ->
+                    moviesResult.onSuccess {
+                        _trendingMovies.value = it
+                    }.onFailure {
+                        _error.value = it.message
                     }
                 }
-        } catch (e: Exception) {
-            _error.value = e.message
+            } catch (e: Exception) {
+                _error.value = e.message
+            }
+        }
+
+        supervisorJob.value = job
+        job.invokeOnCompletion {
+            supervisorJob.value?.cancel()
+            supervisorJob.value = null
         }
     }
 
-    private suspend fun fetchTrendingMovies() {
-        try {
-            moviesRepository.fetchMovies(category = Constants.CATEGORY_TRENDING_MOVIES)
-                .collectLatest {
-                    when (it) {
-                        is NetworkResult.Success -> _trendingMovies.value = it.data
-                        is NetworkResult.Error -> _error.value = it.errorMessage
+    private fun fetchPopularMovies() {
+        val job = viewModelScope.launch {
+            try {
+                moviesRepository.fetchPopularMovies().collect { moviesResult ->
+                    moviesResult.onSuccess {
+                        _popularMovies.value = it
+                    }.onFailure {
+                        _error.value = it.message
                     }
                 }
-        } catch (e: Exception) {
-            _error.value = e.message
+            } catch (e: Exception) {
+                _error.value = e.message
+            }
+        }
+
+        supervisorJob.value = job
+        job.invokeOnCompletion {
+            supervisorJob.value?.cancel()
+            supervisorJob.value = null
         }
     }
 
-    private suspend fun fetchPopularMovies() {
-        try {
-            moviesRepository.fetchMovies(category = Constants.CATEGORY_POPULAR_MOVIES)
-                .collectLatest {
-                    when (it) {
-                        is NetworkResult.Success -> _popularMovies.value = it.data
-                        is NetworkResult.Error -> _error.value = it.errorMessage
+    private fun fetchUpcomingMovies() {
+        val job = viewModelScope.launch {
+            try {
+                moviesRepository.fetchUpcomingMovies().collect { moviesResult ->
+                    moviesResult.onSuccess {
+                        _upcomingMovies.value = it
+                    }.onFailure {
+                        _error.value = it.message
                     }
                 }
-        } catch (e: Exception) {
-            _error.value = e.message
+            } catch (e: Exception) {
+                _error.value = e.message
+            }
         }
-    }
 
-    private suspend fun fetchUpcomingMovies() {
-        try {
-            moviesRepository.fetchMovies(category = Constants.CATEGORY_UPCOMING_MOVIES)
-                .collectLatest {
-                    when (it) {
-                        is NetworkResult.Success -> _upcomingMovies.value = it.data
-                        is NetworkResult.Error -> _error.value = it.errorMessage
-                    }
-                }
-        } catch (e: Exception) {
-            _error.value = e.message
+        supervisorJob.value = job
+        job.invokeOnCompletion {
+            supervisorJob.value?.cancel()
+            supervisorJob.value = null
         }
     }
 }

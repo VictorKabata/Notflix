@@ -1,6 +1,6 @@
 object Versions {
     // Project Level Plugins
-    const val kotlin = "1.6.20"
+    const val kotlin = "1.8.0"
     const val gradle = "7.2.0"
     const val ktLint = "10.3.0"
     const val detekt = "1.19.0"
@@ -11,23 +11,25 @@ object Versions {
     const val firebasePerformance="1.4.1"
 
     // KMM Dependencies Version
-    const val koin = "3.2.0"
-    const val kotlinSerialization = "1.6.10"
-    const val kotlinxSerialization = "1.2.2"
-    const val kotlinxCoroutines = "1.6.0-native-mt"
+    const val koinCore="3.3.3"
+    const val koinAndroid = "3.3.3"
+    const val koinCompose="3.4.2"
+    const val kotlinxSerializationJson = "1.5.0"
+    const val kotlinxCoroutines = "1.6.4"
     const val kotlinxDateTime = "0.3.2"
     const val napier = "2.4.0"
-    const val ktor = "1.6.7"
-    const val sqlDelight = "1.5.3"
+    const val ktor = "2.2.3"
+    const val sqlDelight = "1.5.5"
     const val multiplatformSettings = "0.8.1"
     const val kmpNativeCoroutines = "0.12.1-new-mm"
+    const val kover = "0.6.1"
 
     const val mockk = "1.12.3"
 
     const val kotlinxTestResources = "0.2.2"
 
     // Desktop Dependencies Version
-    const val composeDesktop = "1.2.0-alpha01-dev683"
+    const val composeDesktop = "1.3.0"
     const val kamel = "0.2.2"
 
     // Android Dependencies
