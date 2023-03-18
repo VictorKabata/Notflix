@@ -17,12 +17,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import ui.components.preferences.PreferencesGroup
-import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager
+import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
+import com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE
+import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import koin
 import ui.components.appBars.AppBar
 import ui.components.preferences.DialogPreferenceSelection
+import ui.components.preferences.PreferencesGroup
 import ui.components.preferences.TextPreference
 import ui.navigation.NavController
 
@@ -148,7 +150,7 @@ private fun ChangeTheme(
         labels = listOf("Light Theme", "Dark Theme", "System Default"),
         onNegativeClick = { showDialog.value = false }
     ) { theme ->
-        viewModel.savePreferenceSelection(key = PreferenceManager.THEME_KEY, selection = theme)
+        viewModel.savePreferenceSelection(key = KEY_THEME, selection = theme)
     }
 }
 
@@ -166,7 +168,7 @@ private fun ChangeLanguage(
         onNegativeClick = { showDialog.value = false }
     ) { language ->
         viewModel.savePreferenceSelection(
-            key = PreferenceManager.LANGUAGE_KEY,
+            key = KEY_LANGUAGE,
             selection = language
         )
     }
@@ -186,7 +188,7 @@ private fun ChangeImageQuality(
         onNegativeClick = { showDialog.value = false }
     ) { imageQuality ->
         viewModel.savePreferenceSelection(
-            key = PreferenceManager.IMAGE_QUALITY_KEY,
+            key = KEY_IMAGE_QUALITY,
             selection = imageQuality
         )
     }
