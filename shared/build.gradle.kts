@@ -48,32 +48,32 @@ kotlin {
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
-            implementation(MultiplatformDependencies.kotlinxCoroutines)
+            implementation(libs.kotlinX.coroutines)
 
-            api(MultiplatformDependencies.koinCore)
+            api(libs.koin.core)
 
-            api(MultiplatformDependencies.ktorCore)
-            api(MultiplatformDependencies.ktorCio)
-            implementation(MultiplatformDependencies.ktorContentNegotiation)
-            implementation(MultiplatformDependencies.ktorJson)
-            implementation(MultiplatformDependencies.ktorLogging)
+            api(libs.ktor.core)
+            api(libs.ktor.cio)
+            implementation(libs.ktor.contentNegotiation)
+            implementation(libs.ktor.json)
+            implementation(libs.ktor.logging)
 
-            implementation(MultiplatformDependencies.kotlinxSerializationJson)
+            implementation(libs.kotlinX.serializationJson)
 
-            implementation(MultiplatformDependencies.multiplatformSettings)
-            implementation(MultiplatformDependencies.multiplatformSettingsCoroutines)
+             implementation(libs.multiplatformSettings.noArg)
+            implementation(libs.multiplatformSettings.coroutines)
 
-            api(MultiplatformDependencies.napier)
+            api(libs.napier)
 
-            implementation(MultiplatformDependencies.kotlinxDateTime)
+            implementation(libs.kotlinX.dateTime)
         }
 
         sourceSets["commonTest"].dependencies {
             implementation(kotlin("test"))
-            implementation(MultiplatformDependencies.ktorMock)
-            implementation(MultiplatformDependencies.kotlinxTestResources)
-            implementation(MultiplatformDependencies.kotlinxCoroutinesTest)
-            implementation(MultiplatformDependencies.multiplatformSettingsTest)
+            implementation(libs.ktor.mock)
+            implementation(libs.kotlinX.testResources)
+            implementation(libs.kotlinX.coroutines.test)
+            implementation(libs.multiplatformSettings.test)
         }
 
         sourceSets["androidMain"].dependencies {
