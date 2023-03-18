@@ -17,8 +17,7 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
 class SharedDetailsPresenter constructor(
-    private val movieDetailsRepository: MovieDetailsRepository,
-    private val favouritesPresenter: FavoritesRepository
+    private val movieDetailsRepository: MovieDetailsRepository
 ) : KoinComponent {
 
     @NativeCoroutineScope
@@ -122,7 +121,7 @@ class SharedDetailsPresenter constructor(
     @Deprecated("Pending caching implementation")
     fun deleteFavouriteMovie(movieId: Int) {
         val job = viewModelScope.launch {
-            favouritesPresenter.deleteFavouriteMovie(movieId = movieId)
+            // favouritesPresenter.deleteFavouriteMovie(movieId = movieId)
         }
 
         supervisorJob.value = job
