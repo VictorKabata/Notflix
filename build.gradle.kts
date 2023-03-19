@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.multiplatform) apply false
     alias(libs.plugins.jvm) apply false
     alias(libs.plugins.nativeCocoapod) apply false
+    alias(libs.plugins.googleService.plugin) apply false
 
     alias(libs.plugins.ktLint)
     alias(libs.plugins.detekt)
@@ -14,9 +15,7 @@ plugins {
 
 buildscript {
     dependencies {
-        // classpath(libs.kotlin)
-        // classpath(libs.gradle)
-        classpath(libs.googleServices)
+        // classpath(libs.googleServices)
         classpath(libs.firebase.appDistribution.plugin)
         classpath(libs.firebase.crashlytics.plugin)
         classpath(libs.firebase.performance.plugin)

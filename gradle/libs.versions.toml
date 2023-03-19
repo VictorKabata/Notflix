@@ -78,17 +78,19 @@ kmp-NativeCoroutines-plugin = { id = "com.rickclephas.kmp.nativecoroutines", ver
 sqlDelight-plugin = { id = "com.squareup.sqldelight", version.ref = "sqlDelight" }
 buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
 
+googleService-plugin = { id = "com.google.gms.google-services", version.ref="googleServices" }
+
 firebase-crashlytics-plugin = { id = "com.google.firebase.crashlytics" }
 firebase-appDistribution-plugin = { id = "com.google.firebase.appdistribution" }
 firebase-performance-plugin = { id = "com.google.firebase.firebase-perf" }
-googleService-plugin = { id = "com.google.gms.google-services" }
 
 [libraries]
+googleServices = { module = "com.google.gms:google-services", version.ref = "googleServices" }
+
 #Project
 kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 kmpNativeCoroutines = { module = "com.rickclephas.kmp:kmp-nativecoroutines-gradle-plugin", version.ref = "kmpNativeCoroutines" }
-googleServices = { module = "com.google.gms:google-services", version.ref = "googleServices" }
 firebase-appDistribution-plugin = { module = "com.google.firebase:firebase-appdistribution-gradle", version.ref = "firebaseAppDistribution" }
 firebase-crashlytics-plugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebaseCrashlytics" }
 firebase-performance-plugin = { module = "com.google.firebase:perf-plugin", version.ref = "firebasePerformance" }
@@ -130,14 +132,12 @@ compose-util = { module = "androidx.compose.ui:ui-util", version.ref = "compose"
 compose-constraintLayout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "composeConstraintLayout" }
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3" }
-
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
 accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist" }
 accompanist-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist" }
 accompanist-systemUIController = { module = "com.google.accompanist:accompanist-systemuicontroller", version = "0.17.0" }
 accompanist-materialPlaceHolder = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
 accompanist-pagerIndicator = { module = "com.google.accompanist:accompanist-pager-indicators", version = "0.22.0-rc" }
-
 lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose" }

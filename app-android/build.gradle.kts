@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.android.kotlin)
+    // alias(libs.plugins.googleService)
 
     id(libs.plugins.googleService.plugin.get().pluginId)
     id(libs.plugins.firebase.appDistribution.plugin.get().pluginId)
