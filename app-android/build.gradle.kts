@@ -59,56 +59,56 @@ dependencies {
 
     implementation(libs.androidX.core)
 
-    implementation(AndroidDependencies.material)
+    implementation(libs.material)
 
-    implementation(AndroidDependencies.composeUI)
-    implementation(AndroidDependencies.composeMaterial)
-    implementation(AndroidDependencies.composeTooling)
-    implementation(AndroidDependencies.composeRuntime)
-    implementation(AndroidDependencies.composeUtil)
-    implementation(AndroidDependencies.composeActivity)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.material)
+    implementation(libs.compose.tooling)
+    implementation(libs.compose.runtime)
+    implementation(libs.compose.util)
+    implementation(libs.compose.activity)
 
-    implementation(AndroidDependencies.accompanistPager)
-    implementation(AndroidDependencies.accompanistInsets)
-    implementation(AndroidDependencies.accompanistAnimation)
-    implementation(AndroidDependencies.accompanistSystemUIController)
-    implementation(AndroidDependencies.accompanistMaterialPlaceHolder)
-    implementation(AndroidDependencies.accompanistPagerIndicator)
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.insets)
+    implementation(libs.accompanist.animation)
+    implementation(libs.accompanist.systemUIController)
+    implementation(libs.accompanist.materialPlaceHolder)
+    implementation(libs.accompanist.pagerIndicator)
 
-    implementation(AndroidDependencies.lifecycleRuntime)
+    implementation(libs.lifecycle.runtime)
 
     // Koin-Dependency injection
-    implementation(AndroidDependencies.koinAndroid)
-    implementation(AndroidDependencies.koinCompose)
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
 
     // Compose Navigation-Navigation between various screens
-    implementation(AndroidDependencies.composeNavigation)
+    implementation(libs.navigation.compose)
 
     // Coil-Image Loader
-    implementation(AndroidDependencies.coil)
+    implementation(libs.coil)
 
     // Palette-Used to extract color palette from images
-    implementation(AndroidDependencies.palette)
+    implementation(libs.palette)
 
     // Gowtham Compose Rating Bar
-    implementation(AndroidDependencies.ratingBar)
+    implementation(libs.compose.ratingBar)
 
     // Collapsing toolbar
-    implementation(AndroidDependencies.oneBoneToolbar)
+    implementation(libs.oneBoneToolbar)
 
     // Leak Canary - Memory leaks
-    debugImplementation(AndroidDependencies.leakCanary)
+    debugImplementation(libs.leakCanary)
 
     // Firebase
-    implementation(platform(AndroidDependencies.firebaseBOM))
-    implementation(AndroidDependencies.firebaseAnalytics)
-    implementation(AndroidDependencies.firebaseCrashlytics)
-    implementation(AndroidDependencies.firebasePerformance)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.performance)
 
-    testImplementation(AndroidDependencies.jUnit)
-    testImplementation(AndroidDependencies.googleTruth)
-    testImplementation(AndroidDependencies.coroutinesTest)
+    testImplementation(libs.jUnit)
+    testImplementation(libs.googleTruth)
+    testImplementation(libs.kotlinX.coroutines.test)
 
-    androidTestImplementation(AndroidDependencies.testRules)
-    androidTestImplementation(AndroidDependencies.testRunner)
+    androidTestImplementation(libs.test.rules)
+    androidTestImplementation(libs.test.runner)
 }
