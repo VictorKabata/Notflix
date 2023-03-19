@@ -1,5 +1,7 @@
 plugins {
-    id(libs.plugins.android.application.get().pluginId)
+    alias(libs.plugins.android.application)
+
+    // id(libs.plugins.android.application.get().pluginId)
     id(libs.plugins.android.kotlin.get().pluginId)
 
     id(libs.plugins.googleService.plugin.get().pluginId)
