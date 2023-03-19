@@ -1,20 +1,3 @@
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-        maven("https://plugins.gradle.org/m2/")
-    }
-
-    dependencies {
-        classpath(libs.kotlin)
-        classpath(libs.gradle)
-        classpath(libs.googleServices)
-        classpath(libs.firebase.appDistribution.plugin)
-        classpath(libs.firebase.crashlytics.plugin)
-        classpath(libs.firebase.performance.plugin)
-    }
-}
-
 plugins {
     alias(libs.plugins.ktLint)
     alias(libs.plugins.detekt)
@@ -22,13 +5,14 @@ plugins {
     alias(libs.plugins.kotlinX.testResources)
 }
 
-allprojects {
-
-    repositories {
-        google()
-        mavenCentral()
-        maven("https://jitpack.io")
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+buildscript {
+    dependencies {
+        classpath(libs.kotlin)
+        classpath(libs.gradle)
+        classpath(libs.googleServices)
+        classpath(libs.firebase.appDistribution.plugin)
+        classpath(libs.firebase.crashlytics.plugin)
+        classpath(libs.firebase.performance.plugin)
     }
 }
 
