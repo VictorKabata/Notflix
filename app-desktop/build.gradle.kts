@@ -1,9 +1,8 @@
 import org.jetbrains.compose.compose
 
 plugins {
-    kotlin("jvm")
+    id(libs.plugins.jvm.get().pluginId)
     alias(libs.plugins.compose.desktop.plugin)
-    // id("org.jetbrains.compose") version Versions.composeDesktop
 }
 
 repositories {
