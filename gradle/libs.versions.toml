@@ -65,10 +65,10 @@ archTestCore = "2.1.0"
 ktLint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLint" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 gradleVersionUpdates = { id = "com.github.ben-manes.versions", version.ref = "gradleVersionUpdate" }
-kotlinX-testResources = { id = "com.goncalossilva.resources" }
+kotlinX-testResources = { id = "com.goncalossilva.resources", version.ref = "kotlinxTestResources" }
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 nativeCocoapod = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "gradle" }
 android-application = { id = "com.android.application", version.ref = "gradle" }
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -77,6 +77,11 @@ kotlinX-serialization-plugin = { id = "org.jetbrains.kotlin.plugin.serialization
 kmp-NativeCoroutines-plugin = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "kmpNativeCoroutines" }
 sqlDelight-plugin = { id = "com.squareup.sqldelight", version.ref = "sqlDelight" }
 buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
+
+firebase-crashlytics-plugin = { id = "com.google.firebase.crashlytics" }
+firebase-appDistribution-plugin = { id = "com.google.firebase.appdistribution" }
+firebase-performance-plugin = { id = "com.google.firebase.firebase-perf" }
+googleService-plugin = { id = "com.google.gms.google-services" }
 
 [libraries]
 #Project

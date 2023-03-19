@@ -19,8 +19,7 @@ plugins {
     alias(libs.plugins.ktLint)
     alias(libs.plugins.detekt)
     alias(libs.plugins.gradleVersionUpdates)
-
-    id(Plugins.kotlinxTestResource) version (Versions.kotlinxTestResources)
+    alias(libs.plugins.kotlinX.testResources)
 }
 
 allprojects {

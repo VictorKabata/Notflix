@@ -1,11 +1,11 @@
 plugins {
-    id(Plugins.androidApplication)
-    kotlin(Plugins.android)
+    id(libs.plugins.android.application.get().pluginId)
+    id(libs.plugins.android.kotlin.get().pluginId)
 
-    id(Plugins.googleService)
-    id(Plugins.appDistribution)
-    id(Plugins.crashlytics)
-    id(Plugins.performance)
+    id(libs.plugins.googleService.plugin.get().pluginId)
+    id(libs.plugins.firebase.appDistribution.plugin.get().pluginId)
+    id(libs.plugins.firebase.crashlytics.plugin.get().pluginId)
+    id(libs.plugins.firebase.performance.plugin.get().pluginId)
 }
 
 android {
