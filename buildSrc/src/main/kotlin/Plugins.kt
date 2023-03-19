@@ -1,14 +1,7 @@
 object Plugins {
-    const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
-    const val gradle = "com.android.tools.build:gradle:${Versions.gradle}"
     const val ktLint = "org.jlleitschuh.gradle.ktlint"
     const val detekt = "io.gitlab.arturbosch.detekt"
     const val gradleVersionUpdates = "com.github.ben-manes.versions"
-    const val kmpNativeCoroutines = "com.rickclephas.kmp:kmp-nativecoroutines-gradle-plugin:${Versions.kmpNativeCoroutines}"
-    const val googleServices = "com.google.gms:google-services:${Versions.googleServices}"
-    const val firebaseAppDistribution = "com.google.firebase:firebase-appdistribution-gradle:${Versions.firebaseAppDistribution}"
-    const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics-gradle:${Versions.firebaseCrashlytics}"
-    const val firebasePerformance="com.google.firebase:perf-plugin:${Versions.firebasePerformance}"
     const val kotlinxTestResource="com.goncalossilva.resources"
 
     const val androidApplication = "com.android.application"

@@ -6,21 +6,22 @@ buildscript {
     }
 
     dependencies {
-        classpath(Plugins.kotlin)
-        classpath(Plugins.gradle)
-        classpath(Plugins.kmpNativeCoroutines)
-        classpath(Plugins.googleServices)
-        classpath(Plugins.firebaseAppDistribution)
-        classpath(Plugins.firebaseCrashlytics)
-        classpath(Plugins.firebasePerformance)
+        classpath(libs.kotlin)
+        classpath(libs.gradle)
+        classpath(libs.kmpNativeCoroutines)
+        classpath(libs.googleServices)
+        classpath(libs.firebase.appDistribution.plugin)
+        classpath(libs.firebase.crashlytics.plugin)
+        classpath(libs.firebase.performance.plugin)
     }
 }
 
 plugins {
-    id(Plugins.ktLint) version Versions.ktLint
-    id(Plugins.detekt) version (Versions.detekt)
+    alias(libs.plugins.ktLint)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.gradleVersionUpdates)
+
     id(Plugins.kotlinxTestResource) version (Versions.kotlinxTestResources)
-    id(Plugins.gradleVersionUpdates) version (Versions.gradleVersionUpdate)
 }
 
 allprojects {
