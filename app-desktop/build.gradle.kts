@@ -1,4 +1,5 @@
 plugins {
+    // alias(libs.plugins.jvm)
     id(libs.plugins.jvm.get().pluginId)
     alias(libs.plugins.compose.desktop.plugin)
 }
