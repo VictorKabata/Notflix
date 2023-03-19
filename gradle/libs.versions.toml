@@ -44,7 +44,7 @@ accompanist = "0.25.1"
 navigation = "2.4.0-alpha02"
 lifecycle = "2.3.1"
 coil = "1.4.0"
-palette = "28.0.0"
+palette = "1.0.0"
 paging = "3.0.0"
 coroutines = "1.5.2"
 firebaseBOM = "30.3.1"
@@ -143,7 +143,7 @@ koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndr
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
-palette = { module = "com.android.support:palette-v7", version.ref = "palette" }
+palette = { module = "androidx.palette:palette", version.ref = "palette" }
 compose-ratingBar = { module = "com.github.a914-gowtham:compose-ratingbar", version.ref = "composeRatingBar" }
 leakCanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
 firebase-BOM = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBOM" }
