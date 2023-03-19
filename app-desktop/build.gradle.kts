@@ -1,5 +1,3 @@
-import org.jetbrains.compose.compose
-
 plugins {
     id(libs.plugins.jvm.get().pluginId)
     alias(libs.plugins.compose.desktop.plugin)
@@ -14,7 +12,6 @@ dependencies {
     implementation(project(BuildModules.shared))
 
     implementation(compose.desktop.currentOs)
-    // implementation(DesktopDependencies.kamel)
 }
 
 compose.desktop {

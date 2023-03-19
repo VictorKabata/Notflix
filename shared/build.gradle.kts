@@ -2,14 +2,11 @@ import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
-    kotlin(Plugins.multiplatform)
-    // alias(libs.plugins.multiplatform)
-    kotlin(Plugins.nativeCocoaPods)
-    // alias(libs.plugins.nativeCocoapod)
-    id(Plugins.androidLibrary)
+    id(libs.plugins.multiplatform.get().pluginId)
+    id(libs.plugins.nativeCocoapod.get().pluginId)
+    id(libs.plugins.android.library.get().pluginId)
     alias(libs.plugins.kotlinX.serialization.plugin)
     alias(libs.plugins.kmp.nativeCoroutines.plugin)
-    // alias(libs.plugins.sqlDelight.plugin)
     alias(libs.plugins.buildKonfig)
 }
 
