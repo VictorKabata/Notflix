@@ -5,6 +5,7 @@ plugins {
     kotlin(Plugins.multiplatform)
     // alias(libs.plugins.multiplatform)
     kotlin(Plugins.nativeCocoaPods)
+    // alias(libs.plugins.nativeCocoapod)
     id(Plugins.androidLibrary)
     alias(libs.plugins.kotlinX.serialization.plugin)
     alias(libs.plugins.kmp.nativeCoroutines.plugin)
