@@ -3,12 +3,14 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin(Plugins.multiplatform)
+     // alias(libs.plugins.multiplatform)
     kotlin(Plugins.nativeCocoaPods)
     id(Plugins.androidLibrary)
     kotlin(Plugins.kotlinXSerialization) version Versions.kotlin
-    id(Plugins.nativeCoroutines)
-    id(Plugins.sqlDelight) version Versions.sqlDelight
-    id(Plugins.buildKonfig) version Versions.buildKonfig
+    // alias(libs.plugins.kotlinX.serialization.plugin)
+    alias(libs.plugins.kmp.nativeCoroutines.plugin)
+    // alias(libs.plugins.sqlDelight.plugin)
+    alias(libs.plugins.buildKonfig)
 }
 
 android {

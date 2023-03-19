@@ -8,7 +8,6 @@ buildscript {
     dependencies {
         classpath(libs.kotlin)
         classpath(libs.gradle)
-        classpath(libs.kmpNativeCoroutines)
         classpath(libs.googleServices)
         classpath(libs.firebase.appDistribution.plugin)
         classpath(libs.firebase.crashlytics.plugin)
