@@ -60,7 +60,7 @@ kotlin {
 
             implementation(libs.kotlinX.serializationJson)
 
-             implementation(libs.multiplatformSettings.noArg)
+            implementation(libs.multiplatformSettings.noArg)
             implementation(libs.multiplatformSettings.coroutines)
 
             api(libs.napier)

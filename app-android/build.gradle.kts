@@ -57,7 +57,7 @@ android {
 dependencies {
     api(project(BuildModules.shared))
 
-    implementation(AndroidDependencies.androidCore)
+    implementation(libs.androidX.core)
 
     implementation(AndroidDependencies.material)
 

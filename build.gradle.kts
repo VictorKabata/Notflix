@@ -43,6 +43,7 @@ subprojects {
         outputColorName.set("RED")
         filter {
             enableExperimentalRules.set(true)
+            exclude { element -> element.file.path.contains("${projectDir}\\shared\\build") }
             exclude { projectDir.toURI().relativize(it.file.toURI()).path.contains("/generated/") }
             include("**/kotlin/**")
         }
@@ -61,6 +62,13 @@ subprojects {
         outputDir = "build/dependencyUpdates"
         reportfileName = "report"
     }
+}
+
+tasks.create("execPath") {
+    println("Project Dir: $projectDir")
+    println("BuildDir: $buildDir")
+    println("Path: ${projectDir}\\shared\\build")
+    // println("Is build path: ${projectDir.toURI().relativize(it.file.toURI()).path.contains("build")}")
 }
 
 tasks.register("clean").configure {
