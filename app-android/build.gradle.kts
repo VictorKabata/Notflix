@@ -55,7 +55,7 @@ android {
 }
 
 dependencies {
-    api(project(BuildModules.shared))
+    api(project(":shared"))
 
     implementation(libs.androidX.core)
 

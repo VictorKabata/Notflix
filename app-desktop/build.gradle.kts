@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(BuildModules.shared))
+    implementation(project(":shared"))
 
     implementation(compose.desktop.currentOs)
 }

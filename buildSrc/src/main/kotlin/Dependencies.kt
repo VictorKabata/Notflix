@@ -9,16 +9,9 @@ object AndroidSdk {
     const val compileSdkVersion = 33
     const val targetSdkVersion = compileSdkVersion
 
-    const val versionCode = 3
-    const val versionName = "1.02"
+    const val versionCode = 1
+    const val versionName = "1.0.0"
 
     const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-}
-
-object BuildModules {
-    const val shared = ":shared"
-    const val androidApp = ":androidApp"
-    const val iOSApp = ":iOSApp"
-    const val desktopApp = ":desktopApp"
 }
 
