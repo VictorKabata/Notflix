@@ -9,17 +9,17 @@ plugins {
 }
 
 android {
-    compileSdk = AndroidSdk.compileSdkVersion
+    compileSdk = 33
 
     defaultConfig {
-        applicationId = AndroidSdk.applicationId
+        applicationId = "com.vickikbt.notflix"
 
-        minSdk = AndroidSdk.minSdkVersion
-        targetSdk = AndroidSdk.targetSdkVersion
-        versionCode = AndroidSdk.versionCode
-        versionName = AndroidSdk.versionName
+        minSdk = 21
+        targetSdk = compileSdk
+        versionCode = 1
+        versionName = "1.0.0"
 
-        testInstrumentationRunner = AndroidSdk.testInstrumentationRunner
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
