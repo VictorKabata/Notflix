@@ -3,11 +3,8 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     alias(libs.plugins.multiplatform)
-    // alias(libs.plugins.nativeCocoapod)
+    alias(libs.plugins.nativeCocoapod)
     alias(libs.plugins.android.library)
-
-    id(libs.plugins.nativeCocoapod.get().pluginId)
-
     alias(libs.plugins.kotlinX.serialization.plugin)
     alias(libs.plugins.kmp.nativeCoroutines.plugin)
     alias(libs.plugins.buildKonfig)
