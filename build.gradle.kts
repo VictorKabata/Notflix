@@ -12,8 +12,8 @@ plugins {
 
 buildscript {
     dependencies {
-        classpath(libs.kotlin)
-        classpath(libs.gradle)
+        // classpath(libs.kotlin)
+        // classpath(libs.gradle)
         classpath(libs.googleServices)
         classpath(libs.firebase.appDistribution.plugin)
         classpath(libs.firebase.crashlytics.plugin)
