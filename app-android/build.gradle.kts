@@ -2,8 +2,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.android.kotlin)
 
-    //id(libs.plugins.android.kotlin.get().pluginId)
-
     id(libs.plugins.googleService.plugin.get().pluginId)
     id(libs.plugins.firebase.appDistribution.plugin.get().pluginId)
     id(libs.plugins.firebase.crashlytics.plugin.get().pluginId)

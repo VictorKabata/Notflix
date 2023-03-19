@@ -2,7 +2,8 @@ import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
-    id(libs.plugins.multiplatform.get().pluginId)
+    alias(libs.plugins.multiplatform)
+    // id(libs.plugins.multiplatform.get().pluginId)
     id(libs.plugins.nativeCocoapod.get().pluginId)
     id(libs.plugins.android.library.get().pluginId)
     alias(libs.plugins.kotlinX.serialization.plugin)
