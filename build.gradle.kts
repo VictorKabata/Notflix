@@ -17,7 +17,7 @@ buildscript {
 }
 
 subprojects {
-    apply(plugin = Plugins.ktLint)
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
     ktlint {
         debug.set(true)
         verbose.set(true)
@@ -31,13 +31,13 @@ subprojects {
         }
     }
 
-    apply(plugin = Plugins.detekt)
+    apply(plugin = "io.gitlab.arturbosch.detekt")
     detekt {
         parallel = true
         config = files("${project.rootDir}/config/detekt/detekt.yml")
     }
 
-    apply(plugin = Plugins.kotlinxTestResource)
+    apply(plugin = "com.goncalossilva.resources")
 
     tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
         checkForGradleUpdate = true
