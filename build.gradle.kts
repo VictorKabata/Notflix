@@ -1,3 +1,10 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
@@ -5,21 +12,17 @@ plugins {
     alias(libs.plugins.multiplatform) apply false
     alias(libs.plugins.jvm) apply false
     alias(libs.plugins.nativeCocoapod) apply false
+
     alias(libs.plugins.googleService.plugin) apply false
+
+    alias(libs.plugins.firebase.appDistribution.plugin) apply false
+    alias(libs.plugins.firebase.crashlytics.plugin) apply false
+    alias(libs.plugins.firebase.performance.plugin) apply false
 
     alias(libs.plugins.ktLint)
     alias(libs.plugins.detekt)
     alias(libs.plugins.gradleVersionUpdates)
     alias(libs.plugins.kotlinX.testResources)
-}
-
-buildscript {
-    dependencies {
-        // classpath(libs.googleServices)
-        classpath(libs.firebase.appDistribution.plugin)
-        classpath(libs.firebase.crashlytics.plugin)
-        classpath(libs.firebase.performance.plugin)
-    }
 }
 
 subprojects {

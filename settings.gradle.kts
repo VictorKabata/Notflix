@@ -1,10 +1,11 @@
+rootProject.name = "Notflix"
+
 pluginManagement {
     repositories {
-        gradlePluginPortal()
-        mavenCentral()
         google()
+        mavenCentral()
+        gradlePluginPortal()
         maven { url = uri("https://jitpack.io") }
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
@@ -14,11 +15,10 @@ dependencyResolutionManagement {
         mavenCentral()
         google()
         maven { url = uri("https://jitpack.io") }
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
 include(":app-android")
 include(":shared")
 include(":app-desktop")
-
-rootProject.name = "Notflix"

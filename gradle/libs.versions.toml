@@ -4,10 +4,10 @@ gradle = "7.4.2"
 ktLint = "10.3.0"
 detekt = "1.19.0"
 gradleVersionUpdate = "0.42.0"
-googleServices = "4.3.13"
+googleServices = "4.3.14"
 firebaseAppDistribution = "3.0.3"
-firebaseCrashlytics = "2.9.1"
-firebasePerformance = "1.4.1"
+firebaseCrashlytics = "2.9.2"
+firebasePerformance = "1.4.2"
 
 # Kotlin Multiplatform Version
 kotlinxCoroutines = "1.6.4"
@@ -78,15 +78,13 @@ kmp-NativeCoroutines-plugin = { id = "com.rickclephas.kmp.nativecoroutines", ver
 sqlDelight-plugin = { id = "com.squareup.sqldelight", version.ref = "sqlDelight" }
 buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
 
-googleService-plugin = { id = "com.google.gms.google-services", version.ref="googleServices" }
+googleService-plugin = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 
-firebase-crashlytics-plugin = { id = "com.google.firebase.crashlytics" }
-firebase-appDistribution-plugin = { id = "com.google.firebase.appdistribution" }
-firebase-performance-plugin = { id = "com.google.firebase.firebase-perf" }
+firebase-crashlytics-plugin = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }
+firebase-appDistribution-plugin = { id = "com.google.firebase.appdistribution", version.ref = "firebaseAppDistribution" }
+firebase-performance-plugin = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerformance" }
 
 [libraries]
-googleServices = { module = "com.google.gms:google-services", version.ref = "googleServices" }
-
 #Project
 kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
