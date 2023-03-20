@@ -1,3 +1,4 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
@@ -96,6 +97,6 @@ buildkonfig {
     packageName = "com.vickikbt.shared"
 
     defaultConfigs {
-        buildConfigField(STRING, "API_KEY", properties["api_key"].toString())
+        buildConfigField(STRING, "API_KEY", gradleLocalProperties(rootDir).getProperty("api_key"))
     }
 }
