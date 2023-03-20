@@ -44,7 +44,6 @@ import com.vickikbt.notflix.ui.components.SectionSeparator
 import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
 import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.shared.domain.models.Movie
-import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
 import org.koin.androidx.compose.get
 
 @ExperimentalMaterialApi
@@ -52,14 +51,14 @@ import org.koin.androidx.compose.get
 @Composable
 fun HomeScreen(
     navController: NavController,
-    sharedViewModel: SharedHomePresenter = get()
+    homeViewModel: HomeViewModel = get()
 ) {
     val scrollState = rememberScrollState()
 
-    val nowPlayingMovies = sharedViewModel.nowPlayingMovies.collectAsState().value
-    val trendingMovies = sharedViewModel.trendingMovies.collectAsState().value
-    val popularMovies = sharedViewModel.popularMovies.collectAsState().value
-    val upcomingMovies = sharedViewModel.upcomingMovies.collectAsState().value
+    val nowPlayingMovies = homeViewModel.nowPlayingMovies.collectAsState().value
+    val trendingMovies = homeViewModel.trendingMovies.collectAsState().value
+    val popularMovies = homeViewModel.popularMovies.collectAsState().value
+    val upcomingMovies = homeViewModel.upcomingMovies.collectAsState().value
 
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
         Column(
