@@ -48,7 +48,7 @@ import org.koin.androidx.compose.get
 @Composable
 fun DetailsScreen(
     navController: NavController,
-    detailsViewModel: SharedDetailsPresenter = get(),
+    detailsViewModel: DetailsViewModel = get(),
     movieId: Int
 ) {
     LaunchedEffect(key1 = detailsViewModel) {

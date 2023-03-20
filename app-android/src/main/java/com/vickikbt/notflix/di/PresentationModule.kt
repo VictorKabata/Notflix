@@ -1,6 +1,7 @@
 package com.vickikbt.notflix.di
 
 import com.vickikbt.notflix.ui.activity.MainViewModel
+import com.vickikbt.notflix.ui.screens.details.DetailsViewModel
 import com.vickikbt.notflix.ui.screens.home.HomeViewModel
 import com.vickikbt.notflix.util.LocaleManager
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -13,4 +14,6 @@ val presentationModule = module {
 
     viewModelOf(::MainViewModel)
     viewModelOf(::HomeViewModel)
+    viewModelOf(::DetailsViewModel)
+    
 }
