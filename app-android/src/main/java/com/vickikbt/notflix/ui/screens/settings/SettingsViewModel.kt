@@ -47,5 +47,4 @@ class SettingsViewModel constructor(private val settingsRepository: SettingsRepo
             _selectedImageQuality.value = it ?: 2
         }
     }
-
 }

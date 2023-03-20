@@ -80,5 +80,4 @@ class DetailsViewModel constructor(
     fun deleteFavouriteMovie(movieId: Int) = viewModelScope.launch {
         // favouritesPresenter.deleteFavouriteMovie(movieId = movieId)
     }
-
 }

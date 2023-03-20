@@ -20,7 +20,6 @@ import androidx.navigation.NavController
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemFavoriteMovie
 import com.vickikbt.notflix.ui.components.appbars.AppBar
-import com.vickikbt.shared.presentation.presenters.SharedFavouritesPresenter
 import org.koin.androidx.compose.get
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
