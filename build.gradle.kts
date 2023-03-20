@@ -1,10 +1,3 @@
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
@@ -25,7 +18,13 @@ plugins {
     alias(libs.plugins.kotlinX.testResources)
 }
 
-subprojects {
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven(url = "https://jitpack.io")
+    }
+
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
     ktlint {
         debug.set(true)
@@ -39,7 +38,9 @@ subprojects {
             include("**/kotlin/**")
         }
     }
+}
 
+subprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
     detekt {
         parallel = true
