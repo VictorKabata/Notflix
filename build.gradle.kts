@@ -13,7 +13,7 @@ plugins {
     alias(libs.plugins.jvm) apply false
     alias(libs.plugins.nativeCocoapod) apply false
 
-    alias(libs.plugins.googleService.plugin) apply false
+    alias(libs.plugins.googleServices.plugin) apply false
 
     alias(libs.plugins.firebase.appDistribution.plugin) apply false
     alias(libs.plugins.firebase.crashlytics.plugin) apply false

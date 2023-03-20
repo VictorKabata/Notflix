@@ -78,7 +78,7 @@ kmp-NativeCoroutines-plugin = { id = "com.rickclephas.kmp.nativecoroutines", ver
 sqlDelight-plugin = { id = "com.squareup.sqldelight", version.ref = "sqlDelight" }
 buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
 
-googleService-plugin = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+googleServices-plugin = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 
 firebase-crashlytics-plugin = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }
 firebase-appDistribution-plugin = { id = "com.google.firebase.appdistribution", version.ref = "firebaseAppDistribution" }
