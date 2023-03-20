@@ -33,12 +33,11 @@ import com.vickikbt.shared.domain.utils.Constants
 import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
 import com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE
 import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
-import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import org.koin.androidx.compose.get
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun SettingsScreen(navController: NavController, viewModel: SharedSettingsPresenter = get()) {
+fun SettingsScreen(navController: NavController, viewModel: SettingsViewModel = get()) {
     val context = LocalContext.current
 
     val currentTheme = viewModel.selectedTheme.collectAsState().value ?: 0
@@ -128,7 +127,7 @@ fun SettingsScreen(navController: NavController, viewModel: SharedSettingsPresen
 
 @Composable
 private fun ChangeTheme(
-    viewModel: SharedSettingsPresenter,
+    viewModel: SettingsViewModel,
     showDialog: MutableState<Boolean>,
     currentValue: String?
 ) {
@@ -145,7 +144,7 @@ private fun ChangeTheme(
 
 @Composable
 private fun ChangeLanguage(
-    viewModel: SharedSettingsPresenter,
+    viewModel: SettingsViewModel,
     showDialog: MutableState<Boolean>,
     currentValue: String?
 ) {
@@ -162,7 +161,7 @@ private fun ChangeLanguage(
 
 @Composable
 private fun ChangeImageQuality(
-    viewModel: SharedSettingsPresenter,
+    viewModel: SettingsViewModel,
     showDialog: MutableState<Boolean>,
     currentValue: String?
 ) {

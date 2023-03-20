@@ -28,7 +28,7 @@ import org.koin.androidx.compose.get
 @Composable
 fun FavoritesScreen(
     navController: NavController,
-    favoritesViewModel: SharedFavouritesPresenter = get()
+    favoritesViewModel: FavouritesViewModel = get()
 ) {
     val favouriteMovies = favoritesViewModel.favouriteMovies.collectAsState().value
 
