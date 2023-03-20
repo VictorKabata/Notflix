@@ -29,10 +29,10 @@ import com.vickikbt.notflix.ui.components.appbars.AppBar
 import com.vickikbt.notflix.ui.components.preferences.DialogPreferenceSelection
 import com.vickikbt.notflix.ui.components.preferences.PreferencesGroup
 import com.vickikbt.notflix.ui.components.preferences.TextPreference
-import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager.Companion.IMAGE_QUALITY_KEY
-import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager.Companion.LANGUAGE_KEY
-import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager.Companion.THEME_KEY
 import com.vickikbt.shared.domain.utils.Constants
+import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
+import com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE
+import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import org.koin.androidx.compose.get
 
@@ -139,7 +139,7 @@ private fun ChangeTheme(
         labels = stringArrayResource(id = R.array.theme_labels),
         onNegativeClick = { showDialog.value = false }
     ) { theme ->
-        viewModel.savePreferenceSelection(key = THEME_KEY, selection = theme)
+        viewModel.savePreferenceSelection(key = KEY_THEME, selection = theme)
     }
 }
 
@@ -156,7 +156,7 @@ private fun ChangeLanguage(
         labels = stringArrayResource(id = R.array.language_labels),
         onNegativeClick = { showDialog.value = false }
     ) { language ->
-        viewModel.savePreferenceSelection(key = LANGUAGE_KEY, selection = language)
+        viewModel.savePreferenceSelection(key = KEY_LANGUAGE, selection = language)
     }
 }
 
@@ -174,7 +174,7 @@ private fun ChangeImageQuality(
         onNegativeClick = { showDialog.value = false }
     ) { imageQuality ->
         viewModel.savePreferenceSelection(
-            key = IMAGE_QUALITY_KEY,
+            key = KEY_IMAGE_QUALITY,
             selection = imageQuality
         )
     }

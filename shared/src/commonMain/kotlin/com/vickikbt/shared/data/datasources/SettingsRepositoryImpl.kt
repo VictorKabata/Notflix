@@ -1,26 +1,28 @@
 package com.vickikbt.shared.data.datasources
 
-import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager
-import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager.Companion.IMAGE_QUALITY_KEY
-import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager.Companion.LANGUAGE_KEY
-import com.vickikbt.shared.data.cache.multiplatformsettings.PreferenceManager.Companion.THEME_KEY
+import com.russhwolf.settings.ObservableSettings
+import com.russhwolf.settings.coroutines.getIntOrNullFlow
 import com.vickikbt.shared.domain.repositories.SettingsRepository
+import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
+import com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE
+import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
 import kotlinx.coroutines.flow.Flow
 
-class SettingsRepositoryImpl constructor(private val preferenceManager: PreferenceManager) : SettingsRepository {
+class SettingsRepositoryImpl constructor(private val observableSettings: ObservableSettings) :
+    SettingsRepository {
 
     override suspend fun savePreferenceSelection(key: String, selection: Int) =
-        preferenceManager.setInt(key = key, value = selection)
+        observableSettings.putInt(key = key, value = selection)
 
     override suspend fun getThemePreference(): Flow<Int?> {
-        return preferenceManager.getInt(key = THEME_KEY)
+        return observableSettings.getIntOrNullFlow(key = KEY_THEME)
     }
 
     override suspend fun getLanguagePreference(): Flow<Int?> {
-        return preferenceManager.getInt(key = LANGUAGE_KEY)
+        return observableSettings.getIntOrNullFlow(key = KEY_LANGUAGE)
     }
 
     override suspend fun getImageQualityPreference(): Flow<Int?> {
-        return preferenceManager.getInt(key = IMAGE_QUALITY_KEY)
+        return observableSettings.getIntOrNullFlow(key = KEY_IMAGE_QUALITY)
     }
 }

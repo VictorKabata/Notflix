@@ -5,7 +5,6 @@ import com.vickikbt.shared.domain.models.Cast
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.models.MovieVideo
-import com.vickikbt.shared.domain.repositories.FavoritesRepository
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
@@ -17,8 +16,7 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
 class SharedDetailsPresenter constructor(
-    private val movieDetailsRepository: MovieDetailsRepository,
-    private val favouritesPresenter: FavoritesRepository
+    private val movieDetailsRepository: MovieDetailsRepository
 ) : KoinComponent {
 
     @NativeCoroutineScope
@@ -122,7 +120,7 @@ class SharedDetailsPresenter constructor(
     @Deprecated("Pending caching implementation")
     fun deleteFavouriteMovie(movieId: Int) {
         val job = viewModelScope.launch {
-            favouritesPresenter.deleteFavouriteMovie(movieId = movieId)
+            // favouritesPresenter.deleteFavouriteMovie(movieId = movieId)
         }
 
         supervisorJob.value = job

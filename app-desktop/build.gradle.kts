@@ -1,20 +1,12 @@
-import org.jetbrains.compose.compose
-
 plugins {
-    kotlin("jvm")
-    id("org.jetbrains.compose") version Versions.composeDesktop
-}
-
-repositories {
-    mavenCentral()
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    alias(libs.plugins.jvm)
+    alias(libs.plugins.compose.desktop.plugin)
 }
 
 dependencies {
-    implementation(project(BuildModules.shared))
+    implementation(project(":shared"))
 
     implementation(compose.desktop.currentOs)
-    // implementation(DesktopDependencies.kamel)
 }
 
 compose.desktop {
