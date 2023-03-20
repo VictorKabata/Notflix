@@ -97,6 +97,10 @@ buildkonfig {
     packageName = "com.vickikbt.shared"
 
     defaultConfigs {
-        buildConfigField(STRING, "API_KEY", gradleLocalProperties(rootDir).getProperty("api_key"))
+        buildConfigField(
+            STRING,
+            "API_KEY",
+            gradleLocalProperties(rootDir).getProperty("api_key") ?: ""
+        )
     }
 }
