@@ -9,7 +9,7 @@ import ui.navigation.NavController
 @Composable
 fun DetailsScreen(
     navController: NavController,
-    viewModel: SharedDetailsPresenter = koin.get(),
+    viewModel: DetailsViewModel = koin.get(),
     movieId: Int
 ) {
     Text("Details screen")

@@ -25,7 +25,6 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.domain.models.Movie
-import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
 import koin
 import ui.components.ItemNowPlayingMovies
 import ui.components.ItemPopularMovies
@@ -36,8 +35,9 @@ import ui.navigation.NavController
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: SharedHomePresenter = koin.get()
+    viewModel: HomeViewModel = koin.get()
 ) {
+
     val nowPlayingMovies = viewModel.nowPlayingMovies.collectAsState()
     val trendingMovies = viewModel.trendingMovies.collectAsState()
     val popularMovies = viewModel.popularMovies.collectAsState()

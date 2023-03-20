@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
 import com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE
 import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
-import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import koin
 import ui.components.appBars.AppBar
 import ui.components.preferences.DialogPreferenceSelection
@@ -29,7 +28,7 @@ import ui.components.preferences.TextPreference
 import ui.navigation.NavController
 
 @Composable
-fun SettingsScreen(navController: NavController, viewModel: SharedSettingsPresenter = koin.get()) {
+fun SettingsScreen(navController: NavController, viewModel: SettingsViewModel = koin.get()) {
     val currentTheme = viewModel.selectedTheme.collectAsState().value ?: 0
     val currentLanguage = viewModel.selectedLanguage.collectAsState().value ?: 0
     val currentImageQuality = viewModel.selectedImageQuality.collectAsState().value ?: 0
@@ -139,7 +138,7 @@ fun SettingsScreen(navController: NavController, viewModel: SharedSettingsPresen
 
 @Composable
 private fun ChangeTheme(
-    viewModel: SharedSettingsPresenter,
+    viewModel: SettingsViewModel,
     showDialog: MutableState<Boolean>,
     currentValue: String
 ) {
@@ -156,7 +155,7 @@ private fun ChangeTheme(
 
 @Composable
 private fun ChangeLanguage(
-    viewModel: SharedSettingsPresenter,
+    viewModel: SettingsViewModel,
     showDialog: MutableState<Boolean>,
     currentValue: String
 ) {
@@ -176,7 +175,7 @@ private fun ChangeLanguage(
 
 @Composable
 private fun ChangeImageQuality(
-    viewModel: SharedSettingsPresenter,
+    viewModel: SettingsViewModel,
     showDialog: MutableState<Boolean>,
     currentValue: String
 ) {
