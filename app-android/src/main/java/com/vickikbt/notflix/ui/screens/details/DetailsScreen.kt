@@ -2,7 +2,6 @@ package com.vickikbt.notflix.ui.screens.details
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -28,15 +27,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
-import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.fade
 import com.google.accompanist.placeholder.placeholder
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemMovieCast
 import com.vickikbt.notflix.ui.components.ItemSimilarMovies
 import com.vickikbt.notflix.ui.components.MovieRatingSection
 import com.vickikbt.notflix.ui.components.appbars.DetailsAppBar
-import com.vickikbt.notflix.ui.theme.Gray
 import com.vickikbt.shared.utils.getPopularity
 import com.vickikbt.shared.utils.getRating
 import me.onebone.toolbar.CollapsingToolbarScaffold
@@ -59,8 +55,6 @@ fun DetailsScreen(
 
     val movieDetailsState = detailsViewModel.movieDetailsState.collectAsState().value
 
-    Log.e("VicKbt", "IsLoading: ${movieDetailsState.isLoading}")
-
     val context = LocalContext.current
 
     val scrollState = rememberScrollState()
@@ -75,6 +69,7 @@ fun DetailsScreen(
                 modifier = Modifier.fillMaxWidth(),
                 collapsingScrollState = collapsingScrollState,
                 movieDetails = movieDetailsState.movieDetails,
+                isLoading = movieDetailsState.isLoading,
                 onNavigationIconClick = {
                     navController.navigateUp()
                 },
@@ -98,12 +93,14 @@ fun DetailsScreen(
                 .verticalScroll(state = scrollState),
             verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
+
             //region Movie Ratings
             val voteAverage = movieDetailsState.movieDetails?.voteAverage
             voteAverage?.let {
                 MovieRatingSection(
                     popularity = voteAverage.getPopularity(),
-                    voteAverage = voteAverage.getRating()
+                    voteAverage = voteAverage.getRating(),
+                    isLoading = movieDetailsState.isLoading
                 )
             }
             //endregion
@@ -120,11 +117,7 @@ fun DetailsScreen(
             Text(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
-                    .placeholder(
-                        visible = movieDetailsState.movieDetails?.overview.isNullOrEmpty(),
-                        color = Gray,
-                        highlight = PlaceholderHighlight.fade(highlightColor = Color.Gray)
-                    ),
+                    .placeholder(visible = movieDetailsState.isLoading, color = Color.Gray),
                 text = movieDetailsState.movieDetails?.overview ?: "",
                 style = MaterialTheme.typography.body1,
                 color = MaterialTheme.colors.onSurface,
@@ -148,7 +141,7 @@ fun DetailsScreen(
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     items(items = it) { item ->
-                        ItemMovieCast(actor = item)
+                        ItemMovieCast(actor = item, isLoading = movieDetailsState.isLoading)
                     }
                 }
             }
@@ -169,13 +162,14 @@ fun DetailsScreen(
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     items(items = it) { movie ->
-                        ItemSimilarMovies(movie = movie)
+                        ItemSimilarMovies(movie = movie, isLoading = movieDetailsState.isLoading)
                     }
                 }
             }
             //endregion
         }
     }
+
 }
 
 private fun shareMovie(context: Context, movieId: Int) {
