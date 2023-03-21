@@ -128,7 +128,6 @@ fun ItemPopularMovies(
                     .padding(8.dp)
                     .align(Alignment.BottomCenter)
             ) {
-
                 //region Movie Title
                 Text(
                     modifier = Modifier.placeholder(
@@ -197,7 +196,6 @@ fun ItemPopularMovies(
                     }
                 }
                 //endregion
-
             }
         }
     }

@@ -54,17 +54,14 @@ fun HomeScreen(
     val homeUiState = homeViewModel.homeUiState.collectAsState().value
 
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             //region Now Playing Movies
             homeUiState.nowPlayingMovies?.let {
-
                 HorizontalPager(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -208,7 +205,5 @@ fun HomeScreen(
             }
             //endregion
         }
-
     }
 }
-

@@ -58,7 +58,6 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
             }.onFailure { error ->
                 _homeUiState.update { it.copy(error = error.localizedMessage) }
             }
-
         }
     }
 
@@ -71,7 +70,6 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
             }.onFailure { error ->
                 _homeUiState.update { it.copy(error = error.localizedMessage) }
             }
-
         }
     }
 }

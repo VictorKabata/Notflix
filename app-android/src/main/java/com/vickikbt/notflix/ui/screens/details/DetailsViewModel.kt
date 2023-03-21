@@ -54,7 +54,6 @@ class DetailsViewModel constructor(
             }.onFailure { error ->
                 _movieDetailsState.update { it.copy(error = error.localizedMessage) }
             }
-
         }
     }
 
