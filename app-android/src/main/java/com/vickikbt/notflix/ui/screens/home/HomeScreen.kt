@@ -29,7 +29,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
-import com.google.accompanist.placeholder.placeholder
+import com.google.accompanist.placeholder.material.placeholder
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemNowPlayingMovies
 import com.vickikbt.notflix.ui.components.ItemPopularMovies
@@ -58,19 +58,19 @@ fun HomeScreen(
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
             //region Now Playing Movies
             homeUiState.nowPlayingMovies?.let {
                 HorizontalPager(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(360.dp)
-                        .placeholder(visible = homeUiState.isLoading, color = Color.Gray),
+                        .height(360.dp),
                     count = if (it.size >= 5) 5 else it.size,
                     state = pagerState,
                 ) { page ->
                     ItemNowPlayingMovies(
                         modifier = Modifier.fillMaxSize(),
-                        isLoading = homeUiState.isLoading,
+                        isLoading = true,
                         movie = it[page]
                     ) {
                         val movie = it[page]

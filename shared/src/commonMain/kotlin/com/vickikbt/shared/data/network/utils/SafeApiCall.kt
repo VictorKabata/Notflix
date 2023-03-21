@@ -10,6 +10,7 @@ import io.ktor.client.plugins.RedirectResponseException
 import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.statement.HttpResponse
 import io.ktor.util.network.UnresolvedAddressException
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 
@@ -17,7 +18,7 @@ suspend fun <T : Any?> safeApiCall(apiCall: suspend () -> T): Flow<NetworkResult
     channelFlow {
         send(NetworkResultState.Loading)
 
-        // delay(5000)
+        // delay(6000)
 
         try {
             send(NetworkResultState.Success(apiCall.invoke()))

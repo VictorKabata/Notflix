@@ -63,6 +63,8 @@ fun ItemNowPlayingMovies(
         }
     )
 
+    Log.e("VicKbt", "Is loading NowPlaying: $isLoading")
+
     if (painter.state is ImagePainter.State.Success) {
         LaunchedEffect(key1 = painter) {
             val imageDrawable = painter.imageLoader.execute(painter.request).drawable

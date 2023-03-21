@@ -3,7 +3,6 @@ package com.vickikbt.notflix.ui.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
@@ -26,8 +25,10 @@ import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.Actor
 
 @Composable
-fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor, isLoading: Boolean) {
-    val painter = rememberImagePainter(data = actor.profilePath?.loadImage()) {
+fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor, isLoading: Boolean = true) {
+    val painter = rememberImagePainter(
+        data = actor.profilePath?.loadImage()
+    ) {
         crossfade(true)
         transformations(CircleCropTransformation())
     }
@@ -39,8 +40,7 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor, isLoading: Boolea
         Image(
             modifier = Modifier
                 .placeholder(visible = isLoading, color = Color.Gray.copy(.8f))
-                .size(80.dp)
-                .defaultMinSize(minWidth = 80.dp, minHeight = 80.dp),
+                .size(80.dp),
             painter = painter,
             contentDescription = stringResource(id = R.string.cast)
         )
