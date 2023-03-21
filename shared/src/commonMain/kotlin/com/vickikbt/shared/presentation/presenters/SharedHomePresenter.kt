@@ -34,13 +34,13 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
     val error get() = _error.asStateFlow()
 
     init {
-        fetchNowPlayingMovies()
+        /*fetchNowPlayingMovies()
         fetchTrendingMovies()
         fetchPopularMovies()
-        fetchUpcomingMovies()
+        fetchUpcomingMovies()*/
     }
 
-    private fun fetchNowPlayingMovies() {
+    /*private fun fetchNowPlayingMovies() {
         val job = viewModelScope.launch(Dispatchers.Default) {
             moviesRepository.fetchNowPlayingMovies().collect { moviesResult ->
                 moviesResult.onSuccess {
@@ -122,5 +122,5 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
             supervisorJob.value?.cancel()
             supervisorJob.value = null
         }
-    }
+    }*/
 }

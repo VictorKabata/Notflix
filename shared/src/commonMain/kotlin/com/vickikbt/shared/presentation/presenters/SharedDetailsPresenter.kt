@@ -41,7 +41,7 @@ class SharedDetailsPresenter constructor(
     private val _error = MutableStateFlow<String?>(null)
     val error get() = _error.asStateFlow()
 
-    fun getMovieDetails(movieId: Int) {
+    /*fun getMovieDetails(movieId: Int) {
         _movieDetails.value = null
 
         val job = viewModelScope.launch {
@@ -97,7 +97,7 @@ class SharedDetailsPresenter constructor(
         job.invokeOnCompletion {
             supervisorJob.value = null
         }
-    }
+    }*/
 
     @Deprecated("Pending caching implementation")
     fun saveMovieDetails(movieDetails: MovieDetails) {
