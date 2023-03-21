@@ -1,6 +1,5 @@
 package com.vickikbt.notflix.ui.screens.home
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -57,13 +56,6 @@ fun HomeScreen(
     val scrollState = rememberScrollState()
 
     val homeUiState = homeViewModel.homeUiState.collectAsState().value
-
-    Log.e("VicKbt", "IsLoading: ${homeUiState.isLoading}")
-
-    /*val nowPlayingMovies = homeViewModel.nowPlayingMovies.collectAsState().value
-    val trendingMovies = homeViewModel.trendingMovies.collectAsState().value
-    val popularMovies = homeViewModel.popularMovies.collectAsState().value
-    val upcomingMovies = homeViewModel.upcomingMovies.collectAsState().value*/
 
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
         Column(
