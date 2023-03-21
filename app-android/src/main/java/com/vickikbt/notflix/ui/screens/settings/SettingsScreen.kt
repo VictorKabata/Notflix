@@ -40,18 +40,17 @@ import org.koin.androidx.compose.get
 fun SettingsScreen(navController: NavController, viewModel: SettingsViewModel = get()) {
     val context = LocalContext.current
 
-    val currentTheme = viewModel.selectedTheme.collectAsState().value ?: 0
-    val currentLanguage = viewModel.selectedLanguage.collectAsState().value ?: 0
-    val currentImageQuality = viewModel.selectedImageQuality.collectAsState().value ?: 0
+    val settingsUiState = viewModel.settingsUiState.collectAsState().value
 
     val showThemeDialog = remember { mutableStateOf(false) }
     val showLanguageDialog = remember { mutableStateOf(false) }
     val showImageQualityDialog = remember { mutableStateOf(false) }
 
-    val themeLabel = stringArrayResource(id = R.array.theme_labels)[currentTheme]
-    val languageLabel = stringArrayResource(id = R.array.language_labels)[currentLanguage]
+    val themeLabel = stringArrayResource(id = R.array.theme_labels)[settingsUiState.selectedTheme]
+    val languageLabel =
+        stringArrayResource(id = R.array.language_labels)[settingsUiState.selectedLanguage]
     val imageQualityLabel =
-        stringArrayResource(id = R.array.image_quality_labels)[currentImageQuality]
+        stringArrayResource(id = R.array.image_quality_labels)[settingsUiState.selectedImageQuality]
 
     Scaffold(topBar = { AppBar(stringResource(id = R.string.title_settings)) }) {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {

@@ -26,3 +26,11 @@ data class FavouritesUiState(
     val error: String? = null,
     val favouriteMovies: List<MovieDetails>? = emptyList()
 )
+
+data class SettingsUiState(
+    val isLoading: Boolean = false,
+    val error: String? = null,
+    val selectedTheme: Int = 0,
+    val selectedLanguage: Int = 0,
+    val selectedImageQuality: Int = 0
+)
