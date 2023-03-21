@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickikbt.shared.utils.DetailsUiState
+import com.vickikbt.shared.utils.NetworkResultState
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,13 +21,15 @@ class DetailsViewModel constructor(
 
     fun getMovieDetails(movieId: Int) = viewModelScope.launch {
         movieDetailsRepository.fetchMovieDetails(movieId = movieId).collect { movieDetailsResult ->
-            movieDetailsResult.onSuccess { movieDetails ->
-                _movieDetailsState.update {
-                    it.copy(movieDetails = movieDetails, isLoading = false)
+            when (movieDetailsResult) {
+                is NetworkResultState.Loading -> {
+                    _movieDetailsState.update { it.copy(isLoading = false) }
                 }
-            }.onFailure { error ->
-                _movieDetailsState.update {
-                    it.copy(error = error.localizedMessage, isLoading = false)
+                is NetworkResultState.Failure -> {
+                    _movieDetailsState.update { it.copy(error = movieDetailsResult.exception.localizedMessage) }
+                }
+                is NetworkResultState.Success -> {
+                    _movieDetailsState.update { it.copy(movieDetails = movieDetailsResult.data) }
                 }
             }
         }
@@ -34,13 +37,15 @@ class DetailsViewModel constructor(
 
     fun getMovieCast(movieId: Int) = viewModelScope.launch {
         movieDetailsRepository.fetchMovieCast(movieId = movieId).collect { movieCastsResult ->
-            movieCastsResult.onSuccess { cast ->
-                _movieDetailsState.update {
-                    it.copy(movieCast = cast.actor, isLoading = false)
+            when (movieCastsResult) {
+                is NetworkResultState.Loading -> {
+                    _movieDetailsState.update { it.copy(isLoading = false) }
                 }
-            }.onFailure { error ->
-                _movieDetailsState.update {
-                    it.copy(error = error.localizedMessage, isLoading = false)
+                is NetworkResultState.Failure -> {
+                    _movieDetailsState.update { it.copy(error = movieCastsResult.exception.localizedMessage) }
+                }
+                is NetworkResultState.Success -> {
+                    _movieDetailsState.update { it.copy(movieCast = movieCastsResult.data.actor) }
                 }
             }
         }
@@ -48,15 +53,15 @@ class DetailsViewModel constructor(
 
     fun fetchSimilarMovies(movieId: Int) = viewModelScope.launch {
         movieDetailsRepository.fetchSimilarMovies(movieId).collect { moviesResult ->
-            moviesResult.onSuccess { similarMovies ->
-                _movieDetailsState.update {
-                    it.copy(similarMovies = similarMovies, isLoading = false)
+            when (moviesResult) {
+                is NetworkResultState.Loading -> {
+                    _movieDetailsState.update { it.copy(isLoading = false) }
                 }
-            }.onFailure { error ->
-                _movieDetailsState.update {
-                    it.copy(
-                        error = error.localizedMessage, isLoading = false
-                    )
+                is NetworkResultState.Failure -> {
+                    _movieDetailsState.update { it.copy(error = moviesResult.exception.localizedMessage) }
+                }
+                is NetworkResultState.Success -> {
+                    _movieDetailsState.update { it.copy(similarMovies = moviesResult.data) }
                 }
             }
         }

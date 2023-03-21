@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.utils.HomeUiState
+import com.vickikbt.shared.utils.NetworkResultState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -23,40 +24,64 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
 
     private fun fetchNowPlayingMovies() = viewModelScope.launch {
         moviesRepository.fetchNowPlayingMovies().collect { moviesResult ->
-            moviesResult.onSuccess { movies ->
-                _homeUiState.update { it.copy(nowPlayingMovies = movies, isLoading = false) }
-            }.onFailure { error ->
-                _homeUiState.update { it.copy(error = error.localizedMessage, isLoading = false) }
+            when (moviesResult) {
+                is NetworkResultState.Loading -> {
+                    _homeUiState.update { it.copy(isLoading = true) }
+                }
+                is NetworkResultState.Failure -> {
+                    _homeUiState.update { it.copy(error = moviesResult.exception.localizedMessage) }
+                }
+                is NetworkResultState.Success -> {
+                    _homeUiState.update { it.copy(nowPlayingMovies = moviesResult.data) }
+                }
             }
         }
     }
 
     private fun fetchTrendingMovies() = viewModelScope.launch {
         moviesRepository.fetchTrendingMovies().collect { moviesResult ->
-            moviesResult.onSuccess { movies ->
-                _homeUiState.update { it.copy(trendingMovies = movies, isLoading = false) }
-            }.onFailure { error ->
-                _homeUiState.update { it.copy(error = error.localizedMessage, isLoading = false) }
+            when (moviesResult) {
+                is NetworkResultState.Loading -> {
+                    _homeUiState.update { it.copy(isLoading = false) }
+                }
+                is NetworkResultState.Failure -> {
+                    _homeUiState.update { it.copy(error = moviesResult.exception.localizedMessage) }
+                }
+                is NetworkResultState.Success -> {
+                    _homeUiState.update { it.copy(trendingMovies = moviesResult.data) }
+                }
             }
         }
     }
 
     private fun fetchPopularMovies() = viewModelScope.launch {
         moviesRepository.fetchPopularMovies().collect { moviesResult ->
-            moviesResult.onSuccess { movies ->
-                _homeUiState.update { it.copy(popularMovies = movies, isLoading = false) }
-            }.onFailure { error ->
-                _homeUiState.update { it.copy(error = error.localizedMessage, isLoading = false) }
+            when (moviesResult) {
+                is NetworkResultState.Loading -> {
+                    _homeUiState.update { it.copy(isLoading = false) }
+                }
+                is NetworkResultState.Failure -> {
+                    _homeUiState.update { it.copy(error = moviesResult.exception.localizedMessage) }
+                }
+                is NetworkResultState.Success -> {
+                    _homeUiState.update { it.copy(popularMovies = moviesResult.data) }
+                }
             }
         }
     }
 
     private fun fetchUpcomingMovies() = viewModelScope.launch {
         moviesRepository.fetchUpcomingMovies().collect { moviesResult ->
-            moviesResult.onSuccess { movies ->
-                _homeUiState.update { it.copy(upcomingMovies = movies, isLoading = false) }
-            }.onFailure { error ->
-                _homeUiState.update { it.copy(error = error.localizedMessage, isLoading = false) }
+            when (moviesResult) {
+                is NetworkResultState.Loading -> {
+                    _homeUiState.update { it.copy(isLoading = false) }
+                }
+                is NetworkResultState.Failure -> {
+                    _homeUiState.update { it.copy(error = moviesResult.exception.localizedMessage) }
+                }
+                is NetworkResultState.Success -> {
+                    _homeUiState.update { it.copy(upcomingMovies = moviesResult.data) }
+                }
             }
         }
     }
