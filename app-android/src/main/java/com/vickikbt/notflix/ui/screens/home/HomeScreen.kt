@@ -30,7 +30,6 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.fade
 import com.google.accompanist.placeholder.material.fade
 import com.google.accompanist.placeholder.material.placeholder
 import com.vickikbt.notflix.R
@@ -69,12 +68,15 @@ fun HomeScreen(
                 HorizontalPager(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(360.dp)
-                        .placeholder(visible = homeUiState.isLoading, color = Color.Gray),
+                        .height(360.dp),
                     count = if (it.size >= 5) 5 else it.size,
                     state = pagerState,
                 ) { page ->
-                    ItemNowPlayingMovies(modifier = Modifier.fillMaxSize(), movie = it[page]) {
+                    ItemNowPlayingMovies(
+                        modifier = Modifier.fillMaxSize(),
+                        isLoading = homeUiState.isLoading,
+                        movie = it[page]
+                    ) {
                         val movie = it[page]
                         navController.navigate("details/${movie.id!!}/${movie.cacheId!!}")
                     }
@@ -113,19 +115,14 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 LazyRow(
+                    modifier = Modifier.fillMaxWidth(),
                     contentPadding = PaddingValues(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .placeholder(
-                            visible = false,
-                            color = Gray,
-                            highlight = PlaceholderHighlight.fade(highlightColor = Color.Transparent)
-                        )
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     items(items = it) { item ->
                         ItemTrendingMovies(
                             movie = item,
+                            isLoading = homeUiState.isLoading,
                             onItemClick = { movie ->
                                 navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                             }
@@ -167,6 +164,7 @@ fun HomeScreen(
                                 .width(300.dp)
                                 .height(245.dp),
                             movie = item,
+                            isLoading = homeUiState.isLoading,
                             onClickItem = { movie ->
                                 navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                             }
@@ -199,6 +197,7 @@ fun HomeScreen(
                         items(items = it) { item ->
                             ItemTrendingMovies(
                                 movie = item,
+                                isLoading = homeUiState.isLoading,
                                 onItemClick = { movie ->
                                     navController.navigate("details/${movie.id!!}/${movie.cacheId}")
                                 }

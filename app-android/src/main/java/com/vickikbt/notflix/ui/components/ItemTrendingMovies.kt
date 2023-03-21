@@ -23,9 +23,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
-import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
-import com.google.accompanist.placeholder.shimmer
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.Movie
@@ -33,27 +31,15 @@ import com.vickikbt.shared.domain.models.Movie
 @Composable
 fun ItemTrendingMovies(
     movie: Movie,
+    isLoading: Boolean,
     onItemClick: (Movie) -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .placeholder(
-                visible = false,
-                color = Color.Gray,
-                highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
-            ),
-        verticalArrangement = Arrangement.spacedBy(3.dp)
-    ) {
+    Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
         Card(
             modifier = Modifier
                 .width(150.dp)
                 .fillMaxHeight()
-                .clickable { onItemClick(movie) }
-                .placeholder(
-                    visible = false,
-                    color = Color.Black,
-                    highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
-                ),
+                .clickable { onItemClick(movie) },
             elevation = 8.dp,
             shape = RoundedCornerShape(4.dp)
         ) {
@@ -62,9 +48,9 @@ fun ItemTrendingMovies(
                     .fillMaxWidth()
                     .height(220.dp)
                     .placeholder(
-                        visible = false,
-                        color = Color.Gray,
-                        highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
+                        visible = isLoading,
+                        color = Color.Gray.copy(alpha = .8f),
+                        shape = RoundedCornerShape(4.dp)
                     ),
                 painter = rememberImagePainter(
                     data = movie.posterPath?.loadImage(),
@@ -80,9 +66,9 @@ fun ItemTrendingMovies(
             modifier = Modifier
                 .width(145.dp)
                 .placeholder(
-                    visible = false,
-                    color = Color.Black,
-                    highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
+                    visible = isLoading,
+                    color = Color.Gray,
+                    shape = RoundedCornerShape(0.dp)
                 ),
             text = movie.title ?: "Unknown movie",
             style = MaterialTheme.typography.h5,
