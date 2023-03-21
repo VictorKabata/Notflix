@@ -28,15 +28,15 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
     val error get() = _error.asStateFlow()
 
     init {
-        CoroutineScope(Dispatchers.IO).launch {
-            // fetchNowPlayingMovies()
+        /*CoroutineScope(Dispatchers.IO).launch {
+            fetchNowPlayingMovies()
             fetchTrendingMovies()
             fetchPopularMovies()
-            // fetchUpcomingMovies()
-        }
+            fetchUpcomingMovies()
+        }*/
     }
 
-    private suspend fun fetchNowPlayingMovies() {
+    /*private suspend fun fetchNowPlayingMovies() {
         try {
             moviesRepository.fetchNowPlayingMovies().collect { moviesResult ->
                 moviesResult.onSuccess {
@@ -90,6 +90,6 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
         } catch (e: Exception) {
             _error.value = e.message
         }
-    }
+    }*/
 
 }

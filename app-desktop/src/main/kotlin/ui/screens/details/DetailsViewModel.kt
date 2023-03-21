@@ -35,7 +35,7 @@ class DetailsViewModel constructor(
     private val _error = MutableStateFlow<String?>(null)
     val error get() = _error.asStateFlow()
 
-    fun getMovieDetails(movieId: Int) = CoroutineScope(Dispatchers.IO).launch {
+    /*fun getMovieDetails(movieId: Int) = CoroutineScope(Dispatchers.IO).launch {
         movieDetailsRepository.fetchMovieDetails(movieId = movieId)
             .collect { movieDetailsResult ->
                 movieDetailsResult.onSuccess {
@@ -64,7 +64,7 @@ class DetailsViewModel constructor(
                 _error.value = it.message
             }
         }
-    }
+    }*/
 
     @Deprecated("Pending caching implementation")
     fun saveMovieDetails(movieDetails: MovieDetails) = CoroutineScope(Dispatchers.IO).launch {
