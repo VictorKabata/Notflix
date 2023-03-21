@@ -37,7 +37,12 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
                     }
                 }
                 is NetworkResultState.Success -> {
-                    _homeUiState.update { it.copy(nowPlayingMovies = moviesResult.data) }
+                    _homeUiState.update {
+                        it.copy(
+                            nowPlayingMovies = moviesResult.data,
+                            isLoading = false
+                        )
+                    }
                 }
             }
         }
@@ -58,7 +63,12 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
                     }
                 }
                 is NetworkResultState.Success -> {
-                    _homeUiState.update { it.copy(trendingMovies = moviesResult.data) }
+                    _homeUiState.update {
+                        it.copy(
+                            trendingMovies = moviesResult.data,
+                            isLoading = false
+                        )
+                    }
                 }
             }
         }
@@ -79,7 +89,12 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
                     }
                 }
                 is NetworkResultState.Success -> {
-                    _homeUiState.update { it.copy(popularMovies = moviesResult.data) }
+                    _homeUiState.update {
+                        it.copy(
+                            popularMovies = moviesResult.data,
+                            isLoading = false
+                        )
+                    }
                 }
             }
         }
@@ -100,7 +115,12 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
                     }
                 }
                 is NetworkResultState.Success -> {
-                    _homeUiState.update { it.copy(upcomingMovies = moviesResult.data) }
+                    _homeUiState.update {
+                        it.copy(
+                            upcomingMovies = moviesResult.data,
+                            isLoading = false
+                        )
+                    }
                 }
             }
         }
