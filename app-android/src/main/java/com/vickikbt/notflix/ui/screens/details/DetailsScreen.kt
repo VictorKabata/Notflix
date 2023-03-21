@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -115,9 +116,10 @@ fun DetailsScreen(
 
             Text(
                 modifier = Modifier
+                    .fillMaxWidth()
                     .padding(horizontal = 16.dp)
                     .placeholder(visible = movieDetailsState.isLoading, color = Color.Gray),
-                text = movieDetailsState.movieDetails?.overview ?: "",
+                text = "movieDetailsState.movieDetails?.overview",
                 style = MaterialTheme.typography.body1,
                 color = MaterialTheme.colors.onSurface,
                 fontSize = 15.sp,

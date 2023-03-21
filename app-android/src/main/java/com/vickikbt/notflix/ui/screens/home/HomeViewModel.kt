@@ -19,9 +19,9 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
 
     init {
         fetchNowPlayingMovies()
-        fetchTrendingMovies()
+        /*fetchTrendingMovies()
         fetchPopularMovies()
-        fetchUpcomingMovies()
+        fetchUpcomingMovies()*/
     }
 
     private fun fetchNowPlayingMovies() = viewModelScope.launch {

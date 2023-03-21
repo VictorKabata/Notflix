@@ -3,6 +3,7 @@ package com.vickikbt.notflix.ui.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
@@ -37,16 +38,17 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor, isLoading: Boolea
     ) {
         Image(
             modifier = Modifier
+                .placeholder(visible = isLoading, color = Color.Gray.copy(.8f))
                 .size(80.dp)
-                .placeholder(visible = isLoading, color = Color.Gray.copy(.8f)),
+                .defaultMinSize(minWidth = 80.dp, minHeight = 80.dp),
             painter = painter,
             contentDescription = stringResource(id = R.string.cast)
         )
 
         Text(
             modifier = Modifier
-                .width(78.dp)
-                .placeholder(visible = isLoading, color = Color.Gray),
+                .placeholder(visible = isLoading, color = Color.Gray)
+                .width(78.dp),
             text = actor.name ?: stringResource(R.string.unknown_actor),
             style = MaterialTheme.typography.h6,
             fontSize = 14.sp,
@@ -58,8 +60,8 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor, isLoading: Boolea
 
         Text(
             modifier = Modifier
-                .width(77.dp)
-                .placeholder(visible = isLoading, color = Color.Gray),
+                .placeholder(visible = isLoading, color = Color.Gray)
+                .width(77.dp),
             text = actor.character ?: stringResource(R.string.unknown_character),
             style = MaterialTheme.typography.h4,
             fontSize = 12.sp,

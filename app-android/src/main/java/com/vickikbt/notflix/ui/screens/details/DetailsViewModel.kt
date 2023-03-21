@@ -22,7 +22,8 @@ class DetailsViewModel constructor(
     val movieDetailsState = _movieDetailsState.asStateFlow()
 
     fun getMovieDetails(movieId: Int) = viewModelScope.launch {
-        movieDetailsRepository.fetchMovieDetails(movieId = movieId).collect { movieDetailsResult ->
+        _movieDetailsState.update { it.copy(isLoading = true) }
+        /*movieDetailsRepository.fetchMovieDetails(movieId = movieId).collect { movieDetailsResult ->
             movieDetailsResult.isLoading { isLoading ->
                 _movieDetailsState.update { it.copy(isLoading = isLoading) }
             }.onSuccess { movieDetails ->
@@ -30,11 +31,12 @@ class DetailsViewModel constructor(
             }.onFailure { error ->
                 _movieDetailsState.update { it.copy(error = error.localizedMessage) }
             }
-        }
+        }*/
     }
 
     fun getMovieCast(movieId: Int) = viewModelScope.launch {
-        movieDetailsRepository.fetchMovieCast(movieId = movieId).collect { movieCastsResult ->
+        _movieDetailsState.update { it.copy(isLoading = true) }
+        /*movieDetailsRepository.fetchMovieCast(movieId = movieId).collect { movieCastsResult ->
             movieCastsResult.isLoading { isLoading ->
                 _movieDetailsState.update { it.copy(isLoading = isLoading) }
             }.onSuccess { cast ->
@@ -42,11 +44,12 @@ class DetailsViewModel constructor(
             }.onFailure { error ->
                 _movieDetailsState.update { it.copy(error = error.localizedMessage) }
             }
-        }
+        }*/
     }
 
     fun fetchSimilarMovies(movieId: Int) = viewModelScope.launch {
-        movieDetailsRepository.fetchSimilarMovies(movieId).collect { similarMovies ->
+        _movieDetailsState.update { it.copy(isLoading = true) }
+        /*movieDetailsRepository.fetchSimilarMovies(movieId).collect { similarMovies ->
             similarMovies.isLoading { isLoading ->
                 _movieDetailsState.update { it.copy(isLoading = isLoading) }
             }.onSuccess { movies ->
@@ -54,7 +57,7 @@ class DetailsViewModel constructor(
             }.onFailure { error ->
                 _movieDetailsState.update { it.copy(error = error.localizedMessage) }
             }
-        }
+        }*/
     }
 
     @Deprecated("Pending caching implementation")

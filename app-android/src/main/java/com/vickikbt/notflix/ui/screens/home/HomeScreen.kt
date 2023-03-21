@@ -29,9 +29,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
-import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.material.fade
-import com.google.accompanist.placeholder.material.placeholder
+import com.google.accompanist.placeholder.placeholder
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemNowPlayingMovies
 import com.vickikbt.notflix.ui.components.ItemPopularMovies
@@ -65,7 +63,8 @@ fun HomeScreen(
                 HorizontalPager(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(360.dp),
+                        .height(360.dp)
+                        .placeholder(visible = homeUiState.isLoading, color = Color.Gray),
                     count = if (it.size >= 5) 5 else it.size,
                     state = pagerState,
                 ) { page ->
@@ -104,6 +103,7 @@ fun HomeScreen(
                         .fillMaxWidth()
                         .wrapContentHeight(),
                     sectionTitle = stringResource(id = R.string.trending_movies),
+                    isLoading = homeUiState.isLoading,
                     onItemClick = {
                         // ToDo: OnSectionedClicked-navigate to view all
                     }
@@ -112,7 +112,9 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 LazyRow(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
                     contentPadding = PaddingValues(horizontal = 16.dp),
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
@@ -137,6 +139,7 @@ fun HomeScreen(
                         .fillMaxWidth()
                         .wrapContentHeight(),
                     sectionTitle = stringResource(id = R.string.popular_movies),
+                    isLoading = homeUiState.isLoading,
                     onItemClick = {
                         // ToDo: OnSectionedClicked-navigate to view all
                     }
@@ -149,11 +152,7 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.spacedBy(14.dp),
                     modifier = Modifier
                         .wrapContentHeight()
-                        .placeholder(
-                            visible = false,
-                            color = Color.Gray,
-                            highlight = PlaceholderHighlight.fade()
-                        )
+                        .placeholder(visible = false, color = Color.Gray)
                 ) {
                     items(items = it) { item ->
                         ItemPopularMovies(
@@ -180,6 +179,7 @@ fun HomeScreen(
                             .fillMaxWidth()
                             .wrapContentHeight(),
                         sectionTitle = stringResource(id = R.string.upcoming_movies),
+                        isLoading = homeUiState.isLoading,
                         onItemClick = {
                             // ToDo: OnSectionedClicked-navigate to view all
                         }
@@ -188,6 +188,7 @@ fun HomeScreen(
                     Spacer(modifier = Modifier.height(8.dp))
 
                     LazyRow(
+                        modifier = Modifier.wrapContentHeight(),
                         contentPadding = PaddingValues(horizontal = 16.dp),
                         horizontalArrangement = Arrangement.spacedBy(10.dp),
                     ) {
