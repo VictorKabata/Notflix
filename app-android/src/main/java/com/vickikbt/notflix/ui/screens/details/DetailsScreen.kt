@@ -2,6 +2,7 @@ package com.vickikbt.notflix.ui.screens.details
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -56,10 +57,9 @@ fun DetailsScreen(
         detailsViewModel.getMovieCast(movieId)
     }
 
-    val movieDetails = detailsViewModel.movieDetails.collectAsState().value
-    val movieCast = detailsViewModel.movieCast.collectAsState().value
-    val similarMovies = detailsViewModel.similarMovies.collectAsState().value
-    val error = detailsViewModel.error.collectAsState().value
+    val movieDetailsState = detailsViewModel.movieDetailsState.collectAsState().value
+
+    Log.e("VicKbt", "IsLoading: ${movieDetailsState.isLoading}")
 
     val context = LocalContext.current
 
@@ -74,7 +74,7 @@ fun DetailsScreen(
             DetailsAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 collapsingScrollState = collapsingScrollState,
-                movieDetails = movieDetails,
+                movieDetails = movieDetailsState.movieDetails,
                 onNavigationIconClick = {
                     navController.navigateUp()
                 },
@@ -99,7 +99,7 @@ fun DetailsScreen(
             verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
             //region Movie Ratings
-            val voteAverage = movieDetails?.voteAverage
+            val voteAverage = movieDetailsState.movieDetails?.voteAverage
             voteAverage?.let {
                 MovieRatingSection(
                     popularity = voteAverage.getPopularity(),
@@ -121,11 +121,11 @@ fun DetailsScreen(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .placeholder(
-                        visible = movieDetails?.overview.isNullOrEmpty(),
+                        visible = movieDetailsState.movieDetails?.overview.isNullOrEmpty(),
                         color = Gray,
                         highlight = PlaceholderHighlight.fade(highlightColor = Color.Gray)
                     ),
-                text = movieDetails?.overview ?: "",
+                text = movieDetailsState.movieDetails?.overview ?: "",
                 style = MaterialTheme.typography.body1,
                 color = MaterialTheme.colors.onSurface,
                 fontSize = 15.sp,
@@ -135,7 +135,7 @@ fun DetailsScreen(
             //endregion
 
             //region Movie Cast
-            movieCast?.actor?.let {
+            movieDetailsState.movieCast?.let {
                 Text(
                     modifier = Modifier.padding(horizontal = 16.dp),
                     text = stringResource(id = R.string.cast),
@@ -155,7 +155,7 @@ fun DetailsScreen(
             //endregion
 
             //region Similar Movies
-            similarMovies?.let {
+            movieDetailsState.similarMovies?.let {
                 Text(
                     modifier = Modifier.padding(horizontal = 16.dp),
                     text = stringResource(id = R.string.similar_movies),
