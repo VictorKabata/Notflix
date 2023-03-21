@@ -18,7 +18,7 @@ suspend fun <T : Any?> safeApiCall(apiCall: suspend () -> T): Flow<NetworkResult
     channelFlow {
         send(NetworkResultState.Loading)
 
-        delay(5000)
+        // delay(5000)
 
         try {
             send(NetworkResultState.Success(apiCall.invoke()))
