@@ -2,65 +2,62 @@ package com.vickikbt.notflix.ui.screens.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vickikbt.shared.domain.models.Cast
-import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
-import com.vickikbt.shared.domain.models.MovieVideo
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
+import com.vickikbt.shared.utils.DetailsUiStates
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class DetailsViewModel constructor(
     private val movieDetailsRepository: MovieDetailsRepository
 ) : ViewModel() {
 
-    private val _movieDetails = MutableStateFlow<MovieDetails?>(null)
-    val movieDetails get() = _movieDetails.asStateFlow()
-
-    private val _movieCast = MutableStateFlow<Cast?>(null)
-    val movieCast get() = _movieCast.asStateFlow()
-
-    private val _movieVideo = MutableStateFlow<MovieVideo?>(null)
-    val movieVideo get() = _movieVideo.asStateFlow()
-
-    private val _similarMovies = MutableStateFlow<List<Movie>?>(emptyList())
-    val similarMovies get() = _similarMovies.asStateFlow()
-
-    private val _movieIsFavorite = MutableStateFlow<Boolean>(false)
-    val movieIsFavorite get() = _movieIsFavorite.asStateFlow()
-
-    private val _error = MutableStateFlow<String?>(null)
-    val error get() = _error.asStateFlow()
+    private val _movieDetailsState = MutableStateFlow(DetailsUiStates(isLoading = true))
+    val movieDetailsState = _movieDetailsState.asStateFlow()
 
     fun getMovieDetails(movieId: Int) = viewModelScope.launch {
-        movieDetailsRepository.fetchMovieDetails(movieId = movieId)
-            .collect { movieDetailsResult ->
-                movieDetailsResult.onSuccess {
-                    _movieDetails.value = it
-                }.onFailure {
-                    _error.value = it.message
+        movieDetailsRepository.fetchMovieDetails(movieId = movieId).collect { movieDetailsResult ->
+            movieDetailsResult.onSuccess { movieDetails ->
+                _movieDetailsState.update {
+                    it.copy(movieDetails = movieDetails, isLoading = false)
+                }
+            }.onFailure { error ->
+                _movieDetailsState.update {
+                    it.copy(error = error.localizedMessage, isLoading = false)
                 }
             }
+        }
     }
 
     fun getMovieCast(movieId: Int) = viewModelScope.launch {
         movieDetailsRepository.fetchMovieCast(movieId = movieId).collect { movieCastsResult ->
-            movieCastsResult.onSuccess {
-                _movieCast.value = it
-            }.onFailure {
-                _error.value = it.message
+            movieCastsResult.onSuccess { cast ->
+                _movieDetailsState.update {
+                    it.copy(movieCast = cast.actor, isLoading = false)
+                }
+            }.onFailure { error ->
+                _movieDetailsState.update {
+                    it.copy(error = error.localizedMessage, isLoading = false)
+                }
             }
         }
     }
 
     fun fetchSimilarMovies(movieId: Int) = viewModelScope.launch {
         movieDetailsRepository.fetchSimilarMovies(movieId).collect { moviesResult ->
-            moviesResult.onSuccess {
-                _similarMovies.value = it
-            }.onFailure {
-                _error.value = it.message
+            moviesResult.onSuccess { similarMovies ->
+                _movieDetailsState.update {
+                    it.copy(similarMovies = similarMovies, isLoading = false)
+                }
+            }.onFailure { error ->
+                _movieDetailsState.update {
+                    it.copy(
+                        error = error.localizedMessage, isLoading = false
+                    )
+                }
             }
         }
     }
