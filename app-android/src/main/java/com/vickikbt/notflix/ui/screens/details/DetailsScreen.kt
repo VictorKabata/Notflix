@@ -93,7 +93,6 @@ fun DetailsScreen(
                 .verticalScroll(state = scrollState),
             verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
-
             //region Movie Ratings
             val voteAverage = movieDetailsState.movieDetails?.voteAverage
             voteAverage?.let {
@@ -169,7 +168,6 @@ fun DetailsScreen(
             //endregion
         }
     }
-
 }
 
 private fun shareMovie(context: Context, movieId: Int) {
