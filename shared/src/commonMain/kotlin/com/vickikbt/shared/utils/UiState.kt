@@ -1,8 +1,8 @@
 package com.vickikbt.shared.utils
 
 sealed class UiState<out T : Any?> {
-    data class Success<out T : Any>(val data: T) : UiState<T>()
-    data class Error(val exception: Exception) : UiState<Nothing>()
+    data class Success<out T : Any?>(val data: T) : UiState<T>()
+    data class Error(val exception: String) : UiState<Nothing>()
     object Loading : UiState<Nothing>()
 }
 
@@ -11,7 +11,7 @@ inline fun <T : Any> UiState<T>.onSuccess(crossinline action: (T) -> Unit): UiSt
     return this
 }
 
-inline fun <T : Any> UiState<T>.onFailure(crossinline action: (exception: Exception) -> Unit): UiState<T> {
+inline fun <T : Any> UiState<T>.onFailure(crossinline action: (exception: String) -> Unit): UiState<T> {
     if (this is UiState.Error) action(this.exception)
     return this
 }
