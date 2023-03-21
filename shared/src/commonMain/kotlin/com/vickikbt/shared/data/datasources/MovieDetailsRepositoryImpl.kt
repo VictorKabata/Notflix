@@ -9,22 +9,24 @@ import com.vickikbt.shared.domain.models.Cast
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
+import com.vickikbt.shared.utils.NetworkResultState
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import kotlinx.coroutines.flow.Flow
 
-class MovieDetailsRepositoryImpl constructor(private val httpClient: HttpClient) : MovieDetailsRepository {
+class MovieDetailsRepositoryImpl constructor(private val httpClient: HttpClient) :
+    MovieDetailsRepository {
 
-    override suspend fun fetchMovieDetails(movieId: Int): Flow<Result<MovieDetails>> {
+    override suspend fun fetchMovieDetails(movieId: Int): Flow<NetworkResultState<MovieDetails>> {
         return safeApiCall {
             val response = httpClient.get(urlString = "movie/$movieId").body<MovieDetailsDto>()
             response.toDomain()
         }
     }
 
-    override suspend fun fetchMovieCast(movieId: Int): Flow<Result<Cast>> {
+    override suspend fun fetchMovieCast(movieId: Int): Flow<NetworkResultState<Cast>> {
         return safeApiCall {
             val response = httpClient.get(urlString = "movie/$movieId/credits").body<CastDto>()
 
@@ -32,7 +34,10 @@ class MovieDetailsRepositoryImpl constructor(private val httpClient: HttpClient)
         }
     }
 
-    override suspend fun fetchSimilarMovies(movieId: Int, page: Int): Flow<Result<List<Movie>?>> {
+    override suspend fun fetchSimilarMovies(
+        movieId: Int,
+        page: Int
+    ): Flow<NetworkResultState<List<Movie>?>> {
         return safeApiCall {
             val response = httpClient.get(urlString = "movie/$movieId/similar") {
                 parameter("page", page)

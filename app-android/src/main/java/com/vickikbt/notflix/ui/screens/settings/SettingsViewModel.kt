@@ -3,22 +3,17 @@ package com.vickikbt.notflix.ui.screens.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vickikbt.shared.domain.repositories.SettingsRepository
+import com.vickikbt.shared.utils.SettingsUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SettingsViewModel constructor(private val settingsRepository: SettingsRepository) :
     ViewModel() {
 
-    private val _selectedTheme = MutableStateFlow<Int?>(null)
-    val selectedTheme get() = _selectedTheme.asStateFlow()
-
-    private val _selectedLanguage = MutableStateFlow<Int?>(null)
-    val selectedLanguage get() = _selectedLanguage.asStateFlow()
-
-    private val _selectedImageQuality = MutableStateFlow<Int?>(null)
-    val selectedImageQuality get() = _selectedImageQuality.asStateFlow()
+    private val _settingsUiState = MutableStateFlow(SettingsUiState(isLoading = true))
+    val settingsUiState = _settingsUiState.asStateFlow()
 
     init {
         getThemePreference()
@@ -31,20 +26,26 @@ class SettingsViewModel constructor(private val settingsRepository: SettingsRepo
     }
 
     private fun getThemePreference() = viewModelScope.launch {
-        settingsRepository.getThemePreference().collectLatest {
-            _selectedTheme.value = it ?: 2
+        settingsRepository.getThemePreference().collect { theme ->
+            theme?.let {
+                _settingsUiState.update { it.copy(selectedTheme = theme) }
+            }
         }
     }
 
     private fun getLanguagePreference() = viewModelScope.launch {
-        settingsRepository.getLanguagePreference().collectLatest {
-            _selectedLanguage.value = it ?: 0
+        settingsRepository.getLanguagePreference().collect { language ->
+            language?.let {
+                _settingsUiState.update { it.copy(selectedLanguage = language) }
+            }
         }
     }
 
     private fun getImageQualityPreference() = viewModelScope.launch {
-        settingsRepository.getImageQualityPreference().collectLatest {
-            _selectedImageQuality.value = it ?: 2
+        settingsRepository.getImageQualityPreference().collect { imageQuality ->
+            imageQuality?.let {
+                _settingsUiState.update { it.copy(selectedImageQuality = imageQuality) }
+            }
         }
     }
 }

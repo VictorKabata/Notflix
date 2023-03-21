@@ -5,6 +5,7 @@ import com.vickikbt.shared.data.network.models.MovieResultsDto
 import com.vickikbt.shared.data.network.utils.safeApiCall
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.repositories.MoviesRepository
+import com.vickikbt.shared.utils.NetworkResultState
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -16,7 +17,7 @@ class MoviesRepositoryImpl constructor(
     // private val moviesDao: MovieDao
 ) : MoviesRepository {
 
-    override suspend fun fetchNowPlayingMovies(page: Int): Flow<Result<List<Movie>?>> {
+    override suspend fun fetchNowPlayingMovies(page: Int): Flow<NetworkResultState<List<Movie>?>> {
         return safeApiCall {
             val response = httpClient.get(urlString = "movie/now_playing") {
                 parameter("page", page)
@@ -30,7 +31,7 @@ class MoviesRepositoryImpl constructor(
         mediaType: String,
         timeWindow: String,
         page: Int
-    ): Flow<Result<List<Movie>?>> {
+    ): Flow<NetworkResultState<List<Movie>?>> {
         return safeApiCall {
             val response = httpClient.get(urlString = "trending/$mediaType/$timeWindow") {
                 parameter("page", page)
@@ -40,7 +41,7 @@ class MoviesRepositoryImpl constructor(
         }
     }
 
-    override suspend fun fetchPopularMovies(page: Int): Flow<Result<List<Movie>?>> {
+    override suspend fun fetchPopularMovies(page: Int): Flow<NetworkResultState<List<Movie>?>> {
         return safeApiCall {
             val response = httpClient.get(urlString = "movie/popular") {
                 parameter("page", page)
@@ -50,7 +51,7 @@ class MoviesRepositoryImpl constructor(
         }
     }
 
-    override suspend fun fetchUpcomingMovies(page: Int): Flow<Result<List<Movie>?>> {
+    override suspend fun fetchUpcomingMovies(page: Int): Flow<NetworkResultState<List<Movie>?>> {
         return safeApiCall {
             val response = httpClient.get(urlString = "movie/upcoming") {
                 parameter("page", page)
