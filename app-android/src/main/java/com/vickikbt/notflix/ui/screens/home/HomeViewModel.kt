@@ -3,7 +3,7 @@ package com.vickikbt.notflix.ui.screens.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vickikbt.shared.domain.repositories.MoviesRepository
-import com.vickikbt.shared.utils.HomeUiStates
+import com.vickikbt.shared.utils.HomeUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel constructor(private val moviesRepository: MoviesRepository) : ViewModel() {
 
-    private val _homeUiState = MutableStateFlow(HomeUiStates(isLoading = true))
+    private val _homeUiState = MutableStateFlow(HomeUiState(isLoading = true))
     val homeUiState = _homeUiState.asStateFlow()
 
     init {

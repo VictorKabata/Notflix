@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
-import com.vickikbt.shared.utils.DetailsUiStates
+import com.vickikbt.shared.utils.DetailsUiState
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,7 +15,7 @@ class DetailsViewModel constructor(
     private val movieDetailsRepository: MovieDetailsRepository
 ) : ViewModel() {
 
-    private val _movieDetailsState = MutableStateFlow(DetailsUiStates(isLoading = true))
+    private val _movieDetailsState = MutableStateFlow(DetailsUiState(isLoading = true))
     val movieDetailsState = _movieDetailsState.asStateFlow()
 
     fun getMovieDetails(movieId: Int) = viewModelScope.launch {

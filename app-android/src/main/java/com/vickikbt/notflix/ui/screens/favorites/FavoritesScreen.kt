@@ -29,18 +29,18 @@ fun FavoritesScreen(
     navController: NavController,
     favoritesViewModel: FavouritesViewModel = get()
 ) {
-    val favouriteMovies = favoritesViewModel.favouriteMovies.collectAsState().value
+    val favouriteMoviesUiState = favoritesViewModel.favouritesUiState.collectAsState().value
 
     Scaffold(topBar = { AppBar(stringResource(id = R.string.title_favorites)) }) {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
-            favouriteMovies?.let {
+            favouriteMoviesUiState.favouriteMovies?.let {
                 LazyVerticalGrid(
                     modifier = Modifier.padding(horizontal = 16.dp),
                     columns = GridCells.Fixed(2),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    items(favouriteMovies) { movie ->
+                    items(it) { movie ->
                         ItemFavoriteMovie(movie = movie) {
                             navController.navigate("details/${it.id}/${0}")
                         }
