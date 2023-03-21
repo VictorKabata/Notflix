@@ -1,6 +1,5 @@
 package com.vickikbt.notflix.ui.components
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -63,7 +62,7 @@ fun ItemNowPlayingMovies(
         }
     )
 
-    Log.e("VicKbt", "Is loading NowPlaying: $isLoading")
+    // Log.e("VicKbt", "Is loading NowPlaying: $isLoading")
 
     if (painter.state is ImagePainter.State.Success) {
         LaunchedEffect(key1 = painter) {

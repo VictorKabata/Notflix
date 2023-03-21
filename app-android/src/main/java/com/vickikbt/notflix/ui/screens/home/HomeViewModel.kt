@@ -14,18 +14,19 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel constructor(private val moviesRepository: MoviesRepository) : ViewModel() {
 
-    private val _homeUiState = MutableStateFlow(HomeUiState())
+    private val _homeUiState = MutableStateFlow(HomeUiState(isLoading = true))
     val homeUiState = _homeUiState.asStateFlow()
 
     init {
         fetchNowPlayingMovies()
-        fetchTrendingMovies()
-        /*fetchPopularMovies()
+        /*fetchTrendingMovies()
+        fetchPopularMovies()
         fetchUpcomingMovies()*/
     }
 
     private fun fetchNowPlayingMovies() = viewModelScope.launch {
         _homeUiState.update { it.copy(isLoading = true) }
+
         /*moviesRepository.fetchNowPlayingMovies().collect { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
@@ -38,8 +39,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
     }
 
     private fun fetchTrendingMovies() = viewModelScope.launch {
-        _homeUiState.update { it.copy(isLoading = true) }
-        /*moviesRepository.fetchTrendingMovies().collect { moviesResult ->
+        moviesRepository.fetchTrendingMovies().collect { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
             }.onSuccess { movies ->
@@ -47,7 +47,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
             }.onFailure { error ->
                 _homeUiState.update { it.copy(error = error.localizedMessage) }
             }
-        }*/
+        }
     }
 
     private fun fetchPopularMovies() = viewModelScope.launch {

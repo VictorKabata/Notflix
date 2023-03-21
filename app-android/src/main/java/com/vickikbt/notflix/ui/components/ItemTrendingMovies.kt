@@ -37,7 +37,7 @@ fun ItemTrendingMovies(
     onItemClick: (Movie) -> Unit
 ) {
 
-    Log.e("VicKbt", "Is loading trending movies: $isLoading")
+    // Log.e("VicKbt", "Is loading trending movies: $isLoading")
 
     Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
         Card(
