@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel constructor(private val moviesRepository: MoviesRepository) : ViewModel() {
 
-    private val _homeUiState = MutableStateFlow(HomeUiState(isLoading = true))
+    private val _homeUiState = MutableStateFlow(HomeUiState())
     val homeUiState = _homeUiState.asStateFlow()
 
     init {
@@ -29,7 +29,12 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
                     _homeUiState.update { it.copy(isLoading = true) }
                 }
                 is NetworkResultState.Failure -> {
-                    _homeUiState.update { it.copy(error = moviesResult.exception.localizedMessage) }
+                    _homeUiState.update {
+                        it.copy(
+                            error = moviesResult.exception.localizedMessage,
+                            isLoading = false
+                        )
+                    }
                 }
                 is NetworkResultState.Success -> {
                     _homeUiState.update { it.copy(nowPlayingMovies = moviesResult.data) }
@@ -42,10 +47,15 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
         moviesRepository.fetchTrendingMovies().collect { moviesResult ->
             when (moviesResult) {
                 is NetworkResultState.Loading -> {
-                    _homeUiState.update { it.copy(isLoading = false) }
+                    _homeUiState.update { it.copy(isLoading = true) }
                 }
                 is NetworkResultState.Failure -> {
-                    _homeUiState.update { it.copy(error = moviesResult.exception.localizedMessage) }
+                    _homeUiState.update {
+                        it.copy(
+                            error = moviesResult.exception.localizedMessage,
+                            isLoading = false
+                        )
+                    }
                 }
                 is NetworkResultState.Success -> {
                     _homeUiState.update { it.copy(trendingMovies = moviesResult.data) }
@@ -58,10 +68,15 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
         moviesRepository.fetchPopularMovies().collect { moviesResult ->
             when (moviesResult) {
                 is NetworkResultState.Loading -> {
-                    _homeUiState.update { it.copy(isLoading = false) }
+                    _homeUiState.update { it.copy(isLoading = true) }
                 }
                 is NetworkResultState.Failure -> {
-                    _homeUiState.update { it.copy(error = moviesResult.exception.localizedMessage) }
+                    _homeUiState.update {
+                        it.copy(
+                            error = moviesResult.exception.localizedMessage,
+                            isLoading = false
+                        )
+                    }
                 }
                 is NetworkResultState.Success -> {
                     _homeUiState.update { it.copy(popularMovies = moviesResult.data) }
@@ -74,10 +89,15 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
         moviesRepository.fetchUpcomingMovies().collect { moviesResult ->
             when (moviesResult) {
                 is NetworkResultState.Loading -> {
-                    _homeUiState.update { it.copy(isLoading = false) }
+                    _homeUiState.update { it.copy(isLoading = true) }
                 }
                 is NetworkResultState.Failure -> {
-                    _homeUiState.update { it.copy(error = moviesResult.exception.localizedMessage) }
+                    _homeUiState.update {
+                        it.copy(
+                            error = moviesResult.exception.localizedMessage,
+                            isLoading = false
+                        )
+                    }
                 }
                 is NetworkResultState.Success -> {
                     _homeUiState.update { it.copy(upcomingMovies = moviesResult.data) }
