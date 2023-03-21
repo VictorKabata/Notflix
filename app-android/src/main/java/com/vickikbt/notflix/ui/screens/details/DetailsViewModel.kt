@@ -16,20 +16,30 @@ class DetailsViewModel constructor(
     private val movieDetailsRepository: MovieDetailsRepository
 ) : ViewModel() {
 
-    private val _movieDetailsState = MutableStateFlow(DetailsUiState(isLoading = true))
+    private val _movieDetailsState = MutableStateFlow(DetailsUiState())
     val movieDetailsState = _movieDetailsState.asStateFlow()
 
     fun getMovieDetails(movieId: Int) = viewModelScope.launch {
         movieDetailsRepository.fetchMovieDetails(movieId = movieId).collect { movieDetailsResult ->
             when (movieDetailsResult) {
                 is NetworkResultState.Loading -> {
-                    _movieDetailsState.update { it.copy(isLoading = false) }
+                    _movieDetailsState.update { it.copy(isLoading = true) }
                 }
                 is NetworkResultState.Failure -> {
-                    _movieDetailsState.update { it.copy(error = movieDetailsResult.exception.localizedMessage) }
+                    _movieDetailsState.update {
+                        it.copy(
+                            error = movieDetailsResult.exception.localizedMessage,
+                            isLoading = false
+                        )
+                    }
                 }
                 is NetworkResultState.Success -> {
-                    _movieDetailsState.update { it.copy(movieDetails = movieDetailsResult.data) }
+                    _movieDetailsState.update {
+                        it.copy(
+                            movieDetails = movieDetailsResult.data,
+                            isLoading = false
+                        )
+                    }
                 }
             }
         }
@@ -39,13 +49,23 @@ class DetailsViewModel constructor(
         movieDetailsRepository.fetchMovieCast(movieId = movieId).collect { movieCastsResult ->
             when (movieCastsResult) {
                 is NetworkResultState.Loading -> {
-                    _movieDetailsState.update { it.copy(isLoading = false) }
+                    _movieDetailsState.update { it.copy(isLoading = true) }
                 }
                 is NetworkResultState.Failure -> {
-                    _movieDetailsState.update { it.copy(error = movieCastsResult.exception.localizedMessage) }
+                    _movieDetailsState.update {
+                        it.copy(
+                            error = movieCastsResult.exception.localizedMessage,
+                            isLoading = false
+                        )
+                    }
                 }
                 is NetworkResultState.Success -> {
-                    _movieDetailsState.update { it.copy(movieCast = movieCastsResult.data.actor) }
+                    _movieDetailsState.update {
+                        it.copy(
+                            movieCast = movieCastsResult.data.actor,
+                            isLoading = false
+                        )
+                    }
                 }
             }
         }
@@ -55,13 +75,23 @@ class DetailsViewModel constructor(
         movieDetailsRepository.fetchSimilarMovies(movieId).collect { moviesResult ->
             when (moviesResult) {
                 is NetworkResultState.Loading -> {
-                    _movieDetailsState.update { it.copy(isLoading = false) }
+                    _movieDetailsState.update { it.copy(isLoading = true) }
                 }
                 is NetworkResultState.Failure -> {
-                    _movieDetailsState.update { it.copy(error = moviesResult.exception.localizedMessage) }
+                    _movieDetailsState.update {
+                        it.copy(
+                            error = moviesResult.exception.localizedMessage,
+                            isLoading = false
+                        )
+                    }
                 }
                 is NetworkResultState.Success -> {
-                    _movieDetailsState.update { it.copy(similarMovies = moviesResult.data) }
+                    _movieDetailsState.update {
+                        it.copy(
+                            similarMovies = moviesResult.data,
+                            isLoading = false
+                        )
+                    }
                 }
             }
         }
