@@ -6,8 +6,6 @@ import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickikbt.shared.utils.DetailsUiState
 import com.vickikbt.shared.utils.isLoading
-import com.vickikbt.shared.utils.onFailure
-import com.vickikbt.shared.utils.onSuccess
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

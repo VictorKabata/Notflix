@@ -61,7 +61,6 @@ fun HomeScreen(
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             //region Now Playing Movies
             homeUiState.nowPlayingMovies?.let {
                 HorizontalPager(
