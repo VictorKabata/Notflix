@@ -107,6 +107,12 @@ dependencies {
     testImplementation(libs.jUnit)
     testImplementation(libs.googleTruth)
     testImplementation(libs.kotlinX.coroutines.test)
+    testImplementation(libs.mockk)
+
+    testImplementation("androidx.test.ext:junit-ktx:1.1.4-alpha04")
+    testImplementation("android.arch.core:core-testing:1.1.1")
+    testImplementation("com.google.truth:truth:1.1.3")
+    testImplementation("org.robolectric:robolectric:4.8.1")
 
     androidTestImplementation(libs.test.rules)
     androidTestImplementation(libs.test.runner)

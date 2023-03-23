@@ -17,16 +17,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
     private val _homeUiState = MutableStateFlow(HomeUiState(isLoading = true))
     val homeUiState = _homeUiState.asStateFlow()
 
-    init {
-        fetchNowPlayingMovies()
-        fetchTrendingMovies()
-        fetchPopularMovies()
-        fetchUpcomingMovies()
-    }
-
-    private fun fetchNowPlayingMovies() = viewModelScope.launch {
-        _homeUiState.update { it.copy(isLoading = true) }
-
+    fun fetchNowPlayingMovies() = viewModelScope.launch {
         moviesRepository.fetchNowPlayingMovies().collect { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
@@ -38,7 +29,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
         }
     }
 
-    private fun fetchTrendingMovies() = viewModelScope.launch {
+    fun fetchTrendingMovies() = viewModelScope.launch {
         moviesRepository.fetchTrendingMovies().collect { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
@@ -50,7 +41,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
         }
     }
 
-    private fun fetchPopularMovies() = viewModelScope.launch {
+    fun fetchPopularMovies() = viewModelScope.launch {
         moviesRepository.fetchPopularMovies().collect { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
@@ -62,7 +53,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
         }
     }
 
-    private fun fetchUpcomingMovies() = viewModelScope.launch {
+    fun fetchUpcomingMovies() = viewModelScope.launch {
         moviesRepository.fetchUpcomingMovies().collect { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
