@@ -19,15 +19,15 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
 
     init {
         fetchNowPlayingMovies()
-        /*fetchTrendingMovies()
+        fetchTrendingMovies()
         fetchPopularMovies()
-        fetchUpcomingMovies()*/
+        fetchUpcomingMovies()
     }
 
     private fun fetchNowPlayingMovies() = viewModelScope.launch {
         _homeUiState.update { it.copy(isLoading = true) }
 
-        /*moviesRepository.fetchNowPlayingMovies().collect { moviesResult ->
+        moviesRepository.fetchNowPlayingMovies().collect { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
             }.onSuccess { movies ->
@@ -35,7 +35,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
             }.onFailure { error ->
                 _homeUiState.update { it.copy(error = error.localizedMessage) }
             }
-        }*/
+        }
     }
 
     private fun fetchTrendingMovies() = viewModelScope.launch {
