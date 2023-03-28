@@ -32,7 +32,7 @@ import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.utils.getRating
 
 @Composable
-fun ItemSimilarMovies(movie: Movie, isLoading: Boolean) {
+fun ItemSimilarMovies(movie: Movie, isLoading: Boolean = false) {
     val painter = rememberImagePainter(data = movie.backdropPath?.loadImage())
 
     Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {

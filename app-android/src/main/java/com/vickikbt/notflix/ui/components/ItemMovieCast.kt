@@ -25,7 +25,7 @@ import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.Actor
 
 @Composable
-fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor, isLoading: Boolean = true) {
+fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor, isLoading: Boolean = false) {
     val painter = rememberImagePainter(
         data = actor.profilePath?.loadImage()
     ) {

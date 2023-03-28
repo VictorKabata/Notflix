@@ -56,7 +56,7 @@ fun DetailsAppBar(
     modifier: Modifier = Modifier,
     collapsingScrollState: CollapsingToolbarScaffoldState,
     movieDetails: MovieDetails?,
-    isLoading: Boolean,
+    isLoading: Boolean = false,
     onNavigationIconClick: () -> Unit,
     onShareIconClick: () -> Unit,
     onFavoriteIconClick: (MovieDetails) -> Unit

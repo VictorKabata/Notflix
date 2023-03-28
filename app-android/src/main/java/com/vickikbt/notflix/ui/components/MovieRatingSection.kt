@@ -23,7 +23,7 @@ import com.google.accompanist.placeholder.placeholder
 import com.vickikbt.notflix.R
 
 @Composable
-fun MovieRatingSection(popularity: String?, voteAverage: String?, isLoading: Boolean) {
+fun MovieRatingSection(popularity: String?, voteAverage: String?, isLoading: Boolean = false) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
