@@ -17,8 +17,14 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
     private val _homeUiState = MutableStateFlow(HomeUiState(isLoading = true))
     val homeUiState = _homeUiState.asStateFlow()
 
+    init {
+        fetchNowPlayingMovies()
+        fetchTrendingMovies()
+        fetchPopularMovies()
+        fetchUpcomingMovies()
+    }
+
     fun fetchNowPlayingMovies() = viewModelScope.launch {
-        // _homeUiState.update { it.copy(isLoading = true) } ToDo
         moviesRepository.fetchNowPlayingMovies().collect { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
@@ -65,5 +71,4 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
             }
         }
     }
-
 }

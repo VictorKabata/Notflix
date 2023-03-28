@@ -16,9 +16,6 @@ import kotlinx.coroutines.flow.channelFlow
 suspend fun <T : Any?> safeApiCall(apiCall: suspend () -> T): Flow<NetworkResultState<T>> =
     channelFlow {
         send(NetworkResultState.Loading)
-
-        // delay(6000)
-
         try {
             send(NetworkResultState.Success(apiCall.invoke()))
         } catch (e: RedirectResponseException) {

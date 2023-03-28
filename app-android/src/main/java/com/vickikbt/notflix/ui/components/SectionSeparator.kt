@@ -16,7 +16,7 @@ import com.google.accompanist.placeholder.placeholder
 fun SectionSeparator(
     modifier: Modifier = Modifier,
     sectionTitle: String,
-    isLoading: Boolean,
+    isLoading: Boolean = false,
     onItemClick: () -> Unit
 ) {
     Row(

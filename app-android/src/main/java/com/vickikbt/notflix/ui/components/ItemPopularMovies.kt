@@ -56,7 +56,7 @@ import com.vickikbt.shared.utils.getReleaseDate
 fun ItemPopularMovies(
     modifier: Modifier = Modifier,
     movie: Movie,
-    isLoading: Boolean = true,
+    isLoading: Boolean = false,
     onClickItem: (Movie) -> Unit
 ) {
     val defaultDominantTextColor = MaterialTheme.colors.onSurface

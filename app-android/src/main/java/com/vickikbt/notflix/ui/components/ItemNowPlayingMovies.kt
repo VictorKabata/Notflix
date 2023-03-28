@@ -47,7 +47,7 @@ import com.vickikbt.shared.utils.getRating
 fun ItemNowPlayingMovies(
     modifier: Modifier = Modifier,
     movie: Movie,
-    isLoading: Boolean = true,
+    isLoading: Boolean = false,
     onItemClick: () -> Unit
 ) {
     val defaultDominantColor = MaterialTheme.colors.surface
@@ -61,8 +61,6 @@ fun ItemNowPlayingMovies(
             crossfade(true)
         }
     )
-
-    // Log.e("VicKbt", "Is loading NowPlaying: $isLoading")
 
     if (painter.state is ImagePainter.State.Success) {
         LaunchedEffect(key1 = painter) {

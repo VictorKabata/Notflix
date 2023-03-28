@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -32,12 +33,12 @@ import com.vickikbt.shared.domain.models.Movie
 @Composable
 fun ItemTrendingMovies(
     movie: Movie,
-    isLoading: Boolean = true,
+    isLoading: Boolean = false,
     onItemClick: (Movie) -> Unit
 ) {
-    // Log.e("VicKbt", "Is loading trending movies: $isLoading")
-
-    Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(3.dp)
+    ) {
         Card(
             modifier = Modifier
                 .width(150.dp)
@@ -50,6 +51,7 @@ fun ItemTrendingMovies(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(220.dp)
+                    .sizeIn(minHeight = 30.dp)
                     .placeholder(
                         visible = isLoading,
                         color = Color.Gray.copy(alpha = .8f),
