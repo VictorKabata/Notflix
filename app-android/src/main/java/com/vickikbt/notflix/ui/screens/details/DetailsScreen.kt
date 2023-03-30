@@ -21,7 +21,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -30,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
-import com.google.accompanist.placeholder.placeholder
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemMovieCast
 import com.vickikbt.notflix.ui.components.ItemSimilarMovies
@@ -114,26 +112,27 @@ fun DetailsScreen(
                     //endregion
 
                     //region Movie Overview
-                    Text(
-                        modifier = Modifier.padding(horizontal = 16.dp),
-                        text = stringResource(R.string.overview),
-                        style = MaterialTheme.typography.h6,
-                        fontSize = 20.sp,
-                        color = MaterialTheme.colors.onSurface,
-                    )
+                    movieDetailsState.movieDetails?.overview?.let {
+                        Text(
+                            modifier = Modifier.padding(horizontal = 16.dp),
+                            text = stringResource(R.string.overview),
+                            style = MaterialTheme.typography.h6,
+                            fontSize = 20.sp,
+                            color = MaterialTheme.colors.onSurface,
+                        )
 
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                            .placeholder(visible = movieDetailsState.isLoading, color = Color.Gray),
-                        text = "movieDetailsState.movieDetails?.overview",
-                        style = MaterialTheme.typography.body1,
-                        color = MaterialTheme.colors.onSurface,
-                        fontSize = 15.sp,
-                        textAlign = TextAlign.Start,
-                        overflow = TextOverflow.Ellipsis,
-                    )
+                        Text(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp),
+                            text = it,
+                            style = MaterialTheme.typography.body1,
+                            color = MaterialTheme.colors.onSurface,
+                            fontSize = 15.sp,
+                            textAlign = TextAlign.Start,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                    }
                     //endregion
 
                     //region Movie Cast

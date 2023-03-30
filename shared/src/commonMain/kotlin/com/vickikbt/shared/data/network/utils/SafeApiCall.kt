@@ -10,8 +10,6 @@ import io.ktor.client.plugins.RedirectResponseException
 import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.statement.HttpResponse
 import io.ktor.util.network.UnresolvedAddressException
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.channelFlow
 
 suspend fun <T : Any?> safeApiCall(apiCall: suspend () -> T): NetworkResultState<T> {
     return try {
