@@ -13,6 +13,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -33,26 +34,30 @@ import com.vickikbt.shared.domain.utils.Constants
 import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
 import com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE
 import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
-import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import org.koin.androidx.compose.get
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun SettingsScreen(navController: NavController, viewModel: SharedSettingsPresenter = get()) {
+fun SettingsScreen(navController: NavController? = null, viewModel: SettingsViewModel = get()) {
+    LaunchedEffect(key1 = viewModel) {
+        viewModel.getThemePreference()
+        viewModel.getLanguagePreference()
+        viewModel.getImageQualityPreference()
+    }
+
     val context = LocalContext.current
 
-    val currentTheme = viewModel.selectedTheme.collectAsState().value ?: 0
-    val currentLanguage = viewModel.selectedLanguage.collectAsState().value ?: 0
-    val currentImageQuality = viewModel.selectedImageQuality.collectAsState().value ?: 0
+    val settingsUiState = viewModel.settingsUiState.collectAsState().value
 
     val showThemeDialog = remember { mutableStateOf(false) }
     val showLanguageDialog = remember { mutableStateOf(false) }
     val showImageQualityDialog = remember { mutableStateOf(false) }
 
-    val themeLabel = stringArrayResource(id = R.array.theme_labels)[currentTheme]
-    val languageLabel = stringArrayResource(id = R.array.language_labels)[currentLanguage]
+    val themeLabel = stringArrayResource(id = R.array.theme_labels)[settingsUiState.selectedTheme]
+    val languageLabel =
+        stringArrayResource(id = R.array.language_labels)[settingsUiState.selectedLanguage]
     val imageQualityLabel =
-        stringArrayResource(id = R.array.image_quality_labels)[currentImageQuality]
+        stringArrayResource(id = R.array.image_quality_labels)[settingsUiState.selectedImageQuality]
 
     Scaffold(topBar = { AppBar(stringResource(id = R.string.title_settings)) }) {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
@@ -128,7 +133,7 @@ fun SettingsScreen(navController: NavController, viewModel: SharedSettingsPresen
 
 @Composable
 private fun ChangeTheme(
-    viewModel: SharedSettingsPresenter,
+    viewModel: SettingsViewModel,
     showDialog: MutableState<Boolean>,
     currentValue: String?
 ) {
@@ -145,7 +150,7 @@ private fun ChangeTheme(
 
 @Composable
 private fun ChangeLanguage(
-    viewModel: SharedSettingsPresenter,
+    viewModel: SettingsViewModel,
     showDialog: MutableState<Boolean>,
     currentValue: String?
 ) {
@@ -162,7 +167,7 @@ private fun ChangeLanguage(
 
 @Composable
 private fun ChangeImageQuality(
-    viewModel: SharedSettingsPresenter,
+    viewModel: SettingsViewModel,
     showDialog: MutableState<Boolean>,
     currentValue: String?
 ) {

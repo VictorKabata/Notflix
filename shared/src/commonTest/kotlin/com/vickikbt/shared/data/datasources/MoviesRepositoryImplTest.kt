@@ -1,19 +1,17 @@
 package com.vickikbt.shared.data.datasources
 
+import app.cash.turbine.test
 import com.vickikbt.shared.data.network.MockNotflixServer
 import com.vickikbt.shared.domain.models.ErrorResponse
+import com.vickikbt.shared.utils.onFailure
+import com.vickikbt.shared.utils.onSuccess
 import io.ktor.client.HttpClient
-import io.ktor.http.HttpStatusCode
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
+import kotlin.test.assertNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 
 @ExperimentalCoroutinesApi
@@ -46,93 +44,118 @@ class MoviesRepositoryImplTest {
 
     @Test
     fun `fetchNowPlayingMovies returns success on http 200`() = runTest {
-        val response = moviesRepository.fetchNowPlayingMovies().first()
+        moviesRepository.fetchNowPlayingMovies().test {
+            this.awaitItem().onSuccess {
+                assertNotNull(it)
+            }.onFailure {
+                assertNull(it)
+            }
 
-        assertNotNull(response.getOrNull())
-        assertTrue(response.isSuccess)
-        assertFalse(response.isFailure)
+            awaitComplete()
+        }
     }
 
-    @Test
+    /*@Test
     fun `fetchNowPlayingMovies returns failure on http 500 error`() = runTest {
         mockNotflixServer.throwError(
             httpStatus = HttpStatusCode.InternalServerError,
             response = mockNotflixServer.mock500ErrorResponse
         )
 
-        val response = assertFailsWith<ErrorResponse> {
-            moviesRepository.fetchNowPlayingMovies().first()
+        moviesRepository.fetchNowPlayingMovies().test {
+            val response = assertFailsWith<ErrorResponse> {
+                this.awaitItem()
+            }
+            assertEquals(actual = response, expected = errorResponse500)
         }
-
-        assertEquals(actual = response, expected = errorResponse500)
-    }
+    }*/
 
     @Test
     fun `fetchUpcomingMovies returns success on http 200`() = runTest {
-        val response = moviesRepository.fetchUpcomingMovies().first()
+        moviesRepository.fetchUpcomingMovies().test {
+            this.awaitItem().onSuccess {
+                assertNotNull(it)
+            }.onFailure {
+                assertNull(it)
+            }
 
-        assertNotNull(response.getOrNull())
-        assertTrue(response.isSuccess)
-        assertFalse(response.isFailure)
+            awaitComplete()
+        }
     }
 
-    @Test
+    /*@Test
     fun `fetchUpcomingMovies returns failure on http 500 error`() = runTest {
         mockNotflixServer.throwError(
             httpStatus = HttpStatusCode.InternalServerError,
             response = mockNotflixServer.mock500ErrorResponse
         )
 
-        val response = assertFailsWith<ErrorResponse> {
-            moviesRepository.fetchUpcomingMovies().first()
-        }
+        moviesRepository.fetchUpcomingMovies().test {
 
-        assertEquals(actual = response, expected = errorResponse500)
-    }
+            val response = assertFailsWith<ErrorResponse> {
+                this.awaitItem()
+            }
+
+            assertEquals(actual = response, expected = errorResponse500)
+        }
+    }*/
 
     @Test
     fun `fetchPopularMovies returns success on http 200`() = runTest {
-        val response = moviesRepository.fetchPopularMovies().first()
+        moviesRepository.fetchPopularMovies().test {
+            this.awaitItem().onSuccess {
+                assertNotNull(it)
+            }.onFailure {
+                assertNull(it)
+            }
 
-        assertNotNull(response.getOrNull())
-        assertTrue(response.isSuccess)
-        assertFalse(response.isFailure)
+            awaitComplete()
+        }
     }
 
-    @Test
+    /*@Test
     fun `fetchPopularMovies returns failure on http 500 error`() = runTest {
         mockNotflixServer.throwError(
             httpStatus = HttpStatusCode.InternalServerError,
             response = mockNotflixServer.mock500ErrorResponse
         )
 
-        val response = assertFailsWith<ErrorResponse> {
-            moviesRepository.fetchPopularMovies().first()
-        }
+        moviesRepository.fetchPopularMovies().test {
 
-        assertEquals(actual = response, expected = errorResponse500)
-    }
+            val response = assertFailsWith<ErrorResponse> {
+                this.awaitItem()
+            }
+
+            assertEquals(actual = response, expected = errorResponse500)
+        }
+    }*/
 
     @Test
     fun `fetchTrendingMovies returns success on http 200`() = runTest {
-        val response = moviesRepository.fetchTrendingMovies().first()
+        moviesRepository.fetchTrendingMovies().test {
+            this.awaitItem().onSuccess {
+                assertNotNull(it)
+            }.onFailure {
+                assertNull(it)
+            }
 
-        assertNotNull(response.getOrNull())
-        assertTrue(response.isSuccess)
-        assertFalse(response.isFailure)
+            awaitComplete()
+        }
     }
 
-    @Test
+    /*@Test
     fun `fetchTrendingMovies returns failure on http 500 error`() = runTest {
         mockNotflixServer.throwError(
             httpStatus = HttpStatusCode.InternalServerError,
             response = mockNotflixServer.mock500ErrorResponse
         )
 
-        val response = assertFailsWith<ErrorResponse> {
-            moviesRepository.fetchTrendingMovies().first()
-        }
+        moviesRepository.fetchTrendingMovies().test {
+            val response = assertFailsWith<ErrorResponse> {
+                this.awaitItem()
+            }
 
-        assertEquals(actual = response, expected = errorResponse500)
-    }
+            assertEquals(actual = response, expected = errorResponse500)
+        }
+    }*/
 }

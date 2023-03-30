@@ -20,7 +20,6 @@ import androidx.navigation.NavController
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.ItemFavoriteMovie
 import com.vickikbt.notflix.ui.components.appbars.AppBar
-import com.vickikbt.shared.presentation.presenters.SharedFavouritesPresenter
 import org.koin.androidx.compose.get
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -28,20 +27,20 @@ import org.koin.androidx.compose.get
 @Composable
 fun FavoritesScreen(
     navController: NavController,
-    favoritesViewModel: SharedFavouritesPresenter = get()
+    favoritesViewModel: FavouritesViewModel = get()
 ) {
-    val favouriteMovies = favoritesViewModel.favouriteMovies.collectAsState().value
+    val favouriteMoviesUiState = favoritesViewModel.favouritesUiState.collectAsState().value
 
     Scaffold(topBar = { AppBar(stringResource(id = R.string.title_favorites)) }) {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
-            favouriteMovies?.let {
+            favouriteMoviesUiState.favouriteMovies?.let {
                 LazyVerticalGrid(
                     modifier = Modifier.padding(horizontal = 16.dp),
                     columns = GridCells.Fixed(2),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    items(favouriteMovies) { movie ->
+                    items(it) { movie ->
                         ItemFavoriteMovie(movie = movie) {
                             navController.navigate("details/${it.id}/${0}")
                         }

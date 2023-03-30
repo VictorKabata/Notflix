@@ -8,7 +8,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
 class SharedHomePresenter constructor(private val moviesRepository: MoviesRepository) :
@@ -34,13 +33,13 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
     val error get() = _error.asStateFlow()
 
     init {
-        fetchNowPlayingMovies()
+        /*fetchNowPlayingMovies()
         fetchTrendingMovies()
         fetchPopularMovies()
-        fetchUpcomingMovies()
+        fetchUpcomingMovies()*/
     }
 
-    private fun fetchNowPlayingMovies() {
+    /*private fun fetchNowPlayingMovies() {
         val job = viewModelScope.launch(Dispatchers.Default) {
             moviesRepository.fetchNowPlayingMovies().collect { moviesResult ->
                 moviesResult.onSuccess {
@@ -122,5 +121,5 @@ class SharedHomePresenter constructor(private val moviesRepository: MoviesReposi
             supervisorJob.value?.cancel()
             supervisorJob.value = null
         }
-    }
+    }*/
 }
