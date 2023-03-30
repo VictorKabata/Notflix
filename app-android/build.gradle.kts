@@ -109,6 +109,8 @@ dependencies {
     testImplementation(libs.kotlinX.coroutines.test)
     testImplementation(libs.mockk)
 
+    testImplementation(kotlin("test"))
+
     testImplementation("androidx.test.ext:junit-ktx:1.1.4-alpha04")
     testImplementation("android.arch.core:core-testing:1.1.1")
     testImplementation("com.google.truth:truth:1.1.3")

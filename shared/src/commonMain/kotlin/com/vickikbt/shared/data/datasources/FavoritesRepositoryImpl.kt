@@ -6,7 +6,7 @@ import io.ktor.client.HttpClient
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-class FavoritesRepositoryImpl constructor(private val httpClient: HttpClient):FavoritesRepository {
+class FavoritesRepositoryImpl constructor(private val httpClient: HttpClient) : FavoritesRepository {
     override suspend fun isMovieFavorite(movieId: Int): Flow<Boolean?> {
         return flowOf(true)
     }
@@ -16,6 +16,5 @@ class FavoritesRepositoryImpl constructor(private val httpClient: HttpClient):Fa
     }
 
     override suspend fun deleteFavouriteMovie(movieId: Int) {
-
     }
 }

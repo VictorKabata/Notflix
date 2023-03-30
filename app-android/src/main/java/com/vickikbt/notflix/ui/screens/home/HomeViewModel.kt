@@ -18,10 +18,10 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
     val homeUiState = _homeUiState.asStateFlow()
 
     init {
-        fetchNowPlayingMovies()
+        /*fetchNowPlayingMovies()
         fetchTrendingMovies()
         fetchPopularMovies()
-        fetchUpcomingMovies()
+        fetchUpcomingMovies()*/
     }
 
     fun fetchNowPlayingMovies() = viewModelScope.launch {

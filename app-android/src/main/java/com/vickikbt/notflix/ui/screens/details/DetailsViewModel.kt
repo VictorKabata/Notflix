@@ -9,6 +9,7 @@ import com.vickikbt.shared.utils.isLoading
 import com.vickikbt.shared.utils.onFailure
 import com.vickikbt.shared.utils.onSuccess
 import io.github.aakira.napier.Napier
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -21,7 +22,12 @@ class DetailsViewModel constructor(
     private val _movieDetailsState = MutableStateFlow(DetailsUiState())
     val movieDetailsState = _movieDetailsState.asStateFlow()
 
-    fun getMovieDetails(movieId: Int) = viewModelScope.launch {
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        Napier.e(tag = "VicKbt", message = "Handle $exception in CoroutineExceptionHandler")
+        _movieDetailsState.update { it.copy(isLoading = false, error = exception.message) }
+    }
+
+    fun getMovieDetails(movieId: Int) = viewModelScope.launch(coroutineExceptionHandler) {
         movieDetailsRepository.fetchMovieDetails(movieId = movieId).collect { movieDetailsResult ->
             movieDetailsResult.isLoading { isLoading ->
                 _movieDetailsState.update { it.copy(isLoading = isLoading) }
@@ -33,7 +39,7 @@ class DetailsViewModel constructor(
         }
     }
 
-    fun getMovieCast(movieId: Int) = viewModelScope.launch {
+    fun getMovieCast(movieId: Int) = viewModelScope.launch(coroutineExceptionHandler) {
         movieDetailsRepository.fetchMovieCast(movieId = movieId).collect { movieCastsResult ->
             movieCastsResult.isLoading { isLoading ->
                 _movieDetailsState.update { it.copy(isLoading = isLoading) }
@@ -45,7 +51,7 @@ class DetailsViewModel constructor(
         }
     }
 
-    fun fetchSimilarMovies(movieId: Int) = viewModelScope.launch {
+    fun fetchSimilarMovies(movieId: Int) = viewModelScope.launch(coroutineExceptionHandler) {
         _movieDetailsState.update { it.copy(isLoading = true) }
         movieDetailsRepository.fetchSimilarMovies(movieId).collect { similarMovies ->
             similarMovies.isLoading { isLoading ->

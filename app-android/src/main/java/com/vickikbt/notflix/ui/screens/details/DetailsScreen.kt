@@ -46,7 +46,9 @@ import org.koin.androidx.compose.get
 @ExperimentalCoilApi
 @Composable
 fun DetailsScreen(
-    navController: NavController, detailsViewModel: DetailsViewModel = get(), movieId: Int
+    navController: NavController,
+    detailsViewModel: DetailsViewModel = get(),
+    movieId: Int
 ) {
     LaunchedEffect(key1 = detailsViewModel) {
         detailsViewModel.getMovieDetails(movieId)

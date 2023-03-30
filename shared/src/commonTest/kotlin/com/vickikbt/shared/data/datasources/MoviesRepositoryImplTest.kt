@@ -2,6 +2,8 @@ package com.vickikbt.shared.data.datasources
 
 import com.vickikbt.shared.data.network.MockNotflixServer
 import com.vickikbt.shared.domain.models.ErrorResponse
+import com.vickikbt.shared.utils.onFailure
+import com.vickikbt.shared.utils.onSuccess
 import io.ktor.client.HttpClient
 import io.ktor.http.HttpStatusCode
 import kotlin.test.AfterTest
@@ -9,9 +11,8 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
+import kotlin.test.assertNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -48,9 +49,11 @@ class MoviesRepositoryImplTest {
     fun `fetchNowPlayingMovies returns success on http 200`() = runTest {
         val response = moviesRepository.fetchNowPlayingMovies().first()
 
-        assertNotNull(response.getOrNull())
-        assertTrue(response.isSuccess)
-        assertFalse(response.isFailure)
+        response.onSuccess {
+            assertNotNull(it)
+        }.onFailure {
+            assertNull(it)
+        }
     }
 
     @Test
@@ -71,9 +74,11 @@ class MoviesRepositoryImplTest {
     fun `fetchUpcomingMovies returns success on http 200`() = runTest {
         val response = moviesRepository.fetchUpcomingMovies().first()
 
-        assertNotNull(response.getOrNull())
-        assertTrue(response.isSuccess)
-        assertFalse(response.isFailure)
+        response.onSuccess {
+            assertNotNull(it)
+        }.onFailure {
+            assertNull(it)
+        }
     }
 
     @Test
@@ -94,9 +99,11 @@ class MoviesRepositoryImplTest {
     fun `fetchPopularMovies returns success on http 200`() = runTest {
         val response = moviesRepository.fetchPopularMovies().first()
 
-        assertNotNull(response.getOrNull())
-        assertTrue(response.isSuccess)
-        assertFalse(response.isFailure)
+        response.onSuccess {
+            assertNotNull(it)
+        }.onFailure {
+            assertNull(it)
+        }
     }
 
     @Test
@@ -117,9 +124,11 @@ class MoviesRepositoryImplTest {
     fun `fetchTrendingMovies returns success on http 200`() = runTest {
         val response = moviesRepository.fetchTrendingMovies().first()
 
-        assertNotNull(response.getOrNull())
-        assertTrue(response.isSuccess)
-        assertFalse(response.isFailure)
+        response.onSuccess {
+            assertNotNull(it)
+        }.onFailure {
+            assertNull(it)
+        }
     }
 
     @Test
