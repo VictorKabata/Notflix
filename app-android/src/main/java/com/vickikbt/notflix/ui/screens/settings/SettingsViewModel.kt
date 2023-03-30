@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vickikbt.shared.domain.repositories.SettingsRepository
 import com.vickikbt.shared.utils.SettingsUiState
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -15,36 +16,40 @@ class SettingsViewModel constructor(private val settingsRepository: SettingsRepo
     private val _settingsUiState = MutableStateFlow(SettingsUiState(isLoading = true))
     val settingsUiState = _settingsUiState.asStateFlow()
 
-    init {
-        getThemePreference()
-        getLanguagePreference()
-        getImageQualityPreference()
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        _settingsUiState.update { it.copy(isLoading = false, error = exception.message) }
     }
 
-    fun savePreferenceSelection(key: String, selection: Int) = viewModelScope.launch {
-        settingsRepository.savePreferenceSelection(key = key, selection = selection)
-    }
+    fun savePreferenceSelection(key: String, selection: Int) =
+        viewModelScope.launch(coroutineExceptionHandler) {
+            settingsRepository.savePreferenceSelection(key = key, selection = selection)
+        }
 
-    private fun getThemePreference() = viewModelScope.launch {
+    fun getThemePreference() = viewModelScope.launch(coroutineExceptionHandler) {
         settingsRepository.getThemePreference().collect { theme ->
             theme?.let {
-                _settingsUiState.update { it.copy(selectedTheme = theme) }
+                _settingsUiState.update { it.copy(selectedTheme = theme, isLoading = false) }
             }
         }
     }
 
-    private fun getLanguagePreference() = viewModelScope.launch {
+    fun getLanguagePreference() = viewModelScope.launch(coroutineExceptionHandler) {
         settingsRepository.getLanguagePreference().collect { language ->
             language?.let {
-                _settingsUiState.update { it.copy(selectedLanguage = language) }
+                _settingsUiState.update { it.copy(selectedLanguage = language, isLoading = false) }
             }
         }
     }
 
-    private fun getImageQualityPreference() = viewModelScope.launch {
+    fun getImageQualityPreference() = viewModelScope.launch(coroutineExceptionHandler) {
         settingsRepository.getImageQualityPreference().collect { imageQuality ->
             imageQuality?.let {
-                _settingsUiState.update { it.copy(selectedImageQuality = imageQuality) }
+                _settingsUiState.update {
+                    it.copy(
+                        selectedImageQuality = imageQuality,
+                        isLoading = false
+                    )
+                }
             }
         }
     }
