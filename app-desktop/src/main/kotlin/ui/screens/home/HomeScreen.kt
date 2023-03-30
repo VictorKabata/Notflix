@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalComposeUiApi::class)
-
 package ui.screens.home
 
 import androidx.compose.foundation.layout.Arrangement
@@ -20,28 +18,47 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.vickikbt.shared.domain.models.Movie
 import koin
 import ui.components.ItemNowPlayingMovies
 import ui.components.ItemPopularMovies
 import ui.components.ItemTrendingMovies
 import ui.components.SectionSeparator
-import ui.navigation.NavController
+import ui.screens.details.DetailsScreen
+
+class HomeScreen : Screen {
+    @Composable
+    override fun Content() {
+        HomeComposeScreen()
+    }
+}
 
 @Composable
-fun HomeScreen(
-    navController: NavController,
-    viewModel: HomeViewModel = koin.get()
-) {
+fun HomeComposeScreen(viewModel: HomeScreenModel = koin.get()) {
 
-    val nowPlayingMovies = viewModel.nowPlayingMovies.collectAsState()
-    val trendingMovies = viewModel.trendingMovies.collectAsState()
-    val popularMovies = viewModel.popularMovies.collectAsState()
-    val upcomingMovies = viewModel.upcomingMovies.collectAsState()
+    val navigator = LocalNavigator.currentOrThrow
+
+    LaunchedEffect(key1 = viewModel) {
+        viewModel.fetchNowPlayingMovies()
+        viewModel.fetchUpcomingMovies()
+        viewModel.fetchPopularMovies()
+        viewModel.fetchTrendingMovies()
+    }
+
+    val homeUiState = viewModel.homeUiState.collectAsState().value
+
+    val nowPlayingMovies = homeUiState.nowPlayingMovies
+    val trendingMovies = homeUiState.trendingMovies
+    val popularMovies = homeUiState.popularMovies
+    val upcomingMovies = homeUiState.upcomingMovies
 
     val parentScrollState = rememberScrollState(0)
 
@@ -54,19 +71,16 @@ fun HomeScreen(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            if (!nowPlayingMovies.value.isNullOrEmpty()) NowPlayingMovies(
-                navController = navController,
-                movies = nowPlayingMovies.value!!
-            )
-            trendingMovies.value?.let { TrendingMovies(navController = navController, movies = it) }
-            popularMovies.value?.let { PopularMovies(navController = navController, movies = it) }
-            upcomingMovies.value?.let { UpcomingMovies(navController = navController, movies = it) }
+            nowPlayingMovies?.let { NowPlayingMovies(navigator = navigator, movies = it) }
+            trendingMovies?.let { TrendingMovies(navigator = navigator, movies = it) }
+            popularMovies?.let { PopularMovies(navigator = navigator, movies = it) }
+            upcomingMovies?.let { UpcomingMovies(navigator = navigator, movies = it) }
         }
     }
 }
 
 @Composable
-fun NowPlayingMovies(navController: NavController, movies: List<Movie>) {
+fun NowPlayingMovies(navigator: Navigator, movies: List<Movie>) {
     Row(modifier = Modifier.fillMaxWidth().height(600.dp)) {
         for (movie in movies.take(5)) {
             Box(Modifier.weight(1f)) {
@@ -75,8 +89,8 @@ fun NowPlayingMovies(navController: NavController, movies: List<Movie>) {
                         .fillMaxHeight()
                         .width(300.dp),
                     movie = movie
-                ) {
-                    println("Clicked movie: ${it.title}")
+                ) { movie ->
+                    movie.id?.let { navigator.push(DetailsScreen(movieId = it)) }
                 }
             }
         }
@@ -84,7 +98,7 @@ fun NowPlayingMovies(navController: NavController, movies: List<Movie>) {
 }
 
 @Composable
-fun TrendingMovies(navController: NavController, movies: List<Movie>) {
+fun TrendingMovies(navigator: Navigator, movies: List<Movie>) {
     SectionSeparator(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 12.dp)
@@ -103,15 +117,15 @@ fun TrendingMovies(navController: NavController, movies: List<Movie>) {
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         items(items = movies) { item ->
-            ItemTrendingMovies(modifier = Modifier, movie = item) {
-                navController.navigate("details/${it.id}")
+            ItemTrendingMovies(modifier = Modifier, movie = item) { movie ->
+                movie.id?.let { navigator.push(DetailsScreen(movieId = it)) }
             }
         }
     }
 }
 
 @Composable
-fun PopularMovies(navController: NavController, movies: List<Movie>) {
+fun PopularMovies(navigator: Navigator, movies: List<Movie>) {
     SectionSeparator(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 12.dp)
@@ -133,15 +147,15 @@ fun PopularMovies(navController: NavController, movies: List<Movie>) {
             ItemPopularMovies(
                 modifier = Modifier,
                 movie = item
-            ) {
-                navController.navigate("details/${it.id}")
+            ) { movie ->
+                movie.id?.let { navigator.push(DetailsScreen(movieId = it)) }
             }
         }
     }
 }
 
 @Composable
-fun UpcomingMovies(navController: NavController, movies: List<Movie>) {
+fun UpcomingMovies(navigator: Navigator, movies: List<Movie>) {
     SectionSeparator(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 12.dp)
@@ -160,8 +174,8 @@ fun UpcomingMovies(navController: NavController, movies: List<Movie>) {
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         items(items = movies) { item ->
-            ItemTrendingMovies(modifier = Modifier, movie = item) {
-                navController.navigate("details/${it.id}")
+            ItemTrendingMovies(modifier = Modifier, movie = item) { movie ->
+                movie.id?.let { navigator.push(DetailsScreen(movieId = it)) }
             }
         }
     }

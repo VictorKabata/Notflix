@@ -1,17 +1,18 @@
 package di
 
 import org.koin.core.module.dsl.factoryOf
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
-import ui.screens.details.DetailsViewModel
-import ui.screens.favourites.FavouritesViewModel
-import ui.screens.home.HomeViewModel
-import ui.screens.settings.SettingsViewModel
+import ui.screens.details.DetailsScreenModel
+import ui.screens.favourites.FavouritesScreenModel
+import ui.screens.home.HomeScreenModel
+import ui.screens.settings.SettingsScreenModel
 
 val desktopModule = module {
 
-    factoryOf(::HomeViewModel)
-    factoryOf(::DetailsViewModel)
-    factoryOf(::FavouritesViewModel)
-    factoryOf(::SettingsViewModel)
+    singleOf(::HomeScreenModel)
+    singleOf(::DetailsScreenModel)
+    singleOf(::FavouritesScreenModel)
+    singleOf(::SettingsScreenModel)
 
 }

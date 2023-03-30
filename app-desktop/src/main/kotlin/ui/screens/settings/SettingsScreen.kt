@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.screen.Screen
 import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
 import com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE
 import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
@@ -25,13 +26,21 @@ import ui.components.appBars.AppBar
 import ui.components.preferences.DialogPreferenceSelection
 import ui.components.preferences.PreferencesGroup
 import ui.components.preferences.TextPreference
-import ui.navigation.NavController
+
+class SettingsScreen : Screen {
+    @Composable
+    override fun Content() {
+        SettingsComposableScreen()
+    }
+
+}
 
 @Composable
-fun SettingsScreen(navController: NavController, viewModel: SettingsViewModel = koin.get()) {
-    val currentTheme = viewModel.selectedTheme.collectAsState().value ?: 0
-    val currentLanguage = viewModel.selectedLanguage.collectAsState().value ?: 0
-    val currentImageQuality = viewModel.selectedImageQuality.collectAsState().value ?: 0
+fun SettingsComposableScreen(viewModel: SettingsScreenModel = koin.get()) {
+    val currentTheme = viewModel.settingsUiState.collectAsState().value.selectedTheme
+    val currentLanguage = viewModel.settingsUiState.collectAsState().value.selectedLanguage
+    val currentImageQuality =
+        viewModel.settingsUiState.collectAsState().value.selectedImageQuality
 
     val showThemeDialog = remember { mutableStateOf(false) }
     val showLanguageDialog = remember { mutableStateOf(false) }
@@ -138,7 +147,7 @@ fun SettingsScreen(navController: NavController, viewModel: SettingsViewModel = 
 
 @Composable
 private fun ChangeTheme(
-    viewModel: SettingsViewModel,
+    viewModel: SettingsScreenModel,
     showDialog: MutableState<Boolean>,
     currentValue: String
 ) {
@@ -155,7 +164,7 @@ private fun ChangeTheme(
 
 @Composable
 private fun ChangeLanguage(
-    viewModel: SettingsViewModel,
+    viewModel: SettingsScreenModel,
     showDialog: MutableState<Boolean>,
     currentValue: String
 ) {
@@ -175,7 +184,7 @@ private fun ChangeLanguage(
 
 @Composable
 private fun ChangeImageQuality(
-    viewModel: SettingsViewModel,
+    viewModel: SettingsScreenModel,
     showDialog: MutableState<Boolean>,
     currentValue: String
 ) {

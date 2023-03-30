@@ -8,21 +8,22 @@ import androidx.compose.material.NavigationRail
 import androidx.compose.material.NavigationRailItem
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import ui.navigation.NavController
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import ui.navigation.NavigationItem
+import ui.screens.settings.SettingsScreen
 import ui.theme.Gray
 import ui.theme.PrimaryColor
 
 @Composable
 fun NavigationRailBar(
+    navigator: Navigator = LocalNavigator.currentOrThrow,
     modifier: Modifier = Modifier,
-    navController: NavController,
     navRailItems: List<NavigationItem>
 ) {
     NavigationRail(
@@ -39,8 +40,6 @@ fun NavigationRailBar(
         contentColor = PrimaryColor
     ) {
         navRailItems.forEach { item ->
-            val currentDestination by remember { navController.currentDestination }
-
             NavigationRailItem(
                 icon = {
                     item.icon?.let {
@@ -54,8 +53,8 @@ fun NavigationRailBar(
                 selectedContentColor = PrimaryColor,
                 unselectedContentColor = Gray,
                 alwaysShowLabel = false,
-                selected = currentDestination == item.route,
-                onClick = { navController.navigate(item.route) }
+                selected = false,
+                onClick = { navigator.push(SettingsScreen()) }
             )
         }
     }

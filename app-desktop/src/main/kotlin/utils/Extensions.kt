@@ -17,5 +17,5 @@ fun String.loadImage(): String {
         else -> "w500"
     }
 
-    return "https://image.tmdb.org/t/p/$quality/$this"
+    return "https://image.tmdb.org/t/p/$quality$this"
 }

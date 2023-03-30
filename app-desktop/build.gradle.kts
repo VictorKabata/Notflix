@@ -7,6 +7,10 @@ dependencies {
     implementation(project(":shared"))
 
     implementation(compose.desktop.currentOs)
+
+    implementation(libs.voyager.core)
+    implementation(libs.voyager.navigator)
+    // implementation(libs.voyager.koin)
 }
 
 compose.desktop {

@@ -60,7 +60,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
                     level = LogLevel.HEADERS
                     logger = object : Logger {
                         override fun log(message: String) {
-                            Napier.e(tag = "Http Client", message = message)
+                            Napier.i(tag = "Http Client", message = message)
                         }
                     }
                 }.also {
