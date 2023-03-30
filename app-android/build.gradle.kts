@@ -104,17 +104,12 @@ dependencies {
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.performance)
 
-    testImplementation(libs.jUnit)
-    testImplementation(libs.googleTruth)
+    testImplementation(libs.jUnitKtx)
     testImplementation(libs.kotlinX.coroutines.test)
     testImplementation(libs.mockk)
-
-    testImplementation(kotlin("test"))
-
-    testImplementation("androidx.test.ext:junit-ktx:1.1.4-alpha04")
-    testImplementation("android.arch.core:core-testing:1.1.1")
-    testImplementation("com.google.truth:truth:1.1.3")
-    testImplementation("org.robolectric:robolectric:4.8.1")
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.archTestCore)
+    testImplementation(libs.robolectric)
 
     androidTestImplementation(libs.test.rules)
     androidTestImplementation(libs.test.runner)
