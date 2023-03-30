@@ -21,6 +21,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -48,12 +49,19 @@ import org.koin.androidx.compose.get
 @Composable
 fun HomeScreen(
     navController: NavController,
-    homeViewModel: HomeViewModel = get()
+    viewModel: HomeViewModel = get()
 ) {
     val scrollState = rememberScrollState()
     val pagerState = rememberPagerState()
 
-    val homeUiState = homeViewModel.homeUiState.collectAsState().value
+    LaunchedEffect(key1 = viewModel) {
+        viewModel.fetchNowPlayingMovies()
+        viewModel.fetchTrendingMovies()
+        viewModel.fetchPopularMovies()
+        viewModel.fetchUpcomingMovies()
+    }
+
+    val homeUiState = viewModel.homeUiState.collectAsState().value
 
     Box(
         modifier = Modifier

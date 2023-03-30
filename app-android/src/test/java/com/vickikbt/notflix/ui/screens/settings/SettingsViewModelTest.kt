@@ -150,5 +150,4 @@ class SettingsViewModelTest {
             actual = viewModel.settingsUiState.value
         )
     }
-
 }

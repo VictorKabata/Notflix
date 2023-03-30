@@ -39,7 +39,6 @@ import org.koin.androidx.compose.get
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun SettingsScreen(navController: NavController? = null, viewModel: SettingsViewModel = get()) {
-
     LaunchedEffect(key1 = viewModel) {
         viewModel.getThemePreference()
         viewModel.getLanguagePreference()
