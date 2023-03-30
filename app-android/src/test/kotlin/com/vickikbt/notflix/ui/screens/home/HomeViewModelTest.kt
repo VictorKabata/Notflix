@@ -1,13 +1,17 @@
 package com.vickikbt.notflix.ui.screens.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.google.common.truth.Truth.assertThat
-import com.vickikbt.notflix.utils.FakeMoviesRepository
-import com.vickikbt.notflix.utils.FakeMoviesRepository.Companion.isSuccess
-import com.vickikbt.notflix.utils.FakeMoviesRepository.Companion.testMovie
+import com.vickikbt.shared.domain.models.Movie
+import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.utils.HomeUiState
+import com.vickikbt.shared.utils.NetworkResultState
+import io.mockk.coEvery
+import io.mockk.mockk
+import io.mockk.unmockkAll
+import kotlin.test.assertEquals
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -24,122 +28,192 @@ class HomeViewModelTest {
     private lateinit var viewModel: HomeViewModel
 
     // test helpers
-    private val moviesRepository = FakeMoviesRepository()
+    private val moviesRepository = mockk<MoviesRepository>()
+
+    private val movies = mockk<List<Movie>>(relaxed = true)
 
     @Before
     fun setup() {
         viewModel = HomeViewModel(moviesRepository = moviesRepository)
     }
 
+    @After
+    fun teardown() {
+        unmockkAll()
+    }
+
     @Test
     fun `fetchNowPlayingMovies returns data on success`() = runTest {
-        //given
-        isSuccess = true
+        coEvery { moviesRepository.fetchNowPlayingMovies(page = any()) } returns flowOf(
+            NetworkResultState.Success(data = movies)
+        )
 
-        // when
+        assertEquals(
+            expected = HomeUiState(isLoading = true),
+            actual = viewModel.homeUiState.value
+        )
+
         viewModel.fetchNowPlayingMovies()
 
-        // then
-        assertThat(viewModel.homeUiState.value).isEqualTo(
-            HomeUiState(isLoading = false, nowPlayingMovies = testMovie, error = null)
+        assertEquals(
+            expected = HomeUiState(
+                isLoading = false,
+                nowPlayingMovies = movies,
+                error = null
+            ),
+            actual = viewModel.homeUiState.value
         )
     }
 
     @Test
     fun `fetchNowPlayingMovies returns error on failure`() = runTest {
-        //given
-        isSuccess = false
+        coEvery { moviesRepository.fetchNowPlayingMovies(page = any()) } throws Exception("Error")
+
+        assertEquals(
+            expected = HomeUiState(isLoading = true),
+            actual = viewModel.homeUiState.value
+        )
 
         // when
         viewModel.fetchNowPlayingMovies()
 
         // then
-        assertThat(viewModel.homeUiState.value).isEqualTo(
-            HomeUiState(isLoading = false, error = "Error", nowPlayingMovies = emptyList())
+        assertEquals(
+            expected = HomeUiState(
+                isLoading = false,
+                error = "Error",
+                nowPlayingMovies = emptyList()
+            ),
+            actual = viewModel.homeUiState.value
         )
     }
 
     @Test
     fun `fetchTrendingMovies returns data on success`() = runTest {
-        //given
-        isSuccess = true
+        coEvery { moviesRepository.fetchTrendingMovies(page = any()) } returns flowOf(
+            NetworkResultState.Success(data = movies)
+        )
 
-        // when
+        assertEquals(
+            expected = HomeUiState(isLoading = true),
+            actual = viewModel.homeUiState.value
+        )
+
         viewModel.fetchTrendingMovies()
 
-        // then
-        assertThat(viewModel.homeUiState.value).isEqualTo(
-            HomeUiState(isLoading = false, trendingMovies = testMovie, error = null)
+        assertEquals(
+            expected = HomeUiState(isLoading = false, trendingMovies = movies, error = null),
+            actual = viewModel.homeUiState.value
         )
     }
 
     @Test
     fun `fetchTrendingMovies returns error on failure`() = runTest {
-        //given
-        isSuccess = false
+        coEvery { moviesRepository.fetchTrendingMovies(page = any()) } throws Exception("Error")
 
-        // when
+        assertEquals(
+            expected = HomeUiState(isLoading = true),
+            actual = viewModel.homeUiState.value
+        )
+
         viewModel.fetchTrendingMovies()
 
-        // then
-        assertThat(viewModel.homeUiState.value).isEqualTo(
-            HomeUiState(isLoading = false, error = "Error", trendingMovies = emptyList())
+        assertEquals(
+            expected = HomeUiState(
+                isLoading = false,
+                error = "Error",
+                trendingMovies = emptyList()
+            ),
+            actual = viewModel.homeUiState.value
         )
     }
 
     @Test
     fun `fetchPopularMovies returns data on success`() = runTest {
-        //given
-        isSuccess = true
+        coEvery { moviesRepository.fetchPopularMovies(page = any()) } returns flowOf(
+            NetworkResultState.Success(data = movies)
+        )
 
-        // when
+        assertEquals(
+            expected = HomeUiState(isLoading = true),
+            actual = viewModel.homeUiState.value
+        )
+
         viewModel.fetchPopularMovies()
 
         // then
-        assertThat(viewModel.homeUiState.value).isEqualTo(
-            HomeUiState(isLoading = false, popularMovies = testMovie, error = null)
+        assertEquals(
+            expected = HomeUiState(
+                isLoading = false,
+                popularMovies = movies,
+                error = null
+            ),
+            actual = viewModel.homeUiState.value
         )
     }
 
     @Test
     fun `fetchPopularMovies returns error on failure`() = runTest {
-        //given
-        isSuccess = false
+        coEvery { moviesRepository.fetchPopularMovies(page = any()) } throws Exception("Error")
 
-        // when
+        assertEquals(
+            expected = HomeUiState(isLoading = true),
+            actual = viewModel.homeUiState.value
+        )
+
         viewModel.fetchPopularMovies()
 
-        // then
-        assertThat(viewModel.homeUiState.value).isEqualTo(
-            HomeUiState(isLoading = false, error = "Error", popularMovies = emptyList())
+        assertEquals(
+            expected = HomeUiState(
+                isLoading = false,
+                error = "Error",
+                popularMovies = emptyList()
+            ),
+            actual = viewModel.homeUiState.value
         )
     }
 
     @Test
     fun `fetchUpcomingMovies returns data on success`() = runTest {
-        //given
-        isSuccess = true
+        coEvery { moviesRepository.fetchUpcomingMovies(page = any()) } returns flowOf(
+            NetworkResultState.Success(data = movies)
+        )
 
-        // when
+        assertEquals(
+            expected = HomeUiState(isLoading = true),
+            actual = viewModel.homeUiState.value
+        )
+
         viewModel.fetchUpcomingMovies()
 
-        // then
-        assertThat(viewModel.homeUiState.value).isEqualTo(
-            HomeUiState(isLoading = false, upcomingMovies = testMovie, error = null)
+        assertEquals(
+            expected = HomeUiState(
+                isLoading = false,
+                upcomingMovies = movies,
+                error = null
+            ),
+            actual = viewModel.homeUiState.value
         )
     }
 
     @Test
     fun `fetchUpcomingMovies returns error on failure`() = runTest {
-        //given
-        isSuccess = false
+        coEvery { moviesRepository.fetchUpcomingMovies(page = any()) } throws Exception("Error")
 
-        // when
+        assertEquals(
+            expected = HomeUiState(isLoading = true),
+            actual = viewModel.homeUiState.value
+        )
+
         viewModel.fetchUpcomingMovies()
 
-        // then
-        assertThat(viewModel.homeUiState.value).isEqualTo(
-            HomeUiState(isLoading = false, error = "Error", upcomingMovies = emptyList())
+        assertEquals(
+            expected = HomeUiState(
+                isLoading = false,
+                error = "Error",
+                upcomingMovies = emptyList()
+            ),
+            actual = viewModel.homeUiState.value
         )
     }
 

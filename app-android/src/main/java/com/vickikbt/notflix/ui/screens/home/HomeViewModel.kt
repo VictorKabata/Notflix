@@ -7,6 +7,7 @@ import com.vickikbt.shared.utils.HomeUiState
 import com.vickikbt.shared.utils.isLoading
 import com.vickikbt.shared.utils.onFailure
 import com.vickikbt.shared.utils.onSuccess
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -17,14 +18,11 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
     private val _homeUiState = MutableStateFlow(HomeUiState(isLoading = true))
     val homeUiState = _homeUiState.asStateFlow()
 
-    init {
-        /*fetchNowPlayingMovies()
-        fetchTrendingMovies()
-        fetchPopularMovies()
-        fetchUpcomingMovies()*/
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        _homeUiState.update { it.copy(isLoading = false, error = exception.message) }
     }
 
-    fun fetchNowPlayingMovies() = viewModelScope.launch {
+    fun fetchNowPlayingMovies() = viewModelScope.launch(coroutineExceptionHandler) {
         moviesRepository.fetchNowPlayingMovies().collect { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
@@ -36,7 +34,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
         }
     }
 
-    fun fetchTrendingMovies() = viewModelScope.launch {
+    fun fetchTrendingMovies() = viewModelScope.launch(coroutineExceptionHandler) {
         moviesRepository.fetchTrendingMovies().collect { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
@@ -48,7 +46,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
         }
     }
 
-    fun fetchPopularMovies() = viewModelScope.launch {
+    fun fetchPopularMovies() = viewModelScope.launch(coroutineExceptionHandler) {
         moviesRepository.fetchPopularMovies().collect { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
@@ -60,7 +58,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
         }
     }
 
-    fun fetchUpcomingMovies() = viewModelScope.launch {
+    fun fetchUpcomingMovies() = viewModelScope.launch(coroutineExceptionHandler) {
         moviesRepository.fetchUpcomingMovies().collect { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }

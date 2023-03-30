@@ -23,7 +23,6 @@ class DetailsViewModel constructor(
     val movieDetailsState = _movieDetailsState.asStateFlow()
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        Napier.e(tag = "VicKbt", message = "Handle $exception in CoroutineExceptionHandler")
         _movieDetailsState.update { it.copy(isLoading = false, error = exception.message) }
     }
 
