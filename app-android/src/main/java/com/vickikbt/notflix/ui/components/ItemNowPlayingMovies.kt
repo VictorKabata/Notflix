@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -30,9 +31,7 @@ import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
-import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
-import com.google.accompanist.placeholder.shimmer
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
@@ -48,6 +47,7 @@ import com.vickikbt.shared.utils.getRating
 fun ItemNowPlayingMovies(
     modifier: Modifier = Modifier,
     movie: Movie,
+    isLoading: Boolean = false,
     onItemClick: () -> Unit
 ) {
     val defaultDominantColor = MaterialTheme.colors.surface
@@ -78,13 +78,9 @@ fun ItemNowPlayingMovies(
         //region Movie Cover Image
         Image(
             modifier = Modifier
+                .placeholder(visible = isLoading, color = Color.Gray.copy(alpha = .8f))
                 .fillMaxSize()
-                .align(Alignment.Center)
-                .placeholder(
-                    visible = false,
-                    color = Color.Gray,
-                    highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White)
-                ),
+                .align(Alignment.Center),
             alignment = Alignment.Center,
             contentScale = ContentScale.Crop,
             painter = painter,
@@ -102,7 +98,7 @@ fun ItemNowPlayingMovies(
                     Brush.verticalGradient(
                         listOf(
                             Color.Transparent,
-                            dominantColor
+                            if (isLoading) Color.Transparent else dominantColor
                         )
                     )
                 )
@@ -117,7 +113,11 @@ fun ItemNowPlayingMovies(
             verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
             Text(
-                modifier = Modifier,
+                modifier = Modifier.placeholder(
+                    visible = isLoading,
+                    color = Color.Gray,
+                    shape = RoundedCornerShape(0.dp)
+                ),
                 text = movie.title ?: "Unknown movie",
                 fontSize = 32.sp,
                 maxLines = 2,
@@ -128,7 +128,11 @@ fun ItemNowPlayingMovies(
             )
 
             RatingBar(
-                modifier = Modifier,
+                modifier = Modifier.placeholder(
+                    visible = isLoading,
+                    color = Color.Gray,
+                    shape = RoundedCornerShape(0.dp)
+                ),
                 value = movie.voteAverage?.getRating()?.toFloat() ?: 0f,
                 numStars = 5,
                 size = 18.dp,

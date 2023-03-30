@@ -37,8 +37,6 @@ import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
-import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.material.fade
 import com.google.accompanist.placeholder.material.placeholder
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarStyle
@@ -58,6 +56,7 @@ import com.vickikbt.shared.utils.getReleaseDate
 fun ItemPopularMovies(
     modifier: Modifier = Modifier,
     movie: Movie,
+    isLoading: Boolean = false,
     onClickItem: (Movie) -> Unit
 ) {
     val defaultDominantTextColor = MaterialTheme.colors.onSurface
@@ -84,13 +83,7 @@ fun ItemPopularMovies(
     }
 
     Card(
-        modifier = modifier
-            .clickable { onClickItem(movie) }
-            .placeholder(
-                visible = false,
-                color = Color.Black,
-                highlight = PlaceholderHighlight.fade()
-            ),
+        modifier = modifier.clickable { onClickItem(movie) },
         elevation = 8.dp,
         shape = RoundedCornerShape(4.dp)
     ) {
@@ -100,9 +93,9 @@ fun ItemPopularMovies(
                 modifier = Modifier
                     .fillMaxSize()
                     .placeholder(
-                        visible = false,
-                        color = Color.Black,
-                        highlight = PlaceholderHighlight.fade()
+                        visible = isLoading,
+                        color = Color.Gray.copy(alpha = .8f),
+                        shape = RoundedCornerShape(4.dp)
                     )
                     .align(Alignment.Center),
                 alignment = Alignment.Center,
@@ -121,7 +114,7 @@ fun ItemPopularMovies(
                         Brush.verticalGradient(
                             listOf(
                                 Color.Transparent,
-                                dominantColor
+                                if (isLoading) Color.Transparent else dominantColor
                             )
                         )
                     )
@@ -137,6 +130,10 @@ fun ItemPopularMovies(
             ) {
                 //region Movie Title
                 Text(
+                    modifier = Modifier.placeholder(
+                        visible = isLoading,
+                        color = Color.Gray
+                    ),
                     text = movie.title ?: "Unknown movie",
                     fontSize = 18.sp,
                     maxLines = 2,
@@ -156,7 +153,11 @@ fun ItemPopularMovies(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RatingBar(
-                        modifier = Modifier,
+                        modifier = Modifier.placeholder(
+                            visible = isLoading,
+                            color = Color.Gray,
+                            shape = RoundedCornerShape(0.dp)
+                        ),
                         value = movie.voteAverage?.getRating()?.toFloat() ?: 0f,
                         numStars = 5,
                         size = 15.dp,
@@ -179,7 +180,11 @@ fun ItemPopularMovies(
                         )
 
                         Text(
-                            modifier = Modifier,
+                            modifier = Modifier.placeholder(
+                                visible = isLoading,
+                                color = Color.Gray,
+                                shape = RoundedCornerShape(0.dp)
+                            ),
                             text = movie.releaseDate.getReleaseDate()?.capitalizeEachWord()!!,
                             fontSize = 14.sp,
                             maxLines = 1,

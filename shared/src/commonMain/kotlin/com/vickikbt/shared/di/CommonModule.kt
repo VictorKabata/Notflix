@@ -1,9 +1,11 @@
 package com.vickikbt.shared.di
 
 import com.vickikbt.shared.BuildKonfig
+import com.vickikbt.shared.data.datasources.FavoritesRepositoryImpl
 import com.vickikbt.shared.data.datasources.MovieDetailsRepositoryImpl
 import com.vickikbt.shared.data.datasources.MoviesRepositoryImpl
 import com.vickikbt.shared.data.datasources.SettingsRepositoryImpl
+import com.vickikbt.shared.domain.repositories.FavoritesRepository
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.repositories.SettingsRepository
@@ -79,6 +81,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
 
     single<MoviesRepository> { MoviesRepositoryImpl(httpClient = get()) }
     single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(httpClient = get()) }
+    single<FavoritesRepository> { FavoritesRepositoryImpl(httpClient = get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(observableSettings = get()) }
 
     factoryOf(::SharedMainPresenter)

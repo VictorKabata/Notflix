@@ -2,11 +2,8 @@ package ui.screens.home
 
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.repositories.MoviesRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
 class HomeViewModel constructor(private val moviesRepository: MoviesRepository) :
@@ -91,5 +88,4 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
             _error.value = e.message
         }
     }*/
-
 }

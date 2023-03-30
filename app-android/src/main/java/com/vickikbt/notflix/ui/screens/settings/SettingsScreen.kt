@@ -13,6 +13,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -37,7 +38,13 @@ import org.koin.androidx.compose.get
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun SettingsScreen(navController: NavController, viewModel: SettingsViewModel = get()) {
+fun SettingsScreen(navController: NavController? = null, viewModel: SettingsViewModel = get()) {
+    LaunchedEffect(key1 = viewModel) {
+        viewModel.getThemePreference()
+        viewModel.getLanguagePreference()
+        viewModel.getImageQualityPreference()
+    }
+
     val context = LocalContext.current
 
     val settingsUiState = viewModel.settingsUiState.collectAsState().value

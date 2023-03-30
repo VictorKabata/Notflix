@@ -14,28 +14,20 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.fade
 import com.google.accompanist.placeholder.placeholder
 import com.vickikbt.notflix.R
-import com.vickikbt.notflix.ui.theme.Gray
-import com.vickikbt.notflix.ui.theme.TextSecondary
 
 @Composable
-fun MovieRatingSection(popularity: String?, voteAverage: String?) {
+fun MovieRatingSection(popularity: String?, voteAverage: String?, isLoading: Boolean = false) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .wrapContentHeight()
-            .placeholder(
-                visible = popularity.isNullOrEmpty(),
-                color = Gray,
-                highlight = PlaceholderHighlight.fade(highlightColor = TextSecondary)
-            ),
+            .wrapContentHeight(),
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -46,6 +38,7 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
+                modifier = Modifier.placeholder(visible = isLoading, color = Color.Gray),
                 text = if (popularity.isNullOrEmpty()) "N/A" else popularity,
                 style = MaterialTheme.typography.h6,
                 fontSize = 42.sp,
@@ -75,11 +68,13 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
             verticalArrangement = Arrangement.Center
         ) {
             Image(
+                modifier = Modifier,
                 painter = painterResource(id = R.drawable.ic_rating_star),
                 contentDescription = stringResource(R.string.rating)
             )
 
             Text(
+                modifier = Modifier.placeholder(visible = isLoading, color = Color.Gray),
                 text = if (voteAverage.isNullOrEmpty()) "N/A" else "$voteAverage/5.0",
                 style = MaterialTheme.typography.h6,
                 fontSize = 20.sp,

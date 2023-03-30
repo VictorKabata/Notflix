@@ -10,35 +10,29 @@ import io.ktor.client.plugins.RedirectResponseException
 import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.statement.HttpResponse
 import io.ktor.util.network.UnresolvedAddressException
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.channelFlow
 
-suspend fun <T : Any?> safeApiCall(apiCall: suspend () -> T): Flow<NetworkResultState<T>> =
-    channelFlow {
-        send(NetworkResultState.Loading)
+suspend fun <T : Any?> safeApiCall(apiCall: suspend () -> T): NetworkResultState<T> {
+    return try {
+        NetworkResultState.Loading
 
-        // delay(5000)
-
-        try {
-            send(NetworkResultState.Success(apiCall.invoke()))
-        } catch (e: RedirectResponseException) {
-            val error = parseNetworkError(e.response.body())
-            send(NetworkResultState.Failure(exception = error))
-        } catch (e: ClientRequestException) {
-            val error = parseNetworkError(e.response.body())
-            send(NetworkResultState.Failure(exception = error))
-        } catch (e: ServerResponseException) {
-            val error = parseNetworkError(e.response.body())
-            send(NetworkResultState.Failure(exception = error))
-        } catch (e: UnresolvedAddressException) {
-            val error = parseNetworkError(exception = e)
-            send(NetworkResultState.Failure(exception = error))
-        } catch (e: Exception) {
-            val error = parseNetworkError(exception = e)
-            send(NetworkResultState.Failure(exception = error))
-        }
+        NetworkResultState.Success(apiCall.invoke())
+    } catch (e: RedirectResponseException) {
+        val error = parseNetworkError(e.response.body())
+        NetworkResultState.Failure(exception = error)
+    } catch (e: ClientRequestException) {
+        val error = parseNetworkError(e.response.body())
+        NetworkResultState.Failure(exception = error)
+    } catch (e: ServerResponseException) {
+        val error = parseNetworkError(e.response.body())
+        NetworkResultState.Failure(exception = error)
+    } catch (e: UnresolvedAddressException) {
+        val error = parseNetworkError(exception = e)
+        NetworkResultState.Failure(exception = error)
+    } catch (e: Exception) {
+        val error = parseNetworkError(exception = e)
+        NetworkResultState.Failure(exception = error)
     }
+}
 
 /**Generate [Exception] from network or system error when making network calls
  *

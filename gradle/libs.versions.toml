@@ -25,6 +25,7 @@ buildKonfig = "0.13.3"
 kover = "0.6.1"
 mockk = "1.12.3"
 kotlinxTestResources = "0.2.2"
+voyager = "1.0.0-rc03"
 
 #Android Versions
 
@@ -59,7 +60,9 @@ robolectric = "4.5.1"
 jUnitKtx = "1.1.2"
 espresso = "3.3.0"
 test = "1.3.0"
+kotlinTest = "1.1.51"
 archTestCore = "2.1.0"
+turbine = "0.12.3"
 
 [plugins]
 ktLint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLint" }
@@ -85,15 +88,6 @@ firebase-appDistribution-plugin = { id = "com.google.firebase.appdistribution", 
 firebase-performance-plugin = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerformance" }
 
 [libraries]
-#Project
-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
-kmpNativeCoroutines = { module = "com.rickclephas.kmp:kmp-nativecoroutines-gradle-plugin", version.ref = "kmpNativeCoroutines" }
-firebase-appDistribution-plugin = { module = "com.google.firebase:firebase-appdistribution-gradle", version.ref = "firebaseAppDistribution" }
-firebase-crashlytics-plugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebaseCrashlytics" }
-firebase-performance-plugin = { module = "com.google.firebase:perf-plugin", version.ref = "firebasePerformance" }
-
-
 #Kotlin Multiplatform Lib Dependencies
 kotlinX-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
@@ -115,6 +109,9 @@ kotlinX-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.
 multiplatformSettings-noArg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatformSettings" }
 multiplatformSettings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatformSettings" }
 multiplatformSettings-test = { module = "com.russhwolf:multiplatform-settings-test", version.ref = "multiplatformSettings" }
+voyager-core = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 
 #Android Lib Dependencies
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
@@ -156,6 +153,7 @@ kotlinX-testResources = { module = "com.goncalossilva:resources", version.ref = 
 kotlinX-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 
 jUnit = { module = "junit:junit" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlinTest" }
 googleTruth = { module = "com.google.truth:truth", version.ref = "truth" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 jUnitKtx = { module = "androidx.test.ext:junit-ktx", version.ref = "jUnitKtx" }
@@ -164,3 +162,4 @@ test-core = { module = "androidx.test:core-ktx", version.ref = "test" }
 archTestCore = { module = "androidx.arch.core:core-testing", version.ref = "archTestCore" }
 test-rules = { module = "androidx.test:rules", version.ref = "test" }
 test-runner = { module = "androidx.test:runner", version.ref = "test" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }

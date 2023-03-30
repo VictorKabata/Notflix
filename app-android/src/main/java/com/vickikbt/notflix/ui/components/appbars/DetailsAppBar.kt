@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -41,12 +42,8 @@ import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
-import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.placeholder
-import com.google.accompanist.placeholder.shimmer
 import com.vickikbt.notflix.R
-import com.vickikbt.notflix.ui.theme.Gray
-import com.vickikbt.notflix.ui.theme.TextSecondary
 import com.vickikbt.notflix.util.PaletteGenerator
 import com.vickikbt.notflix.util.loadImage
 import com.vickikbt.shared.domain.models.MovieDetails
@@ -59,6 +56,7 @@ fun DetailsAppBar(
     modifier: Modifier = Modifier,
     collapsingScrollState: CollapsingToolbarScaffoldState,
     movieDetails: MovieDetails?,
+    isLoading: Boolean = false,
     onNavigationIconClick: () -> Unit,
     onShareIconClick: () -> Unit,
     onFavoriteIconClick: (MovieDetails) -> Unit
@@ -95,17 +93,13 @@ fun DetailsAppBar(
             .fillMaxWidth()
             .height(350.dp)
             .graphicsLayer { alpha = scrollProgress }
-            .placeholder(
-                visible = movieDetails == null,
-                color = Gray,
-                highlight = PlaceholderHighlight.shimmer(highlightColor = TextSecondary)
-            )
     ) {
         Image(
             modifier = Modifier
                 .fillMaxSize()
                 .align(Alignment.Center)
-                .aspectRatio(scrollProgress.coerceAtLeast(.1f)),
+                .aspectRatio(scrollProgress.coerceAtLeast(.1f))
+                .placeholder(visible = isLoading, color = Color.Gray.copy(alpha = .8f)),
             painter = painter,
             contentDescription = stringResource(R.string.movie_poster),
             contentScale = ContentScale.Crop
@@ -117,7 +111,12 @@ fun DetailsAppBar(
                 .height(210.dp)
                 .align(Alignment.BottomCenter)
                 .background(
-                    Brush.verticalGradient(listOf(Color.Transparent, dominantColor))
+                    Brush.verticalGradient(
+                        listOf(
+                            Color.Transparent,
+                            if (isLoading) Color.Transparent else dominantColor
+                        )
+                    )
                 )
         )
 
@@ -132,7 +131,9 @@ fun DetailsAppBar(
             horizontalAlignment = Alignment.Start
         ) {
             Text(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .placeholder(visible = isLoading, color = Color.Gray),
                 text = movieDetails?.title ?: stringResource(R.string.unknown_movie),
                 style = MaterialTheme.typography.h6,
                 maxLines = 2,
@@ -141,8 +142,10 @@ fun DetailsAppBar(
                 fontSize = 32.sp
             )
 
+            Spacer(modifier = Modifier.height(2.dp))
+
             Text(
-                modifier = Modifier,
+                modifier = Modifier.placeholder(visible = isLoading, color = Color.Gray),
                 text = movieDetails?.runtime?.getMovieDuration() ?: "",
                 color = dominantTextColor,
                 style = MaterialTheme.typography.h5,
@@ -156,7 +159,8 @@ fun DetailsAppBar(
         title = {
             Text(
                 modifier = Modifier.graphicsLayer { alpha = 1 - scrollProgress },
-                text = movieDetails?.title ?: stringResource(R.string.unknown_movie),
+                text = if (!isLoading) movieDetails?.title
+                    ?: stringResource(R.string.unknown_movie) else "",
                 style = MaterialTheme.typography.h6,
                 fontSize = 20.sp,
                 overflow = TextOverflow.Ellipsis,

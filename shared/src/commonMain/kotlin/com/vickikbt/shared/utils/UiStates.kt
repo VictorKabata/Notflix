@@ -5,7 +5,7 @@ import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
 
 data class HomeUiState(
-    val isLoading: Boolean = false,
+    val isLoading: Boolean = true,
     val error: String? = null,
     val nowPlayingMovies: List<Movie>? = emptyList(),
     val trendingMovies: List<Movie>? = emptyList(),
@@ -14,7 +14,7 @@ data class HomeUiState(
 )
 
 data class DetailsUiState(
-    val isLoading: Boolean = false,
+    val isLoading: Boolean = true,
     val error: String? = null,
     val movieDetails: MovieDetails? = null,
     val movieCast: List<Actor>? = emptyList(),
@@ -22,7 +22,7 @@ data class DetailsUiState(
 )
 
 data class FavouritesUiState(
-    val isLoading: Boolean = false,
+    val isLoading: Boolean = true,
     val error: String? = null,
     val favouriteMovies: List<MovieDetails>? = emptyList()
 )
