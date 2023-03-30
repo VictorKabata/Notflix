@@ -15,35 +15,42 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 
 class MovieDetailsRepositoryImpl constructor(private val httpClient: HttpClient) :
     MovieDetailsRepository {
 
     override suspend fun fetchMovieDetails(movieId: Int): Flow<NetworkResultState<MovieDetails>> {
-        return safeApiCall {
-            val response = httpClient.get(urlString = "movie/$movieId").body<MovieDetailsDto>()
-            response.toDomain()
-        }
+        return flowOf(
+            safeApiCall {
+                val response = httpClient.get(urlString = "movie/$movieId").body<MovieDetailsDto>()
+                response.toDomain()
+            }
+        )
     }
 
     override suspend fun fetchMovieCast(movieId: Int): Flow<NetworkResultState<Cast>> {
-        return safeApiCall {
-            val response = httpClient.get(urlString = "movie/$movieId/credits").body<CastDto>()
+        return flowOf(
+            safeApiCall {
+                val response = httpClient.get(urlString = "movie/$movieId/credits").body<CastDto>()
 
-            response.toDomain()
-        }
+                response.toDomain()
+            }
+        )
     }
 
     override suspend fun fetchSimilarMovies(
         movieId: Int,
         page: Int
     ): Flow<NetworkResultState<List<Movie>?>> {
-        return safeApiCall {
-            val response = httpClient.get(urlString = "movie/$movieId/similar") {
-                parameter("page", page)
-            }.body<MovieResultsDto>()
+        return flowOf(
+            safeApiCall {
+                val response = httpClient.get(urlString = "movie/$movieId/similar") {
+                    parameter("page", page)
+                }.body<MovieResultsDto>()
 
-            response.movies?.map { it.toDomain() }
-        }
+                response.movies?.map { it.toDomain() }
+            }
+        )
     }
 }
