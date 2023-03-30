@@ -20,7 +20,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(manifest=Config.NONE)
+@Config(manifest = Config.NONE)
 class HomeViewModelTest {
 
     @get:Rule
@@ -218,6 +218,4 @@ class HomeViewModelTest {
             actual = viewModel.homeUiState.value
         )
     }
-
-
 }

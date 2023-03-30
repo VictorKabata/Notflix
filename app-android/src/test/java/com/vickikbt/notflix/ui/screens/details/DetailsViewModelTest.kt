@@ -1,7 +1,6 @@
 package com.vickikbt.notflix.ui.screens.details
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.vickikbt.shared.domain.models.Actor
 import com.vickikbt.shared.domain.models.Cast
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
@@ -23,7 +22,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(manifest=Config.NONE)
+@Config(manifest = Config.NONE)
 class DetailsViewModelTest {
 
     @get:Rule
@@ -160,5 +159,4 @@ class DetailsViewModelTest {
             actual = viewModel.movieDetailsState.value
         )
     }
-
 }
