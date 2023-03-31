@@ -17,7 +17,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
 import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
 import com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE
 import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
@@ -26,17 +25,13 @@ import ui.components.appBars.AppBar
 import ui.components.preferences.DialogPreferenceSelection
 import ui.components.preferences.PreferencesGroup
 import ui.components.preferences.TextPreference
-
-class SettingsScreen : Screen {
-    @Composable
-    override fun Content() {
-        SettingsComposableScreen()
-    }
-
-}
+import ui.navigation.NavController
 
 @Composable
-fun SettingsComposableScreen(viewModel: SettingsScreenModel = koin.get()) {
+fun SettingsComposableScreen(
+    navController: NavController,
+    viewModel: SettingsScreenModel = koin.get()
+) {
     val currentTheme = viewModel.settingsUiState.collectAsState().value.selectedTheme
     val currentLanguage = viewModel.settingsUiState.collectAsState().value.selectedLanguage
     val currentImageQuality =

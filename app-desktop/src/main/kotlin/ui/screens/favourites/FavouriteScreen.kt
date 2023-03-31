@@ -5,17 +5,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-
-class FavouriteScreen : Screen {
-
-    @Composable
-    override fun Content() {
-        FavoritesComposableScreen()
-    }
-
-}
+import ui.navigation.NavController
 
 @Composable
-fun FavoritesComposableScreen() {
+fun FavoritesComposableScreen(navController: NavController) {
     Box(modifier = Modifier.fillMaxSize())
 }

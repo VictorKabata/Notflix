@@ -22,29 +22,20 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.navigator.currentOrThrow
 import com.vickikbt.shared.domain.models.Movie
 import koin
 import ui.components.ItemNowPlayingMovies
 import ui.components.ItemPopularMovies
 import ui.components.ItemTrendingMovies
 import ui.components.SectionSeparator
-import ui.screens.details.DetailsScreen
-
-class HomeScreen : Screen {
-    @Composable
-    override fun Content() {
-        HomeComposeScreen()
-    }
-}
+import ui.navigation.NavController
+import ui.navigation.NavigationItem
 
 @Composable
-fun HomeComposeScreen(viewModel: HomeScreenModel = koin.get()) {
-
-    val navigator = LocalNavigator.currentOrThrow
+fun HomeComposeScreen(
+    navController: NavController,
+    viewModel: HomeScreenModel = koin.get()
+) {
 
     LaunchedEffect(key1 = viewModel) {
         viewModel.fetchNowPlayingMovies()
@@ -71,34 +62,36 @@ fun HomeComposeScreen(viewModel: HomeScreenModel = koin.get()) {
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            nowPlayingMovies?.let { NowPlayingMovies(navigator = navigator, movies = it) }
-            trendingMovies?.let { TrendingMovies(navigator = navigator, movies = it) }
-            popularMovies?.let { PopularMovies(navigator = navigator, movies = it) }
-            upcomingMovies?.let { UpcomingMovies(navigator = navigator, movies = it) }
-        }
-    }
-}
 
-@Composable
-fun NowPlayingMovies(navigator: Navigator, movies: List<Movie>) {
-    Row(modifier = Modifier.fillMaxWidth().height(600.dp)) {
-        for (movie in movies.take(5)) {
-            Box(Modifier.weight(1f)) {
-                ItemNowPlayingMovies(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(300.dp),
-                    movie = movie
-                ) { movie ->
-                    movie.id?.let { navigator.push(DetailsScreen(movieId = it)) }
+            //region Now Playing Movies
+            nowPlayingMovies?.let {
+                Row(modifier = Modifier.fillMaxWidth().height(600.dp)) {
+                    for (movie in it.take(5)) {
+                        Box(Modifier.weight(1f)) {
+                            ItemNowPlayingMovies(
+                                modifier = Modifier
+                                    .fillMaxHeight()
+                                    .width(300.dp),
+                                movie = movie
+                            ) { movie ->
+                                movie.id?.let { navController.navigate("details/$it") }
+                            }
+                        }
+                    }
                 }
             }
+            //endregion
+
+            trendingMovies?.let { TrendingMovies(movies = it) }
+            popularMovies?.let { PopularMovies(movies = it) }
+            upcomingMovies?.let { UpcomingMovies(movies = it) }
         }
     }
 }
 
+
 @Composable
-fun TrendingMovies(navigator: Navigator, movies: List<Movie>) {
+fun TrendingMovies(movies: List<Movie>) {
     SectionSeparator(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 12.dp)
@@ -118,14 +111,14 @@ fun TrendingMovies(navigator: Navigator, movies: List<Movie>) {
     ) {
         items(items = movies) { item ->
             ItemTrendingMovies(modifier = Modifier, movie = item) { movie ->
-                movie.id?.let { navigator.push(DetailsScreen(movieId = it)) }
+                // movie.id?.let { navigator.push(DetailsScreen(movieId = it)) }
             }
         }
     }
 }
 
 @Composable
-fun PopularMovies(navigator: Navigator, movies: List<Movie>) {
+fun PopularMovies(movies: List<Movie>) {
     SectionSeparator(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 12.dp)
@@ -148,14 +141,14 @@ fun PopularMovies(navigator: Navigator, movies: List<Movie>) {
                 modifier = Modifier,
                 movie = item
             ) { movie ->
-                movie.id?.let { navigator.push(DetailsScreen(movieId = it)) }
+                // movie.id?.let { navigator.push(DetailsScreen(movieId = it)) }
             }
         }
     }
 }
 
 @Composable
-fun UpcomingMovies(navigator: Navigator, movies: List<Movie>) {
+fun UpcomingMovies(movies: List<Movie>) {
     SectionSeparator(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 12.dp)
@@ -175,7 +168,7 @@ fun UpcomingMovies(navigator: Navigator, movies: List<Movie>) {
     ) {
         items(items = movies) { item ->
             ItemTrendingMovies(modifier = Modifier, movie = item) { movie ->
-                movie.id?.let { navigator.push(DetailsScreen(movieId = it)) }
+                // movie.id?.let { navigator.push(DetailsScreen(movieId = it)) }
             }
         }
     }

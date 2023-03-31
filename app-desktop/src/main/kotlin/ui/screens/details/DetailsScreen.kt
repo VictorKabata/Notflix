@@ -37,21 +37,14 @@ import koin
 import ui.components.ItemMovieCast
 import ui.components.ItemSimilarMovies
 import ui.components.MovieRatingSection
+import ui.navigation.NavController
 import utils.AsyncImage
 import utils.loadImage
 import utils.loadImageBitmap
 
-class DetailsScreen constructor(private val movieId: Int) : Screen {
-
-    @Composable
-    override fun Content() {
-        DetailsComposableScreen(movieId = movieId)
-    }
-
-}
-
 @Composable
 fun DetailsComposableScreen(
+    navController: NavController,
     viewModel: DetailsScreenModel = koin.get(),
     movieId: Int
 ) {
