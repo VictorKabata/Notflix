@@ -33,8 +33,9 @@ fun NavHost.NavigationGraphBuilder.composable(
     route: String,
     content: @Composable (argument: String) -> Unit
 ) {
+    val argument = navController.currentDestination.value
+
     if (navController.currentDestination.value.contains(route.split("/")[0])) {
-        val argument = navController.currentDestination.value
         content(argument)
     }
 }

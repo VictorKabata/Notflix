@@ -22,14 +22,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.vickikbt.shared.domain.models.Movie
 import koin
 import ui.components.ItemNowPlayingMovies
 import ui.components.ItemPopularMovies
 import ui.components.ItemTrendingMovies
 import ui.components.SectionSeparator
 import ui.navigation.NavController
-import ui.navigation.NavigationItem
 
 @Composable
 fun HomeComposeScreen(
@@ -82,94 +80,92 @@ fun HomeComposeScreen(
             }
             //endregion
 
-            trendingMovies?.let { TrendingMovies(movies = it) }
-            popularMovies?.let { PopularMovies(movies = it) }
-            upcomingMovies?.let { UpcomingMovies(movies = it) }
-        }
-    }
-}
+            //region Trending Movies
+            trendingMovies?.let {
+                SectionSeparator(
+                    modifier = Modifier
+                        .padding(start = 16.dp, end = 16.dp, top = 12.dp)
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    sectionTitle = "Trending Movies",
+                    onItemClick = {
+                        // ToDo: OnSectionedClicked-navigate to view all
+                    }
+                )
 
+                Spacer(modifier = Modifier.height(2.dp))
 
-@Composable
-fun TrendingMovies(movies: List<Movie>) {
-    SectionSeparator(
-        modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp, top = 12.dp)
-            .fillMaxWidth()
-            .wrapContentHeight(),
-        sectionTitle = "Trending Movies",
-        onItemClick = {
-            // ToDo: OnSectionedClicked-navigate to view all
-        }
-    )
-
-    Spacer(modifier = Modifier.height(2.dp))
-
-    LazyRow(
-        contentPadding = PaddingValues(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
-    ) {
-        items(items = movies) { item ->
-            ItemTrendingMovies(modifier = Modifier, movie = item) { movie ->
-                // movie.id?.let { navigator.push(DetailsScreen(movieId = it)) }
+                LazyRow(
+                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    items(items = it) { item ->
+                        ItemTrendingMovies(modifier = Modifier, movie = item) { movie ->
+                            movie.id?.let { navController.navigate("details/$it") }
+                        }
+                    }
+                }
             }
-        }
-    }
-}
+            //endregion
 
-@Composable
-fun PopularMovies(movies: List<Movie>) {
-    SectionSeparator(
-        modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp, top = 12.dp)
-            .fillMaxWidth()
-            .wrapContentHeight(),
-        sectionTitle = "Popular Movies",
-        onItemClick = {
-            // ToDo: OnSectionedClicked-navigate to view all
-        }
-    )
+            //region Popular Movies
+            popularMovies?.let {
+                SectionSeparator(
+                    modifier = Modifier
+                        .padding(start = 16.dp, end = 16.dp, top = 12.dp)
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    sectionTitle = "Popular Movies",
+                    onItemClick = {
+                        // ToDo: OnSectionedClicked-navigate to view all
+                    }
+                )
 
-    Spacer(modifier = Modifier.height(2.dp))
+                Spacer(modifier = Modifier.height(2.dp))
 
-    LazyRow(
-        contentPadding = PaddingValues(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(14.dp)
-    ) {
-        items(items = movies) { item ->
-            ItemPopularMovies(
-                modifier = Modifier,
-                movie = item
-            ) { movie ->
-                // movie.id?.let { navigator.push(DetailsScreen(movieId = it)) }
+                LazyRow(
+                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(14.dp)
+                ) {
+                    items(items = it) { item ->
+                        ItemPopularMovies(
+                            modifier = Modifier,
+                            movie = item
+                        ) { movie ->
+                            movie.id?.let { navController.navigate("details/$it") }
+                        }
+                    }
+                }
             }
-        }
-    }
-}
+            //endregion
 
-@Composable
-fun UpcomingMovies(movies: List<Movie>) {
-    SectionSeparator(
-        modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp, top = 12.dp)
-            .fillMaxWidth()
-            .wrapContentHeight(),
-        sectionTitle = "Popular Movies",
-        onItemClick = {
-            // ToDo: OnSectionedClicked-navigate to view all
-        }
-    )
+            //region Upcoming Movies
+            upcomingMovies?.let {
+                SectionSeparator(
+                    modifier = Modifier
+                        .padding(start = 16.dp, end = 16.dp, top = 12.dp)
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    sectionTitle = "Popular Movies",
+                    onItemClick = {
+                        // ToDo: OnSectionedClicked-navigate to view all
+                    }
+                )
 
-    Spacer(modifier = Modifier.height(2.dp))
+                Spacer(modifier = Modifier.height(2.dp))
 
-    LazyRow(
-        contentPadding = PaddingValues(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
-    ) {
-        items(items = movies) { item ->
-            ItemTrendingMovies(modifier = Modifier, movie = item) { movie ->
-                // movie.id?.let { navigator.push(DetailsScreen(movieId = it)) }
+                LazyRow(
+                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    items(items = it) { item ->
+                        ItemTrendingMovies(modifier = Modifier, movie = item) { movie ->
+                            movie.id?.let { navController.navigate("details/$it") }
+                        }
+                    }
+                }
             }
+            //endregion
         }
     }
 }
