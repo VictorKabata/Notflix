@@ -17,7 +17,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -25,9 +24,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.vickikbt.shared.domain.models.Movie
-import utils.AsyncImage
+import io.kamel.image.KamelImage
+import io.kamel.image.lazyPainterResource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import utils.loadImage
-import utils.loadImageBitmap
 
 @Composable
 fun ItemPopularMovies(
@@ -43,27 +44,23 @@ fun ItemPopularMovies(
 
     val imageUrl = movie.backdropPath?.loadImage()
 
-    // var cardAspectRatio by remember { mutableStateOf(1F) }
+    val painterResource = lazyPainterResource(imageUrl ?: "") {
+        coroutineContext = Job() + Dispatchers.IO
+    }
 
     Card(
         modifier = modifier
             .width(480.dp)
             .height(320.dp)
-            .clickable { onClickItem(movie) }
-        /*.onPointerEvent(PointerEventType.Enter) {
-            cardAspectRatio = 1.5f
-        }.onPointerEvent(PointerEventType.Exit) {
-            cardAspectRatio = 1f
-        }*/,
+            .clickable { onClickItem(movie) },
         elevation = 8.dp,
         shape = RoundedCornerShape(4.dp)
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             //region Movie Cover
-            AsyncImage(
+            KamelImage(
                 modifier = Modifier.fillMaxSize(),
-                load = { loadImageBitmap(imageUrl) },
-                painterFor = { remember { BitmapPainter(it) } },
+                resource = painterResource,
                 contentDescription = "Movie backdrop poster",
                 contentScale = ContentScale.Crop
             )
