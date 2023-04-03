@@ -23,7 +23,6 @@ class HomeScreenModel constructor(private val moviesRepository: MoviesRepository
         _homeUiState.update { it.copy(isLoading = false, error = exception.message) }
     }
 
-
     fun fetchNowPlayingMovies() = CoroutineScope(Dispatchers.IO).launch(coroutineExceptionHandler) {
         moviesRepository.fetchNowPlayingMovies().collect { moviesResult ->
             moviesResult.isLoading { isLoading ->

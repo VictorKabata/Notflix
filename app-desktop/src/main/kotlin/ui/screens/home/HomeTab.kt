@@ -36,7 +36,6 @@ import ui.components.ItemNowPlayingMovies
 import ui.components.ItemPopularMovies
 import ui.components.ItemTrendingMovies
 import ui.components.SectionSeparator
-import ui.screens.details.DetailsScreen
 
 object HomeTab : Tab {
 

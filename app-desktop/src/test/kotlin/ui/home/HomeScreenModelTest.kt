@@ -1,23 +1,5 @@
 package ui.home
 
-import com.vickikbt.shared.domain.models.Movie
-import com.vickikbt.shared.domain.repositories.MoviesRepository
-import com.vickikbt.shared.utils.HomeUiState
-import com.vickikbt.shared.utils.NetworkResultState
-import io.mockk.coEvery
-import io.mockk.mockk
-import io.mockk.unmockkAll
-import kotlin.test.assertEquals
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.runTest
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
-import ui.screens.home.HomeScreenModel
-import utils.MainCoroutineRule
-
 class HomeScreenModelTest {
 
     /*@ExperimentalCoroutinesApi
@@ -87,5 +69,4 @@ class HomeScreenModelTest {
             actual = homeScreenModel.homeUiState.value
         )
     }*/
-
 }
