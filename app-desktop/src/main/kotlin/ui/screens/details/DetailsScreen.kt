@@ -23,11 +23,9 @@ import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -35,14 +33,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.vickikbt.shared.utils.getPopularity
 import com.vickikbt.shared.utils.getRating
+import io.kamel.image.KamelImage
+import io.kamel.image.lazyPainterResource
 import koin
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import ui.components.ItemMovieCast
 import ui.components.ItemSimilarMovies
 import ui.components.MovieRatingSection
 import ui.navigation.NavController
-import utils.AsyncImage
 import utils.loadImage
-import utils.loadImageBitmap
 
 @Composable
 fun DetailsComposableScreen(
@@ -75,35 +75,38 @@ fun DetailsComposableScreen(
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
 
-        // Movie Poster region
-        /*IconButton(
-            modifier = Modifier.size(24.dp).padding(24.dp),
-            onClick = { navController.navigateUp() }) {
-            Icon(
-                modifier = Modifier.fillMaxSize(),
-                imageVector = Icons.Rounded.ArrowBack,
-                contentDescription = "Back",
-                tint = Color.Red
-            )
-        }*/
-
+        //region Movie Poster
         Box(modifier = Modifier.fillMaxWidth().height(600.dp)) {
+
             movieDetails?.backdropPath?.let {
-                val imgUrl = it.loadImage()
+                val imageUrl = it.loadImage()
 
-                println("Image URL: $imgUrl")
+                val painterResource = lazyPainterResource(imageUrl) {
+                    coroutineContext = Job() + Dispatchers.IO
+                }
 
-                AsyncImage(
+                KamelImage(
                     modifier = Modifier
                         .fillMaxSize()
                         .align(Alignment.Center)
                         .clickable { navController.navigateUp() },
-                    load = { loadImageBitmap(imgUrl) },
-                    painterFor = { remember { BitmapPainter(it) } },
+                    resource = painterResource,
                     contentDescription = "Image poster",
                     contentScale = ContentScale.Crop
                 )
             }
+
+            IconButton(
+                modifier = Modifier.size(42.dp).padding(24.dp),
+                onClick = { navController.navigateUp() }) {
+                Icon(
+                    modifier = Modifier.fillMaxSize(),
+                    imageVector = Icons.Rounded.ArrowBack,
+                    contentDescription = "Back",
+                    tint = Color.Red
+                )
+            }
+
         }
         // endregion
 
