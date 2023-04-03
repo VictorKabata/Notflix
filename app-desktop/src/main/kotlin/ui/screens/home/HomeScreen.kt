@@ -22,6 +22,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.screen.Screen
 import koin
 import ui.components.ItemNowPlayingMovies
 import ui.components.ItemPopularMovies
@@ -29,9 +30,17 @@ import ui.components.ItemTrendingMovies
 import ui.components.SectionSeparator
 import ui.navigation.NavController
 
+class HomeScreen : Screen {
+    @Composable
+    override fun Content() {
+        HomeScreen()
+    }
+
+}
+
 @Composable
 fun HomeComposeScreen(
-    navController: NavController,
+    navController: NavController? = null,
     viewModel: HomeScreenModel = koin.get()
 ) {
     LaunchedEffect(key1 = viewModel) {
@@ -70,7 +79,7 @@ fun HomeComposeScreen(
                                     .width(300.dp),
                                 movie = movie
                             ) { movie ->
-                                movie.id?.let { navController.navigate("details/$it") }
+                                movie.id?.let { navController?.navigate("details/$it") }
                             }
                         }
                     }
@@ -99,7 +108,7 @@ fun HomeComposeScreen(
                 ) {
                     items(items = it) { item ->
                         ItemTrendingMovies(modifier = Modifier, movie = item) { movie ->
-                            movie.id?.let { navController.navigate("details/$it") }
+                            movie.id?.let { navController?.navigate("details/$it") }
                         }
                     }
                 }
@@ -130,7 +139,7 @@ fun HomeComposeScreen(
                             modifier = Modifier,
                             movie = item
                         ) { movie ->
-                            movie.id?.let { navController.navigate("details/$it") }
+                            movie.id?.let { navController?.navigate("details/$it") }
                         }
                     }
                 }
@@ -158,7 +167,7 @@ fun HomeComposeScreen(
                 ) {
                     items(items = it) { item ->
                         ItemTrendingMovies(modifier = Modifier, movie = item) { movie ->
-                            movie.id?.let { navController.navigate("details/$it") }
+                            movie.id?.let { navController?.navigate("details/$it") }
                         }
                     }
                 }

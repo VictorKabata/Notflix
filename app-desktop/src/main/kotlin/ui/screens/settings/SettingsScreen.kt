@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.screen.Screen
 import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
 import com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE
 import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
@@ -27,9 +28,18 @@ import ui.components.preferences.PreferencesGroup
 import ui.components.preferences.TextPreference
 import ui.navigation.NavController
 
+class SettingsScreen : Screen {
+
+    @Composable
+    override fun Content() {
+        SettingsComposableScreen()
+    }
+
+}
+
 @Composable
 fun SettingsComposableScreen(
-    navController: NavController,
+    navController: NavController? = null,
     viewModel: SettingsScreenModel = koin.get()
 ) {
     val currentTheme = viewModel.settingsUiState.collectAsState().value.selectedTheme
