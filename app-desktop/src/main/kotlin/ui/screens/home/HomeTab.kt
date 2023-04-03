@@ -103,9 +103,9 @@ fun HomeComposableScreen(
                                 movie = movie
                             ) { movie ->
                                 movie.id?.let {
-                                    navigator.push(
+                                    /*navigator.push(
                                         DetailsScreen(navigator = navigator, movieId = it)
-                                    )
+                                    )*/
                                 }
                             }
                         }
@@ -136,9 +136,9 @@ fun HomeComposableScreen(
                     items(items = it) { item ->
                         ItemTrendingMovies(modifier = Modifier, movie = item) { movie ->
                             movie.id?.let {
-                                    navigator.push(
+                                    /*navigator.push(
                                         DetailsScreen(navigator = navigator, movieId = it)
-                                    )
+                                    )*/
                                 }
                         }
                     }
@@ -171,9 +171,9 @@ fun HomeComposableScreen(
                             movie = item
                         ) { movie ->
                             movie.id?.let {
-                                    navigator.push(
+                                    /*navigator.push(
                                         DetailsScreen(navigator = navigator, movieId = it)
-                                    )
+                                    )*/
                                 }
                         }
                     }
@@ -203,9 +203,9 @@ fun HomeComposableScreen(
                     items(items = it) { item ->
                         ItemTrendingMovies(modifier = Modifier, movie = item) { movie ->
                             movie.id?.let {
-                                    navigator.push(
+                                    /*navigator.push(
                                         DetailsScreen(navigator = navigator, movieId = it)
-                                    )
+                                    )*/
                                 }
                         }
                     }

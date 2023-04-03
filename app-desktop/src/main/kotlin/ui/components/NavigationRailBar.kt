@@ -51,7 +51,7 @@ fun NavigationRailBar(
                 selectedContentColor = PrimaryColor,
                 unselectedContentColor = Gray,
                 alwaysShowLabel = false,
-                selected = true, // tabNavigator.current == item,
+                selected = tabNavigator.current == item,
                 onClick = { tabNavigator.current = item }
             )
         }

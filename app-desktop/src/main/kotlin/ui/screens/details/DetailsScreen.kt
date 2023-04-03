@@ -61,7 +61,6 @@ fun DetailsComposableScreen(
     movieId: Int
 ) {
     LaunchedEffect(key1 = viewModel) {
-        // viewModel.getIsMovieFavorite(movieId)
         viewModel.getMovieDetails(movieId)
         viewModel.getMovieCast(movieId)
         viewModel.fetchSimilarMovies(movieId)
@@ -70,12 +69,8 @@ fun DetailsComposableScreen(
     val movieDetails = viewModel.movieDetailsState.collectAsState().value.movieDetails
     val movieCast = viewModel.movieDetailsState.collectAsState().value
     val similarMovies = viewModel.movieDetailsState.collectAsState().value.similarMovies
-    // val isMovieFavorite = viewModel.movieIsFavorite.collectAsState().value
 
     val scrollState = rememberScrollState()
-
-    println("MovieID: $movieId")
-    println("Movie details: $movieDetails")
 
     Column(
         modifier = Modifier
