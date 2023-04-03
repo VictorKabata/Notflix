@@ -18,13 +18,13 @@ class SharedSettingsPresenter constructor(private val settingsRepository: Settin
     private val viewModelScope = CoroutineScope(Dispatchers.Default)
     private val supervisorJob = MutableStateFlow<Job?>(null)
 
-    private val _selectedTheme = MutableStateFlow<Int?>(0)
+    private val _selectedTheme = MutableStateFlow<Int?>(null)
     val selectedTheme get() = _selectedTheme.asStateFlow()
 
-    private val _selectedLanguage = MutableStateFlow<Int?>(0)
+    private val _selectedLanguage = MutableStateFlow<Int?>(null)
     val selectedLanguage get() = _selectedLanguage.asStateFlow()
 
-    private val _selectedImageQuality = MutableStateFlow<Int?>(0)
+    private val _selectedImageQuality = MutableStateFlow<Int?>(null)
     val selectedImageQuality get() = _selectedImageQuality.asStateFlow()
 
     init {
@@ -47,7 +47,7 @@ class SharedSettingsPresenter constructor(private val settingsRepository: Settin
     private fun getThemePreference() {
         val job = viewModelScope.launch {
             settingsRepository.getThemePreference().collectLatest {
-                _selectedTheme.value = it
+                _selectedTheme.value = it ?: 2
             }
         }
 
@@ -60,7 +60,7 @@ class SharedSettingsPresenter constructor(private val settingsRepository: Settin
     private fun getLanguagePreference() {
         val job = viewModelScope.launch {
             settingsRepository.getLanguagePreference().collectLatest {
-                _selectedLanguage.value = it
+                _selectedLanguage.value = it ?: 0
             }
         }
 
@@ -73,7 +73,7 @@ class SharedSettingsPresenter constructor(private val settingsRepository: Settin
     private fun getImageQualityPreference() {
         val job = viewModelScope.launch {
             settingsRepository.getImageQualityPreference().collectLatest {
-                _selectedImageQuality.value = it
+                _selectedImageQuality.value = it ?: 2
             }
         }
 

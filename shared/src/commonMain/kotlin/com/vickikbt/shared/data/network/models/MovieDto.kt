@@ -15,7 +15,7 @@ data class MovieDto(
     val genreIds: List<Int>? = null,
 
     @SerialName("id")
-    val id: Int? = null,
+    val id: Int,
 
     @SerialName("original_language")
     val originalLanguage: String? = null,

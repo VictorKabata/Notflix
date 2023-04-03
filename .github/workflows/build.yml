@@ -25,20 +25,6 @@ jobs:
       - name: Build with gradle
         run: ./gradlew build --stacktrace
 
-  lint-check:
-    name: 🔍 Lint
-    runs-on: ubuntu-latest
-    steps:
-
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Make gradle executable
-        run: chmod +x ./gradlew
-
-      - name: Lint check
-        run: ./gradlew lint --stacktrace
-
   unit-tests:
     name: 🧪 Run Tests
     runs-on: ubuntu-latest

@@ -1,19 +1,17 @@
 package com.vickikbt.shared.utils
 
 import com.russhwolf.settings.MockSettings
-import com.vickikbt.shared.data.cache.multiplatform_settings.PreferenceManager
-import com.vickikbt.shared.data.data_sources.SettingsRepositoryImpl
+import com.vickikbt.shared.data.datasources.SettingsRepositoryImpl
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
-import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
+import kotlinx.coroutines.test.runTest
 
 class SharedExtensionsTests {
 
-    private val preferenceManager = PreferenceManager(MockSettings())
     private val settingsPresenterTest =
-        SharedSettingsPresenter(settingsRepository = SettingsRepositoryImpl(preferenceManager = preferenceManager))
+        SharedSettingsPresenter(settingsRepository = SettingsRepositoryImpl(observableSettings = MockSettings()))
 
     @Test
     fun `capitalizeEachWord capitalizes lowercase strings`() {

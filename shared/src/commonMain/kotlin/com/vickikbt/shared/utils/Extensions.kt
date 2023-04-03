@@ -8,7 +8,6 @@ object Extensions : KoinComponent {
     private val settingsRepository: SharedSettingsPresenter = get()
 
     fun loadImage(link: String): String {
-
         val quality = when (settingsRepository.selectedImageQuality.value) {
             0 -> "original"
             else -> "w500"

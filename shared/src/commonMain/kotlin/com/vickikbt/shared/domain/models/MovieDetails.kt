@@ -8,7 +8,7 @@ data class MovieDetails(
 
     val homepage: String? = null,
 
-    val id: Int? = null,
+    val id: Int,
 
     val imdbId: String? = null,
 
@@ -36,5 +36,7 @@ data class MovieDetails(
 
     val voteAverage: Double? = null,
 
-    val voteCount: Int? = null
+    val voteCount: Int? = null,
+
+    val isFavourite: Boolean? = null
 )

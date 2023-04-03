@@ -34,10 +34,10 @@ class SharedMainPresenter constructor(private val settingsRepository: SettingsRe
         val job = viewModelScope.launch {
             try {
                 settingsRepository.getThemePreference().collectLatest { theme ->
-                    _appTheme.value = theme
+                    _appTheme.value = theme ?: 2
                 }
             } catch (e: Exception) {
-                Napier.e("ERROR saving theme: ${e.message}")
+                Napier.e("ERROR getting theme: ${e.message}")
             }
         }
 
@@ -51,10 +51,10 @@ class SharedMainPresenter constructor(private val settingsRepository: SettingsRe
         val job = viewModelScope.launch {
             try {
                 settingsRepository.getLanguagePreference().collectLatest { language ->
-                    _appLanguage.value = language
+                    _appLanguage.value = language ?: 0
                 }
             } catch (e: Exception) {
-                Napier.e("ERROR saving theme: ${e.message}")
+                Napier.e("ERROR getting theme: ${e.message}")
             }
         }
 

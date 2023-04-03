@@ -1,19 +1,22 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
-    kotlin(Plugins.multiplatform)
-    kotlin(Plugins.nativeCocoaPods)
-    id(Plugins.androidLibrary)
-    kotlin(Plugins.kotlinXSerialization) version Versions.kotlinSerialization
-    id(Plugins.nativeCoroutines)
+    alias(libs.plugins.multiplatform)
+    alias(libs.plugins.nativeCocoapod)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlinX.serialization.plugin)
+    alias(libs.plugins.kmp.nativeCoroutines.plugin)
+    alias(libs.plugins.buildKonfig)
 }
 
 android {
-    compileSdk = AndroidSdk.compileSdkVersion
+    compileSdk = 33
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = AndroidSdk.minSdkVersion
-        targetSdk = AndroidSdk.targetSdkVersion
+        minSdk = 21
+        targetSdk = compileSdk
     }
 }
 
@@ -28,17 +31,15 @@ kotlin {
         else -> ::iosX64
     }
     iosTarget("iOS") {}
-
+    version = "1"
     cocoapods {
-
-        version = "1"
+        // version = "1"
 
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
-        /* ios.deploymentTarget = "14.1"
-         podfile = project.file("../Gistagram/Podfile")
+        // ios.deploymentTarget = "14.1"
+        podfile = project.file("../iOSNotflix/Podfile")
 
-         */
         framework {
             baseName = "shared"
             isStatic = false
@@ -47,45 +48,61 @@ kotlin {
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
-            implementation(MultiplatformDependencies.kotlinxCoroutines)
+            implementation(libs.kotlinX.coroutines)
 
-            implementation(MultiplatformDependencies.kotlinxSerialization)
-            implementation(MultiplatformDependencies.kotlinxDateTime)
+            api(libs.koin.core)
 
-            api(MultiplatformDependencies.koinCore)
+            api(libs.ktor.core)
+            api(libs.ktor.cio)
+            implementation(libs.ktor.contentNegotiation)
+            implementation(libs.ktor.json)
+            implementation(libs.ktor.logging)
 
-            implementation(MultiplatformDependencies.ktorCore)
-            implementation(MultiplatformDependencies.ktorSerialization)
-            implementation(MultiplatformDependencies.ktorLogging)
+            implementation(libs.kotlinX.serializationJson)
 
-            api(MultiplatformDependencies.napier)
+            implementation(libs.multiplatformSettings.noArg)
+            implementation(libs.multiplatformSettings.coroutines)
 
-            implementation(MultiplatformDependencies.multiplatformSettings)
-            implementation(MultiplatformDependencies.multiplatformSettingsCoroutines)
+            api(libs.napier)
+
+            implementation(libs.kotlinX.dateTime)
         }
 
         sourceSets["commonTest"].dependencies {
             implementation(kotlin("test"))
-            implementation(MultiplatformDependencies.ktorMock)
-            implementation(MultiplatformDependencies.kotlinxTestResources)
-            implementation(MultiplatformDependencies.kotlinxCoroutinesTest)
-            implementation(MultiplatformDependencies.multiplatformSettingsTest)
+            implementation(libs.turbine)
+            implementation(libs.ktor.mock)
+            implementation(libs.mockk)
+            implementation(libs.kotlinX.testResources)
+            implementation(libs.kotlinX.coroutines.test)
+            implementation(libs.multiplatformSettings.test)
         }
 
         sourceSets["androidMain"].dependencies {
-            implementation(MultiplatformDependencies.ktorAndroid)
         }
 
         sourceSets["androidTest"].dependencies {}
 
-        sourceSets["jvmMain"].dependencies {
-            api(MultiplatformDependencies.ktorJvm)
-        }
-
         sourceSets["iOSMain"].dependencies {
-            implementation(MultiplatformDependencies.ktoriOS)
         }
 
         sourceSets["iOSTest"].dependencies {}
+
+        sourceSets["jvmMain"].dependencies {
+        }
+
+        sourceSets["jvmTest"].dependencies {}
+    }
+}
+
+buildkonfig {
+    packageName = "com.vickikbt.shared"
+
+    defaultConfigs {
+        buildConfigField(
+            STRING,
+            "API_KEY",
+            gradleLocalProperties(rootDir).getProperty("api_key") ?: ""
+        )
     }
 }
