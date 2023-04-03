@@ -97,7 +97,7 @@ fun DetailsComposableScreen(
             }
 
             IconButton(
-                modifier = Modifier.size(42.dp).padding(24.dp),
+                modifier = Modifier.size(42.dp).padding(24.dp).align(Alignment.TopStart),
                 onClick = { navController.navigateUp() }) {
                 Icon(
                     modifier = Modifier.fillMaxSize(),
