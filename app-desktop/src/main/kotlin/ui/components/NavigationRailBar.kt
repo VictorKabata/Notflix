@@ -2,6 +2,7 @@ package ui.components
 
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.BottomNavigation
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.NavigationRail
@@ -14,6 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
+import cafe.adriel.voyager.navigator.tab.Tab
+import cafe.adriel.voyager.navigator.tab.TabNavigator
 import ui.navigation.NavController
 import ui.navigation.NavigationItem
 import ui.theme.Gray
@@ -22,9 +26,11 @@ import ui.theme.PrimaryColor
 @Composable
 fun NavigationRailBar(
     modifier: Modifier = Modifier,
-    navController: NavController,
-    navRailItems: List<NavigationItem>
+    tabNavigator: TabNavigator,
+    navRailItems: List<Tab>
 ) {
+
+
     NavigationRail(
         modifier = modifier.fillMaxHeight().alpha(0.95F),
         backgroundColor = MaterialTheme.colors.surface,
@@ -38,24 +44,23 @@ fun NavigationRailBar(
         },
         contentColor = PrimaryColor
     ) {
-        val currentDestination by remember { navController.currentDestination }
-
         navRailItems.forEach { item ->
+
             NavigationRailItem(
                 icon = {
-                    item.icon?.let {
+                    item.options.icon?.let {
                         Icon(
-                            painter = painterResource(it),
-                            contentDescription = item.title
+                            painter = it,
+                            contentDescription = item.options.title
                         )
                     }
                 },
-                label = { Text(text = item.title) },
+                label = { Text(text = item.options.title) },
                 selectedContentColor = PrimaryColor,
                 unselectedContentColor = Gray,
                 alwaysShowLabel = false,
-                selected = currentDestination == item.route,
-                onClick = { navController.navigate(item.route) }
+                selected = tabNavigator.current == item,
+                onClick = { tabNavigator.current = item }
             )
         }
     }

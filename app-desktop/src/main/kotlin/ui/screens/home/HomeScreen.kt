@@ -17,12 +17,20 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.tab.Tab
+import cafe.adriel.voyager.navigator.tab.TabOptions
 import koin
 import ui.components.ItemNowPlayingMovies
 import ui.components.ItemPopularMovies
@@ -30,16 +38,32 @@ import ui.components.ItemTrendingMovies
 import ui.components.SectionSeparator
 import ui.navigation.NavController
 
-class HomeScreen : Screen {
+object HomeScreen : Tab {
+
+    override val options: TabOptions
+        @Composable
+        get() {
+            val title by remember { mutableStateOf("Home") }
+            val icon = painterResource("ic_home.svg")
+
+            return remember {
+                TabOptions(
+                    index = 0u,
+                    title = title,
+                    icon = icon
+                )
+            }
+        }
+
     @Composable
     override fun Content() {
-        HomeScreen()
+        HomeComposableScreen()
     }
 
 }
 
 @Composable
-fun HomeComposeScreen(
+fun HomeComposableScreen(
     navController: NavController? = null,
     viewModel: HomeScreenModel = koin.get()
 ) {

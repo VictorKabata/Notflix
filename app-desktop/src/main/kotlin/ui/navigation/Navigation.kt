@@ -3,7 +3,7 @@ package ui.navigation
 import androidx.compose.runtime.Composable
 import ui.screens.details.DetailsComposableScreen
 import ui.screens.favourites.FavoritesComposableScreen
-import ui.screens.home.HomeComposeScreen
+import ui.screens.home.HomeComposableScreen
 import ui.screens.settings.SettingsComposableScreen
 import utils.getNavArguments
 
@@ -11,7 +11,7 @@ import utils.getNavArguments
 fun Navigation(navController: NavController) {
     NavHost(navController = navController) {
         composable(route = NavigationItem.Home.route) {
-            HomeComposeScreen(navController = navController)
+            HomeComposableScreen(navController = navController)
         }
 
         composable(route = NavigationItem.Details.route) {
