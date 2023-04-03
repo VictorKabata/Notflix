@@ -34,7 +34,6 @@ fun HomeComposeScreen(
     navController: NavController,
     viewModel: HomeScreenModel = koin.get()
 ) {
-
     LaunchedEffect(key1 = viewModel) {
         viewModel.fetchNowPlayingMovies()
         viewModel.fetchUpcomingMovies()
@@ -60,7 +59,6 @@ fun HomeComposeScreen(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-
             //region Now Playing Movies
             nowPlayingMovies?.let {
                 Row(modifier = Modifier.fillMaxWidth().height(600.dp)) {

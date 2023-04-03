@@ -26,7 +26,6 @@ import utils.loadImage
 
 @Composable
 fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
-
     val imageUrl = actor.profilePath?.loadImage()
 
     val painterResource = lazyPainterResource(imageUrl ?: "") {

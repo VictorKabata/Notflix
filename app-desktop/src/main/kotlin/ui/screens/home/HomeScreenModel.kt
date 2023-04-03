@@ -70,5 +70,4 @@ class HomeScreenModel constructor(private val moviesRepository: MoviesRepository
             }
         }
     }
-
 }

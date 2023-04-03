@@ -74,10 +74,8 @@ fun DetailsComposableScreen(
             .verticalScroll(state = scrollState),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
-
         //region Movie Poster
         Box(modifier = Modifier.fillMaxWidth().height(600.dp)) {
-
             movieDetails?.backdropPath?.let {
                 val imageUrl = it.loadImage()
 
@@ -106,7 +104,6 @@ fun DetailsComposableScreen(
                     tint = Color.Red
                 )
             }
-
         }
         // endregion
 

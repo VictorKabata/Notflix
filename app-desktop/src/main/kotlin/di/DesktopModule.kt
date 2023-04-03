@@ -1,6 +1,5 @@
 package di
 
-import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import ui.screens.details.DetailsScreenModel
@@ -14,5 +13,4 @@ val desktopModule = module {
     singleOf(::DetailsScreenModel)
     singleOf(::FavouritesScreenModel)
     singleOf(::SettingsScreenModel)
-
 }

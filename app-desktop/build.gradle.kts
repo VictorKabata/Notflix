@@ -11,8 +11,8 @@ dependencies {
     implementation(libs.voyager.core)
     implementation(libs.voyager.navigator)
     implementation(libs.voyager.tabNavigator)
-
-    implementation("com.alialbaali.kamel:kamel-image:0.4.0")
+    
+    implementation(libs.kamel)
 
     testImplementation(kotlin("test"))
     testImplementation(libs.turbine)

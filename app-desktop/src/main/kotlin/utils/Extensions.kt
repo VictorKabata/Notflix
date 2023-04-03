@@ -3,6 +3,7 @@ package utils
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
+import java.io.IOException
 import koin
 
 /**Append the image url with string to determine the image quality to be loaded*/
@@ -26,5 +27,5 @@ internal fun String.getNavArguments(): String {
     val result = matchResult?.groups?.get(1)?.value
 
     return if (!result.isNullOrEmpty()) result
-    else throw Exception("Invalid arguments passed")
+    else throw IOException("Invalid arguments passed")
 }
