@@ -38,7 +38,7 @@ import ui.components.ItemTrendingMovies
 import ui.components.SectionSeparator
 import ui.screens.details.DetailsScreen
 
-object HomeScreen : Tab {
+object HomeTab : Tab {
 
     override val options: TabOptions
         @Composable

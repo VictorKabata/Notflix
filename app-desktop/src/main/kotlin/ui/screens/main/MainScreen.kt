@@ -22,9 +22,9 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.vickikbt.shared.presentation.presenters.SharedMainPresenter
 import koin
 import ui.components.NavigationRailBar
-import ui.screens.favourites.FavouriteScreen
-import ui.screens.home.HomeScreen
-import ui.screens.settings.SettingsScreen
+import ui.screens.favourites.FavouritesTab
+import ui.screens.home.HomeTab
+import ui.screens.settings.SettingsTab
 import ui.theme.NotflixDesktopTheme
 
 @Composable
@@ -45,11 +45,11 @@ fun MainScreen(applicationScope: ApplicationScope, viewModel: SharedMainPresente
     ) {
         val isDarkTheme = theme != 0
 
-        val topLevelDestinations = listOf(HomeScreen, FavouriteScreen, SettingsScreen)
+        val topLevelDestinations = listOf(HomeTab, FavouritesTab, SettingsTab)
 
         NotflixDesktopTheme(darkTheme = isDarkTheme) {
             Surface(color = MaterialTheme.colors.surface) {
-                TabNavigator(HomeScreen) {
+                TabNavigator(HomeTab) {
                     Row {
                         NavigationRailBar(
                             tabNavigator = it,

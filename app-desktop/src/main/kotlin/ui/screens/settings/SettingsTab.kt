@@ -29,7 +29,7 @@ import ui.components.preferences.DialogPreferenceSelection
 import ui.components.preferences.PreferencesGroup
 import ui.components.preferences.TextPreference
 
-object SettingsScreen : Tab {
+object SettingsTab : Tab {
 
     override val options: TabOptions
         @Composable

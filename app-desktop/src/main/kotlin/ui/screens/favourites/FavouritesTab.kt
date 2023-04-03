@@ -11,7 +11,7 @@ import androidx.compose.ui.res.painterResource
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 
-object FavouriteScreen : Tab {
+object FavouritesTab : Tab {
 
     override val options: TabOptions
         @Composable
