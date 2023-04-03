@@ -2,9 +2,15 @@ package ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -36,15 +42,20 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        KamelImage(
-            modifier = Modifier.size(90.dp).clip(CircleShape),
-            resource = painterResource,
-            contentDescription = "Cast",
-            contentScale = ContentScale.Crop
-        )
+        Card(
+            modifier = Modifier.size(90.dp),
+            shape = CircleShape
+        ) {
+            KamelImage(
+                modifier = Modifier.fillMaxSize(),
+                resource = painterResource,
+                contentDescription = "Cast",
+                contentScale = ContentScale.Crop
+            )
+        }
 
         Text(
-            modifier = Modifier.width(78.dp),
+            modifier = Modifier.widthIn(max = 90.dp),
             text = actor.name ?: "Unknown actor",
             style = MaterialTheme.typography.h6,
             fontSize = 14.sp,
@@ -55,7 +66,7 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
         )
 
         Text(
-            modifier = Modifier.width(77.dp),
+            modifier = Modifier.widthIn(max = 90.dp),
             text = actor.character ?: "Unknown character",
             style = MaterialTheme.typography.h4,
             fontSize = 12.sp,

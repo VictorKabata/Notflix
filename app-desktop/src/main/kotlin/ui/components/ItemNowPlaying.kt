@@ -1,6 +1,7 @@
 package ui.components
 
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -50,7 +51,8 @@ fun ItemNowPlayingMovies(
             modifier = Modifier.fillMaxSize(),
             resource = painterResource,
             contentDescription = "Movie Backdrop Poster",
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
+            animationSpec = tween()
         )
 
         //region Movie Title

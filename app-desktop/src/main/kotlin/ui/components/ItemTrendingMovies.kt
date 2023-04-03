@@ -1,5 +1,6 @@
 package ui.components
 
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -51,7 +52,8 @@ fun ItemTrendingMovies(
                 modifier = Modifier.fillMaxSize(),
                 resource = painterResource,
                 contentDescription = "Movie poster",
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                animationSpec = tween()
             )
         }
 
