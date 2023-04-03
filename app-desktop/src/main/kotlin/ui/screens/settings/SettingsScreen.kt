@@ -9,9 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
@@ -19,10 +16,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
@@ -33,7 +28,6 @@ import ui.components.appBars.AppBar
 import ui.components.preferences.DialogPreferenceSelection
 import ui.components.preferences.PreferencesGroup
 import ui.components.preferences.TextPreference
-import ui.navigation.NavController
 
 object SettingsScreen : Tab {
 
@@ -56,14 +50,10 @@ object SettingsScreen : Tab {
     override fun Content() {
         SettingsComposableScreen()
     }
-
 }
 
 @Composable
-fun SettingsComposableScreen(
-    navController: NavController? = null,
-    viewModel: SettingsScreenModel = koin.get()
-) {
+fun SettingsComposableScreen(viewModel: SettingsScreenModel = koin.get()) {
     val currentTheme = viewModel.settingsUiState.collectAsState().value.selectedTheme
     val currentLanguage = viewModel.settingsUiState.collectAsState().value.selectedLanguage
     val currentImageQuality =

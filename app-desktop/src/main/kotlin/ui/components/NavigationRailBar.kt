@@ -2,24 +2,18 @@ package ui.components
 
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.BottomNavigation
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.NavigationRail
 import androidx.compose.material.NavigationRailItem
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import ui.navigation.NavController
-import ui.navigation.NavigationItem
 import ui.theme.Gray
 import ui.theme.PrimaryColor
 
@@ -29,8 +23,6 @@ fun NavigationRailBar(
     tabNavigator: TabNavigator,
     navRailItems: List<Tab>
 ) {
-
-
     NavigationRail(
         modifier = modifier.fillMaxHeight().alpha(0.95F),
         backgroundColor = MaterialTheme.colors.surface,
@@ -59,7 +51,7 @@ fun NavigationRailBar(
                 selectedContentColor = PrimaryColor,
                 unselectedContentColor = Gray,
                 alwaysShowLabel = false,
-                selected = tabNavigator.current == item,
+                selected = true, // tabNavigator.current == item,
                 onClick = { tabNavigator.current = item }
             )
         }

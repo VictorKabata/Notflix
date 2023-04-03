@@ -17,8 +17,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -26,9 +24,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import koin
@@ -36,7 +36,7 @@ import ui.components.ItemNowPlayingMovies
 import ui.components.ItemPopularMovies
 import ui.components.ItemTrendingMovies
 import ui.components.SectionSeparator
-import ui.navigation.NavController
+import ui.screens.details.DetailsScreen
 
 object HomeScreen : Tab {
 
@@ -59,12 +59,11 @@ object HomeScreen : Tab {
     override fun Content() {
         HomeComposableScreen()
     }
-
 }
 
 @Composable
 fun HomeComposableScreen(
-    navController: NavController? = null,
+    navigator: Navigator = LocalNavigator.currentOrThrow,
     viewModel: HomeScreenModel = koin.get()
 ) {
     LaunchedEffect(key1 = viewModel) {
@@ -103,7 +102,11 @@ fun HomeComposableScreen(
                                     .width(300.dp),
                                 movie = movie
                             ) { movie ->
-                                movie.id?.let { navController?.navigate("details/$it") }
+                                movie.id?.let {
+                                    navigator.push(
+                                        DetailsScreen(navigator = navigator, movieId = it)
+                                    )
+                                }
                             }
                         }
                     }
@@ -132,7 +135,11 @@ fun HomeComposableScreen(
                 ) {
                     items(items = it) { item ->
                         ItemTrendingMovies(modifier = Modifier, movie = item) { movie ->
-                            movie.id?.let { navController?.navigate("details/$it") }
+                            movie.id?.let {
+                                    navigator.push(
+                                        DetailsScreen(navigator = navigator, movieId = it)
+                                    )
+                                }
                         }
                     }
                 }
@@ -163,7 +170,11 @@ fun HomeComposableScreen(
                             modifier = Modifier,
                             movie = item
                         ) { movie ->
-                            movie.id?.let { navController?.navigate("details/$it") }
+                            movie.id?.let {
+                                    navigator.push(
+                                        DetailsScreen(navigator = navigator, movieId = it)
+                                    )
+                                }
                         }
                     }
                 }
@@ -191,7 +202,11 @@ fun HomeComposableScreen(
                 ) {
                     items(items = it) { item ->
                         ItemTrendingMovies(modifier = Modifier, movie = item) { movie ->
-                            movie.id?.let { navController?.navigate("details/$it") }
+                            movie.id?.let {
+                                    navigator.push(
+                                        DetailsScreen(navigator = navigator, movieId = it)
+                                    )
+                                }
                         }
                     }
                 }

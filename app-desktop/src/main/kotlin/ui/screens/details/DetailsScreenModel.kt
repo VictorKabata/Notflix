@@ -26,6 +26,16 @@ class DetailsScreenModel constructor(private val movieDetailsRepository: MovieDe
         _movieDetailsState.update { it.copy(isLoading = false, error = exception.message) }
     }
 
+    init {
+        DetailsUiState(
+            isLoading = true,
+            error = null,
+            movieDetails = null,
+            movieCast = null,
+            similarMovies = null
+        )
+    }
+
     fun getMovieDetails(movieId: Int) =
         CoroutineScope(Dispatchers.IO).launch(coroutineExceptionHandler) {
             movieDetailsRepository.fetchMovieDetails(movieId = movieId)

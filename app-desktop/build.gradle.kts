@@ -11,7 +11,7 @@ dependencies {
     implementation(libs.voyager.core)
     implementation(libs.voyager.navigator)
     implementation(libs.voyager.tabNavigator)
-    
+
     implementation(libs.kamel)
 
     testImplementation(kotlin("test"))

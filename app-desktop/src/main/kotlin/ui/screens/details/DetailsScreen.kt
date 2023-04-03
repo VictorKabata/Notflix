@@ -31,6 +31,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.Navigator
 import com.vickikbt.shared.utils.getPopularity
 import com.vickikbt.shared.utils.getRating
 import io.kamel.image.KamelImage
@@ -41,12 +43,20 @@ import kotlinx.coroutines.Job
 import ui.components.ItemMovieCast
 import ui.components.ItemSimilarMovies
 import ui.components.MovieRatingSection
-import ui.navigation.NavController
 import utils.loadImage
+
+class DetailsScreen constructor(private val navigator: Navigator, private val movieId: Int) :
+    Screen {
+
+    @Composable
+    override fun Content() {
+        DetailsComposableScreen(navigator = navigator, movieId = movieId)
+    }
+}
 
 @Composable
 fun DetailsComposableScreen(
-    navController: NavController,
+    navigator: Navigator,
     viewModel: DetailsScreenModel = koin.get(),
     movieId: Int
 ) {
@@ -87,7 +97,7 @@ fun DetailsComposableScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .align(Alignment.Center)
-                        .clickable { navController.navigateUp() },
+                        .clickable { navigator.pop() },
                     resource = painterResource,
                     contentDescription = "Image poster",
                     contentScale = ContentScale.Crop
@@ -96,7 +106,7 @@ fun DetailsComposableScreen(
 
             IconButton(
                 modifier = Modifier.size(42.dp).padding(24.dp).align(Alignment.TopStart),
-                onClick = { navController.navigateUp() }) {
+                onClick = { navigator.pop() }) {
                 Icon(
                     modifier = Modifier.fillMaxSize(),
                     imageVector = Icons.Rounded.ArrowBack,
