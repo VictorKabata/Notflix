@@ -8,34 +8,38 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.vickikbt.shared.domain.models.Actor
+import io.kamel.image.KamelImage
+import io.kamel.image.lazyPainterResource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import ui.theme.TextSecondary
-import utils.AsyncImage
 import utils.loadImage
-import utils.loadImageBitmap
 
 @Composable
 fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
+
     val imageUrl = actor.profilePath?.loadImage()
+
+    val painterResource = lazyPainterResource(imageUrl ?: "") {
+        coroutineContext = Job() + Dispatchers.IO
+    }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        AsyncImage(
+        KamelImage(
             modifier = Modifier.size(90.dp).clip(CircleShape),
-            load = { loadImageBitmap(imageUrl) },
-            painterFor = { remember { BitmapPainter(it) } },
+            resource = painterResource,
             contentDescription = "Cast",
             contentScale = ContentScale.Crop
         )
