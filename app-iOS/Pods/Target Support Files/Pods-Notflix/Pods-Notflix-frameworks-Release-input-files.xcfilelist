@@ -1,4 +1,0 @@
-${PODS_ROOT}/Target Support Files/Pods-Notflix/Pods-Notflix-frameworks.sh
-${BUILT_PRODUCTS_DIR}/KMPNativeCoroutinesAsync/KMPNativeCoroutinesAsync.framework
-${BUILT_PRODUCTS_DIR}/KMPNativeCoroutinesCore/KMPNativeCoroutinesCore.framework
-${PODS_ROOT}/../../shared/build/cocoapods/framework/shared.framework

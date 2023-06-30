@@ -8,3 +8,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+#Cocopods
+app-iOS/Pods/
+app-iOS/Podfile.lock
