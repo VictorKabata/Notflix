@@ -38,7 +38,7 @@ kotlin {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
         // ios.deploymentTarget = "14.1"
-        podfile = project.file("../iOSNotflix/Podfile")
+        podfile = project.file("../app-iOS/Podfile")
 
         framework {
             baseName = "shared"
