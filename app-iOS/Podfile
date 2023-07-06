@@ -1,18 +1,8 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
-
 target 'Notflix' do
-  # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
    platform :ios, '16.0'
    pod 'shared', :path => '../shared'
    pod 'KMPNativeCoroutinesAsync','0.12.2'
-
-
-
-
-
-
  end
 
  post_install do |installer|

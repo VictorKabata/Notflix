@@ -31,13 +31,12 @@ kotlin {
         else -> ::iosX64
     }
     iosTarget("iOS") {}
-    version = "1"
-    cocoapods {
-        // version = "1"
 
+    cocoapods {
+        version = "1.0"
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
-        // ios.deploymentTarget = "14.1"
+        ios.deploymentTarget = "16.0"
         podfile = project.file("../app-iOS/Podfile")
 
         framework {
