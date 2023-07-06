@@ -20,7 +20,7 @@ android {
 }
 
 kotlin {
-    android() {
+    android {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "1.8"
@@ -28,7 +28,7 @@ kotlin {
         }
     }
 
-    jvm() {
+    jvm {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "1.8"
@@ -122,8 +122,8 @@ buildkonfig {
  * contain identical attribute sets. Consider adding an additional attribute to one of the configurations to disambiguate them.
  * Run the 'outgoingVariants' task for more details. See https://docs.gradle.org/8.1.1/userguide/upgrading_version_7.html#unique_attribute_sets
  * for more details.
-*/
- configurations {
+ */
+configurations {
     named("podDebugFrameworkIosFat") {
         attributes {
             attribute(Attribute.of("org.gradle.fatness", String::class.java), "fat")
