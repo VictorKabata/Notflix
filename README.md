@@ -22,6 +22,7 @@ An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlan
 ## Table Of Content
 
 - [Prerequisite](##prerequisite)
+- [Running](##running)
 - [Pros of KMP/KMM](##pros-of-kmpkmm)
 - [App Structure](##app-structure)
   - [1. androidApp](###1-androidapp)
@@ -50,6 +51,20 @@ An android and desktop app built using [Kotlin Multiplatforom](https://kotlinlan
 ## Prerequisite
 
 // ToDo
+
+## Running
+
+Set up the `local.properties` file in the project's root directory (if it doesn't already exist) by adding the following properties:
+
+```properties
+api_key=<YOUR TMDB API KEY>
+```
+
+Run with the following command:
+
+```bash
+./gradlew run
+```
 
 ## Pros of KMP/KMM
 
