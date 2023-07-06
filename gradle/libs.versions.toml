@@ -31,7 +31,7 @@ voyager = "1.0.0-rc03"
 
 #Desktop Versions
 composeDesktop = "1.3.0"
-#kamel = "0.2.2"
+kamel = "0.4.0"
 
 androidxCore = "1.7.0"
 material = "1.6.0"
@@ -109,9 +109,11 @@ kotlinX-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.
 multiplatformSettings-noArg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatformSettings" }
 multiplatformSettings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatformSettings" }
 multiplatformSettings-test = { module = "com.russhwolf:multiplatform-settings-test", version.ref = "multiplatformSettings" }
-voyager-core = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+kamel = { module = "com.alialbaali.kamel:kamel-image", version.ref = "kamel" }
+voyager-core = { module = "cafe.adriel.voyager:voyager-core", version.ref = "voyager" }
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager-tabNavigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
 
 #Android Lib Dependencies
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }

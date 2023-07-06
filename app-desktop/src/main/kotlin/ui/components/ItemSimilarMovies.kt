@@ -9,22 +9,26 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.vickikbt.shared.domain.models.Movie
-import utils.AsyncImage
+import io.kamel.image.KamelImage
+import io.kamel.image.lazyPainterResource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import utils.loadImage
-import utils.loadImageBitmap
 
 @Composable
 fun ItemSimilarMovies(movie: Movie) {
     val imageUrl = movie.posterPath?.loadImage()
+
+    val painterResource = lazyPainterResource(imageUrl ?: "") {
+        coroutineContext = Job() + Dispatchers.IO
+    }
 
     Column {
         Card(
@@ -33,10 +37,9 @@ fun ItemSimilarMovies(movie: Movie) {
                 .height(220.dp),
             shape = RoundedCornerShape(4.dp)
         ) {
-            AsyncImage(
+            KamelImage(
                 modifier = Modifier.fillMaxSize(),
-                load = { loadImageBitmap(imageUrl) },
-                painterFor = { remember { BitmapPainter(it) } },
+                resource = painterResource,
                 contentDescription = "Movie poster",
                 contentScale = ContentScale.Crop
             )

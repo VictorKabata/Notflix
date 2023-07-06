@@ -31,14 +31,13 @@ kotlin {
         else -> ::iosX64
     }
     iosTarget("iOS") {}
-    version = "1"
-    cocoapods {
-        // version = "1"
 
+    cocoapods {
+        version = "1.0"
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
-        // ios.deploymentTarget = "14.1"
-        podfile = project.file("../iOSNotflix/Podfile")
+        ios.deploymentTarget = "16.0"
+        podfile = project.file("../appiOS/Podfile")
 
         framework {
             baseName = "shared"
@@ -72,7 +71,7 @@ kotlin {
             implementation(kotlin("test"))
             implementation(libs.turbine)
             implementation(libs.ktor.mock)
-            implementation(libs.mockk)
+            // implementation(libs.mockk)
             implementation(libs.kotlinX.testResources)
             implementation(libs.kotlinX.coroutines.test)
             implementation(libs.multiplatformSettings.test)
