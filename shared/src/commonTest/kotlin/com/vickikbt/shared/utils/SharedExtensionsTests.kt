@@ -30,7 +30,7 @@ class SharedExtensionsTests {
     }
 
     @Test
-    fun `capitalizeEachWord capitalizes lowercase & uppercase strings`() {
+    fun `capitalizeEachWord capitalizes lowercase and uppercase strings`() {
         val subject = "ThE bIG BroWN wOLF JUMPED ovEr"
         val expected = "The Big Brown Wolf Jumped Over"
 

@@ -16,14 +16,25 @@ android {
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 21
-        targetSdk = compileSdk
     }
 }
 
 kotlin {
-    android()
+    android() {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "1.8"
+            }
+        }
+    }
 
-    jvm()
+    jvm() {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "1.8"
+            }
+        }
+    }
 
     val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
         System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
@@ -38,7 +49,7 @@ kotlin {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
         // ios.deploymentTarget = "14.1"
-        podfile = project.file("../iOSNotflix/Podfile")
+        podfile = project.file("../app-iOS/Podfile")
 
         framework {
             baseName = "shared"
@@ -72,7 +83,6 @@ kotlin {
             implementation(kotlin("test"))
             implementation(libs.turbine)
             implementation(libs.ktor.mock)
-            implementation(libs.mockk)
             implementation(libs.kotlinX.testResources)
             implementation(libs.kotlinX.coroutines.test)
             implementation(libs.multiplatformSettings.test)
@@ -104,5 +114,25 @@ buildkonfig {
             "API_KEY",
             gradleLocalProperties(rootDir).getProperty("api_key") ?: ""
         )
+    }
+}
+
+/**
+ * Avoid error: Consumable configurations with identical capabilities within a project (other than the default configuration)
+ * must have unique attributes, but configuration ':shared:podReleaseFrameworkIosFat' and [configuration ':shared:podReleaseFrameworkIOS']
+ * contain identical attribute sets. Consider adding an additional attribute to one of the configurations to disambiguate them.
+ * Run the 'outgoingVariants' task for more details. See https://docs.gradle.org/8.1.1/userguide/upgrading_version_7.html#unique_attribute_sets
+ * for more details.
+*/
+ configurations {
+    named("podDebugFrameworkIosFat") {
+        attributes {
+            attribute(Attribute.of("org.gradle.fatness", String::class.java), "fat")
+        }
+    }
+    named("podReleaseFrameworkIosFat") {
+        attributes {
+            attribute(Attribute.of("org.gradle.fatness", String::class.java), "fat")
+        }
     }
 }
