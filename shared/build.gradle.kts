@@ -71,7 +71,7 @@ kotlin {
             implementation(kotlin("test"))
             implementation(libs.turbine)
             implementation(libs.ktor.mock)
-            implementation(libs.mockk)
+            // implementation(libs.mockk)
             implementation(libs.kotlinX.testResources)
             implementation(libs.kotlinX.coroutines.test)
             implementation(libs.multiplatformSettings.test)
