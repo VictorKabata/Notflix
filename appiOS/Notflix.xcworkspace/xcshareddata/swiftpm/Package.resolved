@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "shimmer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/joshuajhomann/Shimmer",
+      "state" : {
+        "branch" : "master",
+        "revision" : "2fde687b3f1d9c5409c53da095d3686361e41343"
+      }
+    },
+    {
+      "identity" : "swiftui-cached-async-image",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lorenzofiamingo/swiftui-cached-async-image",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2abb11839f80ebb07a58ac5e146a1da664260c16"
+      }
+    },
+    {
+      "identity" : "uiimagecolors",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jathu/UIImageColors",
+      "state" : {
+        "branch" : "master",
+        "revision" : "f064be8ee0b03158e61135e6c384aee18d7a5414"
+      }
+    }
+  ],
+  "version" : 2
+}
