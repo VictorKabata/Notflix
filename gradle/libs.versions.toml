@@ -15,7 +15,7 @@ koinCore = "3.3.3"
 koinAndroid = "3.3.3"
 koinCompose = "3.4.2"
 kotlinxSerializationJson = "1.5.0"
-kotlinxDateTime = "0.3.2"
+kotlinxDateTime = "0.4.0"
 napier = "2.4.0"
 ktor = "2.2.3"
 sqlDelight = "1.5.5"
@@ -91,7 +91,7 @@ firebase-performance-plugin = { id = "com.google.firebase.firebase-perf", versio
 #Kotlin Multiplatform Lib Dependencies
 kotlinX-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
-kotlinX-serializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerializationJson" }
+kotlinX-serializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktor" }
 ktor-contentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }

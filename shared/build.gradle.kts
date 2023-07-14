@@ -47,12 +47,11 @@ kotlin {
         version = "1.0"
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
-        ios.deploymentTarget = "16.0"
+        ios.deploymentTarget = "14.1"
         podfile = project.file("../appiOS/Podfile")
 
         framework {
             baseName = "shared"
-            isStatic = false
         }
     }
 
@@ -123,7 +122,7 @@ buildkonfig {
  * Run the 'outgoingVariants' task for more details. See https://docs.gradle.org/8.1.1/userguide/upgrading_version_7.html#unique_attribute_sets
  * for more details.
  */
-configurations {
+/*configurations {
     named("podDebugFrameworkIosFat") {
         attributes {
             attribute(Attribute.of("org.gradle.fatness", String::class.java), "fat")
@@ -134,4 +133,4 @@ configurations {
             attribute(Attribute.of("org.gradle.fatness", String::class.java), "fat")
         }
     }
-}
+}*/
