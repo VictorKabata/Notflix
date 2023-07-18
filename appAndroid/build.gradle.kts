@@ -51,6 +51,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.0"
     }
+    namespace = "com.vickikbt.notflix"
 }
 
 dependencies {
