@@ -1,4 +1,4 @@
-package ui.components.preferences
+package com.vickikbt.shared.presentation.ui.components.preferences
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

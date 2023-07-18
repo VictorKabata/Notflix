@@ -38,6 +38,7 @@ class MainActivity : ComponentActivity() {
     private val localeUtil by inject<LocaleManager>()
     private val viewModel by inject<SharedMainPresenter>()
 
+    @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

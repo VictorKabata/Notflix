@@ -1,57 +1,35 @@
-package ui.components
+package com.vickikbt.shared.presentation.ui.components
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.vickikbt.shared.domain.models.Actor
-import io.kamel.image.KamelImage
-import io.kamel.image.lazyPainterResource
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import com.vickikbt.shared.presentation.ui.theme.TextSecondary
-import utils.loadImage
 
 @Composable
 fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
-    val imageUrl = actor.profilePath?.loadImage()
-
-    val painterResource = lazyPainterResource(imageUrl ?: "") {
-        coroutineContext = Job() + Dispatchers.IO
+    /*val painter = rememberImagePainter(
+        data = actor.profilePath?.loadImage()
+    ) {
+        crossfade(true)
+        transformations(CircleCropTransformation())
     }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        verticalArrangement = Arrangement.spacedBy(1.dp)
     ) {
-        Card(
-            modifier = Modifier.size(90.dp),
-            shape = CircleShape
-        ) {
-            KamelImage(
-                modifier = Modifier.fillMaxSize(),
-                resource = painterResource,
-                contentDescription = "Cast",
-                contentScale = ContentScale.Crop
-            )
-        }
+        Image(
+            modifier = Modifier
+                .placeholder(visible = isLoading, color = Color.Gray.copy(.8f))
+                .size(80.dp),
+            painter = painter,
+            contentDescription = stringResource(id = R.string.cast)
+        )
 
         Text(
-            modifier = Modifier.widthIn(max = 90.dp),
-            text = actor.name ?: "Unknown actor",
+            modifier = Modifier
+                .placeholder(visible = isLoading, color = Color.Gray)
+                .width(78.dp),
+            text = actor.name ?: stringResource(R.string.unknown_actor),
             style = MaterialTheme.typography.h6,
             fontSize = 14.sp,
             overflow = TextOverflow.Ellipsis,
@@ -61,8 +39,10 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
         )
 
         Text(
-            modifier = Modifier.widthIn(max = 90.dp),
-            text = actor.character ?: "Unknown character",
+            modifier = Modifier
+                .placeholder(visible = isLoading, color = Color.Gray)
+                .width(77.dp),
+            text = actor.character ?: stringResource(R.string.unknown_character),
             style = MaterialTheme.typography.h4,
             fontSize = 12.sp,
             color = TextSecondary,
@@ -70,5 +50,5 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
             textAlign = TextAlign.Center,
             maxLines = 1
         )
-    }
+    }*/
 }

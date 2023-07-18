@@ -65,9 +65,12 @@ kotlin {
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
 
+            api("io.github.qdsfdhvh:image-loader:1.6.0")
+
             implementation(libs.kotlinX.coroutines)
 
             api(libs.koin.core)
+            implementation(libs.koin.compose)
 
             api(libs.ktor.core)
             api(libs.ktor.cio)

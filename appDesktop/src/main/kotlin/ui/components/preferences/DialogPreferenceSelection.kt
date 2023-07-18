@@ -19,7 +19,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import com.vickikbt.notflix.ui.components.preferences.ItemPreferenceOption
+import com.vickikbt.shared.presentation.ui.components.preferences.ItemPreferenceOption
 import java.util.Locale
 
 @Composable

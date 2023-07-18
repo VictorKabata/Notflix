@@ -78,7 +78,7 @@ dependencies {
 
     // Koin-Dependency injection
     implementation(libs.koin.android)
-    implementation(libs.koin.compose)
+    implementation(libs.koin.androidx.compose)
 
     // Compose Navigation-Navigation between various screens
     implementation(libs.navigation.compose)

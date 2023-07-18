@@ -11,9 +11,10 @@ firebasePerformance = "1.4.2"
 
 # Kotlin Multiplatform Version
 kotlinxCoroutines = "1.6.4"
-koinCore = "3.3.3"
+koinCore = "3.4.2"
+koinCompose = "1.0.3"
 koinAndroid = "3.3.3"
-koinCompose = "3.4.2"
+koinAndroidxCompose="3.4.5"
 kotlinxSerializationJson = "1.5.0"
 kotlinxDateTime = "0.4.0"
 napier = "2.4.0"
@@ -139,7 +140,8 @@ accompanist-materialPlaceHolder = { module = "com.google.accompanist:accompanist
 accompanist-pagerIndicator = { module = "com.google.accompanist:accompanist-pager-indicators", version = "0.22.0-rc" }
 lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
-koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose" }
+koin-androidx-compose={ module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCompose" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 palette = { module = "androidx.palette:palette", version.ref = "palette" }

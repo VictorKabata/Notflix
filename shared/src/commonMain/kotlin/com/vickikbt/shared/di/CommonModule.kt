@@ -16,6 +16,7 @@ import com.vickikbt.shared.presentation.presenters.SharedFavouritesPresenter
 import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
 import com.vickikbt.shared.presentation.presenters.SharedMainPresenter
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
+import com.vickikbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickikbt.shared.utils.getAppLanguage
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
@@ -89,6 +90,8 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     factoryOf(::SharedDetailsPresenter)
     factoryOf(::SharedFavouritesPresenter)
     factoryOf(::SharedSettingsPresenter)
+
+    factoryOf(::HomeViewModel)
 }
 
 expect fun platformModule(): Module

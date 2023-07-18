@@ -27,9 +27,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.vickikbt.notflix.R
 import com.vickikbt.notflix.ui.components.appbars.AppBar
-import com.vickikbt.notflix.ui.components.preferences.DialogPreferenceSelection
-import com.vickikbt.notflix.ui.components.preferences.PreferencesGroup
-import com.vickikbt.notflix.ui.components.preferences.TextPreference
+import com.vickikbt.shared.presentation.ui.components.preferences.DialogPreferenceSelection
+import com.vickikbt.shared.presentation.ui.components.preferences.PreferencesGroup
+import com.vickikbt.shared.presentation.ui.components.preferences.TextPreference
 import com.vickikbt.shared.domain.utils.Constants
 import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
 import com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE

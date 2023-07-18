@@ -3,6 +3,7 @@ package com.vickikbt.notflix.ui.navigation
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.vickikbt.notflix.R
+import com.vickikbt.notflix.ui.navigation.NavigationItem
 
 sealed class NavigationItem(
     val route: String,

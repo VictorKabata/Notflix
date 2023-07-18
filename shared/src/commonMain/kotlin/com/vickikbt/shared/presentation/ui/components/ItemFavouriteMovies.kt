@@ -1,34 +1,35 @@
 package com.vickikbt.shared.presentation.ui.components
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
-import com.vickikbt.shared.domain.models.Movie
+import com.vickikbt.shared.domain.models.MovieDetails
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ItemSimilarMovies(movie: Movie) {
-    /*val painter = rememberImagePainter(data = movie.backdropPath?.loadImage())
+fun ItemFavoriteMovie(movie: MovieDetails, onItemClick: (MovieDetails) -> Unit) {
+    /*val painter = rememberImagePainter(data = movie.posterPath?.loadImage()) {
+        crossfade(true)
+    }
 
-    Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
+    Column {
         Card(
             modifier = Modifier
-                .width(150.dp)
-                .height(220.dp),
-            shape = RoundedCornerShape(4.dp)
+                .fillMaxWidth()
+                .height(240.dp),
+            shape = RoundedCornerShape(4.dp),
+            onClick = { onItemClick(movie) }
         ) {
             Image(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .placeholder(visible = isLoading, color = Color.Gray.copy(.8f)),
+                modifier = Modifier.fillMaxSize(),
                 painter = painter,
-                contentDescription = stringResource(id = com.vickikbt.notflix.R.string.movie_poster),
+                contentDescription = stringResource(id = R.string.movie_poster),
                 contentScale = ContentScale.Crop
             )
         }
 
         Text(
-            modifier = Modifier
-                .width(148.dp)
-                .placeholder(visible = isLoading, color = Color.Gray),
-            text = movie.title ?: stringResource(id = com.vickikbt.notflix.R.string.unknown_movie),
+            modifier = Modifier.width(148.dp),
+            text = movie.title ?: stringResource(id = R.string.unknown_movie),
             style = MaterialTheme.typography.h5,
             fontSize = 14.sp,
             overflow = TextOverflow.Ellipsis,
@@ -39,9 +40,7 @@ fun ItemSimilarMovies(movie: Movie) {
 
         // rating bar
         RatingBar(
-            modifier = Modifier
-                .fillMaxWidth(0.8f)
-                .placeholder(visible = isLoading, color = Color.Gray),
+            modifier = Modifier.fillMaxWidth(0.8f),
             value = movie.voteAverage?.getRating()?.toFloat() ?: 0f,
             numStars = 5,
             size = 15.dp,

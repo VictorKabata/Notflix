@@ -1,18 +1,21 @@
 package com.vickikbt.shared.utils
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.get
+import org.koin.compose.koinInject
 
-object Extensions : KoinComponent {
-    private val settingsRepository: SharedSettingsPresenter = get()
+/**
+ * Append the image url with string to determine the image quality to be loaded
+ */
+@Composable
+fun String.loadImage(): String {
+    val settingsRepository: SharedSettingsPresenter = koinInject()
 
-    fun loadImage(link: String): String {
-        val quality = when (settingsRepository.selectedImageQuality.value) {
-            0 -> "original"
-            else -> "w500"
-        }
-
-        return "https://image.tmdb.org/t/p/$quality/$link"
+    val quality = when (settingsRepository.selectedImageQuality.collectAsState().value) {
+        0 -> "original"
+        else -> "w500"
     }
+
+    return "https://image.tmdb.org/t/p/$quality/$this"
 }
