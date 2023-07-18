@@ -80,6 +80,7 @@ kotlinX-serialization-plugin = { id = "org.jetbrains.kotlin.plugin.serialization
 kmp-NativeCoroutines-plugin = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "kmpNativeCoroutines" }
 sqlDelight-plugin = { id = "com.squareup.sqldelight", version.ref = "sqlDelight" }
 buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 
 googleServices-plugin = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 

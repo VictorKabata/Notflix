@@ -48,7 +48,7 @@ kotlin {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
         ios.deploymentTarget = "14.1"
-        podfile = project.file("../appiOS/Podfile")
+        // podfile = project.file("../appiOS/Podfile")
 
         framework {
             baseName = "shared"
@@ -57,6 +57,13 @@ kotlin {
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
+            // Compose multiplatform
+            /*implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material)
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            implementation(compose.components.resources)*/
+
             implementation(libs.kotlinX.coroutines)
 
             api(libs.koin.core)
