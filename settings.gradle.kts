@@ -19,6 +19,6 @@ pluginManagement {
     }
 }*/
 
-include(":app-android")
+include(":appAndroid")
 include(":shared")
 include(":app-desktop")
