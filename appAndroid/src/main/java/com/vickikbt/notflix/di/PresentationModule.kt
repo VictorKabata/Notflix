@@ -3,7 +3,6 @@ package com.vickikbt.notflix.di
 import com.vickikbt.notflix.ui.activity.MainViewModel
 import com.vickikbt.notflix.ui.screens.details.DetailsViewModel
 import com.vickikbt.notflix.ui.screens.favorites.FavouritesViewModel
-import com.vickikbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickikbt.notflix.ui.screens.settings.SettingsViewModel
 import com.vickikbt.notflix.util.LocaleManager
 import org.koin.androidx.viewmodel.dsl.viewModelOf

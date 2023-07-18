@@ -22,7 +22,6 @@ import org.koin.compose.koinInject
 @ExperimentalMaterialApi
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = koinInject()) {
-
     val scrollState = rememberScrollState()
     // val pagerState = rememberPagerState()
 
@@ -56,7 +55,6 @@ fun HomeScreen(viewModel: HomeViewModel = koinInject()) {
                     .align(Alignment.Center),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-
                 //region Now Playing Movies
                 homeUiState.nowPlayingMovies?.let {
                     ItemNowPlayingMovies(

@@ -43,7 +43,6 @@ fun ItemNowPlayingMovies(
 
     val painter = rememberAsyncImagePainter(movie.backdropPath?.loadImage() ?: "")
 
-
     Box(modifier = modifier.clickable { onItemClick(movie) }) {
         //region Movie Cover Image
         Image(

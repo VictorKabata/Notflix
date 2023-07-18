@@ -39,7 +39,7 @@ fun BottomNavBar(
             contentColor = PrimaryColor
         ) {
             bottomNavItems.iterator().forEach { item ->
-                val isSelected = false //item.route == backStackEntryState.value?.destination?.route
+                val isSelected = false // item.route == backStackEntryState.value?.destination?.route
 
                 BottomNavigationItem(
                     icon = {

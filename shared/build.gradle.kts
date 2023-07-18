@@ -53,6 +53,7 @@ kotlin {
 
         framework {
             baseName = "shared"
+            isStatic = true
         }
     }
 
