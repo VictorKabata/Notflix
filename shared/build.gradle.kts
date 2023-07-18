@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlinX.serialization.plugin)
     alias(libs.plugins.kmp.nativeCoroutines.plugin)
     alias(libs.plugins.buildKonfig)
+    alias(libs.plugins.compose)
 }
 
 android {
@@ -58,11 +59,11 @@ kotlin {
     sourceSets {
         sourceSets["commonMain"].dependencies {
             // Compose multiplatform
-            /*implementation(compose.runtime)
+            implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-            implementation(compose.components.resources)*/
+            implementation(compose.components.resources)
 
             implementation(libs.kotlinX.coroutines)
 

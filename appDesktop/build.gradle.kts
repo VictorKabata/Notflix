@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.jvm)
-    alias(libs.plugins.compose.desktop.plugin)
+    alias(libs.plugins.compose)
+    // alias(libs.plugins.compose.desktop.plugin)
 }
 
 dependencies {
