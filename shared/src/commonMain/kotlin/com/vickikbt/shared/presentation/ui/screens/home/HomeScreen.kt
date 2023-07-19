@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -27,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.presentation.ui.components.ItemNowPlayingMovies
+import com.vickikbt.shared.presentation.ui.components.ItemPopularMovies
 import com.vickikbt.shared.presentation.ui.components.ItemTrendingMovies
 import com.vickikbt.shared.presentation.ui.components.SectionSeparator
 import org.koin.compose.koinInject
@@ -110,15 +112,14 @@ fun HomeScreen(viewModel: HomeViewModel = koinInject()) {
                 }
                 //endregion
 
-                /*//region Popular Movies
-                homeUiState.popularMovies?.let {
+                //region Upcoming Movies
+                homeUiState.upcomingMovies?.let {
                     SectionSeparator(
                         modifier = Modifier
                             .padding(start = 16.dp, end = 16.dp, top = 12.dp)
                             .fillMaxWidth()
                             .wrapContentHeight(),
-                        sectionTitle = stringResource(id = R.string.popular_movies),
-                        // isLoading = homeUiState.isLoading,
+                        sectionTitle = "Upcoming Movies",
                         onItemClick = {
                             // ToDo: OnSectionedClicked-navigate to view all
                         }
@@ -129,9 +130,7 @@ fun HomeScreen(viewModel: HomeViewModel = koinInject()) {
                     LazyRow(
                         contentPadding = PaddingValues(horizontal = 16.dp),
                         horizontalArrangement = Arrangement.spacedBy(14.dp),
-                        modifier = Modifier
-                            .wrapContentHeight()
-                            .placeholder(visible = false, color = Color.Gray)
+                        modifier = Modifier.wrapContentHeight()
                     ) {
                         items(items = it) { item ->
                             ItemPopularMovies(
@@ -139,9 +138,8 @@ fun HomeScreen(viewModel: HomeViewModel = koinInject()) {
                                     .width(300.dp)
                                     .height(245.dp),
                                 movie = item,
-                                isLoading = homeUiState.isLoading,
                                 onClickItem = { movie ->
-                                    navController.navigate("details/${movie.id!!}/${movie.cacheId}")
+                                    // ToDo: Navigate to details
                                 }
                             )
                         }
@@ -149,16 +147,15 @@ fun HomeScreen(viewModel: HomeViewModel = koinInject()) {
                 }
                 //endregion
 
-                //region Upcoming Movies
-                homeUiState.upcomingMovies?.let {
+                //region Popular Movies
+                homeUiState.popularMovies?.let {
                     Column(modifier = Modifier.padding(bottom = 90.dp)) {
                         SectionSeparator(
                             modifier = Modifier
                                 .padding(start = 16.dp, end = 16.dp, top = 12.dp)
                                 .fillMaxWidth()
                                 .wrapContentHeight(),
-                            sectionTitle = stringResource(id = R.string.upcoming_movies),
-                            // isLoading = homeUiState.isLoading,
+                            sectionTitle = "Popular Movies",
                             onItemClick = {
                                 // ToDo: OnSectionedClicked-navigate to view all
                             }
@@ -174,16 +171,15 @@ fun HomeScreen(viewModel: HomeViewModel = koinInject()) {
                             items(items = it) { item ->
                                 ItemTrendingMovies(
                                     movie = item,
-                                    // isLoading = homeUiState.isLoading,
                                     onItemClick = { movie ->
-                                        navController.navigate("details/${movie.id!!}/${movie.cacheId}")
+                                        // ToDo: Navigate to details
                                     }
                                 )
                             }
                         }
                     }
                 }
-                //endregion*/
+                //endregion
             }
         }
     }
