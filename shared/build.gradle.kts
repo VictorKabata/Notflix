@@ -101,7 +101,7 @@ kotlin {
         sourceSets["androidMain"].dependencies {
         }
 
-        sourceSets["androidTest"].dependencies {}
+        // sourceSets["androidTest"].dependencies {}
 
         sourceSets["iOSMain"].dependencies {
         }
