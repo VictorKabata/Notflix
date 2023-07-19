@@ -61,10 +61,11 @@ kotlin {
     sourceSets {
         sourceSets["commonMain"].dependencies {
             // Compose multiplatform
-            implementation(compose.ui)
+            implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
-            implementation(compose.runtime)
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            implementation(compose.components.resources)
 
             api(libs.imageLoader)
 
@@ -106,7 +107,7 @@ kotlin {
         sourceSets["iOSMain"].dependencies {
         }
 
-        sourceSets["iOSTest"].dependencies {}
+        // sourceSets["iOSTest"].dependencies {}
 
         sourceSets["jvmMain"].dependencies {
         }
