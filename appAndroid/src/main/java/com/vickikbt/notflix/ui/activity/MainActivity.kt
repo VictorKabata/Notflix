@@ -22,12 +22,12 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.vickikbt.notflix.R
-import com.vickikbt.notflix.ui.components.BottomNavBar
 import com.vickikbt.notflix.ui.navigation.Navigation
-import com.vickikbt.notflix.ui.navigation.NavigationItem
-import com.vickikbt.notflix.ui.theme.NotflixAndroidTheme
 import com.vickikbt.notflix.util.LocaleManager
 import com.vickikbt.shared.presentation.presenters.SharedMainPresenter
+import com.vickikbt.shared.presentation.ui.components.BottomNavBar
+import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
+import com.vickikbt.shared.presentation.ui.theme.NotflixTheme
 import org.koin.android.ext.android.inject
 
 @ExperimentalAnimationApi
@@ -60,12 +60,7 @@ class MainActivity : ComponentActivity() {
                 language = languageEntry
             )
 
-            /*ChangeSystemBarColorOnNetChange(
-                key = viewModel.isNetworkOn.collectAsState().value,
-                systemUiController = systemUiController,
-            )*/
-
-            NotflixAndroidTheme(darkTheme = isDarkTheme, systemUiController = systemUiController) {
+            NotflixTheme(darkTheme = isDarkTheme) {
                 Surface(color = MaterialTheme.colors.surface) {
                     MainScreen()
                 }
@@ -92,18 +87,9 @@ fun MainScreen() {
     val isTopLevelDestination =
         navController.currentBackStackEntryAsState().value?.destination?.route in topLevelDestinations.map { it.route }
 
-    val backStackEntryState = navController.currentBackStackEntryAsState()
 
     Scaffold(
-        bottomBar = {
-            if (isTopLevelDestination) {
-                BottomNavBar(
-                    navController = navController,
-                    backStackEntryState = backStackEntryState,
-                    bottomNavItems = topLevelDestinations
-                )
-            }
-        }
+        bottomBar = { if (isTopLevelDestination) BottomNavBar(bottomNavItems = topLevelDestinations) }
     ) {
         Navigation(navController = navController)
     }

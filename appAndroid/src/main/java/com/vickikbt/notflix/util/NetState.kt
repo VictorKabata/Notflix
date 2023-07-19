@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.SystemUiController
-import com.vickikbt.notflix.ui.theme.DarkPrimaryColor
-import com.vickikbt.notflix.ui.theme.PrimaryColor
+import com.vickikbt.shared.presentation.ui.theme.DarkPrimaryColor
+import com.vickikbt.shared.presentation.ui.theme.PrimaryColor
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -33,6 +33,7 @@ fun ChangeSystemBarColorOnNetChange(
                     systemUiController.setSystemBarsColor(color = color)
                 }
             }
+
             NetState.NetworkOn -> {}
             NetState.NetworkUnknown -> {}
         }

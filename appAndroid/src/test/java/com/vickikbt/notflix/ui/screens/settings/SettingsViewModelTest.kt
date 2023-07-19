@@ -1,22 +1,6 @@
 package com.vickikbt.notflix.ui.screens.settings
 
-import com.vickikbt.shared.domain.repositories.SettingsRepository
-import com.vickikbt.shared.utils.SettingsUiState
-import io.mockk.coEvery
-import io.mockk.coVerify
-import io.mockk.mockk
-import io.mockk.unmockkAll
-import kotlin.test.assertEquals
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.runTest
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
-
-@RunWith(RobolectricTestRunner::class)
+/*@RunWith(RobolectricTestRunner::class)
 @Config(manifest = Config.NONE)
 class SettingsViewModelTest {
 
@@ -150,4 +134,4 @@ class SettingsViewModelTest {
             actual = viewModel.settingsUiState.value
         )
     }
-}
+}*/

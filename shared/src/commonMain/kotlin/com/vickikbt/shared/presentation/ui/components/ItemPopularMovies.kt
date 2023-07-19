@@ -46,7 +46,6 @@ fun ItemPopularMovies(
     var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
     var dominantSubTextColor by remember { mutableStateOf(defaultDominantTextColor) }
 
-
     Card(
         modifier = modifier.clickable { onClickItem(movie) },
         elevation = 8.dp,

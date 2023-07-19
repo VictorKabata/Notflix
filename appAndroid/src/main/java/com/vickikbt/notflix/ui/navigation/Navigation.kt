@@ -10,11 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.vickikbt.notflix.ui.screens.details.DetailsScreen
-import com.vickikbt.notflix.ui.screens.favorites.FavoritesScreen
-import com.vickikbt.shared.presentation.ui.screens.home.HomeScreen
-import com.vickikbt.notflix.ui.screens.settings.SettingsScreen
 import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
+import com.vickikbt.shared.presentation.ui.screens.home.HomeScreen
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
@@ -33,11 +30,11 @@ fun Navigation(navController: NavHostController) {
         }
 
         composable(route = NavigationItem.Favorites.route) {
-            FavoritesScreen(navController = navController)
+            HomeScreen()
         }
 
         composable(route = NavigationItem.Settings.route) {
-            SettingsScreen(navController = navController)
+            HomeScreen()
         }
 
         composable(
@@ -54,7 +51,7 @@ fun Navigation(navController: NavHostController) {
             val movieID = it.arguments?.getInt("movieId")
             val cacheId = it.arguments?.getInt("cacheId")
             if (movieID != null && cacheId != null) {
-                DetailsScreen(navController = navController, movieId = movieID)
+                HomeScreen()
             }
         }
     }
