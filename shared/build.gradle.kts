@@ -61,13 +61,12 @@ kotlin {
     sourceSets {
         sourceSets["commonMain"].dependencies {
             // Compose multiplatform
-            implementation(compose.runtime)
+            implementation(compose.ui)
             implementation(compose.foundation)
             implementation(compose.material)
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-            implementation(compose.components.resources)
+            implementation(compose.runtime)
 
-            api("io.github.qdsfdhvh:image-loader:1.6.0")
+            api(libs.imageLoader)
 
             implementation(libs.kotlinX.coroutines)
 
