@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     alias(libs.plugins.multiplatform)
-    alias(libs.plugins.nativeCocoapod)
+    // alias(libs.plugins.nativeCocoapod)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlinX.serialization.plugin)
     alias(libs.plugins.kmp.nativeCoroutines.plugin)
@@ -38,14 +38,14 @@ kotlin {
         }
     }
 
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
+    /*val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
         System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
         System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
         else -> ::iosX64
     }
-    iosTarget("iOS") {}
+    iosTarget("iOS") {}*/
 
-    cocoapods {
+    /*cocoapods {
         version = "1.0"
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
@@ -56,7 +56,7 @@ kotlin {
             baseName = "shared"
             isStatic = true
         }
-    }
+    }*/
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
@@ -104,8 +104,8 @@ kotlin {
 
         // sourceSets["androidTest"].dependencies {}
 
-        sourceSets["iOSMain"].dependencies {
-        }
+        /*sourceSets["iOSMain"].dependencies {
+        }*/
 
         // sourceSets["iOSTest"].dependencies {}
 
@@ -135,7 +135,7 @@ buildkonfig {
  * Run the 'outgoingVariants' task for more details. See https://docs.gradle.org/8.1.1/userguide/upgrading_version_7.html#unique_attribute_sets
  * for more details.
  */
-configurations {
+/*configurations {
     named("podDebugFrameworkIosFat") {
         attributes {
             attribute(Attribute.of("org.gradle.fatness", String::class.java), "fat")
@@ -146,4 +146,4 @@ configurations {
             attribute(Attribute.of("org.gradle.fatness", String::class.java), "fat")
         }
     }
-}
+}*/
