@@ -6,7 +6,7 @@ plugins {
     // alias(libs.plugins.nativeCocoapod)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlinX.serialization.plugin)
-    alias(libs.plugins.kmp.nativeCoroutines.plugin)
+    // alias(libs.plugins.kmp.nativeCoroutines.plugin)
     alias(libs.plugins.buildKonfig)
     alias(libs.plugins.compose)
 }
@@ -44,29 +44,15 @@ kotlin {
     }
     iosTarget("iOS") {}*/
 
-    /*cocoapods {
-        version = "1.0"
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
-        ios.deploymentTarget = "14.1"
-        podfile = project.file("../appiOS/Podfile")
-
-        framework {
-            baseName = "shared"
-            isStatic = true
-        }
-    }*/
-
     sourceSets {
         sourceSets["commonMain"].dependencies {
-            // Compose multiplatform
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
 
-            api(libs.imageLoader)
+            implementation(libs.imageLoader)
 
             implementation(libs.kotlinX.coroutines)
 
@@ -103,13 +89,11 @@ kotlin {
 
         // sourceSets["androidTest"].dependencies {}
 
-        /*sourceSets["iOSMain"].dependencies {
-        }*/
+        // sourceSets["iOSMain"].dependencies {}
 
         // sourceSets["iOSTest"].dependencies {}
 
-        sourceSets["jvmMain"].dependencies {
-        }
+        sourceSets["jvmMain"].dependencies {}
 
         sourceSets["jvmTest"].dependencies {}
     }
@@ -126,23 +110,3 @@ buildkonfig {
         )
     }
 }
-
-/**
- * Avoid error: Consumable configurations with identical capabilities within a project (other than the default configuration)
- * must have unique attributes, but configuration ':shared:podReleaseFrameworkIosFat' and [configuration ':shared:podReleaseFrameworkIOS']
- * contain identical attribute sets. Consider adding an additional attribute to one of the configurations to disambiguate them.
- * Run the 'outgoingVariants' task for more details. See https://docs.gradle.org/8.1.1/userguide/upgrading_version_7.html#unique_attribute_sets
- * for more details.
- */
-/*configurations {
-    named("podDebugFrameworkIosFat") {
-        attributes {
-            attribute(Attribute.of("org.gradle.fatness", String::class.java), "fat")
-        }
-    }
-    named("podReleaseFrameworkIosFat") {
-        attributes {
-            attribute(Attribute.of("org.gradle.fatness", String::class.java), "fat")
-        }
-    }
-}*/

@@ -1,6 +1,5 @@
 package com.vickikbt.shared.presentation.presenters
 
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.repositories.FavoritesRepository
 import kotlinx.coroutines.CoroutineScope
@@ -14,7 +13,6 @@ import org.koin.core.component.KoinComponent
 class SharedFavouritesPresenter constructor(private val favouritesRepository: FavoritesRepository) :
     KoinComponent {
 
-    @NativeCoroutineScope
     private val viewModelScope = CoroutineScope(Dispatchers.Default)
 
     private val _favouriteMovies = MutableStateFlow<List<MovieDetails>?>(emptyList())

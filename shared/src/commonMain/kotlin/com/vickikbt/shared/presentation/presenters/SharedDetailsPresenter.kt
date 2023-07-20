@@ -1,6 +1,5 @@
 package com.vickikbt.shared.presentation.presenters
 
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
 import com.vickikbt.shared.domain.models.Cast
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
@@ -19,7 +18,6 @@ class SharedDetailsPresenter constructor(
     private val movieDetailsRepository: MovieDetailsRepository
 ) : KoinComponent {
 
-    @NativeCoroutineScope
     private val viewModelScope = CoroutineScope(Dispatchers.Default)
     private val supervisorJob = MutableStateFlow<Job?>(null)
 

@@ -1,6 +1,5 @@
 package com.vickikbt.shared.presentation.presenters
 
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
 import com.vickikbt.shared.domain.repositories.SettingsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +13,6 @@ import org.koin.core.component.KoinComponent
 class SharedSettingsPresenter constructor(private val settingsRepository: SettingsRepository) :
     KoinComponent {
 
-    @NativeCoroutineScope
     private val viewModelScope = CoroutineScope(Dispatchers.Default)
     private val supervisorJob = MutableStateFlow<Job?>(null)
 
