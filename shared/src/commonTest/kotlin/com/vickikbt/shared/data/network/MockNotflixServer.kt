@@ -1,6 +1,5 @@
 package com.vickikbt.shared.data.network
 
-import com.goncalossilva.resources.Resource
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -20,6 +19,7 @@ import kotlinx.serialization.json.Json
 
 internal class MockNotflixServer {
 
+    /*ToDo
     private var httpStatusCode: HttpStatusCode = HttpStatusCode.OK
 
     private var responseContent: String? = null
@@ -131,5 +131,5 @@ internal class MockNotflixServer {
                 }
             }
         }
-    }
+    }*/
 }

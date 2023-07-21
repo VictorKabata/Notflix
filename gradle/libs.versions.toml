@@ -70,7 +70,7 @@ composeMultiplatform = "1.4.1"
 ktLint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLint" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 gradleVersionUpdates = { id = "com.github.ben-manes.versions", version.ref = "gradleVersionUpdate" }
-kotlinX-testResources = { id = "com.goncalossilva.resources", version.ref = "kotlinxTestResources" }
+#kotlinX-testResources = { id = "com.goncalossilva.resources", version.ref = "kotlinxTestResources" }
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 nativeCocoapod = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -155,7 +155,7 @@ oneBoneToolbar = { module = "me.onebone:toolbar-compose", version.ref = "oneBone
 
 #Tests Lib Dependencies
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
-kotlinX-testResources = { module = "com.goncalossilva:resources", version.ref = "kotlinxTestResources" }
+# kotlinX-testResources = { module = "com.goncalossilva:resources", version.ref = "kotlinxTestResources" }
 kotlinX-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 
 jUnit = { module = "junit:junit" }

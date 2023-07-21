@@ -6,7 +6,6 @@ plugins {
     // alias(libs.plugins.nativeCocoapod)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlinX.serialization.plugin)
-    // alias(libs.plugins.kmp.nativeCoroutines.plugin)
     alias(libs.plugins.buildKonfig)
     alias(libs.plugins.compose)
 }
@@ -20,7 +19,10 @@ android {
     namespace = "com.vickikbt.shared"
 }
 
+@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
+    targetHierarchy.default()
+
     android {
         compilations.all {
             kotlinOptions {
@@ -37,12 +39,20 @@ kotlin {
         }
     }
 
-    /*val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
-        System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
-        else -> ::iosX64
-    }
-    iosTarget("iOS") {}*/
+    /*iosX64()
+    iosArm64()
+    iosSimulatorArm64()*/
+
+    /*cocoapods {
+        summary = "Some description for the Shared Module"
+        homepage = "Link to the Shared Module homepage"
+        version = "1.0"
+        ios.deploymentTarget = "14.1"
+        podfile = project.file("../appiOS/Podfile")
+        framework {
+            baseName = "shared"
+        }
+    }*/
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
@@ -79,7 +89,6 @@ kotlin {
             implementation(kotlin("test"))
             implementation(libs.turbine)
             implementation(libs.ktor.mock)
-            implementation(libs.kotlinX.testResources)
             implementation(libs.kotlinX.coroutines.test)
             implementation(libs.multiplatformSettings.test)
         }

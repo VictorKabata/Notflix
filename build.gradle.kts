@@ -17,7 +17,7 @@ plugins {
     // alias(libs.plugins.ktLint)
     alias(libs.plugins.detekt)
     alias(libs.plugins.gradleVersionUpdates)
-    alias(libs.plugins.kotlinX.testResources)
+    // alias(libs.plugins.kotlinX.testResources)
 }
 
 allprojects {
@@ -38,7 +38,7 @@ subprojects {
         config = files("${project.rootDir}/config/detekt/detekt.yml")
     }
 
-    apply(plugin = "com.goncalossilva.resources")
+    // apply(plugin = "com.goncalossilva.resources")
 
     tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
         checkForGradleUpdate = true

@@ -17,7 +17,7 @@ import kotlinx.coroutines.test.runTest
 @ExperimentalCoroutinesApi
 class MoviesRepositoryImplTest {
 
-    private val mockNotflixServer = MockNotflixServer()
+    /*private val mockNotflixServer = MockNotflixServer()
 
     private lateinit var mockKtorHttpClient: HttpClient
 
@@ -143,7 +143,7 @@ class MoviesRepositoryImplTest {
         }
     }
 
-    /*@Test
+    @Test
     fun `fetchTrendingMovies returns failure on http 500 error`() = runTest {
         mockNotflixServer.throwError(
             httpStatus = HttpStatusCode.InternalServerError,
