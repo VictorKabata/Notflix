@@ -1,4 +1,4 @@
-package com.vickikbt.shared.domain.utils
+package com.vickikbt.shared.utils
 
 import com.russhwolf.settings.JvmPreferencesSettings
 import com.russhwolf.settings.ObservableSettings

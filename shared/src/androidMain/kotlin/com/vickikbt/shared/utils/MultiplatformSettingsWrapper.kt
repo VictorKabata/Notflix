@@ -1,4 +1,4 @@
-package com.vickikbt.shared.domain.utils
+package com.vickikbt.shared.utils
 
 import android.content.Context
 import com.russhwolf.settings.AndroidSettings
