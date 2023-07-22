@@ -31,6 +31,10 @@ kotlin {
         }
     }
 
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
     jvm {
         compilations.all {
             kotlinOptions {
@@ -38,10 +42,6 @@ kotlin {
             }
         }
     }
-
-    /*iosX64()
-    iosArm64()
-    iosSimulatorArm64()*/
 
     /*cocoapods {
         summary = "Some description for the Shared Module"
@@ -62,8 +62,6 @@ kotlin {
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
 
-            implementation(libs.imageLoader)
-
             implementation(libs.kotlinX.coroutines)
 
             api(libs.koin.core)
@@ -77,30 +75,31 @@ kotlin {
 
             implementation(libs.kotlinX.serializationJson)
 
+            implementation(libs.kotlinX.dateTime)
+
             implementation(libs.multiplatformSettings.noArg)
             implementation(libs.multiplatformSettings.coroutines)
 
             api(libs.napier)
 
-            implementation(libs.kotlinX.dateTime)
+            implementation(libs.imageLoader)
         }
 
-        sourceSets["commonTest"].dependencies {
+        /*sourceSets["commonTest"].dependencies {
             implementation(kotlin("test"))
             implementation(libs.turbine)
             implementation(libs.ktor.mock)
             implementation(libs.kotlinX.coroutines.test)
             implementation(libs.multiplatformSettings.test)
-        }
+        }*/
 
-        sourceSets["androidMain"].dependencies {
-        }
+        sourceSets["androidMain"].dependencies {}
 
         // sourceSets["androidTest"].dependencies {}
 
-        // sourceSets["iOSMain"].dependencies {}
+        sourceSets["iosMain"].dependencies {}
 
-        // sourceSets["iOSTest"].dependencies {}
+        sourceSets["iosTest"].dependencies {}
 
         sourceSets["jvmMain"].dependencies {}
 
