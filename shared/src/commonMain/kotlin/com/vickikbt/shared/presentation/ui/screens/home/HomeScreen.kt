@@ -70,14 +70,14 @@ fun HomeScreen(viewModel: HomeViewModel = koinInject()) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 //region Now Playing Movies
-                homeUiState.nowPlayingMovies?.let {
+                /*homeUiState.nowPlayingMovies?.let {
                     ItemNowPlayingMovies(
                         modifier = Modifier.fillMaxSize(),
                         movie = it[0]
                     ) {
                         // ToDo: Navigate to details
                     }
-                }
+                }*/
                 //endregion
 
                 //region Trending Movies

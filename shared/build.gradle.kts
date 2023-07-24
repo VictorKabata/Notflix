@@ -83,6 +83,8 @@ kotlin {
             api(libs.napier)
 
             implementation(libs.imageLoader)
+
+            api(libs.preCompose)
         }
 
         /*sourceSets["commonTest"].dependencies {

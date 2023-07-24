@@ -67,6 +67,7 @@ archTestCore = "2.1.0"
 turbine = "0.12.3"
 composeMultiplatform = "1.4.1"
 kotlinxAtomicfu = "0.18.5"
+preCompose = "1.4.4"
 
 [plugins]
 ktLint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLint" }
@@ -123,6 +124,7 @@ voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.
 voyager-tabNavigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
 imageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "imageLoader" }
 kotlinX-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinxAtomicfu" }
+preCompose = { module = "moe.tlaster:precompose", version.ref = "preCompose" }
 
 #Android Lib Dependencies
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }

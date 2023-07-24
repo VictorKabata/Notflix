@@ -12,8 +12,8 @@ sealed class NavigationItem(
     val icon: ImageVector?
 ) {
 
-    object Home : NavigationItem("home", "Home", Icons.Rounded.Home)
-    object Favorites : NavigationItem("favorites", "Favorites", Icons.Rounded.Favorite)
-    object Settings : NavigationItem("settings", "Settings", Icons.Rounded.Settings)
-    object Details : NavigationItem("details/{movieId}/{cacheId}", "Details", null)
+    object Home : NavigationItem("/home", "Home", Icons.Rounded.Home)
+    object Favorites : NavigationItem("/favorites", "Favorites", Icons.Rounded.Favorite)
+    object Settings : NavigationItem("/settings", "Settings", Icons.Rounded.Settings)
+    object Details : NavigationItem("/detail/{id:[0-9]+}", "Details", null)
 }
