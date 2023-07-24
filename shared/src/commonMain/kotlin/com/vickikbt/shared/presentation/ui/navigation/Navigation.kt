@@ -2,7 +2,10 @@ package com.vickikbt.shared.presentation.ui.navigation
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import com.vickikbt.shared.presentation.ui.screens.details.DetailsScreen
+import com.vickikbt.shared.presentation.ui.screens.favorites.FavoritesScreen
 import com.vickikbt.shared.presentation.ui.screens.home.HomeScreen
+import com.vickikbt.shared.presentation.ui.screens.settings.SettingsScreen
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.Navigator
 
@@ -16,15 +19,15 @@ fun Navigation(navigator: Navigator) {
         }
 
         scene(NavigationItem.Favorites.route) {
-            // HomeScreen()
+            FavoritesScreen()
         }
 
         scene(NavigationItem.Settings.route) {
-            // HomeScreen()
+            SettingsScreen()
         }
 
         scene(NavigationItem.Details.route) {
-            // HomeScreen()
+            DetailsScreen()
         }
 
     }

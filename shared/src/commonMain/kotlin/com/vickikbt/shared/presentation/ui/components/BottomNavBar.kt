@@ -16,12 +16,13 @@ import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
 import com.vickikbt.shared.presentation.ui.theme.Gray
 import com.vickikbt.shared.presentation.ui.theme.PrimaryColor
+import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
 fun BottomNavBar(
     modifier: Modifier = Modifier,
     // backStackEntryState: State<NavBackStackEntry?>,
-    // navController: NavController,
+    navigator: Navigator,
     bottomNavItems: List<NavigationItem>
 ) {
     BottomAppBar(
@@ -39,7 +40,8 @@ fun BottomNavBar(
             contentColor = PrimaryColor
         ) {
             bottomNavItems.iterator().forEach { item ->
-                val isSelected = false // item.route == backStackEntryState.value?.destination?.route
+                val isSelected = false
+                // val isSelected=item.route==navigator.currentEntry.first().route.route
 
                 BottomNavigationItem(
                     icon = {
@@ -54,15 +56,7 @@ fun BottomNavBar(
                     alwaysShowLabel = true,
                     selected = isSelected,
                     onClick = {
-                        /*navController.navigate(item.route) {
-                            navController.graph.startDestinationRoute?.let { route ->
-                                popUpTo(route = route) {
-                                    saveState = true
-                                }
-                            }
-                            launchSingleTop = true
-                            restoreState = true
-                        }*/
+                        navigator.navigate(route = item.route)
                     }
                 )
             }

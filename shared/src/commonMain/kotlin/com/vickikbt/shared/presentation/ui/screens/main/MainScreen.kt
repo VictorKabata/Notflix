@@ -19,7 +19,7 @@ fun MainScreen() {
     )
 
     Scaffold(
-        bottomBar = { BottomNavBar(bottomNavItems = topLevelDestinations) }
+        bottomBar = { BottomNavBar(bottomNavItems = topLevelDestinations, navigator = navigator) }
     ) {
         Navigation(navigator = navigator)
     }
