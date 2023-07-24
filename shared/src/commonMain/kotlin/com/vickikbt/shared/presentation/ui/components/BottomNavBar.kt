@@ -22,7 +22,6 @@ import moe.tlaster.precompose.navigation.Navigator
 @Composable
 fun BottomNavBar(
     modifier: Modifier = Modifier,
-    // backStackEntryState: State<NavBackStackEntry?>,
     navigator: Navigator,
     bottomNavItems: List<NavigationItem>
 ) {
