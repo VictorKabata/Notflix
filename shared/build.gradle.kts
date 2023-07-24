@@ -51,27 +51,28 @@ kotlin {
         podfile = project.file("../appiOS/Podfile")
         framework {
             baseName = "shared"
+            isStatic=true
         }
     }
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material)
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-            implementation(compose.components.resources)
+            api(compose.runtime)
+            api(compose.foundation)
+            api(compose.material)
+
+            implementation(libs.kotlinX.atomicfu)
 
             implementation(libs.kotlinX.coroutines)
-
-            api(libs.koin.core)
-            implementation(libs.koin.compose)
 
             api(libs.ktor.core)
             api(libs.ktor.cio)
             implementation(libs.ktor.contentNegotiation)
             implementation(libs.ktor.json)
             implementation(libs.ktor.logging)
+
+            api(libs.koin.core)
+            implementation(libs.koin.compose)
 
             implementation(libs.kotlinX.serializationJson)
 

@@ -8,6 +8,7 @@ googleServices = "4.3.14"
 firebaseAppDistribution = "3.0.3"
 firebaseCrashlytics = "2.9.2"
 firebasePerformance = "1.4.2"
+nativeCocoapod = "1.9.0"
 
 # Kotlin Multiplatform Version
 kotlinxCoroutines = "1.6.4"
@@ -65,6 +66,7 @@ kotlinTest = "1.1.51"
 archTestCore = "2.1.0"
 turbine = "0.12.3"
 composeMultiplatform = "1.4.1"
+kotlinxAtomicfu = "0.18.5"
 
 [plugins]
 ktLint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLint" }
@@ -117,6 +119,7 @@ voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voy
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 voyager-tabNavigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
 imageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "imageLoader" }
+kotlinX-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinxAtomicfu" }
 
 #Android Lib Dependencies
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
