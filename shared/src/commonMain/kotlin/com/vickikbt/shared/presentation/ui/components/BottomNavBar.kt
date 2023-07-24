@@ -9,6 +9,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
@@ -40,8 +41,10 @@ fun BottomNavBar(
             contentColor = PrimaryColor
         ) {
             bottomNavItems.iterator().forEach { item ->
-                val isSelected = false
-                // val isSelected=item.route==navigator.currentEntry.first().route.route
+
+                val currentDestination =
+                    navigator.currentEntry.collectAsState(null).value?.route?.route
+                val isSelected = item.route == currentDestination
 
                 BottomNavigationItem(
                     icon = {
