@@ -21,7 +21,6 @@ import com.vickikbt.shared.utils.getAppLanguage
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.addDefaultResponseValidation
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
@@ -42,7 +41,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
      * API client via constructor injection
      */
     single {
-        HttpClient(engineFactory = CIO) {
+        HttpClient {
             expectSuccess = true
             addDefaultResponseValidation()
 

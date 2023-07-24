@@ -103,6 +103,9 @@ ktor-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = 
 ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 ktor-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
+ktor-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+ktor-java = { module = "io.ktor:ktor-client-java", version.ref = "ktor" }
+ktor-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 sqlDelight = { module = "com.squareup.sqldelight:runtime", version.ref = "sqlDelight" }
 sqlDelight-coroutine = { module = "com.squareup.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
 sqlDelight-android = { module = "com.squareup.sqldelight:android-driver", version.ref = "sqlDelight" }

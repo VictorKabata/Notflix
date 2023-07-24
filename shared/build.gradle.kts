@@ -66,7 +66,6 @@ kotlin {
             implementation(libs.kotlinX.coroutines)
 
             api(libs.ktor.core)
-            api(libs.ktor.cio)
             implementation(libs.ktor.contentNegotiation)
             implementation(libs.ktor.json)
             implementation(libs.ktor.logging)
@@ -94,15 +93,21 @@ kotlin {
             implementation(libs.multiplatformSettings.test)
         }*/
 
-        sourceSets["androidMain"].dependencies {}
+        sourceSets["androidMain"].dependencies {
+            implementation(libs.ktor.android)
+        }
 
         // sourceSets["androidTest"].dependencies {}
 
-        sourceSets["iosMain"].dependencies {}
+        sourceSets["iosMain"].dependencies {
+            implementation(libs.ktor.darwin)
+        }
 
         sourceSets["iosTest"].dependencies {}
 
-        sourceSets["jvmMain"].dependencies {}
+        sourceSets["jvmMain"].dependencies {
+            implementation(libs.ktor.java)
+        }
 
         sourceSets["jvmTest"].dependencies {}
     }
