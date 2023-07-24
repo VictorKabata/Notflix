@@ -4,6 +4,7 @@ import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
 import com.vickikbt.shared.presentation.presenters.SharedFavouritesPresenter
 import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
+import com.vickikbt.shared.presentation.ui.screens.home.HomeViewModel
 import org.koin.core.Koin
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
@@ -20,13 +21,14 @@ fun initKoin(enableNetworkLogs: Boolean = true, appDeclaration: KoinAppDeclarati
 
 fun KoinApplication.Companion.start(): KoinApplication = initKoin { }
 
-val Koin.homePresenter: SharedHomePresenter
+val Koin.homeViewModel: HomeViewModel
     get() = get()
-val Koin.mainPresenter: SharedHomePresenter
+
+/*val Koin.mainPresenter: SharedHomePresenter
     get() = get()
 val Koin.detailsPresenter: SharedDetailsPresenter
     get() = get()
 val Koin.settingsPresenter: SharedSettingsPresenter
     get() = get()
 val Koin.favoritesPresenter: SharedFavouritesPresenter
-    get() = get()
+    get() = get()*/

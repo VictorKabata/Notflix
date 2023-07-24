@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C8319802A6F21CE00A8F64D /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C83197F2A6F21CE00A8F64D /* ComposeView.swift */; };
+		1C8319822A6F22D600A8F64D /* Koin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8319812A6F22D600A8F64D /* Koin.swift */; };
 		1CE0FB0C2A6A8B4F00B26932 /* NotflixApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE0FB0B2A6A8B4F00B26932 /* NotflixApp.swift */; };
 		1CE0FB0E2A6A8B4F00B26932 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE0FB0D2A6A8B4F00B26932 /* ContentView.swift */; };
 		1CE0FB102A6A8B5100B26932 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CE0FB0F2A6A8B5100B26932 /* Assets.xcassets */; };
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C83197F2A6F21CE00A8F64D /* ComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeView.swift; sourceTree = "<group>"; };
+		1C8319812A6F22D600A8F64D /* Koin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Koin.swift; sourceTree = "<group>"; };
 		1CE0FB082A6A8B4F00B26932 /* Notflix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notflix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CE0FB0B2A6A8B4F00B26932 /* NotflixApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotflixApp.swift; sourceTree = "<group>"; };
 		1CE0FB0D2A6A8B4F00B26932 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,6 +109,8 @@
 				1CE0FB0D2A6A8B4F00B26932 /* ContentView.swift */,
 				1CE0FB0F2A6A8B5100B26932 /* Assets.xcassets */,
 				1CE0FB112A6A8B5100B26932 /* Preview Content */,
+				1C83197F2A6F21CE00A8F64D /* ComposeView.swift */,
+				1C8319812A6F22D600A8F64D /* Koin.swift */,
 			);
 			path = Notflix;
 			sourceTree = "<group>";
@@ -140,7 +146,6 @@
 				F43A1A4F78675B8E4189135B /* Pods-Notflix.debug.xcconfig */,
 				BBBC4C8A43B1D42D922F9C90 /* Pods-Notflix.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -308,7 +313,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C8319802A6F21CE00A8F64D /* ComposeView.swift in Sources */,
 				1CE0FB0E2A6A8B4F00B26932 /* ContentView.swift in Sources */,
+				1C8319822A6F22D600A8F64D /* Koin.swift in Sources */,
 				1CE0FB0C2A6A8B4F00B26932 /* NotflixApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
