@@ -3,7 +3,7 @@ import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 
 plugins {
     alias(libs.plugins.multiplatform)
-    // alias(libs.plugins.nativeCocoapod)
+    alias(libs.plugins.nativeCocoapod)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlinX.serialization.plugin)
     alias(libs.plugins.buildKonfig)
@@ -43,7 +43,7 @@ kotlin {
         }
     }
 
-    /*cocoapods {
+    cocoapods {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
         version = "1.0"
@@ -52,7 +52,7 @@ kotlin {
         framework {
             baseName = "shared"
         }
-    }*/
+    }
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
