@@ -51,17 +51,17 @@ kotlin {
         podfile = project.file("../appiOS/Podfile")
         framework {
             baseName = "shared"
-            isStatic=true
+            isStatic = true
         }
     }
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
-            api(compose.runtime)
-            api(compose.foundation)
-            api(compose.material)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material)
 
-            implementation(libs.kotlinX.atomicfu)
+            implementation(libs.kotlinX.atomicfu) // ToDo: Remove later
 
             implementation(libs.kotlinX.coroutines)
 
