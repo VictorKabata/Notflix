@@ -43,7 +43,7 @@ fun HomeScreen(viewModel: HomeViewModel = koinInject()) {
         viewModel.fetchNowPlayingMovies()
         viewModel.fetchTrendingMovies()
         viewModel.fetchUpcomingMovies()
-        // viewModel.fetchPopularMovies()
+        viewModel.fetchPopularMovies()
     }
 
     val homeUiState = viewModel.homeUiState.collectAsState().value

@@ -59,7 +59,7 @@ fun ItemPopularMovies(
                     .align(Alignment.Center),
                 alignment = Alignment.Center,
                 contentScale = ContentScale.Crop,
-                painter = rememberAsyncImagePainter(movie.posterPath?.loadImage() ?: ""),
+                painter = rememberAsyncImagePainter(movie.backdropPath?.loadImage() ?: ""),
                 contentDescription = null
             )
             //endregion
