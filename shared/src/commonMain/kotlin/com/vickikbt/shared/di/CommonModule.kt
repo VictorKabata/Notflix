@@ -16,6 +16,7 @@ import com.vickikbt.shared.presentation.presenters.SharedFavouritesPresenter
 import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
 import com.vickikbt.shared.presentation.presenters.SharedMainPresenter
 import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
+import com.vickikbt.shared.presentation.ui.screens.details.DetailsViewModel
 import com.vickikbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickikbt.shared.presentation.ui.screens.settings.SettingsViewModel
 import com.vickikbt.shared.utils.getAppLanguage
@@ -92,6 +93,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     factoryOf(::SharedSettingsPresenter)
 
     factoryOf(::HomeViewModel)
+    factoryOf(::DetailsViewModel)
     factoryOf(::SettingsViewModel)
 }
 

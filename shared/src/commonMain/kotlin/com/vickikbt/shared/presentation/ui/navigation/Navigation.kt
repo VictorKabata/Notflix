@@ -8,6 +8,7 @@ import com.vickikbt.shared.presentation.ui.screens.home.HomeScreen
 import com.vickikbt.shared.presentation.ui.screens.settings.SettingsScreen
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.Navigator
+import moe.tlaster.precompose.navigation.path
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -26,8 +27,10 @@ fun Navigation(navigator: Navigator) {
             SettingsScreen()
         }
 
-        scene(NavigationItem.Details.route) {
-            DetailsScreen()
+        scene(NavigationItem.Details.route) { backStackEntry ->
+            val id = backStackEntry.path<Int>("id") ?: 0
+
+            DetailsScreen(navigator = navigator, movieId = id)
         }
 
     }
