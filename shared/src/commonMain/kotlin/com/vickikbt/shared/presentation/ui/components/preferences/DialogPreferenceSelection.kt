@@ -7,7 +7,7 @@ fun DialogPreferenceSelection(
     showDialog: Boolean,
     title: String,
     currentValue: String? = null,
-    labels: Array<String>,
+    labels: List<String>,
     onNegativeClick: () -> Unit,
     onOptionSelected: (Int) -> Unit
 ) {

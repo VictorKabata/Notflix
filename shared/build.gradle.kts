@@ -29,6 +29,8 @@ kotlin {
                 jvmTarget = "1.8"
             }
         }
+
+        sourceSets["commonMain"].resources.srcDirs("src/commonMain/resources")
     }
 
     iosX64()
@@ -53,6 +55,10 @@ kotlin {
             baseName = "shared"
             isStatic = true
         }
+
+        extraSpecAttributes["resources"] =
+            "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
+
     }
 
     sourceSets {
@@ -60,6 +66,8 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            implementation(compose.components.resources)
 
             implementation(libs.kotlinX.atomicfu) // ToDo: Remove later
 
