@@ -21,11 +21,11 @@ plugins {
 }
 
 allprojects {
-    /*repositories {
+    repositories {
         google()
         mavenCentral()
         maven(url = "https://jitpack.io")
-    }*/
+    }
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {
