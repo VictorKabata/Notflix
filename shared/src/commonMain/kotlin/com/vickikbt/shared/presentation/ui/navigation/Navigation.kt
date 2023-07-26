@@ -16,7 +16,7 @@ fun Navigation(navigator: Navigator) {
     NavHost(navigator = navigator, initialRoute = NavigationItem.Home.route) {
 
         scene(NavigationItem.Home.route) {
-            HomeScreen()
+            HomeScreen(navigator = navigator)
         }
 
         scene(NavigationItem.Favorites.route) {
@@ -28,9 +28,9 @@ fun Navigation(navigator: Navigator) {
         }
 
         scene(NavigationItem.Details.route) { backStackEntry ->
-            val id = backStackEntry.path<Int>("id") ?: 0
-
-            DetailsScreen(navigator = navigator, movieId = id)
+            backStackEntry.path<Int>("id")?.let { movieId ->
+                DetailsScreen(navigator = navigator, movieId = movieId)
+            }
         }
 
     }

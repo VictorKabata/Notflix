@@ -27,15 +27,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.vickikbt.shared.presentation.ui.components.ItemNowPlayingMovies
 import com.vickikbt.shared.presentation.ui.components.ItemPopularMovies
 import com.vickikbt.shared.presentation.ui.components.ItemTrendingMovies
 import com.vickikbt.shared.presentation.ui.components.SectionSeparator
+import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
 
 @ExperimentalMaterialApi
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = koinInject()) {
+fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
     val scrollState = rememberScrollState()
     // val pagerState = rememberPagerState()
 
@@ -88,7 +88,6 @@ fun HomeScreen(viewModel: HomeViewModel = koinInject()) {
                         .wrapContentHeight(),
                     sectionTitle = "Trending Movies",
                     onItemClick = {
-                        // ToDo: OnSectionedClicked-navigate to view all
                     }
                 )
 
@@ -105,7 +104,7 @@ fun HomeScreen(viewModel: HomeViewModel = koinInject()) {
                         ItemTrendingMovies(
                             movie = item,
                             onItemClick = { movie ->
-                                // ToDo: Navigate to details
+                                navigator.navigate("/details/${movie.id}")
                             }
                         )
                     }
@@ -139,7 +138,7 @@ fun HomeScreen(viewModel: HomeViewModel = koinInject()) {
                                     .height(245.dp),
                                 movie = item,
                                 onClickItem = { movie ->
-                                    // ToDo: Navigate to details
+                                    navigator.navigate("/details/${movie.id}")
                                 }
                             )
                         }
@@ -172,7 +171,7 @@ fun HomeScreen(viewModel: HomeViewModel = koinInject()) {
                                 ItemTrendingMovies(
                                     movie = item,
                                     onItemClick = { movie ->
-                                        // ToDo: Navigate to details
+                                        navigator.navigate("/details/${movie.id}")
                                     }
                                 )
                             }
