@@ -4,7 +4,11 @@ import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -48,10 +52,8 @@ sealed class RatingBarStyle(open val activeColor: Color) {
     ) : RatingBarStyle(activeColor)
 }
 
-//For ui testing
 val StarRatingKey = SemanticsPropertyKey<Float>("StarRating")
 var SemanticsPropertyReceiver.starRating by StarRatingKey
-
 
 /**
  * @param value is current selected rating count
@@ -85,7 +87,6 @@ internal fun RatingBar(
     val direction = LocalLayoutDirection.current
     val density = LocalDensity.current
 
-
     val paddingInPx = remember {
         with(density) { spaceBetween.toPx() }
     }
@@ -95,25 +96,16 @@ internal fun RatingBar(
 
     Row(modifier = modifier
         .onSizeChanged { rowSize = it.toSize() }
-        .pointerInput(
-            Unit
-        ) {
-            //handling dragging events
+        .pointerInput(Unit) {
             detectHorizontalDragGestures(
                 onDragEnd = {
-                    if (isIndicator || hideInactiveStars)
-                        return@detectHorizontalDragGestures
+                    if (isIndicator || hideInactiveStars) return@detectHorizontalDragGestures
                     onRatingChanged(lastDraggedValue)
                 },
-                onDragCancel = {
-
-                },
-                onDragStart = {
-
-                },
+                onDragCancel = {},
+                onDragStart = {},
                 onHorizontalDrag = { change, _ ->
-                    if (isIndicator || hideInactiveStars)
-                        return@detectHorizontalDragGestures
+                    if (isIndicator || hideInactiveStars) return@detectHorizontalDragGestures
                     change.consume()
                     val dragX = change.position.x.coerceIn(-1f, rowSize.width)
                     var calculatedStars =
@@ -123,8 +115,8 @@ internal fun RatingBar(
                             numOfStars, stepSize, starSizeInPx
                         )
 
-                    if (direction == LayoutDirection.Rtl)
-                        calculatedStars = numOfStars - calculatedStars
+                    if (direction == LayoutDirection.Rtl) calculatedStars =
+                        numOfStars - calculatedStars
                     onValueChange(calculatedStars)
                     lastDraggedValue = calculatedStars
                 }
@@ -154,7 +146,6 @@ fun ComposeStars(
     painterEmpty: Painter?,
     painterFilled: Painter?
 ) {
-
     val ratingPerStar = 1f
     var remainingRating = value
 
@@ -177,9 +168,7 @@ fun ComposeStars(
                     fraction
                 }
             }
-            if (hideInactiveStars && starRating == 0.0f)
-                break
-
+            if (hideInactiveStars && starRating == 0.0f) break
             RatingStar(
                 fraction = starRating,
                 style = style,

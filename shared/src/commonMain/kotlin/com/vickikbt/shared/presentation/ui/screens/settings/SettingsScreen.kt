@@ -94,7 +94,6 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
                         currentValue = imageQualityLabel
                     )
                 }
-
             }
         }
     }

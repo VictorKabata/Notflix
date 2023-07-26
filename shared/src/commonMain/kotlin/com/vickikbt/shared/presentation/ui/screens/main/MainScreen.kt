@@ -10,7 +10,6 @@ import moe.tlaster.precompose.navigation.rememberNavigator
 
 @Composable
 fun MainScreen() {
-
     val navigator = rememberNavigator()
 
     val topLevelDestinations = listOf(

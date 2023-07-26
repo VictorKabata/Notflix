@@ -14,7 +14,6 @@ import moe.tlaster.precompose.navigation.path
 @Composable
 fun Navigation(navigator: Navigator) {
     NavHost(navigator = navigator, initialRoute = NavigationItem.Home.route) {
-
         scene(NavigationItem.Home.route) {
             HomeScreen(navigator = navigator)
         }
@@ -32,6 +31,5 @@ fun Navigation(navigator: Navigator) {
                 DetailsScreen(navigator = navigator, movieId = movieId)
             }
         }
-
     }
 }

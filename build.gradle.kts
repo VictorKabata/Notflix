@@ -40,7 +40,6 @@ allprojects {
             include("**/kotlin/**")
         }
     }
-
 }
 
 subprojects {

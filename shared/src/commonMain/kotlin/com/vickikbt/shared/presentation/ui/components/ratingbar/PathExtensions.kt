@@ -33,7 +33,6 @@ fun Path.addStar(
         y = centerY - sin(totalAngle) * innerRadius
         lineTo(x.toFloat(), y.toFloat())
 
-
         // Line going outwards from innerCircle to outerCircle
         totalAngle += degreesPerSection / 2
         x = centerX + cos(totalAngle) * outerRadius

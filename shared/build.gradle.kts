@@ -49,7 +49,6 @@ kotlin {
 
         extraSpecAttributes["resources"] =
             "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
-
     }
 
     sourceSets {

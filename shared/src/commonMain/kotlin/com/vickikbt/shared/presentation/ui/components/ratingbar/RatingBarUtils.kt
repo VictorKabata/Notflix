@@ -9,10 +9,7 @@ object RatingBarUtils {
         stepSize: StepSize,
         starSizeInPx: Float,
     ): Float {
-
-        if(draggedX<=0){
-            return 0f
-        }
+        if (draggedX <= 0) return 0f
 
         val starWidthWithRightPadding = starSizeInPx + (2 * horizontalPaddingInPx)
         val halfStarWidth = starSizeInPx / 2
