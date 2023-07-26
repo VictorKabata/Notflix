@@ -24,7 +24,7 @@ import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
 import com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE
 import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
 import koin
-import com.vickikbt.shared.presentation.ui.components.appBars.AppBar
+import com.vickikbt.shared.presentation.ui.components.appbars.AppBar
 import ui.components.preferences.DialogPreferenceSelection
 import ui.components.preferences.PreferencesGroup
 import ui.components.preferences.TextPreference

@@ -1,4 +1,4 @@
-package com.vickikbt.shared.presentation.ui.components.appBars
+package com.vickikbt.shared.presentation.ui.components.appbars
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
