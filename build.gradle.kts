@@ -27,7 +27,7 @@ allprojects {
         maven(url = "https://jitpack.io")
     }
 
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    /*tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {
             jvmTarget = "11"
             // allWarningsAsErrors = true
@@ -35,7 +35,7 @@ allprojects {
                 "-opt-in=kotlin.RequiresOptIn",
             )
         }
-    }
+    }*/
 
     //ToDo: Add ktLint
 

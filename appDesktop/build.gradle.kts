@@ -1,7 +1,10 @@
 plugins {
     alias(libs.plugins.jvm)
     alias(libs.plugins.compose)
-    // alias(libs.plugins.compose.desktop.plugin)
+}
+
+kotlin {
+    jvmToolchain(17)
 }
 
 dependencies {

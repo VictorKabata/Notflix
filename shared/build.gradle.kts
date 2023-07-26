@@ -23,23 +23,13 @@ android {
 kotlin {
     targetHierarchy.default()
 
-    android {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = JavaVersion.VERSION_17.toString()
-            }
-        }
-
-        sourceSets["commonMain"].resources.srcDirs("src/commonMain/resources")
-    }
+    android()
 
     iosX64()
     iosArm64()
     iosSimulatorArm64()
 
-    jvm {
-        jvmToolchain(11)
-    }
+    jvm()
 
     cocoapods {
         summary = "Some description for the Shared Module"
