@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.*
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -65,22 +64,21 @@ var SemanticsPropertyReceiver.starRating by StarRatingKey
  * @param style the different style applied to the Rating Bar.
  * @param onRatingChanged A function to be called when the click or drag is released and rating value is passed
  */
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun RatingBar(
     value: Float,
     modifier: Modifier = Modifier,
     numOfStars: Int = 5,
     size: Dp = 32.dp,
-    spaceBetween: Dp = 6.dp,
+    spaceBetween: Dp = 1.2.dp,
     isIndicator: Boolean = false,
     stepSize: StepSize = StepSize.ONE,
     hideInactiveStars: Boolean = false,
     style: RatingBarStyle = RatingBarStyle.Default,
     painterEmpty: Painter? = null,
     painterFilled: Painter? = null,
-    onValueChange: (Float) -> Unit,
-    onRatingChanged: (Float) -> Unit
+    onValueChange: (Float) -> Unit = {},
+    onRatingChanged: (Float) -> Unit = {}
 ) {
     var rowSize by remember { mutableStateOf(Size.Zero) }
     var lastDraggedValue by remember { mutableStateOf(0f) }
@@ -143,69 +141,6 @@ internal fun RatingBar(
             painterFilled
         )
     }
-}
-
-@Composable
-fun RatingBar(
-    value: Float,
-    modifier: Modifier = Modifier,
-    numOfStars: Int = 5,
-    size: Dp = 32.dp,
-    spaceBetween: Dp = 6.dp,
-    isIndicator: Boolean = false,
-    stepSize: StepSize = StepSize.ONE,
-    hideInactiveStars: Boolean = false,
-    style: RatingBarStyle,
-    onValueChange: (Float) -> Unit,
-    onRatingChanged: (Float) -> Unit
-) {
-    RatingBar(
-        value = value,
-        modifier = modifier,
-        numOfStars = numOfStars,
-        size = size,
-        spaceBetween = spaceBetween,
-        isIndicator = isIndicator,
-        stepSize = stepSize,
-        hideInactiveStars = hideInactiveStars,
-        style = style,
-        painterEmpty = null,
-        painterFilled = null,
-        onValueChange = onValueChange,
-        onRatingChanged = onRatingChanged
-    )
-}
-
-@Composable
-fun RatingBar(
-    value: Float,
-    modifier: Modifier = Modifier,
-    numOfStars: Int = 5,
-    size: Dp = 32.dp,
-    spaceBetween: Dp = 6.dp,
-    isIndicator: Boolean = false,
-    stepSize: StepSize = StepSize.ONE,
-    hideInactiveStars: Boolean = false,
-    painterEmpty: Painter,
-    painterFilled: Painter,
-    onValueChange: (Float) -> Unit,
-    onRatingChanged: (Float) -> Unit
-) {
-    RatingBar(
-        value = value,
-        modifier = modifier,
-        numOfStars = numOfStars,
-        size = size,
-        spaceBetween = spaceBetween,
-        isIndicator = isIndicator,
-        stepSize = stepSize,
-        hideInactiveStars = hideInactiveStars,
-        style = RatingBarStyle.Default,
-        painterEmpty = painterEmpty,
-        painterFilled = painterFilled,
-        onValueChange = onValueChange,
-        onRatingChanged = onRatingChanged
-    )
 }
 
 @Composable

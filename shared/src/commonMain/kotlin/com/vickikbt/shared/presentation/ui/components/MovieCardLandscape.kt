@@ -11,9 +11,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -33,7 +35,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberAsyncImagePainter
 import com.vickikbt.shared.domain.models.Movie
+import com.vickikbt.shared.presentation.ui.components.ratingbar.RatingBar
+import com.vickikbt.shared.presentation.ui.components.ratingbar.RatingBarStyle
+import com.vickikbt.shared.presentation.ui.components.ratingbar.StepSize
 import com.vickikbt.shared.utils.capitalizeEachWord
+import com.vickikbt.shared.utils.getRating
 import com.vickikbt.shared.utils.getReleaseDate
 import com.vickikbt.shared.utils.loadImage
 
@@ -44,8 +50,8 @@ fun MovieCardLandscape(
     movie: Movie,
     onClickItem: (Movie) -> Unit
 ) {
-    var dominantTextColor by remember { mutableStateOf(Color.Black) }
-    var dominantSubTextColor by remember { mutableStateOf(Color.LightGray) }
+    var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
+    var dominantSubTextColor by remember { mutableStateOf(dominantTextColor) }
 
     Card(
         modifier = modifier.clickable { onClickItem(movie) },
@@ -109,33 +115,24 @@ fun MovieCardLandscape(
                     horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    /* ToDo: Rating bar
                     RatingBar(
-                        modifier = Modifier.placeholder(
-                            visible = isLoading,
-                            color = Color.Gray,
-                            shape = RoundedCornerShape(0.dp)
-                        ),
+                        modifier = Modifier,
                         value = movie.voteAverage?.getRating()?.toFloat() ?: 0f,
-                        numStars = 5,
+                        numOfStars = 5,
                         size = 15.dp,
                         stepSize = StepSize.HALF,
                         isIndicator = true,
-                        ratingBarStyle = RatingBarStyle.Normal,
-                        activeColor = Golden,
-                        inactiveColor = Gray,
-                        onValueChange = {},
-                        onRatingChanged = {}
-                    )*/
+                        style = RatingBarStyle.Fill()
+                    )
 
                     movie.releaseDate?.let {
-                        /*Divider(
+                        Divider(
                             modifier = Modifier
                                 .padding(horizontal = 4.dp)
                                 .width(1.dp)
                                 .height(13.dp),
                             color = dominantSubTextColor,
-                        )*/
+                        )
 
                         Text(
                             modifier = Modifier,
