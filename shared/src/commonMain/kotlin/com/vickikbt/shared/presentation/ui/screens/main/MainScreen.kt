@@ -2,6 +2,7 @@ package com.vickikbt.shared.presentation.ui.screens.main
 
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import com.vickikbt.shared.presentation.ui.components.BottomNavBar
 import com.vickikbt.shared.presentation.ui.navigation.Navigation
 import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
@@ -18,8 +19,15 @@ fun MainScreen() {
         NavigationItem.Settings
     )
 
+    val isTopLevelDestination =
+        navigator.currentEntry.collectAsState(null).value?.route?.route in topLevelDestinations.map { it.route }
+
     Scaffold(
-        bottomBar = { BottomNavBar(bottomNavItems = topLevelDestinations, navigator = navigator) }
+        bottomBar = {
+            if (isTopLevelDestination) {
+                BottomNavBar(bottomNavItems = topLevelDestinations, navigator = navigator)
+            }
+        }
     ) {
         Navigation(navigator = navigator)
     }

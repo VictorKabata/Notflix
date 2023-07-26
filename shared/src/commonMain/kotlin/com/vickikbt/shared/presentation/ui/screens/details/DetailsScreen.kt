@@ -64,9 +64,7 @@ fun DetailsScreen(
                 topBar = {
                     DetailsAppBar(modifier = Modifier.fillMaxWidth(),
                         movieDetails = movieDetailsState.movieDetails,
-                        onNavigationIconClick = {
-                            navigator.goBack()
-                        },
+                        onNavigationIconClick = { navigator.goBack() },
                         onShareIconClick = {},
                         onFavoriteIconClick = {})
                 }) {
