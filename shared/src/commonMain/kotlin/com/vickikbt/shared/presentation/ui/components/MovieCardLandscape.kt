@@ -1,6 +1,7 @@
 package com.vickikbt.shared.presentation.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
@@ -36,15 +39,13 @@ import com.vickikbt.shared.utils.loadImage
 
 @ExperimentalMaterialApi
 @Composable
-fun ItemPopularMovies(
+fun MovieCardLandscape(
     modifier: Modifier = Modifier,
     movie: Movie,
     onClickItem: (Movie) -> Unit
 ) {
-    val defaultDominantTextColor = MaterialTheme.colors.onSurface
-    var dominantColor by remember { mutableStateOf(Color.Transparent) }
-    var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
-    var dominantSubTextColor by remember { mutableStateOf(defaultDominantTextColor) }
+    var dominantTextColor by remember { mutableStateOf(Color.Black) }
+    var dominantSubTextColor by remember { mutableStateOf(Color.LightGray) }
 
     Card(
         modifier = modifier.clickable { onClickItem(movie) },
@@ -65,7 +66,6 @@ fun ItemPopularMovies(
             //endregion
 
             //region Fading Edge
-            /* ToDo: Implement fading edge
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -74,12 +74,12 @@ fun ItemPopularMovies(
                         Brush.verticalGradient(
                             listOf(
                                 Color.Transparent,
-                                if (isLoading) Color.Transparent else dominantColor
+                                Color.DarkGray
                             )
                         )
                     )
                     .align(Alignment.BottomCenter)
-            )*/
+            )
             //endregion
 
             Column(

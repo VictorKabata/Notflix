@@ -27,8 +27,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.vickikbt.shared.presentation.ui.components.ItemPopularMovies
-import com.vickikbt.shared.presentation.ui.components.ItemTrendingMovies
+import com.vickikbt.shared.presentation.ui.components.MovieCardLandscape
+import com.vickikbt.shared.presentation.ui.components.MovieCardPortrait
 import com.vickikbt.shared.presentation.ui.components.SectionSeparator
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
@@ -101,7 +101,7 @@ fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     items(items = homeUiState.trendingMovies ?: emptyList()) { item ->
-                        ItemTrendingMovies(
+                        MovieCardPortrait(
                             movie = item,
                             onItemClick = { movie ->
                                 navigator.navigate("/details/${movie.id}")
@@ -132,7 +132,7 @@ fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
                         modifier = Modifier.wrapContentHeight()
                     ) {
                         items(items = it) { item ->
-                            ItemPopularMovies(
+                            MovieCardLandscape(
                                 modifier = Modifier
                                     .width(300.dp)
                                     .height(245.dp),
@@ -168,7 +168,7 @@ fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
                             horizontalArrangement = Arrangement.spacedBy(10.dp),
                         ) {
                             items(items = it) { item ->
-                                ItemTrendingMovies(
+                                MovieCardPortrait(
                                     movie = item,
                                     onItemClick = { movie ->
                                         navigator.navigate("/details/${movie.id}")

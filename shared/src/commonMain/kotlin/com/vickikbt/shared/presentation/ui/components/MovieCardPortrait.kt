@@ -26,7 +26,7 @@ import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.utils.loadImage
 
 @Composable
-fun ItemTrendingMovies(
+fun MovieCardPortrait(
     movie: Movie,
     onItemClick: (Movie) -> Unit
 ) {
@@ -68,5 +68,5 @@ fun ItemTrendingMovies(
 
 @Composable
 private fun Preview() {
-    ItemTrendingMovies(movie = Movie(title = "Cocaine Bear"), onItemClick = {})
+    MovieCardPortrait(movie = Movie(title = "Cocaine Bear"), onItemClick = {})
 }
