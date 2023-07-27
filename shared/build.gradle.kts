@@ -83,6 +83,7 @@ kotlin {
             implementation(libs.imageLoader)
 
             api(libs.preCompose)
+            api(libs.preCompose.viewmodel)
         }
 
         /*sourceSets["commonTest"].dependencies {
