@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -27,7 +28,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
     }
 
     fun fetchNowPlayingMovies() = viewModelScope.launch(coroutineExceptionHandler) {
-        moviesRepository.fetchNowPlayingMovies().collect { moviesResult ->
+        moviesRepository.fetchNowPlayingMovies().collectLatest { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
             }.onSuccess { movies ->
@@ -39,7 +40,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
     }
 
     fun fetchTrendingMovies() = viewModelScope.launch(coroutineExceptionHandler) {
-        moviesRepository.fetchTrendingMovies().collect { moviesResult ->
+        moviesRepository.fetchTrendingMovies().collectLatest { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
             }.onSuccess { movies ->
@@ -51,7 +52,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
     }
 
     fun fetchPopularMovies() = viewModelScope.launch(coroutineExceptionHandler) {
-        moviesRepository.fetchPopularMovies().collect { moviesResult ->
+        moviesRepository.fetchPopularMovies().collectLatest { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
             }.onSuccess { movies ->
@@ -63,7 +64,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
     }
 
     fun fetchUpcomingMovies() = viewModelScope.launch(coroutineExceptionHandler) {
-        moviesRepository.fetchUpcomingMovies().collect { moviesResult ->
+        moviesRepository.fetchUpcomingMovies().collectLatest { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
             }.onSuccess { movies ->
