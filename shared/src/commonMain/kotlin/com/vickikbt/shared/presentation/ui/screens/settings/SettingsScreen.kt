@@ -26,10 +26,12 @@ import com.vickikbt.shared.presentation.ui.components.appbars.AppBar
 import com.vickikbt.shared.presentation.ui.components.preferences.DialogPreferenceSelection
 import com.vickikbt.shared.presentation.ui.components.preferences.PreferencesGroup
 import com.vickikbt.shared.presentation.ui.components.preferences.TextPreference
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.koin.compose.koinInject
 
-@OptIn(ExperimentalResourceApi::class)
+private val themeLabels = listOf("Light", "Dark", "System Default")
+private val languageLabels = listOf("English", "Spanish", "French", "German")
+private val imageQualityLabels = listOf("High Quality", "Low Quality")
+
 @Composable
 fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
     LaunchedEffect(key1 = viewModel) {
@@ -43,10 +45,6 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
     val showThemeDialog = remember { mutableStateOf(false) }
     val showLanguageDialog = remember { mutableStateOf(false) }
     val showImageQualityDialog = remember { mutableStateOf(false) }
-
-    val themeLabels = listOf("Dark", "Light", "System Default")
-    val languageLabels = listOf("English", "French")
-    val imageQualityLabels = listOf("High Quality", "Low Quality")
 
     val themeLabel = themeLabels[settingsUiState.selectedTheme]
     val languageLabel = languageLabels[settingsUiState.selectedLanguage]
@@ -112,7 +110,7 @@ private fun ChangeTheme(
         showDialog = showDialog.value,
         title = "Change theme",
         currentValue = currentValue ?: "Default",
-        labels = listOf(),
+        labels = themeLabels,
         onNegativeClick = { showDialog.value = false }
     ) { theme ->
         viewModel.savePreferenceSelection(key = KEY_THEME, selection = theme)
@@ -129,7 +127,7 @@ private fun ChangeLanguage(
         showDialog = showDialog.value,
         title = "Change language",
         currentValue = currentValue ?: "EN",
-        labels = listOf(),
+        labels = languageLabels,
         onNegativeClick = { showDialog.value = false }
     ) { language ->
         viewModel.savePreferenceSelection(key = KEY_LANGUAGE, selection = language)
@@ -146,7 +144,7 @@ private fun ChangeImageQuality(
         showDialog = showDialog.value,
         title = "Image quality",
         currentValue = currentValue ?: "Default",
-        labels = listOf(),
+        labels = imageQualityLabels,
         onNegativeClick = { showDialog.value = false }
     ) { imageQuality ->
         viewModel.savePreferenceSelection(
