@@ -4,6 +4,10 @@ import com.vickikbt.shared.domain.models.Actor
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.domain.models.MovieDetails
 
+data class MainUiState(
+    val appTheme: Int? = 0
+)
+
 data class HomeUiState(
     val isLoading: Boolean = true,
     val error: String? = null,

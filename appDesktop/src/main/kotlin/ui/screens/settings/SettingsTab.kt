@@ -55,7 +55,6 @@ object SettingsTab : Tab {
 @Composable
 fun SettingsComposableScreen(viewModel: SettingsScreenModel = koin.get()) {
     val currentTheme = viewModel.settingsUiState.collectAsState().value.selectedTheme
-    val currentLanguage = viewModel.settingsUiState.collectAsState().value.selectedLanguage
     val currentImageQuality =
         viewModel.settingsUiState.collectAsState().value.selectedImageQuality
 
@@ -67,13 +66,6 @@ fun SettingsComposableScreen(viewModel: SettingsScreenModel = koin.get()) {
         0 -> "Light Theme"
         1 -> "Dark Theme"
         else -> "System Default"
-    }
-    val languageLabel = when (currentLanguage) {
-        0 -> "English"
-        1 -> "Spanish"
-        2 -> "French"
-        3 -> "German"
-        else -> "English"
     }
     val imageQualityLabel = when (currentImageQuality) {
         0 -> "High Quality"
@@ -102,19 +94,6 @@ fun SettingsComposableScreen(viewModel: SettingsScreenModel = koin.get()) {
                             viewModel = viewModel,
                             showDialog = showThemeDialog,
                             currentValue = themeLabel
-                        )
-
-                        TextPreference(
-                            icon = painterResource("ic_language.svg"),
-                            title = "Change Language",
-                            subTitle = languageLabel,
-                            onClick = { showLanguageDialog.value = !showLanguageDialog.value }
-                        )
-
-                        if (showLanguageDialog.value) ChangeLanguage(
-                            viewModel = viewModel,
-                            showDialog = showLanguageDialog,
-                            currentValue = languageLabel
                         )
 
                         TextPreference(

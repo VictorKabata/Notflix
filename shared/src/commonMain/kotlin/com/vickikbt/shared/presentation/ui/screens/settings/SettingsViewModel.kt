@@ -36,14 +36,6 @@ class SettingsViewModel constructor(private val settingsRepository: SettingsRepo
         }
     }
 
-    fun getLanguagePreference() = viewModelScope.launch(coroutineExceptionHandler) {
-        settingsRepository.getLanguagePreference().collect { language ->
-            language?.let {
-                _settingsUiState.update { it.copy(selectedLanguage = language, isLoading = false) }
-            }
-        }
-    }
-
     fun getImageQualityPreference() = viewModelScope.launch(coroutineExceptionHandler) {
         settingsRepository.getImageQualityPreference().collect { imageQuality ->
             imageQuality?.let {

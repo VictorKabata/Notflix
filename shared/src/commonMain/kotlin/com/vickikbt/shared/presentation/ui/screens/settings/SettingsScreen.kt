@@ -9,7 +9,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Image
-import androidx.compose.material.icons.rounded.Language
 import androidx.compose.material.icons.rounded.Lightbulb
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -20,7 +19,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
-import com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE
 import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
 import com.vickikbt.shared.presentation.ui.components.appbars.AppBar
 import com.vickikbt.shared.presentation.ui.components.preferences.DialogPreferenceSelection
@@ -29,25 +27,22 @@ import com.vickikbt.shared.presentation.ui.components.preferences.TextPreference
 import org.koin.compose.koinInject
 
 private val themeLabels = listOf("Light", "Dark", "System Default")
-private val languageLabels = listOf("English", "Spanish", "French", "German")
 private val imageQualityLabels = listOf("High Quality", "Low Quality")
 
 @Composable
 fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
+
     LaunchedEffect(key1 = viewModel) {
         viewModel.getThemePreference()
-        viewModel.getLanguagePreference()
         viewModel.getImageQualityPreference()
     }
 
     val settingsUiState = viewModel.settingsUiState.collectAsState().value
 
     val showThemeDialog = remember { mutableStateOf(false) }
-    val showLanguageDialog = remember { mutableStateOf(false) }
     val showImageQualityDialog = remember { mutableStateOf(false) }
 
     val themeLabel = themeLabels[settingsUiState.selectedTheme]
-    val languageLabel = languageLabels[settingsUiState.selectedLanguage]
     val imageQualityLabel = imageQualityLabels[settingsUiState.selectedImageQuality]
 
     Scaffold(topBar = { AppBar("Settings") }) {
@@ -67,19 +62,6 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
                         viewModel = viewModel,
                         showDialog = showThemeDialog,
                         currentValue = themeLabel
-                    )
-
-                    TextPreference(
-                        icon = Icons.Rounded.Language,
-                        title = "Change language",
-                        subTitle = languageLabel,
-                        onClick = { showLanguageDialog.value = !showLanguageDialog.value }
-                    )
-
-                    if (showLanguageDialog.value) ChangeLanguage(
-                        viewModel = viewModel,
-                        showDialog = showLanguageDialog,
-                        currentValue = languageLabel
                     )
 
                     TextPreference(
@@ -114,23 +96,6 @@ private fun ChangeTheme(
         onNegativeClick = { showDialog.value = false }
     ) { theme ->
         viewModel.savePreferenceSelection(key = KEY_THEME, selection = theme)
-    }
-}
-
-@Composable
-private fun ChangeLanguage(
-    viewModel: SettingsViewModel,
-    showDialog: MutableState<Boolean>,
-    currentValue: String?
-) {
-    DialogPreferenceSelection(
-        showDialog = showDialog.value,
-        title = "Change language",
-        currentValue = currentValue ?: "EN",
-        labels = languageLabels,
-        onNegativeClick = { showDialog.value = false }
-    ) { language ->
-        viewModel.savePreferenceSelection(key = KEY_LANGUAGE, selection = language)
     }
 }
 

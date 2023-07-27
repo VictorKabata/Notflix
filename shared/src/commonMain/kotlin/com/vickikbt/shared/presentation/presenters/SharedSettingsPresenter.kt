@@ -27,7 +27,6 @@ class SharedSettingsPresenter constructor(private val settingsRepository: Settin
 
     init {
         getThemePreference()
-        getLanguagePreference()
         getImageQualityPreference()
     }
 
@@ -46,19 +45,6 @@ class SharedSettingsPresenter constructor(private val settingsRepository: Settin
         val job = viewModelScope.launch {
             settingsRepository.getThemePreference().collectLatest {
                 _selectedTheme.value = it ?: 2
-            }
-        }
-
-        supervisorJob.value = job
-        job.invokeOnCompletion {
-            supervisorJob.value = null
-        }
-    }
-
-    private fun getLanguagePreference() {
-        val job = viewModelScope.launch {
-            settingsRepository.getLanguagePreference().collectLatest {
-                _selectedLanguage.value = it ?: 0
             }
         }
 

@@ -7,8 +7,6 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringArrayResource
@@ -17,7 +15,6 @@ import com.vickikbt.notflix.R
 import com.vickikbt.notflix.util.LocaleManager
 import com.vickikbt.shared.presentation.presenters.SharedMainPresenter
 import com.vickikbt.shared.presentation.ui.screens.main.MainScreen
-import com.vickikbt.shared.presentation.ui.theme.NotflixTheme
 import moe.tlaster.precompose.lifecycle.PreComposeActivity
 import moe.tlaster.precompose.lifecycle.setContent
 import org.koin.android.ext.android.inject
@@ -50,11 +47,7 @@ class MainActivity : PreComposeActivity() {
                 language = languageEntry
             )
 
-            NotflixTheme(darkTheme = isDarkTheme) {
-                Surface(color = MaterialTheme.colors.surface) {
-                    MainScreen()
-                }
-            }
+            MainScreen()
         }
     }
 }

@@ -25,7 +25,6 @@ class SharedMainPresenter constructor(private val settingsRepository: SettingsRe
 
     init {
         getAppTheme()
-        getAppLanguage()
     }
 
     private fun getAppTheme() {
@@ -33,23 +32,6 @@ class SharedMainPresenter constructor(private val settingsRepository: SettingsRe
             try {
                 settingsRepository.getThemePreference().collectLatest { theme ->
                     _appTheme.value = theme ?: 2
-                }
-            } catch (e: Exception) {
-                Napier.e("ERROR getting theme: ${e.message}")
-            }
-        }
-
-        supervisorJob.value = job
-        job.invokeOnCompletion {
-            supervisorJob.value = null
-        }
-    }
-
-    private fun getAppLanguage() {
-        val job = viewModelScope.launch {
-            try {
-                settingsRepository.getLanguagePreference().collectLatest { language ->
-                    _appLanguage.value = language ?: 0
                 }
             } catch (e: Exception) {
                 Napier.e("ERROR getting theme: ${e.message}")

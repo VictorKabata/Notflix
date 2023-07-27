@@ -34,14 +34,6 @@ class SettingsScreenModel constructor(private val settingsRepository: SettingsRe
         }
     }
 
-    fun getLanguagePreference() = CoroutineScope(Dispatchers.IO).launch(coroutineExceptionHandler) {
-        settingsRepository.getLanguagePreference().collect { language ->
-            language?.let {
-                _settingsUiState.update { it.copy(selectedLanguage = language, isLoading = false) }
-            }
-        }
-    }
-
     fun getImageQualityPreference() =
         CoroutineScope(Dispatchers.IO).launch(coroutineExceptionHandler) {
             settingsRepository.getImageQualityPreference().collect { imageQuality ->
