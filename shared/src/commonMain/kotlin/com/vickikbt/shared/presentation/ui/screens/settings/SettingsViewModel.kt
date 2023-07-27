@@ -17,7 +17,7 @@ class SettingsViewModel constructor(private val settingsRepository: SettingsRepo
     private val _settingsUiState = MutableStateFlow(SettingsUiState(isLoading = true))
     val settingsUiState = _settingsUiState.asStateFlow()
 
-    private val viewModelScope = CoroutineScope(Dispatchers.Default)
+    private val viewModelScope = CoroutineScope(Dispatchers.Main)
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         _settingsUiState.update { it.copy(isLoading = false, error = exception.message) }
