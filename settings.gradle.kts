@@ -21,4 +21,3 @@ pluginManagement {
 
 include(":appAndroid")
 include(":shared")
-include(":appDesktop")

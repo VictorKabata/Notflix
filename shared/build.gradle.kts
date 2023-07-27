@@ -20,8 +20,6 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    jvm()
-
     cocoapods {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
@@ -93,11 +91,6 @@ kotlin {
 
         sourceSets["iosTest"].dependencies {}
 
-        sourceSets["jvmMain"].dependencies {
-            implementation(libs.ktor.java)
-        }
-
-        sourceSets["jvmTest"].dependencies {}
     }
 }
 

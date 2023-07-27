@@ -17,7 +17,7 @@ fun MainScreen(viewModel: MainViewModel = koinInject()) {
 
     val appUiState = viewModel.mainUiState.collectAsState().value
 
-    val isDarkTheme = appUiState.appTheme != 0
+    val isDarkTheme = appUiState.selectedTheme != 0
 
     NotflixTheme(darkTheme = isDarkTheme) {
         Surface(color = MaterialTheme.colors.surface) {

@@ -2,7 +2,7 @@ package com.vickikbt.shared.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
+import com.vickikbt.shared.presentation.ui.screens.settings.SettingsViewModel
 import org.koin.compose.koinInject
 
 /**
@@ -10,12 +10,13 @@ import org.koin.compose.koinInject
  */
 @Composable
 fun String.loadImage(): String {
-    val settingsRepository: SharedSettingsPresenter = koinInject()
+    val settingsRepository: SettingsViewModel = koinInject()
 
-    val quality = when (settingsRepository.selectedImageQuality.collectAsState().value) {
-        0 -> "original"
-        else -> "w500"
-    }
+    val quality =
+        when (settingsRepository.settingsUiState.collectAsState().value.selectedImageQuality) {
+            0 -> "original"
+            else -> "w500"
+        }
 
     return "https://image.tmdb.org/t/p/$quality/$this"
 }

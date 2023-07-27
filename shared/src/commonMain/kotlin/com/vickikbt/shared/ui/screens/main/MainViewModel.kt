@@ -30,7 +30,7 @@ class MainViewModel(private val settingsRepository: SettingsRepository) : KoinCo
     private fun getAppTheme() = viewModelScope.launch(coroutineExceptionHandler) {
         try {
             settingsRepository.getThemePreference().collectLatest { theme ->
-                _mainUiState.update { it.copy(appTheme = theme) }
+                _mainUiState.update { it.copy(selectedTheme = theme) }
             }
         } catch (e: Exception) {
             Napier.e("ERROR getting theme: ${e.message}")

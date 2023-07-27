@@ -11,16 +11,10 @@ import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.repositories.SettingsRepository
 import com.vickikbt.shared.domain.utils.Constants.BASE_URL
 import com.vickikbt.shared.domain.utils.Constants.URL_PATH
-import com.vickikbt.shared.presentation.presenters.SharedDetailsPresenter
-import com.vickikbt.shared.presentation.presenters.SharedFavouritesPresenter
-import com.vickikbt.shared.presentation.presenters.SharedHomePresenter
-import com.vickikbt.shared.presentation.presenters.SharedMainPresenter
-import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import com.vickikbt.shared.presentation.ui.screens.details.DetailsViewModel
 import com.vickikbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickikbt.shared.presentation.ui.screens.main.MainViewModel
 import com.vickikbt.shared.presentation.ui.screens.settings.SettingsViewModel
-import com.vickikbt.shared.utils.getAppLanguage
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
@@ -54,7 +48,6 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
                     host = BASE_URL
                     path(URL_PATH)
                     parameters.append("api_key", BuildKonfig.API_KEY)
-                    parameters.append("language", getAppLanguage(settingsPresenter = get()))
                 }
             }
 
@@ -86,12 +79,6 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(httpClient = get()) }
     single<FavoritesRepository> { FavoritesRepositoryImpl(httpClient = get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(observableSettings = get()) }
-
-    factoryOf(::SharedMainPresenter)
-    factoryOf(::SharedHomePresenter)
-    factoryOf(::SharedDetailsPresenter)
-    factoryOf(::SharedFavouritesPresenter)
-    factoryOf(::SharedSettingsPresenter)
 
     factoryOf(::MainViewModel)
     factoryOf(::HomeViewModel)
