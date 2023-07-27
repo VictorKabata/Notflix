@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -23,7 +24,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun TextPreference(
     modifier: Modifier = Modifier,
-    icon: Painter,
+    icon: ImageVector? = null,
     title: String,
     subTitle: String? = null,
     onClick: () -> Unit
@@ -35,13 +36,15 @@ fun TextPreference(
             .clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(
-            modifier = Modifier
-                .padding(vertical = 24.dp, horizontal = 16.dp)
-                .weight(2f),
-            painter = icon,
-            contentDescription = ""
-        )
+        icon?.let {
+            Icon(
+                modifier = Modifier
+                    .padding(vertical = 24.dp, horizontal = 16.dp)
+                    .weight(2f),
+                imageVector = it,
+                contentDescription = ""
+            )
+        }
 
         Column(
             modifier = Modifier

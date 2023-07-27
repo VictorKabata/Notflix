@@ -7,6 +7,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Image
+import androidx.compose.material.icons.rounded.Language
+import androidx.compose.material.icons.rounded.Lightbulb
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -23,7 +27,6 @@ import com.vickikbt.shared.presentation.ui.components.preferences.DialogPreferen
 import com.vickikbt.shared.presentation.ui.components.preferences.PreferencesGroup
 import com.vickikbt.shared.presentation.ui.components.preferences.TextPreference
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.koinInject
 
 @OptIn(ExperimentalResourceApi::class)
@@ -56,7 +59,7 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
 
                 PreferencesGroup(title = "Personalisation") {
                     TextPreference(
-                        icon = painterResource("drawables/ic_theme.xml"),
+                        icon = Icons.Rounded.Lightbulb,
                         title = "Change theme",
                         subTitle = themeLabel,
                         onClick = { showThemeDialog.value = !showThemeDialog.value }
@@ -69,7 +72,7 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
                     )
 
                     TextPreference(
-                        icon = painterResource("drawables/ic_language.xml"),
+                        icon = Icons.Rounded.Language,
                         title = "Change language",
                         subTitle = languageLabel,
                         onClick = { showLanguageDialog.value = !showLanguageDialog.value }
@@ -82,7 +85,7 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
                     )
 
                     TextPreference(
-                        icon = painterResource("drawables/ic_image_quality.xml"),
+                        icon = Icons.Rounded.Image,
                         title = "Image quality",
                         subTitle = imageQualityLabel,
                         onClick = { showImageQualityDialog.value = !showImageQualityDialog.value }
