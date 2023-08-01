@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.vickikbt.shared.presentation.ui.components.MovieRatingSection
 import com.vickikbt.shared.ui.components.ItemMovieCast
-import com.vickikbt.shared.ui.components.ItemSimilarMovies
+import com.vickikbt.shared.ui.components.MovieCardPortrait
 import com.vickikbt.shared.ui.components.appbars.DetailsAppBar
 import com.vickikbt.shared.utils.getPopularity
 import com.vickikbt.shared.utils.getRating
@@ -143,7 +143,7 @@ fun DetailsScreen(
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
                             items(items = it) { movie ->
-                                ItemSimilarMovies(
+                                MovieCardPortrait(
                                     movie = movie,
                                     onItemClick = {
                                         // ToDo: Clicked similar movie

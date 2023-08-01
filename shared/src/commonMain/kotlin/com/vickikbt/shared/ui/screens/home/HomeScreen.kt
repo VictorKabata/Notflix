@@ -30,7 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.presentation.ui.components.MovieCardLandscape
-import com.vickikbt.shared.ui.components.MovieCardPortrait
+import com.vickikbt.shared.ui.components.MovieCardPortraitCompact
 import com.vickikbt.shared.presentation.ui.components.SectionSeparator
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
@@ -116,7 +116,7 @@ fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         items(items = it) { item ->
-                            MovieCardPortrait(
+                            MovieCardPortraitCompact(
                                 movie = item,
                                 onItemClick = { movie ->
                                     navigator.navigate("/details/${movie.id}")
@@ -184,7 +184,7 @@ fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
                             horizontalArrangement = Arrangement.spacedBy(10.dp),
                         ) {
                             items(items = it) { item ->
-                                MovieCardPortrait(
+                                MovieCardPortraitCompact(
                                     movie = item,
                                     onItemClick = { movie ->
                                         navigator.navigate("/details/${movie.id}")

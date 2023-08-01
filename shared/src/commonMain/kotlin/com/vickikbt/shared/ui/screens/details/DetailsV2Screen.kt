@@ -28,7 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.vickikbt.shared.ui.components.ItemSimilarMovies
+import com.vickikbt.shared.ui.components.MovieCardPortrait
 import com.vickikbt.shared.presentation.ui.components.MovieRatingSection
 import com.vickikbt.shared.presentation.ui.screens.details.DetailsViewModel
 import com.vickikbt.shared.ui.components.ItemMovieCast
@@ -154,7 +154,7 @@ fun DetailsV2Screen(
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
                             items(items = it) { movie ->
-                                ItemSimilarMovies(movie = movie, onItemClick = {})
+                                MovieCardPortrait(movie = movie, onItemClick = {})
                             }
                         }
                     }

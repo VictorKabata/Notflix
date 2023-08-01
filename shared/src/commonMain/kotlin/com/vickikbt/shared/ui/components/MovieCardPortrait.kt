@@ -1,74 +1,35 @@
 package com.vickikbt.shared.ui.components
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.sizeIn
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.seiko.imageloader.rememberAsyncImagePainter
 import com.vickikbt.shared.domain.models.Movie
-import com.vickikbt.shared.utils.loadImage
+import com.vickikbt.shared.ui.components.ratingbar.RatingBar
+import com.vickikbt.shared.ui.components.ratingbar.RatingBarStyle
+import com.vickikbt.shared.ui.components.ratingbar.StepSize
+import com.vickikbt.shared.utils.getRating
 
 @Composable
-fun MovieCardPortrait(
-    modifier: Modifier = Modifier,
-    movie: Movie,
-    onItemClick: (Movie) -> Unit
-) {
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(3.dp)
-    ) {
-        Card(
-            modifier = Modifier
-                .width(150.dp)
-                .fillMaxHeight()
-                .clickable { onItemClick(movie) },
-            elevation = 8.dp,
-            shape = RoundedCornerShape(4.dp)
-        ) {
-            Image(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(220.dp)
-                    .sizeIn(minHeight = 30.dp),
-                painter = rememberAsyncImagePainter(movie.posterPath?.loadImage() ?: ""),
-                alignment = Alignment.Center,
-                contentScale = ContentScale.Crop,
-                contentDescription = "Trending movie poster"
-            )
-        }
+fun MovieCardPortrait(movie: Movie, onItemClick: (Movie) -> Unit) {
 
-        Text(
-            modifier = Modifier.width(145.dp),
-            text = movie.title ?: "Unknown movie",
-            style = MaterialTheme.typography.h5,
-            color = MaterialTheme.colors.onSurface,
-            fontSize = 14.sp,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            textAlign = TextAlign.Start
+    Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
+
+        MovieCardPortraitCompact(
+            movie = movie,
+            onItemClick = { onItemClick(movie) })
+
+        // rating bar
+        RatingBar(
+            modifier = Modifier.fillMaxWidth(0.8f),
+            value = movie.voteAverage?.getRating()?.toFloat() ?: 0f,
+            numOfStars = 5,
+            size = 15.dp,
+            stepSize = StepSize.HALF,
+            isIndicator = true,
+            style = RatingBarStyle.Fill()
         )
     }
-}
-
-@Composable
-private fun Preview() {
-    MovieCardPortrait(movie = Movie(title = "Cocaine Bear"), onItemClick = {})
 }
