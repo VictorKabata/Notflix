@@ -6,7 +6,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import com.vickikbt.shared.presentation.ui.components.BottomNavBar
-import com.vickikbt.shared.presentation.ui.navigation.Navigation
+import com.vickikbt.shared.ui.navigation.Navigation
 import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
 import com.vickikbt.shared.presentation.ui.theme.NotflixTheme
 import moe.tlaster.precompose.navigation.rememberNavigator

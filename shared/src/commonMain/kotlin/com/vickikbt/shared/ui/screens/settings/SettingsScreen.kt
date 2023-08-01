@@ -20,10 +20,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
 import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
-import com.vickikbt.shared.presentation.ui.components.appbars.AppBar
-import com.vickikbt.shared.presentation.ui.components.preferences.DialogPreferenceSelection
-import com.vickikbt.shared.presentation.ui.components.preferences.PreferencesGroup
-import com.vickikbt.shared.presentation.ui.components.preferences.TextPreference
+import com.vickikbt.shared.ui.components.appbars.AppBar
+import com.vickikbt.shared.ui.components.preferences.DialogPreferenceSelection
+import com.vickikbt.shared.ui.components.preferences.PreferencesGroup
+import com.vickikbt.shared.ui.components.preferences.TextPreference
 import org.koin.compose.koinInject
 
 private val themeLabels = listOf("Light", "Dark", "System Default")

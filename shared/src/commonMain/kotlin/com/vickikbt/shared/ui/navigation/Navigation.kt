@@ -1,7 +1,8 @@
-package com.vickikbt.shared.presentation.ui.navigation
+package com.vickikbt.shared.ui.navigation
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
 import com.vickikbt.shared.presentation.ui.screens.details.DetailsScreen
 import com.vickikbt.shared.presentation.ui.screens.favorites.FavoritesScreen
 import com.vickikbt.shared.presentation.ui.screens.home.HomeScreen

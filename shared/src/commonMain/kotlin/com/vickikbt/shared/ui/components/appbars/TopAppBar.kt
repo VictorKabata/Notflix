@@ -1,4 +1,4 @@
-package com.vickikbt.shared.presentation.ui.components.appbars
+package com.vickikbt.shared.ui.components.appbars
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
