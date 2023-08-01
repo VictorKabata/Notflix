@@ -1,57 +1,39 @@
-package com.vickikbt.shared.presentation.ui.components
+package com.vickikbt.shared.ui.components
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.seiko.imageloader.rememberAsyncImagePainter
 import com.vickikbt.shared.domain.models.Movie
+import com.vickikbt.shared.ui.components.ratingbar.RatingBar
+import com.vickikbt.shared.ui.components.ratingbar.RatingBarStyle
+import com.vickikbt.shared.ui.components.ratingbar.StepSize
+import com.vickikbt.shared.utils.getRating
+import com.vickikbt.shared.utils.loadImage
 
 @Composable
-fun ItemSimilarMovies(movie: Movie) {
-    /*val painter = rememberImagePainter(data = movie.backdropPath?.loadImage())
+fun ItemSimilarMovies(movie: Movie, onItemClick: (Movie) -> Unit) {
+    val painter = rememberAsyncImagePainter(movie.posterPath?.loadImage() ?: "")
 
     Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
-        Card(
-            modifier = Modifier
-                .width(150.dp)
-                .height(220.dp),
-            shape = RoundedCornerShape(4.dp)
-        ) {
-            Image(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .placeholder(visible = isLoading, color = Color.Gray.copy(.8f)),
-                painter = painter,
-                contentDescription = stringResource(id = com.vickikbt.notflix.R.string.movie_poster),
-                contentScale = ContentScale.Crop
-            )
-        }
 
-        Text(
-            modifier = Modifier
-                .width(148.dp)
-                .placeholder(visible = isLoading, color = Color.Gray),
-            text = movie.title ?: stringResource(id = com.vickikbt.notflix.R.string.unknown_movie),
-            style = MaterialTheme.typography.h5,
-            fontSize = 14.sp,
-            overflow = TextOverflow.Ellipsis,
-            textAlign = TextAlign.Start,
-            maxLines = 1,
-            color = MaterialTheme.colors.onSurface,
-        )
+        MovieCardPortrait(
+            //modifier = Modifier.height(220.dp),
+            movie = movie,
+            onItemClick = { onItemClick(movie) })
 
         // rating bar
         RatingBar(
-            modifier = Modifier
-                .fillMaxWidth(0.8f)
-                .placeholder(visible = isLoading, color = Color.Gray),
+            modifier = Modifier.fillMaxWidth(0.8f),
             value = movie.voteAverage?.getRating()?.toFloat() ?: 0f,
-            numStars = 5,
+            numOfStars = 5,
             size = 15.dp,
             stepSize = StepSize.HALF,
             isIndicator = true,
-            ratingBarStyle = RatingBarStyle.Normal,
-            activeColor = Golden,
-            inactiveColor = Gray,
-            onValueChange = {},
-            onRatingChanged = {}
+            style = RatingBarStyle.Fill()
         )
-    }*/
+    }
 }

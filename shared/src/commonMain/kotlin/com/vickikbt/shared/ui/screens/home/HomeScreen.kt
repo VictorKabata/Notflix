@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -28,15 +27,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.presentation.ui.components.MovieCardLandscape
-import com.vickikbt.shared.presentation.ui.components.MovieCardPager
-import com.vickikbt.shared.presentation.ui.components.MovieCardPagerIndicator
-import com.vickikbt.shared.presentation.ui.components.MovieCardPortrait
+import com.vickikbt.shared.ui.components.MovieCardPortrait
 import com.vickikbt.shared.presentation.ui.components.SectionSeparator
-import com.vickikbt.shared.presentation.ui.theme.DarkPrimaryColor
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
 

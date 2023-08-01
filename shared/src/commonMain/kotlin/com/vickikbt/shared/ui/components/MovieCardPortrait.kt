@@ -1,4 +1,4 @@
-package com.vickikbt.shared.presentation.ui.components
+package com.vickikbt.shared.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -27,10 +27,12 @@ import com.vickikbt.shared.utils.loadImage
 
 @Composable
 fun MovieCardPortrait(
+    modifier: Modifier = Modifier,
     movie: Movie,
     onItemClick: (Movie) -> Unit
 ) {
     Column(
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(3.dp)
     ) {
         Card(
