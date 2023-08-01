@@ -78,7 +78,7 @@ fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 //region Now Playing Movies
-                homeUiState.nowPlayingMovies?.let { nowPlayingMovie ->
+                /*homeUiState.nowPlayingMovies?.let { nowPlayingMovie ->
                     HorizontalPager(state = pagerState, pageCount = 5) { currentPage ->
                         MovieCardPager(
                             modifier = Modifier.fillMaxWidth().height(360.dp),
@@ -96,7 +96,7 @@ fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
                         inactiveColor = Color.Gray,
                         activeColor = DarkPrimaryColor
                     )
-                }
+                }*/
                 //endregion
 
                 //region Trending Movies
