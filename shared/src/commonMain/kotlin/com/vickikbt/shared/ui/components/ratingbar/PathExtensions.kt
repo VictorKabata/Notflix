@@ -1,4 +1,4 @@
-package com.vickikbt.shared.presentation.ui.components.ratingbar
+package com.vickikbt.shared.ui.components.ratingbar
 
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Path

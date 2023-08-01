@@ -35,9 +35,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberAsyncImagePainter
 import com.vickikbt.shared.domain.models.Movie
-import com.vickikbt.shared.presentation.ui.components.ratingbar.RatingBar
-import com.vickikbt.shared.presentation.ui.components.ratingbar.RatingBarStyle
-import com.vickikbt.shared.presentation.ui.components.ratingbar.StepSize
+import com.vickikbt.shared.ui.components.ratingbar.RatingBar
+import com.vickikbt.shared.ui.components.ratingbar.RatingBarStyle
+import com.vickikbt.shared.ui.components.ratingbar.StepSize
 import com.vickikbt.shared.utils.capitalizeEachWord
 import com.vickikbt.shared.utils.getRating
 import com.vickikbt.shared.utils.getReleaseDate

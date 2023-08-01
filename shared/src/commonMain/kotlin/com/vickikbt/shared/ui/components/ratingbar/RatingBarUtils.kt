@@ -1,4 +1,6 @@
-package com.vickikbt.shared.presentation.ui.components.ratingbar
+package com.vickikbt.shared.ui.components.ratingbar
+
+import com.vickikbt.shared.ui.components.ratingbar.StepSize
 
 object RatingBarUtils {
 
