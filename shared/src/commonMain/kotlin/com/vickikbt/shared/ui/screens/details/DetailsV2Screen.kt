@@ -72,7 +72,7 @@ fun DetailsV2Screen(
                 modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
                 topBar = {
                     DetailsV2AppBar(
-                        modifier = Modifier.fillMaxWidth().height(350.dp),
+                        modifier = Modifier.fillMaxWidth(),
                         scrollBehavior = scrollBehavior,
                         movieDetails = movieDetailsState.movieDetails,
                         onNavigationIconClick = { navigator.goBack() },

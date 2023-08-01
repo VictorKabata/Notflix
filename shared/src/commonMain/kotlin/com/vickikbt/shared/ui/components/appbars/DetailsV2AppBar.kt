@@ -1,6 +1,15 @@
 package com.vickikbt.shared.ui.components.appbars
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -17,13 +26,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberAsyncImagePainter
 import com.vickikbt.shared.domain.models.MovieDetails
+import com.vickikbt.shared.utils.getMovieDuration
 import com.vickikbt.shared.utils.loadImage
+import io.github.aakira.napier.Napier
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,52 +59,7 @@ fun DetailsV2AppBar(
 
     val painter = rememberAsyncImagePainter(movieDetails?.backdropPath?.loadImage() ?: "")
 
-    /*// region Toolbar image
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(350.dp)
-    ) {
-        Image(
-            modifier = Modifier
-                .fillMaxSize()
-                .align(Alignment.Center),
-            painter = painter,
-            contentDescription = movieDetails?.title,
-            contentScale = ContentScale.Crop
-        )
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-                .align(Alignment.BottomCenter),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.Start
-        ) {
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                text = movieDetails?.title ?: "Unknown movie",
-                style = MaterialTheme.typography.h6,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                color = dominantTextColor,
-                fontSize = 32.sp
-            )
-
-            Spacer(modifier = Modifier.height(2.dp))
-
-            Text(
-                modifier = Modifier,
-                text = movieDetails?.runtime?.getMovieDuration() ?: "",
-                color = dominantTextColor,
-                style = MaterialTheme.typography.h5,
-                fontSize = 14.sp
-            )
-        }
-    }
-    // endregion*/
+    Napier.e("Scroll fraction: ${scrollBehavior.state.collapsedFraction}")
 
     CenterAlignedTopAppBar(
         modifier = modifier,
@@ -138,4 +107,51 @@ fun DetailsV2AppBar(
             }
         }
     )
+
+    // region Toolbar image
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(350.dp)
+    ) {
+        Image(
+            modifier = Modifier
+                .fillMaxSize()
+                .align(Alignment.Center),
+            painter = painter,
+            contentDescription = movieDetails?.title,
+            contentScale = ContentScale.Crop
+        )
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .align(Alignment.BottomCenter),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.Start
+        ) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = movieDetails?.title ?: "Unknown movie",
+                style = MaterialTheme.typography.h6,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                color = dominantTextColor,
+                fontSize = 32.sp
+            )
+
+            Spacer(modifier = Modifier.height(2.dp))
+
+            Text(
+                modifier = Modifier,
+                text = movieDetails?.runtime?.getMovieDuration() ?: "",
+                color = dominantTextColor,
+                style = MaterialTheme.typography.h5,
+                fontSize = 14.sp
+            )
+        }
+    }
+    // endregion
 }
