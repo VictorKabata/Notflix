@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -29,10 +28,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.vickikbt.shared.presentation.ui.components.ItemMovieCast
 import com.vickikbt.shared.presentation.ui.components.ItemSimilarMovies
 import com.vickikbt.shared.presentation.ui.components.MovieRatingSection
 import com.vickikbt.shared.presentation.ui.screens.details.DetailsViewModel
+import com.vickikbt.shared.ui.components.ItemMovieCast
 import com.vickikbt.shared.ui.components.appbars.DetailsV2AppBar
 import com.vickikbt.shared.utils.getPopularity
 import com.vickikbt.shared.utils.getRating
@@ -134,7 +133,7 @@ fun DetailsV2Screen(
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
                             items(items = it) { item ->
-                                ItemMovieCast(actor = item)
+                                ItemMovieCast(modifier = Modifier, actor = item)
                             }
                         }
                     }

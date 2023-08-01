@@ -1,35 +1,47 @@
-package com.vickikbt.shared.presentation.ui.components
+package com.vickikbt.shared.ui.components
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.seiko.imageloader.rememberAsyncImagePainter
 import com.vickikbt.shared.domain.models.Actor
+import com.vickikbt.shared.presentation.ui.theme.TextSecondary
+import com.vickikbt.shared.utils.loadImage
 
 @Composable
 fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
-    /*val painter = rememberImagePainter(
-        data = actor.profilePath?.loadImage()
-    ) {
-        crossfade(true)
-        transformations(CircleCropTransformation())
-    }
+
+    val painter = rememberAsyncImagePainter(actor.profilePath?.loadImage() ?: "")
 
     Column(
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(1.dp)
     ) {
         Image(
-            modifier = Modifier
-                .placeholder(visible = isLoading, color = Color.Gray.copy(.8f))
-                .size(80.dp),
+            modifier = Modifier.size(80.dp).clip(CircleShape),
             painter = painter,
-            contentDescription = stringResource(id = R.string.cast)
+            contentDescription = "Cast",
+            contentScale = ContentScale.Crop
         )
 
         Text(
-            modifier = Modifier
-                .placeholder(visible = isLoading, color = Color.Gray)
-                .width(78.dp),
-            text = actor.name ?: stringResource(R.string.unknown_actor),
+            modifier = Modifier.width(78.dp),
+            text = actor.name ?: "Unknown actor",
             style = MaterialTheme.typography.h6,
             fontSize = 14.sp,
             overflow = TextOverflow.Ellipsis,
@@ -39,10 +51,8 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
         )
 
         Text(
-            modifier = Modifier
-                .placeholder(visible = isLoading, color = Color.Gray)
-                .width(77.dp),
-            text = actor.character ?: stringResource(R.string.unknown_character),
+            modifier = Modifier.width(77.dp),
+            text = actor.character ?: "Unknown character",
             style = MaterialTheme.typography.h4,
             fontSize = 12.sp,
             color = TextSecondary,
@@ -50,5 +60,5 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
             textAlign = TextAlign.Center,
             maxLines = 1
         )
-    }*/
+    }
 }

@@ -24,7 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.vickikbt.shared.presentation.ui.components.ItemMovieCast
+import com.vickikbt.shared.ui.components.ItemMovieCast
 import com.vickikbt.shared.presentation.ui.components.ItemSimilarMovies
 import com.vickikbt.shared.presentation.ui.components.MovieRatingSection
 import com.vickikbt.shared.ui.components.appbars.DetailsAppBar

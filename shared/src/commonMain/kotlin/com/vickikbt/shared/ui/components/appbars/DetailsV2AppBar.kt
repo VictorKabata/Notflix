@@ -59,8 +59,6 @@ fun DetailsV2AppBar(
 
     val painter = rememberAsyncImagePainter(movieDetails?.backdropPath?.loadImage() ?: "")
 
-    Napier.e("Scroll fraction: ${scrollBehavior.state.collapsedFraction}")
-
     CenterAlignedTopAppBar(
         modifier = modifier,
         scrollBehavior = scrollBehavior,
@@ -109,7 +107,7 @@ fun DetailsV2AppBar(
     )
 
     // region Toolbar image
-    Box(
+    /*Box(
         modifier = modifier
             .fillMaxWidth()
             .height(350.dp)
@@ -152,6 +150,6 @@ fun DetailsV2AppBar(
                 fontSize = 14.sp
             )
         }
-    }
+    }*/
     // endregion
 }
