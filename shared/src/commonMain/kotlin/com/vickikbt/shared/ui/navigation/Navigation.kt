@@ -6,7 +6,7 @@ import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
 import com.vickikbt.shared.presentation.ui.screens.favorites.FavoritesScreen
 import com.vickikbt.shared.presentation.ui.screens.home.HomeScreen
 import com.vickikbt.shared.presentation.ui.screens.settings.SettingsScreen
-import com.vickikbt.shared.ui.screens.details.DetailsV2Screen
+import com.vickikbt.shared.ui.screens.details.DetailsScreen
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.path
@@ -29,7 +29,7 @@ fun Navigation(navigator: Navigator) {
 
         scene(NavigationItem.Details.route) { backStackEntry ->
             backStackEntry.path<Int>("id")?.let { movieId ->
-                DetailsV2Screen(navigator = navigator, movieId = movieId)
+                DetailsScreen(navigator = navigator, movieId = movieId)
             }
         }
     }

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -28,11 +29,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.vickikbt.shared.ui.components.MovieCardPortrait
-import com.vickikbt.shared.ui.components.MovieRatingSection
 import com.vickikbt.shared.presentation.ui.screens.details.DetailsViewModel
 import com.vickikbt.shared.ui.components.ItemMovieCast
-import com.vickikbt.shared.ui.components.appbars.DetailsV2AppBar
+import com.vickikbt.shared.ui.components.MovieCardPortrait
+import com.vickikbt.shared.ui.components.MovieRatingSection
+import com.vickikbt.shared.ui.components.appbars.DetailsAppBar
 import com.vickikbt.shared.utils.getPopularity
 import com.vickikbt.shared.utils.getRating
 import moe.tlaster.precompose.navigation.Navigator
@@ -40,7 +41,7 @@ import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailsV2Screen(
+fun DetailsScreen(
     navigator: Navigator,
     viewModel: DetailsViewModel = koinInject(),
     movieId: Int
@@ -55,7 +56,7 @@ fun DetailsV2Screen(
 
     val scrollState = rememberScrollState()
     val scrollBehavior =
-        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
+        TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     Box(modifier = Modifier.fillMaxSize()) {
         if (movieDetailsState.isLoading) {
@@ -70,8 +71,8 @@ fun DetailsV2Screen(
             Scaffold(
                 modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
                 topBar = {
-                    DetailsV2AppBar(
-                        modifier = Modifier.fillMaxWidth(),
+                    DetailsAppBar(
+                        modifier = Modifier.fillMaxWidth().height(350.dp),
                         scrollBehavior = scrollBehavior,
                         movieDetails = movieDetailsState.movieDetails,
                         onNavigationIconClick = { navigator.goBack() },
