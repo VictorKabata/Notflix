@@ -44,9 +44,7 @@ kotlin {
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
             implementation(compose.materialIconsExtended)
-
-            implementation(libs.kotlinX.atomicfu) // ToDo: Remove later
-
+            
             implementation(libs.kotlinX.coroutines)
 
             api(libs.ktor.core)
