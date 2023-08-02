@@ -39,12 +39,11 @@ kotlin {
         sourceSets["commonMain"].dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material) // ToDo: Remove in favour of mat3
             implementation(compose.material3)
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
             implementation(compose.materialIconsExtended)
-            
+
             implementation(libs.kotlinX.coroutines)
 
             api(libs.ktor.core)
