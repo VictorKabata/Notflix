@@ -1,9 +1,9 @@
-package com.vickikbt.shared.presentation.ui.components
+package com.vickikbt.shared.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,8 +24,8 @@ fun SectionSeparator(
         Text(
             modifier = Modifier,
             text = sectionTitle,
-            color = MaterialTheme.colors.onSurface,
-            style = MaterialTheme.typography.h6,
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.titleMedium,
             fontSize = 20.sp,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis

@@ -1,17 +1,20 @@
-package com.vickikbt.shared.presentation.ui.screens.main
+package com.vickikbt.shared.ui.screens.main
 
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import com.vickikbt.shared.presentation.ui.components.BottomNavBar
-import com.vickikbt.shared.ui.navigation.Navigation
+import com.vickikbt.shared.ui.components.BottomNavBar
 import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
-import com.vickikbt.shared.presentation.ui.theme.NotflixTheme
+import com.vickikbt.shared.presentation.ui.screens.main.MainViewModel
+import com.vickikbt.shared.ui.navigation.Navigation
+import com.vickikbt.shared.ui.theme.NotflixTheme
 import moe.tlaster.precompose.navigation.rememberNavigator
 import org.koin.compose.koinInject
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(viewModel: MainViewModel = koinInject()) {
 
@@ -20,7 +23,7 @@ fun MainScreen(viewModel: MainViewModel = koinInject()) {
     val isDarkTheme = appUiState.selectedTheme != 0
 
     NotflixTheme(darkTheme = isDarkTheme) {
-        Surface(color = MaterialTheme.colors.surface) {
+        Surface(color = MaterialTheme.colorScheme.surface) {
 
             val navigator = rememberNavigator()
 

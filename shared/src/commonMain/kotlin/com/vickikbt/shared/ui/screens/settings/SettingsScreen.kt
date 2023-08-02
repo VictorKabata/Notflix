@@ -1,15 +1,16 @@
-package com.vickikbt.shared.presentation.ui.screens.settings
+package com.vickikbt.shared.ui.screens.settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Image
 import androidx.compose.material.icons.rounded.Lightbulb
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -20,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
 import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
+import com.vickikbt.shared.presentation.ui.screens.settings.SettingsViewModel
 import com.vickikbt.shared.ui.components.appbars.AppBar
 import com.vickikbt.shared.ui.components.preferences.DialogPreferenceSelection
 import com.vickikbt.shared.ui.components.preferences.PreferencesGroup
@@ -29,6 +31,7 @@ import org.koin.compose.koinInject
 private val themeLabels = listOf("Light", "Dark", "System Default")
 private val imageQualityLabels = listOf("High Quality", "Low Quality")
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
 
@@ -46,7 +49,7 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
     val imageQualityLabel = imageQualityLabels[settingsUiState.selectedImageQuality]
 
     Scaffold(topBar = { AppBar("Settings") }) {
-        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
+        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
             Column {
                 Spacer(modifier = Modifier.height(8.dp))
 

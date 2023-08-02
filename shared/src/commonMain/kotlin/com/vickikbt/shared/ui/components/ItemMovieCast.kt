@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,18 +42,18 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
         Text(
             modifier = Modifier.width(78.dp),
             text = actor.name ?: "Unknown actor",
-            style = MaterialTheme.typography.h6,
+            style = MaterialTheme.typography.titleMedium,
             fontSize = 14.sp,
             overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Center,
             maxLines = 1,
-            color = MaterialTheme.colors.onSurface
+            color = MaterialTheme.colorScheme.onSurface
         )
 
         Text(
             modifier = Modifier.width(77.dp),
             text = actor.character ?: "Unknown character",
-            style = MaterialTheme.typography.h4,
+            style = MaterialTheme.typography.labelSmall,
             fontSize = 12.sp,
             color = TextSecondary,
             overflow = TextOverflow.Ellipsis,

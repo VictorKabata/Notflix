@@ -10,9 +10,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,7 +41,7 @@ fun MovieCardPortraitCompact(
                 .width(150.dp)
                 .fillMaxHeight()
                 .clickable { onItemClick(movie) },
-            elevation = 8.dp,
+            elevation = CardDefaults.cardElevation(8.dp),
             shape = RoundedCornerShape(4.dp)
         ) {
             Image(
@@ -58,8 +59,8 @@ fun MovieCardPortraitCompact(
         Text(
             modifier = Modifier.width(145.dp),
             text = movie.title ?: "Unknown movie",
-            style = MaterialTheme.typography.h5,
-            color = MaterialTheme.colors.onSurface,
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onSurface,
             fontSize = 14.sp,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,

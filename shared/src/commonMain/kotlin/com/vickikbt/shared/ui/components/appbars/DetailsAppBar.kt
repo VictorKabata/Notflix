@@ -13,9 +13,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,7 +45,7 @@ fun CollapsedTopBar(
     movieDetails: MovieDetails?
 ) {
     val color: Color by animateColorAsState(
-        if (isCollapsed) MaterialTheme.colors.background else Color.Transparent
+        if (isCollapsed) MaterialTheme.colorScheme.background else Color.Transparent
     )
 
     AnimatedVisibility(visible = isCollapsed) {
@@ -101,12 +101,12 @@ fun CollapsedTopBar(
         Text(
             modifier = modifier.background(color),
             text = movieDetails?.title ?: "Unknown movie",
-            style = MaterialTheme.typography.h6,
+            style = MaterialTheme.typography.titleMedium,
             fontSize = 20.sp,
             overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Center,
             maxLines = 1,
-            color = MaterialTheme.colors.onSurface
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 
@@ -123,8 +123,8 @@ fun ExpandedTopBar(
             .height(EXPANDED_TOP_BAR_HEIGHT)
     ) {
 
-        val defaultDominantColor = MaterialTheme.colors.surface
-        val defaultDominantTextColor = MaterialTheme.colors.onSurface
+        val defaultDominantColor = MaterialTheme.colorScheme.surface
+        val defaultDominantTextColor = MaterialTheme.colorScheme.onSurface
         var dominantColor by remember { mutableStateOf(defaultDominantColor) }
         var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
 
@@ -151,7 +151,7 @@ fun ExpandedTopBar(
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = movieDetails?.title ?: "Unknown movie",
-                style = MaterialTheme.typography.h6,
+                style = MaterialTheme.typography.titleMedium,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 color = dominantTextColor,
@@ -164,7 +164,7 @@ fun ExpandedTopBar(
                 modifier = Modifier,
                 text = movieDetails?.runtime?.getMovieDuration() ?: "",
                 color = dominantTextColor,
-                style = MaterialTheme.typography.h5,
+                style = MaterialTheme.typography.labelMedium,
                 fontSize = 14.sp
             )
         }

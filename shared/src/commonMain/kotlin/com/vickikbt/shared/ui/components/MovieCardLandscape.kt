@@ -14,11 +14,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Divider
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,7 +43,6 @@ import com.vickikbt.shared.utils.getRating
 import com.vickikbt.shared.utils.getReleaseDate
 import com.vickikbt.shared.utils.loadImage
 
-@ExperimentalMaterialApi
 @Composable
 fun MovieCardLandscape(
     modifier: Modifier = Modifier,
@@ -55,7 +54,7 @@ fun MovieCardLandscape(
 
     Card(
         modifier = modifier.clickable { onClickItem(movie) },
-        elevation = 8.dp,
+        elevation = CardDefaults.cardElevation(8.dp),
         shape = RoundedCornerShape(4.dp)
     ) {
         Box(modifier = modifier) {
@@ -100,7 +99,7 @@ fun MovieCardLandscape(
                     text = movie.title ?: "Unknown movie",
                     fontSize = 18.sp,
                     maxLines = 2,
-                    style = MaterialTheme.typography.h6,
+                    style = MaterialTheme.typography.titleMedium,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
                     color = dominantTextColor
@@ -139,7 +138,7 @@ fun MovieCardLandscape(
                             text = movie.releaseDate.getReleaseDate()?.capitalizeEachWord() ?: "",
                             fontSize = 14.sp,
                             maxLines = 1,
-                            style = MaterialTheme.typography.h4,
+                            style = MaterialTheme.typography.labelSmall,
                             overflow = TextOverflow.Ellipsis,
                             textAlign = TextAlign.Start,
                             color = dominantSubTextColor

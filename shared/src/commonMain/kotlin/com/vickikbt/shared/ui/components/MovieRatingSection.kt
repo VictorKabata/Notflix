@@ -8,12 +8,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Star
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,16 +39,16 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
             Text(
                 modifier = Modifier,
                 text = if (popularity.isNullOrEmpty()) "N/A" else popularity,
-                style = MaterialTheme.typography.h6,
+                style = MaterialTheme.typography.titleMedium,
                 fontSize = 42.sp,
-                color = MaterialTheme.colors.onSurface,
+                color = MaterialTheme.colorScheme.onSurface,
             )
 
             Text(
                 text = "Popularity",
-                style = MaterialTheme.typography.h6,
+                style = MaterialTheme.typography.titleMedium,
                 fontSize = 18.sp,
-                color = MaterialTheme.colors.onSurface,
+                color = MaterialTheme.colorScheme.onSurface,
             )
         }
         //endregion
@@ -57,7 +57,7 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
             modifier = Modifier
                 .fillMaxHeight()
                 .width(2.dp),
-            color = MaterialTheme.colors.onSurface
+            color = MaterialTheme.colorScheme.onSurface
         )
 
         //region Rating
@@ -76,9 +76,9 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
             Text(
                 modifier = Modifier,
                 text = if (voteAverage.isNullOrEmpty()) "N/A" else "$voteAverage/5.0",
-                style = MaterialTheme.typography.h6,
+                style = MaterialTheme.typography.titleMedium,
                 fontSize = 20.sp,
-                color = MaterialTheme.colors.onSurface,
+                color = MaterialTheme.colorScheme.onSurface,
             )
         }
         //endregion

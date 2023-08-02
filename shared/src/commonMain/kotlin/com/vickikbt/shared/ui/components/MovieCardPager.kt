@@ -1,4 +1,4 @@
-package com.vickikbt.shared.presentation.ui.components
+package com.vickikbt.shared.ui.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -15,8 +15,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.PagerState
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -90,7 +90,7 @@ fun MovieCardPager(
                 text = movie.title ?: "Unknown movie",
                 fontSize = 32.sp,
                 maxLines = 2,
-                style = MaterialTheme.typography.h6,
+                style = MaterialTheme.typography.titleMedium,
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Start,
                 color = dominantTextColor

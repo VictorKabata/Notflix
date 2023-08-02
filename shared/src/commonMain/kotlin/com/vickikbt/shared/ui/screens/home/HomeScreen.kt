@@ -18,10 +18,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -31,12 +30,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.presentation.ui.components.MovieCardLandscape
 import com.vickikbt.shared.ui.components.MovieCardPortraitCompact
-import com.vickikbt.shared.presentation.ui.components.SectionSeparator
+import com.vickikbt.shared.ui.components.SectionSeparator
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
 
 @OptIn(ExperimentalFoundationApi::class)
-@ExperimentalMaterialApi
 @Composable
 fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
     val scrollState = rememberScrollState()
@@ -54,7 +52,7 @@ fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colors.surface)
+            .background(color = MaterialTheme.colorScheme.surface)
     ) {
         if (homeUiState.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))

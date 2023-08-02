@@ -9,9 +9,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.intl.Locale
@@ -32,15 +33,15 @@ fun DialogPreferenceSelection(
 ) {
     if (showDialog) {
         Card(
-            elevation = 8.dp,
+            elevation = CardDefaults.cardElevation(8.dp),
             shape = RoundedCornerShape(8.dp)
         ) {
             Column(modifier = Modifier.padding(vertical = 16.dp, horizontal = 24.dp)) {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     text = title,
-                    style = MaterialTheme.typography.h4,
-                    color = MaterialTheme.colors.onSurface,
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
                     fontSize = 22.sp,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -71,8 +72,8 @@ fun DialogPreferenceSelection(
                     Text(
                         modifier = Modifier.clickable { onNegativeClick() },
                         text = "Cancel".toUpperCase(Locale.current),
-                        style = MaterialTheme.typography.h4,
-                        color = MaterialTheme.colors.primary,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.primary,
                         fontSize = 16.sp,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,

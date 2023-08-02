@@ -11,9 +11,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -68,7 +68,7 @@ fun DetailsScreen(
         }
     }
 
-    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.surface)) {
+    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
         if (movieDetailsState.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         } else if (!movieDetailsState.error.isNullOrEmpty()) {
@@ -110,9 +110,9 @@ fun DetailsScreen(
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = "Overview",
-                            style = MaterialTheme.typography.h6,
+                            style = MaterialTheme.typography.titleMedium,
                             fontSize = 20.sp,
-                            color = MaterialTheme.colors.onSurface,
+                            color = MaterialTheme.colorScheme.onSurface,
                         )
 
                         Text(
@@ -120,8 +120,8 @@ fun DetailsScreen(
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp),
                             text = it,
-                            style = MaterialTheme.typography.body1,
-                            color = MaterialTheme.colors.onSurface,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurface,
                             fontSize = 15.sp,
                             textAlign = TextAlign.Start,
                             overflow = TextOverflow.Ellipsis,
@@ -136,7 +136,7 @@ fun DetailsScreen(
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = "Cast",
-                            style = MaterialTheme.typography.h6,
+                            style = MaterialTheme.typography.titleMedium,
                             fontSize = 20.sp
                         )
 
@@ -158,9 +158,9 @@ fun DetailsScreen(
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = "Similar Movies",
-                            style = MaterialTheme.typography.h6,
+                            style = MaterialTheme.typography.titleMedium,
                             fontSize = 20.sp,
-                            color = MaterialTheme.colors.onSurface
+                            color = MaterialTheme.colorScheme.onSurface
                         )
 
                         LazyRow(

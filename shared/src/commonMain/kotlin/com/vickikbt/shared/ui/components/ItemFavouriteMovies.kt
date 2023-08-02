@@ -1,10 +1,8 @@
-package com.vickikbt.shared.presentation.ui.components
+package com.vickikbt.shared.ui.components
 
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import com.vickikbt.shared.domain.models.MovieDetails
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ItemFavoriteMovie(movie: MovieDetails, onItemClick: (MovieDetails) -> Unit) {
     /*val painter = rememberImagePainter(data = movie.posterPath?.loadImage()) {

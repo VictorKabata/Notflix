@@ -8,9 +8,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -56,8 +56,8 @@ fun TextPreference(
                     .fillMaxWidth()
                     .padding(horizontal = 12.dp),
                 text = title,
-                style = MaterialTheme.typography.h3,
-                color = MaterialTheme.colors.onSurface,
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 17.sp,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -70,8 +70,8 @@ fun TextPreference(
                         .fillMaxWidth()
                         .padding(horizontal = 13.dp),
                     text = subTitle,
-                    style = MaterialTheme.typography.h3,
-                    color = MaterialTheme.colors.onSurface.copy(alpha = 0.6f),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                     fontSize = 14.sp,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
