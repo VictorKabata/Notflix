@@ -105,9 +105,7 @@ fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
                             .padding(horizontal = 16.dp, vertical = 6.dp)
                             .fillMaxWidth()
                             .wrapContentHeight(),
-                        sectionTitle = "Trending Movies",
-                        onItemClick = {
-                        }
+                        sectionTitle = "Trending Movies"
                     )
 
                     Spacer(modifier = Modifier.height(8.dp))
@@ -138,10 +136,7 @@ fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
                             .padding(start = 16.dp, end = 16.dp, top = 12.dp)
                             .fillMaxWidth()
                             .wrapContentHeight(),
-                        sectionTitle = "Upcoming Movies",
-                        onItemClick = {
-                            // ToDo: OnSectionedClicked-navigate to view all
-                        }
+                        sectionTitle = "Upcoming Movies"
                     )
 
                     Spacer(modifier = Modifier.height(8.dp))
@@ -174,10 +169,7 @@ fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
                                 .padding(start = 16.dp, end = 16.dp, top = 12.dp)
                                 .fillMaxWidth()
                                 .wrapContentHeight(),
-                            sectionTitle = "Popular Movies",
-                            onItemClick = {
-                                // ToDo: OnSectionedClicked-navigate to view all
-                            }
+                            sectionTitle = "Popular Movies"
                         )
 
                         Spacer(modifier = Modifier.height(8.dp))
