@@ -14,10 +14,8 @@ plugins {
     alias(libs.plugins.firebase.crashlytics.plugin) apply false
     alias(libs.plugins.firebase.performance.plugin) apply false
 
-    // alias(libs.plugins.ktLint)
     alias(libs.plugins.detekt)
     alias(libs.plugins.gradleVersionUpdates)
-    // alias(libs.plugins.kotlinX.testResources)
 }
 
 allprojects {
@@ -26,8 +24,6 @@ allprojects {
         mavenCentral()
         maven(url = "https://jitpack.io")
     }
-
-    // ToDo: Add ktLint
 }
 
 subprojects {
@@ -36,9 +32,7 @@ subprojects {
         parallel = true
         config = files("${project.rootDir}/config/detekt/detekt.yml")
     }
-
-    // apply(plugin = "com.goncalossilva.resources")
-
+    
     tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
         checkForGradleUpdate = true
         outputDir = "build/dependencyUpdates"
