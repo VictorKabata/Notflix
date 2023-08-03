@@ -1,5 +1,6 @@
 package com.vickikbt.shared.ui.screens.home
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,6 +15,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
@@ -24,21 +27,25 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.vickikbt.shared.ui.components.MovieCardLandscape
 import com.vickikbt.shared.presentation.ui.screens.home.HomeViewModel
+import com.vickikbt.shared.ui.components.MovieCardLandscape
+import com.vickikbt.shared.ui.components.MovieCardPager
+import com.vickikbt.shared.ui.components.MovieCardPagerIndicator
 import com.vickikbt.shared.ui.components.MovieCardPortraitCompact
 import com.vickikbt.shared.ui.components.SectionSeparator
+import com.vickikbt.shared.ui.theme.DarkPrimaryColor
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
     val scrollState = rememberScrollState()
-    // val pagerState = rememberPagerState(initialPage = 0, initialPageOffsetFraction = 0f, pageCount = ) ToDo
 
-    LaunchedEffect(key1 = viewModel) {
+    LaunchedEffect(key1 = true) {
         viewModel.fetchNowPlayingMovies()
         viewModel.fetchTrendingMovies()
         viewModel.fetchUpcomingMovies()
@@ -69,11 +76,13 @@ fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 //region Now Playing Movies
-                /*homeUiState.nowPlayingMovies?.let { nowPlayingMovie ->
-                    HorizontalPager(state = pagerState, pageCount = 5) { currentPage ->
+                homeUiState.nowPlayingMovies?.let { nowPlayingMovies ->
+                    val pagerState = rememberPagerState(pageCount = { nowPlayingMovies.size })
+
+                    HorizontalPager(state = pagerState) { currentPage ->
                         MovieCardPager(
                             modifier = Modifier.fillMaxWidth().height(360.dp),
-                            movie = nowPlayingMovie[currentPage]
+                            movie = nowPlayingMovies[currentPage]
                         ) { movie ->
                             navigator.navigate("/details/${movie.id}")
                         }
@@ -81,13 +90,12 @@ fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
 
                     MovieCardPagerIndicator(
                         modifier = Modifier.padding(vertical = 6.dp),
-                        state = pagerState,
-                        pageCount = 5,
+                        pagerState = pagerState,
                         indicatorSize = 6.dp,
                         inactiveColor = Color.Gray,
                         activeColor = DarkPrimaryColor
                     )
-                }*/
+                }
                 //endregion
 
                 //region Trending Movies

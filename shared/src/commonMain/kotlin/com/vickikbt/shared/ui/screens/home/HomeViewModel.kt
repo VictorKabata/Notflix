@@ -32,7 +32,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
             moviesResult.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
             }.onSuccess { movies ->
-                _homeUiState.update { it.copy(nowPlayingMovies = movies) }
+                _homeUiState.update { it.copy(nowPlayingMovies = movies?.take(5)) }
             }.onFailure { error ->
                 _homeUiState.update { it.copy(error = error.message) }
             }

@@ -96,7 +96,8 @@ fun MovieCardPager(
                 style = MaterialTheme.typography.titleMedium,
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Start,
-                color = dominantTextColor
+                color = dominantTextColor,
+                lineHeight = 30.sp
             )
 
             movie.voteAverage?.let {
@@ -118,8 +119,7 @@ fun MovieCardPager(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MovieCardPagerIndicator(
-    state: PagerState,
-    pageCount: Int,
+    pagerState: PagerState,
     modifier: Modifier = Modifier,
     indicatorSize: Dp = 6.dp,
     spacing: Dp = 6.dp,
@@ -133,10 +133,10 @@ fun MovieCardPagerIndicator(
             alignment = Alignment.CenterHorizontally
         )
     ) {
-        repeat(pageCount) { currentPage ->
+        repeat(pagerState.pageCount) { currentPage ->
             Canvas(modifier = Modifier.size(indicatorSize), onDraw = {
                 drawCircle(
-                    color = if (state.currentPage == currentPage) activeColor
+                    color = if (pagerState.currentPage == currentPage) activeColor
                     else inactiveColor
                 )
             })

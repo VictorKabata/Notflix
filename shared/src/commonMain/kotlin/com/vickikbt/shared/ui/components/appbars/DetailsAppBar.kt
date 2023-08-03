@@ -119,7 +119,8 @@ fun DetailsAppBar(
                 overflow = TextOverflow.Ellipsis,
                 color = dominantTextColor,
                 fontSize = 32.sp,
-                textAlign = TextAlign.Start
+                textAlign = TextAlign.Start,
+                lineHeight = 30.sp
             )
 
             Text(
