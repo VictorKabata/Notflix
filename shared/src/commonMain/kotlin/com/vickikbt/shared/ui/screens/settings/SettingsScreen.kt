@@ -1,16 +1,13 @@
 package com.vickikbt.shared.ui.screens.settings
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Image
 import androidx.compose.material.icons.rounded.Lightbulb
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -18,7 +15,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
 import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
 import com.vickikbt.shared.presentation.ui.screens.settings.SettingsViewModel
@@ -48,38 +44,37 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
     val themeLabel = themeLabels[settingsUiState.selectedTheme]
     val imageQualityLabel = imageQualityLabels[settingsUiState.selectedImageQuality]
 
-    Scaffold(topBar = { AppBar("Settings") }) {
-        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
-            Column {
-                Spacer(modifier = Modifier.height(8.dp))
+    Scaffold(
+        topBar = { AppBar("Settings") },
+        containerColor = MaterialTheme.colorScheme.surface
+    ) { paddingValues ->
+        Column(modifier = Modifier.padding(paddingValues)) {
+            PreferencesGroup(title = "Personalisation") {
+                TextPreference(
+                    icon = Icons.Rounded.Lightbulb,
+                    title = "Change theme",
+                    subTitle = themeLabel,
+                    onClick = { showThemeDialog.value = !showThemeDialog.value }
+                )
 
-                PreferencesGroup(title = "Personalisation") {
-                    TextPreference(
-                        icon = Icons.Rounded.Lightbulb,
-                        title = "Change theme",
-                        subTitle = themeLabel,
-                        onClick = { showThemeDialog.value = !showThemeDialog.value }
-                    )
+                if (showThemeDialog.value) ChangeTheme(
+                    viewModel = viewModel,
+                    showDialog = showThemeDialog,
+                    currentValue = themeLabel
+                )
 
-                    if (showThemeDialog.value) ChangeTheme(
-                        viewModel = viewModel,
-                        showDialog = showThemeDialog,
-                        currentValue = themeLabel
-                    )
+                TextPreference(
+                    icon = Icons.Rounded.Image,
+                    title = "Image quality",
+                    subTitle = imageQualityLabel,
+                    onClick = { showImageQualityDialog.value = !showImageQualityDialog.value }
+                )
 
-                    TextPreference(
-                        icon = Icons.Rounded.Image,
-                        title = "Image quality",
-                        subTitle = imageQualityLabel,
-                        onClick = { showImageQualityDialog.value = !showImageQualityDialog.value }
-                    )
-
-                    if (showImageQualityDialog.value) ChangeImageQuality(
-                        viewModel = viewModel,
-                        showDialog = showImageQualityDialog,
-                        currentValue = imageQualityLabel
-                    )
-                }
+                if (showImageQualityDialog.value) ChangeImageQuality(
+                    viewModel = viewModel,
+                    showDialog = showImageQualityDialog,
+                    currentValue = imageQualityLabel
+                )
             }
         }
     }
