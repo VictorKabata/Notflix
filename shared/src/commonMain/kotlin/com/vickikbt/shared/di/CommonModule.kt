@@ -29,7 +29,7 @@ import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.module.Module
-import org.koin.core.module.dsl.factoryOf
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 fun commonModule(enableNetworkLogs: Boolean) = module {
@@ -80,10 +80,10 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     single<FavoritesRepository> { FavoritesRepositoryImpl(httpClient = get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(observableSettings = get()) }
 
-    factoryOf(::MainViewModel)
-    factoryOf(::HomeViewModel)
-    factoryOf(::DetailsViewModel)
-    factoryOf(::SettingsViewModel)
+    singleOf(::MainViewModel)
+    singleOf(::HomeViewModel)
+    singleOf(::DetailsViewModel)
+    singleOf(::SettingsViewModel)
 }
 
 expect fun platformModule(): Module
