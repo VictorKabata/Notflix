@@ -13,8 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
-import com.vickikbt.shared.presentation.ui.theme.Gray
-import com.vickikbt.shared.presentation.ui.theme.PrimaryColor
+import com.vickikbt.shared.ui.theme.DarkPrimaryColor
+import com.vickikbt.shared.ui.theme.Gray
+import com.vickikbt.shared.ui.theme.PrimaryColor
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
@@ -27,8 +28,7 @@ fun BottomNavBar(
         modifier = modifier
             .fillMaxWidth()
             .alpha(0.95F),
-        containerColor = MaterialTheme.colorScheme.surface,
-        tonalElevation = 16.dp
+        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = .85f)
     ) {
         bottomNavItems.iterator().forEach { item ->
 
@@ -47,9 +47,7 @@ fun BottomNavBar(
                 alwaysShowLabel = true,
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = PrimaryColor,
-                    selectedTextColor = PrimaryColor,
-                    unselectedIconColor = Gray,
-                    unselectedTextColor = Gray
+                    unselectedIconColor = Gray
                 ),
                 selected = isSelected,
                 onClick = {

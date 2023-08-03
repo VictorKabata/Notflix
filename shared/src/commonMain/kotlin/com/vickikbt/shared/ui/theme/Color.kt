@@ -1,4 +1,4 @@
-package com.vickikbt.shared.presentation.ui.theme
+package com.vickikbt.shared.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

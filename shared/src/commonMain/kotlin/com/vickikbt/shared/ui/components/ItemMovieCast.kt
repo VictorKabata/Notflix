@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberAsyncImagePainter
 import com.vickikbt.shared.domain.models.Actor
-import com.vickikbt.shared.presentation.ui.theme.TextSecondary
+import com.vickikbt.shared.ui.theme.TextSecondary
 import com.vickikbt.shared.utils.loadImage
 
 @Composable

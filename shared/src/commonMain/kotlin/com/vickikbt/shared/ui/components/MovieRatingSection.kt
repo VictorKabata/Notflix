@@ -19,7 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.vickikbt.shared.presentation.ui.theme.Golden
+import com.vickikbt.shared.ui.theme.Golden
 
 @Composable
 fun MovieRatingSection(popularity: String?, voteAverage: String?) {
