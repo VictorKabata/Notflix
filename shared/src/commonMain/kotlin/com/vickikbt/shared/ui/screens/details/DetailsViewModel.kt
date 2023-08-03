@@ -1,4 +1,4 @@
-package com.vickikbt.shared.presentation.ui.screens.details
+package com.vickikbt.shared.ui.screens.details
 
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.domain.repositories.MovieDetailsRepository

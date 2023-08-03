@@ -68,7 +68,6 @@ fun DetailsAppBar(
     val backgroundColor by animateColorAsState(
         targetValue = MaterialTheme.colorScheme.surface.copy(1 - scrollProgress)
     )
-    val contentColor by animateColorAsState(targetValue = if (scrollProgress == 1f) MaterialTheme.colorScheme.surface else Color.Transparent)
 
     Box(
         modifier = modifier
