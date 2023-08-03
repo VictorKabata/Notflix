@@ -32,7 +32,7 @@ subprojects {
         parallel = true
         config = files("${project.rootDir}/config/detekt/detekt.yml")
     }
-    
+
     tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
         checkForGradleUpdate = true
         outputDir = "build/dependencyUpdates"
