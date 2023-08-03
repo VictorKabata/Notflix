@@ -1,4 +1,4 @@
-package com.vickikbt.shared.presentation.ui.screens.home
+package com.vickikbt.shared.ui.screens.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
@@ -29,16 +28,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.presentation.ui.components.MovieCardLandscape
+import com.vickikbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickikbt.shared.ui.components.MovieCardPortraitCompact
 import com.vickikbt.shared.ui.components.SectionSeparator
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
     val scrollState = rememberScrollState()
-    val pagerState = rememberPagerState()
+    // val pagerState = rememberPagerState(initialPage = 0, initialPageOffsetFraction = 0f, pageCount = ) ToDo
 
     LaunchedEffect(key1 = viewModel) {
         viewModel.fetchNowPlayingMovies()

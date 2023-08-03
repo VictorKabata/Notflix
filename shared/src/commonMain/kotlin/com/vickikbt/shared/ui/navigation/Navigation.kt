@@ -2,7 +2,7 @@ package com.vickikbt.shared.ui.navigation
 
 import androidx.compose.runtime.Composable
 import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
-import com.vickikbt.shared.presentation.ui.screens.home.HomeScreen
+import com.vickikbt.shared.ui.screens.home.HomeScreen
 import com.vickikbt.shared.ui.screens.details.DetailsScreen
 import com.vickikbt.shared.ui.screens.favorites.FavoritesScreen
 import com.vickikbt.shared.ui.screens.settings.SettingsScreen
