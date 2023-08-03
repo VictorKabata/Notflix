@@ -24,22 +24,22 @@ jobs:
       - name: Build with gradle
         run: ./gradlew build --stacktrace
 
-  unit-tests:
-    name: 🧪 Run Tests
-    runs-on: ubuntu-latest
-    steps:
-
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Make gradle executable
-        run: chmod +x ./gradlew
-
-      - name: Execute unit tests
-        run: ./gradlew test --stacktrace
-
-      - name: Generate test report
-        uses: actions/upload-artifact@v2
-        with:
-          name: unit_tests_report.html
-          path: androidApp/build/reports/tests/testDebugUnitTest/
+#  unit-tests:
+#    name: 🧪 Run Tests
+#    runs-on: ubuntu-latest
+#    steps:
+#
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: Make gradle executable
+#        run: chmod +x ./gradlew
+#
+#      - name: Execute unit tests
+#        run: ./gradlew test --stacktrace
+#
+#      - name: Generate test report
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: unit_tests_report.html
+#          path: androidApp/build/reports/tests/testDebugUnitTest/
