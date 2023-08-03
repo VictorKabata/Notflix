@@ -20,24 +20,27 @@ import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
 import com.vickikbt.shared.domain.models.Actor
 import com.vickikbt.shared.ui.theme.TextSecondary
+import com.vickikbt.shared.utils.commonImageLoader
 import com.vickikbt.shared.utils.loadImage
 
 @Composable
 fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
-
-    val painter = rememberImagePainter(actor.profilePath?.loadImage() ?: "")
 
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(space = 1.dp)
     ) {
-        Image(
-            modifier = Modifier.size(80.dp).clip(CircleShape),
-            painter = painter,
-            contentDescription = "Cast",
-            contentScale = ContentScale.Crop
-        )
+        commonImageLoader {
+            val painter = rememberImagePainter(actor.profilePath?.loadImage() ?: "")
+
+            Image(
+                modifier = Modifier.size(80.dp).clip(CircleShape),
+                painter = painter,
+                contentDescription = "Cast",
+                contentScale = ContentScale.Crop
+            )
+        }
 
         Text(
             modifier = Modifier.width(78.dp),

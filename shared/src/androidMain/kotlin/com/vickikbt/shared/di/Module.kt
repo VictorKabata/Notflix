@@ -1,9 +1,12 @@
 package com.vickikbt.shared.di
 
+import com.vickikbt.shared.utils.CustomImageLoader
 import com.vickikbt.shared.utils.MultiplatformSettingsWrapper
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
 actual fun platformModule(): Module = module {
     single { MultiplatformSettingsWrapper(context = get()).createSettings() }
+
+    single { CustomImageLoader(context = get()) }
 }

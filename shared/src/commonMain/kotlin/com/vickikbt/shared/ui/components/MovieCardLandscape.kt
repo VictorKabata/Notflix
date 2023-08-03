@@ -39,6 +39,7 @@ import com.vickikbt.shared.ui.components.ratingbar.RatingBar
 import com.vickikbt.shared.ui.components.ratingbar.RatingBarStyle
 import com.vickikbt.shared.ui.components.ratingbar.StepSize
 import com.vickikbt.shared.utils.capitalizeEachWord
+import com.vickikbt.shared.utils.commonImageLoader
 import com.vickikbt.shared.utils.getRating
 import com.vickikbt.shared.utils.getReleaseDate
 import com.vickikbt.shared.utils.loadImage
@@ -52,24 +53,26 @@ fun MovieCardLandscape(
     var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
     var dominantSubTextColor by remember { mutableStateOf(dominantTextColor) }
 
-    val painter = rememberImagePainter(movie.backdropPath?.loadImage() ?: "")
-
     Card(
         modifier = modifier.clickable { onClickItem(movie) },
         elevation = CardDefaults.cardElevation(8.dp),
         shape = RoundedCornerShape(4.dp)
     ) {
         Box(modifier = modifier) {
-            //region Movie Cover
-            Image(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .align(Alignment.Center),
-                alignment = Alignment.Center,
-                contentScale = ContentScale.Crop,
-                painter = painter,
-                contentDescription = null
-            )
+            commonImageLoader {
+                val painter = rememberImagePainter(movie.backdropPath?.loadImage() ?: "")
+
+                //region Movie Cover
+                Image(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .align(Alignment.Center),
+                    alignment = Alignment.Center,
+                    contentScale = ContentScale.Crop,
+                    painter = painter,
+                    contentDescription = null
+                )
+            }
             //endregion
 
             //region Fading Edge

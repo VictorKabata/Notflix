@@ -37,6 +37,7 @@ import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.ui.components.ratingbar.RatingBar
 import com.vickikbt.shared.ui.components.ratingbar.RatingBarStyle
 import com.vickikbt.shared.ui.components.ratingbar.StepSize
+import com.vickikbt.shared.utils.commonImageLoader
 import com.vickikbt.shared.utils.getRating
 import com.vickikbt.shared.utils.loadImage
 
@@ -49,19 +50,21 @@ fun MovieCardPager(
     var dominantColor by remember { mutableStateOf(Color.DarkGray) }
     var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
 
-    val painter = rememberImagePainter(movie.backdropPath?.loadImage() ?: "")
-
     Box(modifier = modifier.clickable { onItemClick(movie) }) {
         //region Movie Cover Image
-        Image(
-            modifier = Modifier
-                .fillMaxSize()
-                .align(Alignment.Center),
-            alignment = Alignment.Center,
-            contentScale = ContentScale.Crop,
-            painter = painter,
-            contentDescription = null
-        )
+        commonImageLoader {
+            val painter = rememberImagePainter(movie.backdropPath?.loadImage() ?: "")
+
+            Image(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .align(Alignment.Center),
+                alignment = Alignment.Center,
+                contentScale = ContentScale.Crop,
+                painter = painter,
+                contentDescription = null
+            )
+        }
         //endregion
 
         //region Fading Edge Box

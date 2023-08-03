@@ -27,10 +27,3 @@ val Koin.homeViewModel: HomeViewModel
 
 val Koin.settingsViewModel: SettingsViewModel
     get() = get()
-
-/*val Koin.detailsPresenter: SharedDetailsPresenter
-    get() = get()
-val Koin.settingsPresenter: SharedSettingsPresenter
-    get() = get()
-val Koin.favoritesPresenter: SharedFavouritesPresenter
-    get() = get()*/

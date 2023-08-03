@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
 import com.vickikbt.shared.domain.models.Movie
+import com.vickikbt.shared.utils.commonImageLoader
 import com.vickikbt.shared.utils.loadImage
 
 @Composable
@@ -32,7 +33,6 @@ fun MovieCardPortraitCompact(
     movie: Movie,
     onItemClick: (Movie) -> Unit
 ) {
-    val painter = rememberImagePainter(movie.posterPath?.loadImage() ?: "")
 
     Column(
         modifier = modifier,
@@ -46,16 +46,20 @@ fun MovieCardPortraitCompact(
             elevation = CardDefaults.cardElevation(8.dp),
             shape = RoundedCornerShape(4.dp)
         ) {
-            Image(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(220.dp)
-                    .sizeIn(minHeight = 30.dp),
-                painter = painter,
-                alignment = Alignment.Center,
-                contentScale = ContentScale.Crop,
-                contentDescription = "Trending movie poster"
-            )
+            commonImageLoader {
+                val painter = rememberImagePainter(movie.posterPath?.loadImage() ?: "")
+
+                Image(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(220.dp)
+                        .sizeIn(minHeight = 30.dp),
+                    painter = painter,
+                    alignment = Alignment.Center,
+                    contentScale = ContentScale.Crop,
+                    contentDescription = "Trending movie poster"
+                )
+            }
         }
 
         Text(

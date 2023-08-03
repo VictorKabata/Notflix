@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
 import com.vickikbt.shared.domain.models.MovieDetails
 import com.vickikbt.shared.ui.components.collapsing_toolbar.CollapsingToolbarScaffoldState
+import com.vickikbt.shared.utils.commonImageLoader
 import com.vickikbt.shared.utils.getMovieDuration
 import com.vickikbt.shared.utils.loadImage
 
@@ -64,8 +65,6 @@ fun DetailsAppBar(
 
     var isFavourite by remember { mutableStateOf(movieDetails?.isFavourite) }
 
-    val painter = rememberImagePainter(movieDetails?.backdropPath?.loadImage() ?: "")
-
     val backgroundColor by animateColorAsState(
         targetValue = MaterialTheme.colorScheme.surface.copy(1 - scrollProgress)
     )
@@ -77,15 +76,19 @@ fun DetailsAppBar(
             .height(350.dp)
             .graphicsLayer { alpha = scrollProgress }
     ) {
-        Image(
-            modifier = Modifier
-                .fillMaxSize()
-                .align(Alignment.Center)
-                .aspectRatio(scrollProgress.coerceAtLeast(.1f)),
-            painter = painter,
-            contentDescription = "Movie poster",
-            contentScale = ContentScale.Crop
-        )
+        commonImageLoader {
+            val painter = rememberImagePainter(movieDetails?.backdropPath?.loadImage() ?: "")
+
+            Image(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .align(Alignment.Center)
+                    .aspectRatio(scrollProgress.coerceAtLeast(.1f)),
+                painter = painter,
+                contentDescription = "Movie poster",
+                contentScale = ContentScale.Crop
+            )
+        }
 
         Box(
             modifier = Modifier
