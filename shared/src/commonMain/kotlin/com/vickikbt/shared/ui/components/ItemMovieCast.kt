@@ -30,7 +30,7 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(1.dp)
+        verticalArrangement = Arrangement.spacedBy(space = 1.dp)
     ) {
         Image(
             modifier = Modifier.size(80.dp).clip(CircleShape),

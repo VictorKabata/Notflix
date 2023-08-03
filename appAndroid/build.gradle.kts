@@ -57,40 +57,9 @@ dependencies {
 
     implementation(libs.material)
 
-    implementation(libs.compose.ui)
-    implementation(libs.compose.material)
-    implementation(libs.compose.tooling)
-    implementation(libs.compose.runtime)
-    implementation(libs.compose.util)
-    implementation(libs.compose.activity)
-
-    implementation(libs.accompanist.pager)
-    implementation(libs.accompanist.insets)
-    implementation(libs.accompanist.animation)
-    implementation(libs.accompanist.systemUIController)
-    implementation(libs.accompanist.materialPlaceHolder)
-    implementation(libs.accompanist.pagerIndicator)
-
-    implementation(libs.lifecycle.runtime)
-
     // Koin-Dependency injection
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
-
-    // Compose Navigation-Navigation between various screens
-    implementation(libs.navigation.compose)
-
-    // Coil-Image Loader
-    implementation(libs.coil)
-
-    // Palette-Used to extract color palette from images
-    implementation(libs.palette)
-
-    // Gowtham Compose Rating Bar
-    implementation(libs.compose.ratingBar)
-
-    // Collapsing toolbar
-    implementation(libs.oneBoneToolbar)
 
     // Leak Canary - Memory leaks
     debugImplementation(libs.leakCanary)
