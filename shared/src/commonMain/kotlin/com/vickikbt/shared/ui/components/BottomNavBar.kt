@@ -11,9 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
-import com.vickikbt.shared.ui.theme.DarkPrimaryColor
 import com.vickikbt.shared.ui.theme.Gray
 import com.vickikbt.shared.ui.theme.PrimaryColor
 import moe.tlaster.precompose.navigation.Navigator
@@ -51,7 +49,7 @@ fun BottomNavBar(
                 ),
                 selected = isSelected,
                 onClick = {
-                    navigator.navigate(route = item.route)
+                    if (item.route != currentDestination) navigator.navigate(route = item.route)
                 }
             )
         }
