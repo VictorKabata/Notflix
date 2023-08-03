@@ -43,7 +43,7 @@ fun DetailsScreen(
     viewModel: DetailsViewModel = koinInject(),
     movieId: Int
 ) {
-    LaunchedEffect(key1 = viewModel) {
+    LaunchedEffect(key1 = true) {
         viewModel.getMovieDetails(movieId)
         viewModel.fetchSimilarMovies(movieId)
         viewModel.getMovieCast(movieId)
