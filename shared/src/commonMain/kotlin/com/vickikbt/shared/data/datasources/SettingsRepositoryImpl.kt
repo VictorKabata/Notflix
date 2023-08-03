@@ -18,10 +18,6 @@ class SettingsRepositoryImpl constructor(private val observableSettings: Observa
         return observableSettings.getIntOrNullFlow(key = KEY_THEME)
     }
 
-    override suspend fun getLanguagePreference(): Flow<Int?> {
-        return observableSettings.getIntOrNullFlow(key = KEY_LANGUAGE)
-    }
-
     override suspend fun getImageQualityPreference(): Flow<Int?> {
         return observableSettings.getIntOrNullFlow(key = KEY_IMAGE_QUALITY)
     }

@@ -1,107 +1,112 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.nativeCocoapod)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlinX.serialization.plugin)
-    alias(libs.plugins.kmp.nativeCoroutines.plugin)
     alias(libs.plugins.buildKonfig)
+    alias(libs.plugins.compose)
 }
 
-android {
-    compileSdk = 33
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdk = 21
-    }
-}
-
+@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    android {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
-    }
+    targetHierarchy.default()
 
-    jvm {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
-    }
+    android()
 
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
-        System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
-        else -> ::iosX64
-    }
-    iosTarget("iOS") {}
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     cocoapods {
-        version = "1.0"
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
-        ios.deploymentTarget = "16.0"
+        version = "1.0"
+        ios.deploymentTarget = "14.1"
         podfile = project.file("../appiOS/Podfile")
-
         framework {
             baseName = "shared"
-            isStatic = false
+            isStatic = true
         }
+
+        extraSpecAttributes["resources"] =
+            "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
     }
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
+            api(compose.runtime)
+            api(compose.foundation)
+            api(compose.material3)
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            api(compose.components.resources)
+            api(compose.materialIconsExtended)
+
             implementation(libs.kotlinX.coroutines)
 
-            api(libs.koin.core)
-
             api(libs.ktor.core)
-            api(libs.ktor.cio)
             implementation(libs.ktor.contentNegotiation)
             implementation(libs.ktor.json)
             implementation(libs.ktor.logging)
 
+            api(libs.koin.core)
+            implementation(libs.koin.compose)
+
             implementation(libs.kotlinX.serializationJson)
+
+            implementation(libs.kotlinX.dateTime)
 
             implementation(libs.multiplatformSettings.noArg)
             implementation(libs.multiplatformSettings.coroutines)
 
             api(libs.napier)
 
-            implementation(libs.kotlinX.dateTime)
+            implementation(libs.imageLoader)
+
+            api(libs.preCompose)
+            api(libs.preCompose.viewmodel)
         }
 
-        sourceSets["commonTest"].dependencies {
+        /*sourceSets["commonTest"].dependencies {
             implementation(kotlin("test"))
             implementation(libs.turbine)
             implementation(libs.ktor.mock)
-            implementation(libs.kotlinX.testResources)
             implementation(libs.kotlinX.coroutines.test)
             implementation(libs.multiplatformSettings.test)
-        }
+        }*/
 
         sourceSets["androidMain"].dependencies {
+            implementation(libs.ktor.android)
         }
 
-        sourceSets["androidTest"].dependencies {}
+        // sourceSets["androidTest"].dependencies {}
 
-        sourceSets["iOSMain"].dependencies {
+        sourceSets["iosMain"].dependencies {
+            implementation(libs.ktor.darwin)
         }
 
-        sourceSets["iOSTest"].dependencies {}
+        sourceSets["iosTest"].dependencies {}
 
-        sourceSets["jvmMain"].dependencies {
-        }
-
-        sourceSets["jvmTest"].dependencies {}
     }
+}
+
+android {
+    compileSdk = 33
+    defaultConfig {
+        minSdk = 21
+    }
+    namespace = "com.vickikbt.shared"
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    sourceSets["main"].res.srcDirs("src/androidMain/res")
+    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 }
 
 buildkonfig {
@@ -113,25 +118,5 @@ buildkonfig {
             "API_KEY",
             gradleLocalProperties(rootDir).getProperty("api_key") ?: ""
         )
-    }
-}
-
-/**
- * Avoid error: Consumable configurations with identical capabilities within a project (other than the default configuration)
- * must have unique attributes, but configuration ':shared:podReleaseFrameworkIosFat' and [configuration ':shared:podReleaseFrameworkIOS']
- * contain identical attribute sets. Consider adding an additional attribute to one of the configurations to disambiguate them.
- * Run the 'outgoingVariants' task for more details. See https://docs.gradle.org/8.1.1/userguide/upgrading_version_7.html#unique_attribute_sets
- * for more details.
- */
-configurations {
-    named("podDebugFrameworkIosFat") {
-        attributes {
-            attribute(Attribute.of("org.gradle.fatness", String::class.java), "fat")
-        }
-    }
-    named("podReleaseFrameworkIosFat") {
-        attributes {
-            attribute(Attribute.of("org.gradle.fatness", String::class.java), "fat")
-        }
     }
 }

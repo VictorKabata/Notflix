@@ -1,6 +1,5 @@
 package com.vickikbt.shared.utils
 
-import com.vickikbt.shared.presentation.presenters.SharedSettingsPresenter
 import kotlinx.datetime.toLocalDate
 
 /**
@@ -49,15 +48,4 @@ fun Double.getRating(): String {
     val before = byTwo.toString().substringBefore(".")
     val after = byTwo.toString().substringAfter(".").split("")[1]
     return "$before.$after"
-}
-
-/**Return language code based on user selection*/
-fun getAppLanguage(settingsPresenter: SharedSettingsPresenter): String {
-    return when (settingsPresenter.selectedLanguage.value) {
-        0 -> "en"
-        1 -> "es"
-        2 -> "fr"
-        3 -> "de"
-        else -> "en"
-    }
 }
