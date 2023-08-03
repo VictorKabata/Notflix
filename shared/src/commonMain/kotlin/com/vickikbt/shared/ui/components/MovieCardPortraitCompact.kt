@@ -22,7 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.seiko.imageloader.rememberAsyncImagePainter
+import com.seiko.imageloader.rememberImagePainter
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.utils.loadImage
 
@@ -32,6 +32,8 @@ fun MovieCardPortraitCompact(
     movie: Movie,
     onItemClick: (Movie) -> Unit
 ) {
+    val painter = rememberImagePainter(movie.posterPath?.loadImage() ?: "")
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(3.dp)
@@ -49,7 +51,7 @@ fun MovieCardPortraitCompact(
                     .fillMaxWidth()
                     .height(220.dp)
                     .sizeIn(minHeight = 30.dp),
-                painter = rememberAsyncImagePainter(movie.posterPath?.loadImage() ?: ""),
+                painter = painter,
                 alignment = Alignment.Center,
                 contentScale = ContentScale.Crop,
                 contentDescription = "Trending movie poster"

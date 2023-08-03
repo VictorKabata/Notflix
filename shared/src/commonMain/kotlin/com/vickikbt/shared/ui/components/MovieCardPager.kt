@@ -32,7 +32,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.seiko.imageloader.rememberAsyncImagePainter
+import com.seiko.imageloader.rememberImagePainter
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.ui.components.ratingbar.RatingBar
 import com.vickikbt.shared.ui.components.ratingbar.RatingBarStyle
@@ -49,7 +49,7 @@ fun MovieCardPager(
     var dominantColor by remember { mutableStateOf(Color.DarkGray) }
     var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
 
-    val painter = rememberAsyncImagePainter(movie.backdropPath?.loadImage() ?: "")
+    val painter = rememberImagePainter(movie.backdropPath?.loadImage() ?: "")
 
     Box(modifier = modifier.clickable { onItemClick(movie) }) {
         //region Movie Cover Image

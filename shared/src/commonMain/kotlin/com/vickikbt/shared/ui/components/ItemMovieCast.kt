@@ -17,7 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.seiko.imageloader.rememberAsyncImagePainter
+import com.seiko.imageloader.rememberImagePainter
 import com.vickikbt.shared.domain.models.Actor
 import com.vickikbt.shared.ui.theme.TextSecondary
 import com.vickikbt.shared.utils.loadImage
@@ -25,7 +25,7 @@ import com.vickikbt.shared.utils.loadImage
 @Composable
 fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
 
-    val painter = rememberAsyncImagePainter(actor.profilePath?.loadImage() ?: "")
+    val painter = rememberImagePainter(actor.profilePath?.loadImage() ?: "")
 
     Column(
         modifier = modifier,

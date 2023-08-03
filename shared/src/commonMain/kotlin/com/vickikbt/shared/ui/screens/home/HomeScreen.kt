@@ -1,6 +1,5 @@
 package com.vickikbt.shared.ui.screens.home
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -27,7 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.vickikbt.shared.presentation.ui.components.MovieCardLandscape
+import com.vickikbt.shared.ui.components.MovieCardLandscape
 import com.vickikbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickikbt.shared.ui.components.MovieCardPortraitCompact
 import com.vickikbt.shared.ui.components.SectionSeparator

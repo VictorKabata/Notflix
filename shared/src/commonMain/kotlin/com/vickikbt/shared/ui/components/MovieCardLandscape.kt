@@ -1,4 +1,4 @@
-package com.vickikbt.shared.presentation.ui.components
+package com.vickikbt.shared.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -33,7 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.seiko.imageloader.rememberAsyncImagePainter
+import com.seiko.imageloader.rememberImagePainter
 import com.vickikbt.shared.domain.models.Movie
 import com.vickikbt.shared.ui.components.ratingbar.RatingBar
 import com.vickikbt.shared.ui.components.ratingbar.RatingBarStyle
@@ -52,6 +52,8 @@ fun MovieCardLandscape(
     var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
     var dominantSubTextColor by remember { mutableStateOf(dominantTextColor) }
 
+    val painter = rememberImagePainter(movie.backdropPath?.loadImage() ?: "")
+
     Card(
         modifier = modifier.clickable { onClickItem(movie) },
         elevation = CardDefaults.cardElevation(8.dp),
@@ -65,7 +67,7 @@ fun MovieCardLandscape(
                     .align(Alignment.Center),
                 alignment = Alignment.Center,
                 contentScale = ContentScale.Crop,
-                painter = rememberAsyncImagePainter(movie.backdropPath?.loadImage() ?: ""),
+                painter = painter,
                 contentDescription = null
             )
             //endregion
