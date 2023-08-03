@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 
 @Composable
 fun DialogPreferenceSelection(
@@ -32,53 +33,55 @@ fun DialogPreferenceSelection(
     onOptionSelected: (Int) -> Unit
 ) {
     if (showDialog) {
-        Card(
-            elevation = CardDefaults.cardElevation(8.dp),
-            shape = RoundedCornerShape(8.dp)
-        ) {
-            Column(modifier = Modifier.padding(vertical = 16.dp, horizontal = 24.dp)) {
-                Text(
-                    modifier = Modifier.fillMaxWidth(),
-                    text = title,
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    fontSize = 22.sp,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    textAlign = TextAlign.Start
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    labels.forEachIndexed { index, option ->
-
-                        ItemPreferenceOption(
-                            optionText = option,
-                            selectedOption = option == currentValue
-                        ) {
-                            onOptionSelected(index)
-                            onNegativeClick()
-                        }
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ) {
+        Dialog(onDismissRequest = { onNegativeClick() }) {
+            Card(
+                elevation = CardDefaults.cardElevation(8.dp),
+                shape = RoundedCornerShape(8.dp)
+            ) {
+                Column(modifier = Modifier.padding(vertical = 16.dp, horizontal = 24.dp)) {
                     Text(
-                        modifier = Modifier.clickable { onNegativeClick() },
-                        text = "Cancel".toUpperCase(Locale.current),
+                        modifier = Modifier.fillMaxWidth(),
+                        text = title,
                         style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.primary,
-                        fontSize = 16.sp,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        fontSize = 22.sp,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Start
                     )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        labels.forEachIndexed { index, option ->
+
+                            ItemPreferenceOption(
+                                optionText = option,
+                                selectedOption = option == currentValue
+                            ) {
+                                onOptionSelected(index)
+                                onNegativeClick()
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Text(
+                            modifier = Modifier.clickable { onNegativeClick() },
+                            text = "Cancel".toUpperCase(Locale.current),
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.primary,
+                            fontSize = 16.sp,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            textAlign = TextAlign.Center
+                        )
+                    }
                 }
             }
         }
