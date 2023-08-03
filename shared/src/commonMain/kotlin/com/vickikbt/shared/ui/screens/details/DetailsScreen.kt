@@ -3,39 +3,35 @@ package com.vickikbt.shared.ui.screens.details
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
 import com.vickikbt.shared.presentation.ui.screens.details.DetailsViewModel
 import com.vickikbt.shared.ui.components.ItemMovieCast
 import com.vickikbt.shared.ui.components.MovieCardPortrait
 import com.vickikbt.shared.ui.components.MovieRatingSection
-import com.vickikbt.shared.ui.components.appbars.COLLAPSED_TOP_BAR_HEIGHT
-import com.vickikbt.shared.ui.components.appbars.CollapsedTopBar
-import com.vickikbt.shared.ui.components.appbars.EXPANDED_TOP_BAR_HEIGHT
-import com.vickikbt.shared.ui.components.appbars.ExpandedTopBar
+import com.vickikbt.shared.ui.components.appbars.DetailsAppBar
+import com.vickikbt.shared.ui.components.collapsing_toolbar.CollapsingToolbarScaffold
+import com.vickikbt.shared.ui.components.collapsing_toolbar.ScrollStrategy
+import com.vickikbt.shared.ui.components.collapsing_toolbar.rememberCollapsingToolbarScaffoldState
 import com.vickikbt.shared.utils.getPopularity
 import com.vickikbt.shared.utils.getRating
 import moe.tlaster.precompose.navigation.Navigator
@@ -55,18 +51,8 @@ fun DetailsScreen(
 
     val movieDetailsState = viewModel.movieDetailsState.collectAsState().value
 
-    val lazyListState = rememberLazyListState()
-
-    val overlapHeightPx = with(LocalDensity.current) {
-        EXPANDED_TOP_BAR_HEIGHT.toPx() - COLLAPSED_TOP_BAR_HEIGHT.toPx()
-    }
-    val isCollapsed: Boolean by remember {
-        derivedStateOf {
-            val isFirstItemHidden =
-                lazyListState.firstVisibleItemScrollOffset > overlapHeightPx
-            isFirstItemHidden || lazyListState.firstVisibleItemIndex > 0
-        }
-    }
+    val scrollState = rememberScrollState()
+    val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
 
     Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
         if (movieDetailsState.isLoading) {
@@ -78,35 +64,34 @@ fun DetailsScreen(
                 textAlign = TextAlign.Center
             )
         } else {
-            CollapsedTopBar(
-                modifier = Modifier.zIndex(2f),
-                isCollapsed = isCollapsed,
-                movieDetails = movieDetailsState.movieDetails
-            )
+            CollapsingToolbarScaffold(modifier = Modifier.fillMaxSize(),
+                state = collapsingScrollState,
+                scrollStrategy = ScrollStrategy.ExitUntilCollapsed,
+                toolbar = {
+                    DetailsAppBar(modifier = Modifier.fillMaxWidth(),
+                        collapsingScrollState = collapsingScrollState,
+                        movieDetails = movieDetailsState.movieDetails,
+                        onNavigationIconClick = { navigator.goBack() },
+                        onShareIconClick = {},
+                        onFavoriteIconClick = {}
+                    )
+                }) {
 
-            LazyColumn(
-                modifier = Modifier.padding(bottom = 20.dp),
-                verticalArrangement = Arrangement.spacedBy(14.dp),
-                state = lazyListState
-            ) {
-                item {
-                    ExpandedTopBar(movieDetails = movieDetailsState.movieDetails)
-                }
-
-                //region Movie Ratings
-                movieDetailsState.movieDetails?.voteAverage?.let { voteAverage ->
-                    item {
+                Column(
+                    modifier = Modifier.padding(bottom = 20.dp).verticalScroll(state = scrollState),
+                    verticalArrangement = Arrangement.spacedBy(14.dp)
+                ) {
+                    //region Movie Ratings
+                    movieDetailsState.movieDetails?.voteAverage?.let { voteAverage ->
                         MovieRatingSection(
                             popularity = voteAverage.getPopularity(),
                             voteAverage = voteAverage.getRating()
                         )
                     }
-                }
-                //endregion
+                    //endregion
 
-                //region Movie Overview
-                movieDetailsState.movieDetails?.overview?.let {
-                    item {
+                    //region Movie Overview
+                    movieDetailsState.movieDetails?.overview?.let {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = "Overview",
@@ -127,12 +112,10 @@ fun DetailsScreen(
                             overflow = TextOverflow.Ellipsis,
                         )
                     }
-                }
-                //endregion
+                    //endregion
 
-                //region Movie Cast
-                movieDetailsState.movieCast?.let {
-                    item {
+                    //region Movie Cast
+                    movieDetailsState.movieCast?.let {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = "Cast",
@@ -149,12 +132,10 @@ fun DetailsScreen(
                             }
                         }
                     }
-                }
-                //endregion
+                    //endregion
 
-                //region Similar Movies
-                movieDetailsState.similarMovies?.let {
-                    item {
+                    //region Similar Movies
+                    movieDetailsState.similarMovies?.let {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = "Similar Movies",
@@ -172,8 +153,9 @@ fun DetailsScreen(
                             }
                         }
                     }
+                    //endregion
                 }
-                //endregion
+
             }
         }
     }
