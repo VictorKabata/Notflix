@@ -8,7 +8,5 @@ interface SettingsRepository {
 
     suspend fun getThemePreference(): Flow<Int?>
 
-    suspend fun getLanguagePreference(): Flow<Int?>
-
     suspend fun getImageQualityPreference(): Flow<Int?>
 }

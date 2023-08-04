@@ -2,10 +2,9 @@
 //  Koin.swift
 //  Notflix
 //
-//  Created by Michael Ndiritu on 15/09/2022.
+//  Created by Victor Kabata on 25/07/2023.
 //
 
-//
 // koin injection in swift
 // https://medium.com/@uwaisalqadri/elegant-koin-injection-for-swift-in-kotlin-multiplatform-mobile-9a803f6efb2e
 
@@ -26,11 +25,7 @@ extension KoinApplication {
 
 extension KoinApplication {
     private static let keyPaths: [PartialKeyPath<Koin>] = [
-        \.homePresenter,
-        \.detailsPresenter,
-        \.favoritesPresenter,
-        \.mainPresenter,
-        \.settingsPresenter
+        \.homeViewModel
          
     ]
     

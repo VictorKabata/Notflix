@@ -10,5 +10,5 @@
 local.properties
 
 #Cocopods
-app-iOS/Pods/
-app-iOS/Podfile.lock
+appiOS/Pods/
+appiOS/Podfile.lock
