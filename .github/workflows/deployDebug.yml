@@ -1,6 +1,7 @@
 name: Deploy Debug
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
 
