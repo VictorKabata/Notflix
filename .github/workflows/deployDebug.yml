@@ -50,4 +50,4 @@ jobs:
           appId: ${{secrets.FIREBASE_APP_ID}}
           token: ${{secrets.FIREBASE_TOKEN}}
           groups: production #testers
-          file: androidApp/build/outputs/apk/debug/androidApp-debug.apk
+          file: androidApp/build/outputs/apk/debug/appAndroid-debug.apk
