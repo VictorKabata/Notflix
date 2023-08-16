@@ -15,7 +15,6 @@ enum class WindowSize {
     MEDIUM,
     EXPANDED;
 
-    // Factory method that creates an instance of the class based on window width
     companion object {
         fun basedOnWidth(windowWidth: Dp): WindowSize {
             return when {

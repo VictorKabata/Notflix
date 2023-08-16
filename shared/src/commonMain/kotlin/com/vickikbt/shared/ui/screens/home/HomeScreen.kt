@@ -37,12 +37,17 @@ import com.vickikbt.shared.ui.components.MovieCardPagerIndicator
 import com.vickikbt.shared.ui.components.MovieCardPortraitCompact
 import com.vickikbt.shared.ui.components.SectionSeparator
 import com.vickikbt.shared.ui.theme.DarkPrimaryColor
+import com.vickikbt.shared.utils.WindowSize
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
+fun HomeScreen(
+    navigator: Navigator,
+    windowSize: WindowSize = WindowSize.COMPACT,
+    viewModel: HomeViewModel = koinInject()
+) {
     val scrollState = rememberScrollState()
 
     LaunchedEffect(key1 = true) {

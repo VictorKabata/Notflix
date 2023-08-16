@@ -31,6 +31,7 @@ import com.vickikbt.shared.ui.components.appbars.DetailsAppBar
 import com.vickikbt.shared.ui.components.collapsing_toolbar.CollapsingToolbarScaffold
 import com.vickikbt.shared.ui.components.collapsing_toolbar.ScrollStrategy
 import com.vickikbt.shared.ui.components.collapsing_toolbar.rememberCollapsingToolbarScaffoldState
+import com.vickikbt.shared.utils.WindowSize
 import com.vickikbt.shared.utils.getPopularity
 import com.vickikbt.shared.utils.getRating
 import moe.tlaster.precompose.navigation.Navigator
@@ -39,6 +40,7 @@ import org.koin.compose.koinInject
 @Composable
 fun DetailsScreen(
     navigator: Navigator,
+    windowSize: WindowSize=WindowSize.COMPACT,
     viewModel: DetailsViewModel = koinInject(),
     movieId: Int
 ) {

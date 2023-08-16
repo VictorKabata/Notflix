@@ -5,7 +5,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import com.vickikbt.shared.utils.WindowSize
 
@@ -23,23 +22,18 @@ private val LightColorPalette = lightColorScheme(
     onSurface = TextPrimary
 )
 
-val LocalWindowSize = compositionLocalOf { WindowSize.COMPACT }
-
 @Composable
 fun NotflixTheme(
-    windowSize: WindowSize,
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
     val colorScheme = if (darkTheme) DarkColorPalette else LightColorPalette
 
-    CompositionLocalProvider(LocalWindowSize provides windowSize) {
-        MaterialTheme(
-            colorScheme = colorScheme,
-            // typography = Typography,
-            shapes = Shapes
-        ) {
-            content()
-        }
+    MaterialTheme(
+        colorScheme = colorScheme,
+        // typography = Typography,
+        shapes = Shapes
+    ) {
+        content()
     }
 }
