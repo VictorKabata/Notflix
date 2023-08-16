@@ -46,7 +46,8 @@ import org.koin.compose.koinInject
 fun HomeScreen(
     navigator: Navigator,
     windowSize: WindowSize = WindowSize.COMPACT,
-    viewModel: HomeViewModel = koinInject()
+    viewModel: HomeViewModel = koinInject(),
+    paddingValues: PaddingValues
 ) {
     val scrollState = rememberScrollState()
 
@@ -63,6 +64,7 @@ fun HomeScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.surface)
+            .padding(paddingValues)
     ) {
         if (homeUiState.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))

@@ -1,5 +1,6 @@
 package com.vickikbt.shared.ui.navigation
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
 import com.vickikbt.shared.ui.screens.details.DetailsScreen
@@ -12,10 +13,18 @@ import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.path
 
 @Composable
-fun Navigation(navigator: Navigator, windowSize: WindowSize) {
+fun Navigation(
+    navigator: Navigator,
+    windowSize: WindowSize,
+    paddingValues: PaddingValues = PaddingValues()
+) {
     NavHost(navigator = navigator, initialRoute = NavigationItem.Home.route) {
         scene(NavigationItem.Home.route) {
-            HomeScreen(navigator = navigator, windowSize = windowSize)
+            HomeScreen(
+                navigator = navigator,
+                windowSize = windowSize,
+                paddingValues = paddingValues
+            )
         }
 
         scene(NavigationItem.Favorites.route) {

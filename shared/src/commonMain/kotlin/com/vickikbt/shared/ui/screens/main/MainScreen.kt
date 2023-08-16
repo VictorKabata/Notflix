@@ -2,6 +2,7 @@ package com.vickikbt.shared.ui.screens.main
 
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
 import com.vickikbt.shared.presentation.ui.screens.main.MainViewModel
 import com.vickikbt.shared.ui.components.BottomNavBar
+import com.vickikbt.shared.ui.components.NavRailBar
 import com.vickikbt.shared.ui.navigation.Navigation
 import com.vickikbt.shared.ui.theme.NotflixTheme
 import com.vickikbt.shared.utils.WindowSize
@@ -48,16 +50,16 @@ fun MainScreen(viewModel: MainViewModel = koinInject()) {
                     if (windowSize == WindowSize.COMPACT) {
                         BottomNavBar(bottomNavItems = topLevelDestinations, navigator = navigator)
                     } else {
-                        // rail navigation
+                        NavRailBar(navigationItems = topLevelDestinations, navigator = navigator)
                     }
                 }
             }
-        ) {
+        ) { paddingValues ->
             Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
                 BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
                     windowSize = WindowSize.basedOnWidth(this.minWidth)
 
-                    Navigation(navigator = navigator, windowSize = windowSize)
+                    Navigation(navigator = navigator, windowSize = windowSize, paddingValues=paddingValues)
                 }
             }
         }
