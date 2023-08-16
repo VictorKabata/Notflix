@@ -1,5 +1,6 @@
 package com.vickikbt.shared.ui.screens.main
 
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -13,6 +14,7 @@ import com.vickikbt.shared.ui.components.BottomNavBar
 import com.vickikbt.shared.ui.navigation.Navigation
 import com.vickikbt.shared.ui.theme.LocalWindowSize
 import com.vickikbt.shared.ui.theme.NotflixTheme
+import com.vickikbt.shared.utils.WindowSize
 import io.github.aakira.napier.Napier
 import moe.tlaster.precompose.navigation.rememberNavigator
 import org.koin.compose.koinInject
@@ -41,6 +43,8 @@ fun MainScreen(viewModel: MainViewModel = koinInject()) {
         Napier.e(tag = "VicKbt", message = "isTopLevel: $isTopLevelDestination")
         Napier.e(tag = "VicKbt", message = "Window size: $windowSize")
 
+
+
         Scaffold(
             bottomBar = {
                 if (isTopLevelDestination) {
@@ -49,7 +53,12 @@ fun MainScreen(viewModel: MainViewModel = koinInject()) {
             }
         ) {
             Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
-                Navigation(navigator = navigator)
+                BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+                    val some = WindowSize.basedOnWidth(this.minWidth)
+                    Napier.e(tag = "VicKbt", message = "New Window size: $some")
+
+                    Navigation(navigator = navigator)
+                }
             }
         }
     }
