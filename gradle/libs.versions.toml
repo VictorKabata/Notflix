@@ -11,7 +11,7 @@ firebasePerformance = "1.4.2"
 nativeCocoapod = "1.9.0"
 
 # Kotlin Multiplatform Version
-kotlinxCoroutines = "1.6.4"
+kotlinxCoroutines = "1.7.3"
 koinCore = "3.4.2"
 koinCompose = "1.0.3"
 koinAndroid = "3.4.2"
