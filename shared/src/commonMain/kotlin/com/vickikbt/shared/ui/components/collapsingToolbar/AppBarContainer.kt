@@ -1,4 +1,4 @@
-package com.vickikbt.shared.ui.components.collapsing_toolbar
+package com.vickikbt.shared.ui.components.collapsingToolbar
 
 import androidx.compose.foundation.gestures.ScrollableDefaults
 import androidx.compose.runtime.Composable
@@ -28,10 +28,10 @@ import kotlin.math.max
 )
 @Composable
 fun AppbarContainer(
-	modifier: Modifier = Modifier,
-	scrollStrategy: ScrollStrategy,
-	collapsingToolbarState: CollapsingToolbarState,
-	content: @Composable AppbarContainerScope.() -> Unit
+    modifier: Modifier = Modifier,
+    scrollStrategy: ScrollStrategy,
+    collapsingToolbarState: CollapsingToolbarState,
+    content: @Composable AppbarContainerScope.() -> Unit
 ) {
 	AppBarContainer(
 		modifier = modifier,
@@ -50,11 +50,11 @@ fun AppbarContainer(
 )
 @Composable
 fun AppBarContainer(
-	modifier: Modifier = Modifier,
-	scrollStrategy: ScrollStrategy,
-	/** The state of a connected collapsing toolbar */
+    modifier: Modifier = Modifier,
+    scrollStrategy: ScrollStrategy,
+    /** The state of a connected collapsing toolbar */
 	collapsingToolbarState: CollapsingToolbarState,
-	content: @Composable AppbarContainerScope.() -> Unit
+    content: @Composable AppbarContainerScope.() -> Unit
 ) {
 	val offsetY = remember { mutableStateOf(0) }
 	val flingBehavior = ScrollableDefaults.flingBehavior()
@@ -77,7 +77,7 @@ interface AppbarContainerScope {
 
 internal class AppbarContainerScopeImpl(
 	private val nestedScrollConnection: NestedScrollConnection
-): AppbarContainerScope {
+) : AppbarContainerScope {
 	override fun Modifier.appBarBody(): Modifier {
 		return this
 			.then(AppBarBodyMarkerModifier)
@@ -85,7 +85,7 @@ internal class AppbarContainerScopeImpl(
 	}
 }
 
-private object AppBarBodyMarkerModifier: ParentDataModifier {
+private object AppBarBodyMarkerModifier : ParentDataModifier {
 	override fun Density.modifyParentData(parentData: Any?): Any {
 		return AppBarBodyMarker
 	}
@@ -97,10 +97,10 @@ private class AppbarMeasurePolicy(
 	private val scrollStrategy: ScrollStrategy,
 	private val toolbarState: CollapsingToolbarState,
 	private val offsetY: State<Int>
-): MeasurePolicy {
+) : MeasurePolicy {
 	override fun MeasureScope.measure(
-		measurables: List<Measurable>,
-		constraints: Constraints
+	    measurables: List<Measurable>,
+	    constraints: Constraints
 	): MeasureResult {
 		var width = 0
 		var height = 0
@@ -109,33 +109,36 @@ private class AppbarMeasurePolicy(
 
 		val nonToolbars = measurables.filter {
 			val data = it.parentData
-			if(data != AppBarBodyMarker) {
-				if(toolbarPlaceable != null)
-					throw IllegalStateException("There cannot exist multiple toolbars under single parent")
+			if (data != AppBarBodyMarker) {
+				if (toolbarPlaceable != null) {
+				    throw IllegalStateException("There cannot exist multiple toolbars under single parent")
+				}
 
-				val placeable = it.measure(constraints.copy(
+				val placeable = it.measure(
+				    constraints.copy(
 					minWidth = 0,
 					minHeight = 0
-				))
+				)
+				)
 				width = max(width, placeable.width)
 				height = max(height, placeable.height)
 
 				toolbarPlaceable = placeable
 
 				false
-			}else{
+			} else {
 				true
 			}
 		}
 
 		val placeables = nonToolbars.map { measurable ->
-			val childConstraints = if(scrollStrategy == ScrollStrategy.ExitUntilCollapsed) {
+			val childConstraints = if (scrollStrategy == ScrollStrategy.ExitUntilCollapsed) {
 				constraints.copy(
 					minWidth = 0,
 					minHeight = 0,
 					maxHeight = max(0, constraints.maxHeight - toolbarState.minHeight)
 				)
-			}else{
+			} else {
 				constraints.copy(
 					minWidth = 0,
 					minHeight = 0

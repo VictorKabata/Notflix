@@ -14,12 +14,11 @@ import com.vickikbt.shared.utils.getRating
 
 @Composable
 fun MovieCardPortrait(movie: Movie, onItemClick: (Movie) -> Unit) {
-
     Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
-
         MovieCardPortraitCompact(
             movie = movie,
-            onItemClick = { onItemClick(movie) })
+            onItemClick = { onItemClick(movie) }
+        )
 
         // rating bar
         RatingBar(

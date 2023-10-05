@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
 import com.vickikbt.shared.domain.models.MovieDetails
-import com.vickikbt.shared.ui.components.collapsing_toolbar.CollapsingToolbarScaffoldState
+import com.vickikbt.shared.ui.components.collapsingToolbar.CollapsingToolbarScaffoldState
 import com.vickikbt.shared.utils.commonImageLoader
 import com.vickikbt.shared.utils.getMovieDuration
 import com.vickikbt.shared.utils.loadImage
@@ -168,8 +168,8 @@ fun DetailsAppBar(
                 onClick = {
                     movieDetails?.let { onFavoriteIconClick(it) }
                     isFavourite?.let { isFavourite = !it }
-                })
-            {
+                }
+            ) {
                 Icon(
                     imageVector = Icons.Rounded.FavoriteBorder,
                     contentDescription = "Favourite",
@@ -179,7 +179,4 @@ fun DetailsAppBar(
         },
         colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = backgroundColor)
     )
-
 }
-
-

@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.PagerState
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,67 +51,69 @@ fun MovieCardPager(
     var dominantColor by remember { mutableStateOf(Color.DarkGray) }
     var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
 
-    Box(modifier = modifier.clickable { onItemClick(movie) }) {
-        //region Movie Cover Image
-        commonImageLoader {
-            val painter = rememberImagePainter(movie.backdropPath?.loadImage() ?: "")
+    Card(modifier = modifier.clickable { onItemClick(movie) }) {
+        Box {
+            //region Movie Cover Image
+            commonImageLoader {
+                val painter = rememberImagePainter(movie.backdropPath?.loadImage() ?: "")
 
-            Image(
+                Image(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .align(Alignment.Center),
+                    alignment = Alignment.Center,
+                    contentScale = ContentScale.Crop,
+                    painter = painter,
+                    contentDescription = null
+                )
+            }
+            //endregion
+
+            //region Fading Edge Box
+            Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .align(Alignment.Center),
-                alignment = Alignment.Center,
-                contentScale = ContentScale.Crop,
-                painter = painter,
-                contentDescription = null
-            )
-        }
-        //endregion
-
-        //region Fading Edge Box
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(190.dp)
-                .align(Alignment.BottomCenter)
-                .background(
-                    Brush.verticalGradient(
-                        listOf(Color.Transparent, dominantColor)
+                    .fillMaxWidth()
+                    .height(190.dp)
+                    .align(Alignment.BottomCenter)
+                    .background(
+                        Brush.verticalGradient(
+                            listOf(Color.Transparent, dominantColor)
+                        )
                     )
-                )
-        )
-        //endregion
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 8.dp)
-                .align(Alignment.BottomCenter),
-            verticalArrangement = Arrangement.spacedBy(2.dp)
-        ) {
-            Text(
-                modifier = Modifier,
-                text = movie.title ?: "Unknown movie",
-                fontSize = 32.sp,
-                maxLines = 2,
-                style = MaterialTheme.typography.titleMedium,
-                overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Start,
-                color = dominantTextColor,
-                lineHeight = 30.sp
             )
+            //endregion
 
-            movie.voteAverage?.let {
-                RatingBar(
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 12.dp, vertical = 8.dp)
+                    .align(Alignment.BottomCenter),
+                verticalArrangement = Arrangement.spacedBy(2.dp)
+            ) {
+                Text(
                     modifier = Modifier,
-                    value = it.getRating().toFloat(),
-                    numOfStars = 5,
-                    size = 15.dp,
-                    spaceBetween = 1.dp,
-                    stepSize = StepSize.HALF,
-                    isIndicator = true,
-                    style = RatingBarStyle.Fill()
+                    text = movie.title ?: "Unknown movie",
+                    fontSize = 28.sp,
+                    maxLines = 2,
+                    style = MaterialTheme.typography.titleMedium,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Start,
+                    color = dominantTextColor,
+                    lineHeight = 30.sp
                 )
+
+                movie.voteAverage?.let {
+                    RatingBar(
+                        modifier = Modifier,
+                        value = it.getRating().toFloat(),
+                        numOfStars = 5,
+                        size = 13.dp,
+                        spaceBetween = 1.dp,
+                        stepSize = StepSize.HALF,
+                        isIndicator = true,
+                        style = RatingBarStyle.Fill()
+                    )
+                }
             }
         }
     }
@@ -136,8 +139,11 @@ fun MovieCardPagerIndicator(
         repeat(pagerState.pageCount) { currentPage ->
             Canvas(modifier = Modifier.size(indicatorSize), onDraw = {
                 drawCircle(
-                    color = if (pagerState.currentPage == currentPage) activeColor
-                    else inactiveColor
+                    color = if (pagerState.currentPage == currentPage) {
+                        activeColor
+                    } else {
+                        inactiveColor
+                    }
                 )
             })
         }

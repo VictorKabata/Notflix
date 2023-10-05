@@ -37,12 +37,18 @@ import com.vickikbt.shared.ui.components.MovieCardPagerIndicator
 import com.vickikbt.shared.ui.components.MovieCardPortraitCompact
 import com.vickikbt.shared.ui.components.SectionSeparator
 import com.vickikbt.shared.ui.theme.DarkPrimaryColor
+import com.vickikbt.shared.utils.WindowSize
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
+fun HomeScreen(
+    navigator: Navigator,
+    windowSize: WindowSize = WindowSize.COMPACT,
+    viewModel: HomeViewModel = koinInject(),
+    paddingValues: PaddingValues
+) {
     val scrollState = rememberScrollState()
 
     LaunchedEffect(key1 = true) {
@@ -58,6 +64,7 @@ fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
         modifier = Modifier
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.surface)
+            .padding(paddingValues)
     ) {
         if (homeUiState.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
@@ -79,9 +86,14 @@ fun HomeScreen(navigator: Navigator, viewModel: HomeViewModel = koinInject()) {
                 homeUiState.nowPlayingMovies?.let { nowPlayingMovies ->
                     val pagerState = rememberPagerState(pageCount = { nowPlayingMovies.size })
 
-                    HorizontalPager(state = pagerState) { currentPage ->
+                    HorizontalPager(
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
+                        state = pagerState,
+                        contentPadding = PaddingValues(horizontal = 16.dp),
+                        pageSpacing = 8.dp
+                    ) { currentPage ->
                         MovieCardPager(
-                            modifier = Modifier.fillMaxWidth().height(360.dp),
+                            modifier = Modifier.fillMaxWidth().height(280.dp),
                             movie = nowPlayingMovies[currentPage]
                         ) { movie ->
                             navigator.navigate("/details/${movie.id}")

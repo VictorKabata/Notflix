@@ -94,7 +94,8 @@ internal fun RatingBar(
         with(density) { size.toPx() }
     }
 
-    Row(modifier = modifier
+    Row(
+        modifier = modifier
         .onSizeChanged { rowSize = it.toSize() }
         .pointerInput(Unit) {
             detectHorizontalDragGestures(
@@ -112,16 +113,21 @@ internal fun RatingBar(
                         RatingBarUtils.calculateStars(
                             dragX,
                             paddingInPx,
-                            numOfStars, stepSize, starSizeInPx
+                            numOfStars,
+                            stepSize,
+                            starSizeInPx
                         )
 
-                    if (direction == LayoutDirection.Rtl) calculatedStars =
+                    if (direction == LayoutDirection.Rtl) {
+                        calculatedStars =
                         numOfStars - calculatedStars
+                    }
                     onValueChange(calculatedStars)
                     lastDraggedValue = calculatedStars
                 }
             )
-        }) {
+        }
+    ) {
         ComposeStars(
             value,
             numOfStars,
@@ -149,8 +155,10 @@ fun ComposeStars(
     val ratingPerStar = 1f
     var remainingRating = value
 
-    Row(modifier = Modifier
-        .semantics { starRating = value }) {
+    Row(
+        modifier = Modifier
+        .semantics { starRating = value }
+    ) {
         for (i in 1..numOfStars) {
             val starRating = when {
                 remainingRating == 0f -> {
@@ -179,7 +187,8 @@ fun ComposeStars(
                     )
                     .size(size = size)
                     .testTag("RatingStar"),
-                painterEmpty = painterEmpty, painterFilled = painterFilled
+                painterEmpty = painterEmpty,
+                painterFilled = painterFilled
             )
         }
     }
