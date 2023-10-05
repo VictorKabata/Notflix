@@ -28,7 +28,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.presentation.ui.screens.home.HomeViewModel
@@ -41,7 +40,6 @@ import com.vickikbt.shared.ui.theme.DarkPrimaryColor
 import com.vickikbt.shared.utils.WindowSize
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
-import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

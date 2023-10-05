@@ -139,8 +139,11 @@ fun MovieCardPagerIndicator(
         repeat(pagerState.pageCount) { currentPage ->
             Canvas(modifier = Modifier.size(indicatorSize), onDraw = {
                 drawCircle(
-                    color = if (pagerState.currentPage == currentPage) activeColor
-                    else inactiveColor
+                    color = if (pagerState.currentPage == currentPage) {
+                        activeColor
+                    } else {
+                        inactiveColor
+                    }
                 )
             })
         }

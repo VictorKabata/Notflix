@@ -1,4 +1,4 @@
-package com.vickikbt.shared.ui.components.collapsing_toolbar
+package com.vickikbt.shared.ui.components.collapsingToolbar
 
 import androidx.compose.foundation.gestures.ScrollableDefaults
 import androidx.compose.runtime.Composable
@@ -29,7 +29,7 @@ class CollapsingToolbarScaffoldState(
 	internal val offsetYState = mutableStateOf(initialOffsetY)
 }
 
-private class CollapsingToolbarScaffoldStateSaver: Saver<CollapsingToolbarScaffoldState, List<Any>> {
+private class CollapsingToolbarScaffoldStateSaver : Saver<CollapsingToolbarScaffoldState, List<Any>> {
 	override fun restore(value: List<Any>): CollapsingToolbarScaffoldState =
 		CollapsingToolbarScaffoldState(
 			CollapsingToolbarState(value[0] as Int),
@@ -45,7 +45,7 @@ private class CollapsingToolbarScaffoldStateSaver: Saver<CollapsingToolbarScaffo
 
 @Composable
 fun rememberCollapsingToolbarScaffoldState(
-	toolbarState: CollapsingToolbarState = rememberCollapsingToolbarState()
+    toolbarState: CollapsingToolbarState = rememberCollapsingToolbarState()
 ): CollapsingToolbarScaffoldState {
 	return rememberSaveable(toolbarState, saver = CollapsingToolbarScaffoldStateSaver()) {
 		CollapsingToolbarScaffoldState(toolbarState)
@@ -59,14 +59,14 @@ interface CollapsingToolbarScaffoldScope {
 
 @Composable
 fun CollapsingToolbarScaffold(
-	modifier: Modifier,
-	state: CollapsingToolbarScaffoldState,
-	scrollStrategy: ScrollStrategy,
-	enabled: Boolean = true,
-	toolbarModifier: Modifier = Modifier,
-	toolbarClipToBounds: Boolean = true,
-	toolbar: @Composable CollapsingToolbarScope.() -> Unit,
-	body: @Composable CollapsingToolbarScaffoldScope.() -> Unit
+    modifier: Modifier,
+    state: CollapsingToolbarScaffoldState,
+    scrollStrategy: ScrollStrategy,
+    enabled: Boolean = true,
+    toolbarModifier: Modifier = Modifier,
+    toolbarClipToBounds: Boolean = true,
+    toolbar: @Composable CollapsingToolbarScope.() -> Unit,
+    body: @Composable CollapsingToolbarScaffoldScope.() -> Unit
 ) {
 	val flingBehavior = ScrollableDefaults.flingBehavior()
 	val layoutDirection = LocalLayoutDirection.current
@@ -159,7 +159,7 @@ fun CollapsingToolbarScaffold(
 	}
 }
 
-internal object CollapsingToolbarScaffoldScopeInstance: CollapsingToolbarScaffoldScope {
+internal object CollapsingToolbarScaffoldScopeInstance : CollapsingToolbarScaffoldScope {
 	@ExperimentalToolbarApi
 	override fun Modifier.align(alignment: Alignment): Modifier =
 		this.then(ScaffoldChildAlignmentModifier(alignment))

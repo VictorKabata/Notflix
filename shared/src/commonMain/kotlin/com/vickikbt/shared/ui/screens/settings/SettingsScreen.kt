@@ -30,7 +30,6 @@ private val imageQualityLabels = listOf("High Quality", "Low Quality")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
-
     LaunchedEffect(key1 = viewModel) {
         viewModel.getThemePreference()
         viewModel.getImageQualityPreference()
@@ -57,11 +56,13 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
                     onClick = { showThemeDialog.value = !showThemeDialog.value }
                 )
 
-                if (showThemeDialog.value) ChangeTheme(
+                if (showThemeDialog.value) {
+                    ChangeTheme(
                     viewModel = viewModel,
                     showDialog = showThemeDialog,
                     currentValue = themeLabel
                 )
+                }
 
                 TextPreference(
                     icon = Icons.Rounded.Image,
@@ -70,11 +71,13 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
                     onClick = { showImageQualityDialog.value = !showImageQualityDialog.value }
                 )
 
-                if (showImageQualityDialog.value) ChangeImageQuality(
+                if (showImageQualityDialog.value) {
+                    ChangeImageQuality(
                     viewModel = viewModel,
                     showDialog = showImageQualityDialog,
                     currentValue = imageQualityLabel
                 )
+                }
             }
         }
     }

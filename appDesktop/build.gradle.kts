@@ -7,7 +7,6 @@ dependencies {
     implementation(project(":shared"))
 
     implementation(compose.desktop.currentOs)
-
 }
 
 compose.desktop {

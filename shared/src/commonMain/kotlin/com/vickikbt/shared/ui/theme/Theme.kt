@@ -5,8 +5,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.compositionLocalOf
-import com.vickikbt.shared.utils.WindowSize
 
 private val DarkColorPalette = darkColorScheme(
     primary = DarkPrimaryColor,

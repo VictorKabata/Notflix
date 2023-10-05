@@ -1,4 +1,4 @@
-package com.vickikbt.shared.ui.components.collapsing_toolbar
+package com.vickikbt.shared.ui.components.collapsingToolbar
 
 import androidx.compose.animation.core.AnimationState
 import androidx.compose.animation.core.animateTo
@@ -156,14 +156,14 @@ class CollapsingToolbarState(
 	override fun dispatchRawDelta(delta: Float): Float = scrollableState.dispatchRawDelta(delta)
 
 	override suspend fun scroll(
-		scrollPriority: MutatePriority,
-		block: suspend ScrollScope.() -> Unit
+	    scrollPriority: MutatePriority,
+	    block: suspend ScrollScope.() -> Unit
 	) = scrollableState.scroll(scrollPriority, block)
 }
 
 @Composable
 fun rememberCollapsingToolbarState(
-	initial: Int = Int.MAX_VALUE
+    initial: Int = Int.MAX_VALUE
 ): CollapsingToolbarState {
 	return remember {
 		CollapsingToolbarState(
@@ -174,10 +174,10 @@ fun rememberCollapsingToolbarState(
 
 @Composable
 fun CollapsingToolbar(
-	modifier: Modifier = Modifier,
-	clipToBounds: Boolean = true,
-	collapsingToolbarState: CollapsingToolbarState,
-	content: @Composable CollapsingToolbarScope.() -> Unit
+    modifier: Modifier = Modifier,
+    clipToBounds: Boolean = true,
+    collapsingToolbarState: CollapsingToolbarState,
+    content: @Composable CollapsingToolbarScope.() -> Unit
 ) {
 	val measurePolicy = remember(collapsingToolbarState) {
 		CollapsingToolbarMeasurePolicy(collapsingToolbarState)
@@ -200,8 +200,8 @@ private class CollapsingToolbarMeasurePolicy(
 	private val collapsingToolbarState: CollapsingToolbarState
 ) : MeasurePolicy {
 	override fun MeasureScope.measure(
-		measurables: List<Measurable>,
-		constraints: Constraints
+	    measurables: List<Measurable>,
+	    constraints: Constraints
 	): MeasureResult {
 		val placeables = measurables.map {
 			it.measure(
@@ -308,7 +308,8 @@ internal class RoadModifier(
 ) : ParentDataModifier {
 	override fun Density.modifyParentData(parentData: Any?): Any {
 		return CollapsingToolbarRoadData(
-			this@RoadModifier.whenCollapsed, this@RoadModifier.whenExpanded,
+			this@RoadModifier.whenCollapsed,
+            this@RoadModifier.whenExpanded,
 			(parentData as? CollapsingToolbarData)?.progressListener
 		)
 	}

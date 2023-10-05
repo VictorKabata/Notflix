@@ -91,7 +91,6 @@ kotlin {
         sourceSets["jvmMain"].dependencies {}
 
         sourceSets["jvmTest"].dependencies {}
-
     }
 }
 
