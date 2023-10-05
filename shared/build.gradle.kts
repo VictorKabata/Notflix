@@ -14,7 +14,7 @@ plugins {
 kotlin {
     targetHierarchy.default()
 
-    android()
+    androidTarget()
 
     iosX64()
     iosArm64()
@@ -32,8 +32,6 @@ kotlin {
             baseName = "shared"
             isStatic = true
         }
-
-        // extraSpecAttributes["resources"] = "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
     }
 
     sourceSets {
