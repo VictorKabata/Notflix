@@ -33,7 +33,6 @@ fun MovieCardPortraitCompact(
     movie: Movie,
     onItemClick: (Movie) -> Unit
 ) {
-
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(3.dp)

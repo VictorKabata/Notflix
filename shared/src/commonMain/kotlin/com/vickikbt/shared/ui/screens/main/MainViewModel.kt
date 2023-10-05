@@ -36,5 +36,4 @@ class MainViewModel(private val settingsRepository: SettingsRepository) : KoinCo
             Napier.e("ERROR getting theme: ${e.message}")
         }
     }
-
 }

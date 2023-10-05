@@ -34,7 +34,9 @@ fun Int?.getMovieDuration(): String? {
         val runtime = if (hours <= 1) "${hours}hr ${minutes}mins" else "${hours}hrs ${minutes}mins"
 
         runtime
-    } else null
+    } else {
+        null
+    }
 }
 
 /**Convert movie rating to a value out of 100% eg. 8 => 80% */
