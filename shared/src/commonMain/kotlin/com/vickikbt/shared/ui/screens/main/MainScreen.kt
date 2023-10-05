@@ -8,6 +8,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
 import com.vickikbt.shared.presentation.ui.screens.main.MainViewModel
 import com.vickikbt.shared.ui.components.BottomNavBar
@@ -30,6 +31,7 @@ fun MainScreen(viewModel: MainViewModel = koinInject()) {
 
         val topLevelDestinations = listOf(
             NavigationItem.Home,
+            NavigationItem.Search,
             NavigationItem.Favorites,
             NavigationItem.Settings
         )
@@ -40,7 +42,11 @@ fun MainScreen(viewModel: MainViewModel = koinInject()) {
         Scaffold(
             bottomBar = {
                 if (isTopLevelDestination) {
-                    BottomNavBar(bottomNavItems = topLevelDestinations, navigator = navigator)
+                    BottomNavBar(
+                        modifier = Modifier.alpha(0.95F),
+                        bottomNavItems = topLevelDestinations,
+                        navigator = navigator
+                    )
                 }
             }
         ) {
