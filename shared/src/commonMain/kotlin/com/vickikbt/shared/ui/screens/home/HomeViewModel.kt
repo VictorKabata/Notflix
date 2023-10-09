@@ -2,6 +2,7 @@ package com.vickikbt.shared.presentation.ui.screens.home
 
 import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.utils.HomeUiState
+import com.vickikbt.shared.utils.SearchUiState
 import com.vickikbt.shared.utils.isLoading
 import com.vickikbt.shared.utils.onFailure
 import com.vickikbt.shared.utils.onSuccess
@@ -20,6 +21,12 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
 
     private val _homeUiState = MutableStateFlow(HomeUiState(isLoading = true))
     val homeUiState = _homeUiState.asStateFlow()
+
+    private val _searchUiState = MutableStateFlow(SearchUiState(isLoading = false))
+    val searchUiState = _searchUiState.asStateFlow()
+
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery = _searchQuery.asStateFlow()
 
     private val viewModelScope = CoroutineScope(Dispatchers.IO)
 
@@ -73,5 +80,21 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
                 _homeUiState.update { it.copy(error = error.message) }
             }
         }
+    }
+
+    fun searchMovie(movieName: String) = viewModelScope.launch(coroutineExceptionHandler) {
+        moviesRepository.searchMovie(movieName = movieName).collectLatest { moviesResult ->
+            moviesResult.isLoading { isLoading ->
+                _searchUiState.update { it.copy(isLoading = isLoading) }
+            }.onSuccess { movies ->
+                _searchUiState.update { it.copy(movieResults = movies) }
+            }.onFailure { error ->
+                _searchUiState.update { it.copy(error = error.message) }
+            }
+        }
+    }
+
+    fun updateSearchQuery(searchQuery: String) {
+        _searchQuery.value = searchQuery
     }
 }

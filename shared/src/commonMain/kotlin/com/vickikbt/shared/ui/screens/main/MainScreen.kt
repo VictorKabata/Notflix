@@ -1,6 +1,7 @@
 package com.vickikbt.shared.ui.screens.main
 
 import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -12,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
 import com.vickikbt.shared.presentation.ui.screens.main.MainViewModel
 import com.vickikbt.shared.ui.components.BottomNavBar
@@ -40,23 +42,31 @@ fun MainScreen(viewModel: MainViewModel = koinInject()) {
 
         val isTopLevelDestination =
             navigator.currentEntry.collectAsState(null).value?.route?.route in topLevelDestinations.map { it.route }
+        val showNavigationRail = windowSize != WindowSize.COMPACT
 
-        Scaffold(
-            bottomBar = {
-                if (isTopLevelDestination) {
-                    if (windowSize == WindowSize.COMPACT) {
+        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
+            Scaffold(
+                bottomBar = {
+                    if (isTopLevelDestination && !showNavigationRail) {
                         BottomNavBar(bottomNavItems = topLevelDestinations, navigator = navigator)
-                    } else {
-                        NavRailBar(navigationItems = topLevelDestinations, navigator = navigator)
                     }
                 }
-            }
-        ) { paddingValues ->
-            Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
+            ) { paddingValues ->
                 BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
                     windowSize = WindowSize.basedOnWidth(this.minWidth)
 
-                    Navigation(navigator = navigator, windowSize = windowSize, paddingValues = paddingValues)
+                    Navigation(
+                        navigator = navigator,
+                        windowSize = windowSize,
+                        paddingValues = PaddingValues(start = if (showNavigationRail) 80.dp else 0.dp)
+                    )
+
+                    if (showNavigationRail) {
+                        NavRailBar(
+                        navigationItems = topLevelDestinations,
+                        navigator = navigator
+                    )
+                    }
                 }
             }
         }

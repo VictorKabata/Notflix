@@ -23,9 +23,7 @@ fun BottomNavBar(
     bottomNavItems: List<NavigationItem>
 ) {
     NavigationBar(
-        modifier = modifier
-            .fillMaxWidth()
-            .alpha(0.95F),
+        modifier = modifier.fillMaxWidth(),
         containerColor = MaterialTheme.colorScheme.surface.copy(alpha = .85f)
     ) {
         bottomNavItems.iterator().forEach { item ->
