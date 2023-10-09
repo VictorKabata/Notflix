@@ -25,6 +25,9 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
     private val _searchUiState = MutableStateFlow(SearchUiState(isLoading = false))
     val searchUiState = _searchUiState.asStateFlow()
 
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery = _searchQuery.asStateFlow()
+
     private val viewModelScope = CoroutineScope(Dispatchers.IO)
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
@@ -89,5 +92,9 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
                 _searchUiState.update { it.copy(error = error.message) }
             }
         }
+    }
+
+    fun updateSearchQuery(searchQuery: String) {
+        _searchQuery.value = searchQuery
     }
 }

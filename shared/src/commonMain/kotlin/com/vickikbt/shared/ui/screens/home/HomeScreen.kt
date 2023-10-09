@@ -20,6 +20,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.CircularProgressIndicator
@@ -28,6 +29,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -40,7 +42,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.vickikbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickikbt.shared.ui.components.MovieCardLandscape
 import com.vickikbt.shared.ui.components.MovieCardPager
@@ -63,7 +67,7 @@ fun HomeScreen(
 ) {
     val scrollState = rememberScrollState()
 
-    LaunchedEffect(key1 = true) {
+    LaunchedEffect(key1 = viewModel) {
         viewModel.fetchNowPlayingMovies()
         viewModel.fetchTrendingMovies()
         viewModel.fetchUpcomingMovies()
@@ -80,7 +84,7 @@ fun HomeScreen(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(
-            space = 8.dp, alignment = Alignment.CenterVertically
+            space = 6.dp, alignment = Alignment.CenterVertically
         )
     ) {
         //region Search
@@ -92,10 +96,26 @@ fun HomeScreen(
             active = activeState,
             onActiveChange = { activeState = it },
             placeholder = {
-                Text("Search")
+                Text(
+                    text = "Search Movie",
+                    fontSize = 18.sp,
+                    style = MaterialTheme.typography.labelMedium,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Start
+                )
             },
             leadingIcon = {
-                Icon(imageVector = Icons.Rounded.Search, contentDescription = "Search")
+                if (activeState) {
+                    IconButton(onClick = {
+                        activeState = false
+                        searchQuery = ""
+                    }) {
+                        Icon(
+                            imageVector = Icons.Rounded.ArrowBack, contentDescription = "Go back"
+                        )
+                    }
+                } else Icon(imageVector = Icons.Rounded.Search, contentDescription = "Search")
             },
             trailingIcon = {
                 if (activeState) {
@@ -108,7 +128,10 @@ fun HomeScreen(
                         )
                     }
                 } else null
-            }
+            },
+            colors = SearchBarDefaults.colors(
+                dividerColor = Color.LightGray
+            )
         ) {
             SearchScreen(navigator = navigator, searchUiState = searchUiState)
         }
