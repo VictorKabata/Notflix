@@ -81,7 +81,7 @@ fun HomeScreen(
     var activeState by remember { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().background(color = MaterialTheme.colorScheme.surface),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(
             space = 6.dp,
@@ -90,7 +90,7 @@ fun HomeScreen(
     ) {
         //region Search
         SearchBar(
-            modifier = Modifier,
+            modifier = Modifier.fillMaxWidth(),
             query = searchQuery,
             onQueryChange = { searchQuery = it },
             onSearch = { viewModel.searchMovie(movieName = it) },
@@ -147,7 +147,6 @@ fun HomeScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = MaterialTheme.colorScheme.surface)
                 .padding(paddingValues)
         ) {
             if (homeUiState.isLoading) {
