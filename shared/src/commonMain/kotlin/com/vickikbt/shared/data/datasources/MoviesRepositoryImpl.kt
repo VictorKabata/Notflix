@@ -79,4 +79,19 @@ class MoviesRepositoryImpl constructor(
 
         return cachedResponse
     }*/
+
+    override suspend fun searchMovie(
+        movieName: String,
+        page: Int
+    ): Flow<NetworkResultState<List<Movie>?>> {
+        return flowOf(
+            safeApiCall {
+                val response = httpClient.get(urlString = "search/movie") {
+                    parameter("page", page)
+                }.body<MovieResultsDto>()
+
+                response.movies?.map { it.toDomain() }
+            }
+        )
+    }
 }
