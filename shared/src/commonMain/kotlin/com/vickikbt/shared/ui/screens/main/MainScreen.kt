@@ -34,7 +34,6 @@ fun MainScreen(viewModel: MainViewModel = koinInject()) {
 
         val topLevelDestinations = listOf(
             NavigationItem.Home,
-            NavigationItem.Search,
             NavigationItem.Favorites,
             NavigationItem.Settings
         )

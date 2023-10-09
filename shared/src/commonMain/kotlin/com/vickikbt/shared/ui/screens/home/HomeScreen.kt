@@ -14,9 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -48,9 +45,9 @@ import com.vickikbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickikbt.shared.ui.components.MovieCardLandscape
 import com.vickikbt.shared.ui.components.MovieCardPager
 import com.vickikbt.shared.ui.components.MovieCardPagerIndicator
-import com.vickikbt.shared.ui.components.MovieCardPortrait
 import com.vickikbt.shared.ui.components.MovieCardPortraitCompact
 import com.vickikbt.shared.ui.components.SectionSeparator
+import com.vickikbt.shared.ui.screens.search.SearchScreen
 import com.vickikbt.shared.ui.theme.DarkPrimaryColor
 import com.vickikbt.shared.utils.WindowSize
 import moe.tlaster.precompose.navigation.Navigator
@@ -79,7 +76,13 @@ fun HomeScreen(
     var searchQuery by remember { mutableStateOf("") }
     var activeState by remember { mutableStateOf(false) }
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(
+            space = 8.dp, alignment = Alignment.CenterVertically
+        )
+    ) {
         //region Search
         SearchBar(
             modifier = Modifier,
@@ -107,45 +110,8 @@ fun HomeScreen(
                 } else null
             }
         ) {
-            Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
-                if (searchUiState.isLoading) {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                } else if (!searchUiState.error.isNullOrEmpty()) {
-                    Text(
-                        modifier = Modifier.align(Alignment.Center),
-                        text = "Error:\n${searchUiState.error}",
-                        textAlign = TextAlign.Center
-                    )
-                } else {
-                    if (searchUiState.movieResults.isNullOrEmpty()) {
-                        Text(
-                            modifier = Modifier.align(Alignment.Center),
-                            text = "Movie not found!",
-                            textAlign = TextAlign.Center
-                        )
-                    } else {
-                        LazyVerticalGrid(
-                            modifier = Modifier.fillMaxSize()//.padding(paddingValues)
-                                .align(Alignment.Center),
-                            columns = GridCells.Adaptive(minSize = 150.dp),
-                            contentPadding = PaddingValues(bottom = 90.dp),
-                            horizontalArrangement = Arrangement.Center
-                        ) {
-                            items(searchUiState.movieResults) { item ->
-                                MovieCardPortrait(
-                                    modifier = Modifier.padding(vertical = 4.dp),
-                                    movie = item,
-                                    onItemClick = { movie ->
-                                        navigator.navigate("/details/${movie.id}")
-                                    }
-                                )
-                            }
-                        }
-                    }
-                }
-            }
+            SearchScreen(navigator = navigator, searchUiState = searchUiState)
         }
-
         //endregion
 
         // region Home section

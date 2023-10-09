@@ -6,7 +6,6 @@ import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
 import com.vickikbt.shared.ui.screens.details.DetailsScreen
 import com.vickikbt.shared.ui.screens.favorites.FavoritesScreen
 import com.vickikbt.shared.ui.screens.home.HomeScreen
-import com.vickikbt.shared.ui.screens.search.SearchScreen
 import com.vickikbt.shared.ui.screens.settings.SettingsScreen
 import com.vickikbt.shared.utils.WindowSize
 import moe.tlaster.precompose.navigation.NavHost
@@ -26,10 +25,6 @@ fun Navigation(
                 windowSize = windowSize,
                 paddingValues = paddingValues
             )
-        }
-
-        scene(NavigationItem.Search.route) {
-            SearchScreen(navigator = navigator)
         }
 
         scene(NavigationItem.Favorites.route) {

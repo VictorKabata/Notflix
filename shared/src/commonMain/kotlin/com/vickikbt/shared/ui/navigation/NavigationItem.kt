@@ -14,7 +14,6 @@ sealed class NavigationItem(
 ) {
 
     object Home : NavigationItem("/home", "Home", Icons.Rounded.Home)
-    object Search : NavigationItem("/search", "Search", Icons.Rounded.Search)
     object Favorites : NavigationItem("/favorites", "Favorites", Icons.Rounded.Favorite)
     object Settings : NavigationItem("/settings", "Settings", Icons.Rounded.Settings)
     object Details : NavigationItem("/details/{id:[0-9]+}", "Details", null)

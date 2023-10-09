@@ -11,10 +11,10 @@ import com.vickikbt.shared.domain.repositories.MoviesRepository
 import com.vickikbt.shared.domain.repositories.SettingsRepository
 import com.vickikbt.shared.domain.utils.Constants.BASE_URL
 import com.vickikbt.shared.domain.utils.Constants.URL_PATH
-import com.vickikbt.shared.ui.screens.details.DetailsViewModel
 import com.vickikbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickikbt.shared.presentation.ui.screens.main.MainViewModel
 import com.vickikbt.shared.presentation.ui.screens.settings.SettingsViewModel
+import com.vickikbt.shared.ui.screens.details.DetailsViewModel
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
