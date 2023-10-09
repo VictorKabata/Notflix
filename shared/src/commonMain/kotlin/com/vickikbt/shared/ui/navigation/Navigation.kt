@@ -29,7 +29,7 @@ fun Navigation(
         }
 
         scene(NavigationItem.Search.route) {
-            SearchScreen()
+            SearchScreen(navigator = navigator)
         }
 
         scene(NavigationItem.Favorites.route) {
