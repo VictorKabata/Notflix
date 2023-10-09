@@ -15,7 +15,6 @@ import com.vickikbt.shared.ui.screens.details.DetailsViewModel
 import com.vickikbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickikbt.shared.presentation.ui.screens.main.MainViewModel
 import com.vickikbt.shared.presentation.ui.screens.settings.SettingsViewModel
-import com.vickikbt.shared.ui.screens.search.SearchViewModel
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
@@ -83,7 +82,6 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
 
     singleOf(::MainViewModel)
     singleOf(::HomeViewModel)
-    singleOf(::SearchViewModel)
     singleOf(::DetailsViewModel)
     singleOf(::SettingsViewModel)
 }
