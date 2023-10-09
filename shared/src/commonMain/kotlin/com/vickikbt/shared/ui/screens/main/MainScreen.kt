@@ -61,10 +61,12 @@ fun MainScreen(viewModel: MainViewModel = koinInject()) {
                         paddingValues = PaddingValues(start = if (showNavigationRail) 80.dp else 0.dp)
                     )
 
-                    if (showNavigationRail) NavRailBar(
+                    if (showNavigationRail) {
+                        NavRailBar(
                         navigationItems = topLevelDestinations,
                         navigator = navigator
                     )
+                    }
                 }
             }
         }
