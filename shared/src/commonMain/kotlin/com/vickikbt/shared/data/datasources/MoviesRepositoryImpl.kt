@@ -87,6 +87,7 @@ class MoviesRepositoryImpl constructor(
         return flowOf(
             safeApiCall {
                 val response = httpClient.get(urlString = "search/movie") {
+                    parameter("query", movieName)
                     parameter("page", page)
                 }.body<MovieResultsDto>()
 
