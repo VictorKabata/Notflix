@@ -24,7 +24,6 @@ import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
 fun SearchScreen(navigator: Navigator, searchUiState: SearchUiState) {
-
     Box(
         modifier = Modifier.fillMaxSize()
             .align(Alignment.Center)

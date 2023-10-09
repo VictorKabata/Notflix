@@ -84,7 +84,8 @@ fun HomeScreen(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(
-            space = 6.dp, alignment = Alignment.CenterVertically
+            space = 6.dp,
+            alignment = Alignment.CenterVertically
         )
     ) {
         //region Search
@@ -112,10 +113,13 @@ fun HomeScreen(
                         searchQuery = ""
                     }) {
                         Icon(
-                            imageVector = Icons.Rounded.ArrowBack, contentDescription = "Go back"
+                            imageVector = Icons.Rounded.ArrowBack,
+                            contentDescription = "Go back"
                         )
                     }
-                } else Icon(imageVector = Icons.Rounded.Search, contentDescription = "Search")
+                } else {
+                    Icon(imageVector = Icons.Rounded.Search, contentDescription = "Search")
+                }
             },
             trailingIcon = {
                 if (activeState) {
@@ -127,7 +131,9 @@ fun HomeScreen(
                             contentDescription = "Close search"
                         )
                     }
-                } else null
+                } else {
+                    null
+                }
             },
             colors = SearchBarDefaults.colors(
                 dividerColor = Color.LightGray
@@ -285,6 +291,5 @@ fun HomeScreen(
             }
         }
         // endregion
-
     }
 }
