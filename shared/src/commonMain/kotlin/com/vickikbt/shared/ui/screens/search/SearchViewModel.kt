@@ -18,17 +18,13 @@ import org.koin.core.component.KoinComponent
 
 class SearchViewModel constructor(private val moviesRepository: MoviesRepository) : KoinComponent {
 
-    private val _searchUiState = MutableStateFlow(SearchUiState(isLoading = true))
+    private val _searchUiState = MutableStateFlow(SearchUiState(isLoading = false))
     val searchUiState = _searchUiState.asStateFlow()
 
     private val viewModelScope = CoroutineScope(Dispatchers.IO)
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         _searchUiState.update { it.copy(isLoading = false, error = exception.message) }
-    }
-
-    init {
-        searchMovie(movieName = "Justice League") // ToDo: Remove and move to UI
     }
 
     fun searchMovie(movieName: String) = viewModelScope.launch(coroutineExceptionHandler) {
