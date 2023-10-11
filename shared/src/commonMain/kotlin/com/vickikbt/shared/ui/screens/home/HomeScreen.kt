@@ -31,6 +31,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -80,17 +81,17 @@ fun HomeScreen(
     var searchQuery by remember { mutableStateOf("") }
     var activeState by remember { mutableStateOf(false) }
 
-    Column(
+    Box(
         modifier = Modifier.fillMaxSize().background(color = MaterialTheme.colorScheme.surface),
-        horizontalAlignment = Alignment.CenterHorizontally,
+        /*horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(
             space = 6.dp,
             alignment = Alignment.CenterVertically
-        )
+        )*/
     ) {
         //region Search
         SearchBar(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.align(Alignment.TopCenter),
             query = searchQuery,
             onQueryChange = { searchQuery = it },
             onSearch = { viewModel.searchMovie(movieName = it) },
@@ -136,7 +137,12 @@ fun HomeScreen(
                 }
             },
             colors = SearchBarDefaults.colors(
-                dividerColor = Color.LightGray
+                dividerColor = Color.Gray.copy(alpha = .6f),
+                inputFieldColors = TextFieldDefaults.colors(
+                    focusedContainerColor = MaterialTheme.colorScheme.surface,
+                    unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+                    disabledContainerColor = MaterialTheme.colorScheme.surface,
+                )
             )
         ) {
             SearchScreen(navigator = navigator, searchUiState = searchUiState)
@@ -148,6 +154,7 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .align(Alignment.Center)
         ) {
             if (homeUiState.isLoading) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
@@ -170,7 +177,8 @@ fun HomeScreen(
                         val pagerState = rememberPagerState(pageCount = { nowPlayingMovies.size })
 
                         HorizontalPager(
-                            modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
+                            modifier = Modifier.fillMaxWidth()
+                                .padding(start = 12.dp, end = 12.dp, top = 80.dp),
                             state = pagerState,
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             pageSpacing = 8.dp
