@@ -5,7 +5,7 @@ import com.seiko.imageloader.component.setupDefaultComponents
 import okio.Path.Companion.toOkioPath
 import java.io.File
 
-actual class CustomImageLoader {
+actual object CustomImageLoader {
 
     actual fun generateImageLoader(): ImageLoader {
         return ImageLoader {

@@ -7,7 +7,7 @@ import platform.Foundation.NSCachesDirectory
 import platform.Foundation.NSSearchPathForDirectoriesInDomains
 import platform.Foundation.NSUserDomainMask
 
-actual class CustomImageLoader {
+actual object CustomImageLoader {
     actual fun generateImageLoader(): ImageLoader {
         return ImageLoader {
             components {

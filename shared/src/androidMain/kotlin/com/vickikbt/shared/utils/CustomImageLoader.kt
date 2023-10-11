@@ -6,7 +6,7 @@ import com.seiko.imageloader.component.setupDefaultComponents
 import com.seiko.imageloader.option.androidContext
 import okio.Path.Companion.toOkioPath
 
-actual class CustomImageLoader {
+actual object CustomImageLoader {
 
     actual fun generateImageLoader(): ImageLoader {
         val context = ContextUtils.context
