@@ -24,11 +24,7 @@ import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
 fun SearchScreen(navigator: Navigator, searchUiState: SearchUiState) {
-    Box(
-        modifier = Modifier.fillMaxSize()
-            .align(Alignment.Center)
-            .background(MaterialTheme.colorScheme.surface)
-    ) {
+    Box(modifier = Modifier.fillMaxSize()) {
         if (searchUiState.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         } else if (!searchUiState.error.isNullOrEmpty()) {

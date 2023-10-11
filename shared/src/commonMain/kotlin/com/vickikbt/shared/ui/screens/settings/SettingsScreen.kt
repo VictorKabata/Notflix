@@ -45,7 +45,6 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
 
     Scaffold(
         topBar = { AppBar("Settings") },
-        containerColor = MaterialTheme.colorScheme.surface
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
             PreferencesGroup(title = "Personalisation") {
