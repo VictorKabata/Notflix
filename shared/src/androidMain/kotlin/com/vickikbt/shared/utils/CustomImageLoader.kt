@@ -1,15 +1,16 @@
 package com.vickikbt.shared.utils
 
-import android.content.Context
 import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.cache.memory.maxSizePercent
 import com.seiko.imageloader.component.setupDefaultComponents
 import com.seiko.imageloader.option.androidContext
 import okio.Path.Companion.toOkioPath
 
-actual class CustomImageLoader(private val context: Context) {
+actual class CustomImageLoader {
 
     actual fun generateImageLoader(): ImageLoader {
+        val context = ContextUtils.context
+
         return ImageLoader {
             options {
                 androidContext(context)
