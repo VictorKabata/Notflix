@@ -10,14 +10,16 @@ private val DarkColorPalette = darkColorScheme(
     primary = DarkPrimaryColor,
     secondary = DarkPrimaryColor,
     surface = DarkSurface,
-    onSurface = DarkTextPrimary
+    onSurface = DarkTextPrimary,
+    background = DarkSurface
 )
 
 private val LightColorPalette = lightColorScheme(
     primary = PrimaryColor,
     secondary = PrimaryColor,
     surface = Surface,
-    onSurface = TextPrimary
+    onSurface = TextPrimary,
+    background = Surface
 )
 
 @Composable
