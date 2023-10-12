@@ -1,6 +1,7 @@
 package com.vickikbt.shared.ui.screens.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -89,7 +90,7 @@ fun HomeScreen(
     ) {
         //region Search
         SearchBar(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surface),
             query = searchQuery,
             onQueryChange = { searchQuery = it },
             onSearch = { viewModel.searchMovie(movieName = it) },
@@ -135,7 +136,8 @@ fun HomeScreen(
                 }
             },
             colors = SearchBarDefaults.colors(
-                dividerColor = Color.LightGray
+                dividerColor = Color.LightGray,
+                // inputFieldColors = TextFieldDefaults.colors()
             )
         ) {
             SearchScreen(navigator = navigator, searchUiState = searchUiState)
