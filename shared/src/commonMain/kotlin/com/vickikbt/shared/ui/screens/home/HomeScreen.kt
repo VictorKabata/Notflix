@@ -31,7 +31,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -138,7 +137,7 @@ fun HomeScreen(
             },
             colors = SearchBarDefaults.colors(
                 dividerColor = Color.LightGray,
-                //inputFieldColors = TextFieldDefaults.colors()
+                // inputFieldColors = TextFieldDefaults.colors()
             )
         ) {
             SearchScreen(navigator = navigator, searchUiState = searchUiState)
