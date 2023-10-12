@@ -14,7 +14,7 @@ fun String.loadImage(): String {
 
     val quality =
         when (settingsRepository.settingsUiState.collectAsState().value.selectedImageQuality) {
-            0 -> "original"
+            0 -> "w500" // original -Sort image loading issue
             else -> "w500"
         }
 

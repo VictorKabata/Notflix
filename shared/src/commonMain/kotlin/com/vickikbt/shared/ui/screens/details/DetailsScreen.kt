@@ -1,6 +1,5 @@
 package com.vickikbt.shared.ui.screens.details
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -55,7 +54,7 @@ fun DetailsScreen(
     val scrollState = rememberScrollState()
     val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
 
-    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
+    Box(modifier = Modifier.fillMaxSize()) {
         if (movieDetailsState.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         } else if (!movieDetailsState.error.isNullOrEmpty()) {

@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId = "com.vickikbt.notflix"
 
-        minSdk = 21
+        minSdk = 24
         targetSdk = compileSdk
         versionCode = 1
         versionName = "1.0.0"
