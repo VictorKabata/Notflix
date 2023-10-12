@@ -24,7 +24,7 @@ actual object CustomImageLoader {
                     maxSizePercent(context, 0.25)
                 }
                 diskCacheConfig {
-                    directory(context.cacheDir.resolve("image_cache").toOkioPath())
+                    directory(context.cacheDir.toOkioPath())
                     maxSizeBytes(512L * 1024 * 1024) // 512MB
                 }
             }
