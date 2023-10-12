@@ -89,7 +89,7 @@ fun HomeScreen(
     ) {
         //region Search
         SearchBar(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(.95f),
             query = searchQuery,
             onQueryChange = { searchQuery = it },
             onSearch = { viewModel.searchMovie(movieName = it) },
@@ -134,9 +134,7 @@ fun HomeScreen(
                     null
                 }
             },
-            colors = SearchBarDefaults.colors(
-                dividerColor = Color.LightGray
-            )
+            colors = SearchBarDefaults.colors(dividerColor = Color.LightGray)
         ) {
             SearchScreen(navigator = navigator, searchUiState = searchUiState)
         }
