@@ -13,5 +13,4 @@ object ContextUtils {
     fun setContext(context: Context) {
         kmpApplicationContext = context.applicationContext
     }
-
 }

@@ -13,8 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import com.vickikbt.shared.presentation.ui.navigation.NavigationItem
 import com.vickikbt.shared.ui.theme.Gray
-import com.vickikbt.shared.ui.theme.PrimaryColor
-import com.vickikbt.shared.ui.theme.White
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
