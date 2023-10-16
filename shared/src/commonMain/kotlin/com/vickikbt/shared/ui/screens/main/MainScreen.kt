@@ -49,6 +49,7 @@ fun MainScreen(viewModel: MainViewModel = koinInject()) {
                 }
             }
         ) { paddingValues ->
+
             BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
                 windowSize = WindowSize.basedOnWidth(this.minWidth)
 
