@@ -140,7 +140,11 @@ fun HomeScreen(
                 // inputFieldColors = TextFieldDefaults.colors()
             )
         ) {
-            SearchScreen(navigator = navigator, searchUiState = searchUiState)
+            SearchScreen(
+                navigator = navigator,
+                searchUiState = searchUiState,
+                windowSize = windowSize
+            )
         }
         //endregion
 
@@ -168,7 +172,8 @@ fun HomeScreen(
                 ) {
                     //region Now Playing Movies
                     homeUiState.nowPlayingMovies?.let { nowPlayingMovies ->
-                        val pagerState = rememberPagerState(pageCount = { nowPlayingMovies.size })
+                        val pagerState =
+                            rememberPagerState(pageCount = { nowPlayingMovies.size })
 
                         HorizontalPager(
                             modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
