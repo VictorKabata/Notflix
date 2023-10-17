@@ -43,8 +43,11 @@ fun SearchScreen(
                     modifier = Modifier.fillMaxSize()
                         .padding(vertical = 12.dp, horizontal = 16.dp)
                         .align(Alignment.Center),
-                    columns = if (windowSize == WindowSize.COMPACT) GridCells.Fixed(2)
-                    else GridCells.Adaptive(minSize = 150.dp),
+                    columns = if (windowSize == WindowSize.COMPACT) {
+                        GridCells.Fixed(2)
+                    } else {
+                        GridCells.Adaptive(minSize = 150.dp)
+                    },
                     contentPadding = PaddingValues(bottom = 90.dp),
                     horizontalArrangement = Arrangement.Center
                 ) {
