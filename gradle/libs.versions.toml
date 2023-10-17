@@ -29,6 +29,7 @@ mockk = "1.13.5"
 kotlinxTestResources = "0.2.2"
 voyager = "1.0.0-rc03"
 imageLoader = "1.6.3"
+materialWindowSizeClass = "0.3.0"
 
 #Android Versions
 
@@ -104,6 +105,7 @@ multiplatformSettings-test = { module = "com.russhwolf:multiplatform-settings-te
 imageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "imageLoader" }
 preCompose = { module = "moe.tlaster:precompose", version.ref = "preCompose" }
 preCompose-viewmodel = { module = "moe.tlaster:precompose-viewmodel", version.ref = "preCompose" }
+material-windowSizeClass = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "materialWindowSizeClass" }
 
 #Android Lib Dependencies
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }

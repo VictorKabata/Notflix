@@ -66,6 +66,8 @@ kotlin {
 
             api(libs.preCompose)
             api(libs.preCompose.viewmodel)
+
+            // implementation(libs.material.windowSizeClass)
         }
 
         /*sourceSets["commonTest"].dependencies {

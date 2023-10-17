@@ -4,14 +4,12 @@
 <img  src="https://img.shields.io/badge/-KOTLIN-E50914?logo=kotlin&logoColor=white&style=for-the-badge">
 <img  src="https://img.shields.io/badge/-ANDROID-E50914?logo=android&logoColor=white&style=for-the-badge">
 <img  src="https://img.shields.io/badge/-IOS-E50914?logo=ios&logoColor=white&style=for-the-badge">
-<img  src="https://img.shields.io/badge/-WINDOWS-CCCCCC?logo=windows&logoColor=606060&style=for-the-badge">
-<img  src="https://img.shields.io/badge/-LINUX-CCCCCC?logo=linux&logoColor=606060&style=for-the-badge">
-<img  src="https://img.shields.io/badge/-MACOS-CCCCCC?logo=apple&logoColor=606060&style=for-the-badge">
+<img  src="https://img.shields.io/badge/-DESKTOP-E50914?logo=desktop&logoColor=white&style=for-the-badge">
 </p>
 
 # Notflix
 
-# 🛠️Migrating to Compose Multiplatform - [Develop Branch](https://youtu.be/dQw4w9WgXcQ)
+# 🛠️Under constant refactor/development - [Develop Branch](https://youtu.be/dQw4w9WgXcQ)
 
 An android and iOS app built using [Kotlin Multiplatforom](https://kotlinlang.org/docs/multiplatform.html) that consumes [TMDB API]("https://developers.themoviedb.org/3") to display current trending, upcoming and popular movies🍿 and tvshows🎬.
 
@@ -21,24 +19,13 @@ An android and iOS app built using [Kotlin Multiplatforom](https://kotlinlang.or
 
 ## Table Of Content
 
+- [Screenshots](##screenshots)
 - [Prerequisite](##prerequisite)
 - [Running](##running)
-- [Pros of KMP/KMM](##pros-of-kmpkmm)
-- [App Structure](##app-structure)
-  - [1. androidApp](###1-androidapp)
-  - [2. desktopApp](###2-desktopapp)
-  - [3. iosApp](###3-iosApp)
-  - [4. shared](###4-shared)
-    - [__Domain__](###domain)
-    - [__Data__](###data)
-    - [__Presentation__](###presentation)
 - [Libraries](##libraries)
   - [Shared](###shared)
   - [Android](###android)
 - [Extras](##extras)
-- [Demo](##demo)
-- [Android App](##android-app)
-- [Desktop](##desktop)
 - [Related Resources](##related-resources)
   - [Videos 📽️](###videos-️)
   - [Articles/Blogs 📖](###articlesblogs-)
@@ -47,6 +34,20 @@ An android and iOS app built using [Kotlin Multiplatforom](https://kotlinlang.or
   - [Videos 📽️](###videos-️-1)
   - [Articles/Blogs 📖](###articlesblogs--1)
   - [Sample Projects 🤖](###sample-projects--1)
+
+## Screenshots
+
+## Android
+
+<img src="screenshots/img1.png" width="250"/>  <img src="screenshots/img2.png" width="250"/> <img src="screenshots/img3.png" width="250"/> <img src="screenshots/img4.png" width="250"/>
+
+## iOS
+
+<img src="screenshots/img5.png" width="250"/>  <img src="screenshots/img7.png" width="250"/> <img src="screenshots/img8.png" width="250"/>
+
+## Desktop
+
+<img src="screenshots/img9.png" width="640"/> <img src="screenshots/img10.png" width="640"/> 
 
 ## Prerequisite
 
@@ -66,67 +67,6 @@ Run with the following command:
 ./gradlew run
 ```
 
-## Pros of KMP/KMM
-
-- Faster development since you only need to write most of the business logic and tests only once.
-- Improve code quality.
-- Highly maintainable and testable code due to separation of concern in the codebase.
-
-## App Structure
-
-<p align="center"><img src="assets/project_structureee.png" alt="Project Structure"></p>
-
-The project currently has 3 main modules:
-
-### 1. [appAndroid](https://github.com/VictorKabata/Notflix/tree/main/androidApp)
-
-This module contains the android application's UI built using [Jetpack compose](https://developer.android.com/jetpack/compose).
-
-
-## 2. [appiOS](https://github.com/VictorKabata/Notflix/tree/main/iOSNotflix)
-This module contains iOS code that holds the iosApp  UI built using [Swift UI](https://developer.apple.com/xcode/swiftui/)
-
-
-### 3 . [shared](https://github.com/VictorKabata/Notflix/tree/main/shared)
-This module contains shared code that holds the domain and data layers and some part of the presentation logic ie.shared viewmodels
-
-
-### __Domain__
-
-This is the core layer of the application. The ```domain``` layer is independent of any other layers this means that changes in other layers will have no effect on domain layer eg. screen UI (presentation layer) or changing database (data layer) will not result in any code change withing domain layer.
-
-Components of domain layer include:
-
-- __Models__: Defines the core structure of the data that will be used within the application.
-
-- __Repositories__: Interfaces used by the use cases. Implemented in the data layer.
-
-### __Data__
-
-The ```data``` layer is responsible for selecting the proper data source for the domain layer. It contains the implementations of the repositories declared in the domain layer.
-
-Components of data layer include:
-
-- __Models__
-
-  -__Dto Models__: Defines POJO of network responses.
-
-  -__Entity Models__: Defines the schema of the database.
-
-- __Mappers__: They perform data transformation between ```domain```, ```dto``` and ```entity``` models.
-
-- __Network__: This is responsible for performing network operations eg. defining API endpoints using [Ktor](https://ktor.io/).
-
-- __Cache__: This is responsible for performing caching operations using [Realm](https://github.com/realm/realm-kotlin).
-
-- __Data Sources__:  Responsible for deciding which data source (network or cache) will be used when fetching data and presenting the data to viewmodels.
-
-<p align="center"><img src="assets/clean_arch.png" alt="Clean Architecture Diagram"></p>
-
-### __Presentation__
-
-The `presentation` package contains shared viewmodels code.
-
 ## Libraries
 
 ### Shared
@@ -141,16 +81,6 @@ The `presentation` package contains shared viewmodels code.
 - [Napier](https://github.com/AAkira/Napier) -  Logger library for Kotlin Multiplatform.
 - [BuildKonfig](https://github.com/yshrsmz/BuildKonfig) - Supports embedding values from gradle file.
 - [Image Loader](https://github.com/qdsfdhvh/compose-imageloader) - Compose Image library for Kotlin Multiplatform
-
-## Screenshots
-
-## Android App
-
-<img src="assets/img0.png" width="250"/>  <img src="assets/img2.png" width="250"/>
-
-## iOS App
-
-<img src="assets/img9.0.png" width="250"/>  <img src="assets/img11.png" width="250"/> <img src="assets/img12.png" width="250"/> 
 
 ## Related Resources
 

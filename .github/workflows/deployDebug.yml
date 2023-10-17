@@ -16,7 +16,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 11
+          java-version: 17
 
       - name: Make gradle executable
         run: chmod +x ./gradlew
@@ -33,10 +33,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v1
 
-      - name: Set up JDK 11
+      - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 11
+          java-version: 17
 
       - name: Make gradle executable
         run: chmod +x ./gradlew
@@ -50,4 +50,4 @@ jobs:
           appId: ${{secrets.FIREBASE_APP_ID}}
           token: ${{secrets.FIREBASE_TOKEN}}
           groups: production #testers
-          file: androidApp/build/outputs/apk/debug/androidApp-debug.apk
+          file: appAndroid/build/outputs/apk/debug/appAndroid-debug.apk

@@ -19,10 +19,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vickikbt.shared.ui.components.MovieCardPortrait
 import com.vickikbt.shared.utils.SearchUiState
+import com.vickikbt.shared.utils.WindowSize
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
-fun SearchScreen(navigator: Navigator, searchUiState: SearchUiState) {
+fun SearchScreen(
+    navigator: Navigator,
+    searchUiState: SearchUiState,
+    windowSize: WindowSize = WindowSize.COMPACT
+) {
     Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
         if (searchUiState.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
@@ -38,7 +43,11 @@ fun SearchScreen(navigator: Navigator, searchUiState: SearchUiState) {
                     modifier = Modifier.fillMaxSize()
                         .padding(vertical = 12.dp, horizontal = 16.dp)
                         .align(Alignment.Center),
-                    columns = GridCells.Adaptive(minSize = 150.dp),
+                    columns = if (windowSize == WindowSize.COMPACT) {
+                        GridCells.Fixed(2)
+                    } else {
+                        GridCells.Adaptive(minSize = 150.dp)
+                    },
                     contentPadding = PaddingValues(bottom = 90.dp),
                     horizontalArrangement = Arrangement.Center
                 ) {
