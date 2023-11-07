@@ -43,11 +43,11 @@ An android and iOS app built using [Kotlin Multiplatforom](https://kotlinlang.or
 
 ## iOS
 
-<img src="screenshots/img5.png" width="250"/>  <img src="screenshots/img7.png" width="250"/> <img src="screenshots/img8.png" width="250"/>
+<img src="screenshots/img7.png" width="250"/> <img src="screenshots/img5.png" width="250"/>  <img src="screenshots/img6.png" width="250"/>
 
 ## Desktop
 
-<img src="screenshots/img9.png" width="640"/> <img src="screenshots/img10.png" width="640"/> 
+<img src="screenshots/img8.png" width="640"/> <img src="screenshots/img9.png" width="640"/>
 
 ## Prerequisite
 
