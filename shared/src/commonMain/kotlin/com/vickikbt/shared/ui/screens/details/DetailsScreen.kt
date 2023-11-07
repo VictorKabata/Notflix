@@ -1,6 +1,5 @@
 package com.vickikbt.shared.ui.screens.details
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,9 +27,10 @@ import com.vickikbt.shared.ui.components.ItemMovieCast
 import com.vickikbt.shared.ui.components.MovieCardPortrait
 import com.vickikbt.shared.ui.components.MovieRatingSection
 import com.vickikbt.shared.ui.components.appbars.DetailsAppBar
-import com.vickikbt.shared.ui.components.collapsing_toolbar.CollapsingToolbarScaffold
-import com.vickikbt.shared.ui.components.collapsing_toolbar.ScrollStrategy
-import com.vickikbt.shared.ui.components.collapsing_toolbar.rememberCollapsingToolbarScaffoldState
+import com.vickikbt.shared.ui.components.collapsingToolbar.CollapsingToolbarScaffold
+import com.vickikbt.shared.ui.components.collapsingToolbar.ScrollStrategy
+import com.vickikbt.shared.ui.components.collapsingToolbar.rememberCollapsingToolbarScaffoldState
+import com.vickikbt.shared.utils.WindowSize
 import com.vickikbt.shared.utils.getPopularity
 import com.vickikbt.shared.utils.getRating
 import moe.tlaster.precompose.navigation.Navigator
@@ -39,6 +39,7 @@ import org.koin.compose.koinInject
 @Composable
 fun DetailsScreen(
     navigator: Navigator,
+    windowSize: WindowSize = WindowSize.COMPACT,
     viewModel: DetailsViewModel = koinInject(),
     movieId: Int
 ) {
@@ -53,7 +54,7 @@ fun DetailsScreen(
     val scrollState = rememberScrollState()
     val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
 
-    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
+    Box(modifier = Modifier.fillMaxSize()) {
         if (movieDetailsState.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         } else if (!movieDetailsState.error.isNullOrEmpty()) {
@@ -63,19 +64,21 @@ fun DetailsScreen(
                 textAlign = TextAlign.Center
             )
         } else {
-            CollapsingToolbarScaffold(modifier = Modifier.fillMaxSize(),
+            CollapsingToolbarScaffold(
+                modifier = Modifier.fillMaxSize(),
                 state = collapsingScrollState,
                 scrollStrategy = ScrollStrategy.ExitUntilCollapsed,
                 toolbar = {
-                    DetailsAppBar(modifier = Modifier.fillMaxWidth(),
+                    DetailsAppBar(
+                        modifier = Modifier.fillMaxWidth(),
                         collapsingScrollState = collapsingScrollState,
                         movieDetails = movieDetailsState.movieDetails,
                         onNavigationIconClick = { navigator.goBack() },
                         onShareIconClick = {},
                         onFavoriteIconClick = {}
                     )
-                }) {
-
+                }
+            ) {
                 Column(
                     modifier = Modifier.padding(bottom = 20.dp).verticalScroll(state = scrollState),
                     verticalArrangement = Arrangement.spacedBy(14.dp)
@@ -154,7 +157,6 @@ fun DetailsScreen(
                     }
                     //endregion
                 }
-
             }
         }
     }

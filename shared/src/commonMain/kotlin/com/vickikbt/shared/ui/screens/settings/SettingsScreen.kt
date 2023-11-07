@@ -6,7 +6,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Image
 import androidx.compose.material.icons.rounded.Lightbulb
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -30,7 +29,6 @@ private val imageQualityLabels = listOf("High Quality", "Low Quality")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
-
     LaunchedEffect(key1 = viewModel) {
         viewModel.getThemePreference()
         viewModel.getImageQualityPreference()
@@ -46,7 +44,6 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
 
     Scaffold(
         topBar = { AppBar("Settings") },
-        containerColor = MaterialTheme.colorScheme.surface
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
             PreferencesGroup(title = "Personalisation") {
@@ -57,11 +54,13 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
                     onClick = { showThemeDialog.value = !showThemeDialog.value }
                 )
 
-                if (showThemeDialog.value) ChangeTheme(
+                if (showThemeDialog.value) {
+                    ChangeTheme(
                     viewModel = viewModel,
                     showDialog = showThemeDialog,
                     currentValue = themeLabel
                 )
+                }
 
                 TextPreference(
                     icon = Icons.Rounded.Image,
@@ -70,11 +69,13 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
                     onClick = { showImageQualityDialog.value = !showImageQualityDialog.value }
                 )
 
-                if (showImageQualityDialog.value) ChangeImageQuality(
+                if (showImageQualityDialog.value) {
+                    ChangeImageQuality(
                     viewModel = viewModel,
                     showDialog = showImageQualityDialog,
                     currentValue = imageQualityLabel
                 )
+                }
             }
         }
     }

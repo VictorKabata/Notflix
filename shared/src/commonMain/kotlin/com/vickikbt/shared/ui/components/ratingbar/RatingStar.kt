@@ -36,16 +36,21 @@ fun RatingStar(
 
 @Composable
 private fun FilledStar(
-    fraction: Float, style: RatingBarStyle, isRtl: Boolean, painterFilled: Painter?
+    fraction: Float,
+    style: RatingBarStyle,
+    isRtl: Boolean,
+    painterFilled: Painter?
 ) = Canvas(
     modifier = Modifier
         .fillMaxSize()
         .clip(
-            if (isRtl) rtlFilledStarFractionalShape(fraction = fraction)
-            else FractionalRectangleShape(0f, fraction)
+            if (isRtl) {
+                rtlFilledStarFractionalShape(fraction = fraction)
+            } else {
+                FractionalRectangleShape(0f, fraction)
+            }
         )
 ) {
-
     if (painterFilled != null) {
         with(painterFilled) {
             draw(
@@ -62,8 +67,6 @@ private fun FilledStar(
             style = Stroke(width = if (style is RatingBarStyle.Stroke) style.width else 1f)
         ) // Border
     }
-
-
 }
 
 @Composable
@@ -77,11 +80,13 @@ private fun EmptyStar(
         modifier = Modifier
             .fillMaxSize()
             .clip(
-                if (isRtl) rtlEmptyStarFractionalShape(fraction = fraction)
-                else FractionalRectangleShape(fraction, 1f)
+                if (isRtl) {
+                    rtlEmptyStarFractionalShape(fraction = fraction)
+                } else {
+                    FractionalRectangleShape(fraction, 1f)
+                }
             )
     ) {
-
         if (painterEmpty != null) {
             with(painterEmpty) {
                 draw(
@@ -90,26 +95,34 @@ private fun EmptyStar(
             }
         } else {
             val path = Path().addStar(size)
-            if (style is RatingBarStyle.Fill) drawPath(
+            if (style is RatingBarStyle.Fill) {
+                drawPath(
                 path,
                 color = style.inActiveColor,
                 style = Fill
             ) // Border
-            else if (style is RatingBarStyle.Stroke) drawPath(
-                path, color = style.strokeColor, style = Stroke(width = style.width)
+            } else if (style is RatingBarStyle.Stroke) {
+                drawPath(
+                path,
+                    color = style.strokeColor,
+                    style = Stroke(width = style.width)
             ) // Border
+            }
         }
-
     }
 
 fun rtlEmptyStarFractionalShape(fraction: Float): FractionalRectangleShape {
-    return if (fraction == 1f || fraction == 0f)
+    return if (fraction == 1f || fraction == 0f) {
         FractionalRectangleShape(fraction, 1f)
-    else FractionalRectangleShape(0f, 1f - fraction)
+    } else {
+        FractionalRectangleShape(0f, 1f - fraction)
+    }
 }
 
 fun rtlFilledStarFractionalShape(fraction: Float): FractionalRectangleShape {
-    return if (fraction == 0f || fraction == 1f)
+    return if (fraction == 0f || fraction == 1f) {
         FractionalRectangleShape(0f, fraction)
-    else FractionalRectangleShape(1f - fraction, 1f)
+    } else {
+        FractionalRectangleShape(1f - fraction, 1f)
+    }
 }

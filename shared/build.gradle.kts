@@ -14,11 +14,13 @@ plugins {
 kotlin {
     targetHierarchy.default()
 
-    android()
+    androidTarget()
 
     iosX64()
     iosArm64()
     iosSimulatorArm64()
+
+    jvm()
 
     cocoapods {
         summary = "Some description for the Shared Module"
@@ -30,9 +32,6 @@ kotlin {
             baseName = "shared"
             isStatic = true
         }
-
-        extraSpecAttributes["resources"] =
-            "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
     }
 
     sourceSets {
@@ -67,6 +66,8 @@ kotlin {
 
             api(libs.preCompose)
             api(libs.preCompose.viewmodel)
+
+            // implementation(libs.material.windowSizeClass)
         }
 
         /*sourceSets["commonTest"].dependencies {
@@ -81,7 +82,7 @@ kotlin {
             implementation(libs.ktor.android)
         }
 
-        // sourceSets["androidTest"].dependencies {}
+        // sourceSets["androidUnitTest"].dependencies {}
 
         sourceSets["iosMain"].dependencies {
             implementation(libs.ktor.darwin)
@@ -89,13 +90,16 @@ kotlin {
 
         sourceSets["iosTest"].dependencies {}
 
+        sourceSets["jvmMain"].dependencies {}
+
+        sourceSets["jvmTest"].dependencies {}
     }
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
-        minSdk = 21
+        minSdk = 24
     }
     namespace = "com.vickikbt.shared"
 

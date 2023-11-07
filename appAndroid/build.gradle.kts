@@ -8,12 +8,12 @@ plugins {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.vickikbt.notflix"
 
-        minSdk = 21
+        minSdk = 24
         targetSdk = compileSdk
         versionCode = 1
         versionName = "1.0.0"
@@ -45,7 +45,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.5"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
     namespace = "com.vickikbt.notflix"
 }

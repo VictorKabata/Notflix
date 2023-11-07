@@ -4,7 +4,6 @@ import com.russhwolf.settings.ObservableSettings
 import com.russhwolf.settings.coroutines.getIntOrNullFlow
 import com.vickikbt.shared.domain.repositories.SettingsRepository
 import com.vickikbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
-import com.vickikbt.shared.domain.utils.Constants.KEY_LANGUAGE
 import com.vickikbt.shared.domain.utils.Constants.KEY_THEME
 import kotlinx.coroutines.flow.Flow
 

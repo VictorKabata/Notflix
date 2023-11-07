@@ -25,6 +25,12 @@ data class DetailsUiState(
     val similarMovies: List<Movie>? = emptyList()
 )
 
+data class SearchUiState(
+    val isLoading: Boolean = true,
+    val error: String? = null,
+    val movieResults: List<Movie>? = emptyList()
+)
+
 data class FavouritesUiState(
     val isLoading: Boolean = true,
     val error: String? = null,

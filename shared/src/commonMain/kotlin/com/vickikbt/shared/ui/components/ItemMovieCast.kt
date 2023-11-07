@@ -25,7 +25,6 @@ import com.vickikbt.shared.utils.loadImage
 
 @Composable
 fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
-
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,

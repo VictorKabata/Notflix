@@ -17,8 +17,7 @@ import com.vickikbt.shared.ui.components.appbars.AppBar
 @Composable
 fun FavoritesScreen() {
     Scaffold(
-        topBar = { AppBar("Favorites") },
-        containerColor = MaterialTheme.colorScheme.surface
+        topBar = { AppBar("Favorites") }
     ) { paddingValues ->
         Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
             Text(
@@ -31,5 +30,4 @@ fun FavoritesScreen() {
             )
         }
     }
-
 }
