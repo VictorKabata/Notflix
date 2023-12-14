@@ -11,7 +11,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.vickikbt.notflix"
+        applicationId = "com.vickbt.notflix"
 
         minSdk = 24
         targetSdk = compileSdk
@@ -47,7 +47,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
-    namespace = "com.vickikbt.notflix"
+    namespace = "com.vickbt.notflix"
 }
 
 dependencies {
