@@ -101,7 +101,7 @@ android {
     defaultConfig {
         minSdk = 24
     }
-    namespace = "com.vickikbt.shared"
+    namespace = "com.vickbt.shared"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -114,7 +114,7 @@ android {
 }
 
 buildkonfig {
-    packageName = "com.vickikbt.shared"
+    packageName = "com.vickbt.shared"
 
     defaultConfigs {
         buildConfigField(
