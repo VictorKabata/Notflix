@@ -20,7 +20,6 @@ kotlinxSerializationJson = "1.6.0"
 kotlinxDateTime = "0.4.1"
 napier = "2.6.1"
 ktor = "2.3.4"
-sqlDelight = "1.5.5"
 multiplatformSettings = "0.8.1"
 kmpNativeCoroutines = "0.12.1-new-mm"
 buildKonfig = "0.13.3"
@@ -53,6 +52,7 @@ archTestCore = "2.2.0"
 turbine = "0.12.3"
 composeMultiplatform = "1.5.10-beta02"
 preCompose = "1.5.0-beta01"
+sqlDelight = "2.0.1"
 
 [plugins]
 ktLint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLint" }
@@ -67,9 +67,9 @@ android-application = { id = "com.android.application", version.ref = "gradle" }
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinX-serialization-plugin = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kmp-NativeCoroutines-plugin = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "kmpNativeCoroutines" }
-sqlDelight-plugin = { id = "com.squareup.sqldelight", version.ref = "sqlDelight" }
 buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
 compose = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
+sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 
 googleServices-plugin = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 
