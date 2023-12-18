@@ -8,6 +8,8 @@ plugins {
     alias(libs.plugins.kotlinX.serialization.plugin)
     alias(libs.plugins.buildKonfig)
     alias(libs.plugins.compose)
+
+    alias(libs.plugins.sqlDelight)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -80,17 +82,21 @@ kotlin {
 
         sourceSets["androidMain"].dependencies {
             implementation(libs.ktor.android)
+            implementation(libs.sqlDelight.android)
         }
 
         // sourceSets["androidUnitTest"].dependencies {}
 
         sourceSets["iosMain"].dependencies {
             implementation(libs.ktor.darwin)
+            implementation(libs.sqlDelight.native)
         }
 
         sourceSets["iosTest"].dependencies {}
 
-        sourceSets["jvmMain"].dependencies {}
+        sourceSets["jvmMain"].dependencies {
+            implementation(libs.sqlDelight.jvm)
+        }
 
         sourceSets["jvmTest"].dependencies {}
     }
@@ -122,5 +128,13 @@ buildkonfig {
             "API_KEY",
             gradleLocalProperties(rootDir).getProperty("api_key") ?: ""
         )
+    }
+}
+
+sqldelight {
+    databases {
+        create("AppDatabase") {
+            packageName.set("com.vickbt")
+        }
     }
 }
