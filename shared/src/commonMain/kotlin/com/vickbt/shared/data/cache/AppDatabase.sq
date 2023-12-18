@@ -1,0 +1,27 @@
+import java.lang.Double;
+
+CREATE TABLE FavoriteMovieEntity(
+id INTEGER NOT NULL,
+imdbId TEXT NOT NULL,
+backdropPath TEXT NOT NULL,
+posterPath TEXT NOT NULL,
+originalLanguage TEXT NOT NULL,
+originalTitle TEXT NOT NULL,
+overview TEXT NOT NULL,
+popularity INTEGER AS Double NOT NULL,
+releaseDate TEXT NOT NULL,
+status TEXT NOT NULL,
+title TEXT NOT NULL,
+voteAverage INTEGER AS Double NOT NULL,
+voteCount INTEGER NOT NULL
+);
+
+insertFavoriteMovie:
+INSERT INTO FavoriteMovieEntity(id, imdbId,backdropPath,posterPath,originalLanguage,originalTitle, overview, popularity, releaseDate,status,title,voteAverage,voteCount);
+VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);
+
+deleteAllFavoriteMovies:
+DELETE FROM FavoriteMovieEntity;
+
+selectAllFavoriteMovies:
+SELECT * FROM FavoriteMovieEntity;
