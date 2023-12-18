@@ -6,7 +6,6 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
         maven { url = uri("https://jitpack.io") }
-        maven(url = "https://androidx.dev/storage/compose-compiler/repository")
     }
 }
 
