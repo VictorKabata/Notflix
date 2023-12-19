@@ -4,7 +4,7 @@ import com.vickbt.shared.AppDatabase
 import com.vickbt.shared.domain.models.MovieDetails
 import com.vickbt.shared.utils.DatabaseDriverFactory
 
-class FavoritesDao(private val databaseDriverFactory: DatabaseDriverFactory) {
+class FavoriteMovieDao(private val databaseDriverFactory: DatabaseDriverFactory) {
 
     val appDatabase = AppDatabase(driver = databaseDriverFactory.createDriver())
     val dbQuery = appDatabase.appDatabaseQueries
