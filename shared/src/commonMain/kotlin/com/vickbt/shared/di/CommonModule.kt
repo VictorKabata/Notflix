@@ -16,6 +16,7 @@ import com.vickbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickbt.shared.presentation.ui.screens.main.MainViewModel
 import com.vickbt.shared.presentation.ui.screens.settings.SettingsViewModel
 import com.vickbt.shared.ui.screens.details.DetailsViewModel
+import com.vickbt.shared.ui.screens.favorites.FavoritesViewModel
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
@@ -82,13 +83,14 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     single<MovieDetailsRepository> {
         MovieDetailsRepositoryImpl(httpClient = get(), favoriteMovieDao = get())
     }
-    single<FavoritesRepository> { FavoritesRepositoryImpl(httpClient = get()) }
+    single<FavoritesRepository> { FavoritesRepositoryImpl(favoriteMovieDao = get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(observableSettings = get()) }
 
     singleOf(::MainViewModel)
     singleOf(::HomeViewModel)
     singleOf(::DetailsViewModel)
     singleOf(::SettingsViewModel)
+    singleOf(::FavoritesViewModel)
 }
 
 expect fun platformModule(): Module

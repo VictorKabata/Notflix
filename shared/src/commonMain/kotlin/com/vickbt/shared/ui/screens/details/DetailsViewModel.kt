@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
-class DetailsViewModel constructor(
+class DetailsViewModel(
     private val movieDetailsRepository: MovieDetailsRepository
 ) : KoinComponent {
 
@@ -66,19 +66,20 @@ class DetailsViewModel constructor(
         }
     }
 
-    @Deprecated("Pending caching implementation")
-    fun saveMovieDetails(movieDetails: MovieDetails) = viewModelScope.launch {
-        try {
-            movieDetailsRepository.apply {
-                // movieDetailsRepository.saveMovieDetails(movieDetail = movieDetails)
+    fun saveFavoriteMovie(movieDetails: MovieDetails) =
+        viewModelScope.launch(coroutineExceptionHandler) {
+            try {
+                movieDetailsRepository.saveFavoriteMovie(movie = movieDetails)
+            } catch (e: Exception) {
+                Napier.e("Error saving movie: ${e.message}")
             }
-        } catch (e: Exception) {
-            Napier.e("Error saving movie: $e")
         }
-    }
 
-    @Deprecated("Pending caching implementation")
-    fun deleteFavouriteMovie(movieId: Int) = viewModelScope.launch {
-        // favouritesPresenter.deleteFavouriteMovie(movieId = movieId)
+    fun deleteFavoriteMovie(id: Int) = viewModelScope.launch(coroutineExceptionHandler) {
+        try {
+            movieDetailsRepository.deleteFavoriteMovie(id = id)
+        } catch (e: Exception) {
+            Napier.e("Error removing movie: ${e.message}")
+        }
     }
 }

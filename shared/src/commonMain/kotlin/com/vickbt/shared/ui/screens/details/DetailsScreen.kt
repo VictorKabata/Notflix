@@ -75,7 +75,10 @@ fun DetailsScreen(
                         movieDetails = movieDetailsState.movieDetails,
                         onNavigationIconClick = { navigator.goBack() },
                         onShareIconClick = {},
-                        onFavoriteIconClick = {}
+                        onFavoriteIconClick = { movieDetails, isFavorite ->
+                            if (isFavorite == true) viewModel.saveFavoriteMovie(movieDetails = movieDetails)
+                            else viewModel.deleteFavoriteMovie(id = movieDetails.id)
+                        }
                     )
                 }
             ) {

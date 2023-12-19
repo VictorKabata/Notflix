@@ -53,7 +53,7 @@ fun DetailsAppBar(
     movieDetails: MovieDetails?,
     onNavigationIconClick: () -> Unit,
     onShareIconClick: () -> Unit,
-    onFavoriteIconClick: (MovieDetails) -> Unit
+    onFavoriteIconClick: (MovieDetails, Boolean?) -> Unit
 ) {
     // Return progress on collapsing toolbar - 1.0f=Expanded, 0.0f=Collapsed
     val scrollProgress = collapsingScrollState.toolbarState.progress
@@ -166,14 +166,14 @@ fun DetailsAppBar(
 
             IconButton(
                 onClick = {
-                    movieDetails?.let { onFavoriteIconClick(it) }
                     isFavourite?.let { isFavourite = !it }
+                    movieDetails?.let { onFavoriteIconClick(it, isFavourite) }
                 }
             ) {
                 Icon(
                     imageVector = Icons.Rounded.FavoriteBorder,
                     contentDescription = "Favourite",
-                    tint = MaterialTheme.colorScheme.onSurface
+                    tint = if (isFavourite == true) Color.Red else MaterialTheme.colorScheme.onSurface
                 )
             }
         },

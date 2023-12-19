@@ -1,5 +1,6 @@
 package com.vickbt.shared.utils
 
+import com.vickbt.shared.FavoriteMovieEntity
 import com.vickbt.shared.domain.models.Actor
 import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.domain.models.MovieDetails
@@ -34,7 +35,7 @@ data class SearchUiState(
 data class FavouritesUiState(
     val isLoading: Boolean = true,
     val error: String? = null,
-    val favouriteMovies: List<MovieDetails>? = emptyList()
+    val favoriteMovies: List<FavoriteMovieEntity>? = emptyList()
 )
 
 data class SettingsUiState(
