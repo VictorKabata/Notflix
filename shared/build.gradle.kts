@@ -69,6 +69,8 @@ kotlin {
             api(libs.preCompose)
             api(libs.preCompose.viewmodel)
 
+            implementation(libs.sqlDelight.coroutine)
+
             // implementation(libs.material.windowSizeClass)
         }
 
