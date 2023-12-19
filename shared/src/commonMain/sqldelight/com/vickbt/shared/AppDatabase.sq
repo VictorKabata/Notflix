@@ -17,7 +17,7 @@ voteCount INTEGER NOT NULL
 );
 
 insertFavoriteMovie:
-INSERT INTO FavoriteMovieEntity(id, imdbId,backdropPath,posterPath,originalLanguage,originalTitle, overview, popularity, releaseDate,status,title,voteAverage,voteCount);
+INSERT INTO FavoriteMovieEntity(id, imdbId,backdropPath,posterPath,originalLanguage,originalTitle, overview, popularity, releaseDate,status,title,voteAverage,voteCount)
 VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 deleteAllFavoriteMovies:
