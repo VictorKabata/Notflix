@@ -1,27 +1,29 @@
-import java.lang.Double;
-
 CREATE TABLE FavoriteMovieEntity(
-id INTEGER NOT NULL,
-imdbId TEXT NOT NULL,
-backdropPath TEXT NOT NULL,
-posterPath TEXT NOT NULL,
-originalLanguage TEXT NOT NULL,
-originalTitle TEXT NOT NULL,
-overview TEXT NOT NULL,
-popularity INTEGER AS Double NOT NULL,
-releaseDate TEXT NOT NULL,
-status TEXT NOT NULL,
-title TEXT NOT NULL,
-voteAverage INTEGER AS Double NOT NULL,
-voteCount INTEGER NOT NULL
+id INTEGER PRIMARY KEY NOT NULL,
+imdbId TEXT DEFAULT NULL,
+backdropPath TEXT DEFAULT NULL,
+posterPath TEXT DEFAULT NULL,
+originalLanguage TEXT DEFAULT NULL,
+originalTitle TEXT DEFAULT NULL,
+overview TEXT DEFAULT NULL,
+popularity REAL DEFAULT NULL,
+releaseDate TEXT DEFAULT NULL,
+status TEXT DEFAULT NULL,
+title TEXT DEFAULT NULL,
+voteAverage REAL DEFAULT NULL,
+voteCount INTEGER DEFAULT NULL
 );
 
 insertFavoriteMovie:
-INSERT INTO FavoriteMovieEntity(id, imdbId,backdropPath,posterPath,originalLanguage,originalTitle, overview, popularity, releaseDate,status,title,voteAverage,voteCount)
+INSERT OR REPLACE INTO FavoriteMovieEntity(id, imdbId,backdropPath,posterPath,originalLanguage,originalTitle, overview, popularity, releaseDate,status,title,voteAverage,voteCount)
 VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);
+
+getAllFavoriteMovies:
+SELECT * FROM FavoriteMovieEntity;
+
+deleteFavoriteMovie:
+DELETE FROM FavoriteMovieEntity
+WHERE id=?;
 
 deleteAllFavoriteMovies:
 DELETE FROM FavoriteMovieEntity;
-
-selectAllFavoriteMovies:
-SELECT * FROM FavoriteMovieEntity;
