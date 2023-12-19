@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -171,7 +172,7 @@ fun DetailsAppBar(
                 }
             ) {
                 Icon(
-                    imageVector = Icons.Rounded.FavoriteBorder,
+                    imageVector = if (isFavourite == true) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
                     contentDescription = "Favourite",
                     tint = if (isFavourite == true) Color.Red else MaterialTheme.colorScheme.onSurface
                 )
