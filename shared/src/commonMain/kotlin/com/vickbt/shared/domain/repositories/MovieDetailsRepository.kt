@@ -34,4 +34,6 @@ interface MovieDetailsRepository {
 
     /**Save movie details to local cache*/
     suspend fun saveFavoriteMovie(movie: MovieDetails)
+
+    suspend fun deleteFavoriteMovie(id:Int)
 }

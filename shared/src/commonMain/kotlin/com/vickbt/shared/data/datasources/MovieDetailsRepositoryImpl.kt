@@ -60,4 +60,8 @@ class MovieDetailsRepositoryImpl(
     override suspend fun saveFavoriteMovie(movie: MovieDetails) {
         favoriteMovieDao.saveFavoriteMovie(movie = movie)
     }
+
+    override suspend fun deleteFavoriteMovie(id: Int) {
+        favoriteMovieDao.deleteFavouriteMovie(id = id)
+    }
 }
