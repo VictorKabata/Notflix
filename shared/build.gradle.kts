@@ -134,7 +134,8 @@ buildkonfig {
 sqldelight {
     databases {
         create("AppDatabase") {
-            packageName.set("com.vickbt")
+            packageName.set("com.vickbt.shared")
+            // ToDo: Update source folder to kotlin-data
         }
     }
 }
