@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
 import com.vickbt.shared.domain.models.MovieDetails
 import com.vickbt.shared.ui.components.collapsingToolbar.CollapsingToolbarScaffoldState
+import com.vickbt.shared.utils.DetailsUiState
 import com.vickbt.shared.utils.commonImageLoader
 import com.vickbt.shared.utils.getMovieDuration
 import com.vickbt.shared.utils.loadImage
@@ -51,7 +52,7 @@ import com.vickbt.shared.utils.loadImage
 fun DetailsAppBar(
     modifier: Modifier = Modifier,
     collapsingScrollState: CollapsingToolbarScaffoldState,
-    movieDetails: MovieDetails?,
+    movieDetailsState: DetailsUiState?,
     onNavigationIconClick: () -> Unit,
     onShareIconClick: () -> Unit,
     onFavoriteIconClick: (MovieDetails, Boolean?) -> Unit
@@ -64,7 +65,8 @@ fun DetailsAppBar(
     var dominantColor by remember { mutableStateOf(defaultDominantColor) }
     var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
 
-    var isFavourite by remember { mutableStateOf(movieDetails?.isFavourite) }
+    val movieDetails by remember { mutableStateOf(movieDetailsState?.movieDetails) }
+    var isFavourite by remember { mutableStateOf(movieDetailsState?.isFavorite) }
 
     val backgroundColor by animateColorAsState(
         targetValue = MaterialTheme.colorScheme.surface.copy(1 - scrollProgress)

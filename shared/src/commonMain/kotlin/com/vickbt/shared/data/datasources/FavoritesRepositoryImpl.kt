@@ -11,5 +11,4 @@ class FavoritesRepositoryImpl(private val favoriteMovieDao: FavoriteMovieDao) :
     override suspend fun getFavouriteMovies(): Flow<List<FavoriteMovieEntity>> {
         return favoriteMovieDao.getAllFavoriteMovies()
     }
-
 }

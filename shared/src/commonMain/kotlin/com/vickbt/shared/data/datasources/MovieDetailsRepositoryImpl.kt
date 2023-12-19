@@ -11,6 +11,7 @@ import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.domain.models.MovieDetails
 import com.vickbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickbt.shared.utils.NetworkResultState
+import com.vickbt.shared.utils.toBoolean
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -63,5 +64,9 @@ class MovieDetailsRepositoryImpl(
 
     override suspend fun deleteFavoriteMovie(id: Int) {
         favoriteMovieDao.deleteFavouriteMovie(id = id)
+    }
+
+    override suspend fun isMovieFavorite(id: Int): Boolean? {
+        return favoriteMovieDao.isMovieFavorite(id = id)?.toBoolean()
     }
 }

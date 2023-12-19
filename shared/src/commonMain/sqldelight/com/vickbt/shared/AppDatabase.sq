@@ -27,3 +27,8 @@ WHERE id=?;
 
 deleteAllFavoriteMovies:
 DELETE FROM FavoriteMovieEntity;
+
+isMovieFavorite:
+SELECT COUNT(1)
+FROM FavoriteMovieEntity
+WHERE id=?;

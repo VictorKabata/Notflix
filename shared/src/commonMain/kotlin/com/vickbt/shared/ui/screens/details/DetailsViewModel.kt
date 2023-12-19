@@ -82,4 +82,13 @@ class DetailsViewModel(
             Napier.e("Error removing movie: ${e.message}")
         }
     }
+
+    fun isMovieFavorite(id: Int) = viewModelScope.launch(coroutineExceptionHandler) {
+        try {
+            val isFavorite = movieDetailsRepository.isMovieFavorite(id = id)
+            _movieDetailsState.update { it.copy(isFavorite = isFavorite) }
+        } catch (e: Exception) {
+            Napier.e("Error removing movie: ${e.message}")
+        }
+    }
 }

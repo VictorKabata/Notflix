@@ -43,5 +43,6 @@ class FavoriteMovieDao(private val databaseDriverFactory: DatabaseDriverFactory)
     /**Delete all favorite movie details in FavoriteMovie table*/
     fun deleteAllFavouriteMovies() = dbQuery.deleteAllFavoriteMovies()
 
-
+    /**Return value depending on whether movie details is in FavoriteMovie table*/
+    fun isMovieFavorite(id: Int) = dbQuery.isMovieFavorite(id = id.toLong()).executeAsOneOrNull()
 }

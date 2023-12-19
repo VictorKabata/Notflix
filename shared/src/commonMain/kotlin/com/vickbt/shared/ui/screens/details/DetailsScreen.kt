@@ -33,6 +33,7 @@ import com.vickbt.shared.ui.components.collapsingToolbar.rememberCollapsingToolb
 import com.vickbt.shared.utils.WindowSize
 import com.vickbt.shared.utils.getPopularity
 import com.vickbt.shared.utils.getRating
+import io.github.aakira.napier.Napier
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
 
@@ -44,12 +45,15 @@ fun DetailsScreen(
     movieId: Int
 ) {
     LaunchedEffect(key1 = true) {
-        viewModel.getMovieDetails(movieId)
-        viewModel.fetchSimilarMovies(movieId)
-        viewModel.getMovieCast(movieId)
+        viewModel.getMovieDetails(movieId = movieId)
+        viewModel.fetchSimilarMovies(movieId = movieId)
+        viewModel.getMovieCast(movieId = movieId)
+        viewModel.isMovieFavorite(id = movieId)
     }
 
     val movieDetailsState = viewModel.movieDetailsState.collectAsState().value
+
+    Napier.e("is favorite: ${movieDetailsState.isFavorite}")
 
     val scrollState = rememberScrollState()
     val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
@@ -72,12 +76,15 @@ fun DetailsScreen(
                     DetailsAppBar(
                         modifier = Modifier.fillMaxWidth(),
                         collapsingScrollState = collapsingScrollState,
-                        movieDetails = movieDetailsState.movieDetails,
+                        movieDetailsState = movieDetailsState,
                         onNavigationIconClick = { navigator.goBack() },
                         onShareIconClick = {},
                         onFavoriteIconClick = { movieDetails, isFavorite ->
-                            if (isFavorite == true) viewModel.saveFavoriteMovie(movieDetails = movieDetails)
-                            else viewModel.deleteFavoriteMovie(id = movieDetails.id)
+                            if (isFavorite == true) {
+                                viewModel.saveFavoriteMovie(movieDetails = movieDetails)
+                            } else {
+                                viewModel.deleteFavoriteMovie(id = movieDetails.id)
+                            }
                         }
                     )
                 }
