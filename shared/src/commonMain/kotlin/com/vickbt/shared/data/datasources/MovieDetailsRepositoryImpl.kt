@@ -1,5 +1,6 @@
 package com.vickbt.shared.data.datasources
 
+import com.vickbt.shared.data.cache.sqldelight.daos.FavoriteMovieDao
 import com.vickbt.shared.data.mappers.toDomain
 import com.vickbt.shared.data.network.models.CastDto
 import com.vickbt.shared.data.network.models.MovieDetailsDto
@@ -17,8 +18,10 @@ import io.ktor.client.request.parameter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-class MovieDetailsRepositoryImpl constructor(private val httpClient: HttpClient) :
-    MovieDetailsRepository {
+class MovieDetailsRepositoryImpl(
+    private val httpClient: HttpClient,
+    private val favoriteMovieDao: FavoriteMovieDao
+) : MovieDetailsRepository {
 
     override suspend fun fetchMovieDetails(movieId: Int): Flow<NetworkResultState<MovieDetails>> {
         return flowOf(
@@ -52,5 +55,9 @@ class MovieDetailsRepositoryImpl constructor(private val httpClient: HttpClient)
                 response.movies?.map { it.toDomain() }
             }
         )
+    }
+
+    override suspend fun saveFavoriteMovie(movie: MovieDetails) {
+        favoriteMovieDao.saveFavoriteMovie(movie = movie)
     }
 }

@@ -1,6 +1,7 @@
 package com.vickbt.shared.di
 
 import com.vickbt.shared.BuildKonfig
+import com.vickbt.shared.data.cache.sqldelight.daos.FavoriteMovieDao
 import com.vickbt.shared.data.datasources.FavoritesRepositoryImpl
 import com.vickbt.shared.data.datasources.MovieDetailsRepositoryImpl
 import com.vickbt.shared.data.datasources.MoviesRepositoryImpl
@@ -75,8 +76,12 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
         }
     }
 
+    single { FavoriteMovieDao(databaseDriverFactory = get()) }
+
     single<MoviesRepository> { MoviesRepositoryImpl(httpClient = get()) }
-    single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(httpClient = get()) }
+    single<MovieDetailsRepository> {
+        MovieDetailsRepositoryImpl(httpClient = get(), favoriteMovieDao = get())
+    }
     single<FavoritesRepository> { FavoritesRepositoryImpl(httpClient = get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(observableSettings = get()) }
 

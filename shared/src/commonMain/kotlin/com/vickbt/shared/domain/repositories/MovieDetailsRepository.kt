@@ -31,4 +31,7 @@ interface MovieDetailsRepository {
         movieId: Int,
         page: Int = STARTING_PAGE_INDEX
     ): Flow<NetworkResultState<List<Movie>?>>
+
+    /**Save movie details to local cache*/
+    suspend fun saveFavoriteMovie(movie: MovieDetails)
 }
