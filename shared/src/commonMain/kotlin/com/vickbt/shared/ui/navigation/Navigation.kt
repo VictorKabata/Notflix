@@ -28,7 +28,7 @@ fun Navigation(
         }
 
         scene(NavigationItem.Favorites.route) {
-            FavoritesScreen()
+            FavoritesScreen(navigator = navigator)
         }
 
         scene(NavigationItem.Settings.route) {

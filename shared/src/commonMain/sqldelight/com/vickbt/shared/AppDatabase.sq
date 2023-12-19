@@ -8,15 +8,17 @@ originalTitle TEXT DEFAULT NULL,
 overview TEXT DEFAULT NULL,
 popularity REAL DEFAULT NULL,
 releaseDate TEXT DEFAULT NULL,
+runTime INTEGER DEFAULT NULL,
 status TEXT DEFAULT NULL,
+tagLine TEXT DEFAULT NULL,
 title TEXT DEFAULT NULL,
 voteAverage REAL DEFAULT NULL,
 voteCount INTEGER DEFAULT NULL
 );
 
 insertFavoriteMovie:
-INSERT OR REPLACE INTO FavoriteMovieEntity(id, imdbId,backdropPath,posterPath,originalLanguage,originalTitle, overview, popularity, releaseDate,status,title,voteAverage,voteCount)
-VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);
+INSERT OR REPLACE INTO FavoriteMovieEntity(id, imdbId,backdropPath,posterPath,originalLanguage,originalTitle, overview, popularity, releaseDate, runTime,status, tagLine,title,voteAverage,voteCount)
+VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 getAllFavoriteMovies:
 SELECT * FROM FavoriteMovieEntity;

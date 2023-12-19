@@ -26,7 +26,9 @@ class FavoriteMovieDao(private val databaseDriverFactory: DatabaseDriverFactory)
                 overview = movie.overview,
                 popularity = movie.popularity,
                 releaseDate = movie.releaseDate,
+                runTime = movie.runtime?.toLong(),
                 status = movie.status,
+                tagLine = movie.tagline,
                 title = movie.title,
                 voteAverage = movie.voteAverage,
                 voteCount = movie.voteCount?.toLong()
