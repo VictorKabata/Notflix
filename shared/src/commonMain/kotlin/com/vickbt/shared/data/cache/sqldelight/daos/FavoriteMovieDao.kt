@@ -7,6 +7,9 @@ import com.vickbt.shared.domain.models.MovieDetails
 import com.vickbt.shared.utils.DatabaseDriverFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 class FavoriteMovieDao(private val databaseDriverFactory: DatabaseDriverFactory) {
 
@@ -31,7 +34,9 @@ class FavoriteMovieDao(private val databaseDriverFactory: DatabaseDriverFactory)
                 tagLine = movie.tagline,
                 title = movie.title,
                 voteAverage = movie.voteAverage,
-                voteCount = movie.voteCount?.toLong()
+                voteCount = movie.voteCount?.toLong(),
+                createdAt = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+                    .toString()
             )
         }
     }
