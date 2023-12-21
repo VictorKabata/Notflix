@@ -25,12 +25,24 @@ class MovieDetailsRepositoryImpl(
 ) : MovieDetailsRepository {
 
     override suspend fun fetchMovieDetails(movieId: Int): Flow<NetworkResultState<MovieDetails>> {
-        return flowOf(
-            safeApiCall {
-                val response = httpClient.get(urlString = "movie/$movieId").body<MovieDetailsDto>()
-                response.toDomain()
+        val isMovieCached = isMovieFavorite(movieId = movieId)
+
+        return if (isMovieCached == true) {
+            try {
+                val cachedFavoriteMovie = getFavoriteMovie(movieId = movieId)
+                flowOf(NetworkResultState.Success(data = cachedFavoriteMovie))
+            } catch (e: Exception) {
+                flowOf(NetworkResultState.Failure(exception = e))
             }
-        )
+        } else {
+            flowOf(
+                safeApiCall {
+                    val response =
+                        httpClient.get(urlString = "movie/$movieId").body<MovieDetailsDto>()
+                    response.toDomain()
+                }
+            )
+        }
     }
 
     override suspend fun fetchMovieCast(movieId: Int): Flow<NetworkResultState<Cast>> {
@@ -62,11 +74,15 @@ class MovieDetailsRepositoryImpl(
         favoriteMovieDao.saveFavoriteMovie(movie = movie)
     }
 
-    override suspend fun deleteFavoriteMovie(id: Int) {
-        favoriteMovieDao.deleteFavouriteMovie(id = id)
+    override suspend fun getFavoriteMovie(movieId: Int): MovieDetails {
+        return favoriteMovieDao.getFavoriteMovie(movieId = movieId).toDomain()
     }
 
-    override suspend fun isMovieFavorite(id: Int): Boolean? {
-        return favoriteMovieDao.isMovieFavorite(id = id)?.toBoolean()
+    override suspend fun deleteFavoriteMovie(movieId: Int) {
+        favoriteMovieDao.deleteFavouriteMovie(movieId = movieId)
+    }
+
+    override suspend fun isMovieFavorite(movieId: Int): Boolean? {
+        return favoriteMovieDao.isMovieFavorite(movieId = movieId)?.toBoolean()
     }
 }
