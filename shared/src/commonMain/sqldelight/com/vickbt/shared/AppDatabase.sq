@@ -23,6 +23,10 @@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 getAllFavoriteMovies:
 SELECT * FROM FavoriteMovieEntity;
 
+getFavoriteMovie:
+SELECT * FROM FavoriteMovieEntity
+WHERE id=?;
+
 deleteFavoriteMovie:
 DELETE FROM FavoriteMovieEntity
 WHERE id=?;
