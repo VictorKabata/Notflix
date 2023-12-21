@@ -39,12 +39,17 @@ class FavoriteMovieDao(private val databaseDriverFactory: DatabaseDriverFactory)
     /**Returns a list of all movie details in FavoriteMovie table*/
     fun getAllFavoriteMovies() = dbQuery.getAllFavoriteMovies().asFlow().mapToList(Dispatchers.IO)
 
+    /**Get single movies from FavoriteMovie table based on its ID*/
+    fun getFavoriteMovie(movieId: Int) =
+        dbQuery.getFavoriteMovie(id = movieId.toLong()).executeAsOne()
+
     /**Delete favorite movie details based on its ID*/
-    fun deleteFavouriteMovie(id: Int) = dbQuery.deleteFavoriteMovie(id = id.toLong())
+    fun deleteFavouriteMovie(movieId: Int) = dbQuery.deleteFavoriteMovie(id = movieId.toLong())
 
     /**Delete all favorite movie details in FavoriteMovie table*/
     fun deleteAllFavouriteMovies() = dbQuery.deleteAllFavoriteMovies()
 
     /**Return value depending on whether movie details is in FavoriteMovie table*/
-    fun isMovieFavorite(id: Int) = dbQuery.isMovieFavorite(id = id.toLong()).executeAsOneOrNull()
+    fun isMovieFavorite(movieId: Int) =
+        dbQuery.isMovieFavorite(id = movieId.toLong()).executeAsOneOrNull()
 }
