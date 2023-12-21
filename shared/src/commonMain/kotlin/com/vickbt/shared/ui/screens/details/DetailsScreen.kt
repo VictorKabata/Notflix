@@ -48,7 +48,7 @@ fun DetailsScreen(
         viewModel.getMovieDetails(movieId = movieId)
         viewModel.fetchSimilarMovies(movieId = movieId)
         viewModel.getMovieCast(movieId = movieId)
-        viewModel.isMovieFavorite(id = movieId)
+        viewModel.isMovieFavorite(movieId = movieId)
     }
 
     val movieDetailsState = viewModel.movieDetailsState.collectAsState().value
@@ -83,7 +83,7 @@ fun DetailsScreen(
                             if (isFavorite == true) {
                                 viewModel.saveFavoriteMovie(movieDetails = movieDetails)
                             } else {
-                                viewModel.deleteFavoriteMovie(id = movieDetails.id)
+                                viewModel.deleteFavoriteMovie(movieId = movieDetails.id)
                             }
                         }
                     )
