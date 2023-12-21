@@ -31,6 +31,7 @@ import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
@@ -88,7 +89,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
 
     singleOf(::MainViewModel)
     singleOf(::HomeViewModel)
-    singleOf(::DetailsViewModel)
+    factoryOf(::DetailsViewModel)
     singleOf(::SettingsViewModel)
     singleOf(::FavoritesViewModel)
 }
