@@ -94,16 +94,16 @@ fun DetailsScreen(
                     verticalArrangement = Arrangement.spacedBy(14.dp)
                 ) {
                     //region Movie Ratings
-                    movieDetailsState.movieDetails?.voteAverage?.let { voteAverage ->
+                    if (movieDetailsState.movieDetails?.voteAverage != null) {
                         MovieRatingSection(
-                            popularity = voteAverage.getPopularity(),
-                            voteAverage = voteAverage.getRating()
+                            popularity = movieDetailsState.movieDetails.voteAverage.getPopularity(),
+                            voteAverage = movieDetailsState.movieDetails.voteAverage.getRating()
                         )
                     }
                     //endregion
 
                     //region Movie Overview
-                    movieDetailsState.movieDetails?.overview?.let {
+                    if (!movieDetailsState.movieDetails?.overview.isNullOrEmpty()) {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = "Overview",
@@ -116,7 +116,7 @@ fun DetailsScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp),
-                            text = it,
+                            text = movieDetailsState.movieDetails?.overview?:"",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface,
                             fontSize = 15.sp,
@@ -127,7 +127,7 @@ fun DetailsScreen(
                     //endregion
 
                     //region Movie Cast
-                    movieDetailsState.movieCast?.let {
+                    if (!movieDetailsState.movieCast.isNullOrEmpty()) {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = "Cast",
@@ -139,7 +139,7 @@ fun DetailsScreen(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            items(items = it) { item ->
+                            items(items = movieDetailsState.movieCast) { item ->
                                 ItemMovieCast(modifier = Modifier, actor = item)
                             }
                         }
@@ -147,7 +147,7 @@ fun DetailsScreen(
                     //endregion
 
                     //region Similar Movies
-                    movieDetailsState.similarMovies?.let {
+                    if (!movieDetailsState.similarMovies.isNullOrEmpty()) {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = "Similar Movies",
@@ -160,7 +160,7 @@ fun DetailsScreen(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            items(items = it) { movie ->
+                            items(items = movieDetailsState.similarMovies) { movie ->
                                 MovieCardPortrait(movie = movie, onItemClick = {})
                             }
                         }
