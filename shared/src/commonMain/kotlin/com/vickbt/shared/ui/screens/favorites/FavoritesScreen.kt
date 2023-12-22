@@ -19,14 +19,12 @@ import org.koin.compose.koinInject
 
 @Composable
 fun FavoritesScreen(navigator: Navigator, viewModel: FavoritesViewModel = koinInject()) {
-
     val favoriteMovies = viewModel.favoriteMoviesState.collectAsState().value
 
     Scaffold(
         topBar = { AppBar("Favorites") }
     ) { paddingValues ->
         Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
-
             LazyColumn(modifier = Modifier.fillMaxSize().padding(bottom = 90.dp)) {
                 items(items = favoriteMovies.favoriteMovies ?: emptyList()) { favoriteMovie ->
                     MovieCardDescription(

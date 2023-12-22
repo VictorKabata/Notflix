@@ -49,9 +49,9 @@ fun ExpandableText(
 
     LaunchedEffect(text, expanded, textLayoutResult, seeMoreSize) {
         val lastLineIndex = minimizedMaxLines - 1
-        if (!expanded && textLayoutResult != null && seeMoreSize != null
-            && lastLineIndex + 1 == textLayoutResult.lineCount
-            && textLayoutResult.isLineEllipsized(lastLineIndex)
+        if (!expanded && textLayoutResult != null && seeMoreSize != null &&
+            lastLineIndex + 1 == textLayoutResult.lineCount &&
+            textLayoutResult.isLineEllipsized(lastLineIndex)
         ) {
             var lastCharIndex = textLayoutResult.getLineEnd(lastLineIndex, visibleEnd = true) + 1
             var charRect: Rect
@@ -84,13 +84,14 @@ fun ExpandableText(
                 onTextLayout = { seeMoreSizeState.value = it.size },
                 modifier = Modifier
                     .then(
-                        if (seeMoreOffset != null)
+                        if (seeMoreOffset != null) {
                             Modifier.offset(
                                 x = with(density) { seeMoreOffset.x.toDp() },
                                 y = with(density) { seeMoreOffset.y.toDp() },
                             )
-                        else
+                        } else {
                             Modifier
+                        }
                     )
                     .clickable {
                         expanded = true
