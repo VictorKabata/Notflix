@@ -116,7 +116,7 @@ fun DetailsScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp),
-                            text = movieDetailsState.movieDetails?.overview?:"",
+                            text = movieDetailsState.movieDetails?.overview ?: "",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface,
                             fontSize = 15.sp,
