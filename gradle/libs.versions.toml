@@ -12,9 +12,9 @@ nativeCocoapod = "1.9.0"
 
 # Kotlin Multiplatform Version
 kotlinxCoroutines = "1.7.3"
-koinCore = "3.4.2"
-koinCompose = "1.0.3"
-koinAndroid = "3.4.2"
+koinCore = "3.5.3"
+koinCompose = "1.1.2"
+koinAndroid = "3.5.3"
 koinAndroidxCompose = "3.4.5"
 kotlinxSerializationJson = "1.6.0"
 kotlinxDateTime = "0.4.1"
