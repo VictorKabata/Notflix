@@ -1,6 +1,6 @@
 package com.vickbt.shared.data.mappers
 
-import com.vickbt.shared.FavoriteMovieEntity
+import com.vickbt.shared.data.cache.sqldelight.FavoriteMovieEntity
 import com.vickbt.shared.domain.models.MovieDetails
 
 fun FavoriteMovieEntity.toDomain(): MovieDetails {
