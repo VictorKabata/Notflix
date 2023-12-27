@@ -3,7 +3,6 @@ package com.vickbt.notflix
 import android.app.Application
 import com.vickbt.shared.di.initKoin
 import com.vickbt.shared.utils.ContextUtils
-import org.koin.android.BuildConfig
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.logger.Level
@@ -16,7 +15,7 @@ class NotflixApplication : Application() {
         ContextUtils.setContext(context = this)
 
         initKoin {
-            androidLogger(level = if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
+            androidLogger(level = Level.NONE)
             androidContext(androidContext = this@NotflixApplication)
         }
     }
