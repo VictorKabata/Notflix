@@ -1,5 +1,6 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -18,9 +19,13 @@ kotlin {
 
     androidTarget()
 
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
+        when {
+            System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
+            System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
+            else -> ::iosX64
+        }
+    iosTarget("ios") {}
 
     jvm()
 
