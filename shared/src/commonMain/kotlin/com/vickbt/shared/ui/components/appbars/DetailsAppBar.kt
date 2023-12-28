@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -41,6 +42,7 @@ import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
 import com.vickbt.shared.domain.models.MovieDetails
 import com.vickbt.shared.ui.components.collapsingToolbar.CollapsingToolbarScaffoldState
+import com.vickbt.shared.utils.DetailsUiState
 import com.vickbt.shared.utils.commonImageLoader
 import com.vickbt.shared.utils.getMovieDuration
 import com.vickbt.shared.utils.loadImage
@@ -50,10 +52,10 @@ import com.vickbt.shared.utils.loadImage
 fun DetailsAppBar(
     modifier: Modifier = Modifier,
     collapsingScrollState: CollapsingToolbarScaffoldState,
-    movieDetails: MovieDetails?,
+    movieDetailsState: DetailsUiState?,
     onNavigationIconClick: () -> Unit,
     onShareIconClick: () -> Unit,
-    onFavoriteIconClick: (MovieDetails) -> Unit
+    onFavoriteIconClick: (MovieDetails, Boolean?) -> Unit
 ) {
     // Return progress on collapsing toolbar - 1.0f=Expanded, 0.0f=Collapsed
     val scrollProgress = collapsingScrollState.toolbarState.progress
@@ -63,7 +65,8 @@ fun DetailsAppBar(
     var dominantColor by remember { mutableStateOf(defaultDominantColor) }
     var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
 
-    var isFavourite by remember { mutableStateOf(movieDetails?.isFavourite) }
+    val movieDetails by remember { mutableStateOf(movieDetailsState?.movieDetails) }
+    var isFavourite by remember { mutableStateOf(movieDetailsState?.isFavorite) }
 
     val backgroundColor by animateColorAsState(
         targetValue = MaterialTheme.colorScheme.surface.copy(1 - scrollProgress)
@@ -166,14 +169,14 @@ fun DetailsAppBar(
 
             IconButton(
                 onClick = {
-                    movieDetails?.let { onFavoriteIconClick(it) }
                     isFavourite?.let { isFavourite = !it }
+                    movieDetails?.let { onFavoriteIconClick(it, isFavourite) }
                 }
             ) {
                 Icon(
-                    imageVector = Icons.Rounded.FavoriteBorder,
+                    imageVector = if (isFavourite == true) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
                     contentDescription = "Favourite",
-                    tint = MaterialTheme.colorScheme.onSurface
+                    tint = if (isFavourite == true) Color.Red else MaterialTheme.colorScheme.onSurface
                 )
             }
         },

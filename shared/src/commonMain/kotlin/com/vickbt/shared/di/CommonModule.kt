@@ -1,6 +1,7 @@
 package com.vickbt.shared.di
 
 import com.vickbt.shared.BuildKonfig
+import com.vickbt.shared.data.cache.sqldelight.daos.FavoriteMovieDao
 import com.vickbt.shared.data.datasources.FavoritesRepositoryImpl
 import com.vickbt.shared.data.datasources.MovieDetailsRepositoryImpl
 import com.vickbt.shared.data.datasources.MoviesRepositoryImpl
@@ -15,6 +16,7 @@ import com.vickbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickbt.shared.presentation.ui.screens.main.MainViewModel
 import com.vickbt.shared.presentation.ui.screens.settings.SettingsViewModel
 import com.vickbt.shared.ui.screens.details.DetailsViewModel
+import com.vickbt.shared.ui.screens.favorites.FavoritesViewModel
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
@@ -29,6 +31,7 @@ import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
@@ -75,15 +78,20 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
         }
     }
 
+    single { FavoriteMovieDao(databaseDriverFactory = get()) }
+
     single<MoviesRepository> { MoviesRepositoryImpl(httpClient = get()) }
-    single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(httpClient = get()) }
-    single<FavoritesRepository> { FavoritesRepositoryImpl(httpClient = get()) }
+    single<MovieDetailsRepository> {
+        MovieDetailsRepositoryImpl(httpClient = get(), favoriteMovieDao = get())
+    }
+    single<FavoritesRepository> { FavoritesRepositoryImpl(favoriteMovieDao = get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(observableSettings = get()) }
 
     singleOf(::MainViewModel)
     singleOf(::HomeViewModel)
-    singleOf(::DetailsViewModel)
+    factoryOf(::DetailsViewModel)
     singleOf(::SettingsViewModel)
+    singleOf(::FavoritesViewModel)
 }
 
 expect fun platformModule(): Module

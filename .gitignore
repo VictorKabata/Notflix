@@ -12,3 +12,6 @@ local.properties
 #Cocopods
 appiOS/Pods/
 appiOS/Podfile.lock
+*.podspec
+*.pbxproj
+*.xcuserstate

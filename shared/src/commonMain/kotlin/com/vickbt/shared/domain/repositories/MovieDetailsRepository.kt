@@ -9,17 +9,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface MovieDetailsRepository {
 
-    /**Save favourite movie details to local DB*/
-    /*@Deprecated("Pending caching implementation")
-    suspend fun saveMovieDetails(movieDetail: MovieDetails)*/
-
-    /**
-     * Retrieves movie detail based on id from local DB
-     * if not available makes a network call to retrieve movie details from API
-     */
-    /*@Deprecated("Pending caching implementation")
-    suspend fun getMovieDetails(movieId: Int): Flow<Result<MovieDetails>>*/
-
     /**Fetch movie details from network source*/
     suspend fun fetchMovieDetails(movieId: Int): Flow<NetworkResultState<MovieDetails>>
 
@@ -31,4 +20,16 @@ interface MovieDetailsRepository {
         movieId: Int,
         page: Int = STARTING_PAGE_INDEX
     ): Flow<NetworkResultState<List<Movie>?>>
+
+    /**Save movie details to local cache*/
+    suspend fun saveFavoriteMovie(movie: MovieDetails)
+
+    /**Retrieve cached movie details from local cache based on its ID*/
+    suspend fun getFavoriteMovie(movieId: Int): MovieDetails
+
+    /**Delete previously saved movie details from local cache*/
+    suspend fun deleteFavoriteMovie(movieId: Int)
+
+    /**Check if movie details record is available in the local cache*/
+    suspend fun isMovieFavorite(movieId: Int): Boolean?
 }

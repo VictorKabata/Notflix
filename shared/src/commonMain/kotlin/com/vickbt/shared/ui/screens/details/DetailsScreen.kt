@@ -33,6 +33,7 @@ import com.vickbt.shared.ui.components.collapsingToolbar.rememberCollapsingToolb
 import com.vickbt.shared.utils.WindowSize
 import com.vickbt.shared.utils.getPopularity
 import com.vickbt.shared.utils.getRating
+import io.github.aakira.napier.Napier
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
 
@@ -43,13 +44,16 @@ fun DetailsScreen(
     viewModel: DetailsViewModel = koinInject(),
     movieId: Int
 ) {
-    LaunchedEffect(key1 = true) {
-        viewModel.getMovieDetails(movieId)
-        viewModel.fetchSimilarMovies(movieId)
-        viewModel.getMovieCast(movieId)
+    LaunchedEffect(key1 = Unit) {
+        viewModel.getMovieDetails(movieId = movieId)
+        viewModel.fetchSimilarMovies(movieId = movieId)
+        viewModel.getMovieCast(movieId = movieId)
+        viewModel.isMovieFavorite(movieId = movieId)
     }
 
     val movieDetailsState = viewModel.movieDetailsState.collectAsState().value
+
+    Napier.e("is favorite: ${movieDetailsState.isFavorite}")
 
     val scrollState = rememberScrollState()
     val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
@@ -72,10 +76,16 @@ fun DetailsScreen(
                     DetailsAppBar(
                         modifier = Modifier.fillMaxWidth(),
                         collapsingScrollState = collapsingScrollState,
-                        movieDetails = movieDetailsState.movieDetails,
+                        movieDetailsState = movieDetailsState,
                         onNavigationIconClick = { navigator.goBack() },
                         onShareIconClick = {},
-                        onFavoriteIconClick = {}
+                        onFavoriteIconClick = { movieDetails, isFavorite ->
+                            if (isFavorite == true) {
+                                viewModel.saveFavoriteMovie(movieDetails = movieDetails)
+                            } else {
+                                viewModel.deleteFavoriteMovie(movieId = movieDetails.id)
+                            }
+                        }
                     )
                 }
             ) {
@@ -84,16 +94,16 @@ fun DetailsScreen(
                     verticalArrangement = Arrangement.spacedBy(14.dp)
                 ) {
                     //region Movie Ratings
-                    movieDetailsState.movieDetails?.voteAverage?.let { voteAverage ->
+                    if (movieDetailsState.movieDetails?.voteAverage != null) {
                         MovieRatingSection(
-                            popularity = voteAverage.getPopularity(),
-                            voteAverage = voteAverage.getRating()
+                            popularity = movieDetailsState.movieDetails.voteAverage.getPopularity(),
+                            voteAverage = movieDetailsState.movieDetails.voteAverage.getRating()
                         )
                     }
                     //endregion
 
                     //region Movie Overview
-                    movieDetailsState.movieDetails?.overview?.let {
+                    if (!movieDetailsState.movieDetails?.overview.isNullOrEmpty()) {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = "Overview",
@@ -106,7 +116,7 @@ fun DetailsScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp),
-                            text = it,
+                            text = movieDetailsState.movieDetails?.overview ?: "",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface,
                             fontSize = 15.sp,
@@ -117,7 +127,7 @@ fun DetailsScreen(
                     //endregion
 
                     //region Movie Cast
-                    movieDetailsState.movieCast?.let {
+                    if (!movieDetailsState.movieCast.isNullOrEmpty()) {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = "Cast",
@@ -129,7 +139,7 @@ fun DetailsScreen(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            items(items = it) { item ->
+                            items(items = movieDetailsState.movieCast) { item ->
                                 ItemMovieCast(modifier = Modifier, actor = item)
                             }
                         }
@@ -137,7 +147,7 @@ fun DetailsScreen(
                     //endregion
 
                     //region Similar Movies
-                    movieDetailsState.similarMovies?.let {
+                    if (!movieDetailsState.similarMovies.isNullOrEmpty()) {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = "Similar Movies",
@@ -150,7 +160,7 @@ fun DetailsScreen(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            items(items = it) { movie ->
+                            items(items = movieDetailsState.similarMovies) { movie ->
                                 MovieCardPortrait(movie = movie, onItemClick = {})
                             }
                         }

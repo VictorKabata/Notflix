@@ -16,7 +16,7 @@ fun String.capitalizeEachWord(): String {
 }
 
 /**Returns formatted date for movie release date*/
-fun String?.getReleaseDate(): String? {
+fun String?.getReleaseDate(): String {
     val localDate = this?.toLocalDate()
 
     return "${localDate?.dayOfMonth} ${localDate?.month}, ${localDate?.year}"
@@ -50,4 +50,8 @@ fun Double.getRating(): String {
     val before = byTwo.toString().substringBefore(".")
     val after = byTwo.toString().substringAfter(".").split("")[1]
     return "$before.$after"
+}
+
+fun Long.toBoolean(): Boolean {
+    return this != 0L
 }

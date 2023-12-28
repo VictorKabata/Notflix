@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.flowOf
 
 class MoviesRepositoryImpl constructor(
     private val httpClient: HttpClient
-    // private val moviesDao: MovieDao
 ) : MoviesRepository {
 
     override suspend fun fetchNowPlayingMovies(page: Int): Flow<NetworkResultState<List<Movie>?>> {
