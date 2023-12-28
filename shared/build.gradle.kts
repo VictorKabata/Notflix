@@ -26,13 +26,13 @@ kotlin {
 
     cocoapods {
         summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
+        homepage = "github.com/VictorKabata/Notflix"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         podfile = project.file("../appiOS/Podfile")
         framework {
             baseName = "shared"
-            isStatic = true
+            isStatic = false
         }
     }
 
