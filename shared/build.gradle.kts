@@ -1,5 +1,6 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import dev.icerock.gradle.MRVisibility
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -8,6 +9,8 @@ plugins {
     alias(libs.plugins.kotlinX.serialization.plugin)
     alias(libs.plugins.buildKonfig)
     alias(libs.plugins.compose)
+
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -67,6 +70,9 @@ kotlin {
             api(libs.preCompose)
             api(libs.preCompose.viewmodel)
 
+            implementation("dev.icerock.moko:resources:0.23.0")
+            implementation("dev.icerock.moko:resources-compose:0.23.0")
+
             // implementation(libs.material.windowSizeClass)
         }
 
@@ -123,4 +129,9 @@ buildkonfig {
             gradleLocalProperties(rootDir).getProperty("api_key") ?: ""
         )
     }
+}
+
+multiplatformResources {
+    multiplatformResourcesPackage = "com.vickbt.notflix"
+    multiplatformResourcesVisibility = MRVisibility.Internal
 }
