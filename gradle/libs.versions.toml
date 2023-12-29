@@ -25,9 +25,7 @@ multiplatformSettings = "0.8.1"
 kmpNativeCoroutines = "0.12.1-new-mm"
 buildKonfig = "0.13.3"
 kover = "0.6.1"
-mockk = "1.13.5"
-kotlinxTestResources = "0.2.2"
-voyager = "1.0.0-rc03"
+preCompose = "1.5.10"
 imageLoader = "1.7.1"
 materialWindowSizeClass = "0.3.0"
 
@@ -44,6 +42,7 @@ leakCanary = "2.12"
 
 jUnit = "4.13.2"
 truth = "1.1.3"
+mockk = "1.13.5"
 robolectric = "4.10.3"
 jUnitKtx = "1.1.5"
 espresso = "3.5.1"
@@ -52,7 +51,6 @@ kotlinTest = "1.9.10"
 archTestCore = "2.2.0"
 turbine = "0.12.3"
 composeMultiplatform = "1.5.10-beta02"
-preCompose = "1.5.0-beta01"
 
 [plugins]
 ktLint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLint" }
