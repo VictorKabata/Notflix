@@ -40,7 +40,7 @@ androidxCore = "1.12.0"
 material = "1.11.0"
 coroutines = "1.5.2"
 firebaseBOM = "32.7.0"
-leakCanary = "2.9.1"
+leakCanary = "2.12"
 
 jUnit = "4.13.2"
 truth = "1.1.3"
