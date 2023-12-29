@@ -13,8 +13,7 @@ plugins {
     id("dev.icerock.mobile.multiplatform-resources")
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
-kotlin {
+@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class) kotlin {
     targetHierarchy.default()
 
     androidTarget()
@@ -42,8 +41,7 @@ kotlin {
             api(compose.runtime)
             api(compose.foundation)
             api(compose.material3)
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-            api(compose.components.resources)
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class) api(compose.components.resources)
             api(compose.materialIconsExtended)
 
             implementation(libs.kotlinX.coroutines)
@@ -99,6 +97,12 @@ kotlin {
         sourceSets["jvmMain"].dependencies {}
 
         sourceSets["jvmTest"].dependencies {}
+
+        /**Temporary fix for Moko resources bug @see[moko resource issue](https://github.com/icerockdev/moko-resources/issues/618)
+         *It should be removed once MR supports kotlin v1.9.10 and compose v1.5.0 @see[link](https://github.com/icerockdev/moko-resources/pull/575)*/
+        getByName("androidMain").dependsOn(commonMain.get())
+        getByName("jvmMain").dependsOn(commonMain.get())
+        getByName("iosMain").dependsOn(commonMain.get())
     }
 }
 
@@ -124,9 +128,7 @@ buildkonfig {
 
     defaultConfigs {
         buildConfigField(
-            STRING,
-            "API_KEY",
-            gradleLocalProperties(rootDir).getProperty("api_key") ?: ""
+            STRING, "API_KEY", gradleLocalProperties(rootDir).getProperty("api_key") ?: ""
         )
     }
 }
