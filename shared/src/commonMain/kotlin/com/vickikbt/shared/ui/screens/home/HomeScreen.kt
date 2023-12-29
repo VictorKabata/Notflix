@@ -45,6 +45,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.vickbt.notflix.MR
 import com.vickikbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickikbt.shared.ui.components.MovieCardLandscape
 import com.vickikbt.shared.ui.components.MovieCardPager
@@ -54,6 +55,7 @@ import com.vickikbt.shared.ui.components.SectionSeparator
 import com.vickikbt.shared.ui.screens.search.SearchScreen
 import com.vickikbt.shared.ui.theme.DarkPrimaryColor
 import com.vickikbt.shared.utils.WindowSize
+import dev.icerock.moko.resources.compose.stringResource
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
 
@@ -98,7 +100,7 @@ fun HomeScreen(
             onActiveChange = { activeState = it },
             placeholder = {
                 Text(
-                    text = "Search Movie",
+                    text = stringResource(MR.strings.search_movie),
                     fontSize = 18.sp,
                     style = MaterialTheme.typography.labelMedium,
                     maxLines = 1,
