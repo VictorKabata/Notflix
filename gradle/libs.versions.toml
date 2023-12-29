@@ -28,7 +28,7 @@ kover = "0.6.1"
 mockk = "1.13.5"
 kotlinxTestResources = "0.2.2"
 voyager = "1.0.0-rc03"
-imageLoader = "1.6.3"
+imageLoader = "1.7.1"
 materialWindowSizeClass = "0.3.0"
 
 #Android Versions
