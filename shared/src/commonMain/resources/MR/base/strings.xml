@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="search_movie">Search Movie</string>
+    <string name="trending_movies">Trending Movies</string>
+</resources>
