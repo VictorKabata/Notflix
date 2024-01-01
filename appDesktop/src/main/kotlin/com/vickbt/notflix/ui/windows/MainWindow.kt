@@ -16,8 +16,8 @@ fun MainWindow(applicationScope: ApplicationScope) {
         title = "Notflix",
         state = rememberWindowState(
             position = WindowPosition.Aligned(Alignment.Center),
-            width = 1080.dp, // or Dp.Unspecified,
-            height = 800.dp, // or Dp.Unspecified,
+            width = 1080.dp,
+            height = 800.dp,
         )
     ) {
         MainScreen()
