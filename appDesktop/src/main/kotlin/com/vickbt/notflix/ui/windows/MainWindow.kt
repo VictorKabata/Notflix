@@ -6,7 +6,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
-import com.vickikbt.shared.ui.screens.main.MainScreen
+import com.vickbt.shared.ui.screens.main.MainScreen
 import moe.tlaster.precompose.PreComposeWindow
 
 @Composable
