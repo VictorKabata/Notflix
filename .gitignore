@@ -13,5 +13,5 @@ local.properties
 appiOS/Pods/
 appiOS/Podfile.lock
 *.podspec
-*.pbxproj
-*.xcuserstate
+# *.pbxproj
+# *.xcuserstate
