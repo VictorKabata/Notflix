@@ -77,6 +77,7 @@ kotlin {
             implementation(libs.sqlDelight.coroutine)
 
             implementation(libs.coil.core)
+            implementation(libs.coil.compose)
             implementation(libs.coil.network)
 
             // implementation(libs.material.windowSizeClass)
