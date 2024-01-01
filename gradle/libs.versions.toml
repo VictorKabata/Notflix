@@ -47,7 +47,6 @@ robolectric = "4.11.1"
 jUnitKtx = "1.1.5"
 espresso = "3.5.1"
 test = "1.5.0"
-kotlinTest = "1.9.10"
 archTestCore = "2.2.0"
 turbine = "0.12.3"
 composeMultiplatform = "1.5.11"
@@ -124,7 +123,7 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 kotlinX-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 
 jUnit = { module = "junit:junit" }
-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlinTest" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 googleTruth = { module = "com.google.truth:truth", version.ref = "truth" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 jUnitKtx = { module = "androidx.test.ext:junit-ktx", version.ref = "jUnitKtx" }
