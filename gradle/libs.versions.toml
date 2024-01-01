@@ -2,7 +2,7 @@
 kotlin = "1.9.21"
 gradle = "8.1.0"
 ktLint = "11.6.0"
-detekt = "1.23.4"
+detekt = "1.19.0"
 gradleVersionUpdate = "0.50.0"
 googleServices = "4.4.0"
 firebaseAppDistribution = "4.0.1"
