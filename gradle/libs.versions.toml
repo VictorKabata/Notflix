@@ -28,6 +28,7 @@ kover = "0.6.1"
 preCompose = "1.5.10"
 imageLoader = "1.7.1"
 materialWindowSizeClass = "0.3.0"
+coil = "3.0.0-alpha01"
 
 #Android Versions
 
@@ -103,6 +104,8 @@ imageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "image
 preCompose = { module = "moe.tlaster:precompose", version.ref = "preCompose" }
 preCompose-viewmodel = { module = "moe.tlaster:precompose-viewmodel", version.ref = "preCompose" }
 material-windowSizeClass = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "materialWindowSizeClass" }
+coil-core = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
+coil-network = { module = "io.coil-kt.coil3:coil-network", version.ref = "coil" }
 
 #Android Lib Dependencies
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
