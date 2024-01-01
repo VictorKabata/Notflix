@@ -1,3 +1,6 @@
 [*.{kt,kts}]
-disabled_rules = import-ordering, experimental:argument-list-wrapping,indent
+disabled_rules = import-ordering, experimental:argument-list-wrapping, indent
 insert_final_newline = true
+# ij_kotlin_allow_trailing_comma = false
+# ij_kotlin_allow_trailing_comma_on_call_site = false
+# indent_size = unset
