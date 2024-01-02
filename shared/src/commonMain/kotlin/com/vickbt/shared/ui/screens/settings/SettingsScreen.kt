@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Image
 import androidx.compose.material.icons.rounded.Lightbulb
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -25,10 +24,9 @@ import com.vickbt.shared.ui.components.preferences.TextPreference
 import dev.icerock.moko.resources.compose.stringResource
 import org.koin.compose.koinInject
 
-private val themeLabels = listOf("Light", "Dark", "System Default")
+private val themeLabels = listOf("Light Theme", "Dark Theme", "System Default")
 private val imageQualityLabels = listOf("High Quality", "Low Quality")
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
     LaunchedEffect(key1 = viewModel) {
@@ -92,7 +90,7 @@ private fun ChangeTheme(
     DialogPreferenceSelection(
         showDialog = showDialog.value,
         title = stringResource(MR.strings.change_theme),
-        currentValue = currentValue ?: stringResource(MR.strings.default),
+        currentValue = currentValue ?: "Default",
         labels = themeLabels,
         onNegativeClick = { showDialog.value = false }
     ) { theme ->
@@ -109,7 +107,7 @@ private fun ChangeImageQuality(
     DialogPreferenceSelection(
         showDialog = showDialog.value,
         title = stringResource(MR.strings.image_quality),
-        currentValue = currentValue ?: stringResource(MR.strings.default),
+        currentValue = currentValue ?: "Default",
         labels = imageQualityLabels,
         onNegativeClick = { showDialog.value = false }
     ) { imageQuality ->

@@ -27,8 +27,6 @@
     <string name="high_quality">High Quality</string>
     <string name="low_quality">Low Quality</string>
 
-    <string name="default">Default</string>
-
     <!--<string-array name="themes">
         <item>Light Theme</item>
         <item>Dark Theme</item>
