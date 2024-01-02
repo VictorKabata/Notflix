@@ -28,6 +28,7 @@ kover = "0.6.1"
 preCompose = "1.5.10"
 imageLoader = "1.7.1"
 materialWindowSizeClass = "0.3.0"
+moko = "0.23.0"
 
 #Android Versions
 
@@ -103,6 +104,8 @@ imageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "image
 preCompose = { module = "moe.tlaster:precompose", version.ref = "preCompose" }
 preCompose-viewmodel = { module = "moe.tlaster:precompose-viewmodel", version.ref = "preCompose" }
 material-windowSizeClass = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "materialWindowSizeClass" }
+moko-resource = { module = "dev.icerock.moko:resources", version.ref = "moko" }
+moko-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko" }
 
 #Android Lib Dependencies
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }

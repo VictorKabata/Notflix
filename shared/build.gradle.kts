@@ -78,8 +78,8 @@ kotlin {
 
             implementation(libs.sqlDelight.coroutine)
 
-            implementation("dev.icerock.moko:resources:0.23.0")
-            implementation("dev.icerock.moko:resources-compose:0.23.0")
+            implementation(libs.moko.resource)
+            implementation(libs.moko.compose)
 
             // implementation(libs.material.windowSizeClass)
         }
