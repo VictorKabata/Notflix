@@ -54,17 +54,6 @@ import com.vickbt.shared.ui.components.SectionSeparator
 import com.vickbt.shared.ui.screens.search.SearchScreen
 import com.vickbt.shared.ui.theme.DarkPrimaryColor
 import com.vickbt.shared.utils.WindowSize
-import com.vickbt.notflix.MR
-import com.vickikbt.shared.presentation.ui.screens.home.HomeViewModel
-import com.vickikbt.shared.ui.components.MovieCardLandscape
-import com.vickikbt.shared.ui.components.MovieCardPager
-import com.vickikbt.shared.ui.components.MovieCardPagerIndicator
-import com.vickikbt.shared.ui.components.MovieCardPortraitCompact
-import com.vickikbt.shared.ui.components.SectionSeparator
-import com.vickikbt.shared.ui.screens.search.SearchScreen
-import com.vickikbt.shared.ui.theme.DarkPrimaryColor
-import com.vickikbt.shared.utils.WindowSize
-import dev.icerock.moko.resources.compose.stringResource
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
 
