@@ -1,5 +1,6 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import dev.icerock.gradle.MRVisibility
 
 plugins {
@@ -10,29 +11,36 @@ plugins {
     alias(libs.plugins.buildKonfig)
     alias(libs.plugins.compose)
 
+    alias(libs.plugins.sqlDelight)
+
     id("dev.icerock.mobile.multiplatform-resources")
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class) kotlin {
-    targetHierarchy.default()
+@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
+kotlin {
+    kotlin.applyDefaultHierarchyTemplate()
 
     androidTarget()
 
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
+        when {
+            System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
+            System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
+            else -> ::iosX64
+        }
+    iosTarget("ios") {}
 
     jvm()
 
     cocoapods {
         summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
+        homepage = "github.com/VictorKabata/Notflix"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         podfile = project.file("../appiOS/Podfile")
         framework {
             baseName = "shared"
-            isStatic = true
+            isStatic = false
         }
     }
 
@@ -68,6 +76,8 @@ plugins {
             api(libs.preCompose)
             api(libs.preCompose.viewmodel)
 
+            implementation(libs.sqlDelight.coroutine)
+
             implementation("dev.icerock.moko:resources:0.23.0")
             implementation("dev.icerock.moko:resources-compose:0.23.0")
 
@@ -84,17 +94,21 @@ plugins {
 
         sourceSets["androidMain"].dependencies {
             implementation(libs.ktor.android)
+            implementation(libs.sqlDelight.android)
         }
 
         // sourceSets["androidUnitTest"].dependencies {}
 
         sourceSets["iosMain"].dependencies {
             implementation(libs.ktor.darwin)
+            implementation(libs.sqlDelight.native)
         }
 
         sourceSets["iosTest"].dependencies {}
 
-        sourceSets["jvmMain"].dependencies {}
+        sourceSets["jvmMain"].dependencies {
+            implementation(libs.sqlDelight.jvm)
+        }
 
         sourceSets["jvmTest"].dependencies {}
 
@@ -111,7 +125,7 @@ android {
     defaultConfig {
         minSdk = 24
     }
-    namespace = "com.vickikbt.shared"
+    namespace = "com.vickbt.shared"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -124,12 +138,21 @@ android {
 }
 
 buildkonfig {
-    packageName = "com.vickikbt.shared"
+    packageName = "com.vickbt.shared"
 
     defaultConfigs {
         buildConfigField(
             STRING, "API_KEY", gradleLocalProperties(rootDir).getProperty("api_key") ?: ""
         )
+    }
+}
+
+sqldelight {
+    databases {
+        create("AppDatabase") {
+            packageName.set("com.vickbt.shared.data.cache.sqldelight")
+            srcDirs.setFrom("src/commonMain/kotlin")
+        }
     }
 }
 
