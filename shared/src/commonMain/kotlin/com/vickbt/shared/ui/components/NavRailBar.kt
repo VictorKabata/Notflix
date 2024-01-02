@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.alpha
 import com.vickbt.shared.ui.navigation.NavigationItem
 import com.vickbt.shared.ui.theme.Gray
 import com.vickbt.shared.ui.theme.PrimaryColor
+import dev.icerock.moko.resources.compose.stringResource
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
@@ -45,11 +46,11 @@ fun NavRailBar(
                     item.icon?.let {
                         Icon(
                             imageVector = it,
-                            contentDescription = item.title
+                            contentDescription = stringResource(item.title)
                         )
                     }
                 },
-                label = { Text(text = item.title) },
+                label = { Text(text = stringResource(item.title)) },
                 colors = NavigationRailItemDefaults.colors(
                     selectedIconColor = PrimaryColor,
                     unselectedIconColor = Gray

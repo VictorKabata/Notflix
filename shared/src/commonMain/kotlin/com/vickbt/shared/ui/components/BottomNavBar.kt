@@ -12,6 +12,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import com.vickbt.shared.ui.navigation.NavigationItem
 import com.vickbt.shared.ui.theme.Gray
+import dev.icerock.moko.resources.compose.stringResource
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
@@ -34,10 +35,10 @@ fun BottomNavBar(
                 icon = {
                     Icon(
                         imageVector = item.icon!!,
-                        contentDescription = item.title
+                        contentDescription = stringResource(item.title)
                     )
                 },
-                label = { Text(text = item.title) },
+                label = { Text(text = stringResource(item.title)) },
                 alwaysShowLabel = true,
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.primary,
