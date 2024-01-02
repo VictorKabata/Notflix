@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ApplicationScope
+import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import com.vickbt.shared.ui.screens.main.MainScreen
@@ -11,7 +12,7 @@ import moe.tlaster.precompose.PreComposeWindow
 
 @Composable
 fun MainWindow(applicationScope: ApplicationScope) {
-    PreComposeWindow(
+    Window(
         onCloseRequest = { applicationScope.exitApplication() },
         title = "Notflix",
         state = rememberWindowState(
