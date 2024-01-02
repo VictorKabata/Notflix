@@ -49,7 +49,8 @@ kotlin {
             api(compose.runtime)
             api(compose.foundation)
             api(compose.material3)
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class) api(compose.components.resources)
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            api(compose.components.resources)
             api(compose.materialIconsExtended)
 
             implementation(libs.kotlinX.coroutines)
@@ -142,7 +143,9 @@ buildkonfig {
 
     defaultConfigs {
         buildConfigField(
-            STRING, "API_KEY", gradleLocalProperties(rootDir).getProperty("api_key") ?: ""
+            STRING,
+            "API_KEY",
+            gradleLocalProperties(rootDir).getProperty("api_key") ?: ""
         )
     }
 }
