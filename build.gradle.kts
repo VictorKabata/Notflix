@@ -66,5 +66,5 @@ subprojects {
 }
 
 tasks.register("clean").configure {
-    delete("build") // dependencyUpdates task, for example, writes here
+    delete(rootProject.buildDir)
 }
