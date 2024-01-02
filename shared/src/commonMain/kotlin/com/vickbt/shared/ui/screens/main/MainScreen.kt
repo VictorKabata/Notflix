@@ -11,7 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.vickbt.shared.presentation.ui.navigation.NavigationItem
+import com.vickbt.shared.ui.navigation.NavigationItem
 import com.vickbt.shared.presentation.ui.screens.main.MainViewModel
 import com.vickbt.shared.ui.components.BottomNavBar
 import com.vickbt.shared.ui.components.NavRailBar

@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import com.vickbt.shared.presentation.ui.navigation.NavigationItem
+import com.vickbt.shared.ui.navigation.NavigationItem
 import com.vickbt.shared.ui.theme.Gray
 import com.vickbt.shared.ui.theme.PrimaryColor
 import moe.tlaster.precompose.navigation.Navigator

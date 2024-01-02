@@ -45,6 +45,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.vickbt.notflix.MR
 import com.vickbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickbt.shared.ui.components.MovieCardLandscape
 import com.vickbt.shared.ui.components.MovieCardPager
@@ -54,6 +55,7 @@ import com.vickbt.shared.ui.components.SectionSeparator
 import com.vickbt.shared.ui.screens.search.SearchScreen
 import com.vickbt.shared.ui.theme.DarkPrimaryColor
 import com.vickbt.shared.utils.WindowSize
+import dev.icerock.moko.resources.compose.stringResource
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
 
@@ -98,7 +100,7 @@ fun HomeScreen(
             onActiveChange = { activeState = it },
             placeholder = {
                 Text(
-                    text = "Search Movie",
+                    text = stringResource(MR.strings.search_movie),
                     fontSize = 18.sp,
                     style = MaterialTheme.typography.labelMedium,
                     maxLines = 1,
@@ -114,11 +116,14 @@ fun HomeScreen(
                     }) {
                         Icon(
                             imageVector = Icons.Rounded.ArrowBack,
-                            contentDescription = "Go back"
+                            contentDescription = stringResource(MR.strings.go_back)
                         )
                     }
                 } else {
-                    Icon(imageVector = Icons.Rounded.Search, contentDescription = "Search")
+                    Icon(
+                        imageVector = Icons.Rounded.Search,
+                        contentDescription = stringResource(MR.strings.search)
+                    )
                 }
             },
             trailingIcon = {
@@ -128,7 +133,7 @@ fun HomeScreen(
                     }) {
                         Icon(
                             imageVector = Icons.Rounded.Close,
-                            contentDescription = "Close search"
+                            contentDescription = stringResource(MR.strings.close_search)
                         )
                     }
                 } else {
@@ -206,7 +211,7 @@ fun HomeScreen(
                                 .padding(horizontal = 16.dp, vertical = 6.dp)
                                 .fillMaxWidth()
                                 .wrapContentHeight(),
-                            sectionTitle = "Trending Movies"
+                            sectionTitle = stringResource(MR.strings.trending_movies)
                         )
 
                         Spacer(modifier = Modifier.height(8.dp))
@@ -237,7 +242,7 @@ fun HomeScreen(
                                 .padding(start = 16.dp, end = 16.dp, top = 12.dp)
                                 .fillMaxWidth()
                                 .wrapContentHeight(),
-                            sectionTitle = "Upcoming Movies"
+                            sectionTitle = stringResource(MR.strings.upcoming_movies)
                         )
 
                         Spacer(modifier = Modifier.height(8.dp))
@@ -270,7 +275,7 @@ fun HomeScreen(
                                     .padding(start = 16.dp, end = 16.dp, top = 12.dp)
                                     .fillMaxWidth()
                                     .wrapContentHeight(),
-                                sectionTitle = "Popular Movies"
+                                sectionTitle = stringResource(MR.strings.popular_movies)
                             )
 
                             Spacer(modifier = Modifier.height(8.dp))

@@ -23,6 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.vickbt.notflix.MR
 import com.vickbt.shared.ui.components.ItemMovieCast
 import com.vickbt.shared.ui.components.MovieCardPortrait
 import com.vickbt.shared.ui.components.MovieRatingSection
@@ -33,6 +34,7 @@ import com.vickbt.shared.ui.components.collapsingToolbar.rememberCollapsingToolb
 import com.vickbt.shared.utils.WindowSize
 import com.vickbt.shared.utils.getPopularity
 import com.vickbt.shared.utils.getRating
+import dev.icerock.moko.resources.compose.stringResource
 import io.github.aakira.napier.Napier
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
@@ -106,7 +108,7 @@ fun DetailsScreen(
                     if (!movieDetailsState.movieDetails?.overview.isNullOrEmpty()) {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
-                            text = "Overview",
+                            text = stringResource(MR.strings.overview),
                             style = MaterialTheme.typography.titleMedium,
                             fontSize = 20.sp,
                             color = MaterialTheme.colorScheme.onSurface,
@@ -130,7 +132,7 @@ fun DetailsScreen(
                     if (!movieDetailsState.movieCast.isNullOrEmpty()) {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
-                            text = "Cast",
+                            text = stringResource(MR.strings.cast),
                             style = MaterialTheme.typography.titleMedium,
                             fontSize = 20.sp
                         )
@@ -150,7 +152,7 @@ fun DetailsScreen(
                     if (!movieDetailsState.similarMovies.isNullOrEmpty()) {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
-                            text = "Similar Movies",
+                            text = stringResource(MR.strings.similar_movies),
                             style = MaterialTheme.typography.titleMedium,
                             fontSize = 20.sp,
                             color = MaterialTheme.colorScheme.onSurface

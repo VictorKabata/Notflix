@@ -2,7 +2,6 @@ package com.vickbt.shared.ui.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
-import com.vickbt.shared.presentation.ui.navigation.NavigationItem
 import com.vickbt.shared.ui.screens.details.DetailsScreen
 import com.vickbt.shared.ui.screens.favorites.FavoritesScreen
 import com.vickbt.shared.ui.screens.home.HomeScreen

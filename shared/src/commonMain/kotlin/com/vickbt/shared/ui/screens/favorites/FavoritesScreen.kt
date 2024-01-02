@@ -12,8 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.vickbt.notflix.MR
 import com.vickbt.shared.ui.components.MovieCardDescription
 import com.vickbt.shared.ui.components.appbars.AppBar
+import dev.icerock.moko.resources.compose.stringResource
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
 
@@ -22,7 +24,7 @@ fun FavoritesScreen(navigator: Navigator, viewModel: FavoritesViewModel = koinIn
     val favoriteMovies = viewModel.favoriteMoviesState.collectAsState().value
 
     Scaffold(
-        topBar = { AppBar("Favorites") }
+        topBar = { AppBar(stringResource(MR.strings.favorites)) }
     ) { paddingValues ->
         Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
             LazyColumn(

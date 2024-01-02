@@ -14,6 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import com.vickbt.notflix.MR
 import com.vickbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
 import com.vickbt.shared.domain.utils.Constants.KEY_THEME
 import com.vickbt.shared.presentation.ui.screens.settings.SettingsViewModel
@@ -21,6 +22,7 @@ import com.vickbt.shared.ui.components.appbars.AppBar
 import com.vickbt.shared.ui.components.preferences.DialogPreferenceSelection
 import com.vickbt.shared.ui.components.preferences.PreferencesGroup
 import com.vickbt.shared.ui.components.preferences.TextPreference
+import dev.icerock.moko.resources.compose.stringResource
 import org.koin.compose.koinInject
 
 private val themeLabels = listOf("Light", "Dark", "System Default")
@@ -43,38 +45,38 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
     val imageQualityLabel = imageQualityLabels[settingsUiState.selectedImageQuality]
 
     Scaffold(
-        topBar = { AppBar("Settings") },
+        topBar = { AppBar(stringResource(MR.strings.settings)) },
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
-            PreferencesGroup(title = "Personalisation") {
+            PreferencesGroup(title = stringResource(MR.strings.personalisation)) {
                 TextPreference(
                     icon = Icons.Rounded.Lightbulb,
-                    title = "Change theme",
+                    title = stringResource(MR.strings.change_theme),
                     subTitle = themeLabel,
                     onClick = { showThemeDialog.value = !showThemeDialog.value }
                 )
 
                 if (showThemeDialog.value) {
                     ChangeTheme(
-                    viewModel = viewModel,
-                    showDialog = showThemeDialog,
-                    currentValue = themeLabel
-                )
+                        viewModel = viewModel,
+                        showDialog = showThemeDialog,
+                        currentValue = themeLabel
+                    )
                 }
 
                 TextPreference(
                     icon = Icons.Rounded.Image,
-                    title = "Image quality",
+                    title = stringResource(MR.strings.image_quality),
                     subTitle = imageQualityLabel,
                     onClick = { showImageQualityDialog.value = !showImageQualityDialog.value }
                 )
 
                 if (showImageQualityDialog.value) {
                     ChangeImageQuality(
-                    viewModel = viewModel,
-                    showDialog = showImageQualityDialog,
-                    currentValue = imageQualityLabel
-                )
+                        viewModel = viewModel,
+                        showDialog = showImageQualityDialog,
+                        currentValue = imageQualityLabel
+                    )
                 }
             }
         }
@@ -89,8 +91,8 @@ private fun ChangeTheme(
 ) {
     DialogPreferenceSelection(
         showDialog = showDialog.value,
-        title = "Change theme",
-        currentValue = currentValue ?: "Default",
+        title = stringResource(MR.strings.change_theme),
+        currentValue = currentValue ?: stringResource(MR.strings.default),
         labels = themeLabels,
         onNegativeClick = { showDialog.value = false }
     ) { theme ->
@@ -106,8 +108,8 @@ private fun ChangeImageQuality(
 ) {
     DialogPreferenceSelection(
         showDialog = showDialog.value,
-        title = "Image quality",
-        currentValue = currentValue ?: "Default",
+        title = stringResource(MR.strings.image_quality),
+        currentValue = currentValue ?: stringResource(MR.strings.default),
         labels = imageQualityLabels,
         onNegativeClick = { showDialog.value = false }
     ) { imageQuality ->

@@ -22,6 +22,8 @@ import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.vickbt.notflix.MR
+import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
 fun DialogPreferenceSelection(
@@ -73,7 +75,7 @@ fun DialogPreferenceSelection(
                     ) {
                         Text(
                             modifier = Modifier.clickable { onNegativeClick() },
-                            text = "Cancel".toUpperCase(Locale.current),
+                            text = stringResource(MR.strings.cancel).toUpperCase(Locale.current),
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.primary,
                             fontSize = 16.sp,
