@@ -93,7 +93,7 @@ fun HomeScreen(
             modifier = Modifier.background(
                 MaterialTheme.colorScheme.surface
             ).also {
-                if (activeState) it.fillMaxWidth() else it.fillMaxWidth(.8f)
+                if (activeState) it.fillMaxWidth() else it.fillMaxWidth(.85f)
             },
             query = searchQuery,
             onQueryChange = { searchQuery = it },
