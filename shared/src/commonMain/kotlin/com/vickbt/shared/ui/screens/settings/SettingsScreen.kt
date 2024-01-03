@@ -5,10 +5,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Image
 import androidx.compose.material.icons.rounded.Lightbulb
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -20,7 +18,6 @@ import com.vickbt.shared.ui.components.appbars.AppBar
 import com.vickbt.shared.ui.components.preferences.DialogPreferenceSelection
 import com.vickbt.shared.ui.components.preferences.PreferencesGroup
 import com.vickbt.shared.ui.components.preferences.TextPreference
-import io.github.aakira.napier.Napier
 import org.koin.compose.koinInject
 
 private val themeLabels = listOf("Light", "Dark", "System Default")
@@ -28,7 +25,6 @@ private val imageQualityLabels = listOf("High Quality", "Low Quality")
 
 @Composable
 fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
-
     val settingsUiState = viewModel.settingsUiState.collectAsState().value
 
     val showThemeDialog = remember { mutableStateOf(false) }
