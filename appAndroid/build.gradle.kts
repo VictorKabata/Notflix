@@ -45,7 +45,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.5"
+        kotlinCompilerExtensionVersion = "1.5.7"
     }
     namespace = "com.vickbt.notflix"
 }
@@ -54,6 +54,7 @@ dependencies {
     api(project(":shared"))
 
     implementation(libs.androidX.core)
+    implementation(libs.androidX.activity)
 
     implementation(libs.material)
 

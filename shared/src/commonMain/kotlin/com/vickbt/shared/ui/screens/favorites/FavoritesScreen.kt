@@ -25,7 +25,10 @@ fun FavoritesScreen(navigator: Navigator, viewModel: FavoritesViewModel = koinIn
         topBar = { AppBar("Favorites") }
     ) { paddingValues ->
         Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
-            LazyColumn(modifier = Modifier.fillMaxSize().padding(bottom = 90.dp)) {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
+                    .padding(bottom = 90.dp, start = 16.dp, end = 16.dp)
+            ) {
                 items(items = favoriteMovies.favoriteMovies ?: emptyList()) { favoriteMovie ->
                     MovieCardDescription(
                         modifier = Modifier.fillMaxWidth().height(260.dp).padding(vertical = 4.dp),
