@@ -90,7 +90,11 @@ fun HomeScreen(
     ) {
         //region Search
         SearchBar(
-            modifier = Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surface),
+            modifier = Modifier.background(
+                MaterialTheme.colorScheme.surface
+            ).also {
+                if (activeState) it.fillMaxWidth() else it.fillMaxWidth(.8f)
+            },
             query = searchQuery,
             onQueryChange = { searchQuery = it },
             onSearch = { viewModel.searchMovie(movieName = it) },
