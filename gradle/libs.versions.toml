@@ -30,6 +30,7 @@ imageLoader = "1.7.1"
 materialWindowSizeClass = "0.3.0"
 
 #Android Versions
+androidxActivity = "1.8.2"
 
 #Desktop Versions
 kamel = "0.4.0"
@@ -105,8 +106,8 @@ preCompose-viewmodel = { module = "moe.tlaster:precompose-viewmodel", version.re
 material-windowSizeClass = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "materialWindowSizeClass" }
 
 #Android Lib Dependencies
-kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 androidX-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
+androidX-activity={module="androidx.activity:activity-compose", version.ref="androidxActivity"}
 material = { module = "com.google.android.material:material", version.ref = "material" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
