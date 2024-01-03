@@ -8,7 +8,6 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import com.vickbt.shared.ui.screens.main.MainScreen
-import moe.tlaster.precompose.PreComposeWindow
 
 @Composable
 fun MainWindow(applicationScope: ApplicationScope) {
