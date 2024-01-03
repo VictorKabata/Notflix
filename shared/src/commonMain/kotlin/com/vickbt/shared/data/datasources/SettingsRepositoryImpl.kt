@@ -16,10 +16,10 @@ class SettingsRepositoryImpl(private val observableSettings: ObservableSettings)
         observableSettings.putInt(key = key, value = selection)
 
     override suspend fun getThemePreference(): Flow<Int> {
-        return observableSettings.getIntFlow(key = KEY_THEME, defaultValue = 0)
+        return observableSettings.getIntFlow(key = KEY_THEME, defaultValue = 2)
     }
 
     override suspend fun getImageQualityPreference(): Flow<Int> {
-        return observableSettings.getIntFlow(key = KEY_IMAGE_QUALITY, defaultValue = 0)
+        return observableSettings.getIntFlow(key = KEY_IMAGE_QUALITY, defaultValue = 1)
     }
 }
