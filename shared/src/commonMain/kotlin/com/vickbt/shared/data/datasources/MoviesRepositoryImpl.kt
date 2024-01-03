@@ -5,7 +5,7 @@ import com.vickbt.shared.data.network.models.MovieResultsDto
 import com.vickbt.shared.data.network.utils.safeApiCall
 import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.domain.repositories.MoviesRepository
-import com.vickbt.shared.utils.NetworkResultState
+import com.vickbt.shared.utils.ResultState
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -17,7 +17,7 @@ class MoviesRepositoryImpl constructor(
     private val httpClient: HttpClient
 ) : MoviesRepository {
 
-    override suspend fun fetchNowPlayingMovies(page: Int): Flow<NetworkResultState<List<Movie>?>> {
+    override suspend fun fetchNowPlayingMovies(page: Int): Flow<ResultState<List<Movie>?>> {
         return flowOf(
             safeApiCall {
                 val response = httpClient.get(urlString = "movie/now_playing") {
@@ -33,7 +33,7 @@ class MoviesRepositoryImpl constructor(
         mediaType: String,
         timeWindow: String,
         page: Int
-    ): Flow<NetworkResultState<List<Movie>?>> {
+    ): Flow<ResultState<List<Movie>?>> {
         return flowOf(
             safeApiCall {
                 val response = httpClient.get(urlString = "trending/$mediaType/$timeWindow") {
@@ -45,7 +45,7 @@ class MoviesRepositoryImpl constructor(
         )
     }
 
-    override suspend fun fetchPopularMovies(page: Int): Flow<NetworkResultState<List<Movie>?>> {
+    override suspend fun fetchPopularMovies(page: Int): Flow<ResultState<List<Movie>?>> {
         return flowOf(
             safeApiCall {
                 val response = httpClient.get(urlString = "movie/popular") {
@@ -57,7 +57,7 @@ class MoviesRepositoryImpl constructor(
         )
     }
 
-    override suspend fun fetchUpcomingMovies(page: Int): Flow<NetworkResultState<List<Movie>?>> {
+    override suspend fun fetchUpcomingMovies(page: Int): Flow<ResultState<List<Movie>?>> {
         return flowOf(
             safeApiCall {
                 val response = httpClient.get(urlString = "movie/upcoming") {
@@ -82,7 +82,7 @@ class MoviesRepositoryImpl constructor(
     override suspend fun searchMovie(
         movieName: String,
         page: Int
-    ): Flow<NetworkResultState<List<Movie>?>> {
+    ): Flow<ResultState<List<Movie>?>> {
         return flowOf(
             safeApiCall {
                 val response = httpClient.get(urlString = "search/movie") {
