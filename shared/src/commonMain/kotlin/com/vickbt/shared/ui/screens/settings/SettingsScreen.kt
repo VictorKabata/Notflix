@@ -16,23 +16,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.vickbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
 import com.vickbt.shared.domain.utils.Constants.KEY_THEME
-import com.vickbt.shared.presentation.ui.screens.settings.SettingsViewModel
 import com.vickbt.shared.ui.components.appbars.AppBar
 import com.vickbt.shared.ui.components.preferences.DialogPreferenceSelection
 import com.vickbt.shared.ui.components.preferences.PreferencesGroup
 import com.vickbt.shared.ui.components.preferences.TextPreference
+import io.github.aakira.napier.Napier
 import org.koin.compose.koinInject
 
 private val themeLabels = listOf("Light", "Dark", "System Default")
 private val imageQualityLabels = listOf("High Quality", "Low Quality")
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
-    LaunchedEffect(key1 = viewModel) {
-        viewModel.getThemePreference()
-        viewModel.getImageQualityPreference()
-    }
 
     val settingsUiState = viewModel.settingsUiState.collectAsState().value
 
