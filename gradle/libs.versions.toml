@@ -21,7 +21,7 @@ kotlinxDateTime = "0.5.0"
 napier = "2.6.1"
 ktor = "2.3.7"
 sqlDelight = "2.0.1"
-multiplatformSettings = "0.8.1"
+multiplatformSettings = "1.1.1"
 kmpNativeCoroutines = "0.12.1-new-mm"
 buildKonfig = "0.13.3"
 kover = "0.6.1"
@@ -31,6 +31,7 @@ materialWindowSizeClass = "0.3.0"
 coil = "3.0.0-alpha01"
 
 #Android Versions
+androidxActivity = "1.8.2"
 
 #Desktop Versions
 kamel = "0.4.0"
@@ -109,8 +110,8 @@ coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" 
 coil-network = { module = "io.coil-kt.coil3:coil-network", version.ref = "coil" }
 
 #Android Lib Dependencies
-kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 androidX-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
+androidX-activity={module="androidx.activity:activity-compose", version.ref="androidxActivity"}
 material = { module = "com.google.android.material:material", version.ref = "material" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }

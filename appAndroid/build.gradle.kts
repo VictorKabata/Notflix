@@ -54,6 +54,7 @@ dependencies {
     api(project(":shared"))
 
     implementation(libs.androidX.core)
+    implementation(libs.androidX.activity)
 
     implementation(libs.material)
 

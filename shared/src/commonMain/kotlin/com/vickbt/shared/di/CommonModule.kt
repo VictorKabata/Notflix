@@ -14,7 +14,7 @@ import com.vickbt.shared.domain.utils.Constants.BASE_URL
 import com.vickbt.shared.domain.utils.Constants.URL_PATH
 import com.vickbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickbt.shared.presentation.ui.screens.main.MainViewModel
-import com.vickbt.shared.presentation.ui.screens.settings.SettingsViewModel
+import com.vickbt.shared.ui.screens.settings.SettingsViewModel
 import com.vickbt.shared.ui.screens.details.DetailsViewModel
 import com.vickbt.shared.ui.screens.favorites.FavoritesViewModel
 import io.github.aakira.napier.DebugAntilog

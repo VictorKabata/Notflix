@@ -11,6 +11,6 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "com.vickbt.notflix.NotflixApplicationKt"
+        mainClass = "NotflixApplicationKt"
     }
 }
