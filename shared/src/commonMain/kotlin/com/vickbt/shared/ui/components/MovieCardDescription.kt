@@ -39,8 +39,8 @@ fun MovieCardDescription(
     overFlowText: String = "See more",
     onItemClick: (MovieDetails) -> Unit
 ) {
-    var dominantColor by remember { mutableStateOf(Color.DarkGray) }
-    var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
+    val dominantColor by remember { mutableStateOf(Color.DarkGray) }
+    val dominantTextColor by remember { mutableStateOf(Color.LightGray) }
 
     Card(modifier = modifier.clickable { onItemClick(movie) }) {
         Box {
