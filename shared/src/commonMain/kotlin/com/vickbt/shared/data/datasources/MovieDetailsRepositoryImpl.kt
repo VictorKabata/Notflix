@@ -10,7 +10,7 @@ import com.vickbt.shared.domain.models.Cast
 import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.domain.models.MovieDetails
 import com.vickbt.shared.domain.repositories.MovieDetailsRepository
-import com.vickbt.shared.utils.NetworkResultState
+import com.vickbt.shared.utils.ResultState
 import com.vickbt.shared.utils.toBoolean
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -24,15 +24,15 @@ class MovieDetailsRepositoryImpl(
     private val favoriteMovieDao: FavoriteMovieDao
 ) : MovieDetailsRepository {
 
-    override suspend fun fetchMovieDetails(movieId: Int): Flow<NetworkResultState<MovieDetails>> {
+    override suspend fun fetchMovieDetails(movieId: Int): Flow<ResultState<MovieDetails>> {
         val isMovieCached = isMovieFavorite(movieId = movieId)
 
         return if (isMovieCached == true) {
             try {
                 val cachedFavoriteMovie = getFavoriteMovie(movieId = movieId)
-                flowOf(NetworkResultState.Success(data = cachedFavoriteMovie))
+                flowOf(ResultState.Success(data = cachedFavoriteMovie))
             } catch (e: Exception) {
-                flowOf(NetworkResultState.Failure(exception = e))
+                flowOf(ResultState.Failure(exception = e))
             }
         } else {
             flowOf(
@@ -45,7 +45,7 @@ class MovieDetailsRepositoryImpl(
         }
     }
 
-    override suspend fun fetchMovieCast(movieId: Int): Flow<NetworkResultState<Cast>> {
+    override suspend fun fetchMovieCast(movieId: Int): Flow<ResultState<Cast>> {
         return flowOf(
             safeApiCall {
                 val response = httpClient.get(urlString = "movie/$movieId/credits").body<CastDto>()
@@ -58,7 +58,7 @@ class MovieDetailsRepositoryImpl(
     override suspend fun fetchSimilarMovies(
         movieId: Int,
         page: Int
-    ): Flow<NetworkResultState<List<Movie>?>> {
+    ): Flow<ResultState<List<Movie>?>> {
         return flowOf(
             safeApiCall {
                 val response = httpClient.get(urlString = "movie/$movieId/similar") {

@@ -2,7 +2,7 @@ package com.vickbt.shared.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import com.vickbt.shared.presentation.ui.screens.settings.SettingsViewModel
+import com.vickbt.shared.ui.screens.settings.SettingsViewModel
 import org.koin.compose.koinInject
 
 /**

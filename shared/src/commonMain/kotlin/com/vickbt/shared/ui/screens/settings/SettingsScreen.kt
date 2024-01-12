@@ -7,7 +7,6 @@ import androidx.compose.material.icons.rounded.Image
 import androidx.compose.material.icons.rounded.Lightbulb
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -16,7 +15,6 @@ import androidx.compose.ui.Modifier
 import com.vickbt.notflix.MR
 import com.vickbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
 import com.vickbt.shared.domain.utils.Constants.KEY_THEME
-import com.vickbt.shared.presentation.ui.screens.settings.SettingsViewModel
 import com.vickbt.shared.ui.components.appbars.AppBar
 import com.vickbt.shared.ui.components.preferences.DialogPreferenceSelection
 import com.vickbt.shared.ui.components.preferences.PreferencesGroup
@@ -29,11 +27,6 @@ private val imageQualityLabels = listOf("High Quality", "Low Quality")
 
 @Composable
 fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
-    LaunchedEffect(key1 = viewModel) {
-        viewModel.getThemePreference()
-        viewModel.getImageQualityPreference()
-    }
-
     val settingsUiState = viewModel.settingsUiState.collectAsState().value
 
     val showThemeDialog = remember { mutableStateOf(false) }

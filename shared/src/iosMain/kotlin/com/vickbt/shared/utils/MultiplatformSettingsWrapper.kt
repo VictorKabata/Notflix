@@ -1,12 +1,12 @@
 package com.vickbt.shared.utils
 
-import com.russhwolf.settings.AppleSettings
+import com.russhwolf.settings.NSUserDefaultsSettings
 import com.russhwolf.settings.ObservableSettings
 import platform.Foundation.NSUserDefaults
 
 actual class MultiplatformSettingsWrapper {
     actual fun createSettings(): ObservableSettings {
         val nsUserDefault = NSUserDefaults.standardUserDefaults
-        return AppleSettings(delegate = nsUserDefault)
+        return NSUserDefaultsSettings(delegate = nsUserDefault)
     }
 }
