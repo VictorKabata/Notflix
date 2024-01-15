@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "393812441846",
-    "project_id": "notflix-e6c20",
-    "storage_bucket": "notflix-e6c20.appspot.com"
+    "project_number": "107303594937",
+    "project_id": "notflix-411314",
+    "storage_bucket": "notflix-411314.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:393812441846:android:88af4c42582e9416204ad7",
+        "mobilesdk_app_id": "1:107303594937:android:0220df24880eae00cbe468",
         "android_client_info": {
           "package_name": "com.vickbt.notflix"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "393812441846-59nbigdpat8poe70p4tcncpguehsv8ud.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDjY2tKIDwy6iNmlUj7z9js0sjtJVdufVc"
+          "current_key": "AIzaSyDGXoQCnf2wd8lZjey16miNnzylMapGJk8"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "393812441846-59nbigdpat8poe70p4tcncpguehsv8ud.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
