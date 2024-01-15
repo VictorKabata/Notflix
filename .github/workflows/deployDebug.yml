@@ -1,7 +1,21 @@
 name: Deploy Android Debug
 
 on:
+  push:
+    branches:
+      [firebase-intergration]
   workflow_dispatch:
+    inputs:
+      versionCode:
+        description: 'Version Code (eg. 123)'
+        required: true
+      versionName:
+        description: 'Version Name (eg 1.2.3)'
+        required: true
+
+env:
+  VERSION_CODE: ${{ github.event.inputs.versionCode }}
+  VERSION_NAME: ${{ github.event.inputs.versionName }}
 
 jobs:
 
@@ -9,12 +23,14 @@ jobs:
     name: 🔨 Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
-          java-version: 17
+          distribution: 'adopt'
+          java-version: '17'
 
       - name: Make gradle executable
         run: chmod +x ./gradlew
@@ -29,12 +45,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
-          java-version: 17
+          distribution: 'adopt'
+          java-version: '17'
 
       - name: Make gradle executable
         run: chmod +x ./gradlew
@@ -46,6 +63,6 @@ jobs:
         uses: wzieba/Firebase-Distribution-Github-Action@v1.3.4
         with:
           appId: ${{secrets.FIREBASE_APP_ID}}
-          token: ${{secrets.FIREBASE_TOKEN}}
+          serviceCredentialsFileContent: ${{secrets.CREDENTIAL_FILE_CONTENT}}
           groups: production #testers
           file: appAndroid/build/outputs/apk/debug/appAndroid-debug.apk
