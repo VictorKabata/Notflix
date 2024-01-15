@@ -11,12 +11,20 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.vickikbt.notflix"
+        applicationId = "com.vickbt.notflix"
 
         minSdk = 24
         targetSdk = compileSdk
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = if (System.getenv("VERSION_CODE").isNullOrEmpty()) {
+            1
+        } else {
+            System.getenv("VERSION_CODE").toInt()
+        }
+        versionName = if (System.getenv("VERSION_NAME").isNullOrEmpty()) {
+            "1.0.0"
+        } else {
+            System.getenv("VERSION_NAME")?.toString()
+        }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -45,15 +53,16 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
+        kotlinCompilerExtensionVersion = "1.5.7"
     }
-    namespace = "com.vickikbt.notflix"
+    namespace = "com.vickbt.notflix"
 }
 
 dependencies {
     api(project(":shared"))
 
     implementation(libs.androidX.core)
+    implementation(libs.androidX.activity)
 
     implementation(libs.material)
 

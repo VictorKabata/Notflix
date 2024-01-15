@@ -1,0 +1,59 @@
+name: Deploy Android Debug
+on:
+  workflow_dispatch:
+    inputs:
+      versionCode:
+        description: Version Code (eg. 123)
+        required: true
+      versionName:
+        description: Version Name (eg 1.2.3)
+        required: true
+
+env:
+  VERSION_CODE: ${{ github.event.inputs.versionCode }}
+  VERSION_NAME: ${{ github.event.inputs.versionName }}
+
+jobs:
+  setup:
+    name: ⚙️Setup Environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: adopt
+          java-version: "17"
+
+  build:
+    name: 🔨 Build
+    needs:
+      - setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
+      - name: Build with Gradle
+        run: ./gradlew build --stacktrace
+
+  deploy:
+    name: 🚀 Deploy to Firebase App Distribution
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.7.0
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          serviceCredentialsFileContent: ${{secrets.CREDENTIAL_FILE_CONTENT}}
+          groups: production
+          file: appAndroid/build/outputs/apk/debug/appAndroid-debug.apk
