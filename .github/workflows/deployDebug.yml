@@ -1,9 +1,7 @@
-name: Deploy Debug
+name: Deploy Android Debug
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ main ]
 
 jobs:
 
