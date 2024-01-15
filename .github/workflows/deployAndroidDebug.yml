@@ -1,4 +1,3 @@
----
 name: Deploy Android Debug
 on:
   workflow_dispatch:
