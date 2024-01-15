@@ -1,16 +1,13 @@
+---
 name: Deploy Android Debug
-
 on:
-  push:
-    branches:
-      [firebase-intergration]
   workflow_dispatch:
     inputs:
       versionCode:
-        description: 'Version Code (eg. 123)'
+        description: Version Code (eg. 123)
         required: true
       versionName:
-        description: 'Version Name (eg 1.2.3)'
+        description: Version Name (eg 1.2.3)
         required: true
 
 env:
@@ -18,41 +15,36 @@ env:
   VERSION_NAME: ${{ github.event.inputs.versionName }}
 
 jobs:
+  setup:
+    name: ⚙️Setup Environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: adopt
+          java-version: "17"
 
   build:
     name: 🔨 Build
+    needs:
+      - setup
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: '17'
-
       - name: Make gradle executable
         run: chmod +x ./gradlew
-
       - name: Build with Gradle
         run: ./gradlew build --stacktrace
 
-
   deploy:
     name: 🚀 Deploy to Firebase App Distribution
-    needs: [ build ]
+    needs:
+      - build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: '17'
-
       - name: Make gradle executable
         run: chmod +x ./gradlew
 
@@ -64,5 +56,5 @@ jobs:
         with:
           appId: ${{secrets.FIREBASE_APP_ID}}
           serviceCredentialsFileContent: ${{secrets.CREDENTIAL_FILE_CONTENT}}
-          groups: production #testers
+          groups: production
           file: appAndroid/build/outputs/apk/debug/appAndroid-debug.apk
