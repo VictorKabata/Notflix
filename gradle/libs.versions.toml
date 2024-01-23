@@ -31,6 +31,7 @@ materialWindowSizeClass = "0.3.0"
 
 #Android Versions
 androidxActivity = "1.8.2"
+systemUiController="0.33.2-alpha"
 
 #Desktop Versions
 kamel = "0.4.0"
@@ -104,6 +105,7 @@ imageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "image
 preCompose = { module = "moe.tlaster:precompose", version.ref = "preCompose" }
 preCompose-viewmodel = { module = "moe.tlaster:precompose-viewmodel", version.ref = "preCompose" }
 material-windowSizeClass = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "materialWindowSizeClass" }
+systemUiController={module="com.google.accompanist:accompanist-systemuicontroller", version.ref="systemUiController"}
 
 #Android Lib Dependencies
 androidX-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }

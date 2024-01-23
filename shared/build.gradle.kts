@@ -90,6 +90,7 @@ kotlin {
         sourceSets["androidMain"].dependencies {
             implementation(libs.ktor.android)
             implementation(libs.sqlDelight.android)
+            implementation(libs.systemUiController)
         }
 
         // sourceSets["androidUnitTest"].dependencies {}
