@@ -5,6 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import com.vickbt.shared.utils.systemBarsUiController
 
 private val DarkColorPalette = darkColorScheme(
     primary = DarkPrimaryColor,
@@ -28,6 +29,8 @@ fun NotflixTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = if (darkTheme) DarkColorPalette else LightColorPalette
+
+    systemBarsUiController(statusBarColor = colorScheme.surface, navBarColor = colorScheme.surface)
 
     MaterialTheme(
         colorScheme = colorScheme,
