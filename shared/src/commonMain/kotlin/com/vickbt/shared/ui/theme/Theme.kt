@@ -32,11 +32,7 @@ fun NotflixTheme(
 
     systemBarsUiController(statusBarColor = colorScheme.surface, navBarColor = colorScheme.surface)
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        // typography = Typography,
-        shapes = Shapes
-    ) {
+    MaterialTheme(colorScheme = colorScheme, shapes = Shapes) {
         content()
     }
 }
