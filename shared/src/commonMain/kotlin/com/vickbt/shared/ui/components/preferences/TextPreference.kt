@@ -25,7 +25,7 @@ fun TextPreference(
     modifier: Modifier = Modifier,
     icon: ImageVector? = null,
     title: String,
-    subTitle: String? = null,
+    description: String? = null,
     onClick: () -> Unit
 ) {
     Row(
@@ -64,12 +64,12 @@ fun TextPreference(
                 textAlign = TextAlign.Start
             )
 
-            if (!subTitle.isNullOrEmpty()) {
+            if (!description.isNullOrEmpty()) {
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 13.dp),
-                    text = subTitle,
+                    text = description,
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                     fontSize = 14.sp,

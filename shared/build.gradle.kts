@@ -49,6 +49,7 @@ kotlin {
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             api(compose.components.resources)
             api(compose.materialIconsExtended)
+            api(compose.preview)
 
             implementation(libs.kotlinX.coroutines)
 

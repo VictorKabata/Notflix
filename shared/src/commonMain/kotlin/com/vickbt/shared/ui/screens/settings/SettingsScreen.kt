@@ -41,7 +41,7 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
                 TextPreference(
                     icon = Icons.Rounded.Lightbulb,
                     title = "Change theme",
-                    subTitle = themeLabel,
+                    description = themeLabel,
                     onClick = { showThemeDialog.value = !showThemeDialog.value }
                 )
 
@@ -56,7 +56,7 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
                 TextPreference(
                     icon = Icons.Rounded.Image,
                     title = "Image quality",
-                    subTitle = imageQualityLabel,
+                    description = imageQualityLabel,
                     onClick = { showImageQualityDialog.value = !showImageQualityDialog.value }
                 )
 
