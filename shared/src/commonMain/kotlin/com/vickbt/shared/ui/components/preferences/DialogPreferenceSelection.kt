@@ -25,6 +25,7 @@ import androidx.compose.ui.window.Dialog
 
 @Composable
 fun DialogPreferenceSelection(
+    modifier: Modifier = Modifier,
     showDialog: Boolean,
     title: String,
     currentValue: String? = null,
@@ -35,6 +36,7 @@ fun DialogPreferenceSelection(
     if (showDialog) {
         Dialog(onDismissRequest = { onNegativeClick() }) {
             Card(
+                modifier = modifier,
                 elevation = CardDefaults.cardElevation(8.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {

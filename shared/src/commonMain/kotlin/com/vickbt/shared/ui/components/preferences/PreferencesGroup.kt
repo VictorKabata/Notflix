@@ -57,6 +57,10 @@ fun PreferencesGroup(
 
         Column(content = content, verticalArrangement = Arrangement.spacedBy(2.dp))
 
-        if (!isLast) Divider(color = Color.Gray.copy(alpha = 0.7f), thickness = 1.dp)
+        if (!isLast) Divider(
+            modifier = Modifier.padding(horizontal = 8.dp),
+            color = Color.Gray.copy(alpha = 0.7f),
+            thickness = 1.dp
+        )
     }
 }
