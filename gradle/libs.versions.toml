@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.9.21"
-gradle = "8.1.0"
+agp = "8.1.0"
 ktLint = "11.6.0"
 detekt = "1.19.0"
 gradleVersionUpdate = "0.50.0"
@@ -28,6 +28,7 @@ kover = "0.6.1"
 preCompose = "1.5.10"
 imageLoader = "1.7.1"
 materialWindowSizeClass = "0.3.0"
+composeMultiplatform = "1.6.0-alpha01"
 
 #Android Versions
 androidxActivity = "1.8.2"
@@ -50,7 +51,6 @@ espresso = "3.5.1"
 test = "1.5.0"
 archTestCore = "2.2.0"
 turbine = "0.12.3"
-composeMultiplatform = "1.5.11"
 
 [plugins]
 ktLint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLint" }
@@ -60,8 +60,8 @@ gradleVersionUpdates = { id = "com.github.ben-manes.versions", version.ref = "gr
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 nativeCocoapod = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-android-library = { id = "com.android.library", version.ref = "gradle" }
-android-application = { id = "com.android.application", version.ref = "gradle" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+android-application = { id = "com.android.application", version.ref = "agp" }
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinX-serialization-plugin = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kmp-NativeCoroutines-plugin = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "kmpNativeCoroutines" }
