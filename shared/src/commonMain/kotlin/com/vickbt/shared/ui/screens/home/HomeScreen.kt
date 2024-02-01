@@ -20,13 +20,14 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
@@ -117,7 +118,7 @@ fun HomeScreen(
                         searchQuery = ""
                     }) {
                         Icon(
-                            imageVector = Icons.Rounded.ArrowBack,
+                            imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
                             contentDescription = "Go back"
                         )
                     }
@@ -159,7 +160,8 @@ fun HomeScreen(
                 .padding(paddingValues)
         ) {
             if (homeUiState.isLoading) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                /*ToDo: Uncomment progress indicator
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))*/
             } else if (!homeUiState.error.isNullOrEmpty()) {
                 Text(
                     modifier = Modifier.align(Alignment.Center),
