@@ -20,7 +20,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.CircularProgressIndicator
@@ -41,6 +41,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -90,7 +91,7 @@ fun HomeScreen(
     ) {
         //region Search
         SearchBar(
-            modifier = Modifier.background(
+            modifier = Modifier.testTag("search_bar").background(
                 MaterialTheme.colorScheme.surface
             ).also {
                 if (activeState) it.fillMaxWidth() else it.fillMaxWidth(.85f)
@@ -117,7 +118,7 @@ fun HomeScreen(
                         searchQuery = ""
                     }) {
                         Icon(
-                            imageVector = Icons.Rounded.ArrowBack,
+                            imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
                             contentDescription = "Go back"
                         )
                     }
@@ -159,16 +160,19 @@ fun HomeScreen(
                 .padding(paddingValues)
         ) {
             if (homeUiState.isLoading) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                CircularProgressIndicator(
+                    modifier = Modifier.testTag("progress_bar_loading").align(Alignment.Center)
+                )
             } else if (!homeUiState.error.isNullOrEmpty()) {
                 Text(
-                    modifier = Modifier.align(Alignment.Center),
+                    modifier = Modifier.testTag("text_error_message").align(Alignment.Center),
                     text = "Error:\n${homeUiState.error}",
                     textAlign = TextAlign.Center
                 )
             } else {
                 Column(
                     modifier = Modifier
+                        .testTag("column_home")
                         .fillMaxSize()
                         .verticalScroll(scrollState)
                         .align(Alignment.Center),
@@ -180,7 +184,9 @@ fun HomeScreen(
                             rememberPagerState(pageCount = { nowPlayingMovies.size })
 
                         HorizontalPager(
-                            modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
+                            modifier = Modifier.testTag("pager_now_playing")
+                                .fillMaxWidth()
+                                .padding(vertical = 12.dp),
                             state = pagerState,
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             pageSpacing = 8.dp
