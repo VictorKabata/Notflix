@@ -1,5 +1,8 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import org.jetbrains.compose.ExperimentalComposeLibrary
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
@@ -11,13 +14,28 @@ plugins {
     alias(libs.plugins.compose)
 
     alias(libs.plugins.sqlDelight)
+
+    // id("com.google.devtools.ksp")
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
+@OptIn(
+    ExperimentalKotlinGradlePluginApi::class,
+    ExperimentalComposeLibrary::class
+)
 kotlin {
     kotlin.applyDefaultHierarchyTemplate()
 
-    androidTarget()
+    androidTarget {
+        instrumentedTestVariant {
+            sourceSetTree.set(KotlinSourceSetTree.test)
+
+            dependencies {
+                implementation("androidx.compose.ui:ui-test-junit4-android:1.5.4")
+                debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.4")
+            }
+        }
+
+    }
 
     val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
         when {
@@ -46,7 +64,6 @@ kotlin {
             api(compose.runtime)
             api(compose.foundation)
             api(compose.material3)
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             api(compose.components.resources)
             api(compose.materialIconsExtended)
 
@@ -79,13 +96,20 @@ kotlin {
             // implementation(libs.material.windowSizeClass)
         }
 
-        /*sourceSets["commonTest"].dependencies {
+        sourceSets["commonTest"].dependencies {
             implementation(kotlin("test"))
-            implementation(libs.turbine)
-            implementation(libs.ktor.mock)
+
             implementation(libs.kotlinX.coroutines.test)
-            implementation(libs.multiplatformSettings.test)
-        }*/
+
+            @OptIn(ExperimentalComposeLibrary::class)
+            implementation(compose.uiTest)
+
+            // ktor
+            implementation(libs.ktor.mock)
+
+            implementation("io.mockative:mockative:2.0.1")
+
+        }
 
         sourceSets["androidMain"].dependencies {
             implementation(libs.ktor.android)
@@ -107,6 +131,14 @@ kotlin {
 
         sourceSets["jvmTest"].dependencies {}
     }
+}
+
+dependencies {
+    configurations
+        .filter { it.name.startsWith("ksp") && it.name.contains("Test") }
+        .forEach {
+            add(it.name, "io.mockative:mockative-processor:2.0.1")
+        }
 }
 
 android {
