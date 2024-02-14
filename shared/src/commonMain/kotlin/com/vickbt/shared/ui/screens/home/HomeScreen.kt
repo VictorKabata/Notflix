@@ -46,7 +46,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.vickbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickbt.shared.ui.components.MovieCardLandscape
 import com.vickbt.shared.ui.components.MovieCardPager
 import com.vickbt.shared.ui.components.MovieCardPagerIndicator
@@ -166,7 +165,7 @@ fun HomeScreen(
             } else if (!homeUiState.error.isNullOrEmpty()) {
                 Text(
                     modifier = Modifier.testTag("text_error_message").align(Alignment.Center),
-                    text = "Error:\n${homeUiState.error}",
+                    text = "${homeUiState.error}",
                     textAlign = TextAlign.Center
                 )
             } else {

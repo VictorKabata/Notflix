@@ -85,7 +85,6 @@ dependencies {
 
     testImplementation(libs.jUnitKtx)
     testImplementation(libs.kotlinX.coroutines.test)
-    testImplementation(libs.mockk)
     testImplementation(libs.kotlin.test)
     testImplementation(libs.archTestCore)
     testImplementation(libs.robolectric)

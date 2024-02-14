@@ -1,4 +1,4 @@
-package com.vickbt.shared.presentation.ui.screens.home
+package com.vickbt.shared.ui.screens.home
 
 import com.vickbt.shared.domain.repositories.MoviesRepository
 import com.vickbt.shared.utils.HomeUiState

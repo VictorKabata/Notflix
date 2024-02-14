@@ -60,7 +60,7 @@ fun DetailsScreen(
 
     Box(modifier = Modifier.fillMaxSize()) {
         if (movieDetailsState.isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+           //  CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         } else if (!movieDetailsState.error.isNullOrEmpty()) {
             Text(
                 modifier = Modifier.align(Alignment.Center),

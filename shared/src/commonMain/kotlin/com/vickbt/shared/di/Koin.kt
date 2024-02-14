@@ -1,6 +1,6 @@
 package com.vickbt.shared.di
 
-import com.vickbt.shared.presentation.ui.screens.home.HomeViewModel
+import com.vickbt.shared.ui.screens.home.HomeViewModel
 import com.vickbt.shared.presentation.ui.screens.main.MainViewModel
 import com.vickbt.shared.ui.screens.settings.SettingsViewModel
 import org.koin.core.Koin
