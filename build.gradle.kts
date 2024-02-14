@@ -14,6 +14,8 @@ plugins {
     alias(libs.plugins.firebase.crashlytics.plugin) apply false
     alias(libs.plugins.firebase.performance.plugin) apply false
 
+    alias(libs.plugins.ksp) apply false
+
     alias(libs.plugins.ktLint)
     alias(libs.plugins.detekt)
     alias(libs.plugins.gradleVersionUpdates)
