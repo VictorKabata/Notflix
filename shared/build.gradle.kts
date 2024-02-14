@@ -15,7 +15,7 @@ plugins {
 
     alias(libs.plugins.sqlDelight)
 
-    // id("com.google.devtools.ksp")
+    alias(libs.plugins.ksp)
 }
 
 @OptIn(
@@ -30,8 +30,8 @@ kotlin {
             sourceSetTree.set(KotlinSourceSetTree.test)
 
             dependencies {
-                implementation("androidx.compose.ui:ui-test-junit4-android:1.5.4")
-                debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.4")
+                implementation("androidx.compose.ui:ui-test-junit4-android:1.6.1")
+                debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.1")
             }
         }
 
@@ -107,7 +107,7 @@ kotlin {
             // ktor
             implementation(libs.ktor.mock)
 
-            implementation("io.mockative:mockative:2.0.1")
+            implementation(libs.mockative)
 
         }
 
@@ -149,8 +149,12 @@ android {
     namespace = "com.vickbt.shared"
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_20
+        targetCompatibility = JavaVersion.VERSION_20
+    }
+
+    defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
