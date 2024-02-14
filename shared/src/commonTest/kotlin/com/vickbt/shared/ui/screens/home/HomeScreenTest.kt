@@ -1,4 +1,4 @@
-package com.vickbt.shared.ui
+package com.vickbt.shared.ui.screens.home
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.test.ExperimentalTestApi
