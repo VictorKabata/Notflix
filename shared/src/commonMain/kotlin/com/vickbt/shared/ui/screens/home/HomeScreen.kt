@@ -23,7 +23,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Search
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -159,9 +158,9 @@ fun HomeScreen(
                 .padding(paddingValues)
         ) {
             if (homeUiState.isLoading) {
-                CircularProgressIndicator(
+                /*CircularProgressIndicator(
                     modifier = Modifier.testTag("progress_bar_loading").align(Alignment.Center)
-                )
+                )*/
             } else if (!homeUiState.error.isNullOrEmpty()) {
                 Text(
                     modifier = Modifier.testTag("text_error_message").align(Alignment.Center),
@@ -191,7 +190,8 @@ fun HomeScreen(
                             pageSpacing = 8.dp
                         ) { currentPage ->
                             MovieCardPager(
-                                modifier = Modifier.fillMaxWidth().height(280.dp),
+                                modifier = Modifier.testTag("item_now_playing").fillMaxWidth()
+                                    .height(280.dp),
                                 movie = nowPlayingMovies[currentPage]
                             ) { movie ->
                                 navigator.navigate("/details/${movie.id}")
@@ -199,7 +199,8 @@ fun HomeScreen(
                         }
 
                         MovieCardPagerIndicator(
-                            modifier = Modifier.padding(vertical = 6.dp),
+                            modifier = Modifier.testTag("page_indicator_now_playing")
+                                .padding(vertical = 6.dp),
                             pagerState = pagerState,
                             indicatorSize = 6.dp,
                             inactiveColor = Color.Gray,
@@ -212,6 +213,7 @@ fun HomeScreen(
                     homeUiState.trendingMovies?.let {
                         SectionSeparator(
                             modifier = Modifier
+                                .testTag("separator_trending_movies")
                                 .padding(horizontal = 16.dp, vertical = 6.dp)
                                 .fillMaxWidth()
                                 .wrapContentHeight(),
@@ -222,6 +224,7 @@ fun HomeScreen(
 
                         LazyRow(
                             modifier = Modifier
+                                .testTag("lazy_row_trending_movies")
                                 .fillMaxWidth()
                                 .wrapContentHeight(),
                             contentPadding = PaddingValues(horizontal = 16.dp),
@@ -229,6 +232,7 @@ fun HomeScreen(
                         ) {
                             items(items = it) { item ->
                                 MovieCardPortraitCompact(
+                                    modifier = Modifier.testTag("item_trending_movies"),
                                     movie = item,
                                     onItemClick = { movie ->
                                         navigator.navigate("/details/${movie.id}")
@@ -243,6 +247,7 @@ fun HomeScreen(
                     homeUiState.upcomingMovies?.let {
                         SectionSeparator(
                             modifier = Modifier
+                                .testTag("separator_upcoming_movies")
                                 .padding(start = 16.dp, end = 16.dp, top = 12.dp)
                                 .fillMaxWidth()
                                 .wrapContentHeight(),
@@ -252,13 +257,15 @@ fun HomeScreen(
                         Spacer(modifier = Modifier.height(8.dp))
 
                         LazyRow(
+                            modifier = Modifier.testTag("lazy_row_upcoming_movies")
+                                .wrapContentHeight(),
                             contentPadding = PaddingValues(horizontal = 16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(14.dp),
-                            modifier = Modifier.wrapContentHeight()
+                            horizontalArrangement = Arrangement.spacedBy(14.dp)
                         ) {
                             items(items = it) { item ->
                                 MovieCardLandscape(
                                     modifier = Modifier
+                                        .testTag("item_upcoming_movies")
                                         .width(300.dp)
                                         .height(245.dp),
                                     movie = item,
@@ -276,6 +283,7 @@ fun HomeScreen(
                         Column(modifier = Modifier.padding(bottom = 90.dp)) {
                             SectionSeparator(
                                 modifier = Modifier
+                                    .testTag("separator_popular_movies")
                                     .padding(start = 16.dp, end = 16.dp, top = 12.dp)
                                     .fillMaxWidth()
                                     .wrapContentHeight(),
@@ -285,12 +293,14 @@ fun HomeScreen(
                             Spacer(modifier = Modifier.height(8.dp))
 
                             LazyRow(
-                                modifier = Modifier.wrapContentHeight(),
+                                modifier = Modifier.testTag("lazy_row_popular_movies")
+                                    .wrapContentHeight(),
                                 contentPadding = PaddingValues(horizontal = 16.dp),
                                 horizontalArrangement = Arrangement.spacedBy(10.dp),
                             ) {
                                 items(items = it) { item ->
                                     MovieCardPortraitCompact(
+                                        modifier = Modifier.testTag("item_popular_movies"),
                                         movie = item,
                                         onItemClick = { movie ->
                                             navigator.navigate("/details/${movie.id}")
