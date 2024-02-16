@@ -30,8 +30,7 @@ fun SearchScreen(
 ) {
     Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
         if (searchUiState.isLoading) {
-            /*ToDo: Uncomment progress indicator
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))*/
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         } else if (!searchUiState.error.isNullOrEmpty()) {
             Text(
                 modifier = Modifier.align(Alignment.Center),

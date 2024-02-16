@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -59,8 +60,7 @@ fun DetailsScreen(
 
     Box(modifier = Modifier.fillMaxSize()) {
         if (movieDetailsState.isLoading) {
-            /*ToDo: Uncomment circular progress indicator
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))*/
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         } else if (!movieDetailsState.error.isNullOrEmpty()) {
             Text(
                 modifier = Modifier.align(Alignment.Center),

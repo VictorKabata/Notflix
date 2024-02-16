@@ -27,7 +27,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
@@ -56,9 +55,14 @@ import com.vickbt.shared.ui.screens.search.SearchScreen
 import com.vickbt.shared.ui.theme.DarkPrimaryColor
 import com.vickbt.shared.utils.WindowSize
 import moe.tlaster.precompose.navigation.Navigator
+import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.koin.compose.koinInject
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(
+    ExperimentalFoundationApi::class,
+    ExperimentalMaterial3Api::class,
+    ExperimentalResourceApi::class
+)
 @Composable
 fun HomeScreen(
     navigator: Navigator,
@@ -103,7 +107,7 @@ fun HomeScreen(
             onActiveChange = { activeState = it },
             placeholder = {
                 Text(
-                    text = "Search Movie",
+                    text = "", //getString(Res.string.search_movie),
                     fontSize = 18.sp,
                     style = MaterialTheme.typography.labelMedium,
                     maxLines = 1,
@@ -160,8 +164,7 @@ fun HomeScreen(
                 .padding(paddingValues)
         ) {
             if (homeUiState.isLoading) {
-                /*ToDo: Uncomment progress indicator
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))*/
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             } else if (!homeUiState.error.isNullOrEmpty()) {
                 Text(
                     modifier = Modifier.align(Alignment.Center),
