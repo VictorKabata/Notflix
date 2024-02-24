@@ -46,14 +46,9 @@ fun DetailsScreen(
 ) {
     LaunchedEffect(key1 = Unit) {
         viewModel.getMovieDetails(movieId = movieId)
-        viewModel.fetchSimilarMovies(movieId = movieId)
-        viewModel.getMovieCast(movieId = movieId)
-        viewModel.isMovieFavorite(movieId = movieId)
     }
 
     val movieDetailsState = viewModel.movieDetailsState.collectAsState().value
-
-    Napier.e("is favorite: ${movieDetailsState.isFavorite}")
 
     val scrollState = rememberScrollState()
     val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
@@ -147,7 +142,7 @@ fun DetailsScreen(
                     //endregion
 
                     //region Similar Movies
-                    if (!movieDetailsState.similarMovies.isNullOrEmpty()) {
+                    if (!movieDetailsState.recommendedMovies.isNullOrEmpty()) {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = "Similar Movies",
@@ -160,7 +155,7 @@ fun DetailsScreen(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            items(items = movieDetailsState.similarMovies) { movie ->
+                            items(items = movieDetailsState.recommendedMovies) { movie ->
                                 MovieCardPortrait(movie = movie, onItemClick = {})
                             }
                         }

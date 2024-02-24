@@ -22,7 +22,7 @@ data class DetailsUiState(
     val error: String? = null,
     val movieDetails: Movie? = null,
     val movieCast: List<People>? = emptyList(),
-    val similarMovies: List<Movie>? = emptyList(),
+    val recommendedMovies: List<Movie>? = emptyList(),
     val isFavorite: Boolean? = false
 )
 

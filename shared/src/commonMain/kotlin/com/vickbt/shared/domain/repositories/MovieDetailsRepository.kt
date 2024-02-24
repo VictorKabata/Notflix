@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface MovieDetailsRepository {
 
     /**Fetch movie details from network source*/
-    // suspend fun fetchMovieDetails(movieId: Int): Flow<ResultState<Movie>>
+     suspend fun fetchMovieDetails(movieId: Int): Flow<ResultState<Movie>>
 
     /**Fetch movie cast from network source*/
     // suspend fun fetchMovieCast(movieId: Int): Flow<ResultState<People>>

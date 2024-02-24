@@ -30,7 +30,7 @@ class DetailsViewModel(
     }
 
     fun getMovieDetails(movieId: Int) = viewModelScope.launch(coroutineExceptionHandler) {
-        /*movieDetailsRepository.fetchMovieDetails(movieId = movieId).collect { movieDetailsResult ->
+        movieDetailsRepository.fetchMovieDetails(movieId = movieId).collect { movieDetailsResult ->
             movieDetailsResult.isLoading { isLoading ->
                 _movieDetailsState.update { it.copy(isLoading = isLoading) }
             }.onSuccess { movieDetails ->
@@ -38,7 +38,7 @@ class DetailsViewModel(
             }.onFailure { error ->
                 _movieDetailsState.update { it.copy(error = error.message) }
             }
-        }*/
+        }
     }
 
     fun getMovieCast(movieId: Int) = viewModelScope.launch(coroutineExceptionHandler) {
