@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
+import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.ui.components.ratingbar.RatingBar
 import com.vickbt.shared.ui.components.ratingbar.RatingBarStyle
 import com.vickbt.shared.ui.components.ratingbar.StepSize
@@ -44,8 +45,8 @@ import com.vickbt.shared.utils.loadImage
 @Composable
 fun MovieCardPager(
     modifier: Modifier = Modifier,
-    movie: Movie,
-    onItemClick: (Movie) -> Unit
+    movie: Movie?,
+    onItemClick: (Movie?) -> Unit
 ) {
     var dominantColor by remember { mutableStateOf(Color.DarkGray) }
     var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
@@ -54,7 +55,7 @@ fun MovieCardPager(
         Box {
             //region Movie Cover Image
             commonImageLoader {
-                val painter = rememberImagePainter(movie.backdropPath?.loadImage() ?: "")
+                val painter = rememberImagePainter(movie?.banner?:"")
 
                 Image(
                     modifier = Modifier
@@ -91,7 +92,7 @@ fun MovieCardPager(
             ) {
                 Text(
                     modifier = Modifier,
-                    text = movie.title ?: "Unknown movie",
+                    text = movie?.title ?: "Unknown movie",
                     fontSize = 28.sp,
                     maxLines = 2,
                     style = MaterialTheme.typography.titleMedium,
@@ -101,10 +102,10 @@ fun MovieCardPager(
                     lineHeight = 30.sp
                 )
 
-                movie.voteAverage?.let {
+                movie?.rating?.let {
                     RatingBar(
                         modifier = Modifier,
-                        value = it.getRating().toFloat(),
+                        value = it.toFloat(),
                         numOfStars = 5,
                         size = 13.dp,
                         spaceBetween = 1.dp,

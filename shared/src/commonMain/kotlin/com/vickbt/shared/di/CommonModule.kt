@@ -1,7 +1,5 @@
 package com.vickbt.shared.di
 
-import com.vickbt.shared.BuildKonfig
-import com.vickbt.shared.data.cache.sqldelight.daos.FavoriteMovieDao
 import com.vickbt.shared.data.datasources.FavoritesRepositoryImpl
 import com.vickbt.shared.data.datasources.MovieDetailsRepositoryImpl
 import com.vickbt.shared.data.datasources.MoviesRepositoryImpl
@@ -11,12 +9,11 @@ import com.vickbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickbt.shared.domain.repositories.MoviesRepository
 import com.vickbt.shared.domain.repositories.SettingsRepository
 import com.vickbt.shared.domain.utils.Constants.BASE_URL
-import com.vickbt.shared.domain.utils.Constants.URL_PATH
 import com.vickbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickbt.shared.presentation.ui.screens.main.MainViewModel
-import com.vickbt.shared.ui.screens.settings.SettingsViewModel
 import com.vickbt.shared.ui.screens.details.DetailsViewModel
 import com.vickbt.shared.ui.screens.favorites.FavoritesViewModel
+import com.vickbt.shared.ui.screens.settings.SettingsViewModel
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
@@ -27,7 +24,6 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.http.URLProtocol
-import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.module.Module
@@ -49,8 +45,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
                 url {
                     protocol = URLProtocol.HTTPS
                     host = BASE_URL
-                    path(URL_PATH)
-                    parameters.append("api_key", BuildKonfig.API_KEY)
+                    // parameters.append("api_key", BuildKonfig.API_KEY)
                 }
             }
 
@@ -78,13 +73,12 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
         }
     }
 
-    single { FavoriteMovieDao(databaseDriverFactory = get()) }
 
     single<MoviesRepository> { MoviesRepositoryImpl(httpClient = get()) }
     single<MovieDetailsRepository> {
-        MovieDetailsRepositoryImpl(httpClient = get(), favoriteMovieDao = get())
+        MovieDetailsRepositoryImpl(httpClient = get())
     }
-    single<FavoritesRepository> { FavoritesRepositoryImpl(favoriteMovieDao = get()) }
+    single<FavoritesRepository> { FavoritesRepositoryImpl() }
     single<SettingsRepository> { SettingsRepositoryImpl(observableSettings = get()) }
 
     singleOf(::MainViewModel)

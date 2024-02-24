@@ -68,10 +68,7 @@ fun HomeScreen(
     val scrollState = rememberScrollState()
 
     LaunchedEffect(key1 = viewModel) {
-        viewModel.fetchNowPlayingMovies()
-        viewModel.fetchTrendingMovies()
-        viewModel.fetchUpcomingMovies()
-        viewModel.fetchPopularMovies()
+        viewModel.fetchHomePage()
     }
 
     val homeUiState = viewModel.homeUiState.collectAsState().value
@@ -175,9 +172,9 @@ fun HomeScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     //region Now Playing Movies
-                    homeUiState.nowPlayingMovies?.let { nowPlayingMovies ->
+                    homeUiState.featureMovies?.let { featuredMovies ->
                         val pagerState =
-                            rememberPagerState(pageCount = { nowPlayingMovies.size })
+                            rememberPagerState(pageCount = { featuredMovies.size })
 
                         HorizontalPager(
                             modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
@@ -187,9 +184,9 @@ fun HomeScreen(
                         ) { currentPage ->
                             MovieCardPager(
                                 modifier = Modifier.fillMaxWidth().height(280.dp),
-                                movie = nowPlayingMovies[currentPage]
+                                movie = featuredMovies[currentPage]
                             ) { movie ->
-                                navigator.navigate("/details/${movie.id}")
+                                navigator.navigate("/details/${movie?.id}")
                             }
                         }
 
@@ -226,7 +223,7 @@ fun HomeScreen(
                                 MovieCardPortraitCompact(
                                     movie = item,
                                     onItemClick = { movie ->
-                                        navigator.navigate("/details/${movie.id}")
+                                        navigator.navigate("/details/${movie?.id}")
                                     }
                                 )
                             }
@@ -234,14 +231,14 @@ fun HomeScreen(
                     }
                     //endregion
 
-                    //region Upcoming Movies
-                    homeUiState.upcomingMovies?.let {
+                    // region Trending TV Shows
+                    homeUiState.trendingTvShows?.let {
                         SectionSeparator(
                             modifier = Modifier
                                 .padding(start = 16.dp, end = 16.dp, top = 12.dp)
                                 .fillMaxWidth()
                                 .wrapContentHeight(),
-                            sectionTitle = "Upcoming Movies"
+                            sectionTitle = "Trending TV Shows"
                         )
 
                         Spacer(modifier = Modifier.height(8.dp))
@@ -258,7 +255,7 @@ fun HomeScreen(
                                         .height(245.dp),
                                     movie = item,
                                     onClickItem = { movie ->
-                                        navigator.navigate("/details/${movie.id}")
+                                        navigator.navigate("/details/${movie?.id}")
                                     }
                                 )
                             }
@@ -266,15 +263,15 @@ fun HomeScreen(
                     }
                     //endregion
 
-                    //region Popular Movies
-                    homeUiState.popularMovies?.let {
+                    //region Latest Movies
+                    homeUiState.latestMovies?.let {
                         Column(modifier = Modifier.padding(bottom = 90.dp)) {
                             SectionSeparator(
                                 modifier = Modifier
                                     .padding(start = 16.dp, end = 16.dp, top = 12.dp)
                                     .fillMaxWidth()
                                     .wrapContentHeight(),
-                                sectionTitle = "Popular Movies"
+                                sectionTitle = "Latest Movies"
                             )
 
                             Spacer(modifier = Modifier.height(8.dp))
@@ -288,10 +285,42 @@ fun HomeScreen(
                                     MovieCardPortraitCompact(
                                         movie = item,
                                         onItemClick = { movie ->
-                                            navigator.navigate("/details/${movie.id}")
+                                            navigator.navigate("/details/${movie?.id}")
                                         }
                                     )
                                 }
+                            }
+                        }
+                    }
+                    //endregion
+
+                    //region Latest TV Show
+                    homeUiState.latestTvShows?.let {
+                        SectionSeparator(
+                            modifier = Modifier
+                                .padding(start = 16.dp, end = 16.dp, top = 12.dp)
+                                .fillMaxWidth()
+                                .wrapContentHeight(),
+                            sectionTitle = "Latest TV Show"
+                        )
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        LazyRow(
+                            contentPadding = PaddingValues(horizontal = 16.dp),
+                            horizontalArrangement = Arrangement.spacedBy(14.dp),
+                            modifier = Modifier.wrapContentHeight()
+                        ) {
+                            items(items = it) { item ->
+                                MovieCardLandscape(
+                                    modifier = Modifier
+                                        .width(300.dp)
+                                        .height(245.dp),
+                                    movie = item,
+                                    onClickItem = { movie ->
+                                        navigator.navigate("/details/${movie?.id}")
+                                    }
+                                )
                             }
                         }
                     }

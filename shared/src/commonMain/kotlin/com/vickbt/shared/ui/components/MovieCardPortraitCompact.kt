@@ -23,14 +23,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
+import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.utils.commonImageLoader
-import com.vickbt.shared.utils.loadImage
 
 @Composable
 fun MovieCardPortraitCompact(
     modifier: Modifier = Modifier,
-    movie: Movie,
-    onItemClick: (Movie) -> Unit
+    movie: Movie?,
+    onItemClick: (Movie?) -> Unit
 ) {
     Column(
         modifier = modifier,
@@ -45,7 +45,7 @@ fun MovieCardPortraitCompact(
             shape = RoundedCornerShape(4.dp)
         ) {
             commonImageLoader {
-                val painter = rememberImagePainter(movie.posterPath?.loadImage() ?: "")
+                val painter = rememberImagePainter(movie?.poster ?: "")
 
                 Image(
                     modifier = Modifier
@@ -62,7 +62,7 @@ fun MovieCardPortraitCompact(
 
         Text(
             modifier = Modifier.width(145.dp),
-            text = movie.title ?: "Unknown movie",
+            text = movie?.title?:"",
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurface,
             fontSize = 14.sp,
@@ -71,9 +71,4 @@ fun MovieCardPortraitCompact(
             textAlign = TextAlign.Start
         )
     }
-}
-
-@Composable
-private fun Preview() {
-    MovieCardPortraitCompact(movie = Movie(title = "Cocaine Bear"), onItemClick = {})
 }

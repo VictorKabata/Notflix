@@ -27,16 +27,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
+import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.utils.commonImageLoader
-import com.vickbt.shared.utils.loadImage
 
 @Composable
 fun MovieCardDescription(
     modifier: Modifier = Modifier,
-    movie: MovieDetails,
+    movie: Movie,
     maxLine: Int = 3,
     overFlowText: String = "See more",
-    onItemClick: (MovieDetails) -> Unit
+    onItemClick: (Movie) -> Unit
 ) {
     var dominantColor by remember { mutableStateOf(Color.DarkGray) }
     var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
@@ -45,7 +45,7 @@ fun MovieCardDescription(
         Box {
             //region Movie Cover Image
             commonImageLoader {
-                val painter = rememberImagePainter(movie.backdropPath?.loadImage() ?: "")
+                val painter = rememberImagePainter(movie.banner ?: "")
 
                 Image(
                     modifier = Modifier
@@ -81,7 +81,7 @@ fun MovieCardDescription(
             ) {
                 Text(
                     modifier = Modifier,
-                    text = movie.title ?: "Unknown movie",
+                    text = movie.title,
                     fontSize = 24.sp,
                     maxLines = 1,
                     style = MaterialTheme.typography.titleMedium,
@@ -91,7 +91,7 @@ fun MovieCardDescription(
                     lineHeight = 30.sp
                 )
 
-                movie.overview?.let {
+                movie.overview.let {
                     ExpandableText(
                         modifier = Modifier.padding(bottom = 4.dp),
                         text = it,

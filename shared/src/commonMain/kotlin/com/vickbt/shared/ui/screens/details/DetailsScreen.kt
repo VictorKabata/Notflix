@@ -80,11 +80,11 @@ fun DetailsScreen(
                         onNavigationIconClick = { navigator.goBack() },
                         onShareIconClick = {},
                         onFavoriteIconClick = { movieDetails, isFavorite ->
-                            if (isFavorite == true) {
+                            /*if (isFavorite == true) {
                                 viewModel.saveFavoriteMovie(movieDetails = movieDetails)
                             } else {
                                 viewModel.deleteFavoriteMovie(movieId = movieDetails.id)
-                            }
+                            }*/
                         }
                     )
                 }
@@ -94,10 +94,10 @@ fun DetailsScreen(
                     verticalArrangement = Arrangement.spacedBy(14.dp)
                 ) {
                     //region Movie Ratings
-                    if (movieDetailsState.movieDetails?.voteAverage != null) {
+                    if (movieDetailsState.movieDetails?.rating != null) {
                         MovieRatingSection(
-                            popularity = movieDetailsState.movieDetails.voteAverage.getPopularity(),
-                            voteAverage = movieDetailsState.movieDetails.voteAverage.getRating()
+                            popularity = movieDetailsState.movieDetails.rating.getPopularity(),
+                            voteAverage = movieDetailsState.movieDetails.rating.getRating()
                         )
                     }
                     //endregion
@@ -140,7 +140,7 @@ fun DetailsScreen(
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
                             items(items = movieDetailsState.movieCast) { item ->
-                                ItemMovieCast(modifier = Modifier, actor = item)
+                                ItemMovieCast(modifier = Modifier, people = item)
                             }
                         }
                     }

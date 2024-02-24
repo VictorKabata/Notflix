@@ -18,19 +18,20 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
+import com.vickbt.shared.domain.models.People
 import com.vickbt.shared.ui.theme.TextSecondary
 import com.vickbt.shared.utils.commonImageLoader
 import com.vickbt.shared.utils.loadImage
 
 @Composable
-fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
+fun ItemMovieCast(modifier: Modifier = Modifier, people: People) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(space = 1.dp)
     ) {
         commonImageLoader {
-            val painter = rememberImagePainter(actor.profilePath?.loadImage() ?: "")
+            val painter = rememberImagePainter(people.image ?: "")
 
             Image(
                 modifier = Modifier.size(80.dp).clip(CircleShape),
@@ -42,7 +43,7 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
 
         Text(
             modifier = Modifier.width(78.dp),
-            text = actor.name ?: "Unknown actor",
+            text = people.name ?: "Unknown actor",
             style = MaterialTheme.typography.titleMedium,
             fontSize = 14.sp,
             overflow = TextOverflow.Ellipsis,
@@ -53,7 +54,7 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
 
         Text(
             modifier = Modifier.width(77.dp),
-            text = actor.character ?: "Unknown character",
+            text = people.name ?: "Unknown character",
             style = MaterialTheme.typography.labelSmall,
             fontSize = 12.sp,
             color = TextSecondary,

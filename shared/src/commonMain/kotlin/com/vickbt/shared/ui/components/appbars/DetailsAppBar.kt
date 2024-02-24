@@ -40,6 +40,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
+import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.ui.components.collapsingToolbar.CollapsingToolbarScaffoldState
 import com.vickbt.shared.utils.DetailsUiState
 import com.vickbt.shared.utils.commonImageLoader
@@ -54,7 +55,7 @@ fun DetailsAppBar(
     movieDetailsState: DetailsUiState?,
     onNavigationIconClick: () -> Unit,
     onShareIconClick: () -> Unit,
-    onFavoriteIconClick: (MovieDetails, Boolean?) -> Unit
+    onFavoriteIconClick: (Movie, Boolean?) -> Unit
 ) {
     // Return progress on collapsing toolbar - 1.0f=Expanded, 0.0f=Collapsed
     val scrollProgress = collapsingScrollState.toolbarState.progress
@@ -78,7 +79,7 @@ fun DetailsAppBar(
             .graphicsLayer { alpha = scrollProgress }
     ) {
         commonImageLoader {
-            val painter = rememberImagePainter(movieDetails?.backdropPath?.loadImage() ?: "")
+            val painter = rememberImagePainter(movieDetails?.banner?.loadImage() ?: "")
 
             Image(
                 modifier = Modifier

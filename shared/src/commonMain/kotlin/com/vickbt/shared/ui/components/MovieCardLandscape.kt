@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
+import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.ui.components.ratingbar.RatingBar
 import com.vickbt.shared.ui.components.ratingbar.RatingBarStyle
 import com.vickbt.shared.ui.components.ratingbar.StepSize
@@ -46,8 +47,8 @@ import com.vickbt.shared.utils.loadImage
 @Composable
 fun MovieCardLandscape(
     modifier: Modifier = Modifier,
-    movie: Movie,
-    onClickItem: (Movie) -> Unit
+    movie: Movie?,
+    onClickItem: (Movie?) -> Unit
 ) {
     var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
     var dominantSubTextColor by remember { mutableStateOf(dominantTextColor) }
@@ -59,7 +60,7 @@ fun MovieCardLandscape(
     ) {
         Box(modifier = modifier) {
             commonImageLoader {
-                val painter = rememberImagePainter(movie.backdropPath?.loadImage() ?: "")
+                val painter = rememberImagePainter(movie?.banner ?: "")
 
                 //region Movie Cover
                 Image(
@@ -100,7 +101,7 @@ fun MovieCardLandscape(
                 //region Movie Title
                 Text(
                     modifier = Modifier,
-                    text = movie.title ?: "Unknown movie",
+                    text = movie?.title ?: "Unknown movie",
                     fontSize = 18.sp,
                     maxLines = 2,
                     style = MaterialTheme.typography.titleMedium,
@@ -120,7 +121,7 @@ fun MovieCardLandscape(
                 ) {
                     RatingBar(
                         modifier = Modifier,
-                        value = movie.voteAverage?.getRating()?.toFloat() ?: 0f,
+                        value = movie?.rating?.toFloat() ?: 0f,
                         numOfStars = 5,
                         size = 15.dp,
                         stepSize = StepSize.HALF,
@@ -128,7 +129,7 @@ fun MovieCardLandscape(
                         style = RatingBarStyle.Fill()
                     )
 
-                    movie.releaseDate?.let {
+                    movie?.released?.let {
                         Divider(
                             modifier = Modifier
                                 .padding(horizontal = 4.dp)
@@ -139,7 +140,7 @@ fun MovieCardLandscape(
 
                         Text(
                             modifier = Modifier,
-                            text = movie.releaseDate.getReleaseDate()?.capitalizeEachWord() ?: "",
+                            text = it,
                             fontSize = 14.sp,
                             maxLines = 1,
                             style = MaterialTheme.typography.labelSmall,

@@ -2,7 +2,7 @@ package com.vickbt.shared.domain.utils
 
 object Constants {
 
-    const val BASE_URL = "localhost:8080"
+    const val BASE_URL = "127.0.0.1:8080"
     // const val URL_PATH = "3/"
 
     const val STARTING_PAGE_INDEX = 1
