@@ -3,8 +3,7 @@ package io.victorkabata.models
 import kotlinx.serialization.Serializable
 
 @Serializable
-class GenreDto(
-    val id: String,
+class CategoryDto(
     val name: String,
-    val shows: List<MovieDto> = listOf(),
+    val list: List<MovieDto>,
 )

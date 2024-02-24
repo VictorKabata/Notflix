@@ -1,8 +1,6 @@
 package com.vickbt.shared.data.mappers
 
-import com.vickbt.shared.data.cache.sqldelight.FavoriteMovieEntity
-
-fun FavoriteMovieEntity.toDomain(): MovieDetails {
+/*fun FavoriteMovieEntity.toDomain(): MovieDetails {
     return MovieDetails(
         adult = null,
         backdropPath = this.backdropPath,
@@ -23,4 +21,4 @@ fun FavoriteMovieEntity.toDomain(): MovieDetails {
         voteAverage = this.voteAverage,
         voteCount = this.voteCount?.toInt()
     )
-}
+}*/

@@ -1,99 +1,70 @@
 package com.vickbt.shared.data.mappers
 
-import com.vickbt.shared.data.network.models.ActorDto
-import com.vickbt.shared.data.network.models.CastDto
-import com.vickbt.shared.data.network.models.ErrorResponseDto
-import com.vickbt.shared.data.network.models.MovieDetailsDto
-import com.vickbt.shared.data.network.models.MovieDto
-import com.vickbt.shared.data.network.models.VideoDto
+import com.vickbt.shared.domain.models.Episode
+import com.vickbt.shared.domain.models.Genre
+import com.vickbt.shared.domain.models.Movie
+import com.vickbt.shared.domain.models.People
+import com.vickbt.shared.domain.models.Season
+import io.victorkabata.models.EpisodeDto
+import io.victorkabata.models.GenreDto
+import io.victorkabata.models.MovieDto
+import io.victorkabata.models.PeopleDto
+import io.victorkabata.models.SeasonDto
 
 fun MovieDto.toDomain(): Movie {
     return Movie(
-        adult = this.adult,
-        backdropPath = this.backdropPath,
         id = this.id,
-        originalLanguage = this.originalLanguage,
-        originalTitle = this.originalTitle,
-        overview = this.overview,
-        popularity = this.popularity,
-        posterPath = this.posterPath,
-        releaseDate = this.releaseDate,
         title = this.title,
-        video = this.video,
-        voteAverage = this.voteAverage,
-        voteCount = this.voteCount,
-        mediaType = this.mediaType
-    )
-}
-
-fun MovieDetailsDto.toDomain(): MovieDetails {
-    return MovieDetails(
-        adult = this.adult,
-        backdropPath = this.backdropPath,
-        homepage = this.homepage,
-        id = this.id,
-        imdbId = this.imdbId,
-        originalLanguage = this.originalLanguage,
-        originalTitle = this.originalTitle,
         overview = this.overview,
-        popularity = this.popularity,
-        posterPath = this.posterPath,
-        releaseDate = this.releaseDate,
+        released = this.released,
         runtime = this.runtime,
-        status = this.status,
-        tagline = this.tagline,
+        youtubeTrailerId = this.youtubeTrailerId,
+        quality = this.quality,
+        rating = this.rating,
+        poster = this.poster,
+        banner = this.banner,
+        seasons = this.seasons.map { it.toDomain() },
+        genres = this.genres.map { it.toDomain() },
+        directors = this.directors.map { it.toDomain() },
+        cast = this.cast.map { it.toDomain() },
+        recommendations = this.recommendations.map { it.toDomain() },
+        category = this.category
+    )
+}
+
+fun SeasonDto.toDomain(): Season {
+    return Season(
+        id = this.id,
+        number = this.number,
         title = this.title,
-        video = this.video,
-        voteAverage = this.voteAverage,
-        voteCount = this.voteCount
+        poster = this.poster,
+        tvShow = this.tvShow?.toDomain(),
+        episodes = this.episodes.map { it.toDomain() }
     )
 }
 
-fun ActorDto.toDomain(): Actor {
-    return Actor(
-        castId = this.castId,
-        character = this.character,
-        creditId = this.creditId,
+fun EpisodeDto.toDomain(): Episode {
+    return Episode(
+        id = this.id,
+        number = this.number,
+        title = this.title,
+        released = this.released,
+        poster = this.poster,
+        tvShow = this.tvShow?.toDomain(),
+        season = this.season?.toDomain()
+    )
+}
+
+fun GenreDto.toDomain(): Genre {
+    return Genre(id = this.id, name = this.name, shows = this.shows.map { it.toDomain() })
+}
+
+fun PeopleDto.toDomain(): People {
+    return People(
         id = this.id,
         name = this.name,
-        originalName = this.originalName,
-        profilePath = this.profilePath
+        image = this.image,
+        filmography = this.filmography.map { it.toDomain() }
     )
 }
 
-fun CastDto.toDomain(): Cast {
-    return Cast(
-        actor = this.actor?.map { it.toDomain() },
-        id = this.id
-    )
-}
-
-fun VideoDto.toDomain(): Video {
-    return Video(
-        id = this.id,
-        iso31661 = this.iso31661,
-        iso6391 = this.iso6391,
-        key = this.key,
-        name = this.name,
-        official = this.official,
-        publishedAt = this.publishedAt,
-        site = this.site,
-        size = this.size,
-        type = this.type
-    )
-}
-
-/*fun MovieVideoDto.toDomain(): MovieVideo {
-    return MovieVideo(
-        id = this.id,
-        videos = this.videos?.map { it.toDomain() }
-    )
-}*/
-
-fun ErrorResponseDto.toDomain(): ErrorResponse {
-    return ErrorResponse(
-        success = this.success,
-        statusCode = this.statusCode,
-        statusMessage = this.statusMessage
-    )
-}
