@@ -1,6 +1,7 @@
 package com.vickbt.shared.presentation.ui.screens.home
 
 import com.vickbt.shared.domain.repositories.MoviesRepository
+import com.vickbt.shared.domain.utils.Enums.MovieCategories
 import com.vickbt.shared.utils.HomeUiState
 import com.vickbt.shared.utils.SearchUiState
 import com.vickbt.shared.utils.isLoading
@@ -12,12 +13,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
-class HomeViewModel constructor(private val moviesRepository: MoviesRepository) : KoinComponent {
+class HomeViewModel(private val moviesRepository: MoviesRepository) : KoinComponent {
 
     private val _homeUiState = MutableStateFlow(HomeUiState(isLoading = true))
     val homeUiState = _homeUiState.asStateFlow()
@@ -34,48 +34,20 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
         _homeUiState.update { it.copy(isLoading = false, error = exception.message) }
     }
 
-    fun fetchNowPlayingMovies() = viewModelScope.launch(coroutineExceptionHandler) {
-        moviesRepository.fetchNowPlayingMovies().collectLatest { moviesResult ->
-            moviesResult.isLoading { isLoading ->
+    fun fetchHomePage() = viewModelScope.launch(coroutineExceptionHandler) {
+        moviesRepository.fetchHomePage().collect { results ->
+            results.isLoading { isLoading ->
                 _homeUiState.update { it.copy(isLoading = isLoading) }
             }.onSuccess { movies ->
-                _homeUiState.update { it.copy(nowPlayingMovies = movies?.take(5)) }
-            }.onFailure { error ->
-                _homeUiState.update { it.copy(error = error.message) }
-            }
-        }
-    }
-
-    fun fetchTrendingMovies() = viewModelScope.launch(coroutineExceptionHandler) {
-        moviesRepository.fetchTrendingMovies().collectLatest { moviesResult ->
-            moviesResult.isLoading { isLoading ->
-                _homeUiState.update { it.copy(isLoading = isLoading) }
-            }.onSuccess { movies ->
-                _homeUiState.update { it.copy(trendingMovies = movies) }
-            }.onFailure { error ->
-                _homeUiState.update { it.copy(error = error.message) }
-            }
-        }
-    }
-
-    fun fetchPopularMovies() = viewModelScope.launch(coroutineExceptionHandler) {
-        moviesRepository.fetchPopularMovies().collectLatest { moviesResult ->
-            moviesResult.isLoading { isLoading ->
-                _homeUiState.update { it.copy(isLoading = isLoading) }
-            }.onSuccess { movies ->
-                _homeUiState.update { it.copy(popularMovies = movies) }
-            }.onFailure { error ->
-                _homeUiState.update { it.copy(error = error.message) }
-            }
-        }
-    }
-
-    fun fetchUpcomingMovies() = viewModelScope.launch(coroutineExceptionHandler) {
-        moviesRepository.fetchUpcomingMovies().collectLatest { moviesResult ->
-            moviesResult.isLoading { isLoading ->
-                _homeUiState.update { it.copy(isLoading = isLoading) }
-            }.onSuccess { movies ->
-                _homeUiState.update { it.copy(upcomingMovies = movies) }
+                _homeUiState.update {
+                    it.copy(
+                        featureMovies = movies[MovieCategories.FEATURED],
+                        trendingMovies = movies[MovieCategories.TRENDING_MOVIES],
+                        trendingTvShows = movies[MovieCategories.TRENDING_TV_SHOW],
+                        latestMovies = movies[MovieCategories.LATEST_MOVIE],
+                        latestTvShows = movies[MovieCategories.LATEST_TV_SHOW]
+                    )
+                }
             }.onFailure { error ->
                 _homeUiState.update { it.copy(error = error.message) }
             }
@@ -83,7 +55,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
     }
 
     fun searchMovie(movieName: String) = viewModelScope.launch(coroutineExceptionHandler) {
-        moviesRepository.searchMovie(movieName = movieName).collectLatest { moviesResult ->
+        /*moviesRepository.searchMovie(movieName = movieName).collectLatest { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _searchUiState.update { it.copy(isLoading = isLoading) }
             }.onSuccess { movies ->
@@ -91,7 +63,7 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
             }.onFailure { error ->
                 _searchUiState.update { it.copy(error = error.message) }
             }
-        }
+        }*/
     }
 
     fun updateSearchQuery(searchQuery: String) {

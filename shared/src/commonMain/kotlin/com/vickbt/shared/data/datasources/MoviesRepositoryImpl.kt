@@ -4,7 +4,9 @@ import com.vickbt.shared.data.mappers.toDomain
 import com.vickbt.shared.data.network.utils.safeApiCall
 import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.domain.repositories.MoviesRepository
+import com.vickbt.shared.domain.utils.Enums.MovieCategories
 import com.vickbt.shared.utils.ResultState
+import com.vickbt.shared.utils.capitalizeEachWord
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -16,11 +18,14 @@ class MoviesRepositoryImpl(
     private val httpClient: HttpClient
 ) : MoviesRepository {
 
-    override suspend fun fetchHomePage(): Flow<ResultState<Map<String, List<Movie?>>>> {
+    override suspend fun fetchHomePage(): Flow<ResultState<Map<MovieCategories, List<Movie?>>>> {
         return flowOf(
             safeApiCall {
                 val response = httpClient.get("/home").body<CategoryDto>()
-                mapOf<String, List<Movie?>>(response.name to response.list.map { it.toDomain() })
+                mapOf<MovieCategories, List<Movie?>>(
+                    MovieCategories.valueOf(
+                        response.name.replace(" ", "_").capitalizeEachWord()
+                    ) to response.list.map { it.toDomain() })
             }
         )
     }

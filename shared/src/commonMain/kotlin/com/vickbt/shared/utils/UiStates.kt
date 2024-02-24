@@ -10,11 +10,11 @@ data class MainUiState(
 data class HomeUiState(
     val isLoading: Boolean = true,
     val error: String? = null,
-    val featureMovies: List<Movie>? = emptyList(),
-    val trendingMovies: List<Movie>? = emptyList(),
-    val trendingTvShows: List<Movie>? = emptyList(),
-    val latestMovies: List<Movie>? = emptyList(),
-    val latestTvShows: List<Movie>? = emptyList(),
+    val featureMovies: List<Movie?>? = emptyList(),
+    val trendingMovies: List<Movie?>? = emptyList(),
+    val trendingTvShows: List<Movie?>? = emptyList(),
+    val latestMovies: List<Movie?>? = emptyList(),
+    val latestTvShows: List<Movie?>? = emptyList(),
 )
 
 data class DetailsUiState(
