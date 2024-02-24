@@ -10,7 +10,7 @@ plugins {
     alias(libs.plugins.buildKonfig)
     alias(libs.plugins.compose)
 
-    alias(libs.plugins.sqlDelight)
+    // alias(libs.plugins.sqlDelight)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -74,7 +74,7 @@ kotlin {
             api(libs.preCompose)
             api(libs.preCompose.viewmodel)
 
-            implementation(libs.sqlDelight.coroutine)
+            // implementation(libs.sqlDelight.coroutine)
 
             // implementation(libs.material.windowSizeClass)
         }
@@ -138,11 +138,11 @@ buildkonfig {
     }
 }
 
-sqldelight {
+/*sqldelight {
     databases {
         create("AppDatabase") {
             packageName.set("com.vickbt.shared.data.cache.sqldelight")
             srcDirs.setFrom("src/commonMain/kotlin")
         }
     }
-}
+}*/
