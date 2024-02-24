@@ -132,8 +132,8 @@ buildkonfig {
     defaultConfigs {
         buildConfigField(
             STRING,
-            "API_KEY",
-            gradleLocalProperties(rootDir).getProperty("api_key") ?: ""
+            "BASE_URL",
+            gradleLocalProperties(rootDir).getProperty("base_url") ?: ""
         )
     }
 }

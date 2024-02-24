@@ -1,5 +1,6 @@
 package com.vickbt.shared.di
 
+import com.vickbt.shared.BuildKonfig
 import com.vickbt.shared.data.datasources.FavoritesRepositoryImpl
 import com.vickbt.shared.data.datasources.MovieDetailsRepositoryImpl
 import com.vickbt.shared.data.datasources.MoviesRepositoryImpl
@@ -44,7 +45,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
             defaultRequest {
                 url {
                     protocol = URLProtocol.HTTP
-                    host = BASE_URL
+                    host = BuildKonfig.BASE_URL
                     // parameters.append("api_key", BuildKonfig.API_KEY)
                 }
             }
