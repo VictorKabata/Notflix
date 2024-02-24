@@ -1,5 +1,8 @@
 package com.vickbt.shared.utils
 
+import com.vickbt.shared.domain.models.Movie
+import com.vickbt.shared.domain.models.People
+
 data class MainUiState(
     val selectedTheme: Int? = 0
 )
@@ -7,17 +10,18 @@ data class MainUiState(
 data class HomeUiState(
     val isLoading: Boolean = true,
     val error: String? = null,
-    val nowPlayingMovies: List<Movie>? = emptyList(),
+    val featureMovies: List<Movie>? = emptyList(),
     val trendingMovies: List<Movie>? = emptyList(),
-    val popularMovies: List<Movie>? = emptyList(),
-    val upcomingMovies: List<Movie>? = emptyList(),
+    val trendingTvShows: List<Movie>? = emptyList(),
+    val latestMovies: List<Movie>? = emptyList(),
+    val latestTvShows: List<Movie>? = emptyList(),
 )
 
 data class DetailsUiState(
     val isLoading: Boolean = true,
     val error: String? = null,
-    val movieDetails: MovieDetails? = null,
-    val movieCast: List<Actor>? = emptyList(),
+    val movieDetails: Movie? = null,
+    val movieCast: List<People>? = emptyList(),
     val similarMovies: List<Movie>? = emptyList(),
     val isFavorite: Boolean? = false
 )
@@ -31,7 +35,7 @@ data class SearchUiState(
 data class FavouritesUiState(
     val isLoading: Boolean = true,
     val error: String? = null,
-    val favoriteMovies: List<MovieDetails>? = emptyList()
+    val favoriteMovies: List<Movie>? = emptyList()
 )
 
 data class SettingsUiState(
