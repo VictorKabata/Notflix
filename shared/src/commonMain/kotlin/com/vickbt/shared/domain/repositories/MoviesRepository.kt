@@ -1,6 +1,7 @@
 package com.vickbt.shared.domain.repositories
 
 import com.vickbt.shared.domain.models.Movie
+import com.vickbt.shared.domain.utils.Constants.STARTING_PAGE_INDEX
 import com.vickbt.shared.domain.utils.Enums.MovieCategories
 import com.vickbt.shared.utils.ResultState
 import kotlinx.coroutines.flow.Flow
@@ -11,8 +12,8 @@ interface MoviesRepository {
     suspend fun fetchHomePage(): Flow<ResultState<List<Map<MovieCategories, List<Movie?>>>>>
 
     // Search movie from network source
-    /*suspend fun searchMovie(
+    suspend fun searchMovie(
         movieName: String,
         page: Int = STARTING_PAGE_INDEX
-    ): Flow<ResultState<List<Movie>?>>*/
+    ): Flow<ResultState<List<Movie>?>>
 }

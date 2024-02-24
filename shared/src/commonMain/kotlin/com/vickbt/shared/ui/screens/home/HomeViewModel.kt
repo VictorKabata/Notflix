@@ -55,7 +55,7 @@ class HomeViewModel(private val moviesRepository: MoviesRepository) : KoinCompon
     }
 
     fun searchMovie(movieName: String) = viewModelScope.launch(coroutineExceptionHandler) {
-        /*moviesRepository.searchMovie(movieName = movieName).collectLatest { moviesResult ->
+        moviesRepository.searchMovie(movieName = movieName).collect { moviesResult ->
             moviesResult.isLoading { isLoading ->
                 _searchUiState.update { it.copy(isLoading = isLoading) }
             }.onSuccess { movies ->
@@ -63,7 +63,7 @@ class HomeViewModel(private val moviesRepository: MoviesRepository) : KoinCompon
             }.onFailure { error ->
                 _searchUiState.update { it.copy(error = error.message) }
             }
-        }*/
+        }
     }
 
     fun updateSearchQuery(searchQuery: String) {

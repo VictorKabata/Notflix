@@ -9,7 +9,9 @@ import com.vickbt.shared.utils.ResultState
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.request.parameter
 import io.victorkabata.models.CategoryDto
+import io.victorkabata.models.MovieDto
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
@@ -31,19 +33,19 @@ class MoviesRepositoryImpl(
         )
     }
 
-    /*override suspend fun searchMovie(
+    override suspend fun searchMovie(
         movieName: String,
         page: Int
     ): Flow<ResultState<List<Movie>?>> {
         return flowOf(
             safeApiCall {
-                val response = httpClient.get(urlString = "search/movie") {
-                    parameter("query", movieName)
+                val response = httpClient.get(urlString = "search") {
+                    parameter("name", movieName)
                     parameter("page", page)
-                }.body<MovieResultsDto>()
+                }.body<List<MovieDto>>()
 
-                response.movies?.map { it.toDomain() }
+                response.map { it.toDomain() }
             }
         )
-    }*/
+    }
 }
