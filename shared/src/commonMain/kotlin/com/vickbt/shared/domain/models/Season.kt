@@ -1,9 +1,5 @@
 package com.vickbt.shared.domain.models
 
-import com.vickbt.shared.domain.models.Episode
-import com.vickbt.shared.domain.models.Movie
-import kotlinx.serialization.Serializable
-
 class Season(
     val id: String,
     val number: Int,

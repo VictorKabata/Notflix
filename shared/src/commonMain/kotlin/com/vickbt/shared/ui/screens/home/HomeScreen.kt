@@ -295,7 +295,6 @@ fun HomeScreen(
                     //region Latest TV Show
                     homeUiState.latestTvShows?.let {
                         Column(modifier = Modifier.padding(bottom = 90.dp)) {
-
                             SectionSeparator(
                                 modifier = Modifier
                                     .padding(start = 16.dp, end = 16.dp, top = 12.dp)

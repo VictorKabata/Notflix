@@ -6,7 +6,6 @@ import com.vickbt.shared.utils.DetailsUiState
 import com.vickbt.shared.utils.isLoading
 import com.vickbt.shared.utils.onFailure
 import com.vickbt.shared.utils.onSuccess
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -39,8 +39,6 @@ import com.vickbt.shared.ui.components.ratingbar.RatingBar
 import com.vickbt.shared.ui.components.ratingbar.RatingBarStyle
 import com.vickbt.shared.ui.components.ratingbar.StepSize
 import com.vickbt.shared.utils.commonImageLoader
-import com.vickbt.shared.utils.getRating
-import com.vickbt.shared.utils.loadImage
 
 @Composable
 fun MovieCardPager(
@@ -55,7 +53,7 @@ fun MovieCardPager(
         Box {
             //region Movie Cover Image
             commonImageLoader {
-                val painter = rememberImagePainter(movie?.banner?:"")
+                val painter = rememberImagePainter(movie?.banner ?: "")
 
                 Image(
                     modifier = Modifier

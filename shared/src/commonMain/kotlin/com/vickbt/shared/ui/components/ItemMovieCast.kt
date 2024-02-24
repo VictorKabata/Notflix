@@ -21,7 +21,6 @@ import com.seiko.imageloader.rememberImagePainter
 import com.vickbt.shared.domain.models.People
 import com.vickbt.shared.ui.theme.TextSecondary
 import com.vickbt.shared.utils.commonImageLoader
-import com.vickbt.shared.utils.loadImage
 
 @Composable
 fun ItemMovieCast(modifier: Modifier = Modifier, people: People) {

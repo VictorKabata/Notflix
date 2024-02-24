@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.flowOf
 
 class MovieDetailsRepositoryImpl(
     private val httpClient: HttpClient,
-    //private val favoriteMovieDao: FavoriteMovieDao
+    // private val favoriteMovieDao: FavoriteMovieDao
 ) : MovieDetailsRepository {
 
     override suspend fun fetchMovieDetails(movieId: Int): Flow<ResultState<Movie>> {

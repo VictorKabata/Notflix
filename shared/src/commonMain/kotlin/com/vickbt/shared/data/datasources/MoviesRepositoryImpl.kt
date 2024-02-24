@@ -27,7 +27,8 @@ class MoviesRepositoryImpl(
                     mapOf<MovieCategories, List<Movie?>>(
                         MovieCategories.valueOf(
                             it.name.uppercase().replace(" ", "_")
-                        ) to it.list.map { it.toDomain() })
+                        ) to it.list.map { it.toDomain() }
+                    )
                 }
             }
         )

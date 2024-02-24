@@ -73,4 +73,3 @@ fun PeopleDto.toDomain(): People {
 fun ErrorResponseDto.toDomain(): ErrorResponse {
     return ErrorResponse(errorCode = this.errorCode, errorMessage = this.errorMessage)
 }
-

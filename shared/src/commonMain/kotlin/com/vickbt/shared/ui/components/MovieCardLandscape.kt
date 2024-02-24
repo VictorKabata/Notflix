@@ -38,11 +38,7 @@ import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.ui.components.ratingbar.RatingBar
 import com.vickbt.shared.ui.components.ratingbar.RatingBarStyle
 import com.vickbt.shared.ui.components.ratingbar.StepSize
-import com.vickbt.shared.utils.capitalizeEachWord
 import com.vickbt.shared.utils.commonImageLoader
-import com.vickbt.shared.utils.getRating
-import com.vickbt.shared.utils.getReleaseDate
-import com.vickbt.shared.utils.loadImage
 
 @Composable
 fun MovieCardLandscape(

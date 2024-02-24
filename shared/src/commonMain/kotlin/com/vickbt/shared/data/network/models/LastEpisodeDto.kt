@@ -4,5 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class LastEpisodeDto(
-    val season: Int, val episode: Int
+    val season: Int,
+    val episode: Int
 )

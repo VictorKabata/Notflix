@@ -1,5 +1,6 @@
 package com.vickbt.shared.domain.models
 
 data class LastEpisode(
-    val season: Int, val episode: Int
+    val season: Int,
+    val episode: Int
 )

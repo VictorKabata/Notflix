@@ -45,7 +45,6 @@ import com.vickbt.shared.ui.components.collapsingToolbar.CollapsingToolbarScaffo
 import com.vickbt.shared.utils.DetailsUiState
 import com.vickbt.shared.utils.commonImageLoader
 import com.vickbt.shared.utils.getMovieDuration
-import com.vickbt.shared.utils.loadImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

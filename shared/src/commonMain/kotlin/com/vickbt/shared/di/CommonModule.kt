@@ -74,7 +74,6 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
         }
     }
 
-
     single<MoviesRepository> { MoviesRepositoryImpl(httpClient = get()) }
     single<MovieDetailsRepository> {
         MovieDetailsRepositoryImpl(httpClient = get())

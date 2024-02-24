@@ -1,7 +1,6 @@
 package com.vickbt.shared.utils
 
 import com.vickbt.shared.domain.models.Movie
-import com.vickbt.shared.domain.models.People
 
 data class MainUiState(
     val selectedTheme: Int? = 0
