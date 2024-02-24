@@ -1,27 +1,14 @@
 package com.vickbt.shared.data.datasources
 
-import com.vickbt.shared.data.cache.sqldelight.daos.FavoriteMovieDao
-import com.vickbt.shared.data.mappers.toDomain
-import com.vickbt.shared.data.network.models.CastDto
-import com.vickbt.shared.data.network.models.MovieDetailsDto
-import com.vickbt.shared.data.network.models.MovieResultsDto
-import com.vickbt.shared.data.network.utils.safeApiCall
 import com.vickbt.shared.domain.repositories.MovieDetailsRepository
-import com.vickbt.shared.utils.ResultState
-import com.vickbt.shared.utils.toBoolean
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 
 class MovieDetailsRepositoryImpl(
     private val httpClient: HttpClient,
-    private val favoriteMovieDao: FavoriteMovieDao
+    //private val favoriteMovieDao: FavoriteMovieDao
 ) : MovieDetailsRepository {
 
-    override suspend fun fetchMovieDetails(movieId: Int): Flow<ResultState<MovieDetails>> {
+    /*override suspend fun fetchMovieDetails(movieId: Int): Flow<ResultState<MovieDetails>> {
         val isMovieCached = isMovieFavorite(movieId = movieId)
 
         return if (isMovieCached == true) {
@@ -81,5 +68,5 @@ class MovieDetailsRepositoryImpl(
 
     override suspend fun isMovieFavorite(movieId: Int): Boolean? {
         return favoriteMovieDao.isMovieFavorite(movieId = movieId)?.toBoolean()
-    }
+    }*/
 }

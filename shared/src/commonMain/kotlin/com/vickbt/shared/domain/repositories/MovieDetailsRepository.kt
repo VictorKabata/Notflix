@@ -9,16 +9,16 @@ import kotlinx.coroutines.flow.Flow
 interface MovieDetailsRepository {
 
     /**Fetch movie details from network source*/
-    suspend fun fetchMovieDetails(movieId: Int): Flow<ResultState<Movie>>
+    // suspend fun fetchMovieDetails(movieId: Int): Flow<ResultState<Movie>>
 
     /**Fetch movie cast from network source*/
-    suspend fun fetchMovieCast(movieId: Int): Flow<ResultState<People>>
+    // suspend fun fetchMovieCast(movieId: Int): Flow<ResultState<People>>
 
     /** Fetches similar movies from network source*/
-    suspend fun fetchSimilarMovies(
+    /*suspend fun fetchSimilarMovies(
         movieId: Int,
         page: Int = STARTING_PAGE_INDEX
-    ): Flow<ResultState<List<Movie>?>>
+    ): Flow<ResultState<List<Movie>?>>*/
 
     /**Save movie details to local cache*/
     // suspend fun saveFavoriteMovie(movie: Movie)

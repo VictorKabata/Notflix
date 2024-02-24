@@ -12,8 +12,8 @@ interface MoviesRepository {
     suspend fun fetchHomePage(): Flow<ResultState<Map<String, Category>?>>
 
     // Search movie from network source
-    suspend fun searchMovie(
+    /*suspend fun searchMovie(
         movieName: String,
         page: Int = STARTING_PAGE_INDEX
-    ): Flow<ResultState<List<Movie>?>>
+    ): Flow<ResultState<List<Movie>?>>*/
 }
