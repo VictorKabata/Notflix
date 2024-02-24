@@ -43,7 +43,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
 
             defaultRequest {
                 url {
-                    protocol = URLProtocol.HTTPS
+                    protocol = URLProtocol.HTTP
                     host = BASE_URL
                     // parameters.append("api_key", BuildKonfig.API_KEY)
                 }

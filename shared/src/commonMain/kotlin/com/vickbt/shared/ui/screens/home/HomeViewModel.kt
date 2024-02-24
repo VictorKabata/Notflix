@@ -41,11 +41,11 @@ class HomeViewModel(private val moviesRepository: MoviesRepository) : KoinCompon
             }.onSuccess { movies ->
                 _homeUiState.update {
                     it.copy(
-                        featureMovies = movies[MovieCategories.FEATURED],
-                        trendingMovies = movies[MovieCategories.TRENDING_MOVIES],
-                        trendingTvShows = movies[MovieCategories.TRENDING_TV_SHOW],
-                        latestMovies = movies[MovieCategories.LATEST_MOVIE],
-                        latestTvShows = movies[MovieCategories.LATEST_TV_SHOW]
+                        featureMovies = movies[0][MovieCategories.FEATURED],
+                        trendingMovies = movies[1][MovieCategories.TRENDING_MOVIES],
+                        trendingTvShows = movies[2][MovieCategories.TRENDING_TV_SHOWS],
+                        latestMovies = movies[3][MovieCategories.LATEST_MOVIES],
+                        latestTvShows = movies[4][MovieCategories.LATEST_TV_SHOWS]
                     )
                 }
             }.onFailure { error ->

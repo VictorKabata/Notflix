@@ -265,30 +265,28 @@ fun HomeScreen(
 
                     //region Latest Movies
                     homeUiState.latestMovies?.let {
-                        Column(modifier = Modifier.padding(bottom = 90.dp)) {
-                            SectionSeparator(
-                                modifier = Modifier
-                                    .padding(start = 16.dp, end = 16.dp, top = 12.dp)
-                                    .fillMaxWidth()
-                                    .wrapContentHeight(),
-                                sectionTitle = "Latest Movies"
-                            )
+                        SectionSeparator(
+                            modifier = Modifier
+                                .padding(start = 16.dp, end = 16.dp, top = 12.dp)
+                                .fillMaxWidth()
+                                .wrapContentHeight(),
+                            sectionTitle = "Latest Movies"
+                        )
 
-                            Spacer(modifier = Modifier.height(8.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
 
-                            LazyRow(
-                                modifier = Modifier.wrapContentHeight(),
-                                contentPadding = PaddingValues(horizontal = 16.dp),
-                                horizontalArrangement = Arrangement.spacedBy(10.dp),
-                            ) {
-                                items(items = it) { item ->
-                                    MovieCardPortraitCompact(
-                                        movie = item,
-                                        onItemClick = { movie ->
-                                            navigator.navigate("/details/${movie?.id}")
-                                        }
-                                    )
-                                }
+                        LazyRow(
+                            modifier = Modifier.wrapContentHeight(),
+                            contentPadding = PaddingValues(horizontal = 16.dp),
+                            horizontalArrangement = Arrangement.spacedBy(10.dp),
+                        ) {
+                            items(items = it) { item ->
+                                MovieCardPortraitCompact(
+                                    movie = item,
+                                    onItemClick = { movie ->
+                                        navigator.navigate("/details/${movie?.id}")
+                                    }
+                                )
                             }
                         }
                     }
@@ -296,31 +294,34 @@ fun HomeScreen(
 
                     //region Latest TV Show
                     homeUiState.latestTvShows?.let {
-                        SectionSeparator(
-                            modifier = Modifier
-                                .padding(start = 16.dp, end = 16.dp, top = 12.dp)
-                                .fillMaxWidth()
-                                .wrapContentHeight(),
-                            sectionTitle = "Latest TV Show"
-                        )
+                        Column(modifier = Modifier.padding(bottom = 90.dp)) {
 
-                        Spacer(modifier = Modifier.height(8.dp))
+                            SectionSeparator(
+                                modifier = Modifier
+                                    .padding(start = 16.dp, end = 16.dp, top = 12.dp)
+                                    .fillMaxWidth()
+                                    .wrapContentHeight(),
+                                sectionTitle = "Latest TV Show"
+                            )
 
-                        LazyRow(
-                            contentPadding = PaddingValues(horizontal = 16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(14.dp),
-                            modifier = Modifier.wrapContentHeight()
-                        ) {
-                            items(items = it) { item ->
-                                MovieCardLandscape(
-                                    modifier = Modifier
-                                        .width(300.dp)
-                                        .height(245.dp),
-                                    movie = item,
-                                    onClickItem = { movie ->
-                                        navigator.navigate("/details/${movie?.id}")
-                                    }
-                                )
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            LazyRow(
+                                contentPadding = PaddingValues(horizontal = 16.dp),
+                                horizontalArrangement = Arrangement.spacedBy(14.dp),
+                                modifier = Modifier.wrapContentHeight()
+                            ) {
+                                items(items = it) { item ->
+                                    MovieCardLandscape(
+                                        modifier = Modifier
+                                            .width(300.dp)
+                                            .height(245.dp),
+                                        movie = item,
+                                        onClickItem = { movie ->
+                                            navigator.navigate("/details/${movie?.id}")
+                                        }
+                                    )
+                                }
                             }
                         }
                     }
