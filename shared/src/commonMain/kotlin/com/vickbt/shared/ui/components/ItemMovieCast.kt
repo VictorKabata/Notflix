@@ -18,7 +18,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
-import com.vickbt.shared.domain.models.Actor
 import com.vickbt.shared.ui.theme.TextSecondary
 import com.vickbt.shared.utils.commonImageLoader
 import com.vickbt.shared.utils.loadImage

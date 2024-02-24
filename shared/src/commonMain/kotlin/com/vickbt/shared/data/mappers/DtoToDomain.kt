@@ -6,12 +6,6 @@ import com.vickbt.shared.data.network.models.ErrorResponseDto
 import com.vickbt.shared.data.network.models.MovieDetailsDto
 import com.vickbt.shared.data.network.models.MovieDto
 import com.vickbt.shared.data.network.models.VideoDto
-import com.vickbt.shared.domain.models.Actor
-import com.vickbt.shared.domain.models.Cast
-import com.vickbt.shared.domain.models.ErrorResponse
-import com.vickbt.shared.domain.models.Movie
-import com.vickbt.shared.domain.models.MovieDetails
-import com.vickbt.shared.domain.models.Video
 
 fun MovieDto.toDomain(): Movie {
     return Movie(

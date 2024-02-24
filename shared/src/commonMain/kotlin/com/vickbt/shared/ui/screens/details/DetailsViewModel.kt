@@ -1,6 +1,5 @@
 package com.vickbt.shared.ui.screens.details
 
-import com.vickbt.shared.domain.models.MovieDetails
 import com.vickbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickbt.shared.utils.DetailsUiState
 import com.vickbt.shared.utils.isLoading

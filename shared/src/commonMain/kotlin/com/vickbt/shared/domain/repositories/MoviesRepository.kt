@@ -1,6 +1,5 @@
 package com.vickbt.shared.domain.repositories
 
-import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.domain.utils.Constants.STARTING_PAGE_INDEX
 import com.vickbt.shared.utils.ResultState
 import kotlinx.coroutines.flow.Flow

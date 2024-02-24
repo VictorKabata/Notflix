@@ -1,6 +1,5 @@
 package com.vickbt.shared.domain.repositories
 
-import com.vickbt.shared.domain.models.MovieDetails
 import kotlinx.coroutines.flow.Flow
 
 interface FavoritesRepository {

@@ -1,37 +1,20 @@
 package com.vickbt.shared.domain.models
 
-data class Movie(
-    val adult: Boolean? = null,
-
-    val backdropPath: String? = null,
-
-    val id: Int? = null,
-
-    val originalLanguage: String? = null,
-
-    val originalTitle: String? = null,
-
-    val overview: String? = null,
-
-    val popularity: Double? = null,
-
-    val posterPath: String? = null,
-
-    val releaseDate: String? = null,
-
-    val title: String? = null,
-
-    val video: Boolean? = null,
-
-    val voteAverage: Double? = null,
-
-    val voteCount: Int? = null,
-
-    val category: String? = null,
-
-    val isFavorite: Boolean? = null,
-
-    val cacheId: Int? = 0,
-
-    val mediaType: String? = null
+class Movie(
+    val id: String,
+    val title: String,
+    val overview: String = "",
+    val released: String? = null,
+    val runtime: Int? = null,
+    val youtubeTrailerId: String? = null,
+    val quality: String? = null,
+    val rating: Double? = null,
+    val poster: String? = null,
+    val banner: String? = null,
+    val seasons: List<Season> = listOf(),
+    val genres: List<Genre> = listOf(),
+    val directors: List<People> = listOf(),
+    val cast: List<People> = listOf(),
+    val recommendations: List<Movie> = listOf(),
+    val category: String
 )

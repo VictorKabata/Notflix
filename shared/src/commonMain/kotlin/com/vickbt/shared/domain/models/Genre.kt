@@ -1,8 +1,7 @@
 package com.vickbt.shared.domain.models
 
-data class Genre(
-
-    val id: Int? = null,
-
-    val name: String? = null
+class Genre(
+    val id: String,
+    val name: String,
+    val shows: List<Movie> = listOf(),
 )

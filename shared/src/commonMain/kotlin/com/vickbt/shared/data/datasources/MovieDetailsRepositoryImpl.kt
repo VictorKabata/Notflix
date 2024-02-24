@@ -6,9 +6,6 @@ import com.vickbt.shared.data.network.models.CastDto
 import com.vickbt.shared.data.network.models.MovieDetailsDto
 import com.vickbt.shared.data.network.models.MovieResultsDto
 import com.vickbt.shared.data.network.utils.safeApiCall
-import com.vickbt.shared.domain.models.Cast
-import com.vickbt.shared.domain.models.Movie
-import com.vickbt.shared.domain.models.MovieDetails
 import com.vickbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickbt.shared.utils.ResultState
 import com.vickbt.shared.utils.toBoolean

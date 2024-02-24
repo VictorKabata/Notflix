@@ -3,7 +3,6 @@ package com.vickbt.shared.data.cache.sqldelight.daos
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import com.vickbt.shared.data.cache.sqldelight.AppDatabase
-import com.vickbt.shared.domain.models.MovieDetails
 import com.vickbt.shared.utils.DatabaseDriverFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

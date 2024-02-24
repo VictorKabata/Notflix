@@ -3,7 +3,6 @@ package com.vickbt.shared.data.datasources
 import com.vickbt.shared.data.mappers.toDomain
 import com.vickbt.shared.data.network.models.MovieResultsDto
 import com.vickbt.shared.data.network.utils.safeApiCall
-import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.domain.repositories.MoviesRepository
 import com.vickbt.shared.utils.ResultState
 import io.ktor.client.HttpClient
