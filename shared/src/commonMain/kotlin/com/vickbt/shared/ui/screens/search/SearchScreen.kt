@@ -38,7 +38,7 @@ fun SearchScreen(
                 textAlign = TextAlign.Center
             )
         } else {
-            searchUiState.movieResults?.let { movieResults ->
+            /*searchUiState.movieResults?.let { movieResults ->
                 LazyVerticalGrid(
                     modifier = Modifier.fillMaxSize()
                         .padding(vertical = 12.dp, horizontal = 16.dp)
@@ -61,7 +61,7 @@ fun SearchScreen(
                         )
                     }
                 }
-            }
+            }*/
         }
     }
 }

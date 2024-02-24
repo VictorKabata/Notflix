@@ -29,8 +29,8 @@ class FavoritesViewModel(
     }
 
     fun getFavoriteMovie() = viewModelScope.launch(coroutineExceptionHandler) {
-        favoritesRepository.getFavouriteMovies().collect { favoriteMoviesResult ->
+        /*favoritesRepository.getFavouriteMovies().collect { favoriteMoviesResult ->
             _favoriteMoviesState.update { it.copy(favoriteMovies = favoriteMoviesResult) }
-        }
+        }*/
     }
 }
