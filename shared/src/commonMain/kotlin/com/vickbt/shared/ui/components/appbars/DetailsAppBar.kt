@@ -79,7 +79,7 @@ fun DetailsAppBar(
             .graphicsLayer { alpha = scrollProgress }
     ) {
         commonImageLoader {
-            val painter = rememberImagePainter(movieDetails?.banner?.loadImage() ?: "")
+            val painter = rememberImagePainter(movieDetails?.banner ?: "")
 
             Image(
                 modifier = Modifier

@@ -50,6 +50,8 @@ fun DetailsScreen(
 
     val movieDetailsState = viewModel.movieDetailsState.collectAsState().value
 
+    Napier.e("Movie Details: $movieDetailsState")
+
     val scrollState = rememberScrollState()
     val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
 
@@ -122,7 +124,7 @@ fun DetailsScreen(
                     //endregion
 
                     //region Movie Cast
-                    if (!movieDetailsState.movieCast.isNullOrEmpty()) {
+                    if (!movieDetailsState.movieDetails?.cast.isNullOrEmpty()) {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = "Cast",
@@ -134,7 +136,9 @@ fun DetailsScreen(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            items(items = movieDetailsState.movieCast) { item ->
+                            items(
+                                items = movieDetailsState.movieDetails?.cast ?: emptyList()
+                            ) { item ->
                                 ItemMovieCast(modifier = Modifier, people = item)
                             }
                         }
@@ -142,10 +146,10 @@ fun DetailsScreen(
                     //endregion
 
                     //region Similar Movies
-                    if (!movieDetailsState.recommendedMovies.isNullOrEmpty()) {
+                    if (!movieDetailsState.movieDetails?.recommendations.isNullOrEmpty()) {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
-                            text = "Similar Movies",
+                            text = "Recommended Movies",
                             style = MaterialTheme.typography.titleMedium,
                             fontSize = 20.sp,
                             color = MaterialTheme.colorScheme.onSurface
@@ -155,7 +159,10 @@ fun DetailsScreen(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            items(items = movieDetailsState.recommendedMovies) { movie ->
+                            items(
+                                items = movieDetailsState.movieDetails?.recommendations
+                                    ?: emptyList()
+                            ) { movie ->
                                 MovieCardPortrait(movie = movie, onItemClick = {})
                             }
                         }

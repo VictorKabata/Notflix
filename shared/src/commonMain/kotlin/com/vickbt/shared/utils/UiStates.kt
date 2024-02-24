@@ -21,8 +21,6 @@ data class DetailsUiState(
     val isLoading: Boolean = true,
     val error: String? = null,
     val movieDetails: Movie? = null,
-    val movieCast: List<People>? = emptyList(),
-    val recommendedMovies: List<Movie>? = emptyList(),
     val isFavorite: Boolean? = false
 )
 
