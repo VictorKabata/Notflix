@@ -2,6 +2,7 @@ package com.vickbt.shared.data.network.utils
 
 import com.vickbt.shared.data.mappers.toDomain
 import com.vickbt.shared.data.network.models.ErrorResponseDto
+import com.vickbt.shared.domain.models.ErrorResponse
 import com.vickbt.shared.utils.ResultState
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
@@ -42,8 +43,7 @@ internal suspend fun parseNetworkError(
     exception: Exception? = null
 ): Exception {
     throw errorResponse?.body<ErrorResponseDto>()?.toDomain() ?: ErrorResponse(
-        success = false,
-        statusCode = 0,
-        statusMessage = exception?.message ?: "Error"
+        errorCode = 0,
+        errorMessage = exception?.message ?: "Error"
     )
 }

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface MoviesRepository {
 
     /** Fetch Now Playing movies from data source*/
-    suspend fun fetchHomePage(): Flow<ResultState<Map<String, Category>?>>
+    suspend fun fetchHomePage(): Flow<ResultState<Map<String, List<Movie?>>>>
 
     // Search movie from network source
     /*suspend fun searchMovie(

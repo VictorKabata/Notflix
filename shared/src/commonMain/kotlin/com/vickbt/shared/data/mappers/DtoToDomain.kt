@@ -1,6 +1,8 @@
 package com.vickbt.shared.data.mappers
 
+import com.vickbt.shared.data.network.models.ErrorResponseDto
 import com.vickbt.shared.domain.models.Episode
+import com.vickbt.shared.domain.models.ErrorResponse
 import com.vickbt.shared.domain.models.Genre
 import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.domain.models.People
@@ -66,5 +68,9 @@ fun PeopleDto.toDomain(): People {
         image = this.image,
         filmography = this.filmography.map { it.toDomain() }
     )
+}
+
+fun ErrorResponseDto.toDomain(): ErrorResponse {
+    return ErrorResponse(errorCode = this.errorCode, errorMessage = this.errorMessage)
 }
 

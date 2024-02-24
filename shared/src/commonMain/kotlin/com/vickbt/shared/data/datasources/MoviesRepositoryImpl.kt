@@ -1,25 +1,28 @@
 package com.vickbt.shared.data.datasources
 
 import com.vickbt.shared.data.mappers.toDomain
-import com.vickbt.shared.data.network.models.MovieResultsDto
 import com.vickbt.shared.data.network.utils.safeApiCall
-import com.vickbt.shared.domain.models.Category
 import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.domain.repositories.MoviesRepository
 import com.vickbt.shared.utils.ResultState
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
-import io.ktor.client.request.parameter
+import io.victorkabata.models.CategoryDto
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-class MoviesRepositoryImpl constructor(
+class MoviesRepositoryImpl(
     private val httpClient: HttpClient
 ) : MoviesRepository {
 
-    override suspend fun fetchHomePage(): Flow<ResultState<Map<String, Category>?>> {
-        TODO("Not yet implemented")
+    override suspend fun fetchHomePage(): Flow<ResultState<Map<String, List<Movie?>>>> {
+        return flowOf(
+            safeApiCall {
+                val response = httpClient.get("/home").body<CategoryDto>()
+                mapOf<String, List<Movie?>>(response.name to response.list.map { it.toDomain() })
+            }
+        )
     }
 
     /*override suspend fun searchMovie(
