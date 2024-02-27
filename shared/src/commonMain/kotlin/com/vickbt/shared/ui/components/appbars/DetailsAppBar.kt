@@ -6,17 +6,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.rounded.Share
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -43,9 +46,13 @@ import com.seiko.imageloader.rememberImagePainter
 import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.domain.utils.Enums
 import com.vickbt.shared.ui.components.collapsingToolbar.CollapsingToolbarScaffoldState
+import com.vickbt.shared.ui.components.ratingbar.RatingBar
+import com.vickbt.shared.ui.components.ratingbar.RatingBarStyle
+import com.vickbt.shared.ui.components.ratingbar.StepSize
 import com.vickbt.shared.utils.DetailsUiState
 import com.vickbt.shared.utils.commonImageLoader
 import com.vickbt.shared.utils.getMovieDuration
+import com.vickbt.shared.utils.getRating
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -128,18 +135,43 @@ fun DetailsAppBar(
                 lineHeight = 30.sp
             )
 
-            Text(
-                modifier = Modifier,
-                text = if (movieDetails?.category == Enums.Categories.MOVIE.name) {
-                    movieDetails?.runtime?.getMovieDuration()
-                    ?: ""
-                } else {
-                    if (numberOfSeasons == 1) "$numberOfSeasons season" else "$numberOfSeasons seasons"
-                },
-                color = dominantTextColor,
-                style = MaterialTheme.typography.labelMedium,
-                fontSize = 14.sp
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(1.dp)
+            ) {
+                movieDetails?.rating?.let {
+                    RatingBar(
+                        modifier = Modifier,
+                        value = it.getRating(),
+                        numOfStars = 5,
+                        size = 15.dp,
+                        stepSize = StepSize.HALF,
+                        isIndicator = true,
+                        style = RatingBarStyle.Fill()
+                    )
+
+                    Divider(
+                        modifier = Modifier
+                            .padding(horizontal = 4.dp)
+                            .width(1.dp)
+                            .height(13.dp),
+                        color = dominantTextColor,
+                    )
+                }
+
+                Text(
+                    modifier = Modifier,
+                    text = if (movieDetails?.category == Enums.Categories.MOVIE.name) {
+                        movieDetails?.runtime?.getMovieDuration() ?: ""
+                    } else {
+                        if (numberOfSeasons == 1) "$numberOfSeasons season" else "$numberOfSeasons seasons"
+                    },
+                    color = dominantTextColor,
+                    style = MaterialTheme.typography.labelMedium,
+                    fontSize = 14.sp
+                )
+            }
         }
     }
 

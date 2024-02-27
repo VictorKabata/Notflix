@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.PlayArrow
@@ -73,18 +74,18 @@ fun EpisodeCardPager(
         }
 
         Text(
-            modifier = Modifier,
+            modifier = Modifier.width(170.dp),
             text = "Episode ${episode?.number}:",
             fontSize = 14.sp,
             maxLines = 1,
             style = MaterialTheme.typography.labelSmall,
             overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Start,
-            color = dominantTextColor
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
         Text(
-            modifier = Modifier,
+            modifier = Modifier.width(170.dp),
             text = episode?.title ?: "Unknown episode",
             fontSize = 14.sp,
             maxLines = 1,

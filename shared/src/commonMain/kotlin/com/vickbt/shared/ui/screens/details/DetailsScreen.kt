@@ -32,6 +32,7 @@ import com.vickbt.shared.ui.components.EpisodeCardPager
 import com.vickbt.shared.ui.components.ItemMovieCast
 import com.vickbt.shared.ui.components.MovieCardPortrait
 import com.vickbt.shared.ui.components.MovieRatingSection
+import com.vickbt.shared.ui.components.SeasonsDropDown
 import com.vickbt.shared.ui.components.appbars.DetailsAppBar
 import com.vickbt.shared.ui.components.collapsingToolbar.CollapsingToolbarScaffold
 import com.vickbt.shared.ui.components.collapsingToolbar.ScrollStrategy
@@ -61,9 +62,6 @@ fun DetailsScreen(
     }
 
     val movieDetailsState = viewModel.movieDetailsState.collectAsState().value
-
-    Napier.e(tag = "VicKbt", message = "Category: $category")
-    Napier.e("Movie Details: $movieDetailsState")
 
     val scrollState = rememberScrollState()
     val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
@@ -103,14 +101,14 @@ fun DetailsScreen(
                     modifier = Modifier.padding(bottom = 20.dp).verticalScroll(state = scrollState),
                     verticalArrangement = Arrangement.spacedBy(14.dp)
                 ) {
-                    //region Movie Ratings
-                    if (movieDetailsState.movieDetails?.rating != null) {
+                    //region Play Buttons
+                    /*if (movieDetailsState.movieDetails?.rating != null) {
                         MovieRatingSection(
                             popularity = movieDetailsState.movieDetails.rating.getPopularity(),
                             voteAverage = movieDetailsState.movieDetails.rating.getRating()
                                 .toString()
                         )
-                    }
+                    }*/
                     //endregion
 
                     //region Movie Overview
@@ -141,7 +139,8 @@ fun DetailsScreen(
                     if (category == Categories.TV_SHOW) {
                         Row(
                             modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
                                 modifier = Modifier,
@@ -151,7 +150,12 @@ fun DetailsScreen(
                                 color = MaterialTheme.colorScheme.onSurface,
                             )
 
-                            // ToDo: Add seasons drop down
+                            SeasonsDropDown(
+                                modifier = Modifier,
+                                content = movieDetailsState.movieDetails?.seasons ?: listOf()
+                            ) { season ->
+                                viewModel.getSeasonEpisodes(seasonId = season.id)
+                            }
                         }
 
                         LazyRow(
