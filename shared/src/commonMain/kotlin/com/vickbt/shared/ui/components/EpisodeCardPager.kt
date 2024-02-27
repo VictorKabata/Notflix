@@ -2,11 +2,16 @@ package com.vickbt.shared.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,19 +39,37 @@ fun EpisodeCardPager(
 
     Column(modifier = Modifier.padding(horizontal = 4.dp)) {
         Card(modifier = modifier.clickable { onItemClick(episode) }) {
-            //region Movie Cover Image
-            commonImageLoader {
-                val painter = rememberImagePainter(episode?.poster ?: "")
+            Box(modifier = Modifier.fillMaxSize()) {
+                //region Movie Cover Image
+                commonImageLoader {
+                    val painter = rememberImagePainter(episode?.poster ?: "")
 
-                Image(
-                    modifier = Modifier.fillMaxSize(),
-                    alignment = Alignment.Center,
-                    contentScale = ContentScale.Crop,
-                    painter = painter,
-                    contentDescription = null
-                )
+                    Image(
+                        modifier = Modifier.fillMaxSize(),
+                        alignment = Alignment.Center,
+                        contentScale = ContentScale.Crop,
+                        painter = painter,
+                        contentDescription = null
+                    )
+                }
+                //endregion
+
+                SmallFloatingActionButton(
+                    modifier = Modifier.align(Alignment.Center),
+                    shape = RoundedCornerShape(24.dp),
+                    containerColor = dominantTextColor.copy(alpha = .4f),
+                    onClick = { onItemClick(episode) }
+                ) {
+                    Image(
+                        modifier = Modifier,
+                        alignment = Alignment.Center,
+                        contentScale = ContentScale.Crop,
+                        imageVector = Icons.Rounded.PlayArrow,
+                        contentDescription = "Play episode",
+                        alpha = .4f
+                    )
+                }
             }
-            //endregion
         }
 
         Text(

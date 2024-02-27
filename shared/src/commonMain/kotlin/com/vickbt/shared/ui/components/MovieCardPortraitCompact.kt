@@ -66,7 +66,7 @@ fun MovieCardPortraitCompact(
 
                 movie?.quality?.let {
                     OutlinedText(
-                        modifier = Modifier.align(Alignment.TopEnd).padding(4.dp),
+                        modifier = Modifier.align(Alignment.TopEnd).padding(2.dp),
                         text = it
                     )
                 }
