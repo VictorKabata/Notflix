@@ -125,7 +125,7 @@ fun MovieCardLandscape(
                         style = RatingBarStyle.Fill()
                     )
 
-                    movie?.released?.let {
+                    movie?.seasons?.firstOrNull()?.let {
                         Divider(
                             modifier = Modifier
                                 .padding(horizontal = 4.dp)
@@ -136,7 +136,7 @@ fun MovieCardLandscape(
 
                         Text(
                             modifier = Modifier,
-                            text = it,
+                            text = "S${it.number}E${it.episodes.firstOrNull()?.number}",
                             fontSize = 14.sp,
                             maxLines = 1,
                             style = MaterialTheme.typography.labelSmall,
