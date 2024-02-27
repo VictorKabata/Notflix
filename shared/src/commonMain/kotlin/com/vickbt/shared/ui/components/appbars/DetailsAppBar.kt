@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
 import com.vickbt.shared.domain.models.Movie
+import com.vickbt.shared.domain.utils.Enums
 import com.vickbt.shared.ui.components.collapsingToolbar.CollapsingToolbarScaffoldState
 import com.vickbt.shared.utils.DetailsUiState
 import com.vickbt.shared.utils.commonImageLoader
@@ -61,11 +62,17 @@ fun DetailsAppBar(
 
     val defaultDominantColor = MaterialTheme.colorScheme.surface
     val defaultDominantTextColor = MaterialTheme.colorScheme.onSurface
-    var dominantColor by remember { mutableStateOf(defaultDominantColor) }
-    var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
+    val dominantColor by remember { mutableStateOf(defaultDominantColor) }
+    val dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
 
     val movieDetails by remember { mutableStateOf(movieDetailsState?.movieDetails) }
     var isFavourite by remember { mutableStateOf(movieDetailsState?.isFavorite) }
+
+    val numberOfSeasons by remember {
+        mutableStateOf(
+            movieDetails?.seasons?.lastOrNull()?.number ?: 0
+        )
+    }
 
     val backgroundColor by animateColorAsState(
         targetValue = MaterialTheme.colorScheme.surface.copy(1 - scrollProgress)
@@ -106,10 +113,7 @@ fun DetailsAppBar(
                 .graphicsLayer { alpha = scrollProgress }
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 .align(Alignment.BottomCenter),
-            verticalArrangement = Arrangement.spacedBy(
-                space = 2.dp,
-                alignment = Alignment.CenterVertically
-            ),
+            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.Start
         ) {
             Text(
@@ -126,7 +130,10 @@ fun DetailsAppBar(
 
             Text(
                 modifier = Modifier,
-                text = movieDetails?.runtime?.getMovieDuration() ?: "",
+                text = if (movieDetails?.category == Enums.Categories.MOVIE.name) movieDetails?.runtime?.getMovieDuration()
+                    ?: "" else {
+                    if (numberOfSeasons == 1) "$numberOfSeasons season" else "$numberOfSeasons seasons"
+                },
                 color = dominantTextColor,
                 style = MaterialTheme.typography.labelMedium,
                 fontSize = 14.sp
