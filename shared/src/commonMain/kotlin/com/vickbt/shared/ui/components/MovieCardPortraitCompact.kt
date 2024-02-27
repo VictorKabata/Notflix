@@ -3,9 +3,9 @@ package com.vickbt.shared.ui.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
@@ -33,30 +33,35 @@ fun MovieCardPortraitCompact(
     onItemClick: (Movie?) -> Unit
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier.width(150.dp).height(220.dp)
+            .sizeIn(minWidth = 150.dp, minHeight = 220.dp),
         verticalArrangement = Arrangement.spacedBy(3.dp)
     ) {
         Card(
             modifier = Modifier
-                .width(150.dp)
-                .fillMaxHeight()
+                .fillMaxSize()
                 .clickable { onItemClick(movie) },
             elevation = CardDefaults.cardElevation(8.dp),
             shape = RoundedCornerShape(4.dp)
         ) {
-            commonImageLoader {
-                val painter = rememberImagePainter(movie?.poster ?: "")
+            Box(modifier = Modifier.fillMaxSize()) {
+                commonImageLoader {
+                    val painter = rememberImagePainter(movie?.poster ?: "")
 
-                Image(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(220.dp)
-                        .sizeIn(minHeight = 30.dp),
-                    painter = painter,
-                    alignment = Alignment.Center,
-                    contentScale = ContentScale.Crop,
-                    contentDescription = "Trending movie poster"
-                )
+                    Image(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .align(Alignment.Center),
+                        painter = painter,
+                        alignment = Alignment.Center,
+                        contentScale = ContentScale.Crop,
+                        contentDescription = "Trending movie poster"
+                    )
+                }
+
+                movie?.quality?.let {
+                    VideoQualityText(modifier = Modifier.align(Alignment.TopEnd), quality = it)
+                }
             }
         }
 
