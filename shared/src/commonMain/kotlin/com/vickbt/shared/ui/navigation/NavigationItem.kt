@@ -1,4 +1,4 @@
-package com.vickbt.shared.presentation.ui.navigation
+package com.vickbt.shared.ui.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Favorite

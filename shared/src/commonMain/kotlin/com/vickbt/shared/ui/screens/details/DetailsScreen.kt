@@ -1,12 +1,16 @@
 package com.vickbt.shared.ui.screens.details
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -23,6 +27,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.vickbt.shared.domain.utils.Enums.Categories
+import com.vickbt.shared.ui.components.EpisodeCardPager
 import com.vickbt.shared.ui.components.ItemMovieCast
 import com.vickbt.shared.ui.components.MovieCardPortrait
 import com.vickbt.shared.ui.components.MovieRatingSection
@@ -37,19 +43,23 @@ import io.github.aakira.napier.Napier
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DetailsScreen(
     navigator: Navigator,
     windowSize: WindowSize = WindowSize.COMPACT,
     viewModel: DetailsViewModel = koinInject(),
-    movieId: Int
+    movieId: Int,
+    category: Categories
 ) {
     LaunchedEffect(key1 = Unit) {
-        viewModel.getMovieDetails(movieId = movieId)
+        if (category == Categories.MOVIE) viewModel.getMovieDetails(movieId = movieId)
+        else viewModel.getShowDetails(showId = movieId)
     }
 
     val movieDetailsState = viewModel.movieDetailsState.collectAsState().value
 
+    Napier.e(tag = "VicKbt", message = "Category: $category")
     Napier.e("Movie Details: $movieDetailsState")
 
     val scrollState = rememberScrollState()
@@ -94,7 +104,8 @@ fun DetailsScreen(
                     if (movieDetailsState.movieDetails?.rating != null) {
                         MovieRatingSection(
                             popularity = movieDetailsState.movieDetails.rating.getPopularity(),
-                            voteAverage = movieDetailsState.movieDetails.rating.getRating().toString()
+                            voteAverage = movieDetailsState.movieDetails.rating.getRating()
+                                .toString()
                         )
                     }
                     //endregion
@@ -120,6 +131,40 @@ fun DetailsScreen(
                             textAlign = TextAlign.Start,
                             overflow = TextOverflow.Ellipsis,
                         )
+                    }
+                    //endregion
+
+                    //region TV Show Episodes
+                    if (category == Categories.TV_SHOW) {
+                        Row(
+                            modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                modifier = Modifier,
+                                text = "Episodes",
+                                style = MaterialTheme.typography.titleMedium,
+                                fontSize = 20.sp,
+                                color = MaterialTheme.colorScheme.onSurface,
+                            )
+
+                            // ToDo: Add seasons drop down
+                        }
+
+                        LazyRow(
+                            modifier = Modifier.fillMaxWidth(),
+                            contentPadding = PaddingValues(horizontal = 16.dp)
+                        ) {
+                            items(items = movieDetailsState.episodes ?: listOf()) {
+                                EpisodeCardPager(
+                                    modifier = Modifier.width(180.dp).height(120.dp),
+                                    episode = it
+                                ) { episode ->
+                                    // ToDo: Open player to play episode
+                                    // navigator.navigate("/details/${movie?.id}")
+                                }
+                            }
+                        }
                     }
                     //endregion
 

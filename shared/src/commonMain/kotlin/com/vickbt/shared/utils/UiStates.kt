@@ -1,5 +1,6 @@
 package com.vickbt.shared.utils
 
+import com.vickbt.shared.domain.models.Episode
 import com.vickbt.shared.domain.models.Movie
 
 data class MainUiState(
@@ -20,6 +21,7 @@ data class DetailsUiState(
     val isLoading: Boolean = true,
     val error: String? = null,
     val movieDetails: Movie? = null,
+    val episodes: List<Episode>? = null,
     val isFavorite: Boolean? = false
 )
 

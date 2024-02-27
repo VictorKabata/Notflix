@@ -56,7 +56,7 @@ fun SearchScreen(
                             modifier = Modifier.padding(vertical = 4.dp),
                             movie = item,
                             onItemClick = { movie ->
-                                navigator.navigate("/details/${movie.id}")
+                                navigator.navigate("/details/${movie.id}?category=${movie.category}")
                             }
                         )
                     }

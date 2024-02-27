@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -64,7 +65,10 @@ fun MovieCardPortraitCompact(
                 }
 
                 movie?.quality?.let {
-                    VideoQualityText(modifier = Modifier.align(Alignment.TopEnd), quality = it)
+                    OutlinedText(
+                        modifier = Modifier.align(Alignment.TopEnd).padding(4.dp),
+                        text = it
+                    )
                 }
             }
         }

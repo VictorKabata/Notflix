@@ -1,5 +1,6 @@
 package com.vickbt.shared.domain.repositories
 
+import com.vickbt.shared.domain.models.Episode
 import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.utils.ResultState
 import kotlinx.coroutines.flow.Flow
@@ -7,7 +8,13 @@ import kotlinx.coroutines.flow.Flow
 interface MovieDetailsRepository {
 
     /**Fetch movie details from network source*/
-     suspend fun fetchMovieDetails(movieId: Int): Flow<ResultState<Movie>>
+    suspend fun fetchMovieDetails(movieId: Int): Flow<ResultState<Movie>>
+
+    /**Fetch tv show details from network source*/
+    suspend fun fetchTvShowDetails(showId: Int): Flow<ResultState<Movie>>
+
+    /**Fetch TV episodes based on the season*/
+    suspend fun fetchSeasonEpisodes(seasonId: String): Flow<ResultState<List<Episode>>>
 
     /**Fetch movie cast from network source*/
     // suspend fun fetchMovieCast(movieId: Int): Flow<ResultState<People>>

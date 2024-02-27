@@ -40,6 +40,36 @@ class DetailsViewModel(
         }
     }
 
+    fun getShowDetails(showId: Int) = viewModelScope.launch(coroutineExceptionHandler) {
+        movieDetailsRepository.fetchTvShowDetails(showId = showId).collect { showDetailsResult ->
+            showDetailsResult.isLoading { isLoading ->
+                _movieDetailsState.update { it.copy(isLoading = isLoading) }
+            }.onSuccess { showDetails ->
+                _movieDetailsState.update { it.copy(movieDetails = showDetails) }
+
+                getSeasonEpisodes(
+                    seasonId = movieDetailsState.value.movieDetails?.seasons?.firstOrNull()?.id
+                        ?: ""
+                )
+            }.onFailure { error ->
+                _movieDetailsState.update { it.copy(error = error.message) }
+            }
+        }
+    }
+
+    fun getSeasonEpisodes(seasonId: String) = viewModelScope.launch(coroutineExceptionHandler) {
+        movieDetailsRepository.fetchSeasonEpisodes(seasonId = seasonId).collect { episodesResult ->
+            episodesResult.isLoading { isLoading ->
+                _movieDetailsState.update { it.copy(isLoading = isLoading) }
+            }.onSuccess { seasonEpisodes ->
+                _movieDetailsState.update { it.copy(episodes = seasonEpisodes) }
+            }.onFailure { error ->
+                _movieDetailsState.update { it.copy(error = error.message) }
+            }
+
+        }
+    }
+
     fun getMovieCast(movieId: Int) = viewModelScope.launch(coroutineExceptionHandler) {
         /*movieDetailsRepository.fetchMovieCast(movieId = movieId).collect { movieCastsResult ->
             movieCastsResult.isLoading { isLoading ->

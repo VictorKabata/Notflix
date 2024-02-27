@@ -2,6 +2,7 @@ package com.vickbt.shared.data.datasources
 
 import com.vickbt.shared.data.mappers.toDomain
 import com.vickbt.shared.data.network.utils.safeApiCall
+import com.vickbt.shared.domain.models.Episode
 import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickbt.shared.utils.ResultState
@@ -9,6 +10,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
+import io.victorkabata.models.EpisodeDto
 import io.victorkabata.models.MovieDto
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -25,7 +27,32 @@ class MovieDetailsRepositoryImpl(
                     httpClient.get(urlString = "movie") {
                         parameter("id", movieId)
                     }.body<MovieDto>()
+
                 response.toDomain()
+            }
+        )
+    }
+
+    override suspend fun fetchTvShowDetails(showId: Int): Flow<ResultState<Movie>> {
+        return flowOf(
+            safeApiCall {
+                val response = httpClient.get(urlString = "show") {
+                    parameter("id", showId)
+                }.body<MovieDto>()
+
+                response.toDomain()
+            }
+        )
+    }
+
+    override suspend fun fetchSeasonEpisodes(seasonId: String): Flow<ResultState<List<Episode>>> {
+        return flowOf(
+            safeApiCall {
+                val response = httpClient.get(urlString = "show/season") {
+                    parameter("id", seasonId)
+                }.body<List<EpisodeDto>>()
+
+                response.map { it.toDomain() }
             }
         )
     }

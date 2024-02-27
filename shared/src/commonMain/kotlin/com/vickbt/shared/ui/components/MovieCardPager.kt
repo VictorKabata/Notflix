@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -116,7 +115,7 @@ fun MovieCardPager(
             }
 
             movie?.quality?.let {
-                VideoQualityText(modifier = Modifier.align(Alignment.TopEnd).padding(4.dp), quality = it)
+                OutlinedText(modifier = Modifier.align(Alignment.TopEnd).padding(4.dp), text = it)
             }
         }
     }

@@ -15,9 +15,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun VideoQualityText(
+fun OutlinedText(
     modifier: Modifier = Modifier,
-    quality: String,
+    text: String,
     shape: RoundedCornerShape = RoundedCornerShape(4.dp),
     border: BorderStroke = BorderStroke(1.dp, Color.White),
     textColor: Color = Color.White,
@@ -26,7 +26,7 @@ fun VideoQualityText(
     Card(modifier = modifier, shape = shape, border = border, colors = cardColors) {
         Text(
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-            text = quality,
+            text = text,
             fontSize = 12.sp,
             fontWeight = FontWeight.Bold,
             color = textColor

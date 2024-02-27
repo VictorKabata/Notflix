@@ -186,7 +186,7 @@ fun HomeScreen(
                                 modifier = Modifier.fillMaxWidth().height(280.dp),
                                 movie = featuredMovies[currentPage]
                             ) { movie ->
-                                navigator.navigate("/details/${movie?.id}")
+                                navigator.navigate("/details/${movie?.id}?category=${movie?.category}")
                             }
                         }
 
@@ -223,7 +223,7 @@ fun HomeScreen(
                                 MovieCardPortraitCompact(
                                     movie = item,
                                     onItemClick = { movie ->
-                                        navigator.navigate("/details/${movie?.id}")
+                                        navigator.navigate("/details/${movie?.id}?category=${movie?.category}")
                                     }
                                 )
                             }
@@ -255,7 +255,7 @@ fun HomeScreen(
                                         .height(245.dp),
                                     movie = item,
                                     onClickItem = { movie ->
-                                        navigator.navigate("/details/${movie?.id}")
+                                        navigator.navigate("/details/${movie?.id}?category=${movie?.category}")
                                     }
                                 )
                             }
@@ -284,7 +284,7 @@ fun HomeScreen(
                                 MovieCardPortraitCompact(
                                     movie = item,
                                     onItemClick = { movie ->
-                                        navigator.navigate("/details/${movie?.id}")
+                                        navigator.navigate("/details/${movie?.id}?category=${movie?.category}")
                                     }
                                 )
                             }
@@ -317,7 +317,7 @@ fun HomeScreen(
                                             .height(245.dp),
                                         movie = item,
                                         onClickItem = { movie ->
-                                            navigator.navigate("/details/${movie?.id}")
+                                            navigator.navigate("/details/${movie?.id}?category=${movie?.category}")
                                         }
                                     )
                                 }

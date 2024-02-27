@@ -150,9 +150,9 @@ fun MovieCardLandscape(
             }
 
             movie?.quality?.let {
-                VideoQualityText(
+                OutlinedText(
                     modifier = Modifier.align(Alignment.TopEnd).padding(4.dp),
-                    quality = it
+                    text = it
                 )
             }
         }
