@@ -23,7 +23,7 @@ fun VideoQualityText(
     textColor: Color = Color.White,
     cardColors: CardColors = CardDefaults.cardColors(containerColor = Color.Transparent)
 ) {
-    Card(modifier = modifier.padding(2.dp), shape = shape, border = border, colors = cardColors) {
+    Card(modifier = modifier, shape = shape, border = border, colors = cardColors) {
         Text(
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
             text = quality,

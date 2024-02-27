@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -60,7 +61,10 @@ fun MovieCardPortraitCompact(
                 }
 
                 movie?.quality?.let {
-                    VideoQualityText(modifier = Modifier.align(Alignment.TopEnd), quality = it)
+                    VideoQualityText(
+                        modifier = Modifier.align(Alignment.TopEnd).padding(2.dp),
+                        quality = it
+                    )
                 }
             }
         }

@@ -46,8 +46,8 @@ fun MovieCardPager(
     movie: Movie?,
     onItemClick: (Movie?) -> Unit
 ) {
-    var dominantColor by remember { mutableStateOf(Color.DarkGray) }
-    var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
+    val dominantColor by remember { mutableStateOf(Color.DarkGray) }
+    val dominantTextColor by remember { mutableStateOf(Color.LightGray) }
 
     Card(modifier = modifier.clickable { onItemClick(movie) }) {
         Box {
@@ -112,6 +112,10 @@ fun MovieCardPager(
                         style = RatingBarStyle.Fill()
                     )
                 }
+            }
+
+            movie?.quality?.let {
+                VideoQualityText(modifier = Modifier.align(Alignment.TopEnd).padding(4.dp), quality = it)
             }
         }
     }
