@@ -94,7 +94,7 @@ fun DetailsScreen(
                     if (movieDetailsState.movieDetails?.rating != null) {
                         MovieRatingSection(
                             popularity = movieDetailsState.movieDetails.rating.getPopularity(),
-                            voteAverage = movieDetailsState.movieDetails.rating.getRating()
+                            voteAverage = movieDetailsState.movieDetails.rating.getRating().toString()
                         )
                     }
                     //endregion

@@ -39,6 +39,7 @@ import com.vickbt.shared.ui.components.ratingbar.RatingBar
 import com.vickbt.shared.ui.components.ratingbar.RatingBarStyle
 import com.vickbt.shared.ui.components.ratingbar.StepSize
 import com.vickbt.shared.utils.commonImageLoader
+import com.vickbt.shared.utils.getRating
 
 @Composable
 fun MovieCardPager(
@@ -103,7 +104,7 @@ fun MovieCardPager(
                 movie?.rating?.let {
                     RatingBar(
                         modifier = Modifier,
-                        value = it.toFloat(),
+                        value = it.getRating(),
                         numOfStars = 5,
                         size = 13.dp,
                         spaceBetween = 1.dp,

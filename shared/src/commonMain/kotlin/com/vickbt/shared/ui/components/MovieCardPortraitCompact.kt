@@ -5,9 +5,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,13 +35,13 @@ fun MovieCardPortraitCompact(
     onItemClick: (Movie?) -> Unit
 ) {
     Column(
-        modifier = modifier.width(150.dp).height(220.dp)
-            .sizeIn(minWidth = 150.dp, minHeight = 220.dp),
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(3.dp)
     ) {
         Card(
             modifier = Modifier
-                .fillMaxSize()
+                .width(150.dp)
+                .fillMaxHeight()
                 .clickable { onItemClick(movie) },
             elevation = CardDefaults.cardElevation(8.dp),
             shape = RoundedCornerShape(4.dp)
@@ -51,7 +52,9 @@ fun MovieCardPortraitCompact(
 
                     Image(
                         modifier = Modifier
-                            .fillMaxSize()
+                            .fillMaxWidth()
+                            .height(220.dp)
+                            .sizeIn(minHeight = 30.dp)
                             .align(Alignment.Center),
                         painter = painter,
                         alignment = Alignment.Center,
@@ -61,10 +64,7 @@ fun MovieCardPortraitCompact(
                 }
 
                 movie?.quality?.let {
-                    VideoQualityText(
-                        modifier = Modifier.align(Alignment.TopEnd).padding(2.dp),
-                        quality = it
-                    )
+                    VideoQualityText(modifier = Modifier.align(Alignment.TopEnd), quality = it)
                 }
             }
         }

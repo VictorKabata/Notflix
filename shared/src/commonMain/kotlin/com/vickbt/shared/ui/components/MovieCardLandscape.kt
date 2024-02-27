@@ -38,6 +38,7 @@ import com.vickbt.shared.ui.components.ratingbar.RatingBar
 import com.vickbt.shared.ui.components.ratingbar.RatingBarStyle
 import com.vickbt.shared.ui.components.ratingbar.StepSize
 import com.vickbt.shared.utils.commonImageLoader
+import com.vickbt.shared.utils.getRating
 
 @Composable
 fun MovieCardLandscape(
@@ -116,7 +117,7 @@ fun MovieCardLandscape(
                 ) {
                     RatingBar(
                         modifier = Modifier,
-                        value = movie?.rating?.toFloat() ?: 0f,
+                        value = movie?.rating?.getRating() ?: 0f,
                         numOfStars = 5,
                         size = 15.dp,
                         stepSize = StepSize.HALF,
