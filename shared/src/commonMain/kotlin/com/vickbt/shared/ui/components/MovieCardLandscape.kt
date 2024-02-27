@@ -23,7 +23,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -46,8 +45,8 @@ fun MovieCardLandscape(
     movie: Movie?,
     onClickItem: (Movie?) -> Unit
 ) {
-    var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
-    var dominantSubTextColor by remember { mutableStateOf(dominantTextColor) }
+    val dominantTextColor by remember { mutableStateOf(Color.LightGray) }
+    val dominantSubTextColor by remember { mutableStateOf(dominantTextColor) }
 
     Card(
         modifier = modifier.clickable { onClickItem(movie) },
@@ -55,10 +54,10 @@ fun MovieCardLandscape(
         shape = RoundedCornerShape(4.dp)
     ) {
         Box(modifier = modifier) {
+            //region Movie Cover
             commonImageLoader {
-                val painter = rememberImagePainter(movie?.banner ?: "")
+                val painter = rememberImagePainter(movie?.poster ?: "")
 
-                //region Movie Cover
                 Image(
                     modifier = Modifier
                         .fillMaxSize()
@@ -147,6 +146,13 @@ fun MovieCardLandscape(
                     }
                 }
                 //endregion
+            }
+
+            movie?.quality?.let {
+                VideoQualityText(
+                    modifier = Modifier.align(Alignment.TopEnd).padding(4.dp),
+                    quality = it
+                )
             }
         }
     }
