@@ -53,8 +53,11 @@ fun DetailsScreen(
     category: Categories
 ) {
     LaunchedEffect(key1 = Unit) {
-        if (category == Categories.MOVIE) viewModel.getMovieDetails(movieId = movieId)
-        else viewModel.getShowDetails(showId = movieId)
+        if (category == Categories.MOVIE) {
+            viewModel.getMovieDetails(movieId = movieId)
+        } else {
+            viewModel.getShowDetails(showId = movieId)
+        }
     }
 
     val movieDetailsState = viewModel.movieDetailsState.collectAsState().value

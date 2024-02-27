@@ -66,7 +66,6 @@ class DetailsViewModel(
             }.onFailure { error ->
                 _movieDetailsState.update { it.copy(error = error.message) }
             }
-
         }
     }
 

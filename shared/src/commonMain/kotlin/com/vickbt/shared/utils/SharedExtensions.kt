@@ -47,7 +47,7 @@ fun Double.getPopularity(): String {
 /**Convert movie rating to a value out of 5.0 eg. 8 => 4.0/5.0 */
 fun Double.getRating(): Float {
     val result = (this / 10) * 5
-    return result.toFloat()?:0f
+    return result.toFloat() ?: 0f
 }
 
 fun Long.toBoolean(): Boolean {
