@@ -130,8 +130,10 @@ fun DetailsAppBar(
 
             Text(
                 modifier = Modifier,
-                text = if (movieDetails?.category == Enums.Categories.MOVIE.name) movieDetails?.runtime?.getMovieDuration()
-                    ?: "" else {
+                text = if (movieDetails?.category == Enums.Categories.MOVIE.name) {
+                    movieDetails?.runtime?.getMovieDuration()
+                    ?: ""
+                } else {
                     if (numberOfSeasons == 1) "$numberOfSeasons season" else "$numberOfSeasons seasons"
                 },
                 color = dominantTextColor,
