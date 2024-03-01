@@ -8,7 +8,9 @@ import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColorScheme(
     primary = DarkPrimaryColor,
-    secondary = DarkPrimaryColor,
+    onPrimary = DarkTextPrimary,
+    secondary = TextSecondary,
+    onSecondary = DarkTextSecondary,
     surface = DarkSurface,
     onSurface = DarkTextPrimary,
     background = DarkSurface
@@ -16,7 +18,9 @@ private val DarkColorPalette = darkColorScheme(
 
 private val LightColorPalette = lightColorScheme(
     primary = PrimaryColor,
-    secondary = PrimaryColor,
+    onPrimary = DarkTextPrimary,
+    secondary = DarkTextSecondary,
+    onSecondary = TextSecondary,
     surface = Surface,
     onSurface = TextPrimary,
     background = Surface

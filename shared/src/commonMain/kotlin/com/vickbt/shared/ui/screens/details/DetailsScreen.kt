@@ -16,6 +16,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Download
+import androidx.compose.material.icons.rounded.Movie
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -101,19 +103,42 @@ fun DetailsScreen(
                     verticalArrangement = Arrangement.spacedBy(14.dp)
                 ) {
                     //region Play Buttons
-                    /*if (movieDetailsState.movieDetails?.rating != null) {
-                        MovieRatingSection(
-                            popularity = movieDetailsState.movieDetails.rating.getPopularity(),
-                            voteAverage = movieDetailsState.movieDetails.rating.getRating()
-                                .toString()
-                        )
-                    }*/
                     ActionButton(
-                        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                        modifier = Modifier.fillMaxWidth()
+                            .padding(horizontal = 16.dp),
                         buttonText = "Watch Now",
                         buttonIcon = Icons.Rounded.PlayArrow
                     ) {
                         // ToDo: Play video
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(
+                            6.dp, Alignment.CenterHorizontally
+                        )
+                    ) {
+                        movieDetailsState.movieDetails?.youtubeTrailerId?.let {
+                            ActionButton(
+                                modifier = Modifier.weight(1f),
+                                buttonText = "Watch Trailer",
+                                buttonIcon = Icons.Rounded.Movie,
+                                buttonColor = MaterialTheme.colorScheme.secondary,
+                                contentColor = MaterialTheme.colorScheme.onSecondary
+                            ) {
+                                // ToDo: Open youtube app to play trailer
+                            }
+                        }
+
+                        ActionButton(
+                            modifier = Modifier.weight(1f),
+                            buttonText = "Download",
+                            buttonIcon = Icons.Rounded.Download,
+                            buttonColor = MaterialTheme.colorScheme.secondary,
+                            contentColor = MaterialTheme.colorScheme.onSecondary
+                        ) {
+                            // ToDo: Download movie/tv show
+                        }
                     }
                     //endregion
 

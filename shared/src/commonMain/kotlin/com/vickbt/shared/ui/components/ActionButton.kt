@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
@@ -23,11 +24,11 @@ fun ActionButton(
     modifier: Modifier,
     buttonText: String,
     buttonIcon: ImageVector,
-    contentColor: Color = MaterialTheme.colorScheme.primary,
-    buttonColor: Color = MaterialTheme.colorScheme.onPrimary,
+    buttonColor: Color = MaterialTheme.colorScheme.primary,
+    contentColor: Color = MaterialTheme.colorScheme.onPrimary,
     onClick: () -> Unit
 ) {
-    FilledTonalButton(
+    Button(
         modifier = modifier,
         onClick = { onClick.invoke() },
         shape = MaterialTheme.shapes.medium,
@@ -35,21 +36,15 @@ fun ActionButton(
             containerColor = buttonColor,
             contentColor = contentColor
         ),
-        contentPadding = PaddingValues(vertical = 12.dp)
+        contentPadding = PaddingValues(vertical = 8.dp)
     ) {
-        Row(
-            modifier = Modifier.fillMaxSize(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = buttonText.capitalizeEachWord(),
-                fontSize = 16.sp,
-                style = MaterialTheme.typography.labelLarge,
-                color = contentColor
-            )
+        Text(
+            text = buttonText.capitalizeEachWord(),
+            fontSize = 18.sp,
+            style = MaterialTheme.typography.labelMedium,
+            color = contentColor
+        )
 
-            Icon(imageVector = buttonIcon, contentDescription = null, tint = contentColor)
-        }
+        Icon(imageVector = buttonIcon, contentDescription = null, tint = contentColor)
     }
 }
