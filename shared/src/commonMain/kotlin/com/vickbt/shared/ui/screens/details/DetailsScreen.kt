@@ -15,6 +15,8 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,19 +30,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.vickbt.shared.domain.utils.Enums.Categories
+import com.vickbt.shared.ui.components.ActionButton
 import com.vickbt.shared.ui.components.EpisodeCardPager
 import com.vickbt.shared.ui.components.ItemMovieCast
 import com.vickbt.shared.ui.components.MovieCardPortrait
-import com.vickbt.shared.ui.components.MovieRatingSection
 import com.vickbt.shared.ui.components.SeasonsDropDown
 import com.vickbt.shared.ui.components.appbars.DetailsAppBar
 import com.vickbt.shared.ui.components.collapsingToolbar.CollapsingToolbarScaffold
 import com.vickbt.shared.ui.components.collapsingToolbar.ScrollStrategy
 import com.vickbt.shared.ui.components.collapsingToolbar.rememberCollapsingToolbarScaffoldState
 import com.vickbt.shared.utils.WindowSize
-import com.vickbt.shared.utils.getPopularity
-import com.vickbt.shared.utils.getRating
-import io.github.aakira.napier.Napier
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
 
@@ -109,6 +108,13 @@ fun DetailsScreen(
                                 .toString()
                         )
                     }*/
+                    ActionButton(
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                        buttonText = "Watch Now",
+                        buttonIcon = Icons.Rounded.PlayArrow
+                    ) {
+                        // ToDo: Play video
+                    }
                     //endregion
 
                     //region Movie Overview
