@@ -12,14 +12,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.rounded.Share
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -27,6 +25,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -151,12 +150,12 @@ fun DetailsAppBar(
                         style = RatingBarStyle.Fill()
                     )
 
-                    Divider(
+                    VerticalDivider(
                         modifier = Modifier
                             .padding(horizontal = 4.dp)
-                            .width(1.dp)
                             .height(13.dp),
                         color = dominantTextColor,
+                        thickness = 1.dp
                     )
                 }
 
@@ -170,6 +169,19 @@ fun DetailsAppBar(
                     color = dominantTextColor,
                     style = MaterialTheme.typography.labelMedium,
                     fontSize = 14.sp
+                )
+            }
+
+            movieDetails?.genres?.joinToString(", ", limit = 4) { it.name }?.let { genre ->
+                Text(
+                    modifier = Modifier.fillMaxWidth().graphicsLayer { alpha = scrollProgress },
+                    text = genre,
+                    style = MaterialTheme.typography.titleMedium,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    color = dominantTextColor,
+                    fontSize = 12.sp,
+                    textAlign = TextAlign.Start
                 )
             }
         }
@@ -192,7 +204,7 @@ fun DetailsAppBar(
         navigationIcon = {
             IconButton(onClick = { onNavigationIconClick() }) {
                 Icon(
-                    imageVector = Icons.Rounded.ArrowBack,
+                    imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
                     contentDescription = "Back",
                     tint = MaterialTheme.colorScheme.onSurface
                 )

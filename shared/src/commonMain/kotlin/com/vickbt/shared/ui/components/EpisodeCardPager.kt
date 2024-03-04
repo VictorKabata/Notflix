@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.Card
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
@@ -59,7 +60,8 @@ fun EpisodeCardPager(
                     modifier = Modifier.align(Alignment.Center),
                     shape = RoundedCornerShape(24.dp),
                     containerColor = dominantTextColor.copy(alpha = .4f),
-                    onClick = { onItemClick(episode) }
+                    onClick = { onItemClick(episode) },
+                    elevation = FloatingActionButtonDefaults.elevation(2.dp)
                 ) {
                     Image(
                         modifier = Modifier,

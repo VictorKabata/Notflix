@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.sp
 import com.vickbt.shared.domain.utils.Enums.Categories
 import com.vickbt.shared.ui.components.ActionButton
 import com.vickbt.shared.ui.components.EpisodeCardPager
-import com.vickbt.shared.ui.components.ItemMovieCast
 import com.vickbt.shared.ui.components.MovieCardPortrait
 import com.vickbt.shared.ui.components.SeasonsDropDown
 import com.vickbt.shared.ui.components.appbars.DetailsAppBar
@@ -201,28 +200,6 @@ fun DetailsScreen(
                                     // ToDo: Open player to play episode
                                     // navigator.navigate("/details/${movie?.id}")
                                 }
-                            }
-                        }
-                    }
-                    //endregion
-
-                    //region Movie Cast
-                    if (!movieDetailsState.movieDetails?.cast.isNullOrEmpty()) {
-                        Text(
-                            modifier = Modifier.padding(horizontal = 16.dp),
-                            text = "Cast",
-                            style = MaterialTheme.typography.titleMedium,
-                            fontSize = 20.sp
-                        )
-
-                        LazyRow(
-                            contentPadding = PaddingValues(horizontal = 16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(10.dp)
-                        ) {
-                            items(
-                                items = movieDetailsState.movieDetails?.cast ?: emptyList()
-                            ) { item ->
-                                ItemMovieCast(modifier = Modifier, people = item)
                             }
                         }
                     }
