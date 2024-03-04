@@ -77,18 +77,7 @@ fun EpisodeCardPager(
 
         Text(
             modifier = Modifier.width(170.dp),
-            text = "Episode ${episode?.number}:",
-            fontSize = 14.sp,
-            maxLines = 1,
-            style = MaterialTheme.typography.labelSmall,
-            overflow = TextOverflow.Ellipsis,
-            textAlign = TextAlign.Start,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-
-        Text(
-            modifier = Modifier.width(170.dp),
-            text = episode?.title ?: "Unknown episode",
+            text = "E${episode?.number ?: "00"}: ${episode?.title ?: "Unknown episode"}",
             fontSize = 14.sp,
             maxLines = 1,
             style = MaterialTheme.typography.labelMedium,
