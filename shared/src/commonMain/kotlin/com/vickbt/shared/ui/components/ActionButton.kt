@@ -31,20 +31,25 @@ fun ActionButton(
     Button(
         modifier = modifier,
         onClick = { onClick.invoke() },
-        shape = MaterialTheme.shapes.medium,
+        shape = MaterialTheme.shapes.small,
         colors = ButtonDefaults.filledTonalButtonColors(
             containerColor = buttonColor,
             contentColor = contentColor
         ),
         contentPadding = PaddingValues(vertical = 8.dp)
     ) {
-        Text(
-            text = buttonText.capitalizeEachWord(),
-            fontSize = 18.sp,
-            style = MaterialTheme.typography.labelMedium,
-            color = contentColor
-        )
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            horizontalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterHorizontally)
+        ) {
+            Text(
+                text = buttonText.capitalizeEachWord(),
+                fontSize = 18.sp,
+                style = MaterialTheme.typography.labelMedium,
+                color = contentColor
+            )
 
-        Icon(imageVector = buttonIcon, contentDescription = null, tint = contentColor)
+            Icon(imageVector = buttonIcon, contentDescription = null, tint = contentColor)
+        }
     }
 }
