@@ -74,7 +74,7 @@ fun MovieCardPager(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(190.dp)
+                    .height(210.dp)
                     .align(Alignment.BottomCenter)
                     .background(
                         Brush.verticalGradient(

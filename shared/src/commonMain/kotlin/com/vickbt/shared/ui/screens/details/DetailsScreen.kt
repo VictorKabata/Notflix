@@ -53,8 +53,6 @@ fun DetailsScreen(
 
     val movieDetailsState = viewModel.movieDetailsState.collectAsState().value
 
-    Napier.e("is favorite: ${movieDetailsState.isFavorite}")
-
     val scrollState = rememberScrollState()
     val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
 

@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,6 +40,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kmpalette.loader.rememberPainterLoader
+import com.kmpalette.rememberDominantColorState
 import com.seiko.imageloader.rememberImagePainter
 import com.vickbt.shared.domain.models.MovieDetails
 import com.vickbt.shared.ui.components.collapsingToolbar.CollapsingToolbarScaffoldState
@@ -57,16 +60,17 @@ fun DetailsAppBar(
     onShareIconClick: () -> Unit,
     onFavoriteIconClick: (MovieDetails, Boolean?) -> Unit
 ) {
+    val movieDetails by remember { mutableStateOf(movieDetailsState?.movieDetails) }
+    var isFavourite by remember { mutableStateOf(movieDetailsState?.isFavorite) }
+
     // Return progress on collapsing toolbar - 1.0f=Expanded, 0.0f=Collapsed
     val scrollProgress = collapsingScrollState.toolbarState.progress
 
-    val defaultDominantColor = MaterialTheme.colorScheme.surface
-    val defaultDominantTextColor = MaterialTheme.colorScheme.onSurface
-    var dominantColor by remember { mutableStateOf(defaultDominantColor) }
-    var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
-
-    val movieDetails by remember { mutableStateOf(movieDetailsState?.movieDetails) }
-    var isFavourite by remember { mutableStateOf(movieDetailsState?.isFavorite) }
+    val painter = rememberImagePainter(movieDetails?.backdropPath?.loadImage() ?: "")
+    val dominantColorState = rememberDominantColorState(loader = rememberPainterLoader())
+    LaunchedEffect(painter) {
+        dominantColorState.updateFrom(painter)
+    }
 
     val backgroundColor by animateColorAsState(
         targetValue = MaterialTheme.colorScheme.surface.copy(1 - scrollProgress)
@@ -79,8 +83,6 @@ fun DetailsAppBar(
             .graphicsLayer { alpha = scrollProgress }
     ) {
         commonImageLoader {
-            val painter = rememberImagePainter(movieDetails?.backdropPath?.loadImage() ?: "")
-
             Image(
                 modifier = Modifier
                     .fillMaxSize()
@@ -95,9 +97,15 @@ fun DetailsAppBar(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(210.dp)
+                .height(240.dp)
                 .align(Alignment.BottomCenter)
-                .background(Brush.verticalGradient(listOf(Color.Transparent, dominantColor)))
+                .background(
+                    Brush.verticalGradient(
+                        listOf(
+                            Color.Transparent, dominantColorState.color
+                        )
+                    )
+                )
         )
 
         Column(
@@ -119,7 +127,7 @@ fun DetailsAppBar(
                 style = MaterialTheme.typography.titleMedium,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                color = dominantTextColor,
+                color = dominantColorState.onColor,
                 fontSize = 32.sp,
                 textAlign = TextAlign.Start,
                 lineHeight = 30.sp
@@ -128,7 +136,7 @@ fun DetailsAppBar(
             Text(
                 modifier = Modifier,
                 text = movieDetails?.runtime?.getMovieDuration() ?: "",
-                color = dominantTextColor,
+                color = dominantColorState.onColor,
                 style = MaterialTheme.typography.labelMedium,
                 fontSize = 14.sp
             )
