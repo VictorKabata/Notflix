@@ -28,6 +28,7 @@ kover = "0.6.1"
 preCompose = "1.5.10"
 imageLoader = "1.7.1"
 materialWindowSizeClass = "0.3.0"
+kmpalette = "3.1.0"
 
 #Android Versions
 androidxActivity = "1.8.2"
@@ -104,6 +105,7 @@ imageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "image
 preCompose = { module = "moe.tlaster:precompose", version.ref = "preCompose" }
 preCompose-viewmodel = { module = "moe.tlaster:precompose-viewmodel", version.ref = "preCompose" }
 material-windowSizeClass = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "materialWindowSizeClass" }
+kmpalette-core = { module = "com.kmpalette:kmpalette-core", version.ref = "kmpalette" }
 
 #Android Lib Dependencies
 androidX-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
