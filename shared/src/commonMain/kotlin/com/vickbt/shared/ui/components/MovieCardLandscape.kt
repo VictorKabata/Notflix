@@ -20,10 +20,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -33,6 +30,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kmpalette.loader.rememberPainterLoader
+import com.kmpalette.rememberDominantColorState
 import com.seiko.imageloader.rememberImagePainter
 import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.ui.components.ratingbar.RatingBar
@@ -50,8 +49,12 @@ fun MovieCardLandscape(
     movie: Movie,
     onClickItem: (Movie) -> Unit
 ) {
-    var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
-    var dominantSubTextColor by remember { mutableStateOf(dominantTextColor) }
+    val painter = rememberImagePainter(movie.backdropPath?.loadImage() ?: "")
+
+    val dominantColorState = rememberDominantColorState(loader = rememberPainterLoader())
+    LaunchedEffect(painter) {
+        dominantColorState.updateFrom(painter)
+    }
 
     Card(
         modifier = modifier.clickable { onClickItem(movie) },
@@ -60,8 +63,6 @@ fun MovieCardLandscape(
     ) {
         Box(modifier = modifier) {
             commonImageLoader {
-                val painter = rememberImagePainter(movie.backdropPath?.loadImage() ?: "")
-
                 //region Movie Cover
                 Image(
                     modifier = Modifier
@@ -79,13 +80,10 @@ fun MovieCardLandscape(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp)
+                    .height(140.dp)
                     .background(
                         Brush.verticalGradient(
-                            listOf(
-                                Color.Transparent,
-                                Color.DarkGray
-                            )
+                            listOf(Color.Transparent, dominantColorState.color)
                         )
                     )
                     .align(Alignment.BottomCenter)
@@ -107,7 +105,7 @@ fun MovieCardLandscape(
                     style = MaterialTheme.typography.titleMedium,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
-                    color = dominantTextColor
+                    color = dominantColorState.onColor
                 )
                 //endregion
 
@@ -135,18 +133,18 @@ fun MovieCardLandscape(
                                 .padding(horizontal = 4.dp)
                                 .width(1.dp)
                                 .height(13.dp),
-                            color = dominantSubTextColor,
+                            color = dominantColorState.onColor,
                         )
 
                         Text(
                             modifier = Modifier,
-                            text = movie.releaseDate.getReleaseDate()?.capitalizeEachWord() ?: "",
+                            text = movie.releaseDate.getReleaseDate().capitalizeEachWord(),
                             fontSize = 14.sp,
                             maxLines = 1,
                             style = MaterialTheme.typography.labelSmall,
                             overflow = TextOverflow.Ellipsis,
                             textAlign = TextAlign.Start,
-                            color = dominantSubTextColor
+                            color = dominantColorState.onColor
                         )
                     }
                 }
