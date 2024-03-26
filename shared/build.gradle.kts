@@ -50,8 +50,8 @@ kotlin {
             api(compose.components.resources)
             api(compose.materialIconsExtended)
 
-            api(compose.preview)
-            api(compose.uiTooling)
+            // api(compose.preview)
+            // api(compose.uiTooling)
 
             implementation(libs.kotlinX.coroutines)
 
