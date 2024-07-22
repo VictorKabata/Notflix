@@ -1,6 +1,7 @@
 package com.vickbt.shared.ui.screens.details
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.vickbt.shared.domain.models.MovieDetails
 import com.vickbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickbt.shared.utils.DetailsUiState
@@ -22,8 +23,6 @@ class DetailsViewModel(
 
     private val _movieDetailsState = MutableStateFlow(DetailsUiState())
     val movieDetailsState = _movieDetailsState.asStateFlow()
-
-    private val viewModelScope = CoroutineScope(Dispatchers.Default)
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         _movieDetailsState.update { it.copy(isLoading = false, error = exception.message) }

@@ -1,6 +1,7 @@
 package com.vickbt.shared.ui.screens.home
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.vickbt.shared.domain.repositories.MoviesRepository
 import com.vickbt.shared.utils.HomeUiState
 import com.vickbt.shared.utils.SearchUiState
@@ -27,8 +28,6 @@ class HomeViewModel(private val moviesRepository: MoviesRepository) : ViewModel(
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery = _searchQuery.asStateFlow()
-
-    private val viewModelScope = CoroutineScope(Dispatchers.IO)
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         _homeUiState.update { it.copy(isLoading = false, error = exception.message) }

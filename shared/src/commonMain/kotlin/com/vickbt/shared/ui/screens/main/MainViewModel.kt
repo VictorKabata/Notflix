@@ -1,6 +1,7 @@
 package com.vickbt.shared.ui.screens.main
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.vickbt.shared.domain.repositories.SettingsRepository
 import com.vickbt.shared.utils.MainUiState
 import io.github.aakira.napier.Napier
@@ -18,8 +19,6 @@ class MainViewModel(private val settingsRepository: SettingsRepository) : ViewMo
 
     private val _mainUiState = MutableStateFlow(MainUiState())
     val mainUiState = _mainUiState.asStateFlow()
-
-    private val viewModelScope = CoroutineScope(Dispatchers.IO)
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, _ -> }
 

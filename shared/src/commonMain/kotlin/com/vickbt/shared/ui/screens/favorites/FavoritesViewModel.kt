@@ -1,6 +1,7 @@
 package com.vickbt.shared.ui.screens.favorites
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.vickbt.shared.domain.repositories.FavoritesRepository
 import com.vickbt.shared.utils.FavouritesUiState
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -17,8 +18,6 @@ class FavoritesViewModel(
 
     private val _favoriteMoviesState = MutableStateFlow(FavouritesUiState())
     val favoriteMoviesState = _favoriteMoviesState.asStateFlow()
-
-    private val viewModelScope = CoroutineScope(Dispatchers.Default)
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         _favoriteMoviesState.update { it.copy(isLoading = false, error = exception.message) }
