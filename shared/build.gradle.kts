@@ -71,8 +71,7 @@ kotlin {
             api(libs.napier)
 
             implementation(libs.imageLoader)
-
-            api(libs.preCompose)
+            implementation(libs.bundles.coil)
 
             implementation(libs.navigation)
 

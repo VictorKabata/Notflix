@@ -17,19 +17,19 @@ koinCompose = "1.1.5"
 koinComposeViewModel = "1.2.0-Beta4"
 koinAndroid = "3.5.3"
 koinAndroidxCompose = "3.5.3"
+composeMultiplatform = "1.5.11"
 kotlinxSerializationJson = "1.6.2"
 kotlinxDateTime = "0.5.0"
 napier = "2.6.1"
 ktor = "2.3.7"
 sqlDelight = "2.0.1"
 multiplatformSettings = "1.1.1"
-kmpNativeCoroutines = "0.12.1-new-mm"
 buildKonfig = "0.13.3"
 kover = "0.6.1"
-preCompose = "1.5.10"
 imageLoader = "1.7.1"
 materialWindowSizeClass = "0.3.0"
 navigation = "2.7.0-alpha07"
+coil = "3.0.0-alpha06"
 
 #Android Versions
 androidxActivity = "1.8.2"
@@ -52,7 +52,6 @@ espresso = "3.5.1"
 test = "1.5.0"
 archTestCore = "2.2.0"
 turbine = "0.12.3"
-composeMultiplatform = "1.5.11"
 
 [plugins]
 ktLint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLint" }
@@ -66,7 +65,6 @@ android-library = { id = "com.android.library", version.ref = "gradle" }
 android-application = { id = "com.android.application", version.ref = "gradle" }
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinX-serialization-plugin = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kmp-NativeCoroutines-plugin = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "kmpNativeCoroutines" }
 buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
 compose = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
@@ -103,9 +101,12 @@ multiplatformSettings-noArg = { module = "com.russhwolf:multiplatform-settings-n
 multiplatformSettings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatformSettings" }
 multiplatformSettings-test = { module = "com.russhwolf:multiplatform-settings-test", version.ref = "multiplatformSettings" }
 imageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "imageLoader" }
-preCompose = { module = "moe.tlaster:precompose", version.ref = "preCompose" }
 material-windowSizeClass = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "materialWindowSizeClass" }
 navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-compose-core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coil" }
+coil-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil" }
+coil-multiplatform = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
 
 #Android Lib Dependencies
 androidX-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
@@ -137,3 +138,6 @@ archTestCore = { module = "androidx.arch.core:core-testing", version.ref = "arch
 test-rules = { module = "androidx.test:rules", version.ref = "test" }
 test-runner = { module = "androidx.test:runner", version.ref = "test" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+
+[bundles]
+coil=["coil-compose-core", "coil-compose", "coil-ktor", "coil-multiplatform"]

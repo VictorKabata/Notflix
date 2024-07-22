@@ -11,14 +11,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.vickbt.shared.presentation.ui.navigation.NavigationItem
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.vickbt.shared.ui.navigation.NavigationItem
 import com.vickbt.shared.ui.components.BottomNavBar
 import com.vickbt.shared.ui.components.NavRailBar
 import com.vickbt.shared.ui.navigation.Navigation
 import com.vickbt.shared.ui.theme.NotflixTheme
 import com.vickbt.shared.utils.WindowSize
 import moe.tlaster.precompose.PreComposeApp
-import moe.tlaster.precompose.navigation.rememberNavigator
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -30,7 +31,7 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel<MainViewModel>()) {
         val isDarkTheme = appUiState.selectedTheme != 0
 
         NotflixTheme(darkTheme = isDarkTheme) {
-            val navigator = rememberNavigator()
+            val navHostController = rememberNavController()
 
             val topLevelDestinations = listOf(
                 NavigationItem.Home,
@@ -39,14 +40,14 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel<MainViewModel>()) {
             )
 
             val isTopLevelDestination =
-                navigator.currentEntry.collectAsState(null).value?.route?.route in topLevelDestinations.map { it.route }
+                navHostController.currentBackStackEntryAsState().value?.destination?.route in topLevelDestinations.map { it.route }
 
             val showNavigationRail = windowSize != WindowSize.COMPACT
 
             Scaffold(
                 bottomBar = {
                     if (isTopLevelDestination && !showNavigationRail) {
-                        BottomNavBar(bottomNavItems = topLevelDestinations, navigator = navigator)
+                        BottomNavBar(bottomNavItems = topLevelDestinations, navHostController = navHostController)
                     }
                 }
             ) { paddingValues ->
@@ -58,12 +59,12 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel<MainViewModel>()) {
                         if (isTopLevelDestination && showNavigationRail) {
                             NavRailBar(
                                 navigationItems = topLevelDestinations,
-                                navigator = navigator
+                                navHostController = navHostController
                             )
                         }
 
                         Navigation(
-                            navigator = navigator,
+                            navHostController = navHostController,
                             windowSize = windowSize,
                             paddingValues = paddingValues
                         )

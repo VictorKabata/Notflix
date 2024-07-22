@@ -23,6 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.vickbt.shared.ui.components.ItemMovieCast
 import com.vickbt.shared.ui.components.MovieCardPortrait
 import com.vickbt.shared.ui.components.MovieRatingSection
@@ -34,13 +35,11 @@ import com.vickbt.shared.utils.WindowSize
 import com.vickbt.shared.utils.getPopularity
 import com.vickbt.shared.utils.getRating
 import io.github.aakira.napier.Napier
-import moe.tlaster.precompose.navigation.Navigator
-import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun DetailsScreen(
-    navigator: Navigator,
+    navigator: NavHostController,
     windowSize: WindowSize = WindowSize.COMPACT,
     viewModel: DetailsViewModel = koinViewModel<DetailsViewModel>(),
     movieId: Int
@@ -78,7 +77,7 @@ fun DetailsScreen(
                         modifier = Modifier.fillMaxWidth(),
                         collapsingScrollState = collapsingScrollState,
                         movieDetailsState = movieDetailsState,
-                        onNavigationIconClick = { navigator.goBack() },
+                        onNavigationIconClick = { navigator.navigateUp() },
                         onShareIconClick = {},
                         onFavoriteIconClick = { movieDetails, isFavorite ->
                             if (isFavorite == true) {

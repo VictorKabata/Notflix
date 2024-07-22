@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.vickbt.shared.ui.components.MovieCardPortrait
 import com.vickbt.shared.utils.SearchUiState
 import com.vickbt.shared.utils.WindowSize
@@ -24,7 +25,7 @@ import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
 fun SearchScreen(
-    navigator: Navigator,
+    navigator: NavHostController,
     searchUiState: SearchUiState,
     windowSize: WindowSize = WindowSize.COMPACT
 ) {

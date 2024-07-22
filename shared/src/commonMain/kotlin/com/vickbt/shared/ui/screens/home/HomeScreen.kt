@@ -45,6 +45,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.vickbt.shared.ui.components.MovieCardLandscape
 import com.vickbt.shared.ui.components.MovieCardPager
 import com.vickbt.shared.ui.components.MovieCardPagerIndicator
@@ -59,7 +60,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    navigator: Navigator,
+    navigator: NavHostController,
     windowSize: WindowSize = WindowSize.COMPACT,
     viewModel: HomeViewModel = koinViewModel<HomeViewModel>(),
     paddingValues: PaddingValues

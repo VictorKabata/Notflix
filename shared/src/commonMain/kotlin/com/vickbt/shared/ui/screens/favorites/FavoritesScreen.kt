@@ -12,14 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.vickbt.shared.ui.components.MovieCardDescription
 import com.vickbt.shared.ui.components.appbars.AppBar
-import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun FavoritesScreen(
-    navigator: Navigator,
+    navigator: NavHostController,
     viewModel: FavoritesViewModel = koinViewModel<FavoritesViewModel>()
 ) {
     val favoriteMovies = viewModel.favoriteMoviesState.collectAsState().value
