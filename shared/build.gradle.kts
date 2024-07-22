@@ -59,6 +59,7 @@ kotlin {
 
             api(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.koin.composeViewModel)
 
             implementation(libs.kotlinX.serializationJson)
 
@@ -72,7 +73,6 @@ kotlin {
             implementation(libs.imageLoader)
 
             api(libs.preCompose)
-            api(libs.preCompose.viewmodel)
 
             implementation(libs.sqlDelight.coroutine)
 

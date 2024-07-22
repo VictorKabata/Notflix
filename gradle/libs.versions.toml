@@ -13,7 +13,8 @@ nativeCocoapod = "1.9.0"
 # Kotlin Multiplatform Version
 kotlinxCoroutines = "1.7.3"
 koinCore = "3.5.3"
-koinCompose = "1.1.2"
+koinCompose = "1.1.5"
+koinComposeViewModel = "1.2.0-Beta4"
 koinAndroid = "3.5.3"
 koinAndroidxCompose = "3.5.3"
 kotlinxSerializationJson = "1.6.2"
@@ -107,11 +108,12 @@ material-windowSizeClass = { module = "dev.chrisbanes.material3:material3-window
 
 #Android Lib Dependencies
 androidX-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
-androidX-activity={module="androidx.activity:activity-compose", version.ref="androidxActivity"}
+androidX-activity = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCompose" }
+koin-composeViewModel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeViewModel" }
 leakCanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
 firebase-BOM = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBOM" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
