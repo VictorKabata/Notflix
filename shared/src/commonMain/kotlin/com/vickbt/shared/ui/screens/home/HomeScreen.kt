@@ -66,13 +66,6 @@ fun HomeScreen(
 ) {
     val scrollState = rememberScrollState()
 
-    LaunchedEffect(key1 = viewModel) {
-        viewModel.fetchNowPlayingMovies()
-        viewModel.fetchTrendingMovies()
-        viewModel.fetchUpcomingMovies()
-        viewModel.fetchPopularMovies()
-    }
-
     val homeUiState = viewModel.homeUiState.collectAsState().value
     val searchUiState = viewModel.searchUiState.collectAsState().value
 

@@ -33,6 +33,13 @@ class HomeViewModel(private val moviesRepository: MoviesRepository) : ViewModel(
         _homeUiState.update { it.copy(isLoading = false, error = exception.message) }
     }
 
+    init {
+        fetchNowPlayingMovies()
+        fetchTrendingMovies()
+        fetchUpcomingMovies()
+        fetchPopularMovies()
+    }
+
     fun fetchNowPlayingMovies() = viewModelScope.launch(coroutineExceptionHandler) {
         moviesRepository.fetchNowPlayingMovies().collectLatest { moviesResult ->
             moviesResult.isLoading { isLoading ->
