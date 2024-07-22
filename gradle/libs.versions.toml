@@ -29,6 +29,7 @@ kover = "0.6.1"
 preCompose = "1.5.10"
 imageLoader = "1.7.1"
 materialWindowSizeClass = "0.3.0"
+navigation = "2.7.0-alpha07"
 
 #Android Versions
 androidxActivity = "1.8.2"
@@ -103,8 +104,8 @@ multiplatformSettings-coroutines = { module = "com.russhwolf:multiplatform-setti
 multiplatformSettings-test = { module = "com.russhwolf:multiplatform-settings-test", version.ref = "multiplatformSettings" }
 imageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "imageLoader" }
 preCompose = { module = "moe.tlaster:precompose", version.ref = "preCompose" }
-preCompose-viewmodel = { module = "moe.tlaster:precompose-viewmodel", version.ref = "preCompose" }
 material-windowSizeClass = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "materialWindowSizeClass" }
+navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 
 #Android Lib Dependencies
 androidX-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }

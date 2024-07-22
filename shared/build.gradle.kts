@@ -74,6 +74,8 @@ kotlin {
 
             api(libs.preCompose)
 
+            implementation(libs.navigation)
+
             implementation(libs.sqlDelight.coroutine)
 
             // implementation(libs.material.windowSizeClass)
