@@ -11,64 +11,64 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.vickbt.shared.presentation.ui.navigation.NavigationItem
-import com.vickbt.shared.presentation.ui.screens.main.MainViewModel
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.vickbt.shared.ui.components.BottomNavBar
 import com.vickbt.shared.ui.components.NavRailBar
 import com.vickbt.shared.ui.navigation.Navigation
+import com.vickbt.shared.ui.navigation.NavigationItem
 import com.vickbt.shared.ui.theme.NotflixTheme
 import com.vickbt.shared.utils.WindowSize
-import moe.tlaster.precompose.PreComposeApp
-import moe.tlaster.precompose.navigation.rememberNavigator
-import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun MainScreen(viewModel: MainViewModel = koinInject()) {
-    PreComposeApp {
-        val appUiState = viewModel.mainUiState.collectAsState().value
-        var windowSize by remember { mutableStateOf(WindowSize.COMPACT) }
+fun MainScreen(viewModel: MainViewModel = koinViewModel<MainViewModel>()) {
+    val appUiState = viewModel.mainUiState.collectAsState().value
+    var windowSize by remember { mutableStateOf(WindowSize.COMPACT) }
 
-        val isDarkTheme = appUiState.selectedTheme != 0
+    val isDarkTheme = appUiState.selectedTheme != 0
 
-        NotflixTheme(darkTheme = isDarkTheme) {
-            val navigator = rememberNavigator()
+    NotflixTheme(darkTheme = isDarkTheme) {
+        val navHostController = rememberNavController()
 
-            val topLevelDestinations = listOf(
-                NavigationItem.Home,
-                NavigationItem.Favorites,
-                NavigationItem.Settings
-            )
+        val topLevelDestinations = listOf(
+            NavigationItem.Home,
+            NavigationItem.Favorites,
+            NavigationItem.Settings
+        )
 
-            val isTopLevelDestination =
-                navigator.currentEntry.collectAsState(null).value?.route?.route in topLevelDestinations.map { it.route }
+        val isTopLevelDestination =
+            navHostController.currentBackStackEntryAsState().value?.destination?.route in topLevelDestinations.map { it.route }
 
-            val showNavigationRail = windowSize != WindowSize.COMPACT
+        val showNavigationRail = windowSize != WindowSize.COMPACT
 
-            Scaffold(
-                bottomBar = {
-                    if (isTopLevelDestination && !showNavigationRail) {
-                        BottomNavBar(bottomNavItems = topLevelDestinations, navigator = navigator)
-                    }
+        Scaffold(
+            bottomBar = {
+                if (isTopLevelDestination && !showNavigationRail) {
+                    BottomNavBar(
+                        bottomNavItems = topLevelDestinations,
+                        navHostController = navHostController
+                    )
                 }
-            ) { paddingValues ->
+            }
+        ) { paddingValues ->
 
-                BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
-                    windowSize = WindowSize.basedOnWidth(this.minWidth)
+            BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+                windowSize = WindowSize.basedOnWidth(this.minWidth)
 
-                    Row(modifier = Modifier.fillMaxSize()) {
-                        if (isTopLevelDestination && showNavigationRail) {
-                            NavRailBar(
-                                navigationItems = topLevelDestinations,
-                                navigator = navigator
-                            )
-                        }
-
-                        Navigation(
-                            navigator = navigator,
-                            windowSize = windowSize,
-                            paddingValues = paddingValues
+                Row(modifier = Modifier.fillMaxSize()) {
+                    if (isTopLevelDestination && showNavigationRail) {
+                        NavRailBar(
+                            navigationItems = topLevelDestinations,
+                            navHostController = navHostController
                         )
                     }
+
+                    Navigation(
+                        navHostController = navHostController,
+                        windowSize = windowSize,
+                        paddingValues = paddingValues
+                    )
                 }
             }
         }

@@ -5,6 +5,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import coil3.compose.setSingletonImageLoaderFactory
+import com.vickbt.shared.utils.getAsyncImageLoader
 
 private val DarkColorPalette = darkColorScheme(
     primary = DarkPrimaryColor,
@@ -28,6 +30,10 @@ fun NotflixTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = if (darkTheme) DarkColorPalette else LightColorPalette
+
+    setSingletonImageLoaderFactory { context ->
+        context.getAsyncImageLoader()
+    }
 
     MaterialTheme(
         colorScheme = colorScheme,

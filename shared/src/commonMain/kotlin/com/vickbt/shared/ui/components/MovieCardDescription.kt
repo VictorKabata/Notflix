@@ -1,6 +1,5 @@
 package com.vickbt.shared.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -26,9 +25,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.seiko.imageloader.rememberImagePainter
+import coil3.compose.AsyncImage
 import com.vickbt.shared.domain.models.MovieDetails
-import com.vickbt.shared.utils.commonImageLoader
 import com.vickbt.shared.utils.loadImage
 
 @Composable
@@ -45,19 +43,15 @@ fun MovieCardDescription(
     Card(modifier = modifier.clickable { onItemClick(movie) }) {
         Box {
             //region Movie Cover Image
-            commonImageLoader {
-                val painter = rememberImagePainter(movie.backdropPath?.loadImage() ?: "")
-
-                Image(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .align(Alignment.Center),
-                    alignment = Alignment.Center,
-                    contentScale = ContentScale.Crop,
-                    painter = painter,
-                    contentDescription = null
-                )
-            }
+            AsyncImage(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .align(Alignment.Center),
+                model = movie.backdropPath?.loadImage(),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.Center,
+            )
             //endregion
 
             //region Fading Edge Box

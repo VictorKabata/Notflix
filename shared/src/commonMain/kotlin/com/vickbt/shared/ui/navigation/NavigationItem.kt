@@ -1,4 +1,4 @@
-package com.vickbt.shared.presentation.ui.navigation
+package com.vickbt.shared.ui.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Favorite
@@ -15,5 +15,5 @@ sealed class NavigationItem(
     object Home : NavigationItem("/home", "Home", Icons.Rounded.Home)
     object Favorites : NavigationItem("/favorites", "Favorites", Icons.Rounded.Favorite)
     object Settings : NavigationItem("/settings", "Settings", Icons.Rounded.Settings)
-    object Details : NavigationItem("/details/{id:[0-9]+}", "Details", null)
+    object Details : NavigationItem("/details/{movieId}", "Details", null)
 }

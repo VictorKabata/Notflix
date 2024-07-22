@@ -1,5 +1,7 @@
-package com.vickbt.shared.presentation.ui.screens.home
+package com.vickbt.shared.ui.screens.home
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.vickbt.shared.domain.repositories.MoviesRepository
 import com.vickbt.shared.utils.HomeUiState
 import com.vickbt.shared.utils.SearchUiState
@@ -7,17 +9,13 @@ import com.vickbt.shared.utils.isLoading
 import com.vickbt.shared.utils.onFailure
 import com.vickbt.shared.utils.onSuccess
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
 
-class HomeViewModel constructor(private val moviesRepository: MoviesRepository) : KoinComponent {
+class HomeViewModel(private val moviesRepository: MoviesRepository) : ViewModel() {
 
     private val _homeUiState = MutableStateFlow(HomeUiState(isLoading = true))
     val homeUiState = _homeUiState.asStateFlow()
@@ -28,10 +26,15 @@ class HomeViewModel constructor(private val moviesRepository: MoviesRepository) 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery = _searchQuery.asStateFlow()
 
-    private val viewModelScope = CoroutineScope(Dispatchers.IO)
-
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         _homeUiState.update { it.copy(isLoading = false, error = exception.message) }
+    }
+
+    init {
+        fetchNowPlayingMovies()
+        fetchTrendingMovies()
+        fetchUpcomingMovies()
+        fetchPopularMovies()
     }
 
     fun fetchNowPlayingMovies() = viewModelScope.launch(coroutineExceptionHandler) {

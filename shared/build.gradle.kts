@@ -27,7 +27,7 @@ kotlin {
         }
     iosTarget("ios") {}
 
-    jvm()
+    jvm("desktop")
 
     cocoapods {
         summary = "Some description for the Shared Module"
@@ -50,29 +50,25 @@ kotlin {
             api(compose.components.resources)
             api(compose.materialIconsExtended)
 
-            implementation(libs.kotlinX.coroutines)
+            implementation(libs.coroutines)
 
-            api(libs.ktor.core)
-            implementation(libs.ktor.contentNegotiation)
-            implementation(libs.ktor.json)
-            implementation(libs.ktor.logging)
+            implementation(libs.bundles.ktor)
 
             api(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.koin.composeViewModel)
 
             implementation(libs.kotlinX.serializationJson)
 
             implementation(libs.kotlinX.dateTime)
 
-            implementation(libs.multiplatformSettings.noArg)
-            implementation(libs.multiplatformSettings.coroutines)
+            implementation(libs.bundles.multiplatformSettings)
 
             api(libs.napier)
 
-            implementation(libs.imageLoader)
+            implementation(libs.bundles.coil)
 
-            api(libs.preCompose)
-            api(libs.preCompose.viewmodel)
+            implementation(libs.navigation)
 
             implementation(libs.sqlDelight.coroutine)
 
@@ -101,11 +97,13 @@ kotlin {
 
         sourceSets["iosTest"].dependencies {}
 
-        sourceSets["jvmMain"].dependencies {
+        sourceSets["desktopMain"].dependencies {
+            implementation(libs.ktor.java)
             implementation(libs.sqlDelight.jvm)
+            implementation(libs.coroutines.swing)
         }
 
-        sourceSets["jvmTest"].dependencies {}
+        sourceSets["desktopTest"].dependencies {}
     }
 }
 

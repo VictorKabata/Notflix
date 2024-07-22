@@ -1,5 +1,7 @@
 package com.vickbt.shared.ui.screens.details
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.vickbt.shared.domain.models.MovieDetails
 import com.vickbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickbt.shared.utils.DetailsUiState
@@ -8,22 +10,17 @@ import com.vickbt.shared.utils.onFailure
 import com.vickbt.shared.utils.onSuccess
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
 
 class DetailsViewModel(
     private val movieDetailsRepository: MovieDetailsRepository
-) : KoinComponent {
+) : ViewModel() {
 
     private val _movieDetailsState = MutableStateFlow(DetailsUiState())
     val movieDetailsState = _movieDetailsState.asStateFlow()
-
-    private val viewModelScope = CoroutineScope(Dispatchers.Default)
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         _movieDetailsState.update { it.copy(isLoading = false, error = exception.message) }
