@@ -65,12 +65,10 @@ kotlin {
 
             implementation(libs.kotlinX.dateTime)
 
-            implementation(libs.multiplatformSettings.noArg)
-            implementation(libs.multiplatformSettings.coroutines)
+            implementation(libs.bundles.multiplatformSettings)
 
             api(libs.napier)
 
-            implementation(libs.imageLoader)
             implementation(libs.bundles.coil)
 
             implementation(libs.navigation)
