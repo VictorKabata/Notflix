@@ -27,7 +27,7 @@ kotlin {
         }
     iosTarget("ios") {}
 
-    jvm()
+    jvm("desktop")
 
     cocoapods {
         summary = "Some description for the Shared Module"
@@ -97,13 +97,13 @@ kotlin {
 
         sourceSets["iosTest"].dependencies {}
 
-        sourceSets["jvmMain"].dependencies {
+        sourceSets["desktopMain"].dependencies {
             implementation(libs.ktor.java)
             implementation(libs.sqlDelight.jvm)
             implementation(libs.coroutines.swing)
         }
 
-        sourceSets["jvmTest"].dependencies {}
+        sourceSets["desktopTest"].dependencies {}
     }
 }
 
