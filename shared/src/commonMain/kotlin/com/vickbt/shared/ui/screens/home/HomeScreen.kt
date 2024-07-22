@@ -54,7 +54,6 @@ import com.vickbt.shared.ui.components.SectionSeparator
 import com.vickbt.shared.ui.screens.search.SearchScreen
 import com.vickbt.shared.ui.theme.DarkPrimaryColor
 import com.vickbt.shared.utils.WindowSize
-import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)

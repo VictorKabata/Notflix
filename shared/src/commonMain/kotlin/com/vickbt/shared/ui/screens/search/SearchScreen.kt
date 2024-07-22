@@ -21,7 +21,6 @@ import androidx.navigation.NavHostController
 import com.vickbt.shared.ui.components.MovieCardPortrait
 import com.vickbt.shared.utils.SearchUiState
 import com.vickbt.shared.utils.WindowSize
-import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
 fun SearchScreen(

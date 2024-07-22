@@ -2,6 +2,10 @@ package com.vickbt.shared.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import coil3.ImageLoader
+import coil3.PlatformContext
+import coil3.request.crossfade
+import coil3.util.DebugLogger
 import com.vickbt.shared.ui.screens.settings.SettingsViewModel
 import org.koin.compose.koinInject
 
@@ -20,3 +24,8 @@ fun String.loadImage(): String {
 
     return "https://image.tmdb.org/t/p/$quality/$this"
 }
+
+fun PlatformContext.getAsyncImageLoader() = ImageLoader.Builder(this)
+    .crossfade(true)
+    .logger(DebugLogger())
+    .build()

@@ -1,6 +1,5 @@
 package com.vickbt.shared.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,9 +21,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.seiko.imageloader.rememberImagePainter
+import coil3.compose.AsyncImage
 import com.vickbt.shared.domain.models.Movie
-import com.vickbt.shared.utils.commonImageLoader
 import com.vickbt.shared.utils.loadImage
 
 @Composable
@@ -45,20 +43,16 @@ fun MovieCardPortraitCompact(
             elevation = CardDefaults.cardElevation(8.dp),
             shape = RoundedCornerShape(4.dp)
         ) {
-            commonImageLoader {
-                val painter = rememberImagePainter(movie.posterPath?.loadImage() ?: "")
-
-                Image(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(220.dp)
-                        .sizeIn(minHeight = 30.dp),
-                    painter = painter,
-                    alignment = Alignment.Center,
-                    contentScale = ContentScale.Crop,
-                    contentDescription = "Trending movie poster"
-                )
-            }
+            AsyncImage(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(220.dp)
+                    .sizeIn(minHeight = 30.dp),
+                model = movie.posterPath?.loadImage(),
+                contentDescription = "Trending movie poster",
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.Center,
+            )
         }
 
         Text(

@@ -32,8 +32,6 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
-import org.koin.core.module.dsl.factoryOf
-import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 fun commonModule(enableNetworkLogs: Boolean) = module {
@@ -93,7 +91,6 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     viewModelOf(::DetailsViewModel)
     viewModelOf(::SettingsViewModel)
     viewModelOf(::FavoritesViewModel)
-
 }
 
 expect fun platformModule(): Module
