@@ -50,12 +50,9 @@ kotlin {
             api(compose.components.resources)
             api(compose.materialIconsExtended)
 
-            implementation(libs.kotlinX.coroutines)
+            implementation(libs.coroutines)
 
-            api(libs.ktor.core)
-            implementation(libs.ktor.contentNegotiation)
-            implementation(libs.ktor.json)
-            implementation(libs.ktor.logging)
+            implementation(libs.bundles.ktor)
 
             api(libs.koin.core)
             implementation(libs.koin.compose)
@@ -101,7 +98,9 @@ kotlin {
         sourceSets["iosTest"].dependencies {}
 
         sourceSets["jvmMain"].dependencies {
+            implementation(libs.ktor.java)
             implementation(libs.sqlDelight.jvm)
+            implementation(libs.coroutines.swing)
         }
 
         sourceSets["jvmTest"].dependencies {}

@@ -76,7 +76,8 @@ firebase-performance-plugin = { id = "com.google.firebase.firebase-perf", versio
 
 [libraries]
 #Kotlin Multiplatform Lib Dependencies
-kotlinX-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+coroutines-swing={module="org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref="coroutines"}
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 kotlinX-serializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
@@ -137,5 +138,6 @@ test-runner = { module = "androidx.test:runner", version.ref = "test" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 [bundles]
+ktor = ["ktor-core", "ktor-contentNegotiation", "ktor-json", "ktor-logging"]
 coil = ["coil-compose-core", "coil-compose", "coil-ktor", "coil-multiplatform"]
 multiplatformSettings = ["multiplatformSettings-coroutines", "multiplatformSettings-noArg"]
