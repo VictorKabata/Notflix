@@ -1,5 +1,6 @@
 package com.vickbt.shared.ui.screens.favorites
 
+import androidx.lifecycle.ViewModel
 import com.vickbt.shared.domain.repositories.FavoritesRepository
 import com.vickbt.shared.utils.FavouritesUiState
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -9,11 +10,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
 
 class FavoritesViewModel(
     private val favoritesRepository: FavoritesRepository
-) : KoinComponent {
+) : ViewModel() {
 
     private val _favoriteMoviesState = MutableStateFlow(FavouritesUiState())
     val favoriteMoviesState = _favoriteMoviesState.asStateFlow()

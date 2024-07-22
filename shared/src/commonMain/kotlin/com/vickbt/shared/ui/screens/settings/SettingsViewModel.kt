@@ -1,5 +1,6 @@
 package com.vickbt.shared.ui.screens.settings
 
+import androidx.lifecycle.ViewModel
 import com.vickbt.shared.domain.repositories.SettingsRepository
 import com.vickbt.shared.utils.SettingsUiState
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -13,7 +14,7 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
 class SettingsViewModel(private val settingsRepository: SettingsRepository) :
-    KoinComponent {
+    ViewModel() {
 
     private val _settingsUiState = MutableStateFlow(SettingsUiState(isLoading = true))
     val settingsUiState = _settingsUiState.asStateFlow()

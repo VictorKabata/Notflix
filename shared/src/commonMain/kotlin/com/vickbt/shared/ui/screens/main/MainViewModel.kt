@@ -1,5 +1,6 @@
-package com.vickbt.shared.presentation.ui.screens.main
+package com.vickbt.shared.ui.screens.main
 
+import androidx.lifecycle.ViewModel
 import com.vickbt.shared.domain.repositories.SettingsRepository
 import com.vickbt.shared.utils.MainUiState
 import io.github.aakira.napier.Napier
@@ -12,9 +13,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
 
-class MainViewModel(private val settingsRepository: SettingsRepository) : KoinComponent {
+class MainViewModel(private val settingsRepository: SettingsRepository) : ViewModel() {
 
     private val _mainUiState = MutableStateFlow(MainUiState())
     val mainUiState = _mainUiState.asStateFlow()

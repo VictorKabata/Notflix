@@ -18,13 +18,13 @@ import com.vickbt.shared.ui.components.appbars.AppBar
 import com.vickbt.shared.ui.components.preferences.DialogPreferenceSelection
 import com.vickbt.shared.ui.components.preferences.PreferencesGroup
 import com.vickbt.shared.ui.components.preferences.TextPreference
-import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 private val themeLabels = listOf("Light", "Dark", "System Default")
 private val imageQualityLabels = listOf("High Quality", "Low Quality")
 
 @Composable
-fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
+fun SettingsScreen(viewModel: SettingsViewModel = koinViewModel<SettingsViewModel>()) {
     val settingsUiState = viewModel.settingsUiState.collectAsState().value
 
     val showThemeDialog = remember { mutableStateOf(false) }
@@ -47,10 +47,10 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
 
                 if (showThemeDialog.value) {
                     ChangeTheme(
-                    viewModel = viewModel,
-                    showDialog = showThemeDialog,
-                    currentValue = themeLabel
-                )
+                        viewModel = viewModel,
+                        showDialog = showThemeDialog,
+                        currentValue = themeLabel
+                    )
                 }
 
                 TextPreference(
@@ -62,10 +62,10 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinInject()) {
 
                 if (showImageQualityDialog.value) {
                     ChangeImageQuality(
-                    viewModel = viewModel,
-                    showDialog = showImageQualityDialog,
-                    currentValue = imageQualityLabel
-                )
+                        viewModel = viewModel,
+                        showDialog = showImageQualityDialog,
+                        currentValue = imageQualityLabel
+                    )
                 }
             }
         }

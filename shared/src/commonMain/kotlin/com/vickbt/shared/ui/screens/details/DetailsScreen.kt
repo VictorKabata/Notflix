@@ -36,12 +36,13 @@ import com.vickbt.shared.utils.getRating
 import io.github.aakira.napier.Napier
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun DetailsScreen(
     navigator: Navigator,
     windowSize: WindowSize = WindowSize.COMPACT,
-    viewModel: DetailsViewModel = koinInject(),
+    viewModel: DetailsViewModel = koinViewModel<DetailsViewModel>(),
     movieId: Int
 ) {
     LaunchedEffect(key1 = Unit) {

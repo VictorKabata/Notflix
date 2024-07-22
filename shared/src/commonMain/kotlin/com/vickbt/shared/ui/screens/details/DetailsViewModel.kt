@@ -1,5 +1,6 @@
 package com.vickbt.shared.ui.screens.details
 
+import androidx.lifecycle.ViewModel
 import com.vickbt.shared.domain.models.MovieDetails
 import com.vickbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickbt.shared.utils.DetailsUiState
@@ -14,11 +15,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
 
 class DetailsViewModel(
     private val movieDetailsRepository: MovieDetailsRepository
-) : KoinComponent {
+) : ViewModel() {
 
     private val _movieDetailsState = MutableStateFlow(DetailsUiState())
     val movieDetailsState = _movieDetailsState.asStateFlow()

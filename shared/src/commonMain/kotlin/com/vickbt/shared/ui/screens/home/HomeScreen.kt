@@ -45,7 +45,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.vickbt.shared.presentation.ui.screens.home.HomeViewModel
 import com.vickbt.shared.ui.components.MovieCardLandscape
 import com.vickbt.shared.ui.components.MovieCardPager
 import com.vickbt.shared.ui.components.MovieCardPagerIndicator
@@ -55,14 +54,14 @@ import com.vickbt.shared.ui.screens.search.SearchScreen
 import com.vickbt.shared.ui.theme.DarkPrimaryColor
 import com.vickbt.shared.utils.WindowSize
 import moe.tlaster.precompose.navigation.Navigator
-import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navigator: Navigator,
     windowSize: WindowSize = WindowSize.COMPACT,
-    viewModel: HomeViewModel = koinInject(),
+    viewModel: HomeViewModel = koinViewModel<HomeViewModel>(),
     paddingValues: PaddingValues
 ) {
     val scrollState = rememberScrollState()

@@ -1,5 +1,6 @@
-package com.vickbt.shared.presentation.ui.screens.home
+package com.vickbt.shared.ui.screens.home
 
+import androidx.lifecycle.ViewModel
 import com.vickbt.shared.domain.repositories.MoviesRepository
 import com.vickbt.shared.utils.HomeUiState
 import com.vickbt.shared.utils.SearchUiState
@@ -15,9 +16,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
 
-class HomeViewModel constructor(private val moviesRepository: MoviesRepository) : KoinComponent {
+class HomeViewModel(private val moviesRepository: MoviesRepository) : ViewModel() {
 
     private val _homeUiState = MutableStateFlow(HomeUiState(isLoading = true))
     val homeUiState = _homeUiState.asStateFlow()
