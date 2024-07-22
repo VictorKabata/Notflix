@@ -5,9 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.vickbt.shared.domain.repositories.SettingsRepository
 import com.vickbt.shared.utils.SettingsUiState
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
