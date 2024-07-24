@@ -12,11 +12,11 @@ import com.vickbt.shared.domain.repositories.MoviesRepository
 import com.vickbt.shared.domain.repositories.SettingsRepository
 import com.vickbt.shared.domain.utils.Constants.BASE_URL
 import com.vickbt.shared.domain.utils.Constants.URL_PATH
+import com.vickbt.shared.ui.screens.details.DetailsViewModel
+import com.vickbt.shared.ui.screens.favorites.FavoritesViewModel
 import com.vickbt.shared.ui.screens.home.HomeViewModel
 import com.vickbt.shared.ui.screens.main.MainViewModel
 import com.vickbt.shared.ui.screens.settings.SettingsViewModel
-import com.vickbt.shared.ui.screens.details.DetailsViewModel
-import com.vickbt.shared.ui.screens.favorites.FavoritesViewModel
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
@@ -84,7 +84,12 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
         MovieDetailsRepositoryImpl(httpClient = get(), favoriteMovieDao = get())
     }
     single<FavoritesRepository> { FavoritesRepositoryImpl(favoriteMovieDao = get()) }
-    single<SettingsRepository> { SettingsRepositoryImpl(observableSettings = get()) }
+    single<SettingsRepository> {
+        SettingsRepositoryImpl(
+            observableSettings = get(),
+            dataStore = get()
+        )
+    }
 
     viewModelOf(::MainViewModel)
     viewModelOf(::HomeViewModel)
