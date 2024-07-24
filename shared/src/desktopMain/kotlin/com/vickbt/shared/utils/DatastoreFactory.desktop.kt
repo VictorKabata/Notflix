@@ -4,7 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.vickbt.shared.domain.utils.Constants
 
-actual class DatastoreFactory actual constructor() {
+actual class DatastoreFactory {
     actual fun createDatastore(): DataStore<Preferences> {
         return initDataStore {
             Constants.dataStoreFileName

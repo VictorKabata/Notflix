@@ -23,7 +23,6 @@ kotlinxDateTime = "0.5.0"
 napier = "2.6.1"
 ktor = "2.3.7"
 sqlDelight = "2.0.1"
-multiplatformSettings = "1.1.1"
 buildKonfig = "0.13.3"
 kover = "0.6.1"
 materialWindowSizeClass = "0.3.0"
@@ -98,9 +97,6 @@ sqlDelight-native = { module = "app.cash.sqldelight:native-driver", version.ref 
 sqlDelight-JVM = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 kotlinX-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDateTime" }
-multiplatformSettings-noArg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatformSettings" }
-multiplatformSettings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatformSettings" }
-multiplatformSettings-test = { module = "com.russhwolf:multiplatform-settings-test", version.ref = "multiplatformSettings" }
 material-windowSizeClass = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "materialWindowSizeClass" }
 navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
@@ -142,4 +138,3 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 [bundles]
 ktor = ["ktor-core", "ktor-contentNegotiation", "ktor-json", "ktor-logging"]
 coil = ["coil-compose-core", "coil-compose", "coil-ktor", "coil-multiplatform"]
-multiplatformSettings = ["multiplatformSettings-coroutines", "multiplatformSettings-noArg"]

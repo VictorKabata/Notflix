@@ -84,12 +84,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
         MovieDetailsRepositoryImpl(httpClient = get(), favoriteMovieDao = get())
     }
     single<FavoritesRepository> { FavoritesRepositoryImpl(favoriteMovieDao = get()) }
-    single<SettingsRepository> {
-        SettingsRepositoryImpl(
-            observableSettings = get(),
-            dataStore = get()
-        )
-    }
+    single<SettingsRepository> { SettingsRepositoryImpl(dataStore = get()) }
 
     viewModelOf(::MainViewModel)
     viewModelOf(::HomeViewModel)

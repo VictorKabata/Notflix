@@ -62,8 +62,6 @@ kotlin {
 
             implementation(libs.kotlinX.dateTime)
 
-            implementation(libs.bundles.multiplatformSettings)
-
             api(libs.napier)
 
             implementation(libs.bundles.coil)

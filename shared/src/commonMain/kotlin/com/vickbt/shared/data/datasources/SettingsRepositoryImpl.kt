@@ -4,17 +4,13 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
-import com.russhwolf.settings.ExperimentalSettingsApi
-import com.russhwolf.settings.ObservableSettings
 import com.vickbt.shared.domain.repositories.SettingsRepository
 import com.vickbt.shared.domain.utils.Constants.KEY_IMAGE_QUALITY
 import com.vickbt.shared.domain.utils.Constants.KEY_THEME
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-@ExperimentalSettingsApi
 class SettingsRepositoryImpl(
-    private val observableSettings: ObservableSettings,
     private val dataStore: DataStore<Preferences>
 ) : SettingsRepository {
 
