@@ -62,8 +62,6 @@ kotlin {
 
             implementation(libs.kotlinX.dateTime)
 
-            implementation(libs.bundles.multiplatformSettings)
-
             api(libs.napier)
 
             implementation(libs.bundles.coil)
@@ -71,6 +69,8 @@ kotlin {
             implementation(libs.navigation)
 
             implementation(libs.sqlDelight.coroutine)
+
+            implementation(libs.datastore.preferences)
 
             // implementation(libs.material.windowSizeClass)
         }

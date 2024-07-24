@@ -1,9 +1,5 @@
 package com.vickbt.shared.di
 
-import com.vickbt.shared.ui.screens.home.HomeViewModel
-import com.vickbt.shared.ui.screens.main.MainViewModel
-import com.vickbt.shared.ui.screens.settings.SettingsViewModel
-import org.koin.core.Koin
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
@@ -18,12 +14,3 @@ fun initKoin(enableNetworkLogs: Boolean = true, appDeclaration: KoinAppDeclarati
 // fun initKoin() = initKoin(enableNetworkLogs = false) {}
 
 fun KoinApplication.Companion.start(): KoinApplication = initKoin { }
-
-val Koin.mainViewModel: MainViewModel
-    get() = get()
-
-val Koin.homeViewModel: HomeViewModel
-    get() = get()
-
-val Koin.settingsViewModel: SettingsViewModel
-    get() = get()

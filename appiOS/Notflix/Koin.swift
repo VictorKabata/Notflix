@@ -24,9 +24,7 @@ extension KoinApplication {
 }
 
 extension KoinApplication {
-    private static let keyPaths: [PartialKeyPath<Koin>] = [
-        \.homeViewModel
-         
+    private static let keyPaths: [PartialKeyPath<Koin>] = [         
     ]
     
     static func inject<T>() -> T {
