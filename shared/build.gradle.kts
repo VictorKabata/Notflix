@@ -72,6 +72,8 @@ kotlin {
 
             implementation(libs.sqlDelight.coroutine)
 
+            implementation(libs.datastore.preferences)
+
             // implementation(libs.material.windowSizeClass)
         }
 

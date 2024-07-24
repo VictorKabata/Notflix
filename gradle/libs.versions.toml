@@ -29,6 +29,7 @@ kover = "0.6.1"
 materialWindowSizeClass = "0.3.0"
 navigation = "2.7.0-alpha07"
 coil = "3.0.0-alpha06"
+datastore = "1.1.1"
 
 #Android Versions
 androidxActivity = "1.8.2"
@@ -78,6 +79,7 @@ firebase-performance-plugin = { id = "com.google.firebase.firebase-perf", versio
 #Kotlin Multiplatform Lib Dependencies
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 coroutines-swing={module="org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref="coroutines"}
+datastore-preferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastore" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 kotlinX-serializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
