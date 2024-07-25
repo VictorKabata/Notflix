@@ -11,6 +11,9 @@ plugins {
     alias(libs.plugins.compose)
 
     alias(libs.plugins.sqlDelight)
+
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -71,6 +74,9 @@ kotlin {
             implementation(libs.sqlDelight.coroutine)
 
             implementation(libs.datastore.preferences)
+
+            implementation(libs.room.runtime)
+            implementation(libs.sqlite.bundled)
 
             // implementation(libs.material.windowSizeClass)
         }
@@ -143,4 +149,12 @@ sqldelight {
             srcDirs.setFrom("src/commonMain/kotlin")
         }
     }
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
+}
+
+dependencies {
+    kspCommonMainMetadata(libs.room.compiler)
 }
