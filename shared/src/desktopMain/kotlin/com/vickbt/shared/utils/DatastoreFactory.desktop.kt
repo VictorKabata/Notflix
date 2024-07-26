@@ -7,7 +7,7 @@ import com.vickbt.shared.domain.utils.Constants
 actual class DatastoreFactory {
     actual fun createDatastore(): DataStore<Preferences> {
         return initDataStore {
-            Constants.dataStoreFileName
+            Constants.DATASTORE_FILE_NAME
         }
     }
 }

@@ -8,7 +8,7 @@ import com.vickbt.shared.domain.utils.Constants
 actual class DatastoreFactory(private val context: Context) {
     actual fun createDatastore(): DataStore<Preferences> {
         return initDataStore {
-            context.filesDir.resolve(Constants.dataStoreFileName).absolutePath
+            context.filesDir.resolve(Constants.DATASTORE_FILE_NAME).absolutePath
         }
     }
 }

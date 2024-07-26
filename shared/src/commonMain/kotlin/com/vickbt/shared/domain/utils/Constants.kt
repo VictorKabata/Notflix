@@ -17,5 +17,7 @@ object Constants {
     const val KEY_LANGUAGE = "language"
     const val KEY_IMAGE_QUALITY = "image_quality"
 
-    internal const val dataStoreFileName = "notflix.preferences_pb"
+    const val DATABASE_NAME = "notflix.db"
+
+    internal const val DATASTORE_FILE_NAME = "notflix.preferences_pb"
 }

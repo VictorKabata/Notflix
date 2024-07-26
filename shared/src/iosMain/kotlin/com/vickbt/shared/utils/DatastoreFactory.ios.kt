@@ -20,7 +20,7 @@ actual class DatastoreFactory {
                 create = false,
                 error = null
             )
-            requireNotNull(directory).path() + "/${Constants.dataStoreFileName}"
+            requireNotNull(directory).path() + "/${Constants.DATASTORE_FILE_NAME}"
         }
     }
 }
