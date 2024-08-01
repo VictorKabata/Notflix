@@ -8,16 +8,16 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import com.vickbt.shared.presentation.ui.navigation.NavigationItem
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import com.vickbt.shared.ui.navigation.NavigationItem
 import com.vickbt.shared.ui.theme.Gray
-import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
 fun BottomNavBar(
     modifier: Modifier = Modifier,
-    navigator: Navigator,
+    navHostController: NavHostController,
     bottomNavItems: List<NavigationItem>
 ) {
     NavigationBar(
@@ -27,7 +27,7 @@ fun BottomNavBar(
         bottomNavItems.iterator().forEach { item ->
 
             val currentDestination =
-                navigator.currentEntry.collectAsState(null).value?.route?.route
+                navHostController.currentBackStackEntryAsState().value?.destination?.route
             val isSelected = item.route == currentDestination
 
             NavigationBarItem(
@@ -45,7 +45,7 @@ fun BottomNavBar(
                 ),
                 selected = isSelected,
                 onClick = {
-                    if (item.route != currentDestination) navigator.navigate(route = item.route)
+                    if (item.route != currentDestination) navHostController.navigate(route = item.route)
                 }
             )
         }

@@ -32,7 +32,6 @@ import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,7 +44,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.vickbt.shared.presentation.ui.screens.home.HomeViewModel
+import androidx.navigation.NavHostController
 import com.vickbt.shared.ui.components.MovieCardLandscape
 import com.vickbt.shared.ui.components.MovieCardPager
 import com.vickbt.shared.ui.components.MovieCardPagerIndicator
@@ -54,25 +53,17 @@ import com.vickbt.shared.ui.components.SectionSeparator
 import com.vickbt.shared.ui.screens.search.SearchScreen
 import com.vickbt.shared.ui.theme.DarkPrimaryColor
 import com.vickbt.shared.utils.WindowSize
-import moe.tlaster.precompose.navigation.Navigator
-import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    navigator: Navigator,
+    navigator: NavHostController,
     windowSize: WindowSize = WindowSize.COMPACT,
-    viewModel: HomeViewModel = koinInject(),
+    viewModel: HomeViewModel = koinViewModel<HomeViewModel>(),
     paddingValues: PaddingValues
 ) {
     val scrollState = rememberScrollState()
-
-    LaunchedEffect(key1 = viewModel) {
-        viewModel.fetchNowPlayingMovies()
-        viewModel.fetchTrendingMovies()
-        viewModel.fetchUpcomingMovies()
-        viewModel.fetchPopularMovies()
-    }
 
     val homeUiState = viewModel.homeUiState.collectAsState().value
     val searchUiState = viewModel.searchUiState.collectAsState().value

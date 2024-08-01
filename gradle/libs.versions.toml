@@ -13,21 +13,22 @@ nativeCocoapod = "1.9.0"
 # Kotlin Multiplatform Version
 kotlinxCoroutines = "1.7.3"
 koinCore = "3.5.3"
-koinCompose = "1.1.2"
+koinCompose = "1.1.5"
+koinComposeViewModel = "1.2.0-Beta4"
 koinAndroid = "3.5.3"
 koinAndroidxCompose = "3.5.3"
+composeMultiplatform = "1.5.11"
 kotlinxSerializationJson = "1.6.2"
 kotlinxDateTime = "0.5.0"
 napier = "2.6.1"
 ktor = "2.3.7"
 sqlDelight = "2.0.1"
-multiplatformSettings = "1.1.1"
-kmpNativeCoroutines = "0.12.1-new-mm"
 buildKonfig = "0.13.3"
 kover = "0.6.1"
-preCompose = "1.5.10"
-imageLoader = "1.7.1"
 materialWindowSizeClass = "0.3.0"
+navigation = "2.7.0-alpha07"
+coil = "3.0.0-alpha06"
+datastore = "1.1.1"
 
 #Android Versions
 androidxActivity = "1.8.2"
@@ -50,7 +51,6 @@ espresso = "3.5.1"
 test = "1.5.0"
 archTestCore = "2.2.0"
 turbine = "0.12.3"
-composeMultiplatform = "1.5.11"
 
 [plugins]
 ktLint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLint" }
@@ -64,7 +64,6 @@ android-library = { id = "com.android.library", version.ref = "gradle" }
 android-application = { id = "com.android.application", version.ref = "gradle" }
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinX-serialization-plugin = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kmp-NativeCoroutines-plugin = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "kmpNativeCoroutines" }
 buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
 compose = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
@@ -77,11 +76,12 @@ firebase-performance-plugin = { id = "com.google.firebase.firebase-perf", versio
 
 [libraries]
 #Kotlin Multiplatform Lib Dependencies
-kotlinX-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+coroutines-swing={module="org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref="coroutines"}
+datastore-preferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastore" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 kotlinX-serializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
-ktor-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktor" }
 ktor-contentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
@@ -97,21 +97,21 @@ sqlDelight-native = { module = "app.cash.sqldelight:native-driver", version.ref 
 sqlDelight-JVM = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 kotlinX-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDateTime" }
-multiplatformSettings-noArg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatformSettings" }
-multiplatformSettings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatformSettings" }
-multiplatformSettings-test = { module = "com.russhwolf:multiplatform-settings-test", version.ref = "multiplatformSettings" }
-imageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "imageLoader" }
-preCompose = { module = "moe.tlaster:precompose", version.ref = "preCompose" }
-preCompose-viewmodel = { module = "moe.tlaster:precompose-viewmodel", version.ref = "preCompose" }
 material-windowSizeClass = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "materialWindowSizeClass" }
+navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-compose-core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coil" }
+coil-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil" }
+coil-multiplatform = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
 
 #Android Lib Dependencies
 androidX-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
-androidX-activity={module="androidx.activity:activity-compose", version.ref="androidxActivity"}
+androidX-activity = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCompose" }
+koin-composeViewModel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeViewModel" }
 leakCanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
 firebase-BOM = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBOM" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
@@ -134,3 +134,7 @@ archTestCore = { module = "androidx.arch.core:core-testing", version.ref = "arch
 test-rules = { module = "androidx.test:rules", version.ref = "test" }
 test-runner = { module = "androidx.test:runner", version.ref = "test" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+
+[bundles]
+ktor = ["ktor-core", "ktor-contentNegotiation", "ktor-json", "ktor-logging"]
+coil = ["coil-compose-core", "coil-compose", "coil-ktor", "coil-multiplatform"]

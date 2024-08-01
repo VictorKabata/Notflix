@@ -1,6 +1,5 @@
 package com.vickbt.shared.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -33,13 +32,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.seiko.imageloader.rememberImagePainter
+import coil3.compose.AsyncImage
 import com.vickbt.shared.domain.models.Movie
 import com.vickbt.shared.ui.components.ratingbar.RatingBar
 import com.vickbt.shared.ui.components.ratingbar.RatingBarStyle
 import com.vickbt.shared.ui.components.ratingbar.StepSize
 import com.vickbt.shared.utils.capitalizeEachWord
-import com.vickbt.shared.utils.commonImageLoader
 import com.vickbt.shared.utils.getRating
 import com.vickbt.shared.utils.getReleaseDate
 import com.vickbt.shared.utils.loadImage
@@ -59,20 +57,15 @@ fun MovieCardLandscape(
         shape = RoundedCornerShape(4.dp)
     ) {
         Box(modifier = modifier) {
-            commonImageLoader {
-                val painter = rememberImagePainter(movie.backdropPath?.loadImage() ?: "")
-
-                //region Movie Cover
-                Image(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .align(Alignment.Center),
-                    alignment = Alignment.Center,
-                    contentScale = ContentScale.Crop,
-                    painter = painter,
-                    contentDescription = null
-                )
-            }
+            AsyncImage(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .align(Alignment.Center),
+                model = movie.backdropPath?.loadImage(),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.Center,
+            )
             //endregion
 
             //region Fading Edge
@@ -140,7 +133,7 @@ fun MovieCardLandscape(
 
                         Text(
                             modifier = Modifier,
-                            text = movie.releaseDate.getReleaseDate()?.capitalizeEachWord() ?: "",
+                            text = movie.releaseDate.getReleaseDate().capitalizeEachWord(),
                             fontSize = 14.sp,
                             maxLines = 1,
                             style = MaterialTheme.typography.labelSmall,

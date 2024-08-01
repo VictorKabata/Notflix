@@ -1,7 +1,6 @@
 package com.vickbt.shared.ui.components.appbars
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -39,11 +38,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.seiko.imageloader.rememberImagePainter
+import coil3.compose.AsyncImage
 import com.vickbt.shared.domain.models.MovieDetails
 import com.vickbt.shared.ui.components.collapsingToolbar.CollapsingToolbarScaffoldState
 import com.vickbt.shared.utils.DetailsUiState
-import com.vickbt.shared.utils.commonImageLoader
 import com.vickbt.shared.utils.getMovieDuration
 import com.vickbt.shared.utils.loadImage
 
@@ -78,19 +76,16 @@ fun DetailsAppBar(
             .height(350.dp)
             .graphicsLayer { alpha = scrollProgress }
     ) {
-        commonImageLoader {
-            val painter = rememberImagePainter(movieDetails?.backdropPath?.loadImage() ?: "")
-
-            Image(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .align(Alignment.Center)
-                    .aspectRatio(scrollProgress.coerceAtLeast(.1f)),
-                painter = painter,
-                contentDescription = "Movie poster",
-                contentScale = ContentScale.Crop
-            )
-        }
+        AsyncImage(
+            modifier = Modifier
+                .fillMaxSize()
+                .align(Alignment.Center)
+                .aspectRatio(scrollProgress.coerceAtLeast(.1f)),
+            model = movieDetails?.backdropPath?.loadImage(),
+            contentDescription = "Movie poster",
+            contentScale = ContentScale.Crop,
+            alignment = Alignment.Center,
+        )
 
         Box(
             modifier = Modifier

@@ -16,4 +16,6 @@ object Constants {
     const val KEY_THEME = "theme"
     const val KEY_LANGUAGE = "language"
     const val KEY_IMAGE_QUALITY = "image_quality"
+
+    internal const val dataStoreFileName = "notflix.preferences_pb"
 }

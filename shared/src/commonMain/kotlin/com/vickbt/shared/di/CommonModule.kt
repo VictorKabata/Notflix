@@ -12,11 +12,11 @@ import com.vickbt.shared.domain.repositories.MoviesRepository
 import com.vickbt.shared.domain.repositories.SettingsRepository
 import com.vickbt.shared.domain.utils.Constants.BASE_URL
 import com.vickbt.shared.domain.utils.Constants.URL_PATH
-import com.vickbt.shared.presentation.ui.screens.home.HomeViewModel
-import com.vickbt.shared.presentation.ui.screens.main.MainViewModel
-import com.vickbt.shared.ui.screens.settings.SettingsViewModel
 import com.vickbt.shared.ui.screens.details.DetailsViewModel
 import com.vickbt.shared.ui.screens.favorites.FavoritesViewModel
+import com.vickbt.shared.ui.screens.home.HomeViewModel
+import com.vickbt.shared.ui.screens.main.MainViewModel
+import com.vickbt.shared.ui.screens.settings.SettingsViewModel
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
@@ -30,9 +30,8 @@ import io.ktor.http.URLProtocol
 import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
-import org.koin.core.module.dsl.factoryOf
-import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 fun commonModule(enableNetworkLogs: Boolean) = module {
@@ -85,13 +84,13 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
         MovieDetailsRepositoryImpl(httpClient = get(), favoriteMovieDao = get())
     }
     single<FavoritesRepository> { FavoritesRepositoryImpl(favoriteMovieDao = get()) }
-    single<SettingsRepository> { SettingsRepositoryImpl(observableSettings = get()) }
+    single<SettingsRepository> { SettingsRepositoryImpl(dataStore = get()) }
 
-    singleOf(::MainViewModel)
-    singleOf(::HomeViewModel)
-    factoryOf(::DetailsViewModel)
-    singleOf(::SettingsViewModel)
-    singleOf(::FavoritesViewModel)
+    viewModelOf(::MainViewModel)
+    viewModelOf(::HomeViewModel)
+    viewModelOf(::DetailsViewModel)
+    viewModelOf(::SettingsViewModel)
+    viewModelOf(::FavoritesViewModel)
 }
 
 expect fun platformModule(): Module

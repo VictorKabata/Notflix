@@ -2,42 +2,52 @@ package com.vickbt.shared.ui.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
-import com.vickbt.shared.presentation.ui.navigation.NavigationItem
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.vickbt.shared.ui.screens.details.DetailsScreen
 import com.vickbt.shared.ui.screens.favorites.FavoritesScreen
 import com.vickbt.shared.ui.screens.home.HomeScreen
 import com.vickbt.shared.ui.screens.settings.SettingsScreen
 import com.vickbt.shared.utils.WindowSize
-import moe.tlaster.precompose.navigation.NavHost
-import moe.tlaster.precompose.navigation.Navigator
-import moe.tlaster.precompose.navigation.path
+import io.github.aakira.napier.Napier
 
 @Composable
 fun Navigation(
-    navigator: Navigator,
+    navHostController: NavHostController,
     windowSize: WindowSize,
     paddingValues: PaddingValues = PaddingValues()
 ) {
-    NavHost(navigator = navigator, initialRoute = NavigationItem.Home.route) {
-        scene(NavigationItem.Home.route) {
+    NavHost(navController = navHostController, startDestination = NavigationItem.Home.route) {
+        composable(route = NavigationItem.Home.route) {
             HomeScreen(
-                navigator = navigator,
+                navigator = navHostController,
                 windowSize = windowSize,
                 paddingValues = paddingValues
             )
         }
 
-        scene(NavigationItem.Favorites.route) {
-            FavoritesScreen(navigator = navigator)
+        composable(route = NavigationItem.Favorites.route) {
+            FavoritesScreen(navigator = navHostController)
         }
 
-        scene(NavigationItem.Settings.route) {
+        composable(route = NavigationItem.Settings.route) {
             SettingsScreen()
         }
 
-        scene(NavigationItem.Details.route) { backStackEntry ->
-            backStackEntry.path<Int>("id")?.let { movieId ->
-                DetailsScreen(navigator = navigator, windowSize = windowSize, movieId = movieId)
+        composable(
+            route = NavigationItem.Details.route,
+            arguments = listOf(navArgument("movieId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            backStackEntry.arguments?.getInt("movieId")?.let { movieId ->
+                Napier.e("Movie ID: $movieId")
+                DetailsScreen(
+                    navigator = navHostController,
+                    windowSize = windowSize,
+                    movieId = movieId
+                )
             }
         }
     }
