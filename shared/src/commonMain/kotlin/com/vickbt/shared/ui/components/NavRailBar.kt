@@ -15,6 +15,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.vickbt.shared.ui.navigation.NavigationItem
 import com.vickbt.shared.ui.theme.Gray
 import com.vickbt.shared.ui.theme.PrimaryColor
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun NavRailBar(
@@ -45,11 +46,11 @@ fun NavRailBar(
                     item.icon?.let {
                         Icon(
                             imageVector = it,
-                            contentDescription = item.title
+                            contentDescription = stringResource(item.title)
                         )
                     }
                 },
-                label = { Text(text = item.title) },
+                label = { Text(text = stringResource(item.title)) },
                 colors = NavigationRailItemDefaults.colors(
                     selectedIconColor = PrimaryColor,
                     unselectedIconColor = Gray
