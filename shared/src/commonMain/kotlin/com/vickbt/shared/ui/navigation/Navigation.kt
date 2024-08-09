@@ -42,7 +42,6 @@ fun Navigation(
             arguments = listOf(navArgument("movieId") { type = NavType.IntType })
         ) { backStackEntry ->
             backStackEntry.arguments?.getInt("movieId")?.let { movieId ->
-                Napier.e("Movie ID: $movieId")
                 DetailsScreen(
                     navigator = navHostController,
                     windowSize = windowSize,
