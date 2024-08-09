@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.rounded.Share
@@ -44,6 +44,12 @@ import com.vickbt.shared.ui.components.collapsingToolbar.CollapsingToolbarScaffo
 import com.vickbt.shared.utils.DetailsUiState
 import com.vickbt.shared.utils.getMovieDuration
 import com.vickbt.shared.utils.loadImage
+import notflix.shared.generated.resources.Res
+import notflix.shared.generated.resources.back
+import notflix.shared.generated.resources.share
+import notflix.shared.generated.resources.title_favorites
+import notflix.shared.generated.resources.unknown_movie
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -135,7 +141,7 @@ fun DetailsAppBar(
         title = {
             Text(
                 modifier = Modifier.graphicsLayer { alpha = 1 - scrollProgress },
-                text = movieDetails?.title ?: "Unknown movie",
+                text = movieDetails?.title ?: stringResource(Res.string.unknown_movie),
                 style = MaterialTheme.typography.titleMedium,
                 fontSize = 20.sp,
                 overflow = TextOverflow.Ellipsis,
@@ -147,8 +153,8 @@ fun DetailsAppBar(
         navigationIcon = {
             IconButton(onClick = { onNavigationIconClick() }) {
                 Icon(
-                    imageVector = Icons.Rounded.ArrowBack,
-                    contentDescription = "Back",
+                    imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                    contentDescription = stringResource(Res.string.back),
                     tint = MaterialTheme.colorScheme.onSurface
                 )
             }
@@ -157,7 +163,7 @@ fun DetailsAppBar(
             IconButton(onClick = { onShareIconClick() }) {
                 Icon(
                     imageVector = Icons.Rounded.Share,
-                    contentDescription = "Share",
+                    contentDescription = stringResource(Res.string.share),
                     tint = MaterialTheme.colorScheme.onSurface
                 )
             }
@@ -170,7 +176,7 @@ fun DetailsAppBar(
             ) {
                 Icon(
                     imageVector = if (isFavourite == true) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
-                    contentDescription = "Favourite",
+                    contentDescription = stringResource(Res.string.title_favorites),
                     tint = if (isFavourite == true) Color.Red else MaterialTheme.colorScheme.onSurface
                 )
             }

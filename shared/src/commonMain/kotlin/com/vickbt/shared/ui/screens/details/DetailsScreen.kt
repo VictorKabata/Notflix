@@ -34,7 +34,11 @@ import com.vickbt.shared.ui.components.collapsingToolbar.rememberCollapsingToolb
 import com.vickbt.shared.utils.WindowSize
 import com.vickbt.shared.utils.getPopularity
 import com.vickbt.shared.utils.getRating
-import io.github.aakira.napier.Napier
+import notflix.shared.generated.resources.Res
+import notflix.shared.generated.resources.cast
+import notflix.shared.generated.resources.overview
+import notflix.shared.generated.resources.similar_movies
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -52,8 +56,6 @@ fun DetailsScreen(
     }
 
     val movieDetailsState = viewModel.movieDetailsState.collectAsState().value
-
-    Napier.e("is favorite: ${movieDetailsState.isFavorite}")
 
     val scrollState = rememberScrollState()
     val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
@@ -106,7 +108,7 @@ fun DetailsScreen(
                     if (!movieDetailsState.movieDetails?.overview.isNullOrEmpty()) {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
-                            text = "Overview",
+                            text = stringResource(Res.string.overview),
                             style = MaterialTheme.typography.titleMedium,
                             fontSize = 20.sp,
                             color = MaterialTheme.colorScheme.onSurface,
@@ -130,7 +132,7 @@ fun DetailsScreen(
                     if (!movieDetailsState.movieCast.isNullOrEmpty()) {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
-                            text = "Cast",
+                            text = stringResource(Res.string.cast),
                             style = MaterialTheme.typography.titleMedium,
                             fontSize = 20.sp
                         )
@@ -150,7 +152,7 @@ fun DetailsScreen(
                     if (!movieDetailsState.similarMovies.isNullOrEmpty()) {
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
-                            text = "Similar Movies",
+                            text = stringResource(Res.string.similar_movies),
                             style = MaterialTheme.typography.titleMedium,
                             fontSize = 20.sp,
                             color = MaterialTheme.colorScheme.onSurface

@@ -18,6 +18,11 @@ import com.vickbt.shared.ui.components.appbars.AppBar
 import com.vickbt.shared.ui.components.preferences.DialogPreferenceSelection
 import com.vickbt.shared.ui.components.preferences.PreferencesGroup
 import com.vickbt.shared.ui.components.preferences.TextPreference
+import notflix.shared.generated.resources.Res
+import notflix.shared.generated.resources.change_image_quality
+import notflix.shared.generated.resources.change_theme
+import notflix.shared.generated.resources.title_settings
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 private val themeLabels = listOf("Light", "Dark", "System Default")
@@ -34,13 +39,13 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinViewModel<SettingsViewMode
     val imageQualityLabel = imageQualityLabels[settingsUiState.selectedImageQuality]
 
     Scaffold(
-        topBar = { AppBar("Settings") },
+        topBar = { AppBar(stringResource(Res.string.title_settings)) },
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
             PreferencesGroup(title = "Personalisation") {
                 TextPreference(
                     icon = Icons.Rounded.Lightbulb,
-                    title = "Change theme",
+                    title = stringResource(Res.string.change_theme),
                     subTitle = themeLabel,
                     onClick = { showThemeDialog.value = !showThemeDialog.value }
                 )
@@ -97,7 +102,7 @@ private fun ChangeImageQuality(
 ) {
     DialogPreferenceSelection(
         showDialog = showDialog.value,
-        title = "Image quality",
+        title = stringResource(Res.string.change_image_quality),
         currentValue = currentValue ?: "Default",
         labels = imageQualityLabels,
         onNegativeClick = { showDialog.value = false }
