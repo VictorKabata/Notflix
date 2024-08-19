@@ -13,13 +13,14 @@ import platform.Foundation.NSUserDomainMask
 actual class DatastoreFactory {
     actual fun createDatastore(): DataStore<Preferences> {
         return initDataStore {
-            val directory = NSFileManager.defaultManager.URLForDirectory(
-                directory = NSDocumentDirectory,
-                inDomain = NSUserDomainMask,
-                appropriateForURL = null,
-                create = false,
-                error = null
-            )
+            val directory =
+                NSFileManager.defaultManager.URLForDirectory(
+                    directory = NSDocumentDirectory,
+                    inDomain = NSUserDomainMask,
+                    appropriateForURL = null,
+                    create = false,
+                    error = null,
+                )
             requireNotNull(directory).path() + "/${Constants.dataStoreFileName}"
         }
     }

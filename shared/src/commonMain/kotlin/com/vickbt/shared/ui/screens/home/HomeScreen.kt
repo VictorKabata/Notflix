@@ -61,7 +61,7 @@ fun HomeScreen(
     navigator: NavHostController,
     windowSize: WindowSize = WindowSize.COMPACT,
     viewModel: HomeViewModel = koinViewModel<HomeViewModel>(),
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
 ) {
     val scrollState = rememberScrollState()
 
@@ -74,18 +74,20 @@ fun HomeScreen(
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(
-            space = 6.dp,
-            alignment = Alignment.CenterVertically
-        )
+        verticalArrangement =
+            Arrangement.spacedBy(
+                space = 6.dp,
+                alignment = Alignment.CenterVertically,
+            ),
     ) {
         //region Search
         SearchBar(
-            modifier = Modifier.background(
-                MaterialTheme.colorScheme.surface
-            ).also {
-                if (activeState) it.fillMaxWidth() else it.fillMaxWidth(.85f)
-            },
+            modifier =
+                Modifier.background(
+                    MaterialTheme.colorScheme.surface,
+                ).also {
+                    if (activeState) it.fillMaxWidth() else it.fillMaxWidth(.85f)
+                },
             query = searchQuery,
             onQueryChange = { searchQuery = it },
             onSearch = { viewModel.searchMovie(movieName = it) },
@@ -98,7 +100,7 @@ fun HomeScreen(
                     style = MaterialTheme.typography.labelMedium,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    textAlign = TextAlign.Start
+                    textAlign = TextAlign.Start,
                 )
             },
             leadingIcon = {
@@ -109,7 +111,7 @@ fun HomeScreen(
                     }) {
                         Icon(
                             imageVector = Icons.Rounded.ArrowBack,
-                            contentDescription = "Go back"
+                            contentDescription = "Go back",
                         )
                     }
                 } else {
@@ -123,31 +125,33 @@ fun HomeScreen(
                     }) {
                         Icon(
                             imageVector = Icons.Rounded.Close,
-                            contentDescription = "Close search"
+                            contentDescription = "Close search",
                         )
                     }
                 } else {
                     null
                 }
             },
-            colors = SearchBarDefaults.colors(
-                dividerColor = Color.LightGray,
-                // inputFieldColors = TextFieldDefaults.colors()
-            )
+            colors =
+                SearchBarDefaults.colors(
+                    dividerColor = Color.LightGray,
+                    // inputFieldColors = TextFieldDefaults.colors()
+                ),
         ) {
             SearchScreen(
                 navigator = navigator,
                 searchUiState = searchUiState,
-                windowSize = windowSize
+                windowSize = windowSize,
             )
         }
         //endregion
 
         // region Home section
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
         ) {
             if (homeUiState.isLoading) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
@@ -155,15 +159,16 @@ fun HomeScreen(
                 Text(
                     modifier = Modifier.align(Alignment.Center),
                     text = "Error:\n${homeUiState.error}",
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
                 )
             } else {
                 Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .verticalScroll(scrollState)
-                        .align(Alignment.Center),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .verticalScroll(scrollState)
+                            .align(Alignment.Center),
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     //region Now Playing Movies
                     homeUiState.nowPlayingMovies?.let { nowPlayingMovies ->
@@ -174,11 +179,11 @@ fun HomeScreen(
                             modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
                             state = pagerState,
                             contentPadding = PaddingValues(horizontal = 16.dp),
-                            pageSpacing = 8.dp
+                            pageSpacing = 8.dp,
                         ) { currentPage ->
                             MovieCardPager(
                                 modifier = Modifier.fillMaxWidth().height(280.dp),
-                                movie = nowPlayingMovies[currentPage]
+                                movie = nowPlayingMovies[currentPage],
                             ) { movie ->
                                 navigator.navigate("/details/${movie.id}")
                             }
@@ -189,7 +194,7 @@ fun HomeScreen(
                             pagerState = pagerState,
                             indicatorSize = 6.dp,
                             inactiveColor = Color.Gray,
-                            activeColor = DarkPrimaryColor
+                            activeColor = DarkPrimaryColor,
                         )
                     }
                     //endregion
@@ -197,28 +202,30 @@ fun HomeScreen(
                     //region Trending Movies
                     homeUiState.trendingMovies?.let {
                         SectionSeparator(
-                            modifier = Modifier
-                                .padding(horizontal = 16.dp, vertical = 6.dp)
-                                .fillMaxWidth()
-                                .wrapContentHeight(),
-                            sectionTitle = "Trending Movies"
+                            modifier =
+                                Modifier
+                                    .padding(horizontal = 16.dp, vertical = 6.dp)
+                                    .fillMaxWidth()
+                                    .wrapContentHeight(),
+                            sectionTitle = "Trending Movies",
                         )
 
                         Spacer(modifier = Modifier.height(8.dp))
 
                         LazyRow(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentHeight(),
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .wrapContentHeight(),
                             contentPadding = PaddingValues(horizontal = 16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            horizontalArrangement = Arrangement.spacedBy(10.dp),
                         ) {
                             items(items = it) { item ->
                                 MovieCardPortraitCompact(
                                     movie = item,
                                     onItemClick = { movie ->
                                         navigator.navigate("/details/${movie.id}")
-                                    }
+                                    },
                                 )
                             }
                         }
@@ -228,11 +235,12 @@ fun HomeScreen(
                     //region Upcoming Movies
                     homeUiState.upcomingMovies?.let {
                         SectionSeparator(
-                            modifier = Modifier
-                                .padding(start = 16.dp, end = 16.dp, top = 12.dp)
-                                .fillMaxWidth()
-                                .wrapContentHeight(),
-                            sectionTitle = "Upcoming Movies"
+                            modifier =
+                                Modifier
+                                    .padding(start = 16.dp, end = 16.dp, top = 12.dp)
+                                    .fillMaxWidth()
+                                    .wrapContentHeight(),
+                            sectionTitle = "Upcoming Movies",
                         )
 
                         Spacer(modifier = Modifier.height(8.dp))
@@ -240,17 +248,18 @@ fun HomeScreen(
                         LazyRow(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(14.dp),
-                            modifier = Modifier.wrapContentHeight()
+                            modifier = Modifier.wrapContentHeight(),
                         ) {
                             items(items = it) { item ->
                                 MovieCardLandscape(
-                                    modifier = Modifier
-                                        .width(300.dp)
-                                        .height(245.dp),
+                                    modifier =
+                                        Modifier
+                                            .width(300.dp)
+                                            .height(245.dp),
                                     movie = item,
                                     onClickItem = { movie ->
                                         navigator.navigate("/details/${movie.id}")
-                                    }
+                                    },
                                 )
                             }
                         }
@@ -261,11 +270,12 @@ fun HomeScreen(
                     homeUiState.popularMovies?.let {
                         Column(modifier = Modifier.padding(bottom = 90.dp)) {
                             SectionSeparator(
-                                modifier = Modifier
-                                    .padding(start = 16.dp, end = 16.dp, top = 12.dp)
-                                    .fillMaxWidth()
-                                    .wrapContentHeight(),
-                                sectionTitle = "Popular Movies"
+                                modifier =
+                                    Modifier
+                                        .padding(start = 16.dp, end = 16.dp, top = 12.dp)
+                                        .fillMaxWidth()
+                                        .wrapContentHeight(),
+                                sectionTitle = "Popular Movies",
                             )
 
                             Spacer(modifier = Modifier.height(8.dp))
@@ -280,7 +290,7 @@ fun HomeScreen(
                                         movie = item,
                                         onItemClick = { movie ->
                                             navigator.navigate("/details/${movie.id}")
-                                        }
+                                        },
                                     )
                                 }
                             }

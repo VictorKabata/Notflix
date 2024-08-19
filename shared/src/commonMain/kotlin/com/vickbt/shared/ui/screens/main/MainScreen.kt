@@ -31,11 +31,12 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel<MainViewModel>()) {
     NotflixTheme(darkTheme = isDarkTheme) {
         val navHostController = rememberNavController()
 
-        val topLevelDestinations = listOf(
-            NavigationItem.Home,
-            NavigationItem.Favorites,
-            NavigationItem.Settings
-        )
+        val topLevelDestinations =
+            listOf(
+                NavigationItem.Home,
+                NavigationItem.Favorites,
+                NavigationItem.Settings,
+            )
 
         val isTopLevelDestination =
             navHostController.currentBackStackEntryAsState().value?.destination?.route in topLevelDestinations.map { it.route }
@@ -47,10 +48,10 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel<MainViewModel>()) {
                 if (isTopLevelDestination && !showNavigationRail) {
                     BottomNavBar(
                         bottomNavItems = topLevelDestinations,
-                        navHostController = navHostController
+                        navHostController = navHostController,
                     )
                 }
-            }
+            },
         ) { paddingValues ->
 
             BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
@@ -60,14 +61,14 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel<MainViewModel>()) {
                     if (isTopLevelDestination && showNavigationRail) {
                         NavRailBar(
                             navigationItems = topLevelDestinations,
-                            navHostController = navHostController
+                            navHostController = navHostController,
                         )
                     }
 
                     Navigation(
                         navHostController = navHostController,
                         windowSize = windowSize,
-                        paddingValues = paddingValues
+                        paddingValues = paddingValues,
                     )
                 }
             }

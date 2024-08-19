@@ -53,7 +53,7 @@ fun DetailsAppBar(
     movieDetailsState: DetailsUiState?,
     onNavigationIconClick: () -> Unit,
     onShareIconClick: () -> Unit,
-    onFavoriteIconClick: (MovieDetails, Boolean?) -> Unit
+    onFavoriteIconClick: (MovieDetails, Boolean?) -> Unit,
 ) {
     // Return progress on collapsing toolbar - 1.0f=Expanded, 0.0f=Collapsed
     val scrollProgress = collapsingScrollState.toolbarState.progress
@@ -67,20 +67,22 @@ fun DetailsAppBar(
     var isFavourite by remember { mutableStateOf(movieDetailsState?.isFavorite) }
 
     val backgroundColor by animateColorAsState(
-        targetValue = MaterialTheme.colorScheme.surface.copy(1 - scrollProgress)
+        targetValue = MaterialTheme.colorScheme.surface.copy(1 - scrollProgress),
     )
 
     Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(350.dp)
-            .graphicsLayer { alpha = scrollProgress }
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .height(350.dp)
+                .graphicsLayer { alpha = scrollProgress },
     ) {
         AsyncImage(
-            modifier = Modifier
-                .fillMaxSize()
-                .align(Alignment.Center)
-                .aspectRatio(scrollProgress.coerceAtLeast(.1f)),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .align(Alignment.Center)
+                    .aspectRatio(scrollProgress.coerceAtLeast(.1f)),
             model = movieDetails?.backdropPath?.loadImage(),
             contentDescription = "Movie poster",
             contentScale = ContentScale.Crop,
@@ -88,25 +90,28 @@ fun DetailsAppBar(
         )
 
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(210.dp)
-                .align(Alignment.BottomCenter)
-                .background(Brush.verticalGradient(listOf(Color.Transparent, dominantColor)))
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .height(210.dp)
+                    .align(Alignment.BottomCenter)
+                    .background(Brush.verticalGradient(listOf(Color.Transparent, dominantColor))),
         )
 
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .graphicsLayer { alpha = scrollProgress }
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-                .align(Alignment.BottomCenter),
-            verticalArrangement = Arrangement.spacedBy(
-                space = 2.dp,
-                alignment = Alignment.CenterVertically
-            ),
-            horizontalAlignment = Alignment.Start
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .graphicsLayer { alpha = scrollProgress }
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .align(Alignment.BottomCenter),
+            verticalArrangement =
+                Arrangement.spacedBy(
+                    space = 2.dp,
+                    alignment = Alignment.CenterVertically,
+                ),
+            horizontalAlignment = Alignment.Start,
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
@@ -117,7 +122,7 @@ fun DetailsAppBar(
                 color = dominantTextColor,
                 fontSize = 32.sp,
                 textAlign = TextAlign.Start,
-                lineHeight = 30.sp
+                lineHeight = 30.sp,
             )
 
             Text(
@@ -125,7 +130,7 @@ fun DetailsAppBar(
                 text = movieDetails?.runtime?.getMovieDuration() ?: "",
                 color = dominantTextColor,
                 style = MaterialTheme.typography.labelMedium,
-                fontSize = 14.sp
+                fontSize = 14.sp,
             )
         }
     }
@@ -141,7 +146,7 @@ fun DetailsAppBar(
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Center,
                 maxLines = 1,
-                color = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colorScheme.onSurface,
             )
         },
         navigationIcon = {
@@ -149,7 +154,7 @@ fun DetailsAppBar(
                 Icon(
                     imageVector = Icons.Rounded.ArrowBack,
                     contentDescription = "Back",
-                    tint = MaterialTheme.colorScheme.onSurface
+                    tint = MaterialTheme.colorScheme.onSurface,
                 )
             }
         },
@@ -158,7 +163,7 @@ fun DetailsAppBar(
                 Icon(
                     imageVector = Icons.Rounded.Share,
                     contentDescription = "Share",
-                    tint = MaterialTheme.colorScheme.onSurface
+                    tint = MaterialTheme.colorScheme.onSurface,
                 )
             }
 
@@ -166,15 +171,15 @@ fun DetailsAppBar(
                 onClick = {
                     isFavourite?.let { isFavourite = !it }
                     movieDetails?.let { onFavoriteIconClick(it, isFavourite) }
-                }
+                },
             ) {
                 Icon(
                     imageVector = if (isFavourite == true) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
                     contentDescription = "Favourite",
-                    tint = if (isFavourite == true) Color.Red else MaterialTheme.colorScheme.onSurface
+                    tint = if (isFavourite == true) Color.Red else MaterialTheme.colorScheme.onSurface,
                 )
             }
         },
-        colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = backgroundColor)
+        colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = backgroundColor),
     )
 }

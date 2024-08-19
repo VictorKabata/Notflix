@@ -20,7 +20,7 @@ import com.vickbt.shared.ui.theme.PrimaryColor
 fun NavRailBar(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
-    navigationItems: List<NavigationItem>
+    navigationItems: List<NavigationItem>,
 ) {
     NavigationRail(
         modifier = modifier.fillMaxHeight().alpha(0.95F),
@@ -32,7 +32,7 @@ fun NavRailBar(
                 contentDescription = "Logo"
             )*/
         },
-        contentColor = PrimaryColor
+        contentColor = PrimaryColor,
     ) {
         navigationItems.forEach { item ->
 
@@ -45,20 +45,21 @@ fun NavRailBar(
                     item.icon?.let {
                         Icon(
                             imageVector = it,
-                            contentDescription = item.title
+                            contentDescription = item.title,
                         )
                     }
                 },
                 label = { Text(text = item.title) },
-                colors = NavigationRailItemDefaults.colors(
-                    selectedIconColor = PrimaryColor,
-                    unselectedIconColor = Gray
-                ),
+                colors =
+                    NavigationRailItemDefaults.colors(
+                        selectedIconColor = PrimaryColor,
+                        unselectedIconColor = Gray,
+                    ),
                 alwaysShowLabel = false,
                 selected = isSelected,
                 onClick = {
                     if (item.route != currentDestination) navHostController.navigate(route = item.route)
-                }
+                },
             )
         }
     }

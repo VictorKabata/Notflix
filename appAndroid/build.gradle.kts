@@ -15,16 +15,18 @@ android {
 
         minSdk = 24
         targetSdk = compileSdk
-        versionCode = if (System.getenv("VERSION_CODE").isNullOrEmpty()) {
-            1
-        } else {
-            System.getenv("VERSION_CODE").toInt()
-        }
-        versionName = if (System.getenv("VERSION_NAME").isNullOrEmpty()) {
-            "1.0.0"
-        } else {
-            System.getenv("VERSION_NAME")?.toString()
-        }
+        versionCode =
+            if (System.getenv("VERSION_CODE").isNullOrEmpty()) {
+                1
+            } else {
+                System.getenv("VERSION_CODE").toInt()
+            }
+        versionName =
+            if (System.getenv("VERSION_NAME").isNullOrEmpty()) {
+                "1.0.0"
+            } else {
+                System.getenv("VERSION_NAME")?.toString()
+            }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -34,7 +36,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
 

@@ -44,7 +44,7 @@ import com.vickbt.shared.utils.loadImage
 fun MovieCardPager(
     modifier: Modifier = Modifier,
     movie: Movie,
-    onItemClick: (Movie) -> Unit
+    onItemClick: (Movie) -> Unit,
 ) {
     var dominantColor by remember { mutableStateOf(Color.DarkGray) }
     var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
@@ -53,9 +53,10 @@ fun MovieCardPager(
         Box {
             //region Movie Cover Image
             AsyncImage(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .align(Alignment.Center),
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .align(Alignment.Center),
                 model = movie.backdropPath?.loadImage(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
@@ -65,24 +66,26 @@ fun MovieCardPager(
 
             //region Fading Edge Box
             Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(190.dp)
-                    .align(Alignment.BottomCenter)
-                    .background(
-                        Brush.verticalGradient(
-                            listOf(Color.Transparent, dominantColor)
-                        )
-                    )
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(190.dp)
+                        .align(Alignment.BottomCenter)
+                        .background(
+                            Brush.verticalGradient(
+                                listOf(Color.Transparent, dominantColor),
+                            ),
+                        ),
             )
             //endregion
 
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 12.dp, vertical = 8.dp)
-                    .align(Alignment.BottomCenter),
-                verticalArrangement = Arrangement.spacedBy(2.dp)
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 12.dp, vertical = 8.dp)
+                        .align(Alignment.BottomCenter),
+                verticalArrangement = Arrangement.spacedBy(2.dp),
             ) {
                 Text(
                     modifier = Modifier,
@@ -93,7 +96,7 @@ fun MovieCardPager(
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
                     color = dominantTextColor,
-                    lineHeight = 30.sp
+                    lineHeight = 30.sp,
                 )
 
                 movie.voteAverage?.let {
@@ -105,7 +108,7 @@ fun MovieCardPager(
                         spaceBetween = 1.dp,
                         stepSize = StepSize.HALF,
                         isIndicator = true,
-                        style = RatingBarStyle.Fill()
+                        style = RatingBarStyle.Fill(),
                     )
                 }
             }
@@ -121,23 +124,25 @@ fun MovieCardPagerIndicator(
     indicatorSize: Dp = 6.dp,
     spacing: Dp = 6.dp,
     inactiveColor: Color = Color.LightGray,
-    activeColor: Color = Color.DarkGray
+    activeColor: Color = Color.DarkGray,
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(
-            space = spacing,
-            alignment = Alignment.CenterHorizontally
-        )
+        horizontalArrangement =
+            Arrangement.spacedBy(
+                space = spacing,
+                alignment = Alignment.CenterHorizontally,
+            ),
     ) {
         repeat(pagerState.pageCount) { currentPage ->
             Canvas(modifier = Modifier.size(indicatorSize), onDraw = {
                 drawCircle(
-                    color = if (pagerState.currentPage == currentPage) {
-                        activeColor
-                    } else {
-                        inactiveColor
-                    }
+                    color =
+                        if (pagerState.currentPage == currentPage) {
+                            activeColor
+                        } else {
+                            inactiveColor
+                        },
                 )
             })
         }

@@ -26,29 +26,31 @@ fun PreferencesGroup(
     modifier: Modifier = Modifier,
     title: String? = null,
     isLast: Boolean = false,
-    content: @Composable ColumnScope.() -> Unit
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     Column {
         Row(
-            modifier = modifier
-                .fillMaxWidth()
-                .wrapContentHeight(),
-            verticalAlignment = Alignment.CenterVertically
+            modifier =
+                modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             if (!title.isNullOrEmpty()) {
                 Spacer(modifier = Modifier.weight(2f))
 
                 Text(
-                    modifier = Modifier
-                        .weight(8f)
-                        .padding(horizontal = 12.dp),
+                    modifier =
+                        Modifier
+                            .weight(8f)
+                            .padding(horizontal = 12.dp),
                     text = title,
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.primary,
                     fontSize = 16.sp,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    textAlign = TextAlign.Start
+                    textAlign = TextAlign.Start,
                 )
             }
         }

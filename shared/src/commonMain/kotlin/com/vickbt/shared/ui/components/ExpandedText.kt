@@ -75,32 +75,33 @@ fun ExpandableText(
             fontSize = fontSize,
             style = style,
             textAlign = textAlign,
-            color = color
+            color = color,
         )
         if (!expanded) {
             val density = LocalDensity.current
             Text(
                 text = "...$overFlowText",
                 onTextLayout = { seeMoreSizeState.value = it.size },
-                modifier = Modifier
-                    .then(
-                        if (seeMoreOffset != null) {
-                            Modifier.offset(
-                                x = with(density) { seeMoreOffset.x.toDp() },
-                                y = with(density) { seeMoreOffset.y.toDp() },
-                            )
-                        } else {
-                            Modifier
+                modifier =
+                    Modifier
+                        .then(
+                            if (seeMoreOffset != null) {
+                                Modifier.offset(
+                                    x = with(density) { seeMoreOffset.x.toDp() },
+                                    y = with(density) { seeMoreOffset.y.toDp() },
+                                )
+                            } else {
+                                Modifier
+                            },
+                        )
+                        .clickable {
+                            expanded = true
+                            cutText = null
                         }
-                    )
-                    .clickable {
-                        expanded = true
-                        cutText = null
-                    }
-                    .alpha(if (seeMoreOffset != null) 1f else 0f),
+                        .alpha(if (seeMoreOffset != null) 1f else 0f),
                 fontSize = fontSize,
                 style = style,
-                color = Color.LightGray.copy(alpha = .9f)
+                color = Color.LightGray.copy(alpha = .9f),
             )
         }
     }

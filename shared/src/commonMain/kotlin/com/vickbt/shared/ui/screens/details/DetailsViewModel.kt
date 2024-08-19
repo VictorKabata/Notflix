@@ -16,52 +16,55 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(
-    private val movieDetailsRepository: MovieDetailsRepository
+    private val movieDetailsRepository: MovieDetailsRepository,
 ) : ViewModel() {
-
     private val _movieDetailsState = MutableStateFlow(DetailsUiState())
     val movieDetailsState = _movieDetailsState.asStateFlow()
 
-    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        _movieDetailsState.update { it.copy(isLoading = false, error = exception.message) }
-    }
+    private val coroutineExceptionHandler =
+        CoroutineExceptionHandler { _, exception ->
+            _movieDetailsState.update { it.copy(isLoading = false, error = exception.message) }
+        }
 
-    fun getMovieDetails(movieId: Int) = viewModelScope.launch(coroutineExceptionHandler) {
-        movieDetailsRepository.fetchMovieDetails(movieId = movieId).collect { movieDetailsResult ->
-            movieDetailsResult.isLoading { isLoading ->
-                _movieDetailsState.update { it.copy(isLoading = isLoading) }
-            }.onSuccess { movieDetails ->
-                _movieDetailsState.update { it.copy(movieDetails = movieDetails) }
-            }.onFailure { error ->
-                _movieDetailsState.update { it.copy(error = error.message) }
+    fun getMovieDetails(movieId: Int) =
+        viewModelScope.launch(coroutineExceptionHandler) {
+            movieDetailsRepository.fetchMovieDetails(movieId = movieId).collect { movieDetailsResult ->
+                movieDetailsResult.isLoading { isLoading ->
+                    _movieDetailsState.update { it.copy(isLoading = isLoading) }
+                }.onSuccess { movieDetails ->
+                    _movieDetailsState.update { it.copy(movieDetails = movieDetails) }
+                }.onFailure { error ->
+                    _movieDetailsState.update { it.copy(error = error.message) }
+                }
             }
         }
-    }
 
-    fun getMovieCast(movieId: Int) = viewModelScope.launch(coroutineExceptionHandler) {
-        movieDetailsRepository.fetchMovieCast(movieId = movieId).collect { movieCastsResult ->
-            movieCastsResult.isLoading { isLoading ->
-                _movieDetailsState.update { it.copy(isLoading = isLoading) }
-            }.onSuccess { cast ->
-                _movieDetailsState.update { it.copy(movieCast = cast.actor) }
-            }.onFailure { error ->
-                _movieDetailsState.update { it.copy(error = error.message) }
+    fun getMovieCast(movieId: Int) =
+        viewModelScope.launch(coroutineExceptionHandler) {
+            movieDetailsRepository.fetchMovieCast(movieId = movieId).collect { movieCastsResult ->
+                movieCastsResult.isLoading { isLoading ->
+                    _movieDetailsState.update { it.copy(isLoading = isLoading) }
+                }.onSuccess { cast ->
+                    _movieDetailsState.update { it.copy(movieCast = cast.actor) }
+                }.onFailure { error ->
+                    _movieDetailsState.update { it.copy(error = error.message) }
+                }
             }
         }
-    }
 
-    fun fetchSimilarMovies(movieId: Int) = viewModelScope.launch(coroutineExceptionHandler) {
-        _movieDetailsState.update { it.copy(isLoading = true) }
-        movieDetailsRepository.fetchSimilarMovies(movieId).collect { similarMovies ->
-            similarMovies.isLoading { isLoading ->
-                _movieDetailsState.update { it.copy(isLoading = isLoading) }
-            }.onSuccess { movies ->
-                _movieDetailsState.update { it.copy(similarMovies = movies) }
-            }.onFailure { error ->
-                _movieDetailsState.update { it.copy(error = error.message) }
+    fun fetchSimilarMovies(movieId: Int) =
+        viewModelScope.launch(coroutineExceptionHandler) {
+            _movieDetailsState.update { it.copy(isLoading = true) }
+            movieDetailsRepository.fetchSimilarMovies(movieId).collect { similarMovies ->
+                similarMovies.isLoading { isLoading ->
+                    _movieDetailsState.update { it.copy(isLoading = isLoading) }
+                }.onSuccess { movies ->
+                    _movieDetailsState.update { it.copy(similarMovies = movies) }
+                }.onFailure { error ->
+                    _movieDetailsState.update { it.copy(error = error.message) }
+                }
             }
         }
-    }
 
     fun saveFavoriteMovie(movieDetails: MovieDetails) =
         viewModelScope.launch(coroutineExceptionHandler) {
@@ -72,20 +75,22 @@ class DetailsViewModel(
             }
         }
 
-    fun deleteFavoriteMovie(movieId: Int) = viewModelScope.launch(coroutineExceptionHandler) {
-        try {
-            movieDetailsRepository.deleteFavoriteMovie(movieId = movieId)
-        } catch (e: Exception) {
-            Napier.e("Error removing movie: ${e.message}")
+    fun deleteFavoriteMovie(movieId: Int) =
+        viewModelScope.launch(coroutineExceptionHandler) {
+            try {
+                movieDetailsRepository.deleteFavoriteMovie(movieId = movieId)
+            } catch (e: Exception) {
+                Napier.e("Error removing movie: ${e.message}")
+            }
         }
-    }
 
-    fun isMovieFavorite(movieId: Int) = viewModelScope.launch(coroutineExceptionHandler) {
-        try {
-            val isFavorite = movieDetailsRepository.isMovieFavorite(movieId = movieId)
-            _movieDetailsState.update { it.copy(isFavorite = isFavorite) }
-        } catch (e: Exception) {
-            Napier.e("Error removing movie: ${e.message}")
+    fun isMovieFavorite(movieId: Int) =
+        viewModelScope.launch(coroutineExceptionHandler) {
+            try {
+                val isFavorite = movieDetailsRepository.isMovieFavorite(movieId = movieId)
+                _movieDetailsState.update { it.copy(isFavorite = isFavorite) }
+            } catch (e: Exception) {
+                Napier.e("Error removing movie: ${e.message}")
+            }
         }
-    }
 }

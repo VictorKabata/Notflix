@@ -9,11 +9,13 @@ import androidx.compose.ui.graphics.vector.ImageVector
 sealed class NavigationItem(
     val route: String,
     val title: String,
-    val icon: ImageVector?
+    val icon: ImageVector?,
 ) {
-
     object Home : NavigationItem("/home", "Home", Icons.Rounded.Home)
+
     object Favorites : NavigationItem("/favorites", "Favorites", Icons.Rounded.Favorite)
+
     object Settings : NavigationItem("/settings", "Settings", Icons.Rounded.Settings)
+
     object Details : NavigationItem("/details/{movieId}", "Details", null)
 }

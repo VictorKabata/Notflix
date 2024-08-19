@@ -22,11 +22,14 @@ import com.vickbt.shared.ui.theme.TextSecondary
 import com.vickbt.shared.utils.loadImage
 
 @Composable
-fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
+fun ItemMovieCast(
+    modifier: Modifier = Modifier,
+    actor: Actor,
+) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(space = 1.dp)
+        verticalArrangement = Arrangement.spacedBy(space = 1.dp),
     ) {
         AsyncImage(
             modifier = Modifier.size(80.dp).clip(CircleShape),
@@ -43,7 +46,7 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
             overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Center,
             maxLines = 1,
-            color = MaterialTheme.colorScheme.onSurface
+            color = MaterialTheme.colorScheme.onSurface,
         )
 
         Text(
@@ -54,7 +57,7 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
             color = TextSecondary,
             overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Center,
-            maxLines = 1
+            maxLines = 1,
         )
     }
 }

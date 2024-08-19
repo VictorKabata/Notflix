@@ -5,10 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CastDto(
-
     @SerialName("cast")
     val actor: List<ActorDto>? = null,
-
     @SerialName("id")
-    val id: Int
+    val id: Int,
 )

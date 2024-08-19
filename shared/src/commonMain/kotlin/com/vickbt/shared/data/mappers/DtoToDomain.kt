@@ -28,7 +28,7 @@ fun MovieDto.toDomain(): Movie {
         video = this.video,
         voteAverage = this.voteAverage,
         voteCount = this.voteCount,
-        mediaType = this.mediaType
+        mediaType = this.mediaType,
     )
 }
 
@@ -51,7 +51,7 @@ fun MovieDetailsDto.toDomain(): MovieDetails {
         title = this.title,
         video = this.video,
         voteAverage = this.voteAverage,
-        voteCount = this.voteCount
+        voteCount = this.voteCount,
     )
 }
 
@@ -63,14 +63,14 @@ fun ActorDto.toDomain(): Actor {
         id = this.id,
         name = this.name,
         originalName = this.originalName,
-        profilePath = this.profilePath
+        profilePath = this.profilePath,
     )
 }
 
 fun CastDto.toDomain(): Cast {
     return Cast(
         actor = this.actor?.map { it.toDomain() },
-        id = this.id
+        id = this.id,
     )
 }
 
@@ -85,7 +85,7 @@ fun VideoDto.toDomain(): Video {
         publishedAt = this.publishedAt,
         site = this.site,
         size = this.size,
-        type = this.type
+        type = this.type,
     )
 }
 
@@ -100,6 +100,6 @@ fun ErrorResponseDto.toDomain(): ErrorResponse {
     return ErrorResponse(
         success = this.success,
         statusCode = this.statusCode,
-        statusMessage = this.statusMessage
+        statusMessage = this.statusMessage,
     )
 }

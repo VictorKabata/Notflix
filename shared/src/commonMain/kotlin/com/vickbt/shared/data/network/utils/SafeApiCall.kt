@@ -40,11 +40,11 @@ suspend fun <T : Any?> safeApiCall(apiCall: suspend () -> T): ResultState<T> {
  * */
 internal suspend fun parseNetworkError(
     errorResponse: HttpResponse? = null,
-    exception: Exception? = null
+    exception: Exception? = null,
 ): Exception {
     throw errorResponse?.body<ErrorResponseDto>()?.toDomain() ?: ErrorResponse(
         success = false,
         statusCode = 0,
-        statusMessage = exception?.message ?: "Error"
+        statusMessage = exception?.message ?: "Error",
     )
 }

@@ -42,7 +42,7 @@ fun DetailsScreen(
     navigator: NavHostController,
     windowSize: WindowSize = WindowSize.COMPACT,
     viewModel: DetailsViewModel = koinViewModel<DetailsViewModel>(),
-    movieId: Int
+    movieId: Int,
 ) {
     LaunchedEffect(key1 = Unit) {
         viewModel.getMovieDetails(movieId = movieId)
@@ -65,7 +65,7 @@ fun DetailsScreen(
             Text(
                 modifier = Modifier.align(Alignment.Center),
                 text = "Error:\n${movieDetailsState.error}",
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
         } else {
             CollapsingToolbarScaffold(
@@ -85,19 +85,19 @@ fun DetailsScreen(
                             } else {
                                 viewModel.deleteFavoriteMovie(movieId = movieDetails.id)
                             }
-                        }
+                        },
                     )
-                }
+                },
             ) {
                 Column(
                     modifier = Modifier.padding(bottom = 20.dp).verticalScroll(state = scrollState),
-                    verticalArrangement = Arrangement.spacedBy(14.dp)
+                    verticalArrangement = Arrangement.spacedBy(14.dp),
                 ) {
                     //region Movie Ratings
                     if (movieDetailsState.movieDetails?.voteAverage != null) {
                         MovieRatingSection(
                             popularity = movieDetailsState.movieDetails.voteAverage.getPopularity(),
-                            voteAverage = movieDetailsState.movieDetails.voteAverage.getRating()
+                            voteAverage = movieDetailsState.movieDetails.voteAverage.getRating(),
                         )
                     }
                     //endregion
@@ -113,9 +113,10 @@ fun DetailsScreen(
                         )
 
                         Text(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 16.dp),
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 16.dp),
                             text = movieDetailsState.movieDetails?.overview ?: "",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface,
@@ -132,12 +133,12 @@ fun DetailsScreen(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = "Cast",
                             style = MaterialTheme.typography.titleMedium,
-                            fontSize = 20.sp
+                            fontSize = 20.sp,
                         )
 
                         LazyRow(
                             contentPadding = PaddingValues(horizontal = 16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            horizontalArrangement = Arrangement.spacedBy(10.dp),
                         ) {
                             items(items = movieDetailsState.movieCast) { item ->
                                 ItemMovieCast(modifier = Modifier, actor = item)
@@ -153,12 +154,12 @@ fun DetailsScreen(
                             text = "Similar Movies",
                             style = MaterialTheme.typography.titleMedium,
                             fontSize = 20.sp,
-                            color = MaterialTheme.colorScheme.onSurface
+                            color = MaterialTheme.colorScheme.onSurface,
                         )
 
                         LazyRow(
                             contentPadding = PaddingValues(horizontal = 16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            horizontalArrangement = Arrangement.spacedBy(10.dp),
                         ) {
                             items(items = movieDetailsState.similarMovies) { movie ->
                                 MovieCardPortrait(movie = movie, onItemClick = {})

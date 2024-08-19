@@ -13,7 +13,8 @@ fun rememberWindowInfo(boxWithConstraintsScope: BoxWithConstraintsScope): Window
 enum class WindowSize {
     COMPACT,
     MEDIUM,
-    EXPANDED;
+    EXPANDED,
+    ;
 
     companion object {
         fun basedOnWidth(windowWidth: Dp): WindowSize {

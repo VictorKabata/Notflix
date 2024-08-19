@@ -30,13 +30,13 @@ fun DialogPreferenceSelection(
     currentValue: String? = null,
     labels: List<String>,
     onNegativeClick: () -> Unit,
-    onOptionSelected: (Int) -> Unit
+    onOptionSelected: (Int) -> Unit,
 ) {
     if (showDialog) {
         Dialog(onDismissRequest = { onNegativeClick() }) {
             Card(
                 elevation = CardDefaults.cardElevation(8.dp),
-                shape = RoundedCornerShape(8.dp)
+                shape = RoundedCornerShape(8.dp),
             ) {
                 Column(modifier = Modifier.padding(vertical = 16.dp, horizontal = 24.dp)) {
                     Text(
@@ -47,7 +47,7 @@ fun DialogPreferenceSelection(
                         fontSize = 22.sp,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        textAlign = TextAlign.Start
+                        textAlign = TextAlign.Start,
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -57,7 +57,7 @@ fun DialogPreferenceSelection(
 
                             ItemPreferenceOption(
                                 optionText = option,
-                                selectedOption = option == currentValue
+                                selectedOption = option == currentValue,
                             ) {
                                 onOptionSelected(index)
                                 onNegativeClick()
@@ -69,7 +69,7 @@ fun DialogPreferenceSelection(
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End
+                        horizontalArrangement = Arrangement.End,
                     ) {
                         Text(
                             modifier = Modifier.clickable { onNegativeClick() },
@@ -79,7 +79,7 @@ fun DialogPreferenceSelection(
                             fontSize = 16.sp,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                            textAlign = TextAlign.Center
+                            textAlign = TextAlign.Center,
                         )
                     }
                 }

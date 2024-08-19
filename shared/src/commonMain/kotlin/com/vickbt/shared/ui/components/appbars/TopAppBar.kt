@@ -25,8 +25,8 @@ fun AppBar(title: String) {
                 style = MaterialTheme.typography.titleMedium,
                 fontSize = 28.sp,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
             )
-        }
+        },
     )
 }

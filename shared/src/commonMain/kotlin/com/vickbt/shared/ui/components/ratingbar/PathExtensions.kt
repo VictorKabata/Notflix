@@ -10,7 +10,7 @@ fun Path.addStar(
     size: Size,
     spikes: Int = 5,
     outerRadiusFraction: Float = 0.5f,
-    innerRadiusFraction: Float = 0.2f
+    innerRadiusFraction: Float = 0.2f,
 ): Path {
     val outerRadius = size.minDimension * outerRadiusFraction
     val innerRadius = size.minDimension * innerRadiusFraction

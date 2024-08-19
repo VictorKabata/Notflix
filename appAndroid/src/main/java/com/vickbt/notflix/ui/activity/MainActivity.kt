@@ -8,7 +8,6 @@ import com.vickbt.shared.ui.screens.main.MainScreen
 
 @ExperimentalAnimationApi
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

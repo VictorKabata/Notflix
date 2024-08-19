@@ -35,7 +35,7 @@ fun MovieCardDescription(
     movie: MovieDetails,
     maxLine: Int = 3,
     overFlowText: String = "See more",
-    onItemClick: (MovieDetails) -> Unit
+    onItemClick: (MovieDetails) -> Unit,
 ) {
     var dominantColor by remember { mutableStateOf(Color.DarkGray) }
     var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
@@ -44,9 +44,10 @@ fun MovieCardDescription(
         Box {
             //region Movie Cover Image
             AsyncImage(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .align(Alignment.Center),
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .align(Alignment.Center),
                 model = movie.backdropPath?.loadImage(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
@@ -56,23 +57,25 @@ fun MovieCardDescription(
 
             //region Fading Edge Box
             Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(190.dp)
-                    .align(Alignment.BottomCenter)
-                    .background(
-                        Brush.verticalGradient(
-                            listOf(Color.Transparent, dominantColor)
-                        )
-                    )
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(190.dp)
+                        .align(Alignment.BottomCenter)
+                        .background(
+                            Brush.verticalGradient(
+                                listOf(Color.Transparent, dominantColor),
+                            ),
+                        ),
             )
             //endregion
 
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 8.dp)
-                    .align(Alignment.BottomCenter)
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 8.dp)
+                        .align(Alignment.BottomCenter),
             ) {
                 Text(
                     modifier = Modifier,
@@ -83,7 +86,7 @@ fun MovieCardDescription(
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
                     color = dominantTextColor,
-                    lineHeight = 30.sp
+                    lineHeight = 30.sp,
                 )
 
                 movie.overview?.let {
@@ -91,7 +94,7 @@ fun MovieCardDescription(
                         modifier = Modifier.padding(bottom = 4.dp),
                         text = it,
                         overFlowText = overFlowText,
-                        minimizedMaxLines = maxLine
+                        minimizedMaxLines = maxLine,
                     )
                 }
             }

@@ -12,38 +12,42 @@ import kotlinx.coroutines.launch
 
 class SettingsViewModel(private val settingsRepository: SettingsRepository) :
     ViewModel() {
-
     private val _settingsUiState = MutableStateFlow(SettingsUiState(isLoading = true))
     val settingsUiState = _settingsUiState.asStateFlow()
 
-    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        _settingsUiState.update { it.copy(isLoading = false, error = exception.message) }
-    }
+    private val coroutineExceptionHandler =
+        CoroutineExceptionHandler { _, exception ->
+            _settingsUiState.update { it.copy(isLoading = false, error = exception.message) }
+        }
 
     init {
         getThemePreference()
         getImageQualityPreference()
     }
 
-    fun savePreferenceSelection(key: String, selection: Int) =
-        viewModelScope.launch(coroutineExceptionHandler) {
-            settingsRepository.savePreferenceSelection(key = key, selection = selection)
-        }
-
-    fun getThemePreference() = viewModelScope.launch(coroutineExceptionHandler) {
-        settingsRepository.getThemePreference().collect { theme ->
-            _settingsUiState.update { it.copy(selectedTheme = theme, isLoading = false) }
-        }
+    fun savePreferenceSelection(
+        key: String,
+        selection: Int,
+    ) = viewModelScope.launch(coroutineExceptionHandler) {
+        settingsRepository.savePreferenceSelection(key = key, selection = selection)
     }
 
-    fun getImageQualityPreference() = viewModelScope.launch(coroutineExceptionHandler) {
-        settingsRepository.getImageQualityPreference().collect { imageQuality ->
-            _settingsUiState.update {
-                it.copy(
-                    selectedImageQuality = imageQuality,
-                    isLoading = false
-                )
+    fun getThemePreference() =
+        viewModelScope.launch(coroutineExceptionHandler) {
+            settingsRepository.getThemePreference().collect { theme ->
+                _settingsUiState.update { it.copy(selectedTheme = theme, isLoading = false) }
             }
         }
-    }
+
+    fun getImageQualityPreference() =
+        viewModelScope.launch(coroutineExceptionHandler) {
+            settingsRepository.getImageQualityPreference().collect { imageQuality ->
+                _settingsUiState.update {
+                    it.copy(
+                        selectedImageQuality = imageQuality,
+                        isLoading = false,
+                    )
+                }
+            }
+        }
 }

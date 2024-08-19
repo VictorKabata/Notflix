@@ -27,11 +27,12 @@ fun String.loadImage(): String {
     return "https://image.tmdb.org/t/p/$quality/$this"
 }
 
-fun PlatformContext.getAsyncImageLoader() = ImageLoader.Builder(this)
-    .crossfade(true)
-    .memoryCachePolicy(CachePolicy.ENABLED)
-    .memoryCache {
-        MemoryCache.Builder().maxSizePercent(this, 0.3).strongReferencesEnabled(true).build()
-    }
-    .logger(DebugLogger())
-    .build()
+fun PlatformContext.getAsyncImageLoader() =
+    ImageLoader.Builder(this)
+        .crossfade(true)
+        .memoryCachePolicy(CachePolicy.ENABLED)
+        .memoryCache {
+            MemoryCache.Builder().maxSizePercent(this, 0.3).strongReferencesEnabled(true).build()
+        }
+        .logger(DebugLogger())
+        .build()

@@ -11,20 +11,20 @@ import androidx.compose.ui.unit.LayoutDirection
 @Stable
 class FractionalRectangleShape(
     private val startFraction: Float,
-    private val endFraction: Float
+    private val endFraction: Float,
 ) : Shape {
     override fun createOutline(
         size: Size,
         layoutDirection: LayoutDirection,
-        density: Density
+        density: Density,
     ): Outline {
         return Outline.Rectangle(
             Rect(
                 left = (startFraction * size.width).coerceAtMost(size.width - 1f),
                 top = 0f,
                 right = (endFraction * size.width).coerceAtLeast(1f),
-                bottom = size.height
-            )
+                bottom = size.height,
+            ),
         )
     }
 }

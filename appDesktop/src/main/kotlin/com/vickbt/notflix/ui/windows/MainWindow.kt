@@ -14,11 +14,12 @@ fun MainWindow(applicationScope: ApplicationScope) {
     Window(
         onCloseRequest = { applicationScope.exitApplication() },
         title = "Notflix",
-        state = rememberWindowState(
-            position = WindowPosition.Aligned(Alignment.Center),
-            width = 1080.dp,
-            height = 800.dp,
-        )
+        state =
+            rememberWindowState(
+                position = WindowPosition.Aligned(Alignment.Center),
+                width = 1080.dp,
+                height = 800.dp,
+            ),
     ) {
         MainScreen()
     }

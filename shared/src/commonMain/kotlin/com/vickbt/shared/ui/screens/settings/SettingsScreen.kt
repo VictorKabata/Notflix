@@ -42,14 +42,14 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinViewModel<SettingsViewMode
                     icon = Icons.Rounded.Lightbulb,
                     title = "Change theme",
                     subTitle = themeLabel,
-                    onClick = { showThemeDialog.value = !showThemeDialog.value }
+                    onClick = { showThemeDialog.value = !showThemeDialog.value },
                 )
 
                 if (showThemeDialog.value) {
                     ChangeTheme(
                         viewModel = viewModel,
                         showDialog = showThemeDialog,
-                        currentValue = themeLabel
+                        currentValue = themeLabel,
                     )
                 }
 
@@ -57,14 +57,14 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinViewModel<SettingsViewMode
                     icon = Icons.Rounded.Image,
                     title = "Image quality",
                     subTitle = imageQualityLabel,
-                    onClick = { showImageQualityDialog.value = !showImageQualityDialog.value }
+                    onClick = { showImageQualityDialog.value = !showImageQualityDialog.value },
                 )
 
                 if (showImageQualityDialog.value) {
                     ChangeImageQuality(
                         viewModel = viewModel,
                         showDialog = showImageQualityDialog,
-                        currentValue = imageQualityLabel
+                        currentValue = imageQualityLabel,
                     )
                 }
             }
@@ -76,14 +76,14 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinViewModel<SettingsViewMode
 private fun ChangeTheme(
     viewModel: SettingsViewModel,
     showDialog: MutableState<Boolean>,
-    currentValue: String?
+    currentValue: String?,
 ) {
     DialogPreferenceSelection(
         showDialog = showDialog.value,
         title = "Change theme",
         currentValue = currentValue ?: "Default",
         labels = themeLabels,
-        onNegativeClick = { showDialog.value = false }
+        onNegativeClick = { showDialog.value = false },
     ) { theme ->
         viewModel.savePreferenceSelection(key = KEY_THEME, selection = theme)
     }
@@ -93,18 +93,18 @@ private fun ChangeTheme(
 private fun ChangeImageQuality(
     viewModel: SettingsViewModel,
     showDialog: MutableState<Boolean>,
-    currentValue: String?
+    currentValue: String?,
 ) {
     DialogPreferenceSelection(
         showDialog = showDialog.value,
         title = "Image quality",
         currentValue = currentValue ?: "Default",
         labels = imageQualityLabels,
-        onNegativeClick = { showDialog.value = false }
+        onNegativeClick = { showDialog.value = false },
     ) { imageQuality ->
         viewModel.savePreferenceSelection(
             key = KEY_IMAGE_QUALITY,
-            selection = imageQuality
+            selection = imageQuality,
         )
     }
 }

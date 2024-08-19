@@ -13,11 +13,15 @@ import com.vickbt.shared.ui.components.ratingbar.StepSize
 import com.vickbt.shared.utils.getRating
 
 @Composable
-fun MovieCardPortrait(modifier: Modifier = Modifier, movie: Movie, onItemClick: (Movie) -> Unit) {
+fun MovieCardPortrait(
+    modifier: Modifier = Modifier,
+    movie: Movie,
+    onItemClick: (Movie) -> Unit,
+) {
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(1.dp)) {
         MovieCardPortraitCompact(
             movie = movie,
-            onItemClick = { onItemClick(movie) }
+            onItemClick = { onItemClick(movie) },
         )
 
         // rating bar
@@ -28,7 +32,7 @@ fun MovieCardPortrait(modifier: Modifier = Modifier, movie: Movie, onItemClick: 
             size = 15.dp,
             stepSize = StepSize.HALF,
             isIndicator = true,
-            style = RatingBarStyle.Fill()
+            style = RatingBarStyle.Fill(),
         )
     }
 }

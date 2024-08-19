@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.map
 
 class FavoritesRepositoryImpl(private val favoriteMovieDao: FavoriteMovieDao) :
     FavoritesRepository {
-
     override suspend fun getFavouriteMovies(): Flow<List<MovieDetails>> {
         return favoriteMovieDao.getAllFavoriteMovies()
             .map { it.map { movieDetail -> movieDetail.toDomain() } }

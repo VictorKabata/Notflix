@@ -8,7 +8,6 @@ import com.vickbt.shared.utils.ResultState
 import kotlinx.coroutines.flow.Flow
 
 interface MovieDetailsRepository {
-
     /**Fetch movie details from network source*/
     suspend fun fetchMovieDetails(movieId: Int): Flow<ResultState<MovieDetails>>
 
@@ -18,7 +17,7 @@ interface MovieDetailsRepository {
     /** Fetches similar movies from network source*/
     suspend fun fetchSimilarMovies(
         movieId: Int,
-        page: Int = STARTING_PAGE_INDEX
+        page: Int = STARTING_PAGE_INDEX,
     ): Flow<ResultState<List<Movie>?>>
 
     /**Save movie details to local cache*/

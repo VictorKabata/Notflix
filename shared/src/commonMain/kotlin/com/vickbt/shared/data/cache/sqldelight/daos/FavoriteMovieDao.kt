@@ -12,7 +12,6 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
 class FavoriteMovieDao(private val databaseDriverFactory: DatabaseDriverFactory) {
-
     val appDatabase = AppDatabase(driver = databaseDriverFactory.createDriver())
     val dbQuery = appDatabase.appDatabaseQueries
 
@@ -35,8 +34,9 @@ class FavoriteMovieDao(private val databaseDriverFactory: DatabaseDriverFactory)
                 title = movie.title,
                 voteAverage = movie.voteAverage,
                 voteCount = movie.voteCount?.toLong(),
-                createdAt = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
-                    .toString()
+                createdAt =
+                    Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+                        .toString(),
             )
         }
     }
@@ -45,8 +45,7 @@ class FavoriteMovieDao(private val databaseDriverFactory: DatabaseDriverFactory)
     fun getAllFavoriteMovies() = dbQuery.getAllFavoriteMovies().asFlow().mapToList(Dispatchers.IO)
 
     /**Get single movies from FavoriteMovie table based on its ID*/
-    fun getFavoriteMovie(movieId: Int) =
-        dbQuery.getFavoriteMovie(id = movieId.toLong()).executeAsOne()
+    fun getFavoriteMovie(movieId: Int) = dbQuery.getFavoriteMovie(id = movieId.toLong()).executeAsOne()
 
     /**Delete favorite movie details based on its ID*/
     fun deleteFavouriteMovie(movieId: Int) = dbQuery.deleteFavoriteMovie(id = movieId.toLong())
@@ -55,6 +54,5 @@ class FavoriteMovieDao(private val databaseDriverFactory: DatabaseDriverFactory)
     fun deleteAllFavouriteMovies() = dbQuery.deleteAllFavoriteMovies()
 
     /**Return value depending on whether movie details is in FavoriteMovie table*/
-    fun isMovieFavorite(movieId: Int) =
-        dbQuery.isMovieFavorite(id = movieId.toLong()).executeAsOneOrNull()
+    fun isMovieFavorite(movieId: Int) = dbQuery.isMovieFavorite(id = movieId.toLong()).executeAsOneOrNull()
 }

@@ -18,14 +18,14 @@ import io.github.aakira.napier.Napier
 fun Navigation(
     navHostController: NavHostController,
     windowSize: WindowSize,
-    paddingValues: PaddingValues = PaddingValues()
+    paddingValues: PaddingValues = PaddingValues(),
 ) {
     NavHost(navController = navHostController, startDestination = NavigationItem.Home.route) {
         composable(route = NavigationItem.Home.route) {
             HomeScreen(
                 navigator = navHostController,
                 windowSize = windowSize,
-                paddingValues = paddingValues
+                paddingValues = paddingValues,
             )
         }
 
@@ -39,14 +39,14 @@ fun Navigation(
 
         composable(
             route = NavigationItem.Details.route,
-            arguments = listOf(navArgument("movieId") { type = NavType.IntType })
+            arguments = listOf(navArgument("movieId") { type = NavType.IntType }),
         ) { backStackEntry ->
             backStackEntry.arguments?.getInt("movieId")?.let { movieId ->
                 Napier.e("Movie ID: $movieId")
                 DetailsScreen(
                     navigator = navHostController,
                     windowSize = windowSize,
-                    movieId = movieId
+                    movieId = movieId,
                 )
             }
         }

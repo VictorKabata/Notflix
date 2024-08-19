@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.toSize
 
 sealed interface StepSize {
     object ONE : StepSize
+
     object HALF : StepSize
 }
 
@@ -48,7 +49,7 @@ sealed class RatingBarStyle(open val activeColor: Color) {
     class Stroke(
         val width: Float = 1f,
         override val activeColor: Color = Color(0xFFFFCA00),
-        val strokeColor: Color = Color(0xFF888888)
+        val strokeColor: Color = Color(0xFF888888),
     ) : RatingBarStyle(activeColor)
 }
 
@@ -80,53 +81,56 @@ internal fun RatingBar(
     painterEmpty: Painter? = null,
     painterFilled: Painter? = null,
     onValueChange: (Float) -> Unit = {},
-    onRatingChanged: (Float) -> Unit = {}
+    onRatingChanged: (Float) -> Unit = {},
 ) {
     var rowSize by remember { mutableStateOf(Size.Zero) }
     var lastDraggedValue by remember { mutableStateOf(0f) }
     val direction = LocalLayoutDirection.current
     val density = LocalDensity.current
 
-    val paddingInPx = remember {
-        with(density) { spaceBetween.toPx() }
-    }
-    val starSizeInPx = remember {
-        with(density) { size.toPx() }
-    }
+    val paddingInPx =
+        remember {
+            with(density) { spaceBetween.toPx() }
+        }
+    val starSizeInPx =
+        remember {
+            with(density) { size.toPx() }
+        }
 
     Row(
-        modifier = modifier
-        .onSizeChanged { rowSize = it.toSize() }
-        .pointerInput(Unit) {
-            detectHorizontalDragGestures(
-                onDragEnd = {
-                    if (isIndicator || hideInactiveStars) return@detectHorizontalDragGestures
-                    onRatingChanged(lastDraggedValue)
-                },
-                onDragCancel = {},
-                onDragStart = {},
-                onHorizontalDrag = { change, _ ->
-                    if (isIndicator || hideInactiveStars) return@detectHorizontalDragGestures
-                    change.consume()
-                    val dragX = change.position.x.coerceIn(-1f, rowSize.width)
-                    var calculatedStars =
-                        RatingBarUtils.calculateStars(
-                            dragX,
-                            paddingInPx,
-                            numOfStars,
-                            stepSize,
-                            starSizeInPx
-                        )
+        modifier =
+            modifier
+                .onSizeChanged { rowSize = it.toSize() }
+                .pointerInput(Unit) {
+                    detectHorizontalDragGestures(
+                        onDragEnd = {
+                            if (isIndicator || hideInactiveStars) return@detectHorizontalDragGestures
+                            onRatingChanged(lastDraggedValue)
+                        },
+                        onDragCancel = {},
+                        onDragStart = {},
+                        onHorizontalDrag = { change, _ ->
+                            if (isIndicator || hideInactiveStars) return@detectHorizontalDragGestures
+                            change.consume()
+                            val dragX = change.position.x.coerceIn(-1f, rowSize.width)
+                            var calculatedStars =
+                                RatingBarUtils.calculateStars(
+                                    dragX,
+                                    paddingInPx,
+                                    numOfStars,
+                                    stepSize,
+                                    starSizeInPx,
+                                )
 
-                    if (direction == LayoutDirection.Rtl) {
-                        calculatedStars =
-                        numOfStars - calculatedStars
-                    }
-                    onValueChange(calculatedStars)
-                    lastDraggedValue = calculatedStars
-                }
-            )
-        }
+                            if (direction == LayoutDirection.Rtl) {
+                                calculatedStars =
+                                    numOfStars - calculatedStars
+                            }
+                            onValueChange(calculatedStars)
+                            lastDraggedValue = calculatedStars
+                        },
+                    )
+                },
     ) {
         ComposeStars(
             value,
@@ -136,7 +140,7 @@ internal fun RatingBar(
             hideInactiveStars,
             style = style,
             painterEmpty,
-            painterFilled
+            painterFilled,
         )
     }
 }
@@ -150,45 +154,48 @@ fun ComposeStars(
     hideInactiveStars: Boolean,
     style: RatingBarStyle,
     painterEmpty: Painter?,
-    painterFilled: Painter?
+    painterFilled: Painter?,
 ) {
     val ratingPerStar = 1f
     var remainingRating = value
 
     Row(
-        modifier = Modifier
-        .semantics { starRating = value }
+        modifier =
+            Modifier
+                .semantics { starRating = value },
     ) {
         for (i in 1..numOfStars) {
-            val starRating = when {
-                remainingRating == 0f -> {
-                    0f
-                }
+            val starRating =
+                when {
+                    remainingRating == 0f -> {
+                        0f
+                    }
 
-                remainingRating >= ratingPerStar -> {
-                    remainingRating -= ratingPerStar
-                    1f
-                }
+                    remainingRating >= ratingPerStar -> {
+                        remainingRating -= ratingPerStar
+                        1f
+                    }
 
-                else -> {
-                    val fraction = remainingRating / ratingPerStar
-                    remainingRating = 0f
-                    fraction
+                    else -> {
+                        val fraction = remainingRating / ratingPerStar
+                        remainingRating = 0f
+                        fraction
+                    }
                 }
-            }
             if (hideInactiveStars && starRating == 0.0f) break
             RatingStar(
                 fraction = starRating,
                 style = style,
-                modifier = Modifier
-                    .padding(
-                        start = if (i > 1) spaceBetween else 0.dp,
-                        end = if (i < numOfStars) spaceBetween else 0.dp
-                    )
-                    .size(size = size)
-                    .testTag("RatingStar"),
+                modifier =
+                    Modifier
+                        .padding(
+                            start = if (i > 1) spaceBetween else 0.dp,
+                            end = if (i < numOfStars) spaceBetween else 0.dp,
+                        )
+                        .size(size = size)
+                        .testTag("RatingStar"),
                 painterEmpty = painterEmpty,
-                painterFilled = painterFilled
+                painterFilled = painterFilled,
             )
         }
     }

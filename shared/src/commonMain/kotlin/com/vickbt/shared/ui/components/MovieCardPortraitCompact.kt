@@ -29,25 +29,27 @@ import com.vickbt.shared.utils.loadImage
 fun MovieCardPortraitCompact(
     modifier: Modifier = Modifier,
     movie: Movie,
-    onItemClick: (Movie) -> Unit
+    onItemClick: (Movie) -> Unit,
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(3.dp)
+        verticalArrangement = Arrangement.spacedBy(3.dp),
     ) {
         Card(
-            modifier = Modifier
-                .width(150.dp)
-                .fillMaxHeight()
-                .clickable { onItemClick(movie) },
+            modifier =
+                Modifier
+                    .width(150.dp)
+                    .fillMaxHeight()
+                    .clickable { onItemClick(movie) },
             elevation = CardDefaults.cardElevation(8.dp),
-            shape = RoundedCornerShape(4.dp)
+            shape = RoundedCornerShape(4.dp),
         ) {
             AsyncImage(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(220.dp)
-                    .sizeIn(minHeight = 30.dp),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(220.dp)
+                        .sizeIn(minHeight = 30.dp),
                 model = movie.posterPath?.loadImage(),
                 contentDescription = "Trending movie poster",
                 contentScale = ContentScale.Crop,
@@ -63,7 +65,7 @@ fun MovieCardPortraitCompact(
             fontSize = 14.sp,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            textAlign = TextAlign.Start
+            textAlign = TextAlign.Start,
         )
     }
 }

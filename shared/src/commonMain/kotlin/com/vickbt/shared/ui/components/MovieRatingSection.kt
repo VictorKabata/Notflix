@@ -22,19 +22,23 @@ import androidx.compose.ui.unit.sp
 import com.vickbt.shared.ui.theme.Golden
 
 @Composable
-fun MovieRatingSection(popularity: String?, voteAverage: String?) {
+fun MovieRatingSection(
+    popularity: String?,
+    voteAverage: String?,
+) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight(),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
         horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         //region Popularity
         Column(
             modifier = Modifier,
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
             Text(
                 modifier = Modifier,
@@ -54,23 +58,24 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
         //endregion
 
         Divider(
-            modifier = Modifier
-                .fillMaxHeight()
-                .width(2.dp),
-            color = MaterialTheme.colorScheme.onSurface
+            modifier =
+                Modifier
+                    .fillMaxHeight()
+                    .width(2.dp),
+            color = MaterialTheme.colorScheme.onSurface,
         )
 
         //region Rating
         Column(
             modifier = Modifier,
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
             Icon(
                 modifier = Modifier.size(48.dp),
                 imageVector = Icons.Rounded.Star,
                 tint = Golden,
-                contentDescription = "Rating"
+                contentDescription = "Rating",
             )
 
             Text(

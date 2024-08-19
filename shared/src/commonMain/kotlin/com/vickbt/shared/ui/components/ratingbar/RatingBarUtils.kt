@@ -1,7 +1,6 @@
 package com.vickbt.shared.ui.components.ratingbar
 
 object RatingBarUtils {
-
     fun calculateStars(
         draggedX: Float,
         horizontalPaddingInPx: Float,

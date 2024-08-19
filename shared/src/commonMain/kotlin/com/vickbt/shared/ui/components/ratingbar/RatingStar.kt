@@ -20,7 +20,7 @@ fun RatingStar(
     modifier: Modifier = Modifier,
     style: RatingBarStyle,
     painterEmpty: Painter?,
-    painterFilled: Painter?
+    painterFilled: Painter?,
 ) {
     val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
     Box(modifier = modifier) {
@@ -28,7 +28,7 @@ fun RatingStar(
             fraction,
             style,
             isRtl,
-            painterFilled
+            painterFilled,
         )
         EmptyStar(fraction, style, isRtl, painterEmpty)
     }
@@ -39,17 +39,18 @@ private fun FilledStar(
     fraction: Float,
     style: RatingBarStyle,
     isRtl: Boolean,
-    painterFilled: Painter?
+    painterFilled: Painter?,
 ) = Canvas(
-    modifier = Modifier
-        .fillMaxSize()
-        .clip(
-            if (isRtl) {
-                rtlFilledStarFractionalShape(fraction = fraction)
-            } else {
-                FractionalRectangleShape(0f, fraction)
-            }
-        )
+    modifier =
+        Modifier
+            .fillMaxSize()
+            .clip(
+                if (isRtl) {
+                    rtlFilledStarFractionalShape(fraction = fraction)
+                } else {
+                    FractionalRectangleShape(0f, fraction)
+                },
+            ),
 ) {
     if (painterFilled != null) {
         with(painterFilled) {
@@ -64,7 +65,7 @@ private fun FilledStar(
         drawPath(
             path,
             color = style.activeColor,
-            style = Stroke(width = if (style is RatingBarStyle.Stroke) style.width else 1f)
+            style = Stroke(width = if (style is RatingBarStyle.Stroke) style.width else 1f),
         ) // Border
     }
 }
@@ -74,42 +75,42 @@ private fun EmptyStar(
     fraction: Float,
     style: RatingBarStyle,
     isRtl: Boolean,
-    painterEmpty: Painter?
-) =
-    Canvas(
-        modifier = Modifier
+    painterEmpty: Painter?,
+) = Canvas(
+    modifier =
+        Modifier
             .fillMaxSize()
             .clip(
                 if (isRtl) {
                     rtlEmptyStarFractionalShape(fraction = fraction)
                 } else {
                     FractionalRectangleShape(fraction, 1f)
-                }
+                },
+            ),
+) {
+    if (painterEmpty != null) {
+        with(painterEmpty) {
+            draw(
+                size = Size(size.height, size.height),
             )
-    ) {
-        if (painterEmpty != null) {
-            with(painterEmpty) {
-                draw(
-                    size = Size(size.height, size.height),
-                )
-            }
-        } else {
-            val path = Path().addStar(size)
-            if (style is RatingBarStyle.Fill) {
-                drawPath(
+        }
+    } else {
+        val path = Path().addStar(size)
+        if (style is RatingBarStyle.Fill) {
+            drawPath(
                 path,
                 color = style.inActiveColor,
-                style = Fill
+                style = Fill,
             ) // Border
-            } else if (style is RatingBarStyle.Stroke) {
-                drawPath(
+        } else if (style is RatingBarStyle.Stroke) {
+            drawPath(
                 path,
-                    color = style.strokeColor,
-                    style = Stroke(width = style.width)
+                color = style.strokeColor,
+                style = Stroke(width = style.width),
             ) // Border
-            }
         }
     }
+}
 
 fun rtlEmptyStarFractionalShape(fraction: Float): FractionalRectangleShape {
     return if (fraction == 1f || fraction == 0f) {

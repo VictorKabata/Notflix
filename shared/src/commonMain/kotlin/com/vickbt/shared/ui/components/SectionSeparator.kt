@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun SectionSeparator(
     modifier: Modifier = Modifier,
-    sectionTitle: String
+    sectionTitle: String,
 ) {
     Row(
         modifier = modifier,
@@ -27,7 +27,7 @@ fun SectionSeparator(
             style = MaterialTheme.typography.titleMedium,
             fontSize = 20.sp,
             maxLines = 1,
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
         )
     }
 }

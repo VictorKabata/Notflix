@@ -18,11 +18,11 @@ import com.vickbt.shared.ui.theme.Gray
 fun BottomNavBar(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
-    bottomNavItems: List<NavigationItem>
+    bottomNavItems: List<NavigationItem>,
 ) {
     NavigationBar(
         modifier = modifier.fillMaxWidth(),
-        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = .85f)
+        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = .85f),
     ) {
         bottomNavItems.iterator().forEach { item ->
 
@@ -34,19 +34,20 @@ fun BottomNavBar(
                 icon = {
                     Icon(
                         imageVector = item.icon!!,
-                        contentDescription = item.title
+                        contentDescription = item.title,
                     )
                 },
                 label = { Text(text = item.title) },
                 alwaysShowLabel = true,
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary,
-                    unselectedIconColor = Gray
-                ),
+                colors =
+                    NavigationBarItemDefaults.colors(
+                        selectedIconColor = MaterialTheme.colorScheme.primary,
+                        unselectedIconColor = Gray,
+                    ),
                 selected = isSelected,
                 onClick = {
                     if (item.route != currentDestination) navHostController.navigate(route = item.route)
-                }
+                },
             )
         }
     }

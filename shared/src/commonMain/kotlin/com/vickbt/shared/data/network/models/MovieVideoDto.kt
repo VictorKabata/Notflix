@@ -5,10 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MovieVideoDto(
-
     @SerialName("id")
     val id: Int? = null,
-
     @SerialName("results")
-    val videos: List<VideoDto>? = null
+    val videos: List<VideoDto>? = null,
 )

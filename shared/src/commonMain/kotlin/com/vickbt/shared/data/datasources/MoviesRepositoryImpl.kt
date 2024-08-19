@@ -14,58 +14,61 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
 class MoviesRepositoryImpl constructor(
-    private val httpClient: HttpClient
+    private val httpClient: HttpClient,
 ) : MoviesRepository {
-
     override suspend fun fetchNowPlayingMovies(page: Int): Flow<ResultState<List<Movie>?>> {
         return flowOf(
             safeApiCall {
-                val response = httpClient.get(urlString = "movie/now_playing") {
-                    parameter("page", page)
-                }.body<MovieResultsDto>()
+                val response =
+                    httpClient.get(urlString = "movie/now_playing") {
+                        parameter("page", page)
+                    }.body<MovieResultsDto>()
 
                 response.movies?.map { it.toDomain() }
-            }
+            },
         )
     }
 
     override suspend fun fetchTrendingMovies(
         mediaType: String,
         timeWindow: String,
-        page: Int
+        page: Int,
     ): Flow<ResultState<List<Movie>?>> {
         return flowOf(
             safeApiCall {
-                val response = httpClient.get(urlString = "trending/$mediaType/$timeWindow") {
-                    parameter("page", page)
-                }.body<MovieResultsDto>()
+                val response =
+                    httpClient.get(urlString = "trending/$mediaType/$timeWindow") {
+                        parameter("page", page)
+                    }.body<MovieResultsDto>()
 
                 response.movies?.map { it.toDomain() }
-            }
+            },
         )
     }
 
     override suspend fun fetchPopularMovies(page: Int): Flow<ResultState<List<Movie>?>> {
         return flowOf(
             safeApiCall {
-                val response = httpClient.get(urlString = "movie/popular") {
-                    parameter("page", page)
-                }.body<MovieResultsDto>()
+                val response =
+                    httpClient.get(urlString = "movie/popular") {
+                        parameter("page", page)
+                    }.body<MovieResultsDto>()
 
                 response.movies?.map { it.toDomain() }
-            }
+            },
         )
     }
 
     override suspend fun fetchUpcomingMovies(page: Int): Flow<ResultState<List<Movie>?>> {
         return flowOf(
             safeApiCall {
-                val response = httpClient.get(urlString = "movie/upcoming") {
-                    parameter("page", page)
-                }.body<MovieResultsDto>()
+                val response =
+                    httpClient.get(urlString = "movie/upcoming") {
+                        parameter("page", page)
+                    }.body<MovieResultsDto>()
 
                 response.movies?.map { it.toDomain() }
-            }
+            },
         )
     }
 
@@ -81,17 +84,18 @@ class MoviesRepositoryImpl constructor(
 
     override suspend fun searchMovie(
         movieName: String,
-        page: Int
+        page: Int,
     ): Flow<ResultState<List<Movie>?>> {
         return flowOf(
             safeApiCall {
-                val response = httpClient.get(urlString = "search/movie") {
-                    parameter("query", movieName)
-                    parameter("page", page)
-                }.body<MovieResultsDto>()
+                val response =
+                    httpClient.get(urlString = "search/movie") {
+                        parameter("query", movieName)
+                        parameter("page", page)
+                    }.body<MovieResultsDto>()
 
                 response.movies?.map { it.toDomain() }
-            }
+            },
         )
     }
 }

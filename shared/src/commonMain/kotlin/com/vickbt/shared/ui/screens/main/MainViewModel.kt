@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val settingsRepository: SettingsRepository) : ViewModel() {
-
     private val _mainUiState = MutableStateFlow(MainUiState())
     val mainUiState = _mainUiState.asStateFlow()
 
@@ -23,13 +22,14 @@ class MainViewModel(private val settingsRepository: SettingsRepository) : ViewMo
         getAppTheme()
     }
 
-    private fun getAppTheme() = viewModelScope.launch(coroutineExceptionHandler) {
-        try {
-            settingsRepository.getThemePreference().collectLatest { theme ->
-                _mainUiState.update { it.copy(selectedTheme = theme) }
+    private fun getAppTheme() =
+        viewModelScope.launch(coroutineExceptionHandler) {
+            try {
+                settingsRepository.getThemePreference().collectLatest { theme ->
+                    _mainUiState.update { it.copy(selectedTheme = theme) }
+                }
+            } catch (e: Exception) {
+                Napier.e("ERROR getting theme: ${e.message}")
             }
-        } catch (e: Exception) {
-            Napier.e("ERROR getting theme: ${e.message}")
         }
-    }
 }

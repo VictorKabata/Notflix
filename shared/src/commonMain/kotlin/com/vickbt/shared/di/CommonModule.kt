@@ -34,63 +34,65 @@ import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-fun commonModule(enableNetworkLogs: Boolean) = module {
-    /**
-     * Creates a http client for Ktor that is provided to the
-     * API client via constructor injection
-     */
-    single {
-        HttpClient {
-            expectSuccess = true
-            addDefaultResponseValidation()
+fun commonModule(enableNetworkLogs: Boolean) =
+    module {
+        /**
+         * Creates a http client for Ktor that is provided to the
+         * API client via constructor injection
+         */
+        single {
+            HttpClient {
+                expectSuccess = true
+                addDefaultResponseValidation()
 
-            defaultRequest {
-                url {
-                    protocol = URLProtocol.HTTPS
-                    host = BASE_URL
-                    path(URL_PATH)
-                    parameters.append("api_key", BuildKonfig.API_KEY)
-                }
-            }
-
-            if (enableNetworkLogs) {
-                install(Logging) {
-                    level = LogLevel.HEADERS
-                    logger = object : Logger {
-                        override fun log(message: String) {
-                            Napier.i(tag = "Http Client", message = message)
-                        }
+                defaultRequest {
+                    url {
+                        protocol = URLProtocol.HTTPS
+                        host = BASE_URL
+                        path(URL_PATH)
+                        parameters.append("api_key", BuildKonfig.API_KEY)
                     }
-                }.also {
-                    Napier.base(DebugAntilog())
                 }
-            }
 
-            install(ContentNegotiation) {
-                json(
-                    Json {
-                        ignoreUnknownKeys = true
-                        isLenient = true
+                if (enableNetworkLogs) {
+                    install(Logging) {
+                        level = LogLevel.HEADERS
+                        logger =
+                            object : Logger {
+                                override fun log(message: String) {
+                                    Napier.i(tag = "Http Client", message = message)
+                                }
+                            }
+                    }.also {
+                        Napier.base(DebugAntilog())
                     }
-                )
+                }
+
+                install(ContentNegotiation) {
+                    json(
+                        Json {
+                            ignoreUnknownKeys = true
+                            isLenient = true
+                        },
+                    )
+                }
             }
         }
+
+        single { FavoriteMovieDao(databaseDriverFactory = get()) }
+
+        single<MoviesRepository> { MoviesRepositoryImpl(httpClient = get()) }
+        single<MovieDetailsRepository> {
+            MovieDetailsRepositoryImpl(httpClient = get(), favoriteMovieDao = get())
+        }
+        single<FavoritesRepository> { FavoritesRepositoryImpl(favoriteMovieDao = get()) }
+        single<SettingsRepository> { SettingsRepositoryImpl(dataStore = get()) }
+
+        viewModelOf(::MainViewModel)
+        viewModelOf(::HomeViewModel)
+        viewModelOf(::DetailsViewModel)
+        viewModelOf(::SettingsViewModel)
+        viewModelOf(::FavoritesViewModel)
     }
-
-    single { FavoriteMovieDao(databaseDriverFactory = get()) }
-
-    single<MoviesRepository> { MoviesRepositoryImpl(httpClient = get()) }
-    single<MovieDetailsRepository> {
-        MovieDetailsRepositoryImpl(httpClient = get(), favoriteMovieDao = get())
-    }
-    single<FavoritesRepository> { FavoritesRepositoryImpl(favoriteMovieDao = get()) }
-    single<SettingsRepository> { SettingsRepositoryImpl(dataStore = get()) }
-
-    viewModelOf(::MainViewModel)
-    viewModelOf(::HomeViewModel)
-    viewModelOf(::DetailsViewModel)
-    viewModelOf(::SettingsViewModel)
-    viewModelOf(::FavoritesViewModel)
-}
 
 expect fun platformModule(): Module

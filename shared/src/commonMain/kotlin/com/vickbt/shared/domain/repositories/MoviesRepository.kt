@@ -6,7 +6,6 @@ import com.vickbt.shared.utils.ResultState
 import kotlinx.coroutines.flow.Flow
 
 interface MoviesRepository {
-
     /** Fetch Now Playing movies from data source*/
     suspend fun fetchNowPlayingMovies(page: Int = STARTING_PAGE_INDEX): Flow<ResultState<List<Movie>?>>
 
@@ -14,7 +13,7 @@ interface MoviesRepository {
     suspend fun fetchTrendingMovies(
         mediaType: String = "movie",
         timeWindow: String = "week",
-        page: Int = STARTING_PAGE_INDEX
+        page: Int = STARTING_PAGE_INDEX,
     ): Flow<ResultState<List<Movie>?>>
 
     /** Fetch Popular movies from data source*/
@@ -30,6 +29,6 @@ interface MoviesRepository {
     // Search movie from network source
     suspend fun searchMovie(
         movieName: String,
-        page: Int = STARTING_PAGE_INDEX
+        page: Int = STARTING_PAGE_INDEX,
     ): Flow<ResultState<List<Movie>?>>
 }

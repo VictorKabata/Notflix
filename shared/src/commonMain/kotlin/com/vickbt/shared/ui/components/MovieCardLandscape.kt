@@ -46,7 +46,7 @@ import com.vickbt.shared.utils.loadImage
 fun MovieCardLandscape(
     modifier: Modifier = Modifier,
     movie: Movie,
-    onClickItem: (Movie) -> Unit
+    onClickItem: (Movie) -> Unit,
 ) {
     var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
     var dominantSubTextColor by remember { mutableStateOf(dominantTextColor) }
@@ -54,13 +54,14 @@ fun MovieCardLandscape(
     Card(
         modifier = modifier.clickable { onClickItem(movie) },
         elevation = CardDefaults.cardElevation(8.dp),
-        shape = RoundedCornerShape(4.dp)
+        shape = RoundedCornerShape(4.dp),
     ) {
         Box(modifier = modifier) {
             AsyncImage(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .align(Alignment.Center),
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .align(Alignment.Center),
                 model = movie.backdropPath?.loadImage(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
@@ -70,26 +71,28 @@ fun MovieCardLandscape(
 
             //region Fading Edge
             Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(100.dp)
-                    .background(
-                        Brush.verticalGradient(
-                            listOf(
-                                Color.Transparent,
-                                Color.DarkGray
-                            )
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(100.dp)
+                        .background(
+                            Brush.verticalGradient(
+                                listOf(
+                                    Color.Transparent,
+                                    Color.DarkGray,
+                                ),
+                            ),
                         )
-                    )
-                    .align(Alignment.BottomCenter)
+                        .align(Alignment.BottomCenter),
             )
             //endregion
 
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-                    .align(Alignment.BottomCenter)
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .align(Alignment.BottomCenter),
             ) {
                 //region Movie Title
                 Text(
@@ -100,17 +103,18 @@ fun MovieCardLandscape(
                     style = MaterialTheme.typography.titleMedium,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
-                    color = dominantTextColor
+                    color = dominantTextColor,
                 )
                 //endregion
 
                 //region Movie Rating
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight(),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight(),
                     horizontalArrangement = Arrangement.Start,
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     RatingBar(
                         modifier = Modifier,
@@ -119,15 +123,16 @@ fun MovieCardLandscape(
                         size = 15.dp,
                         stepSize = StepSize.HALF,
                         isIndicator = true,
-                        style = RatingBarStyle.Fill()
+                        style = RatingBarStyle.Fill(),
                     )
 
                     movie.releaseDate?.let {
                         Divider(
-                            modifier = Modifier
-                                .padding(horizontal = 4.dp)
-                                .width(1.dp)
-                                .height(13.dp),
+                            modifier =
+                                Modifier
+                                    .padding(horizontal = 4.dp)
+                                    .width(1.dp)
+                                    .height(13.dp),
                             color = dominantSubTextColor,
                         )
 
@@ -139,7 +144,7 @@ fun MovieCardLandscape(
                             style = MaterialTheme.typography.labelSmall,
                             overflow = TextOverflow.Ellipsis,
                             textAlign = TextAlign.Start,
-                            color = dominantSubTextColor
+                            color = dominantSubTextColor,
                         )
                     }
                 }

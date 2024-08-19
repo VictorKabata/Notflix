@@ -22,6 +22,6 @@ fun FavoriteMovieEntity.toDomain(): MovieDetails {
         title = this.title,
         video = null,
         voteAverage = this.voteAverage,
-        voteCount = this.voteCount?.toInt()
+        voteCount = this.voteCount?.toInt(),
     )
 }

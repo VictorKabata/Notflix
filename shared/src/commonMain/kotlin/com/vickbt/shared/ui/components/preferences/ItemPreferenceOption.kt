@@ -20,12 +20,12 @@ fun ItemPreferenceOption(
     modifier: Modifier = Modifier,
     optionText: String,
     selectedOption: Boolean = false,
-    onOptionSelected: () -> Unit
+    onOptionSelected: () -> Unit,
 ) {
     Row(
         modifier = modifier.clickable { onOptionSelected() },
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(6.dp)
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         RadioButton(selected = selectedOption, onClick = { onOptionSelected() })
 
@@ -37,7 +37,7 @@ fun ItemPreferenceOption(
             fontSize = 18.sp,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            textAlign = TextAlign.Start
+            textAlign = TextAlign.Start,
         )
     }
 }

@@ -8,7 +8,6 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.logger.Level
 
 class NotflixApplication : Application() {
-
     override fun onCreate() {
         super.onCreate()
 

@@ -11,10 +11,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class SettingsRepositoryImpl(
-    private val dataStore: DataStore<Preferences>
+    private val dataStore: DataStore<Preferences>,
 ) : SettingsRepository {
-
-    override suspend fun savePreferenceSelection(key: String, selection: Int) {
+    override suspend fun savePreferenceSelection(
+        key: String,
+        selection: Int,
+    ) {
         dataStore.edit { preferences ->
             preferences[intPreferencesKey(key)] = selection
         }
