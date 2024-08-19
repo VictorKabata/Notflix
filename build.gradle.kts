@@ -45,7 +45,7 @@ subprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
     detekt {
         parallel = true
-        config = files("${project.rootDir}/config/detekt/detekt.yml")
+        config.setFrom(files("${project.rootDir}/config/detekt/detekt.yml"))
     }
 
     tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
