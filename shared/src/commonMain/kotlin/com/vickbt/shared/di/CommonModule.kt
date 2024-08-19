@@ -81,20 +81,9 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
         }
     }
 
-    single {
-        get<RoomDatabase.Builder<RoomAppDatabase>>()
-            .fallbackToDestructiveMigrationOnDowngrade(true)
-            .setDriver(BundledSQLiteDriver())
-            .setQueryCoroutineContext(Dispatchers.IO)
-            .build()
-    }
-
     single<MoviesRepository> { MoviesRepositoryImpl(httpClient = get()) }
     single<MovieDetailsRepository> {
-        MovieDetailsRepositoryImpl(
-            httpClient = get(),
-            appDatabase = get()
-        )
+        MovieDetailsRepositoryImpl(httpClient = get(), appDatabase = get())
     }
     single<FavoritesRepository> { FavoritesRepositoryImpl(appDatabase = get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(dataStore = get()) }

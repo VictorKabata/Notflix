@@ -7,5 +7,6 @@ import org.koin.dsl.module
 
 actual fun platformModule(): Module = module {
     single { DatastoreFactory(context = get()).createDatastore() }
+
     single { DatabaseBuilder.createDatabase(context = get()) }
 }
