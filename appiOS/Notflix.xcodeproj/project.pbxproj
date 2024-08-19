@@ -168,7 +168,6 @@
 				1CE0FB042A6A8B4F00B26932 /* Sources */,
 				1CE0FB052A6A8B4F00B26932 /* Frameworks */,
 				1CE0FB062A6A8B4F00B26932 /* Resources */,
-				3D4331466293CD88FAB5966F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -285,23 +284,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3D4331466293CD88FAB5966F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Notflix/Pods-Notflix-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Notflix/Pods-Notflix-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Notflix/Pods-Notflix-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		993BC5CD8E6407198A6CC6F3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

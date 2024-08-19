@@ -1,6 +1,6 @@
 [versions]
-kotlin = "1.9.21"
-gradle = "8.1.0"
+kotlin = "2.0.0"
+gradle = "8.1.4"
 ktLint = "11.6.0"
 detekt = "1.19.0"
 gradleVersionUpdate = "0.50.0"
@@ -12,16 +12,16 @@ nativeCocoapod = "1.9.0"
 
 # Kotlin Multiplatform Version
 kotlinxCoroutines = "1.7.3"
-koinCore = "3.5.3"
+koinCore = "3.5.6"
 koinCompose = "1.1.5"
-koinComposeViewModel = "1.2.0-Beta4"
-koinAndroid = "3.5.3"
+koinComposeViewModel = "1.2.0-Beta5"
+koinAndroid = "3.5.6"
 koinAndroidxCompose = "3.5.3"
-composeMultiplatform = "1.5.11"
+composeMultiplatform = "1.6.11"
 kotlinxSerializationJson = "1.6.2"
 kotlinxDateTime = "0.5.0"
 napier = "2.6.1"
-ktor = "2.3.7"
+ktor = "2.3.12"
 buildKonfig = "0.13.3"
 kover = "0.6.1"
 materialWindowSizeClass = "0.3.0"
@@ -33,7 +33,7 @@ sqlite = "2.5.0-SNAPSHOT"
 room = "2.7.0-alpha06"
 
 #Android Versions
-androidxActivity = "1.8.2"
+androidxActivity = "1.9.1"
 
 #Desktop Versions
 kamel = "0.4.0"
@@ -58,7 +58,6 @@ turbine = "0.12.3"
 ktLint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLint" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 gradleVersionUpdates = { id = "com.github.ben-manes.versions", version.ref = "gradleVersionUpdate" }
-#kotlinX-testResources = { id = "com.goncalossilva.resources", version.ref = "kotlinxTestResources" }
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 nativeCocoapod = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -68,6 +67,7 @@ jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinX-serialization-plugin = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
 compose = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
 
