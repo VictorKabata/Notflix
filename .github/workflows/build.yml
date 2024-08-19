@@ -7,7 +7,7 @@ on:
 jobs:
 
   build:
-    name: 🔨 Build
+    name: 🔨 Build & Test
     runs-on: ubuntu-latest
     steps:
 

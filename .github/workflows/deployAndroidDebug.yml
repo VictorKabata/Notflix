@@ -16,7 +16,7 @@ env:
 jobs:
 
   build:
-    name: 🔨 Build
+    name: 🔨 Build & Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
