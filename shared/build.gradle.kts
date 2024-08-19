@@ -22,13 +22,17 @@ kotlin {
 
     androidTarget()
 
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
-        when {
-            System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-            System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
-            else -> ::iosX64
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "Shared"
+            isStatic = true
+            linkerOpts.add("-lsqlite3") // add sqlite
         }
-    iosTarget("ios") {}
+    }
 
     jvm("desktop")
 
@@ -40,7 +44,7 @@ kotlin {
         podfile = project.file("../appiOS/Podfile")
         framework {
             baseName = "shared"
-            isStatic = false
+            isStatic = true
         }
     }
 

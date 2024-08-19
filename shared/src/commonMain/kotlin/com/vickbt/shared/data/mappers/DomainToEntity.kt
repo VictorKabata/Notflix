@@ -2,26 +2,27 @@ package com.vickbt.shared.data.mappers
 
 import com.vickbt.shared.data.cache.room.entities.FavoriteMovieEntity
 import com.vickbt.shared.domain.models.MovieDetails
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
-fun FavoriteMovieEntity.toDomain(): MovieDetails {
-    return MovieDetails(
-        adult = null,
-        backdropPath = this.backdropPath,
-        homepage = null,
+fun MovieDetails.toEntity(): FavoriteMovieEntity {
+    return FavoriteMovieEntity(
         id = this.id,
         imdbId = this.imdbId,
+        title = this.title,
+        posterPath = this.posterPath,
+        backdropPath = this.backdropPath,
         originalLanguage = this.originalLanguage,
         originalTitle = this.originalTitle,
         overview = this.overview,
         popularity = this.popularity,
-        posterPath = this.posterPath,
         releaseDate = this.releaseDate,
-        runtime = this.runTime,
+        runTime = this.runtime,
         status = this.status,
-        tagline = this.tagLine,
-        title = this.title,
-        video = null,
+        tagLine = this.tagline,
         voteAverage = this.voteAverage,
-        voteCount = this.voteCount
+        voteCount = this.voteCount,
+        createdAt = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).toString()
     )
 }

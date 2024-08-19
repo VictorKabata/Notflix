@@ -1,7 +1,9 @@
 package com.vickbt.shared.data.datasources
 
+import com.vickbt.shared.data.cache.room.RoomAppDatabase
 import com.vickbt.shared.data.cache.sqldelight.daos.FavoriteMovieDao
 import com.vickbt.shared.data.mappers.toDomain
+import com.vickbt.shared.data.mappers.toEntity
 import com.vickbt.shared.data.network.models.CastDto
 import com.vickbt.shared.data.network.models.MovieDetailsDto
 import com.vickbt.shared.data.network.models.MovieResultsDto
@@ -21,7 +23,7 @@ import kotlinx.coroutines.flow.flowOf
 
 class MovieDetailsRepositoryImpl(
     private val httpClient: HttpClient,
-    private val favoriteMovieDao: FavoriteMovieDao
+    private val appDatabase: RoomAppDatabase
 ) : MovieDetailsRepository {
 
     override suspend fun fetchMovieDetails(movieId: Int): Flow<ResultState<MovieDetails>> {
@@ -71,18 +73,19 @@ class MovieDetailsRepositoryImpl(
     }
 
     override suspend fun saveFavoriteMovie(movie: MovieDetails) {
-        favoriteMovieDao.saveFavoriteMovie(movie = movie)
+        appDatabase.favoriteMovieDao().insertFavoriteMovie(favoriteMovie = movie.toEntity())
     }
 
     override suspend fun getFavoriteMovie(movieId: Int): MovieDetails {
-        return favoriteMovieDao.getFavoriteMovie(movieId = movieId).toDomain()
+        val favMovieDao=appDatabase.favoriteMovieDao()
+        return favMovieDao.getFavoriteMovie(id = movieId)!!.toDomain()
     }
 
     override suspend fun deleteFavoriteMovie(movieId: Int) {
-        favoriteMovieDao.deleteFavouriteMovie(movieId = movieId)
+        appDatabase.favoriteMovieDao().deleteFavoriteMovie(id = movieId)
     }
 
     override suspend fun isMovieFavorite(movieId: Int): Boolean? {
-        return favoriteMovieDao.isMovieFavorite(movieId = movieId)?.toBoolean()
+        return appDatabase.favoriteMovieDao().isMovieFavorite(id = movieId).toBoolean()
     }
 }

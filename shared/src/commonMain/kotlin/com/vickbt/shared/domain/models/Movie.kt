@@ -5,7 +5,7 @@ data class Movie(
 
     val backdropPath: String? = null,
 
-    val id: Int? = null,
+    val id: Int,
 
     val originalLanguage: String? = null,
 

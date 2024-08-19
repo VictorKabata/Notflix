@@ -52,6 +52,6 @@ fun Double.getRating(): String {
     return "$before.$after"
 }
 
-fun Long.toBoolean(): Boolean {
-    return this != 0L
+fun Int.toBoolean(): Boolean {
+    return this != 0
 }
