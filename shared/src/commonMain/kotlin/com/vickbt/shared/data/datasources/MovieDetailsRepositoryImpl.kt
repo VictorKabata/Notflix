@@ -76,7 +76,7 @@ class MovieDetailsRepositoryImpl(
     }
 
     override suspend fun getFavoriteMovie(movieId: Int): MovieDetails {
-        val favMovieDao=appDatabase.favoriteMovieDao()
+        val favMovieDao = appDatabase.favoriteMovieDao()
         return favMovieDao.getFavoriteMovie(id = movieId)!!.toDomain()
     }
 

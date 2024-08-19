@@ -11,8 +11,8 @@ object DatabaseBuilder {
         val dbFile = appContext.getDatabasePath("notflix.db")
 
         return Room.databaseBuilder<RoomAppDatabase>(
-            context = appContext, name = dbFile.absolutePath
+            context = appContext,
+            name = dbFile.absolutePath
         ).build()
     }
-
 }

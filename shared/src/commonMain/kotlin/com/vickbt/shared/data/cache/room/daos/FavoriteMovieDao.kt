@@ -28,4 +28,3 @@ interface FavoriteMovieDao {
     @Query("SELECT count(1) FROM `Favorite Movie Table` WHERE id = :id")
     suspend fun isMovieFavorite(id: Int): Int
 }
-
