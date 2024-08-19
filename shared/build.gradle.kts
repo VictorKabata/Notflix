@@ -10,8 +10,6 @@ plugins {
     alias(libs.plugins.buildKonfig)
     alias(libs.plugins.compose)
 
-    alias(libs.plugins.sqlDelight)
-
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
 }
@@ -75,8 +73,6 @@ kotlin {
 
             implementation(libs.navigation)
 
-            implementation(libs.sqlDelight.coroutine)
-
             implementation(libs.datastore.preferences)
 
             implementation(libs.room.runtime)
@@ -95,21 +91,18 @@ kotlin {
 
         sourceSets["androidMain"].dependencies {
             implementation(libs.ktor.android)
-            implementation(libs.sqlDelight.android)
         }
 
         // sourceSets["androidUnitTest"].dependencies {}
 
         sourceSets["iosMain"].dependencies {
             implementation(libs.ktor.darwin)
-            implementation(libs.sqlDelight.native)
         }
 
         sourceSets["iosTest"].dependencies {}
 
         sourceSets["desktopMain"].dependencies {
             implementation(libs.ktor.java)
-            implementation(libs.sqlDelight.jvm)
             implementation(libs.coroutines.swing)
         }
 
@@ -143,15 +136,6 @@ buildkonfig {
             "API_KEY",
             gradleLocalProperties(rootDir).getProperty("api_key") ?: ""
         )
-    }
-}
-
-sqldelight {
-    databases {
-        create("AppDatabase") {
-            packageName.set("com.vickbt.shared.data.cache.sqldelight")
-            srcDirs.setFrom("src/commonMain/kotlin")
-        }
     }
 }
 
