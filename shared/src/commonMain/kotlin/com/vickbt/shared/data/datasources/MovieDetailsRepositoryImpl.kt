@@ -1,7 +1,6 @@
 package com.vickbt.shared.data.datasources
 
 import com.vickbt.shared.data.cache.room.RoomAppDatabase
-import com.vickbt.shared.data.cache.sqldelight.daos.FavoriteMovieDao
 import com.vickbt.shared.data.mappers.toDomain
 import com.vickbt.shared.data.mappers.toEntity
 import com.vickbt.shared.data.network.models.CastDto

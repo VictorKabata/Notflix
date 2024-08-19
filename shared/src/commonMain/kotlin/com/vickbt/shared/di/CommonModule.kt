@@ -4,7 +4,6 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import com.vickbt.shared.BuildKonfig
 import com.vickbt.shared.data.cache.room.RoomAppDatabase
-import com.vickbt.shared.data.cache.sqldelight.daos.FavoriteMovieDao
 import com.vickbt.shared.data.datasources.FavoritesRepositoryImpl
 import com.vickbt.shared.data.datasources.MovieDetailsRepositoryImpl
 import com.vickbt.shared.data.datasources.MoviesRepositoryImpl
@@ -89,10 +88,6 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
             .setQueryCoroutineContext(Dispatchers.IO)
             .build()
     }
-
-    // single { get<RoomAppDatabase>().favoriteMovieDao() }
-
-    single { FavoriteMovieDao(databaseDriverFactory = get()) }
 
     single<MoviesRepository> { MoviesRepositoryImpl(httpClient = get()) }
     single<MovieDetailsRepository> {
