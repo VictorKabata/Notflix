@@ -16,7 +16,6 @@ plugins {
 
     alias(libs.plugins.ktLint)
     alias(libs.plugins.detekt)
-    alias(libs.plugins.gradleVersionUpdates)
 }
 
 allprojects {
@@ -46,12 +45,6 @@ subprojects {
     detekt {
         parallel = true
         config = files("${project.rootDir}/config/detekt/detekt.yml")
-    }
-
-    tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
-        checkForGradleUpdate = true
-        outputDir = "build/dependencyUpdates"
-        reportfileName = "report"
     }
 }
 
