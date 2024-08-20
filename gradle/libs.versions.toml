@@ -3,10 +3,9 @@ kotlin = "1.9.21"
 gradle = "8.1.0"
 ktLint = "12.1.1"
 detekt = "1.23.6"
-gradleVersionUpdate = "0.51.0"
-googleServices = "4.4.0"
-firebaseAppDistribution = "4.0.1"
-firebaseCrashlytics = "2.9.9"
+googleServices = "4.4.2"
+firebaseAppDistribution = "5.0.0"
+firebaseCrashlytics = "3.0.2"
 firebasePerformance = "1.4.2"
 nativeCocoapod = "1.9.0"
 
@@ -52,7 +51,6 @@ turbine = "0.12.3"
 [plugins]
 ktLint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLint" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-gradleVersionUpdates = { id = "com.github.ben-manes.versions", version.ref = "gradleVersionUpdate" }
 #kotlinX-testResources = { id = "com.goncalossilva.resources", version.ref = "kotlinxTestResources" }
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 nativeCocoapod = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
