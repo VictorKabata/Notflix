@@ -78,14 +78,4 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.performance)
-
-    testImplementation(libs.jUnitKtx)
-    testImplementation(libs.kotlinX.coroutines.test)
-    testImplementation(libs.mockk)
-    testImplementation(libs.kotlin.test)
-    testImplementation(libs.archTestCore)
-    testImplementation(libs.robolectric)
-
-    androidTestImplementation(libs.test.rules)
-    androidTestImplementation(libs.test.runner)
 }
