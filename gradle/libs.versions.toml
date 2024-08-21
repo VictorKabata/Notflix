@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.9.21"
+kotlin = "2.0.0"
 gradle = "8.1.4"
 ktLint = "11.6.0"
 detekt = "1.23.6"
@@ -16,7 +16,7 @@ koinCompose = "1.1.5"
 koinComposeViewModel = "1.2.0-Beta5"
 koinAndroid = "3.5.6"
 koinAndroidxCompose = "3.5.3"
-composeMultiplatform = "1.5.11"
+composeMultiplatform = "1.6.11"
 kotlinxSerializationJson = "1.6.2"
 kotlinxDateTime = "0.6.0"
 napier = "2.7.1"
@@ -55,6 +55,7 @@ jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinX-serialization-plugin = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
 compose = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 
 googleServices-plugin = { id = "com.google.gms.google-services", version.ref = "googleServices" }
@@ -66,7 +67,7 @@ firebase-performance-plugin = { id = "com.google.firebase.firebase-perf", versio
 [libraries]
 #Kotlin Multiplatform Lib Dependencies
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
-coroutines-swing={module="org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref="coroutines"}
+coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "coroutines" }
 datastore-preferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastore" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 kotlinX-serializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }

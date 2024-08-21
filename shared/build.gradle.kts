@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlinX.serialization.plugin)
     alias(libs.plugins.buildKonfig)
     alias(libs.plugins.compose)
+    alias(libs.plugins.compose.compiler)
 
     alias(libs.plugins.sqlDelight)
 }

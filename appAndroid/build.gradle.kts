@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.firebase.appDistribution.plugin)
     alias(libs.plugins.firebase.crashlytics.plugin)
     alias(libs.plugins.firebase.performance.plugin)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -52,9 +53,6 @@ android {
         compose = true
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.7"
-    }
     namespace = "com.vickbt.notflix"
 }
 
