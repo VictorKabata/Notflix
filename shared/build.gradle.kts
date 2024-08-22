@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     alias(libs.plugins.multiplatform)
-    alias(libs.plugins.nativeCocoapod)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlinX.serialization.plugin)
     alias(libs.plugins.buildKonfig)
@@ -29,18 +28,6 @@ kotlin {
     iosTarget("ios") {}
 
     jvm("desktop")
-
-    cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "github.com/VictorKabata/Notflix"
-        version = "1.0"
-        ios.deploymentTarget = "14.1"
-        podfile = project.file("../appiOS/Podfile")
-        framework {
-            baseName = "shared"
-            isStatic = false
-        }
-    }
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
