@@ -8,6 +8,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+.kotlin
 
 #Cocopods
 appiOS/Pods/

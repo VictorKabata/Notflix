@@ -4,11 +4,11 @@ plugins {
     alias(libs.plugins.android.kotlin) apply false
     alias(libs.plugins.multiplatform) apply false
     alias(libs.plugins.jvm) apply false
-    alias(libs.plugins.nativeCocoapod) apply false
 
     alias(libs.plugins.googleServices.plugin) apply false
 
     alias(libs.plugins.compose) apply false
+    alias(libs.plugins.compose.compiler) apply false
 
     alias(libs.plugins.firebase.appDistribution.plugin) apply false
     alias(libs.plugins.firebase.crashlytics.plugin) apply false
@@ -16,7 +16,6 @@ plugins {
 
     alias(libs.plugins.ktLint)
     alias(libs.plugins.detekt)
-    alias(libs.plugins.gradleVersionUpdates)
 }
 
 allprojects {
@@ -46,12 +45,6 @@ subprojects {
     detekt {
         parallel = true
         config = files("${project.rootDir}/config/detekt/detekt.yml")
-    }
-
-    tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
-        checkForGradleUpdate = true
-        outputDir = "build/dependencyUpdates"
-        reportfileName = "report"
     }
 }
 
