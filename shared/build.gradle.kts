@@ -19,13 +19,16 @@ kotlin {
 
     androidTarget()
 
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
-        when {
-            System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-            System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
-            else -> ::iosX64
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries.framework {
+            baseName = "shared"
+            isStatic = false
         }
-    iosTarget("ios") {}
+    }
 
     jvm("desktop")
 
