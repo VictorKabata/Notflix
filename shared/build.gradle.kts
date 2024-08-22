@@ -1,14 +1,13 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     alias(libs.plugins.multiplatform)
-    alias(libs.plugins.nativeCocoapod)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlinX.serialization.plugin)
     alias(libs.plugins.buildKonfig)
     alias(libs.plugins.compose)
+    alias(libs.plugins.compose.compiler)
 
     alias(libs.plugins.sqlDelight)
 }
@@ -19,27 +18,18 @@ kotlin {
 
     androidTarget()
 
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
-        when {
-            System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-            System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
-            else -> ::iosX64
-        }
-    iosTarget("ios") {}
-
-    jvm("desktop")
-
-    cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "github.com/VictorKabata/Notflix"
-        version = "1.0"
-        ios.deploymentTarget = "14.1"
-        podfile = project.file("../appiOS/Podfile")
-        framework {
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries.framework {
             baseName = "shared"
             isStatic = false
         }
     }
+
+    jvm("desktop")
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
