@@ -16,7 +16,6 @@
 		1CE0FB1D2A6A8B5100B26932 /* NotflixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE0FB1C2A6A8B5100B26932 /* NotflixTests.swift */; };
 		1CE0FB272A6A8B5100B26932 /* NotflixUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE0FB262A6A8B5100B26932 /* NotflixUITests.swift */; };
 		1CE0FB292A6A8B5100B26932 /* NotflixUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE0FB282A6A8B5100B26932 /* NotflixUITestsLaunchTests.swift */; };
-		EEF0A9DB7EF0B7314CD86782 /* Pods_Notflix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1DDC9A5FE4F3F3C8914D53 /* Pods_Notflix.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,9 +48,6 @@
 		1CE0FB222A6A8B5100B26932 /* NotflixUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotflixUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CE0FB262A6A8B5100B26932 /* NotflixUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotflixUITests.swift; sourceTree = "<group>"; };
 		1CE0FB282A6A8B5100B26932 /* NotflixUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotflixUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		5B1DDC9A5FE4F3F3C8914D53 /* Pods_Notflix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Notflix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BBBC4C8A43B1D42D922F9C90 /* Pods-Notflix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notflix.release.xcconfig"; path = "Target Support Files/Pods-Notflix/Pods-Notflix.release.xcconfig"; sourceTree = "<group>"; };
-		F43A1A4F78675B8E4189135B /* Pods-Notflix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notflix.debug.xcconfig"; path = "Target Support Files/Pods-Notflix/Pods-Notflix.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +55,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEF0A9DB7EF0B7314CD86782 /* Pods_Notflix.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +83,6 @@
 				1CE0FB252A6A8B5100B26932 /* NotflixUITests */,
 				1CE0FB092A6A8B4F00B26932 /* Products */,
 				380B2E20DFD34D0F45BCF04A /* Pods */,
-				A9050EA9DF34E91E4EB54887 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -143,18 +137,8 @@
 		380B2E20DFD34D0F45BCF04A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F43A1A4F78675B8E4189135B /* Pods-Notflix.debug.xcconfig */,
-				BBBC4C8A43B1D42D922F9C90 /* Pods-Notflix.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		A9050EA9DF34E91E4EB54887 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5B1DDC9A5FE4F3F3C8914D53 /* Pods_Notflix.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,12 +148,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1CE0FB2C2A6A8B5100B26932 /* Build configuration list for PBXNativeTarget "Notflix" */;
 			buildPhases = (
-				993BC5CD8E6407198A6CC6F3 /* [CP] Check Pods Manifest.lock */,
 				1CE0FB042A6A8B4F00B26932 /* Sources */,
 				1CE0FB052A6A8B4F00B26932 /* Frameworks */,
 				1CE0FB062A6A8B4F00B26932 /* Resources */,
-				987E1C4A95024182A3B0F904 /* [CP] Embed Pods Frameworks */,
-				8706BB71802248BED512C737 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -284,65 +265,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		8706BB71802248BED512C737 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Notflix/Pods-Notflix-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Notflix/Pods-Notflix-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Notflix/Pods-Notflix-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		987E1C4A95024182A3B0F904 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Notflix/Pods-Notflix-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Notflix/Pods-Notflix-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Notflix/Pods-Notflix-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		993BC5CD8E6407198A6CC6F3 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Notflix-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1CE0FB042A6A8B4F00B26932 /* Sources */ = {
@@ -505,7 +427,6 @@
 		};
 		1CE0FB2D2A6A8B5100B26932 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F43A1A4F78675B8E4189135B /* Pods-Notflix.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -534,7 +455,6 @@
 		};
 		1CE0FB2E2A6A8B5100B26932 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BBBC4C8A43B1D42D922F9C90 /* Pods-Notflix.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
