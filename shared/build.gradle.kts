@@ -32,7 +32,7 @@ kotlin {
     jvm("desktop")
 
     sourceSets {
-        sourceSets["commonMain"].dependencies {
+        commonMain.dependencies {
             api(compose.runtime)
             api(compose.foundation)
             api(compose.material3)
@@ -65,27 +65,22 @@ kotlin {
             // implementation(libs.material.windowSizeClass)
         }
 
-        /*sourceSets["commonTest"].dependencies {
+        commonTest.dependencies {
             implementation(kotlin("test"))
             implementation(libs.turbine)
             implementation(libs.ktor.mock)
             implementation(libs.kotlinX.coroutines.test)
-            implementation(libs.multiplatformSettings.test)
-        }*/
+        }
 
-        sourceSets["androidMain"].dependencies {
+        androidMain.dependencies {
             implementation(libs.ktor.android)
             implementation(libs.sqlDelight.android)
         }
 
-        // sourceSets["androidUnitTest"].dependencies {}
-
-        sourceSets["iosMain"].dependencies {
+        iosMain.dependencies {
             implementation(libs.ktor.darwin)
             implementation(libs.sqlDelight.native)
         }
-
-        sourceSets["iosTest"].dependencies {}
 
         sourceSets["desktopMain"].dependencies {
             implementation(libs.ktor.java)
