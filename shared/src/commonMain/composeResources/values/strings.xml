@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_details">Details</string>
+
+    <string name="trending_movies">Trending Movies</string>
+    <string name="popular_movies">Popular Movies</string>
+    <string name="upcoming_movies">Upcoming Movies</string>
+    <string name="view_all">View All</string>
+
+    <string name="share">Share</string>
+
+    <!--Preference Titles-->
+    <string name="title_personalisation">Personalisation</string>
+    <string name="title_extras">Extras</string>
+
+    <!--Preference Headers-->
+    <string name="change_theme">Change theme</string>
+    <string name="change_language">Change language</string>
+    <string name="change_image_quality">Change image quality</string>
+    <string name="report_bug">Report Bug</string>
+    <string name="report_bug_description">Report bug or request feature</string>
+    <string name="source_code">Source Code</string>
+    <string name="source_code_description">View app source code</string>
+
+    <string name="light_theme">Light theme</string>
+    <string name="dark_theme">Dark theme</string>
+    <string name="system_default">System default</string>
+
+    <string name="popularity">Popularity</string>
+    <string name="overview">Overview</string>
+    <string name="cast">Cast</string>
+    <string name="trailer">Trailer</string>
+    <string name="similar_movies">Similar Movies</string>
+
+    <string name="def">Default</string>
+    <string name="language_eg" translatable="false">No Russian</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="movie_poster">Movie poster</string>
+    <string name="unknown_movie">Unknown movie</string>
+    <string name="rating">Rating</string>
+    <string name="unknown_actor">Unknown Actor</string>
+    <string name="unknown_character">Unknown character</string>
+    <string name="back">Back</string>
+    <string name="close_search">Close Search</string>
+
+</resources>
