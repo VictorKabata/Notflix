@@ -20,6 +20,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Search
@@ -53,6 +54,14 @@ import com.vickbt.shared.ui.components.SectionSeparator
 import com.vickbt.shared.ui.screens.search.SearchScreen
 import com.vickbt.shared.ui.theme.DarkPrimaryColor
 import com.vickbt.shared.utils.WindowSize
+import notflix.shared.generated.resources.Res
+import notflix.shared.generated.resources.back
+import notflix.shared.generated.resources.close_search
+import notflix.shared.generated.resources.popular_movies
+import notflix.shared.generated.resources.title_search
+import notflix.shared.generated.resources.trending_movies
+import notflix.shared.generated.resources.upcoming_movies
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
@@ -93,9 +102,9 @@ fun HomeScreen(
             onActiveChange = { activeState = it },
             placeholder = {
                 Text(
-                    text = "Search Movie",
+                    text = stringResource(Res.string.title_search),
                     fontSize = 18.sp,
-                    style = MaterialTheme.typography.labelMedium,
+                    style = MaterialTheme.typography.titleMedium,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start
@@ -108,8 +117,8 @@ fun HomeScreen(
                         searchQuery = ""
                     }) {
                         Icon(
-                            imageVector = Icons.Rounded.ArrowBack,
-                            contentDescription = "Go back"
+                            imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                            contentDescription = stringResource(Res.string.back)
                         )
                     }
                 } else {
@@ -123,7 +132,7 @@ fun HomeScreen(
                     }) {
                         Icon(
                             imageVector = Icons.Rounded.Close,
-                            contentDescription = "Close search"
+                            contentDescription = stringResource(Res.string.close_search)
                         )
                     }
                 } else {
@@ -201,7 +210,7 @@ fun HomeScreen(
                                 .padding(horizontal = 16.dp, vertical = 6.dp)
                                 .fillMaxWidth()
                                 .wrapContentHeight(),
-                            sectionTitle = "Trending Movies"
+                            sectionTitle = stringResource(Res.string.trending_movies)
                         )
 
                         Spacer(modifier = Modifier.height(8.dp))
@@ -232,7 +241,7 @@ fun HomeScreen(
                                 .padding(start = 16.dp, end = 16.dp, top = 12.dp)
                                 .fillMaxWidth()
                                 .wrapContentHeight(),
-                            sectionTitle = "Upcoming Movies"
+                            sectionTitle = stringResource(Res.string.upcoming_movies)
                         )
 
                         Spacer(modifier = Modifier.height(8.dp))
@@ -265,7 +274,7 @@ fun HomeScreen(
                                     .padding(start = 16.dp, end = 16.dp, top = 12.dp)
                                     .fillMaxWidth()
                                     .wrapContentHeight(),
-                                sectionTitle = "Popular Movies"
+                                sectionTitle = stringResource(Res.string.popular_movies)
                             )
 
                             Spacer(modifier = Modifier.height(8.dp))

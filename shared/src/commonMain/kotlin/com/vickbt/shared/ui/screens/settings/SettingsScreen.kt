@@ -1,3 +1,5 @@
+@file:OptIn(KoinExperimentalAPI::class)
+
 package com.vickbt.shared.ui.screens.settings
 
 import androidx.compose.foundation.layout.Column
@@ -18,14 +20,25 @@ import com.vickbt.shared.ui.components.appbars.AppBar
 import com.vickbt.shared.ui.components.preferences.DialogPreferenceSelection
 import com.vickbt.shared.ui.components.preferences.PreferencesGroup
 import com.vickbt.shared.ui.components.preferences.TextPreference
+import notflix.shared.generated.resources.Res
+import notflix.shared.generated.resources.change_image_quality
+import notflix.shared.generated.resources.change_theme
+import notflix.shared.generated.resources.def
+import notflix.shared.generated.resources.image_qualities
+import notflix.shared.generated.resources.themes
+import notflix.shared.generated.resources.title_personalisation
+import notflix.shared.generated.resources.title_settings
+import org.jetbrains.compose.resources.stringArrayResource
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-
-private val themeLabels = listOf("Light", "Dark", "System Default")
-private val imageQualityLabels = listOf("High Quality", "Low Quality")
+import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun SettingsScreen(viewModel: SettingsViewModel = koinViewModel<SettingsViewModel>()) {
     val settingsUiState = viewModel.settingsUiState.collectAsState().value
+
+    val themeLabels = stringArrayResource(Res.array.themes)
+    val imageQualityLabels = stringArrayResource(Res.array.image_qualities)
 
     val showThemeDialog = remember { mutableStateOf(false) }
     val showImageQualityDialog = remember { mutableStateOf(false) }
@@ -34,13 +47,13 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinViewModel<SettingsViewMode
     val imageQualityLabel = imageQualityLabels[settingsUiState.selectedImageQuality]
 
     Scaffold(
-        topBar = { AppBar("Settings") },
+        topBar = { AppBar(stringResource(Res.string.title_settings)) },
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
-            PreferencesGroup(title = "Personalisation") {
+            PreferencesGroup(title = stringResource(Res.string.title_personalisation)) {
                 TextPreference(
                     icon = Icons.Rounded.Lightbulb,
-                    title = "Change theme",
+                    title = stringResource(Res.string.change_theme),
                     subTitle = themeLabel,
                     onClick = { showThemeDialog.value = !showThemeDialog.value }
                 )
@@ -55,7 +68,7 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinViewModel<SettingsViewMode
 
                 TextPreference(
                     icon = Icons.Rounded.Image,
-                    title = "Image quality",
+                    title = stringResource(Res.string.change_image_quality),
                     subTitle = imageQualityLabel,
                     onClick = { showImageQualityDialog.value = !showImageQualityDialog.value }
                 )
@@ -80,9 +93,9 @@ private fun ChangeTheme(
 ) {
     DialogPreferenceSelection(
         showDialog = showDialog.value,
-        title = "Change theme",
+        title = stringResource(Res.string.change_theme),
         currentValue = currentValue ?: "Default",
-        labels = themeLabels,
+        labels = stringArrayResource(Res.array.themes),
         onNegativeClick = { showDialog.value = false }
     ) { theme ->
         viewModel.savePreferenceSelection(key = KEY_THEME, selection = theme)
@@ -97,9 +110,9 @@ private fun ChangeImageQuality(
 ) {
     DialogPreferenceSelection(
         showDialog = showDialog.value,
-        title = "Image quality",
-        currentValue = currentValue ?: "Default",
-        labels = imageQualityLabels,
+        title = stringResource(Res.string.change_image_quality),
+        currentValue = currentValue ?: stringResource(Res.string.def),
+        labels = stringArrayResource(Res.array.image_qualities),
         onNegativeClick = { showDialog.value = false }
     ) { imageQuality ->
         viewModel.savePreferenceSelection(

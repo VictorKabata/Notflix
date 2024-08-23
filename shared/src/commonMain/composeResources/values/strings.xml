@@ -48,4 +48,17 @@
     <string name="back">Back</string>
     <string name="close_search">Close Search</string>
 
+    <string-array name="themes">
+        <item>Light theme</item>
+        <item>Dark theme</item>
+        <item>System default</item>
+    </string-array>
+
+    <string-array name="image_qualities">
+        <item>High Quality</item>
+        <item>Low Quality</item>
+    </string-array>
+
+
+
 </resources>
