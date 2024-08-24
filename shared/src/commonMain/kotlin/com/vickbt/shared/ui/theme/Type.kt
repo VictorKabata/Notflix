@@ -12,7 +12,6 @@ import org.jetbrains.compose.resources.Font
 
 @Composable
 internal fun Typography(): Typography {
-
     val Nunito = FontFamily(Font(Res.font.nunito))
 
     return Typography(
