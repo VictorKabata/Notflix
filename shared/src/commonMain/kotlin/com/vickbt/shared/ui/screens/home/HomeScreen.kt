@@ -207,13 +207,10 @@ fun HomeScreen(
                     homeUiState.trendingMovies?.let {
                         SectionSeparator(
                             modifier = Modifier
-                                .padding(horizontal = 16.dp, vertical = 6.dp)
                                 .fillMaxWidth()
                                 .wrapContentHeight(),
                             sectionTitle = stringResource(Res.string.trending_movies)
                         )
-
-                        Spacer(modifier = Modifier.height(8.dp))
 
                         LazyRow(
                             modifier = Modifier
@@ -238,13 +235,10 @@ fun HomeScreen(
                     homeUiState.upcomingMovies?.let {
                         SectionSeparator(
                             modifier = Modifier
-                                .padding(start = 16.dp, end = 16.dp, top = 12.dp)
                                 .fillMaxWidth()
                                 .wrapContentHeight(),
                             sectionTitle = stringResource(Res.string.upcoming_movies)
                         )
-
-                        Spacer(modifier = Modifier.height(8.dp))
 
                         LazyRow(
                             contentPadding = PaddingValues(horizontal = 16.dp),
@@ -271,13 +265,10 @@ fun HomeScreen(
                         Column(modifier = Modifier.padding(bottom = 90.dp)) {
                             SectionSeparator(
                                 modifier = Modifier
-                                    .padding(start = 16.dp, end = 16.dp, top = 12.dp)
                                     .fillMaxWidth()
                                     .wrapContentHeight(),
                                 sectionTitle = stringResource(Res.string.popular_movies)
                             )
-
-                            Spacer(modifier = Modifier.height(8.dp))
 
                             LazyRow(
                                 modifier = Modifier.wrapContentHeight(),

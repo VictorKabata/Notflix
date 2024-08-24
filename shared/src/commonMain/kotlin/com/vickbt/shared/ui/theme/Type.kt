@@ -19,7 +19,7 @@ internal fun Typography(): Typography {
         titleLarge = TextStyle(
             fontFamily = Nunito,
             fontWeight = FontWeight.Bold,
-            fontSize = 22.sp,
+            fontSize = 24.sp,
             lineHeight = 28.sp,
             letterSpacing = 0.sp,
         ),
