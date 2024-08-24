@@ -19,17 +19,25 @@ internal fun Typography(): Typography {
         titleLarge = TextStyle(
             fontFamily = Nunito,
             fontWeight = FontWeight.Bold,
-            fontSize = 26.sp,
+            fontSize = 22.sp,
             lineHeight = 28.sp,
             letterSpacing = 0.sp,
         ),
 
         titleMedium = TextStyle(
             fontFamily = Nunito,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 16.sp,
+            lineHeight = 24.sp,
+            letterSpacing = 0.15.sp,
+        ),
+
+        bodyLarge = TextStyle(
+            fontFamily = Nunito,
             fontWeight = FontWeight.Bold,
-            fontSize = 24.sp,
-            lineHeight = 28.sp,
-            letterSpacing = 0.sp,
+            fontSize = 16.sp,
+            lineHeight = 24.sp,
+            letterSpacing = 0.15.sp,
         ),
 
         bodyMedium = TextStyle(
@@ -37,7 +45,12 @@ internal fun Typography(): Typography {
             fontWeight = FontWeight.Medium,
             fontSize = 16.sp,
             lineHeight = 28.sp,
-            letterSpacing = 0.sp,
+            letterSpacing = 0.15.sp,
+        ),
+
+        labelSmall = TextStyle(
+            fontFamily = Nunito,
+            fontWeight = FontWeight.SemiBold
         )
     )
 }

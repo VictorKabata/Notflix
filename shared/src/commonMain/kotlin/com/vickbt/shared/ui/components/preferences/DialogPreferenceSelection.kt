@@ -42,7 +42,7 @@ fun DialogPreferenceSelection(
                     Text(
                         modifier = Modifier.fillMaxWidth(),
                         text = title,
-                        style = MaterialTheme.typography.labelMedium,
+                        style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurface,
                         fontSize = 22.sp,
                         maxLines = 1,
@@ -74,7 +74,7 @@ fun DialogPreferenceSelection(
                         Text(
                             modifier = Modifier.clickable { onNegativeClick() },
                             text = "Cancel".toUpperCase(Locale.current),
-                            style = MaterialTheme.typography.labelMedium,
+                            style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.primary,
                             fontSize = 16.sp,
                             maxLines = 1,

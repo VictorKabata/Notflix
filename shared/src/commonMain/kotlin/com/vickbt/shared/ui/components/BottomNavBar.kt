@@ -32,12 +32,14 @@ fun BottomNavBar(
 
             NavigationBarItem(
                 icon = {
-                    Icon(
-                        imageVector = item.icon!!,
-                        contentDescription = item.title
-                    )
+                    item.icon?.let {
+                        Icon(
+                            imageVector = item.icon,
+                            contentDescription = item.title
+                        )
+                    }
                 },
-                label = { Text(text = item.title) },
+                label = { Text(text = item.title, style = MaterialTheme.typography.labelSmall) },
                 alwaysShowLabel = true,
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.primary,
