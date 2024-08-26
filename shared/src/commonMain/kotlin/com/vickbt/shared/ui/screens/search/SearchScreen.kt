@@ -1,3 +1,5 @@
+@file:OptIn(KoinExperimentalAPI::class)
+
 package com.vickbt.shared.ui.screens.search
 
 import androidx.compose.foundation.background
@@ -13,21 +15,27 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.vickbt.shared.ui.components.MovieCardPortrait
-import com.vickbt.shared.utils.SearchUiState
 import com.vickbt.shared.utils.WindowSize
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun SearchScreen(
     navigator: NavHostController,
-    searchUiState: SearchUiState,
+    viewModel: SearchViewModel = koinViewModel<SearchViewModel>(),
     windowSize: WindowSize = WindowSize.COMPACT
 ) {
+
+    val searchUiState by viewModel.searchUiState.collectAsState()
+
     Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
         if (searchUiState.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
