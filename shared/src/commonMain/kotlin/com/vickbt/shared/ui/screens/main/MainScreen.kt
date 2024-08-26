@@ -68,7 +68,7 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel<MainViewModel>()) {
                     Navigation(
                         navHostController = navHostController,
                         windowSize = windowSize,
-                        paddingValues = paddingValues
+                        mainPaddingValues = paddingValues
                     )
                 }
             }

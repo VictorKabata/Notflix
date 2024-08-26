@@ -19,27 +19,27 @@ import io.github.aakira.napier.Napier
 fun Navigation(
     navHostController: NavHostController,
     windowSize: WindowSize,
-    paddingValues: PaddingValues = PaddingValues()
+    mainPaddingValues: PaddingValues = PaddingValues()
 ) {
     NavHost(navController = navHostController, startDestination = NavigationItem.Home.route) {
         composable(route = NavigationItem.Home.route) {
             HomeScreen(
                 navigator = navHostController,
                 windowSize = windowSize,
-                mainPaddingValues = paddingValues
+                mainPaddingValues = mainPaddingValues
             )
         }
 
         composable(route = NavigationItem.Favorites.route) {
-            FavoritesScreen(navigator = navHostController)
+            FavoritesScreen(navigator = navHostController, mainPaddingValues = mainPaddingValues)
         }
 
         composable(route = NavigationItem.Search.route) {
-            SearchScreen(navigator = navHostController)
+            SearchScreen(navigator = navHostController, mainPaddingValues = mainPaddingValues)
         }
 
         composable(route = NavigationItem.Settings.route) {
-            SettingsScreen()
+            SettingsScreen(mainPaddingValues = mainPaddingValues)
         }
 
         composable(

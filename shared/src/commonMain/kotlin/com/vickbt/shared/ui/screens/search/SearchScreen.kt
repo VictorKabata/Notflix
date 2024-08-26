@@ -31,7 +31,8 @@ import org.koin.core.annotation.KoinExperimentalAPI
 fun SearchScreen(
     navigator: NavHostController,
     viewModel: SearchViewModel = koinViewModel<SearchViewModel>(),
-    windowSize: WindowSize = WindowSize.COMPACT
+    windowSize: WindowSize = WindowSize.COMPACT,
+    mainPaddingValues:PaddingValues
 ) {
 
     val searchUiState by viewModel.searchUiState.collectAsState()

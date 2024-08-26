@@ -1,6 +1,7 @@
 package com.vickbt.shared.ui.screens.settings
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Image
@@ -24,7 +25,10 @@ private val themeLabels = listOf("Light", "Dark", "System Default")
 private val imageQualityLabels = listOf("High Quality", "Low Quality")
 
 @Composable
-fun SettingsScreen(viewModel: SettingsViewModel = koinViewModel<SettingsViewModel>()) {
+fun SettingsScreen(
+    viewModel: SettingsViewModel = koinViewModel<SettingsViewModel>(),
+    mainPaddingValues: PaddingValues
+) {
     val settingsUiState = viewModel.settingsUiState.collectAsState().value
 
     val showThemeDialog = remember { mutableStateOf(false) }
@@ -34,6 +38,7 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinViewModel<SettingsViewMode
     val imageQualityLabel = imageQualityLabels[settingsUiState.selectedImageQuality]
 
     Scaffold(
+        modifier = Modifier.padding(mainPaddingValues),
         topBar = { AppBar("Settings") },
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {

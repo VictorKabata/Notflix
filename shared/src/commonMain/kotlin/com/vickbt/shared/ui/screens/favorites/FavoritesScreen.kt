@@ -1,6 +1,7 @@
 package com.vickbt.shared.ui.screens.favorites
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,17 +21,19 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun FavoritesScreen(
     navigator: NavHostController,
-    viewModel: FavoritesViewModel = koinViewModel<FavoritesViewModel>()
+    viewModel: FavoritesViewModel = koinViewModel<FavoritesViewModel>(),
+    mainPaddingValues: PaddingValues
 ) {
     val favoriteMovies = viewModel.favoriteMoviesState.collectAsState().value
 
     Scaffold(
+        modifier = Modifier.padding(mainPaddingValues),
         topBar = { AppBar("Favorites") }
     ) { paddingValues ->
         Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
-                    .padding(bottom = 90.dp, start = 16.dp, end = 16.dp)
+                    .padding(horizontal = 16.dp)
             ) {
                 items(items = favoriteMovies.favoriteMovies ?: emptyList()) { favoriteMovie ->
                     MovieCardDescription(
