@@ -94,14 +94,7 @@ fun HomeScreen(
                             pageSpacing = 8.dp
                         ) { currentPage ->
                             MovieCardPager(
-                                modifier = Modifier.fillMaxWidth()
-                                    .apply {
-                                        if (windowSize == WindowSize.EXPANDED) {
-                                            fillMaxHeight(.3f)
-                                        } else {
-                                            height(280.dp)
-                                        }
-                                    },
+                                modifier = Modifier.fillMaxWidth().height(280.dp),
                                 movie = nowPlayingMovies[currentPage]
                             ) { movie ->
                                 navigator.navigate("/details/${movie.id}")
