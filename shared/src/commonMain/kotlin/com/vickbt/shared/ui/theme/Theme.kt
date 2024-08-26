@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoilApi::class)
+
 package com.vickbt.shared.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -5,6 +7,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import coil3.annotation.ExperimentalCoilApi
 import coil3.compose.setSingletonImageLoaderFactory
 import com.vickbt.shared.utils.getAsyncImageLoader
 
@@ -37,7 +40,7 @@ fun NotflixTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        // typography = Typography,
+        typography = Typography(),
         shapes = Shapes
     ) {
         content()

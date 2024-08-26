@@ -1,3 +1,5 @@
+@file:OptIn(KoinExperimentalAPI::class)
+
 package com.vickbt.shared.ui.screens.favorites
 
 import androidx.compose.foundation.layout.Box
@@ -16,7 +18,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.vickbt.shared.ui.components.MovieCardDescription
 import com.vickbt.shared.ui.components.appbars.AppBar
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.title_favorites
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun FavoritesScreen(
@@ -28,7 +34,7 @@ fun FavoritesScreen(
 
     Scaffold(
         modifier = Modifier.padding(mainPaddingValues),
-        topBar = { AppBar("Favorites") }
+        topBar = { AppBar(stringResource(Res.string.title_favorites)) }
     ) { paddingValues ->
         Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
             LazyColumn(

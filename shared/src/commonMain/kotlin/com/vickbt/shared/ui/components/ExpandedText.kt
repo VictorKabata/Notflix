@@ -32,7 +32,7 @@ fun ExpandableText(
     modifier: Modifier = Modifier,
     minimizedMaxLines: Int = 1,
     fontSize: TextUnit = 14.sp,
-    style: TextStyle = MaterialTheme.typography.bodySmall,
+    style: TextStyle = MaterialTheme.typography.bodyMedium,
     textAlign: TextAlign = TextAlign.Start,
     color: Color = Color.LightGray.copy(alpha = .85f),
 ) {
@@ -42,7 +42,6 @@ fun ExpandableText(
     val seeMoreSizeState = remember { mutableStateOf<IntSize?>(null) }
     val seeMoreOffsetState = remember { mutableStateOf<Offset?>(null) }
 
-    // getting raw values for smart cast
     val textLayoutResult = textLayoutResultState.value
     val seeMoreSize = seeMoreSizeState.value
     val seeMoreOffset = seeMoreOffsetState.value

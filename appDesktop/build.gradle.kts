@@ -1,3 +1,5 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+
 plugins {
     alias(libs.plugins.jvm)
     alias(libs.plugins.compose)
@@ -12,6 +14,11 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "NotflixApplicationKt"
+        mainClass = "com.vickbt.notflix.MainKt"
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "Notflix"
+            packageVersion = "1.0.0"
+        }
     }
 }

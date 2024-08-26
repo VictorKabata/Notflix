@@ -43,7 +43,7 @@ fun PreferencesGroup(
                         .weight(8f)
                         .padding(horizontal = 12.dp),
                     text = title,
-                    style = MaterialTheme.typography.labelMedium,
+                    style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.primary,
                     fontSize = 16.sp,
                     maxLines = 1,
