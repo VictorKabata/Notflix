@@ -22,14 +22,4 @@ interface MoviesRepository {
 
     /** Fetch Upcoming movies from data source*/
     suspend fun fetchUpcomingMovies(page: Int = STARTING_PAGE_INDEX): Flow<ResultState<List<Movie>?>>
-
-    /** Get movies based on category from cache*/
-    /*@Deprecated("Pending caching implementation")
-    suspend fun getMovies(category: String): Flow<List<Movie>>*/
-
-    // Search movie from network source
-    suspend fun searchMovie(
-        movieName: String,
-        page: Int = STARTING_PAGE_INDEX
-    ): Flow<ResultState<List<Movie>?>>
 }

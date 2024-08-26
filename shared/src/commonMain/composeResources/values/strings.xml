@@ -48,6 +48,8 @@
     <string name="back">Back</string>
     <string name="close_search">Close Search</string>
 
+    <string name="search_movie">Search Movie</string>
+
     <string-array name="themes">
         <item>Light theme</item>
         <item>Dark theme</item>

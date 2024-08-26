@@ -3,6 +3,7 @@
 package com.vickbt.shared.ui.screens.settings
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Image
@@ -34,7 +35,10 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
-fun SettingsScreen(viewModel: SettingsViewModel = koinViewModel<SettingsViewModel>()) {
+fun SettingsScreen(
+    viewModel: SettingsViewModel = koinViewModel<SettingsViewModel>(),
+    mainPaddingValues: PaddingValues
+) {
     val settingsUiState = viewModel.settingsUiState.collectAsState().value
 
     val themeLabels = stringArrayResource(Res.array.themes)
@@ -47,6 +51,7 @@ fun SettingsScreen(viewModel: SettingsViewModel = koinViewModel<SettingsViewMode
     val imageQualityLabel = imageQualityLabels[settingsUiState.selectedImageQuality]
 
     Scaffold(
+        modifier = Modifier.padding(mainPaddingValues),
         topBar = { AppBar(stringResource(Res.string.title_settings)) },
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
