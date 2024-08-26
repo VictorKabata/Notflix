@@ -56,8 +56,7 @@ fun SearchScreen(
     var activeState by remember { mutableStateOf(true) }
 
     SearchBar(
-        modifier = Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surface)
-            .padding(mainPaddingValues),
+        modifier = Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surface),
         query = searchQuery,
         onQueryChange = { searchQuery = it },
         onSearch = { viewModel.searchMovie(movieName = it) },
@@ -105,7 +104,8 @@ fun SearchScreen(
         colors = SearchBarDefaults.colors(dividerColor = Color.LightGray)
     ) {
         Box(
-            modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
+            modifier = Modifier.padding(mainPaddingValues)
+                .fillMaxSize().background(MaterialTheme.colorScheme.surface)
         ) {
             if (searchUiState.isLoading) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
