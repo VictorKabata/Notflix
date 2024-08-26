@@ -38,8 +38,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.title_search
 import com.vickbt.shared.ui.components.MovieCardPortrait
 import com.vickbt.shared.utils.WindowSize
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -64,7 +67,7 @@ fun SearchScreen(
         onActiveChange = { activeState = it },
         placeholder = {
             Text(
-                text = "Search Movie",
+                text = stringResource(Res.string.title_search),
                 fontSize = 18.sp,
                 style = MaterialTheme.typography.labelMedium,
                 maxLines = 1,
@@ -75,7 +78,7 @@ fun SearchScreen(
         leadingIcon = {
             if (activeState) {
                 IconButton(onClick = {
-                    activeState = false
+                    activeState = true
                     searchQuery = ""
                 }) {
                     Icon(
@@ -90,7 +93,7 @@ fun SearchScreen(
         trailingIcon = {
             if (activeState) {
                 IconButton(onClick = {
-                    if (searchQuery.isNotEmpty()) searchQuery = "" else activeState = false
+                    if (searchQuery.isNotEmpty()) searchQuery = "" else activeState = true
                 }) {
                     Icon(
                         imageVector = Icons.Rounded.Close,
