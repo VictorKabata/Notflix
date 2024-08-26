@@ -97,7 +97,7 @@ fun HomeScreen(
                                 modifier = Modifier.fillMaxWidth()
                                     .apply {
                                         if (windowSize == WindowSize.EXPANDED) {
-                                            fillMaxHeight(.25f)
+                                            fillMaxHeight(.3f)
                                         } else {
                                             height(280.dp)
                                         }

@@ -127,7 +127,8 @@ fun SearchScreen(
                             GridCells.Adaptive(minSize = 150.dp)
                         },
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        contentPadding = PaddingValues(vertical = 8.dp, horizontal = 16.dp)
                     ) {
                         items(items = movieResults) { item ->
                             MovieCardPortrait(
