@@ -128,3 +128,9 @@ sqldelight {
         }
     }
 }
+
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "com.vickbt.shared.resources"
+    generateResClass = always
+}

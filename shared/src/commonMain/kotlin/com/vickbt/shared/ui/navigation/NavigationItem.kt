@@ -6,12 +6,12 @@ import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
-import notflix.shared.generated.resources.Res
-import notflix.shared.generated.resources.title_details
-import notflix.shared.generated.resources.title_favorites
-import notflix.shared.generated.resources.title_home
-import notflix.shared.generated.resources.title_search
-import notflix.shared.generated.resources.title_settings
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.title_favorites
+import com.vickbt.shared.resources.title_home
+import com.vickbt.shared.resources.title_search
+import com.vickbt.shared.resources.title_settings
+import com.vickbt.shared.resources.title_details
 import org.jetbrains.compose.resources.StringResource
 
 sealed class NavigationItem(

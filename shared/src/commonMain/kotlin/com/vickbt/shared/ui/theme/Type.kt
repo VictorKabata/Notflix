@@ -6,8 +6,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import notflix.shared.generated.resources.Res
-import notflix.shared.generated.resources.nunito
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.nunito
 import org.jetbrains.compose.resources.Font
 
 @Composable

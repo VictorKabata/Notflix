@@ -53,13 +53,13 @@ import com.vickbt.shared.ui.components.SectionSeparator
 import com.vickbt.shared.ui.screens.search.SearchScreen
 import com.vickbt.shared.ui.theme.DarkPrimaryColor
 import com.vickbt.shared.utils.WindowSize
-import notflix.shared.generated.resources.Res
-import notflix.shared.generated.resources.back
-import notflix.shared.generated.resources.close_search
-import notflix.shared.generated.resources.popular_movies
-import notflix.shared.generated.resources.title_search
-import notflix.shared.generated.resources.trending_movies
-import notflix.shared.generated.resources.upcoming_movies
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.back
+import com.vickbt.shared.resources.close_search
+import com.vickbt.shared.resources.popular_movies
+import com.vickbt.shared.resources.title_search
+import com.vickbt.shared.resources.trending_movies
+import com.vickbt.shared.resources.upcoming_movies
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 

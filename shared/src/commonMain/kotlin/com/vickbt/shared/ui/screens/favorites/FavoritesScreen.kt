@@ -17,8 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.vickbt.shared.ui.components.MovieCardDescription
 import com.vickbt.shared.ui.components.appbars.AppBar
-import notflix.shared.generated.resources.Res
-import notflix.shared.generated.resources.title_favorites
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.title_favorites
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI

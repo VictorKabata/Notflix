@@ -36,10 +36,10 @@ import com.vickbt.shared.ui.components.collapsingToolbar.rememberCollapsingToolb
 import com.vickbt.shared.utils.WindowSize
 import com.vickbt.shared.utils.getPopularity
 import com.vickbt.shared.utils.getRating
-import notflix.shared.generated.resources.Res
-import notflix.shared.generated.resources.cast
-import notflix.shared.generated.resources.overview
-import notflix.shared.generated.resources.similar_movies
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.cast
+import com.vickbt.shared.resources.overview
+import com.vickbt.shared.resources.similar_movies
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI

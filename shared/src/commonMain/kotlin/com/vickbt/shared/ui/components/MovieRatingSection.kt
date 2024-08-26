@@ -19,10 +19,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.popularity
+import com.vickbt.shared.resources.rating
 import com.vickbt.shared.ui.theme.Golden
-import notflix.shared.generated.resources.Res
-import notflix.shared.generated.resources.popularity
-import notflix.shared.generated.resources.rating
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
