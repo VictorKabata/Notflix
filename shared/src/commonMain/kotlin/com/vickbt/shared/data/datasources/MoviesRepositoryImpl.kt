@@ -69,29 +69,4 @@ class MoviesRepositoryImpl constructor(
         )
     }
 
-    /*override suspend fun getMovies(category: String): Flow<List<Movie>> {
-        val cachedResponse = moviesDao.getMoviesByCategory(category = category)
-            .map { it.map { movieEntity -> movieEntity.toDomain(category = category) } }
-            .onEach { movies ->
-                // if (movies.isEmpty()) fetchMovies(category = category)
-            }
-
-        return cachedResponse
-    }*/
-
-    override suspend fun searchMovie(
-        movieName: String,
-        page: Int
-    ): Flow<ResultState<List<Movie>?>> {
-        return flowOf(
-            safeApiCall {
-                val response = httpClient.get(urlString = "search/movie") {
-                    parameter("query", movieName)
-                    parameter("page", page)
-                }.body<MovieResultsDto>()
-
-                response.movies?.map { it.toDomain() }
-            }
-        )
-    }
 }
