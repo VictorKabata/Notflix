@@ -11,6 +11,7 @@ fun main() {
     koin = initKoin(enableNetworkLogs = true).koin
 
     return application {
+        Thread.currentThread().contextClassLoader = this.javaClass.classLoader
         MainWindow(applicationScope = this)
     }
 }

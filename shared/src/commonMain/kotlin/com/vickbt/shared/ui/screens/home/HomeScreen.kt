@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,6 +19,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Search
@@ -53,6 +53,14 @@ import com.vickbt.shared.ui.components.SectionSeparator
 import com.vickbt.shared.ui.screens.search.SearchScreen
 import com.vickbt.shared.ui.theme.DarkPrimaryColor
 import com.vickbt.shared.utils.WindowSize
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.back
+import com.vickbt.shared.resources.close_search
+import com.vickbt.shared.resources.popular_movies
+import com.vickbt.shared.resources.title_search
+import com.vickbt.shared.resources.trending_movies
+import com.vickbt.shared.resources.upcoming_movies
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
@@ -93,9 +101,9 @@ fun HomeScreen(
             onActiveChange = { activeState = it },
             placeholder = {
                 Text(
-                    text = "Search Movie",
+                    text = stringResource(Res.string.title_search),
                     fontSize = 18.sp,
-                    style = MaterialTheme.typography.labelMedium,
+                    style = MaterialTheme.typography.titleMedium,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start
@@ -108,8 +116,8 @@ fun HomeScreen(
                         searchQuery = ""
                     }) {
                         Icon(
-                            imageVector = Icons.Rounded.ArrowBack,
-                            contentDescription = "Go back"
+                            imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                            contentDescription = stringResource(Res.string.back)
                         )
                     }
                 } else {
@@ -123,7 +131,7 @@ fun HomeScreen(
                     }) {
                         Icon(
                             imageVector = Icons.Rounded.Close,
-                            contentDescription = "Close search"
+                            contentDescription = stringResource(Res.string.close_search)
                         )
                     }
                 } else {
@@ -198,13 +206,10 @@ fun HomeScreen(
                     homeUiState.trendingMovies?.let {
                         SectionSeparator(
                             modifier = Modifier
-                                .padding(horizontal = 16.dp, vertical = 6.dp)
                                 .fillMaxWidth()
                                 .wrapContentHeight(),
-                            sectionTitle = "Trending Movies"
+                            sectionTitle = stringResource(Res.string.trending_movies)
                         )
-
-                        Spacer(modifier = Modifier.height(8.dp))
 
                         LazyRow(
                             modifier = Modifier
@@ -229,13 +234,10 @@ fun HomeScreen(
                     homeUiState.upcomingMovies?.let {
                         SectionSeparator(
                             modifier = Modifier
-                                .padding(start = 16.dp, end = 16.dp, top = 12.dp)
                                 .fillMaxWidth()
                                 .wrapContentHeight(),
-                            sectionTitle = "Upcoming Movies"
+                            sectionTitle = stringResource(Res.string.upcoming_movies)
                         )
-
-                        Spacer(modifier = Modifier.height(8.dp))
 
                         LazyRow(
                             contentPadding = PaddingValues(horizontal = 16.dp),
@@ -262,13 +264,10 @@ fun HomeScreen(
                         Column(modifier = Modifier.padding(bottom = 90.dp)) {
                             SectionSeparator(
                                 modifier = Modifier
-                                    .padding(start = 16.dp, end = 16.dp, top = 12.dp)
                                     .fillMaxWidth()
                                     .wrapContentHeight(),
-                                sectionTitle = "Popular Movies"
+                                sectionTitle = stringResource(Res.string.popular_movies)
                             )
-
-                            Spacer(modifier = Modifier.height(8.dp))
 
                             LazyRow(
                                 modifier = Modifier.wrapContentHeight(),

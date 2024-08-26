@@ -56,7 +56,7 @@ fun TextPreference(
                     .fillMaxWidth()
                     .padding(horizontal = 12.dp),
                 text = title,
-                style = MaterialTheme.typography.labelMedium,
+                style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 17.sp,
                 maxLines = 1,
@@ -70,7 +70,7 @@ fun TextPreference(
                         .fillMaxWidth()
                         .padding(horizontal = 13.dp),
                     text = subTitle,
-                    style = MaterialTheme.typography.labelSmall,
+                    style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                     fontSize = 14.sp,
                     maxLines = 1,
