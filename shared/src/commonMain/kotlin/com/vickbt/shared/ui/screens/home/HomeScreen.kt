@@ -17,11 +17,6 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -34,6 +29,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.popular_movies
+import com.vickbt.shared.resources.trending_movies
+import com.vickbt.shared.resources.upcoming_movies
 import com.vickbt.shared.ui.components.MovieCardLandscape
 import com.vickbt.shared.ui.components.MovieCardPager
 import com.vickbt.shared.ui.components.MovieCardPagerIndicator
@@ -42,13 +41,6 @@ import com.vickbt.shared.ui.components.SectionSeparator
 import com.vickbt.shared.ui.components.appbars.AppBar
 import com.vickbt.shared.ui.theme.DarkPrimaryColor
 import com.vickbt.shared.utils.WindowSize
-import com.vickbt.shared.resources.Res
-import com.vickbt.shared.resources.back
-import com.vickbt.shared.resources.close_search
-import com.vickbt.shared.resources.popular_movies
-import com.vickbt.shared.resources.title_search
-import com.vickbt.shared.resources.trending_movies
-import com.vickbt.shared.resources.upcoming_movies
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -189,25 +181,26 @@ fun HomeScreen(
                                 sectionTitle = stringResource(Res.string.popular_movies)
                             )
 
-                        LazyRow(
-                            modifier = Modifier.wrapContentHeight(),
-                            contentPadding = PaddingValues(horizontal = 16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(10.dp),
-                        ) {
-                            items(items = it) { item ->
-                                MovieCardPortraitCompact(
-                                    movie = item,
-                                    onItemClick = { movie ->
-                                        navigator.navigate("/details/${movie.id}")
-                                    }
-                                )
+                            LazyRow(
+                                modifier = Modifier.wrapContentHeight(),
+                                contentPadding = PaddingValues(horizontal = 16.dp),
+                                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                            ) {
+                                items(items = it) { item ->
+                                    MovieCardPortraitCompact(
+                                        movie = item,
+                                        onItemClick = { movie ->
+                                            navigator.navigate("/details/${movie.id}")
+                                        }
+                                    )
+                                }
                             }
                         }
+                        //endregion
                     }
-                    //endregion
                 }
             }
+            // endregion
         }
-        // endregion
     }
 }
