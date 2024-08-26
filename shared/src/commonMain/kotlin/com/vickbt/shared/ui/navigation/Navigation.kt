@@ -35,7 +35,11 @@ fun Navigation(
         }
 
         composable(route = NavigationItem.Search.route) {
-            SearchScreen(navigator = navHostController, mainPaddingValues = mainPaddingValues)
+            SearchScreen(
+                windowSize = windowSize,
+                navigator = navHostController,
+                mainPaddingValues = mainPaddingValues
+            )
         }
 
         composable(route = NavigationItem.Settings.route) {

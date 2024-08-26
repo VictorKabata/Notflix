@@ -126,11 +126,12 @@ fun SearchScreen(
                         } else {
                             GridCells.Adaptive(minSize = 150.dp)
                         },
-                        horizontalArrangement = Arrangement.SpaceAround
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         items(items = movieResults) { item ->
                             MovieCardPortrait(
-                                modifier = Modifier.padding(vertical = 4.dp),
+                                modifier = Modifier,
                                 movie = item,
                                 onItemClick = { movie ->
                                     navigator.navigate("/details/${movie.id}")

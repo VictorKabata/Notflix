@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -93,7 +94,14 @@ fun HomeScreen(
                             pageSpacing = 8.dp
                         ) { currentPage ->
                             MovieCardPager(
-                                modifier = Modifier.fillMaxWidth().height(280.dp),
+                                modifier = Modifier.fillMaxWidth()
+                                    .apply {
+                                        if (windowSize == WindowSize.EXPANDED) {
+                                            fillMaxHeight(.25f)
+                                        } else {
+                                            height(280.dp)
+                                        }
+                                    },
                                 movie = nowPlayingMovies[currentPage]
                             ) { movie ->
                                 navigator.navigate("/details/${movie.id}")
