@@ -9,7 +9,7 @@ interface SearchRepository {
 
     // Search movie from network source
     suspend fun searchMovie(
-        movieName: String, page: Int = STARTING_PAGE_INDEX
+        movieName: String,
+        page: Int = STARTING_PAGE_INDEX
     ): Flow<ResultState<List<Movie>?>>
-
 }

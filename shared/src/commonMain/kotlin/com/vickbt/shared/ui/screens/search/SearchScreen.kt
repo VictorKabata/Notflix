@@ -50,7 +50,6 @@ fun SearchScreen(
     windowSize: WindowSize = WindowSize.COMPACT,
     mainPaddingValues: PaddingValues
 ) {
-
     val searchUiState by viewModel.searchUiState.collectAsState()
 
     var searchQuery by remember { mutableStateOf("") }
@@ -105,7 +104,6 @@ fun SearchScreen(
         },
         colors = SearchBarDefaults.colors(dividerColor = Color.LightGray)
     ) {
-
         Box(
             modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
         ) {

@@ -18,7 +18,8 @@ class SearchRepositoryImpl(
 ) : SearchRepository {
 
     override suspend fun searchMovie(
-        movieName: String, page: Int
+        movieName: String,
+        page: Int
     ): Flow<ResultState<List<Movie>?>> {
         return flowOf(
             safeApiCall {

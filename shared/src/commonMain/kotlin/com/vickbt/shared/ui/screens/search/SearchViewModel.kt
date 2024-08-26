@@ -2,7 +2,6 @@ package com.vickbt.shared.ui.screens.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vickbt.shared.domain.repositories.MoviesRepository
 import com.vickbt.shared.domain.repositories.SearchRepository
 import com.vickbt.shared.utils.SearchUiState
 import com.vickbt.shared.utils.isLoading
@@ -15,7 +14,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class SearchViewModel(private val searchRepository: SearchRepository):ViewModel() {
+class SearchViewModel(private val searchRepository: SearchRepository) : ViewModel() {
 
     private val _searchUiState = MutableStateFlow(SearchUiState(isLoading = false))
     val searchUiState = _searchUiState.asStateFlow()
@@ -47,8 +46,6 @@ class SearchViewModel(private val searchRepository: SearchRepository):ViewModel(
         _searchQuery.value = searchQuery
     }
 
-    private fun getGenres()=viewModelScope.launch {
-
+    private fun getGenres() = viewModelScope.launch {
     }
-
 }
