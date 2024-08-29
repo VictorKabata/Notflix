@@ -41,7 +41,7 @@ import com.vickbt.shared.utils.getRating
 import com.vickbt.shared.utils.loadImage
 
 @Composable
-fun MovieCardPager(
+fun MovieCardPage(
     modifier: Modifier = Modifier,
     movie: Movie,
     onItemClick: (Movie) -> Unit

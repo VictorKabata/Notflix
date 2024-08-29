@@ -34,7 +34,7 @@ import com.vickbt.shared.resources.popular_movies
 import com.vickbt.shared.resources.trending_movies
 import com.vickbt.shared.resources.upcoming_movies
 import com.vickbt.shared.ui.components.MovieCardLandscape
-import com.vickbt.shared.ui.components.MovieCardPager
+import com.vickbt.shared.ui.components.MovieCardPage
 import com.vickbt.shared.ui.components.MovieCardPagerIndicator
 import com.vickbt.shared.ui.components.MovieCardPortraitCompact
 import com.vickbt.shared.ui.components.SectionSeparator
@@ -96,7 +96,7 @@ fun HomeScreen(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             pageSpacing = 8.dp
                         ) { currentPage ->
-                            MovieCardPager(
+                            MovieCardPage(
                                 modifier = Modifier.fillMaxWidth().height(280.dp),
                                 movie = nowPlayingMovies[currentPage]
                             ) { movie ->
