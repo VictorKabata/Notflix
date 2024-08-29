@@ -61,6 +61,8 @@ kotlin {
 
             implementation(libs.datastore.preferences)
 
+            implementation(libs.sdpSsp)
+
             // implementation(libs.material.windowSizeClass)
         }
 
