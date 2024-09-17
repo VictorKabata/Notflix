@@ -15,7 +15,6 @@ plugins {
     alias(libs.plugins.firebase.appDistribution.plugin)
     alias(libs.plugins.firebase.crashlytics.plugin)
     alias(libs.plugins.firebase.performance.plugin)
-
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
