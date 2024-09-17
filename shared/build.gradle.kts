@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalWasmDsl::class)
+
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -30,6 +33,13 @@ kotlin {
     }
 
     jvm("desktop")
+
+    wasmJs("web") {
+        binaries.executable()
+        browser {
+
+        }
+    }
 
     sourceSets {
         commonMain.dependencies {
@@ -88,6 +98,11 @@ kotlin {
         }
 
         sourceSets["desktopTest"].dependencies {}
+
+        sourceSets["webMain"].dependencies {}
+
+        sourceSets["webTest"].dependencies {}
+
     }
 }
 

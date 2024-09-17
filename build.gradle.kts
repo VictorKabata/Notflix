@@ -47,7 +47,3 @@ subprojects {
         config = files("${project.rootDir}/config/detekt/detekt.yml")
     }
 }
-
-tasks.register("clean").configure {
-    delete("build") // dependencyUpdates task, for example, writes here
-}
