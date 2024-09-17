@@ -1,5 +1,6 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -85,6 +86,7 @@ kotlin {
             implementation(libs.ktor.java)
             implementation(libs.sqlDelight.jvm)
             implementation(libs.coroutines.swing)
+            implementation(compose.desktop.currentOs)
         }
 
         sourceSets["desktopTest"].dependencies {}
@@ -106,6 +108,17 @@ android {
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
+}
+
+compose.desktop {
+    application {
+        mainClass = "com.vickbt.notflix.MainKt"
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "Notflix"
+            packageVersion = "1.0.0"
+        }
+    }
 }
 
 buildkonfig {
