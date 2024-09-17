@@ -10,4 +10,4 @@ pluginManagement {
 }
 
 // include(":appAndroid")
-include(":shared")
+include(":composeApp")

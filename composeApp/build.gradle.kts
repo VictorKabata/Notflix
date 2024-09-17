@@ -38,11 +38,11 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(compose.runtime)
-            api(compose.foundation)
-            api(compose.material3)
-            api(compose.components.resources)
-            api(compose.materialIconsExtended)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.components.resources)
+            implementation(compose.materialIconsExtended)
 
             implementation(libs.coroutines)
 
