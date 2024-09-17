@@ -5,10 +5,12 @@ import com.vickbt.shared.data.cache.sqldelight.daos.FavoriteMovieDao
 import com.vickbt.shared.data.datasources.FavoritesRepositoryImpl
 import com.vickbt.shared.data.datasources.MovieDetailsRepositoryImpl
 import com.vickbt.shared.data.datasources.MoviesRepositoryImpl
+import com.vickbt.shared.data.datasources.SearchRepositoryImpl
 import com.vickbt.shared.data.datasources.SettingsRepositoryImpl
 import com.vickbt.shared.domain.repositories.FavoritesRepository
 import com.vickbt.shared.domain.repositories.MovieDetailsRepository
 import com.vickbt.shared.domain.repositories.MoviesRepository
+import com.vickbt.shared.domain.repositories.SearchRepository
 import com.vickbt.shared.domain.repositories.SettingsRepository
 import com.vickbt.shared.domain.utils.Constants.BASE_URL
 import com.vickbt.shared.domain.utils.Constants.URL_PATH
@@ -16,6 +18,7 @@ import com.vickbt.shared.ui.screens.details.DetailsViewModel
 import com.vickbt.shared.ui.screens.favorites.FavoritesViewModel
 import com.vickbt.shared.ui.screens.home.HomeViewModel
 import com.vickbt.shared.ui.screens.main.MainViewModel
+import com.vickbt.shared.ui.screens.search.SearchViewModel
 import com.vickbt.shared.ui.screens.settings.SettingsViewModel
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
@@ -84,11 +87,13 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
         MovieDetailsRepositoryImpl(httpClient = get(), favoriteMovieDao = get())
     }
     single<FavoritesRepository> { FavoritesRepositoryImpl(favoriteMovieDao = get()) }
+    single<SearchRepository> { SearchRepositoryImpl(httpClient = get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(dataStore = get()) }
 
     viewModelOf(::MainViewModel)
     viewModelOf(::HomeViewModel)
     viewModelOf(::DetailsViewModel)
+    viewModelOf(::SearchViewModel)
     viewModelOf(::SettingsViewModel)
     viewModelOf(::FavoritesViewModel)
 }

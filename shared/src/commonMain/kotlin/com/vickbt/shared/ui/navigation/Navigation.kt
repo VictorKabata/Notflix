@@ -10,6 +10,7 @@ import androidx.navigation.navArgument
 import com.vickbt.shared.ui.screens.details.DetailsScreen
 import com.vickbt.shared.ui.screens.favorites.FavoritesScreen
 import com.vickbt.shared.ui.screens.home.HomeScreen
+import com.vickbt.shared.ui.screens.search.SearchScreen
 import com.vickbt.shared.ui.screens.settings.SettingsScreen
 import com.vickbt.shared.utils.WindowSize
 import io.github.aakira.napier.Napier
@@ -18,23 +19,31 @@ import io.github.aakira.napier.Napier
 fun Navigation(
     navHostController: NavHostController,
     windowSize: WindowSize,
-    paddingValues: PaddingValues = PaddingValues()
+    mainPaddingValues: PaddingValues = PaddingValues()
 ) {
     NavHost(navController = navHostController, startDestination = NavigationItem.Home.route) {
         composable(route = NavigationItem.Home.route) {
             HomeScreen(
                 navigator = navHostController,
                 windowSize = windowSize,
-                paddingValues = paddingValues
+                mainPaddingValues = mainPaddingValues
             )
         }
 
         composable(route = NavigationItem.Favorites.route) {
-            FavoritesScreen(navigator = navHostController)
+            FavoritesScreen(navigator = navHostController, mainPaddingValues = mainPaddingValues)
+        }
+
+        composable(route = NavigationItem.Search.route) {
+            SearchScreen(
+                windowSize = windowSize,
+                navigator = navHostController,
+                mainPaddingValues = mainPaddingValues
+            )
         }
 
         composable(route = NavigationItem.Settings.route) {
-            SettingsScreen()
+            SettingsScreen(mainPaddingValues = mainPaddingValues)
         }
 
         composable(
