@@ -4,13 +4,18 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     alias(libs.plugins.multiplatform)
-    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlinX.serialization.plugin)
     alias(libs.plugins.buildKonfig)
     alias(libs.plugins.compose)
     alias(libs.plugins.compose.compiler)
-
     alias(libs.plugins.sqlDelight)
+
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.googleServices.plugin)
+    alias(libs.plugins.firebase.appDistribution.plugin)
+    alias(libs.plugins.firebase.crashlytics.plugin)
+    alias(libs.plugins.firebase.performance.plugin)
+
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -75,6 +80,14 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.ktor.android)
             implementation(libs.sqlDelight.android)
+            implementation(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
+            implementation(libs.androidX.activity)
+
+            // Firebase
+            implementation(libs.firebase.analytics)
+            implementation(libs.firebase.crashlytics)
+            implementation(libs.firebase.performance)
         }
 
         iosMain.dependencies {
@@ -96,18 +109,57 @@ kotlin {
 android {
     compileSdk = 34
     defaultConfig {
+        applicationId = "com.vickbt.notflix"
+
         minSdk = 24
+        targetSdk = compileSdk
+        versionCode = if (System.getenv("VERSION_CODE").isNullOrEmpty()) {
+            1
+        } else {
+            System.getenv("VERSION_CODE").toInt()
+        }
+        versionName = if (System.getenv("VERSION_NAME").isNullOrEmpty()) {
+            "1.0.0"
+        } else {
+            System.getenv("VERSION_NAME")?.toString()
+        }
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    namespace = "com.vickbt.shared"
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+
+        getByName("debug") {
+            isMinifyEnabled = false
+        }
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    buildFeatures {
+        compose = true
+    }
+
+    namespace = "com.vickbt.notflix"
+
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
+
+    dependencies {
+        debugImplementation(libs.leakCanary)
+        implementation(platform(libs.firebase.bom))
+    }
 }
 
 compose.desktop {

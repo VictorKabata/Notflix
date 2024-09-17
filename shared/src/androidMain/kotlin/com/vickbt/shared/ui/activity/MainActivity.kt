@@ -1,4 +1,4 @@
-package com.vickbt.notflix.ui.activity
+package com.vickbt.shared.ui.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

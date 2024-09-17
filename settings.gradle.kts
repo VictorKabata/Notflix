@@ -9,5 +9,5 @@ pluginManagement {
     }
 }
 
-include(":appAndroid")
+// include(":appAndroid")
 include(":shared")
