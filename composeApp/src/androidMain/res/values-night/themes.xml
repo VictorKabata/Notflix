@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--SplashScreen Theme-->
+    <!--<style name="Theme.Splashscreen" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_image</item>
+        <item name="android:statusBarColor">@color/secondaryTextColor</item>
+    </style>-->
+
+    <!--Rating bar style-->
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/grey</item>
+        <item name="colorControlActivated">@color/golden</item>
+    </style>
+
+</resources>
