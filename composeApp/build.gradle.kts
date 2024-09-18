@@ -33,7 +33,7 @@ kotlin {
         it.binaries.framework {
             baseName = "shared"
             isStatic = false
-            linkerOpts.add("-lsqlite3") // add sqlite
+            linkerOpts.add("-lsqlite3")
         }
     }
 
@@ -190,7 +190,11 @@ room {
 }
 
 dependencies {
-    ksp(libs.room.compiler)
+    add("kspAndroid", libs.room.compiler)
+    add("kspIosX64", libs.room.compiler)
+    add("kspIosArm64", libs.room.compiler)
+    add("kspIosSimulatorArm64", libs.room.compiler)
+    add("kspDesktop", libs.room.compiler)
 }
 
 compose.resources {
