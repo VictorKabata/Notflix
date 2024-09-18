@@ -5,5 +5,4 @@ import com.vickbt.composeApp.data.cache.AppDatabase
 expect class DatabaseFactory {
 
     fun createDatabase(): AppDatabase
-
 }

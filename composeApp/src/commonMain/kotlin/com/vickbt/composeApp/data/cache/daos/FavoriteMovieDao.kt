@@ -26,5 +26,4 @@ interface FavoriteMovieDao {
 
     @Query("SELECT COUNT() FROM `Favorite Movies` WHERE id = :id")
     fun isMovieFavorite(id: Int): Flow<Boolean>
-
 }

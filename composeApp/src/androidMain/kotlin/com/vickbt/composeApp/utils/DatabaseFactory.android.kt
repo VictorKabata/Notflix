@@ -17,5 +17,4 @@ actual class DatabaseFactory(private val context: Context) {
         ).setQueryCoroutineContext(Dispatchers.IO).fallbackToDestructiveMigration(true)
             .setDriver(BundledSQLiteDriver()).build()
     }
-
 }
