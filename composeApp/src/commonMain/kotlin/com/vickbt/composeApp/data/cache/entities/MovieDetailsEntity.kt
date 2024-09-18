@@ -4,7 +4,7 @@ import androidx.room.Entity
 import kotlinx.datetime.Clock
 
 @Entity(tableName = "Favorite Movies")
-data class FavoriteMovieEntity(
+data class MovieDetailsEntity(
     val id: Int,
     val imdbId: String? = null,
     val backdropPath: String,
