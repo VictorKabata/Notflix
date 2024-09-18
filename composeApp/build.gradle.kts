@@ -59,7 +59,7 @@ kotlin {
 
             implementation(libs.bundles.ktor)
 
-            api(libs.koin.core)
+            implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.composeViewModel)
 
@@ -67,7 +67,7 @@ kotlin {
 
             implementation(libs.kotlinX.dateTime)
 
-            api(libs.napier)
+            implementation(libs.napier)
 
             implementation(libs.bundles.coil)
 
