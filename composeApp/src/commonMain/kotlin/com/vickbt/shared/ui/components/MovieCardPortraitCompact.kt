@@ -70,5 +70,5 @@ fun MovieCardPortraitCompact(
 
 @Composable
 private fun Preview() {
-    //MovieCardPortraitCompact(movie = Movie(title = "Cocaine Bear"), onItemClick = {})
+    // MovieCardPortraitCompact(movie = Movie(title = "Cocaine Bear"), onItemClick = {})
 }

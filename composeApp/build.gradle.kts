@@ -11,7 +11,6 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.sqlDelight)
 
     alias(libs.plugins.android.application)
     alias(libs.plugins.googleServices.plugin)
@@ -83,7 +82,6 @@ kotlin {
 
         androidMain.dependencies {
             implementation(libs.ktor.android)
-            implementation(libs.sqlDelight.android)
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
             implementation(libs.androidX.activity)
