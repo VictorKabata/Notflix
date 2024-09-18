@@ -44,13 +44,16 @@ import com.vickbt.composeApp.ui.components.collapsingToolbar.CollapsingToolbarSc
 import com.vickbt.composeApp.utils.DetailsUiState
 import com.vickbt.composeApp.utils.getMovieDuration
 import com.vickbt.composeApp.utils.loadImage
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.unknown_movie
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailsAppBar(
     modifier: Modifier = Modifier,
     collapsingScrollState: CollapsingToolbarScaffoldState,
-    movieDetailsState: DetailsUiState?,
+    movieDetailsState: DetailsUiState,
     onNavigationIconClick: () -> Unit,
     onShareIconClick: () -> Unit,
     onFavoriteIconClick: (MovieDetails, Boolean?) -> Unit
@@ -63,8 +66,8 @@ fun DetailsAppBar(
     var dominantColor by remember { mutableStateOf(defaultDominantColor) }
     var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
 
-    val movieDetails by remember { mutableStateOf(movieDetailsState?.movieDetails) }
-    var isFavourite by remember { mutableStateOf(movieDetailsState?.isFavorite) }
+    val movieDetails by remember { mutableStateOf(movieDetailsState.movieDetails) }
+    var isFavourite by remember { mutableStateOf(movieDetailsState.isFavorite) }
 
     val backgroundColor by animateColorAsState(
         targetValue = MaterialTheme.colorScheme.surface.copy(1 - scrollProgress)
@@ -110,7 +113,7 @@ fun DetailsAppBar(
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = movieDetails?.title ?: "Unknown movie",
+                text = movieDetails?.title ?: stringResource(Res.string.unknown_movie),
                 style = MaterialTheme.typography.titleMedium,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
@@ -135,7 +138,7 @@ fun DetailsAppBar(
         title = {
             Text(
                 modifier = Modifier.graphicsLayer { alpha = 1 - scrollProgress },
-                text = movieDetails?.title ?: "Unknown movie",
+                text = movieDetails?.title ?: stringResource(Res.string.unknown_movie),
                 style = MaterialTheme.typography.titleMedium,
                 fontSize = 20.sp,
                 overflow = TextOverflow.Ellipsis,

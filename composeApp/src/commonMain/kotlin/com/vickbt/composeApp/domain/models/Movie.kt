@@ -3,23 +3,23 @@ package com.vickbt.composeApp.domain.models
 data class Movie(
     val adult: Boolean? = null,
 
-    val backdropPath: String? = null,
+    val backdropPath: String,
 
     val id: Int,
 
     val originalLanguage: String? = null,
 
-    val originalTitle: String? = null,
+    val originalTitle: String,
 
-    val overview: String? = null,
+    val overview: String,
 
     val popularity: Double? = null,
 
-    val posterPath: String? = null,
+    val posterPath: String,
 
     val releaseDate: String? = null,
 
-    val title: String? = null,
+    val title: String,
 
     val video: Boolean? = null,
 

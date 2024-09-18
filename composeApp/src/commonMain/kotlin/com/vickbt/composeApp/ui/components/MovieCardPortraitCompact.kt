@@ -57,7 +57,7 @@ fun MovieCardPortraitCompact(
 
         Text(
             modifier = Modifier.width(145.dp),
-            text = movie.title ?: "Unknown movie",
+            text = movie.title,
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface,
             fontSize = 14.sp,

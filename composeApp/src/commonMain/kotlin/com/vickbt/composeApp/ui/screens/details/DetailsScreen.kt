@@ -64,7 +64,7 @@ fun DetailsScreen(
     val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
 
     Box(modifier = Modifier.fillMaxSize()) {
-        if (movieDetailsState.isLoading) {
+        if (movieDetailsState.isLoading && movieDetailsState.movieDetails == null) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         } else if (!movieDetailsState.error.isNullOrEmpty()) {
             Text(

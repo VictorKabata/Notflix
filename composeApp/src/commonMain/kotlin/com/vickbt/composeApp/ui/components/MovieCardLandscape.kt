@@ -94,7 +94,7 @@ fun MovieCardLandscape(
                 //region Movie Title
                 Text(
                     modifier = Modifier,
-                    text = movie.title ?: "Unknown movie",
+                    text = movie.title,
                     fontSize = 18.sp,
                     maxLines = 2,
                     style = MaterialTheme.typography.titleMedium,

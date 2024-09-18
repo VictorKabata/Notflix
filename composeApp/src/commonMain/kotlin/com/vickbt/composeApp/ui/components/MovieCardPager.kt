@@ -86,7 +86,7 @@ fun MovieCardPager(
             ) {
                 Text(
                     modifier = Modifier,
-                    text = movie.title ?: "Unknown movie",
+                    text = movie.title,
                     fontSize = 28.sp,
                     maxLines = 2,
                     style = MaterialTheme.typography.titleMedium,

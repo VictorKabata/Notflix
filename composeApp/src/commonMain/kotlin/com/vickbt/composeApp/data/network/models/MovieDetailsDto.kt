@@ -10,7 +10,7 @@ data class MovieDetailsDto(
     val adult: Boolean? = null,
 
     @SerialName("backdrop_path")
-    val backdropPath: String? = null,
+    val backdropPath: String,
 
     @SerialName("genres")
     val genres: List<GenreDto>? = null,
@@ -28,16 +28,16 @@ data class MovieDetailsDto(
     val originalLanguage: String? = null,
 
     @SerialName("original_title")
-    val originalTitle: String? = null,
+    val originalTitle: String,
 
     @SerialName("overview")
-    val overview: String? = null,
+    val overview: String,
 
     @SerialName("popularity")
     val popularity: Double? = null,
 
     @SerialName("poster_path")
-    val posterPath: String? = null,
+    val posterPath: String,
 
     @SerialName("release_date")
     val releaseDate: String? = null,
@@ -55,7 +55,7 @@ data class MovieDetailsDto(
     val tagline: String? = null,
 
     @SerialName("title")
-    val title: String? = null,
+    val title: String,
 
     @SerialName("video")
     val video: Boolean? = null,

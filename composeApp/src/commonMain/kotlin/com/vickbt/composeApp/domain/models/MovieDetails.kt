@@ -4,7 +4,7 @@ data class MovieDetails(
 
     val adult: Boolean? = null,
 
-    val backdropPath: String? = null,
+    val backdropPath: String,
 
     val homepage: String? = null,
 
@@ -14,13 +14,13 @@ data class MovieDetails(
 
     val originalLanguage: String? = null,
 
-    val originalTitle: String? = null,
+    val originalTitle: String,
 
-    val overview: String? = null,
+    val overview: String,
 
     val popularity: Double? = null,
 
-    val posterPath: String? = null,
+    val posterPath: String,
 
     val releaseDate: String? = null,
 
@@ -30,7 +30,7 @@ data class MovieDetails(
 
     val tagline: String? = null,
 
-    val title: String? = null,
+    val title: String,
 
     val video: Boolean? = null,
 

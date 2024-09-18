@@ -76,7 +76,7 @@ fun MovieCardDescription(
             ) {
                 Text(
                     modifier = Modifier,
-                    text = movie.title ?: "Unknown movie",
+                    text = movie.title,
                     fontSize = 24.sp,
                     maxLines = 1,
                     style = MaterialTheme.typography.titleMedium,
