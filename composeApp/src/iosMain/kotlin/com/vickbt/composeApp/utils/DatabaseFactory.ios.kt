@@ -1,17 +1,19 @@
-@file:OptIn(ExperimentalForeignApi::class, ExperimentalForeignApi::class)
+@file:OptIn(ExperimentalForeignApi::class)
 
 package com.vickbt.composeApp.utils
 
 import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import com.vickbt.composeApp.data.cache.AppDatabase
 import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
 
 actual class DatabaseFactory {
-    actual fun createDatabase(): RoomDatabase.Builder<AppDatabase> {
+    actual fun createDatabase(): AppDatabase {
         val documentDirectory = NSFileManager.defaultManager.URLForDirectory(
             directory = NSDocumentDirectory,
             inDomain = NSUserDomainMask,
@@ -23,7 +25,8 @@ actual class DatabaseFactory {
         val dbFilePath = requireNotNull(documentDirectory?.path) + "/notflix.db"
         return Room.databaseBuilder<AppDatabase>(
             name = dbFilePath,
-        )
+        ).setQueryCoroutineContext(Dispatchers.IO).fallbackToDestructiveMigration(true)
+            .setDriver(BundledSQLiteDriver()).build()
     }
 
 }

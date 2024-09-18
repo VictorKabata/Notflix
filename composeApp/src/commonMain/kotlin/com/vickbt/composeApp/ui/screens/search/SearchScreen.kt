@@ -38,8 +38,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.vickbt.composeApp.resources.Res
-import com.vickbt.composeApp.resources.title_search
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.title_search
 import com.vickbt.composeApp.ui.components.MovieCardPortrait
 import com.vickbt.composeApp.utils.WindowSize
 import org.jetbrains.compose.resources.stringResource

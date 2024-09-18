@@ -12,6 +12,7 @@ import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -82,8 +83,9 @@ class DetailsViewModel(
 
     fun isMovieFavorite(movieId: Int) = viewModelScope.launch(coroutineExceptionHandler) {
         try {
-            val isFavorite = movieDetailsRepository.isMovieFavorite(movieId = movieId)
-            _movieDetailsState.update { it.copy(isFavorite = isFavorite) }
+            movieDetailsRepository.isMovieFavorite(movieId = movieId).collectLatest { isFavorite ->
+                _movieDetailsState.update { it.copy(isFavorite = isFavorite) }
+            }
         } catch (e: Exception) {
             Napier.e("Error removing movie: ${e.message}")
         }

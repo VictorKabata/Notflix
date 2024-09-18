@@ -36,10 +36,10 @@ import com.vickbt.composeApp.ui.components.collapsingToolbar.rememberCollapsingT
 import com.vickbt.composeApp.utils.WindowSize
 import com.vickbt.composeApp.utils.getPopularity
 import com.vickbt.composeApp.utils.getRating
-import com.vickbt.composeApp.resources.Res
-import com.vickbt.composeApp.resources.cast
-import com.vickbt.composeApp.resources.overview
-import com.vickbt.composeApp.resources.similar_movies
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.cast
+import com.vickbt.shared.resources.overview
+import com.vickbt.shared.resources.similar_movies
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI

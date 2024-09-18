@@ -1,7 +1,6 @@
 package com.vickbt.composeApp.data.cache.daos
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.vickbt.composeApp.data.cache.entities.MovieDetailsEntity
@@ -17,15 +16,15 @@ interface FavoriteMovieDao {
     fun getAllFavoriteMovies(): Flow<List<MovieDetailsEntity>>
 
     @Query("SELECT * FROM `Favorite Movies` WHERE id = :id")
-    fun getFavoriteMovie(id: Int): MovieDetailsEntity
+    suspend fun getFavoriteMovie(id: Int): MovieDetailsEntity
 
     @Query("DELETE FROM `Favorite Movies` WHERE id = :id")
     suspend fun deleteFavoriteMovie(id: Int)
 
-    @Delete
+    @Query("DELETE FROM `Favorite Movies`")
     suspend fun deleteAllFavoriteMovies()
 
     @Query("SELECT COUNT() FROM `Favorite Movies` WHERE id = :id")
-    fun isMovieFavorite(id: Int): Boolean
+    fun isMovieFavorite(id: Int): Flow<Boolean>
 
 }

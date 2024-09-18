@@ -19,9 +19,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.vickbt.composeApp.resources.Res
-import com.vickbt.composeApp.resources.popularity
-import com.vickbt.composeApp.resources.rating
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.popularity
+import com.vickbt.shared.resources.rating
 import com.vickbt.composeApp.ui.theme.Golden
 import org.jetbrains.compose.resources.stringResource
 

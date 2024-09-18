@@ -6,12 +6,12 @@ import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.vickbt.composeApp.resources.Res
-import com.vickbt.composeApp.resources.title_favorites
-import com.vickbt.composeApp.resources.title_home
-import com.vickbt.composeApp.resources.title_search
-import com.vickbt.composeApp.resources.title_settings
-import com.vickbt.composeApp.resources.title_details
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.title_favorites
+import com.vickbt.shared.resources.title_home
+import com.vickbt.shared.resources.title_search
+import com.vickbt.shared.resources.title_settings
+import com.vickbt.shared.resources.title_details
 import org.jetbrains.compose.resources.StringResource
 
 sealed class NavigationItem(

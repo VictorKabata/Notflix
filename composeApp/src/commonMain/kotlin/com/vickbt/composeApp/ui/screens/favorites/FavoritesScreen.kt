@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.vickbt.composeApp.ui.components.MovieCardDescription
 import com.vickbt.composeApp.ui.components.appbars.AppBar
-import com.vickbt.composeApp.resources.Res
-import com.vickbt.composeApp.resources.title_favorites
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.title_favorites
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI

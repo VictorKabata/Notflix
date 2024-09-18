@@ -29,10 +29,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.vickbt.composeApp.resources.Res
-import com.vickbt.composeApp.resources.popular_movies
-import com.vickbt.composeApp.resources.trending_movies
-import com.vickbt.composeApp.resources.upcoming_movies
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.popular_movies
+import com.vickbt.shared.resources.trending_movies
+import com.vickbt.shared.resources.upcoming_movies
 import com.vickbt.composeApp.ui.components.MovieCardLandscape
 import com.vickbt.composeApp.ui.components.MovieCardPager
 import com.vickbt.composeApp.ui.components.MovieCardPagerIndicator

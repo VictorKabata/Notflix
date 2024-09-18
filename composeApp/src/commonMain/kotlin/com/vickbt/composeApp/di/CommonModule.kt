@@ -1,6 +1,5 @@
 package com.vickbt.composeApp.di
 
-import com.vickbt.composeApp.BuildKonfig
 import com.vickbt.composeApp.data.datasources.FavoritesRepositoryImpl
 import com.vickbt.composeApp.data.datasources.MovieDetailsRepositoryImpl
 import com.vickbt.composeApp.data.datasources.MoviesRepositoryImpl
@@ -19,6 +18,7 @@ import com.vickbt.composeApp.ui.screens.home.HomeViewModel
 import com.vickbt.composeApp.ui.screens.main.MainViewModel
 import com.vickbt.composeApp.ui.screens.search.SearchViewModel
 import com.vickbt.composeApp.ui.screens.settings.SettingsViewModel
+import com.vickbt.shared.BuildKonfig
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient

@@ -25,11 +25,11 @@ interface MovieDetailsRepository {
     suspend fun saveFavoriteMovie(movie: MovieDetails)
 
     /**Retrieve cached movie details from local cache based on its ID*/
-    suspend fun getFavoriteMovie(movieId: Int): MovieDetails
+    suspend fun getFavoriteMovie(movieId: Int): MovieDetails?
 
     /**Delete previously saved movie details from local cache*/
     suspend fun deleteFavoriteMovie(movieId: Int)
 
     /**Check if movie details record is available in the local cache*/
-    suspend fun isMovieFavorite(movieId: Int): Boolean?
+    suspend fun isMovieFavorite(movieId: Int): Flow<Boolean>
 }

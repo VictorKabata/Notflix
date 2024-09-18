@@ -190,7 +190,7 @@ room {
 }
 
 dependencies {
-    kspCommonMainMetadata(libs.room.compiler)
+    ksp(libs.room.compiler)
 }
 
 compose.resources {
