@@ -26,9 +26,9 @@ materialWindowSizeClass = "0.3.0"
 navigation = "2.7.0-alpha07"
 coil = "3.0.0-alpha06"
 datastore = "1.1.1"
-ksp = "2.0.20-RC-1.0.24"
+ksp = "2.0.0-1.0.24"
 sqlite = "2.5.0-SNAPSHOT"
-room = "2.7.0-alpha06"
+room = "2.7.0-alpha07"
 
 #Android Versions
 androidxActivity = "1.8.2"
