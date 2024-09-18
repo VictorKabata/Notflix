@@ -29,8 +29,8 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "composeApp"
-            isStatic = true
+            baseName = "shared"
+            isStatic = false
         }
     }
 
