@@ -7,8 +7,10 @@ import androidx.room.RoomDatabaseConstructor
 import com.vickbt.composeApp.data.cache.daos.FavoriteMovieDao
 import com.vickbt.composeApp.data.cache.entities.MovieDetailsEntity
 
-@Suppress("ACTUAL_WITHOUT_EXPECT")
-internal expect object AppDatabaseConstructor : RoomDatabaseConstructor<AppDatabase>
+@Suppress("NO_ACTUAL_FOR_EXPECT")
+expect object AppDatabaseConstructor : RoomDatabaseConstructor<AppDatabase> {
+    override fun initialize(): AppDatabase
+}
 
 @Database(entities = [MovieDetailsEntity::class], version = 1, exportSchema = true)
 @ConstructedBy(AppDatabaseConstructor::class)
