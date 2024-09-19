@@ -19,10 +19,6 @@ plugins {
     alias(libs.plugins.firebase.performance.plugin)
 }
 
-kotlin {
-    jvmToolchain(17)
-}
-
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     kotlin.applyDefaultHierarchyTemplate()
@@ -36,7 +32,7 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
-            isStatic = false
+            isStatic = true
         }
     }
 
@@ -87,7 +83,6 @@ kotlin {
             implementation(libs.koin.androidx.compose)
             implementation(libs.androidX.activity)
 
-            // Firebase
             implementation(libs.firebase.analytics)
             implementation(libs.firebase.crashlytics)
             implementation(libs.firebase.performance)
