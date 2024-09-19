@@ -7,14 +7,20 @@ plugins {
     alias(libs.plugins.kotlinX.serialization.plugin)
     alias(libs.plugins.buildKonfig)
     alias(libs.plugins.compose)
+
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.sqlDelight)
 
     alias(libs.plugins.android.application)
     alias(libs.plugins.googleServices.plugin)
     alias(libs.plugins.firebase.appDistribution.plugin)
     alias(libs.plugins.firebase.crashlytics.plugin)
     alias(libs.plugins.firebase.performance.plugin)
+}
+
+kotlin {
+    jvmToolchain(17)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -30,7 +36,7 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
-            isStatic = false
+            isStatic = true
         }
     }
 
@@ -48,7 +54,7 @@ kotlin {
 
             implementation(libs.bundles.ktor)
 
-            api(libs.koin.core)
+            implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.composeViewModel)
 
@@ -56,17 +62,16 @@ kotlin {
 
             implementation(libs.kotlinX.dateTime)
 
-            api(libs.napier)
+            implementation(libs.napier)
 
             implementation(libs.bundles.coil)
 
             implementation(libs.navigation)
 
-            implementation(libs.sqlDelight.coroutine)
-
             implementation(libs.datastore.preferences)
 
-            // implementation(libs.material.windowSizeClass)
+            implementation(libs.room.runtime)
+            implementation(libs.sqlite.bundled)
         }
 
         commonTest.dependencies {
@@ -78,12 +83,10 @@ kotlin {
 
         androidMain.dependencies {
             implementation(libs.ktor.android)
-            implementation(libs.sqlDelight.android)
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
             implementation(libs.androidX.activity)
 
-            // Firebase
             implementation(libs.firebase.analytics)
             implementation(libs.firebase.crashlytics)
             implementation(libs.firebase.performance)
@@ -91,12 +94,10 @@ kotlin {
 
         iosMain.dependencies {
             implementation(libs.ktor.darwin)
-            implementation(libs.sqlDelight.native)
         }
 
         sourceSets["desktopMain"].dependencies {
             implementation(libs.ktor.java)
-            implementation(libs.sqlDelight.jvm)
             implementation(libs.coroutines.swing)
             implementation(compose.desktop.currentOs)
         }
@@ -184,13 +185,16 @@ buildkonfig {
     }
 }
 
-sqldelight {
-    databases {
-        create("AppDatabase") {
-            packageName.set("com.vickbt.shared.data.cache.sqldelight")
-            srcDirs.setFrom("src/commonMain/kotlin")
-        }
-    }
+room {
+    schemaDirectory("$projectDir/schemas")
+}
+
+dependencies {
+    add("kspAndroid", libs.room.compiler)
+    add("kspIosX64", libs.room.compiler)
+    add("kspIosArm64", libs.room.compiler)
+    add("kspIosSimulatorArm64", libs.room.compiler)
+    add("kspDesktop", libs.room.compiler)
 }
 
 compose.resources {
