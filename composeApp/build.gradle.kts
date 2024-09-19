@@ -19,6 +19,10 @@ plugins {
     alias(libs.plugins.firebase.performance.plugin)
 }
 
+kotlin {
+    jvmToolchain(17)
+}
+
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     kotlin.applyDefaultHierarchyTemplate()
