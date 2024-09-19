@@ -19,6 +19,10 @@ plugins {
     alias(libs.plugins.firebase.performance.plugin)
 }
 
+kotlin {
+    jvmToolchain(17)
+}
+
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     kotlin.applyDefaultHierarchyTemplate()
@@ -33,7 +37,6 @@ kotlin {
         it.binaries.framework {
             baseName = "shared"
             isStatic = false
-            linkerOpts.add("-lsqlite3")
         }
     }
 
@@ -142,8 +145,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_20
-        targetCompatibility = JavaVersion.VERSION_20
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     buildFeatures {
@@ -190,11 +193,12 @@ room {
 }
 
 dependencies {
-    add("kspAndroid", libs.room.compiler)
+    /*add("kspAndroid", libs.room.compiler)
     add("kspIosX64", libs.room.compiler)
     add("kspIosArm64", libs.room.compiler)
     add("kspIosSimulatorArm64", libs.room.compiler)
-    add("kspDesktop", libs.room.compiler)
+    add("kspDesktop", libs.room.compiler)*/
+    ksp(libs.room.compiler)
 }
 
 compose.resources {

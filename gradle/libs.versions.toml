@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.0.0"
+kotlin = "2.0.20"
 gradle = "8.1.4"
 ktLint = "11.6.0"
 detekt = "1.23.6"
@@ -26,9 +26,9 @@ materialWindowSizeClass = "0.3.0"
 navigation = "2.7.0-alpha07"
 coil = "3.0.0-alpha06"
 datastore = "1.1.1"
-ksp = "2.0.0-1.0.24"
+ksp = "2.0.20-1.0.24"
 sqlite = "2.5.0-SNAPSHOT"
-room = "2.7.0-alpha07"
+room = "2.7.0-alpha08"
 
 #Android Versions
 androidxActivity = "1.8.2"
