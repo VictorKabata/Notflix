@@ -4,9 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vickbt.composeApp.domain.repositories.SearchRepository
 import com.vickbt.composeApp.utils.SearchUiState
-import com.vickbt.composeApp.utils.isLoading
-import com.vickbt.composeApp.utils.onFailure
-import com.vickbt.composeApp.utils.onSuccess
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -26,26 +23,15 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
         _searchUiState.update { it.copy(isLoading = false, error = exception.message) }
     }
 
-    init {
-        getGenres()
-    }
-
     fun searchMovie(movieName: String) = viewModelScope.launch(coroutineExceptionHandler) {
-        searchRepository.searchMovie(movieName = movieName).collectLatest { moviesResult ->
-            moviesResult.isLoading { isLoading ->
-                _searchUiState.update { it.copy(isLoading = isLoading) }
-            }.onSuccess { movies ->
-                _searchUiState.update { it.copy(movieResults = movies) }
-            }.onFailure { error ->
-                _searchUiState.update { it.copy(error = error.message) }
+        _searchUiState.update { it.copy(isLoading = true) }
+
+        searchRepository.searchMovie(movieName = movieName).onSuccess { data ->
+            data.collectLatest { movies ->
+                _searchUiState.update { it.copy(movieResults = movies, isLoading = false) }
             }
+        }.onFailure { error ->
+            _searchUiState.update { it.copy(error = error.message, isLoading = false) }
         }
-    }
-
-    fun updateSearchQuery(searchQuery: String) {
-        _searchQuery.value = searchQuery
-    }
-
-    private fun getGenres() = viewModelScope.launch {
     }
 }
