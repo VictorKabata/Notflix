@@ -59,30 +59,19 @@ class DetailsViewModel(
 
     fun saveFavoriteMovie(movieDetails: MovieDetails) =
         viewModelScope.launch(coroutineExceptionHandler) {
-            try {
-                movieDetailsRepository.saveFavoriteMovie(movie = movieDetails)
-            } catch (e: Exception) {
-                Napier.e("Error saving movie: ${e.message}")
-            }
+            movieDetailsRepository.saveFavoriteMovie(movie = movieDetails)
+
         }
 
     fun deleteFavoriteMovie(movieId: Int) = viewModelScope.launch(coroutineExceptionHandler) {
-        try {
-            movieDetailsRepository.deleteFavoriteMovie(movieId = movieId)
-        } catch (e: Exception) {
-            Napier.e("Error removing movie: ${e.message}")
-        }
+        movieDetailsRepository.deleteFavoriteMovie(movieId = movieId)
     }
 
     fun isMovieFavorite(movieId: Int) = viewModelScope.launch(coroutineExceptionHandler) {
-        try {
-            movieDetailsRepository.isMovieFavorite(movieId = movieId).onSuccess { data ->
-                data.collectLatest { isFavorite ->
-                    _movieDetailsState.update { it.copy(isFavorite = isFavorite) }
-                }
+        movieDetailsRepository.isMovieFavorite(movieId = movieId).onSuccess { data ->
+            data.collectLatest { isFavorite ->
+                _movieDetailsState.update { it.copy(isFavorite = isFavorite) }
             }
-        } catch (e: Exception) {
-            Napier.e("Error removing movie: ${e.message}")
         }
     }
 }

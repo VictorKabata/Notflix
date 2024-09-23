@@ -32,7 +32,7 @@ class SettingsViewModel(private val settingsRepository: SettingsRepository) :
         }
 
     fun getThemePreference() = viewModelScope.launch(coroutineExceptionHandler) {
-        settingsRepository.getThemePreference().onSuccess { data->
+        settingsRepository.getThemePreference().onSuccess { data ->
             data.collectLatest { theme ->
                 _settingsUiState.update { it.copy(selectedTheme = theme, isLoading = false) }
             }
@@ -40,13 +40,10 @@ class SettingsViewModel(private val settingsRepository: SettingsRepository) :
     }
 
     fun getImageQualityPreference() = viewModelScope.launch(coroutineExceptionHandler) {
-        settingsRepository.getImageQualityPreference().onSuccess { data->
+        settingsRepository.getImageQualityPreference().onSuccess { data ->
             data.collectLatest { imageQuality ->
                 _settingsUiState.update {
-                    it.copy(
-                        selectedImageQuality = imageQuality,
-                        isLoading = false
-                    )
+                    it.copy(selectedImageQuality = imageQuality, isLoading = false)
                 }
             }
         }
