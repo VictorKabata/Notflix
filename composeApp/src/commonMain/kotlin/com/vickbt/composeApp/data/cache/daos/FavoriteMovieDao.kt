@@ -13,10 +13,10 @@ interface FavoriteMovieDao {
     suspend fun saveFavoriteMovie(movie: MovieDetailsEntity)
 
     @Query("SELECT * FROM `Favorite Movies`")
-    fun getAllFavoriteMovies(): Flow<List<MovieDetailsEntity>>
+    fun getAllFavoriteMovies(): Flow<List<MovieDetailsEntity>?>
 
     @Query("SELECT * FROM `Favorite Movies` WHERE id = :id")
-    suspend fun getFavoriteMovie(id: Int): MovieDetailsEntity
+    fun getFavoriteMovie(id: Int): Flow<MovieDetailsEntity?>
 
     @Query("DELETE FROM `Favorite Movies` WHERE id = :id")
     suspend fun deleteFavoriteMovie(id: Int)
@@ -25,5 +25,5 @@ interface FavoriteMovieDao {
     suspend fun deleteAllFavoriteMovies()
 
     @Query("SELECT COUNT() FROM `Favorite Movies` WHERE id = :id")
-    fun isMovieFavorite(id: Int): Flow<Boolean>
+    fun isMovieFavorite(id: Int): Flow<Boolean?>
 }

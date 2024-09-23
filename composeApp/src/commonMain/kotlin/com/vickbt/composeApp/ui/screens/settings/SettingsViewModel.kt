@@ -7,6 +7,7 @@ import com.vickbt.composeApp.utils.SettingsUiState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -31,18 +32,19 @@ class SettingsViewModel(private val settingsRepository: SettingsRepository) :
         }
 
     fun getThemePreference() = viewModelScope.launch(coroutineExceptionHandler) {
-        settingsRepository.getThemePreference().collect { theme ->
-            _settingsUiState.update { it.copy(selectedTheme = theme, isLoading = false) }
+        settingsRepository.getThemePreference().onSuccess { data ->
+            data.collectLatest { theme ->
+                _settingsUiState.update { it.copy(selectedTheme = theme, isLoading = false) }
+            }
         }
     }
 
     fun getImageQualityPreference() = viewModelScope.launch(coroutineExceptionHandler) {
-        settingsRepository.getImageQualityPreference().collect { imageQuality ->
-            _settingsUiState.update {
-                it.copy(
-                    selectedImageQuality = imageQuality,
-                    isLoading = false
-                )
+        settingsRepository.getImageQualityPreference().onSuccess { data ->
+            data.collectLatest { imageQuality ->
+                _settingsUiState.update {
+                    it.copy(selectedImageQuality = imageQuality, isLoading = false)
+                }
             }
         }
     }

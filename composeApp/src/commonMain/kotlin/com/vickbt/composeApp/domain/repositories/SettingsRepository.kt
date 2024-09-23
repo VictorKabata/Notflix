@@ -6,7 +6,7 @@ interface SettingsRepository {
 
     suspend fun savePreferenceSelection(key: String, selection: Int)
 
-    suspend fun getThemePreference(): Flow<Int>
+    suspend fun getThemePreference(): Result<Flow<Int>>
 
-    suspend fun getImageQualityPreference(): Flow<Int>
+    suspend fun getImageQualityPreference(): Result<Flow<Int>>
 }
