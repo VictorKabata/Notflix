@@ -20,15 +20,19 @@ class SettingsRepositoryImpl(
         }
     }
 
-    override suspend fun getThemePreference(): Flow<Int> {
-        return dataStore.data.map { preferences ->
-            preferences[intPreferencesKey(KEY_THEME)] ?: 2
+    override suspend fun getThemePreference(): Result<Flow<Int>> {
+        return runCatching {
+            dataStore.data.map { preferences ->
+                preferences[intPreferencesKey(KEY_THEME)] ?: 2
+            }
         }
     }
 
-    override suspend fun getImageQualityPreference(): Flow<Int> {
-        return dataStore.data.map { preferences ->
-            preferences[intPreferencesKey(KEY_IMAGE_QUALITY)] ?: 1
+    override suspend fun getImageQualityPreference(): Result<Flow<Int>> {
+        return runCatching {
+            dataStore.data.map { preferences ->
+                preferences[intPreferencesKey(KEY_IMAGE_QUALITY)] ?: 1
+            }
         }
     }
 }
