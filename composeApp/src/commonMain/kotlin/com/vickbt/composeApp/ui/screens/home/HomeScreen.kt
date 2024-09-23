@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -17,7 +18,6 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -29,10 +29,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.vickbt.shared.resources.Res
-import com.vickbt.shared.resources.popular_movies
-import com.vickbt.shared.resources.trending_movies
-import com.vickbt.shared.resources.upcoming_movies
 import com.vickbt.composeApp.ui.components.MovieCardLandscape
 import com.vickbt.composeApp.ui.components.MovieCardPager
 import com.vickbt.composeApp.ui.components.MovieCardPagerIndicator
@@ -41,6 +37,10 @@ import com.vickbt.composeApp.ui.components.SectionSeparator
 import com.vickbt.composeApp.ui.components.appbars.AppBar
 import com.vickbt.composeApp.ui.theme.DarkPrimaryColor
 import com.vickbt.composeApp.utils.WindowSize
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.popular_movies
+import com.vickbt.shared.resources.trending_movies
+import com.vickbt.shared.resources.upcoming_movies
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -69,9 +69,7 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            if (homeUiState.isLoading) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-            } else if (!homeUiState.error.isNullOrEmpty()) {
+            if (!homeUiState.error.isNullOrEmpty()) {
                 Text(
                     modifier = Modifier.align(Alignment.Center),
                     text = "Error:\n${homeUiState.error}",
@@ -86,32 +84,31 @@ fun HomeScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     //region Now Playing Movies
-                    homeUiState.nowPlayingMovies?.let { nowPlayingMovies ->
-                        val pagerState =
-                            rememberPagerState(pageCount = { nowPlayingMovies.size })
+                    val pagerState =
+                        rememberPagerState(pageCount = { homeUiState.nowPlayingMovies?.size ?: 0 })
 
-                        HorizontalPager(
-                            modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
-                            state = pagerState,
-                            contentPadding = PaddingValues(horizontal = 16.dp),
-                            pageSpacing = 8.dp
-                        ) { currentPage ->
-                            MovieCardPager(
-                                modifier = Modifier.fillMaxWidth().height(280.dp),
-                                movie = nowPlayingMovies[currentPage]
-                            ) { movie ->
-                                navigator.navigate("/details/${movie.id}")
-                            }
+                    HorizontalPager(
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
+                        state = pagerState,
+                        contentPadding = PaddingValues(horizontal = 16.dp),
+                        pageSpacing = 8.dp
+                    ) { currentPage ->
+                        MovieCardPager(
+                            modifier = Modifier.fillMaxWidth().heightIn(min = 280.dp, max = 280.dp),
+                            movie = homeUiState.nowPlayingMovies?.get(currentPage),
+                            showShimmer = homeUiState.nowPlayingMovies?.isEmpty() == true
+                        ) { movie ->
+                            navigator.navigate("/details/${movie.id}")
                         }
-
-                        MovieCardPagerIndicator(
-                            modifier = Modifier.padding(vertical = 6.dp),
-                            pagerState = pagerState,
-                            indicatorSize = 6.dp,
-                            inactiveColor = Color.Gray,
-                            activeColor = DarkPrimaryColor
-                        )
                     }
+
+                    MovieCardPagerIndicator(
+                        modifier = Modifier.padding(vertical = 6.dp),
+                        pagerState = pagerState,
+                        indicatorSize = 6.dp,
+                        inactiveColor = Color.Gray,
+                        activeColor = DarkPrimaryColor
+                    )
                     //endregion
 
                     //region Trending Movies
