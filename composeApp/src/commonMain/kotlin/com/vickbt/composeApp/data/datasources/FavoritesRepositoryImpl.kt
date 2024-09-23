@@ -11,9 +11,13 @@ class FavoritesRepositoryImpl(
     private val appDatabase: AppDatabase
 ) : FavoritesRepository {
 
-    override suspend fun getFavouriteMovies(): Flow<List<MovieDetails>> {
-        return appDatabase.favoriteMovieDao().getAllFavoriteMovies().map {
-            it.map { movieDetail -> movieDetail.toDomain() }
+    override suspend fun getFavouriteMovies(): Result<Flow<List<MovieDetails>>> {
+        return try {
+            Result.success(appDatabase.favoriteMovieDao().getAllFavoriteMovies().map {
+                it.map { movieDetail -> movieDetail.toDomain() }
+            })
+        } catch (e: Exception) {
+            Result.failure(e)
         }
     }
 }
