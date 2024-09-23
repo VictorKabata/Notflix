@@ -72,6 +72,8 @@ kotlin {
 
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
+
+            implementation(libs.bundles.paging)
         }
 
         commonTest.dependencies {
