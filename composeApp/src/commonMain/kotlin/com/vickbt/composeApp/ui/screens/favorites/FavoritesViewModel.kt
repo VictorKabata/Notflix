@@ -7,6 +7,7 @@ import com.vickbt.composeApp.utils.FavouritesUiState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -26,8 +27,14 @@ class FavoritesViewModel(
     }
 
     fun getFavoriteMovie() = viewModelScope.launch(coroutineExceptionHandler) {
-        favoritesRepository.getFavouriteMovies().collect { favoriteMoviesResult ->
-            _favoriteMoviesState.update { it.copy(favoriteMovies = favoriteMoviesResult) }
+        favoritesRepository.getFavouriteMovies().onSuccess { data ->
+            data.collectLatest { favoriteMoviesResult ->
+                _favoriteMoviesState.update {
+                    it.copy(favoriteMovies = favoriteMoviesResult, isLoading = false)
+                }
+            }
+        }.onFailure { error ->
+            _favoriteMoviesState.update { it.copy(error = error.message, isLoading = false) }
         }
     }
 }
