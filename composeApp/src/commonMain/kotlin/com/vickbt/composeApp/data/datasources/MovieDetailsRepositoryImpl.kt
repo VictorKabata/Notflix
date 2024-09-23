@@ -11,7 +11,6 @@ import com.vickbt.composeApp.domain.models.Cast
 import com.vickbt.composeApp.domain.models.Movie
 import com.vickbt.composeApp.domain.models.MovieDetails
 import com.vickbt.composeApp.domain.repositories.MovieDetailsRepository
-import com.vickbt.composeApp.utils.ResultState
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -19,72 +18,59 @@ import io.ktor.client.request.parameter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 
 class MovieDetailsRepositoryImpl(
     private val httpClient: HttpClient,
     private val appDatabase: AppDatabase
 ) : MovieDetailsRepository {
 
-    override suspend fun fetchMovieDetails(movieId: Int): Flow<ResultState<MovieDetails>> {
-        val isMovieCached = isMovieFavorite(movieId = movieId).firstOrNull()
+    override suspend fun fetchMovieDetails(movieId: Int): Result<Flow<MovieDetails?>> {
+        val isMovieCached = isMovieFavorite(movieId = movieId).getOrDefault(flowOf(false))
+            .firstOrNull()
 
-        return if (isMovieCached == true) {
-            try {
-                val cachedFavoriteMovie = getFavoriteMovie(movieId = movieId)
-                flowOf(ResultState.Success(data = cachedFavoriteMovie))
-            } catch (e: Exception) {
-                flowOf(ResultState.Failure(exception = e))
-            }
-        } else {
-            flowOf(
-                safeApiCall {
-                    val response =
-                        httpClient.get(urlString = "movie/$movieId").body<MovieDetailsDto>()
-                    response.toDomain()
-                }
-            )
+        return if (isMovieCached == true) getFavoriteMovie(movieId = movieId)
+        else safeApiCall {
+            httpClient.get(urlString = "movie/$movieId").body<MovieDetailsDto>().toDomain()
         }
+
     }
 
-    override suspend fun fetchMovieCast(movieId: Int): Flow<ResultState<Cast>> {
-        return flowOf(
-            safeApiCall {
-                val response = httpClient.get(urlString = "movie/$movieId/credits").body<CastDto>()
-
-                response.toDomain()
-            }
-        )
+    override suspend fun fetchMovieCast(movieId: Int): Result<Flow<Cast>> {
+        return safeApiCall {
+            httpClient.get(urlString = "movie/$movieId/credits").body<CastDto>().toDomain()
+        }
     }
 
     override suspend fun fetchSimilarMovies(
         movieId: Int,
         page: Int
-    ): Flow<ResultState<List<Movie>?>> {
-        return flowOf(
-            safeApiCall {
-                val response = httpClient.get(urlString = "movie/$movieId/similar") {
-                    parameter("page", page)
-                }.body<MovieResultsDto>()
+    ): Result<Flow<List<Movie>?>> {
+        return safeApiCall {
+            val response = httpClient.get(urlString = "movie/$movieId/similar") {
+                parameter("page", page)
+            }.body<MovieResultsDto>()
 
-                response.movies?.map { it.toDomain() }
-            }
-        )
+            response.movies?.map { it.toDomain() }
+        }
     }
 
     override suspend fun saveFavoriteMovie(movie: MovieDetails) {
-        appDatabase.favoriteMovieDao().saveFavoriteMovie(movie = movie.toEntity())
+        runCatching { appDatabase.favoriteMovieDao().saveFavoriteMovie(movie = movie.toEntity()) }
     }
 
-    override suspend fun getFavoriteMovie(movieId: Int): MovieDetails {
-        val favMovieDao = appDatabase.favoriteMovieDao()
-        return favMovieDao.getFavoriteMovie(id = movieId).toDomain()
+    override suspend fun getFavoriteMovie(movieId: Int): Result<Flow<MovieDetails?>> {
+
+        return runCatching {
+            appDatabase.favoriteMovieDao().getFavoriteMovie(id = movieId).map { it?.toDomain() }
+        }
     }
 
     override suspend fun deleteFavoriteMovie(movieId: Int) {
-        appDatabase.favoriteMovieDao().deleteFavoriteMovie(id = movieId)
+        runCatching { appDatabase.favoriteMovieDao().deleteFavoriteMovie(id = movieId) }
     }
 
-    override suspend fun isMovieFavorite(movieId: Int): Flow<Boolean> {
-        return appDatabase.favoriteMovieDao().isMovieFavorite(id = movieId)
+    override suspend fun isMovieFavorite(movieId: Int): Result<Flow<Boolean?>> {
+        return runCatching { appDatabase.favoriteMovieDao().isMovieFavorite(id = movieId) }
     }
 }
