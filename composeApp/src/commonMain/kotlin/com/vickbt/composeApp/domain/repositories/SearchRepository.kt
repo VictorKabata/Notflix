@@ -2,7 +2,6 @@ package com.vickbt.composeApp.domain.repositories
 
 import com.vickbt.composeApp.domain.models.Movie
 import com.vickbt.composeApp.domain.utils.Constants.STARTING_PAGE_INDEX
-import com.vickbt.composeApp.utils.ResultState
 import kotlinx.coroutines.flow.Flow
 
 interface SearchRepository {
@@ -11,5 +10,5 @@ interface SearchRepository {
     suspend fun searchMovie(
         movieName: String,
         page: Int = STARTING_PAGE_INDEX
-    ): Flow<ResultState<List<Movie>?>>
+    ): Flow<Result<List<Movie>?>>
 }
