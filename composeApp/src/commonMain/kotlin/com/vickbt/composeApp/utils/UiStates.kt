@@ -1,5 +1,6 @@
 package com.vickbt.composeApp.utils
 
+import app.cash.paging.PagingData
 import com.vickbt.composeApp.domain.models.Actor
 import com.vickbt.composeApp.domain.models.Movie
 import com.vickbt.composeApp.domain.models.MovieDetails
@@ -12,7 +13,7 @@ data class HomeUiState(
     val isLoading: Boolean = true,
     val error: String? = null,
     val nowPlayingMovies: List<Movie>? = emptyList(),
-    val trendingMovies: List<Movie>? = emptyList(),
+    val trendingMovies: PagingData<Movie>? = null,
     val popularMovies: List<Movie>? = emptyList(),
     val upcomingMovies: List<Movie>? = emptyList(),
 )
