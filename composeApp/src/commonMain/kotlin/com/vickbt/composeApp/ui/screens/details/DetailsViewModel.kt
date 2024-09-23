@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.vickbt.composeApp.domain.models.MovieDetails
 import com.vickbt.composeApp.domain.repositories.MovieDetailsRepository
 import com.vickbt.composeApp.utils.DetailsUiState
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -60,7 +59,6 @@ class DetailsViewModel(
     fun saveFavoriteMovie(movieDetails: MovieDetails) =
         viewModelScope.launch(coroutineExceptionHandler) {
             movieDetailsRepository.saveFavoriteMovie(movie = movieDetails)
-
         }
 
     fun deleteFavoriteMovie(movieId: Int) = viewModelScope.launch(coroutineExceptionHandler) {

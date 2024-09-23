@@ -12,8 +12,10 @@ class FavoritesRepositoryImpl(
 ) : FavoritesRepository {
 
     override suspend fun getFavouriteMovies(): Result<Flow<List<MovieDetails>?>> {
-        return runCatching { appDatabase.favoriteMovieDao().getAllFavoriteMovies().map {
+        return runCatching {
+            appDatabase.favoriteMovieDao().getAllFavoriteMovies().map {
             it?.map { movieDetail -> movieDetail.toDomain() }
-        } }
+        }
+        }
     }
 }

@@ -29,11 +29,13 @@ class MovieDetailsRepositoryImpl(
         val isMovieCached = isMovieFavorite(movieId = movieId).getOrDefault(flowOf(false))
             .firstOrNull()
 
-        return if (isMovieCached == true) getFavoriteMovie(movieId = movieId)
-        else safeApiCall {
+        return if (isMovieCached == true) {
+            getFavoriteMovie(movieId = movieId)
+        } else {
+            safeApiCall {
             httpClient.get(urlString = "movie/$movieId").body<MovieDetailsDto>().toDomain()
         }
-
+        }
     }
 
     override suspend fun fetchMovieCast(movieId: Int): Result<Flow<Cast>> {
@@ -60,7 +62,6 @@ class MovieDetailsRepositoryImpl(
     }
 
     override suspend fun getFavoriteMovie(movieId: Int): Result<Flow<MovieDetails?>> {
-
         return runCatching {
             appDatabase.favoriteMovieDao().getFavoriteMovie(id = movieId).map { it?.toDomain() }
         }

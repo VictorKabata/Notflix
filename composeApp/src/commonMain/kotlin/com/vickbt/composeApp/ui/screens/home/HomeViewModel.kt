@@ -32,7 +32,8 @@ class HomeViewModel(private val moviesRepository: MoviesRepository) : ViewModel(
             data.collectLatest { movies ->
                 _homeUiState.update {
                     it.copy(
-                        nowPlayingMovies = movies?.take(5), isLoading = false
+                        nowPlayingMovies = movies?.take(5),
+                        isLoading = false
                     )
                 }
             }
