@@ -10,5 +10,5 @@ interface SearchRepository {
     suspend fun searchMovie(
         movieName: String,
         page: Int = STARTING_PAGE_INDEX
-    ): Flow<Result<List<Movie>?>>
+    ): Result<Flow<List<Movie>?>>
 }
