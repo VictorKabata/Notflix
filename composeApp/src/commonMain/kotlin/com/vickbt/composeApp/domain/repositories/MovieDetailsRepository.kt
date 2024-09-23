@@ -30,5 +30,5 @@ interface MovieDetailsRepository {
     suspend fun deleteFavoriteMovie(movieId: Int)
 
     /**Check if movie details record is available in the local cache*/
-    suspend fun isMovieFavorite(movieId: Int): Result<Flow<Boolean>?>
+    suspend fun isMovieFavorite(movieId: Int): Result<Flow<Boolean?>>
 }
