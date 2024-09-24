@@ -179,7 +179,9 @@ fun HomeScreen(
                     //endregion
 
                     //region Popular Movies
-                    homeUiState.popularMovies?.let {
+                    homeUiState.popularMovies?.let { movies ->
+                        val popularMovies = movies.collectAsLazyPagingItems()
+
                         Column(modifier = Modifier.padding(bottom = 90.dp)) {
                             SectionSeparator(
                                 modifier = Modifier
@@ -193,13 +195,15 @@ fun HomeScreen(
                                 contentPadding = PaddingValues(horizontal = 16.dp),
                                 horizontalArrangement = Arrangement.spacedBy(10.dp),
                             ) {
-                                items(items = it) { item ->
-                                    MovieCardPortraitCompact(
-                                        movie = item,
-                                        onItemClick = { movie ->
-                                            navigator.navigate("/details/${movie.id}")
-                                        }
-                                    )
+                                items(popularMovies.itemCount) { index ->
+                                    popularMovies[index]?.let {
+                                        MovieCardPortraitCompact(
+                                            movie = it,
+                                            onItemClick = { movie ->
+                                                navigator.navigate("/details/${movie.id}")
+                                            }
+                                        )
+                                    }
                                 }
                             }
                         }

@@ -3,7 +3,7 @@ package com.vickbt.composeApp.domain.models
 data class Movie(
     val adult: Boolean? = null,
 
-    val backdropPath: String,
+    val backdropPath: String? = null,
 
     val id: Int,
 

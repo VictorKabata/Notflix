@@ -19,6 +19,8 @@ class MoviesRepositoryImpl(
     private val httpClient: HttpClient
 ) : MoviesRepository {
 
+    private val pagingConfig = PagingConfig(pageSize = 20, enablePlaceholders = false)
+
     override suspend fun fetchNowPlayingMovies(): Result<Flow<List<Movie>?>> {
         return safeApiCall {
             val response = httpClient.get(urlString = "movie/now_playing") {
@@ -33,8 +35,6 @@ class MoviesRepositoryImpl(
         mediaType: String,
         timeWindow: String
     ): Result<Flow<PagingData<Movie>>> {
-        val pagingConfig = PagingConfig(pageSize = 20, enablePlaceholders = false)
-
         val pagingSource = BasePagingSource { page ->
             val response = httpClient.get(urlString = "trending/$mediaType/$timeWindow") {
                 parameter("page", page)
@@ -51,13 +51,20 @@ class MoviesRepositoryImpl(
         }
     }
 
-    override suspend fun fetchPopularMovies(page: Int): Result<Flow<List<Movie>?>> {
-        return safeApiCall {
+    override suspend fun fetchPopularMovies(): Result<Flow<PagingData<Movie>>> {
+        val pagingSource = BasePagingSource { page ->
             val response = httpClient.get(urlString = "movie/popular") {
                 parameter("page", page)
-            }.body<MovieResultsDto>()
+            }.body<MovieResultsDto>().movies
 
-            response.movies?.map { it.toDomain() }
+            response?.map { it.toDomain() }
+        }
+
+        return runCatching {
+            Pager(
+                config = pagingConfig,
+                pagingSourceFactory = { pagingSource }
+            ).flow
         }
     }
 
