@@ -16,7 +16,7 @@ data class HomeUiState(
     val nowPlayingMovies: List<Movie>? = emptyList(),
     val trendingMovies: Flow<PagingData<Movie>>? = null,
     val popularMovies: Flow<PagingData<Movie>>? = null,
-    val upcomingMovies: List<Movie>? = emptyList(),
+    val upcomingMovies: Flow<PagingData<Movie>>? = null,
 )
 
 data class DetailsUiState(

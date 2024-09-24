@@ -68,13 +68,20 @@ class MoviesRepositoryImpl(
         }
     }
 
-    override suspend fun fetchUpcomingMovies(page: Int): Result<Flow<List<Movie>?>> {
-        return safeApiCall {
+    override suspend fun fetchUpcomingMovies(): Result<Flow<PagingData<Movie>>> {
+        val pagingSource = BasePagingSource { page ->
             val response = httpClient.get(urlString = "movie/upcoming") {
                 parameter("page", page)
-            }.body<MovieResultsDto>()
+            }.body<MovieResultsDto>().movies
 
-            response.movies?.map { it.toDomain() }
+            response?.map { it.toDomain() }
+        }
+
+        return runCatching {
+            Pager(
+                config = pagingConfig,
+                pagingSourceFactory = { pagingSource }
+            ).flow
         }
     }
 }

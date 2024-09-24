@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
@@ -150,7 +149,9 @@ fun HomeScreen(
                     //endregion
 
                     //region Upcoming Movies
-                    homeUiState.upcomingMovies?.let {
+                    homeUiState.upcomingMovies?.let { movies ->
+                        val upcomingMovies = movies.collectAsLazyPagingItems()
+
                         SectionSeparator(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -163,16 +164,18 @@ fun HomeScreen(
                             horizontalArrangement = Arrangement.spacedBy(14.dp),
                             modifier = Modifier.wrapContentHeight()
                         ) {
-                            items(items = it) { item ->
-                                MovieCardLandscape(
-                                    modifier = Modifier
-                                        .width(300.dp)
-                                        .height(245.dp),
-                                    movie = item,
-                                    onClickItem = { movie ->
-                                        navigator.navigate("/details/${movie.id}")
-                                    }
-                                )
+                            items(upcomingMovies.itemCount) { index ->
+                                upcomingMovies[index]?.let {
+                                    MovieCardLandscape(
+                                        modifier = Modifier
+                                            .width(300.dp)
+                                            .height(245.dp),
+                                        movie = it,
+                                        onClickItem = { movie ->
+                                            navigator.navigate("/details/${movie.id}")
+                                        }
+                                    )
+                                }
                             }
                         }
                     }

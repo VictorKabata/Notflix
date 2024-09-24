@@ -71,8 +71,11 @@ class HomeViewModel(private val moviesRepository: MoviesRepository) : ViewModel(
 
     fun fetchUpcomingMovies() = viewModelScope.launch(coroutineExceptionHandler) {
         moviesRepository.fetchUpcomingMovies().onSuccess { data ->
-            data.collectLatest { movies ->
-                _homeUiState.update { it.copy(upcomingMovies = movies, isLoading = false) }
+            _homeUiState.update {
+                it.copy(
+                    upcomingMovies = data.cachedIn(viewModelScope),
+                    isLoading = false
+                )
             }
         }.onFailure { error ->
             _homeUiState.update { it.copy(error = error.message, isLoading = false) }

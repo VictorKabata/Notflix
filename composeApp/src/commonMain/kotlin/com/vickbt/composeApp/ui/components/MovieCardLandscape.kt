@@ -41,6 +41,9 @@ import com.vickbt.composeApp.utils.capitalizeEachWord
 import com.vickbt.composeApp.utils.getRating
 import com.vickbt.composeApp.utils.getReleaseDate
 import com.vickbt.composeApp.utils.loadImage
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.unknown_movie
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MovieCardLandscape(
@@ -94,7 +97,7 @@ fun MovieCardLandscape(
                 //region Movie Title
                 Text(
                     modifier = Modifier,
-                    text = movie.title,
+                    text = movie.title ?: stringResource(Res.string.unknown_movie),
                     fontSize = 18.sp,
                     maxLines = 2,
                     style = MaterialTheme.typography.titleMedium,
