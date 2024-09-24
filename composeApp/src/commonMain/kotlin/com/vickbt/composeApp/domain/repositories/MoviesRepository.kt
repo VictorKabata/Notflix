@@ -1,6 +1,6 @@
 package com.vickbt.composeApp.domain.repositories
 
-import androidx.paging.PagingData
+import app.cash.paging.PagingData
 import com.vickbt.composeApp.domain.models.Movie
 import com.vickbt.composeApp.domain.utils.Constants.STARTING_PAGE_INDEX
 import kotlinx.coroutines.flow.Flow

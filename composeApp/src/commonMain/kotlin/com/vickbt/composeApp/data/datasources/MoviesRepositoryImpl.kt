@@ -1,8 +1,8 @@
 package com.vickbt.composeApp.data.datasources
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
+import app.cash.paging.Pager
+import app.cash.paging.PagingConfig
+import app.cash.paging.PagingData
 import com.vickbt.composeApp.data.mappers.toDomain
 import com.vickbt.composeApp.data.network.models.MovieResultsDto
 import com.vickbt.composeApp.data.network.utils.safeApiCall
@@ -33,7 +33,7 @@ class MoviesRepositoryImpl(
         mediaType: String,
         timeWindow: String
     ): Result<Flow<PagingData<Movie>>> {
-        val pagingConfig = PagingConfig(pageSize = 5, enablePlaceholders = false)
+        val pagingConfig = PagingConfig(pageSize = 20, enablePlaceholders = false)
 
         val pagingSource = BasePagingSource { page ->
             val response = httpClient.get(urlString = "trending/$mediaType/$timeWindow") {

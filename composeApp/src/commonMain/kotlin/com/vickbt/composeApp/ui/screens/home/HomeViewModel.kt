@@ -2,6 +2,7 @@ package com.vickbt.composeApp.ui.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.vickbt.composeApp.domain.repositories.MoviesRepository
 import com.vickbt.composeApp.utils.HomeUiState
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -44,9 +45,7 @@ class HomeViewModel(private val moviesRepository: MoviesRepository) : ViewModel(
 
     fun fetchTrendingMovies() = viewModelScope.launch(coroutineExceptionHandler) {
         moviesRepository.fetchTrendingMovies().onSuccess { data ->
-            data.collectLatest { movies ->
-                _homeUiState.update { it.copy(trendingMovies = movies, isLoading = false) }
-            }
+            _homeUiState.update { it.copy(trendingMovies = data.cachedIn(viewModelScope), isLoading = false) }
         }.onFailure { error ->
             _homeUiState.update { it.copy(error = error.message, isLoading = false) }
         }

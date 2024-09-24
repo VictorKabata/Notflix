@@ -18,7 +18,6 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,10 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.vickbt.shared.resources.Res
-import com.vickbt.shared.resources.popular_movies
-import com.vickbt.shared.resources.trending_movies
-import com.vickbt.shared.resources.upcoming_movies
+import app.cash.paging.compose.collectAsLazyPagingItems
 import com.vickbt.composeApp.ui.components.MovieCardLandscape
 import com.vickbt.composeApp.ui.components.MovieCardPager
 import com.vickbt.composeApp.ui.components.MovieCardPagerIndicator
@@ -41,10 +37,15 @@ import com.vickbt.composeApp.ui.components.SectionSeparator
 import com.vickbt.composeApp.ui.components.appbars.AppBar
 import com.vickbt.composeApp.ui.theme.DarkPrimaryColor
 import com.vickbt.composeApp.utils.WindowSize
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.popular_movies
+import com.vickbt.shared.resources.trending_movies
+import com.vickbt.shared.resources.upcoming_movies
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
     navigator: NavHostController,
@@ -55,6 +56,8 @@ fun HomeScreen(
     val scrollState = rememberScrollState()
 
     val homeUiState = viewModel.homeUiState.collectAsState().value
+
+    val movies = homeUiState.trendingMovies?.collectAsLazyPagingItems()
 
     Scaffold(
         modifier = Modifier
@@ -116,6 +119,8 @@ fun HomeScreen(
 
                     //region Trending Movies
                     homeUiState.trendingMovies?.let {
+                        val trendingMovies = it.collectAsLazyPagingItems()
+
                         SectionSeparator(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -130,11 +135,11 @@ fun HomeScreen(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            items(items = it) { item ->
+                            items(trendingMovies.itemCount) { index ->
                                 MovieCardPortraitCompact(
-                                    movie = item,
+                                    movie = trendingMovies[index],
                                     onItemClick = { movie ->
-                                        navigator.navigate("/details/${movie.id}")
+                                        navigator.navigate("/details/${movie?.id}")
                                     }
                                 )
                             }
@@ -190,7 +195,7 @@ fun HomeScreen(
                                     MovieCardPortraitCompact(
                                         movie = item,
                                         onItemClick = { movie ->
-                                            navigator.navigate("/details/${movie.id}")
+                                            navigator.navigate("/details/${movie?.id}")
                                         }
                                     )
                                 }
