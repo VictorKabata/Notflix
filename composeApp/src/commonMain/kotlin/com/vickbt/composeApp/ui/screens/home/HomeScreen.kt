@@ -118,8 +118,8 @@ fun HomeScreen(
                     //endregion
 
                     //region Trending Movies
-                    homeUiState.trendingMovies?.let {
-                        val trendingMovies = it.collectAsLazyPagingItems()
+                    homeUiState.trendingMovies?.let { movies ->
+                        val trendingMovies = movies.collectAsLazyPagingItems()
 
                         SectionSeparator(
                             modifier = Modifier
@@ -136,12 +136,14 @@ fun HomeScreen(
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
                             items(trendingMovies.itemCount) { index ->
-                                MovieCardPortraitCompact(
-                                    movie = trendingMovies[index],
-                                    onItemClick = { movie ->
-                                        navigator.navigate("/details/${movie?.id}")
-                                    }
-                                )
+                                trendingMovies[index]?.let {
+                                    MovieCardPortraitCompact(
+                                        movie = it,
+                                        onItemClick = { movie ->
+                                            navigator.navigate("/details/${movie.id}")
+                                        }
+                                    )
+                                }
                             }
                         }
                     }
@@ -195,7 +197,7 @@ fun HomeScreen(
                                     MovieCardPortraitCompact(
                                         movie = item,
                                         onItemClick = { movie ->
-                                            navigator.navigate("/details/${movie?.id}")
+                                            navigator.navigate("/details/${movie.id}")
                                         }
                                     )
                                 }

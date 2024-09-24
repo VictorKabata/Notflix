@@ -24,15 +24,12 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.vickbt.composeApp.domain.models.Movie
 import com.vickbt.composeApp.utils.loadImage
-import com.vickbt.shared.resources.Res
-import com.vickbt.shared.resources.unknown_movie
-import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MovieCardPortraitCompact(
     modifier: Modifier = Modifier,
-    movie: Movie?,
-    onItemClick: (Movie?) -> Unit
+    movie: Movie,
+    onItemClick: (Movie) -> Unit
 ) {
     Column(
         modifier = modifier,
@@ -51,7 +48,7 @@ fun MovieCardPortraitCompact(
                     .fillMaxWidth()
                     .height(220.dp)
                     .sizeIn(minHeight = 30.dp),
-                model = movie?.posterPath?.loadImage(),
+                model = movie.posterPath.loadImage(),
                 contentDescription = "Trending movie poster",
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
@@ -60,7 +57,7 @@ fun MovieCardPortraitCompact(
 
         Text(
             modifier = Modifier.width(145.dp),
-            text = movie?.title?: stringResource(Res.string.unknown_movie),
+            text = movie.title,
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface,
             fontSize = 14.sp,
@@ -69,9 +66,4 @@ fun MovieCardPortraitCompact(
             textAlign = TextAlign.Start
         )
     }
-}
-
-@Composable
-private fun Preview() {
-    // MovieCardPortraitCompact(movie = Movie(title = "Cocaine Bear"), onItemClick = {})
 }
