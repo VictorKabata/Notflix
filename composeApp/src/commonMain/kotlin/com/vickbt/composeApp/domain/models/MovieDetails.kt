@@ -4,7 +4,7 @@ data class MovieDetails(
 
     val adult: Boolean? = null,
 
-    val backdropPath: String,
+    val backdropPath: String? = null,
 
     val homepage: String? = null,
 
@@ -20,7 +20,7 @@ data class MovieDetails(
 
     val popularity: Double? = null,
 
-    val posterPath: String,
+    val posterPath: String? = null,
 
     val releaseDate: String? = null,
 
