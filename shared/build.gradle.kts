@@ -61,6 +61,8 @@ kotlin {
 
             implementation(libs.datastore.preferences)
 
+            implementation(libs.bundles.kmpPalette)
+
             // implementation(libs.material.windowSizeClass)
         }
 
