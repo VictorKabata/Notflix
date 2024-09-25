@@ -100,7 +100,7 @@ kotlin {
 
         sourceSets["desktopMain"].dependencies {
             implementation(libs.ktor.java)
-            implementation(libs.coroutines.swing)
+            runtimeOnly(libs.coroutines.swing)
             implementation(compose.desktop.currentOs)
         }
 
