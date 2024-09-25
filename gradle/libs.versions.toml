@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.0.0"
+kotlin = "2.0.20"
 gradle = "8.1.4"
 ktLint = "11.6.0"
 detekt = "1.23.6"
@@ -20,13 +20,16 @@ kotlinxSerializationJson = "1.7.1"
 kotlinxDateTime = "0.6.0"
 napier = "2.7.1"
 ktor = "2.3.12"
-sqlDelight = "2.0.2"
 buildKonfig = "0.13.3"
 materialWindowSizeClass = "0.3.0"
 navigation = "2.7.0-alpha07"
 coil = "3.0.0-alpha06"
 datastore = "1.1.1"
 kmpPalette = "3.1.0"
+ksp = "2.0.20-1.0.24"
+sqlite = "2.5.0-SNAPSHOT"
+room = "2.7.0-alpha08"
+paging = "3.3.0-alpha02-0.5.1"
 
 #Android Versions
 androidxActivity = "1.8.2"
@@ -50,7 +53,8 @@ kotlinX-serialization-plugin = { id = "org.jetbrains.kotlin.plugin.serialization
 buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
 compose = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "room" }
 
 googleServices-plugin = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 
@@ -73,11 +77,6 @@ ktor-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 ktor-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
 ktor-java = { module = "io.ktor:ktor-client-java", version.ref = "ktor" }
 ktor-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
-sqlDelight = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
-sqlDelight-coroutine = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
-sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
-sqlDelight-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
-sqlDelight-JVM = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 kotlinX-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDateTime" }
 material-windowSizeClass = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "materialWindowSizeClass" }
@@ -88,6 +87,11 @@ coil-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil
 coil-multiplatform = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
 kmpPalette-core = { module = "com.kmpalette:kmpalette-core", version.ref = "kmpPalette" }
 kmpPalette-network = { module = "com.kmpalette:extensions-network", version.ref = "kmpPalette" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+paging-common = { module = "app.cash.paging:paging-common", version.ref = "paging" }
+paging-compose = { module = "app.cash.paging:paging-compose-common", version.ref = "paging" }
 
 #Android Lib Dependencies
 androidX-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
@@ -113,3 +117,4 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 ktor = ["ktor-core", "ktor-contentNegotiation", "ktor-json", "ktor-logging"]
 coil = ["coil-compose-core", "coil-compose", "coil-ktor", "coil-multiplatform"]
 kmpPalette=["kmpPalette-core", "kmpPalette-network"]
+paging = ["paging-common", "paging-compose"]

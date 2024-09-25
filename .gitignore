@@ -15,3 +15,5 @@ appiOS/Pods/
 appiOS/Podfile.lock
 *.podspec
 *.xcuserstate
+
+notflix.preferences_pb

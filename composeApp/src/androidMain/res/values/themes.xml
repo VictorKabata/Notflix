@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--SplashScreen Theme-->
+    <!--<style name="Theme.Splashscreen" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_image</item>
+        <item name="android:statusBarColor">@color/secondaryTextColor</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    </style>-->
+
+</resources>
