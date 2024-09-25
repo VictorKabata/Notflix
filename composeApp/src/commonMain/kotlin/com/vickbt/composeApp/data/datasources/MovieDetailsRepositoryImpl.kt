@@ -1,5 +1,8 @@
 package com.vickbt.composeApp.data.datasources
 
+import androidx.paging.PagingData
+import app.cash.paging.Pager
+import app.cash.paging.PagingConfig
 import com.vickbt.composeApp.data.cache.AppDatabase
 import com.vickbt.composeApp.data.mappers.toDomain
 import com.vickbt.composeApp.data.mappers.toEntity
@@ -7,6 +10,7 @@ import com.vickbt.composeApp.data.network.models.CastDto
 import com.vickbt.composeApp.data.network.models.MovieDetailsDto
 import com.vickbt.composeApp.data.network.models.MovieResultsDto
 import com.vickbt.composeApp.data.network.utils.safeApiCall
+import com.vickbt.composeApp.data.paging.BasePagingSource
 import com.vickbt.composeApp.domain.models.Cast
 import com.vickbt.composeApp.domain.models.Movie
 import com.vickbt.composeApp.domain.models.MovieDetails
@@ -25,6 +29,8 @@ class MovieDetailsRepositoryImpl(
     private val appDatabase: AppDatabase
 ) : MovieDetailsRepository {
 
+    private val pagingConfig = PagingConfig(pageSize = 20, enablePlaceholders = false)
+
     override suspend fun fetchMovieDetails(movieId: Int): Result<Flow<MovieDetails?>> {
         val isMovieCached = isMovieFavorite(movieId = movieId).getOrDefault(flowOf(false))
             .firstOrNull()
@@ -33,8 +39,8 @@ class MovieDetailsRepositoryImpl(
             getFavoriteMovie(movieId = movieId)
         } else {
             safeApiCall {
-            httpClient.get(urlString = "movie/$movieId").body<MovieDetailsDto>().toDomain()
-        }
+                httpClient.get(urlString = "movie/$movieId").body<MovieDetailsDto>().toDomain()
+            }
         }
     }
 
@@ -44,16 +50,20 @@ class MovieDetailsRepositoryImpl(
         }
     }
 
-    override suspend fun fetchSimilarMovies(
-        movieId: Int,
-        page: Int
-    ): Result<Flow<List<Movie>?>> {
-        return safeApiCall {
+    override suspend fun fetchSimilarMovies(movieId: Int): Result<Flow<PagingData<Movie>>> {
+        val pagingSource = BasePagingSource { page ->
             val response = httpClient.get(urlString = "movie/$movieId/similar") {
                 parameter("page", page)
             }.body<MovieResultsDto>()
 
             response.movies?.map { it.toDomain() }
+        }
+
+        return runCatching {
+            Pager(
+                config = pagingConfig,
+                pagingSourceFactory = { pagingSource }
+            ).flow
         }
     }
 

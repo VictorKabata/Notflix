@@ -12,13 +12,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,10 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.vickbt.shared.resources.Res
-import com.vickbt.shared.resources.popular_movies
-import com.vickbt.shared.resources.trending_movies
-import com.vickbt.shared.resources.upcoming_movies
+import app.cash.paging.compose.collectAsLazyPagingItems
 import com.vickbt.composeApp.ui.components.MovieCardLandscape
 import com.vickbt.composeApp.ui.components.MovieCardPager
 import com.vickbt.composeApp.ui.components.MovieCardPagerIndicator
@@ -41,10 +36,14 @@ import com.vickbt.composeApp.ui.components.SectionSeparator
 import com.vickbt.composeApp.ui.components.appbars.AppBar
 import com.vickbt.composeApp.ui.theme.DarkPrimaryColor
 import com.vickbt.composeApp.utils.WindowSize
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.popular_movies
+import com.vickbt.shared.resources.trending_movies
+import com.vickbt.shared.resources.upcoming_movies
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
     navigator: NavHostController,
@@ -55,6 +54,8 @@ fun HomeScreen(
     val scrollState = rememberScrollState()
 
     val homeUiState = viewModel.homeUiState.collectAsState().value
+
+    val movies = homeUiState.trendingMovies?.collectAsLazyPagingItems()
 
     Scaffold(
         modifier = Modifier
@@ -115,7 +116,9 @@ fun HomeScreen(
                     //endregion
 
                     //region Trending Movies
-                    homeUiState.trendingMovies?.let {
+                    homeUiState.trendingMovies?.let { movies ->
+                        val trendingMovies = movies.collectAsLazyPagingItems()
+
                         SectionSeparator(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -130,20 +133,24 @@ fun HomeScreen(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            items(items = it) { item ->
-                                MovieCardPortraitCompact(
-                                    movie = item,
-                                    onItemClick = { movie ->
-                                        navigator.navigate("/details/${movie.id}")
-                                    }
-                                )
+                            items(trendingMovies.itemCount) { index ->
+                                trendingMovies[index]?.let {
+                                    MovieCardPortraitCompact(
+                                        movie = it,
+                                        onItemClick = { movie ->
+                                            navigator.navigate("/details/${movie.id}")
+                                        }
+                                    )
+                                }
                             }
                         }
                     }
                     //endregion
 
                     //region Upcoming Movies
-                    homeUiState.upcomingMovies?.let {
+                    homeUiState.upcomingMovies?.let { movies ->
+                        val upcomingMovies = movies.collectAsLazyPagingItems()
+
                         SectionSeparator(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -156,23 +163,27 @@ fun HomeScreen(
                             horizontalArrangement = Arrangement.spacedBy(14.dp),
                             modifier = Modifier.wrapContentHeight()
                         ) {
-                            items(items = it) { item ->
-                                MovieCardLandscape(
-                                    modifier = Modifier
-                                        .width(300.dp)
-                                        .height(245.dp),
-                                    movie = item,
-                                    onClickItem = { movie ->
-                                        navigator.navigate("/details/${movie.id}")
-                                    }
-                                )
+                            items(upcomingMovies.itemCount) { index ->
+                                upcomingMovies[index]?.let {
+                                    MovieCardLandscape(
+                                        modifier = Modifier
+                                            .width(300.dp)
+                                            .height(245.dp),
+                                        movie = it,
+                                        onClickItem = { movie ->
+                                            navigator.navigate("/details/${movie.id}")
+                                        }
+                                    )
+                                }
                             }
                         }
                     }
                     //endregion
 
                     //region Popular Movies
-                    homeUiState.popularMovies?.let {
+                    homeUiState.popularMovies?.let { movies ->
+                        val popularMovies = movies.collectAsLazyPagingItems()
+
                         Column(modifier = Modifier.padding(bottom = 90.dp)) {
                             SectionSeparator(
                                 modifier = Modifier
@@ -186,13 +197,15 @@ fun HomeScreen(
                                 contentPadding = PaddingValues(horizontal = 16.dp),
                                 horizontalArrangement = Arrangement.spacedBy(10.dp),
                             ) {
-                                items(items = it) { item ->
-                                    MovieCardPortraitCompact(
-                                        movie = item,
-                                        onItemClick = { movie ->
-                                            navigator.navigate("/details/${movie.id}")
-                                        }
-                                    )
+                                items(popularMovies.itemCount) { index ->
+                                    popularMovies[index]?.let {
+                                        MovieCardPortraitCompact(
+                                            movie = it,
+                                            onItemClick = { movie ->
+                                                navigator.navigate("/details/${movie.id}")
+                                            }
+                                        )
+                                    }
                                 }
                             }
                         }
