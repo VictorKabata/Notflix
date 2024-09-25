@@ -2,6 +2,7 @@ package com.vickbt.composeApp.ui.screens.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.vickbt.composeApp.domain.models.MovieDetails
 import com.vickbt.composeApp.domain.repositories.MovieDetailsRepository
 import com.vickbt.composeApp.utils.DetailsUiState
@@ -48,8 +49,11 @@ class DetailsViewModel(
     fun fetchSimilarMovies(movieId: Int) = viewModelScope.launch(coroutineExceptionHandler) {
         _movieDetailsState.update { it.copy(isLoading = true) }
         movieDetailsRepository.fetchSimilarMovies(movieId).onSuccess { data ->
-            data.collectLatest { movies ->
-                _movieDetailsState.update { it.copy(similarMovies = movies, isLoading = false) }
+            _movieDetailsState.update {
+                it.copy(
+                    similarMovies = data.cachedIn(viewModelScope),
+                    isLoading = false
+                )
             }
         }.onFailure { error ->
             _movieDetailsState.update { it.copy(error = error.message, isLoading = false) }

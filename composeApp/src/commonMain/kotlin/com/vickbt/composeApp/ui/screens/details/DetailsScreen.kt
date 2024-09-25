@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import app.cash.paging.compose.collectAsLazyPagingItems
 import com.vickbt.composeApp.ui.components.ItemMovieCast
 import com.vickbt.composeApp.ui.components.MovieCardPortrait
 import com.vickbt.composeApp.ui.components.MovieRatingSection
@@ -152,7 +153,8 @@ fun DetailsScreen(
                     //endregion
 
                     //region Similar Movies
-                    if (!movieDetailsState.similarMovies.isNullOrEmpty()) {
+                    movieDetailsState.similarMovies?.let {
+                        val similarMovies = it.collectAsLazyPagingItems()
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = stringResource(Res.string.similar_movies),
@@ -165,8 +167,10 @@ fun DetailsScreen(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            items(items = movieDetailsState.similarMovies) { movie ->
-                                MovieCardPortrait(movie = movie, onItemClick = {})
+                            items(similarMovies.itemCount) { index ->
+                                similarMovies[index]?.let { movie ->
+                                    MovieCardPortrait(movie = movie, onItemClick = {})
+                                }
                             }
                         }
                     }

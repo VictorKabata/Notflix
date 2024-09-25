@@ -24,7 +24,7 @@ data class DetailsUiState(
     val error: String? = null,
     val movieDetails: MovieDetails? = null,
     val movieCast: List<Actor>? = emptyList(),
-    val similarMovies: List<Movie>? = emptyList(),
+    val similarMovies: Flow<PagingData<Movie>>? = null,
     val isFavorite: Boolean? = false
 )
 

@@ -1,9 +1,9 @@
 package com.vickbt.composeApp.domain.repositories
 
+import androidx.paging.PagingData
 import com.vickbt.composeApp.domain.models.Cast
 import com.vickbt.composeApp.domain.models.Movie
 import com.vickbt.composeApp.domain.models.MovieDetails
-import com.vickbt.composeApp.domain.utils.Constants.STARTING_PAGE_INDEX
 import kotlinx.coroutines.flow.Flow
 
 interface MovieDetailsRepository {
@@ -15,10 +15,7 @@ interface MovieDetailsRepository {
     suspend fun fetchMovieCast(movieId: Int): Result<Flow<Cast>>
 
     /** Fetches similar movies from network source*/
-    suspend fun fetchSimilarMovies(
-        movieId: Int,
-        page: Int = STARTING_PAGE_INDEX
-    ): Result<Flow<List<Movie>?>>
+    suspend fun fetchSimilarMovies(movieId: Int): Result<Flow<PagingData<Movie>>>
 
     /**Save movie details to local cache*/
     suspend fun saveFavoriteMovie(movie: MovieDetails)
