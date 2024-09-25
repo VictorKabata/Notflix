@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Close
@@ -38,10 +37,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.vickbt.shared.resources.Res
-import com.vickbt.shared.resources.title_search
+import app.cash.paging.compose.collectAsLazyPagingItems
 import com.vickbt.composeApp.ui.components.MovieCardPortrait
 import com.vickbt.composeApp.utils.WindowSize
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.title_search
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -120,6 +120,8 @@ fun SearchScreen(
                 )
             } else {
                 searchUiState.movieResults?.let { movieResults ->
+                    val searchResults = movieResults.collectAsLazyPagingItems()
+
                     LazyVerticalGrid(
                         modifier = Modifier.fillMaxSize(),
                         columns = if (windowSize == WindowSize.COMPACT) {
@@ -131,14 +133,17 @@ fun SearchScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                         contentPadding = PaddingValues(vertical = 8.dp, horizontal = 16.dp)
                     ) {
-                        items(items = movieResults) { item ->
-                            MovieCardPortrait(
-                                modifier = Modifier,
-                                movie = item,
-                                onItemClick = { movie ->
-                                    navigator.navigate("/details/${movie.id}")
-                                }
-                            )
+
+                        items(searchResults.itemCount) { index ->
+                            searchResults[index]?.let { movies ->
+                                MovieCardPortrait(
+                                    modifier = Modifier,
+                                    movie = movies,
+                                    onItemClick = { movie ->
+                                        navigator.navigate("/details/${movie.id}")
+                                    }
+                                )
+                            }
                         }
                     }
                 }

@@ -31,7 +31,7 @@ data class DetailsUiState(
 data class SearchUiState(
     val isLoading: Boolean = true,
     val error: String? = null,
-    val movieResults: List<Movie>? = emptyList()
+    val movieResults: Flow<PagingData<Movie>>? = null
 )
 
 data class FavouritesUiState(
