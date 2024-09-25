@@ -10,7 +10,7 @@ class BasePagingSource<T : Any>(val fetchData: suspend (page: Int) -> List<T>?) 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, T> {
         val page = params.key ?: STARTING_PAGE_INDEX
 
-        val data = fetchData(page)?: emptyList()
+        val data = fetchData(page) ?: emptyList()
 
         return try {
             LoadResult.Page(

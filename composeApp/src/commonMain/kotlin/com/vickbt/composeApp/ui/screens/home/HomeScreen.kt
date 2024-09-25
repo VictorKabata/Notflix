@@ -43,7 +43,6 @@ import com.vickbt.shared.resources.upcoming_movies
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
-
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(

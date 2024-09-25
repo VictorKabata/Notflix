@@ -133,7 +133,6 @@ fun SearchScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                         contentPadding = PaddingValues(vertical = 8.dp, horizontal = 16.dp)
                     ) {
-
                         items(searchResults.itemCount) { index ->
                             searchResults[index]?.let { movies ->
                                 MovieCardPortrait(
