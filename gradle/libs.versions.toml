@@ -21,7 +21,6 @@ kotlinxDateTime = "0.6.0"
 napier = "2.7.1"
 ktor = "2.3.12"
 buildKonfig = "0.13.3"
-materialWindowSizeClass = "0.3.0"
 navigation = "2.7.0-alpha07"
 coil = "3.0.0-alpha06"
 datastore = "1.1.1"
@@ -34,8 +33,6 @@ kmppalette = "3.1.0"
 
 #Android Versions
 androidxActivity = "1.8.2"
-androidxCore = "1.12.0"
-material = "1.12.0"
 firebaseBOM = "33.1.2"
 leakCanary = "2.12"
 
@@ -58,7 +55,6 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
 
 googleServices-plugin = { id = "com.google.gms.google-services", version.ref = "googleServices" }
-
 firebase-crashlytics-plugin = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }
 firebase-appDistribution-plugin = { id = "com.google.firebase.appdistribution", version.ref = "firebaseAppDistribution" }
 firebase-performance-plugin = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerformance" }
@@ -69,6 +65,10 @@ coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version
 coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinxCoroutines" }
 datastore-preferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastore" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCompose" }
+koin-composeViewModel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeViewModel" }
 kotlinX-serializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-contentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
@@ -80,7 +80,6 @@ ktor-java = { module = "io.ktor:ktor-client-java", version.ref = "ktor" }
 ktor-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 kotlinX-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDateTime" }
-material-windowSizeClass = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "materialWindowSizeClass" }
 navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-compose-core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coil" }
@@ -95,13 +94,7 @@ paging-common = { module = "app.cash.paging:paging-common", version.ref = "pagin
 paging-compose = { module = "app.cash.paging:paging-compose-common", version.ref = "paging" }
 
 #Android Lib Dependencies
-androidX-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
 androidX-activity = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
-material = { module = "com.google.android.material:material", version.ref = "material" }
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
-koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
-koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCompose" }
-koin-composeViewModel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeViewModel" }
 leakCanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
 firebase-BOM = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBOM" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
