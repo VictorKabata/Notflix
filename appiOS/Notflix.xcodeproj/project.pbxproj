@@ -148,7 +148,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1CE0FB2C2A6A8B5100B26932 /* Build configuration list for PBXNativeTarget "Notflix" */;
 			buildPhases = (
-				1C13F5F92C773DB900B1DA2E /* ShellScript */,
+				1CD2A8F32C9B405100B07805 /* ShellScript */,
 				1CE0FB042A6A8B4F00B26932 /* Sources */,
 				1CE0FB052A6A8B4F00B26932 /* Frameworks */,
 				1CE0FB062A6A8B4F00B26932 /* Resources */,
@@ -268,7 +268,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1C13F5F92C773DB900B1DA2E /* ShellScript */ = {
+		1CD2A8F32C9B405100B07805 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -283,7 +283,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :composeApp:embedAndSignAppleFrameworkForXcode\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
