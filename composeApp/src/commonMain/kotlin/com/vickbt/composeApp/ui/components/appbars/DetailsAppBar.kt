@@ -24,10 +24,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -39,6 +37,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.kmpalette.loader.NetworkLoader
+import com.kmpalette.rememberDominantColorState
 import com.vickbt.composeApp.domain.models.MovieDetails
 import com.vickbt.composeApp.ui.components.collapsingToolbar.CollapsingToolbarScaffoldState
 import com.vickbt.composeApp.utils.DetailsUiState
@@ -46,6 +46,9 @@ import com.vickbt.composeApp.utils.getMovieDuration
 import com.vickbt.composeApp.utils.loadImage
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.unknown_movie
+import io.ktor.http.Url
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,6 +57,7 @@ fun DetailsAppBar(
     modifier: Modifier = Modifier,
     collapsingScrollState: CollapsingToolbarScaffoldState,
     movieDetailsState: DetailsUiState,
+    networkLoader: NetworkLoader,
     onNavigationIconClick: () -> Unit,
     onShareIconClick: () -> Unit,
     onFavoriteIconClick: (MovieDetails, Boolean?) -> Unit
@@ -61,13 +65,21 @@ fun DetailsAppBar(
     // Return progress on collapsing toolbar - 1.0f=Expanded, 0.0f=Collapsed
     val scrollProgress = collapsingScrollState.toolbarState.progress
 
-    val defaultDominantColor = MaterialTheme.colorScheme.surface
-    val defaultDominantTextColor = MaterialTheme.colorScheme.onSurface
-    var dominantColor by remember { mutableStateOf(defaultDominantColor) }
-    var dominantTextColor by remember { mutableStateOf(defaultDominantTextColor) }
+    val dominantColorState = rememberDominantColorState(
+        loader = networkLoader,
+        defaultColor = Color.DarkGray,
+        defaultOnColor = Color.LightGray,
+        coroutineContext = Dispatchers.IO
+    )
 
-    val movieDetails by remember { mutableStateOf(movieDetailsState.movieDetails) }
-    var isFavourite by remember { mutableStateOf(movieDetailsState.isFavorite) }
+    movieDetailsState.movieDetails?.backdropPath?.loadImage()?.let {
+        LaunchedEffect(it) {
+            dominantColorState.updateFrom(Url(it))
+        }
+    }
+
+    val movieDetails = movieDetailsState.movieDetails
+    var isFavourite = movieDetailsState.isFavorite
 
     val backgroundColor by animateColorAsState(
         targetValue = MaterialTheme.colorScheme.surface.copy(1 - scrollProgress)
@@ -95,7 +107,11 @@ fun DetailsAppBar(
                 .fillMaxWidth()
                 .height(210.dp)
                 .align(Alignment.BottomCenter)
-                .background(Brush.verticalGradient(listOf(Color.Transparent, dominantColor)))
+                .background(
+                    Brush.verticalGradient(
+                        listOf(Color.Transparent, dominantColorState.color)
+                    )
+                )
         )
 
         Column(
@@ -117,7 +133,7 @@ fun DetailsAppBar(
                 style = MaterialTheme.typography.titleMedium,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                color = dominantTextColor,
+                color = dominantColorState.onColor,
                 fontSize = 32.sp,
                 textAlign = TextAlign.Start,
                 lineHeight = 30.sp
@@ -126,7 +142,7 @@ fun DetailsAppBar(
             Text(
                 modifier = Modifier,
                 text = movieDetails?.runtime?.getMovieDuration() ?: "",
-                color = dominantTextColor,
+                color = dominantColorState.onColor,
                 style = MaterialTheme.typography.bodyMedium,
                 fontSize = 14.sp
             )
