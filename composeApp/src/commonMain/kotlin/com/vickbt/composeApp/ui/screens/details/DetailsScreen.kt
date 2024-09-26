@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import app.cash.paging.compose.collectAsLazyPagingItems
+import com.kmpalette.loader.rememberNetworkLoader
 import com.vickbt.composeApp.ui.components.ItemMovieCast
 import com.vickbt.composeApp.ui.components.MovieCardPortrait
 import com.vickbt.composeApp.ui.components.MovieRatingSection
@@ -42,6 +43,7 @@ import com.vickbt.shared.resources.cast
 import com.vickbt.shared.resources.overview
 import com.vickbt.shared.resources.similar_movies
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -58,6 +60,8 @@ fun DetailsScreen(
         viewModel.getMovieCast(movieId = movieId)
         viewModel.isMovieFavorite(movieId = movieId)
     }
+
+    val networkLoader = rememberNetworkLoader(httpClient = koinInject())
 
     val movieDetailsState = viewModel.movieDetailsState.collectAsState().value
 
@@ -83,6 +87,7 @@ fun DetailsScreen(
                         modifier = Modifier.fillMaxWidth(),
                         collapsingScrollState = collapsingScrollState,
                         movieDetailsState = movieDetailsState,
+                        networkLoader = networkLoader,
                         onNavigationIconClick = { navigator.navigateUp() },
                         onShareIconClick = {},
                         onFavoriteIconClick = { movieDetails, isFavorite ->
