@@ -108,8 +108,8 @@ fun DetailsScreen(
                     //region Movie Ratings
                     if (movieDetailsState.movieDetails?.voteAverage != null) {
                         MovieRatingSection(
-                            popularity = movieDetailsState.movieDetails.voteAverage.getPopularity(),
-                            voteAverage = movieDetailsState.movieDetails.voteAverage.getRating()
+                            popularity = movieDetailsState.movieDetails?.voteAverage?.getPopularity(),
+                            voteAverage = movieDetailsState.movieDetails?.voteAverage?.getRating()
                         )
                     }
                     //endregion
@@ -139,7 +139,7 @@ fun DetailsScreen(
                     //endregion
 
                     //region Movie Cast
-                    if (!movieDetailsState.movieCast.isNullOrEmpty()) {
+                    movieDetailsState.movieCast?.let { cast ->
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = stringResource(Res.string.cast),
@@ -151,11 +151,12 @@ fun DetailsScreen(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            items(items = movieDetailsState.movieCast) { item ->
+                            items(items = cast) { item ->
                                 ItemMovieCast(modifier = Modifier, actor = item)
                             }
                         }
                     }
+
                     //endregion
 
                     //region Similar Movies
