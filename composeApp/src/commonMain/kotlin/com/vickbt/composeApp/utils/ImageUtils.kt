@@ -1,4 +1,4 @@
-package com.vickbt.shared.utils
+package com.vickbt.composeApp.utils
 
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import coil3.compose.LocalPlatformContext
 import coil3.compose.rememberAsyncImagePainter
+import com.vickbt.composeApp.utils.getAsyncImageLoader
 
 @Composable
 fun ImageComponent(
