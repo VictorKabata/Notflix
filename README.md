@@ -1,4 +1,6 @@
-<p align="center"><img src="assets/logo_notflix.png" alt="NotFlix" height="31px"></p>
+# Notflix
+
+<!-- <p align="center"><img src="assets/logo_notflix.png" alt="NotFlix" height="31px"></p> -->
 
 <p align="center">
 <img  src="https://img.shields.io/badge/-KOTLIN-E50914?logo=kotlin&logoColor=white&style=for-the-badge">
@@ -7,84 +9,118 @@
 <img  src="https://img.shields.io/badge/-DESKTOP-E50914?logo=desktop&logoColor=white&style=for-the-badge">
 </p>
 
-# Notflix
+Notflix is a [Kotlin Multiplatform]((https://kotlinlang.org/docs/multiplatform.html)) app that demonstrates cross-platform development using a single codebase and [Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp) for a consistent UI across Android, iOS and desktop(Linux, Windows & macOS) devices.
 
-# 🛠️Under constant refactor/development - [Develop Branch](https://youtu.be/dQw4w9WgXcQ)
+It consumes the TMDB API to fetch movie data and display it on all platforms.
 
-An android and iOS app built using [Kotlin Multiplatforom](https://kotlinlang.org/docs/multiplatform.html) that consumes [TMDB API]("https://developers.themoviedb.org/3") to display current trending, upcoming and popular movies🍿 and tvshows🎬.
+> [!note]
+This repository is under constant development/refactor since the project is designed to showcase the basics of Kotlin/Compose Multiplatform and is not intended for production use
 
-[Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html) is a framework of Kotlin that allows for sharing of a single codebase for business logic across different [targets](https://kotlinlang.org/docs/multiplatform-dsl-reference.html#targets)/platforms. Some of the targets supported by kotlin are: Android, iOS, Kotlin/JVM, Kotlin/JS, Android NDK, Windows, Linux, macOS etc.
-
-[Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/) is a UI framework maybe by Jetbrains that allow for simple and accelerated desktop application and web development using [compose](https://developer.android.com/jetpack/compose). Compose multiplatform also allows sharing compose UI code between diffrent platforms. eg android, iOS desktop(Windows, Linux, MacOS) and web.
 
 ## Table Of Content
 
 - [Screenshots](##screenshots)
-- [Prerequisite](##prerequisite)
-- [Running](##running)
+- [Getting Started](##getting-started)
+  - [Prerequisite](###prerequisite)
+  - [Installation](###installation)
 - [Libraries](##libraries)
-  - [Shared](###shared)
-  - [Android](###android)
-- [Extras](##extras)
 - [Related Resources](##related-resources)
   - [Videos 📽️](###videos-️)
   - [Articles/Blogs 📖](###articlesblogs-)
   - [Sample Projects 🤖](###sample-projects-)
-- [Other Helpful Resources](##other-helpful-resources)
-  - [Videos 📽️](###videos-️-1)
-  - [Articles/Blogs 📖](###articlesblogs--1)
-  - [Sample Projects 🤖](###sample-projects--1)
 
 ## Screenshots
 
 ## Android
 
-<img src="screenshots/img1.png" width="250"/>  <img src="screenshots/img2.png" width="250"/> <img src="screenshots/img3.png" width="250"/> <img src="screenshots/img4.png" width="250"/>
+<img src="screenshots/android1.png" width="200"/>  <img src="screenshots/android2.png" width="200"/> <img src="screenshots/android3.png" width="200"/> <img src="screenshots/android4.png" width="200"/> <img src="screenshots/android5.png" width="200"/> <img src="screenshots/android6.png" width="200"/>
 
 ## iOS
 
-<img src="screenshots/img7.png" width="250"/> <img src="screenshots/img5.png" width="250"/>  <img src="screenshots/img6.png" width="250"/>
+<img src="screenshots/ios1.png" width="200"/>  <img src="screenshots/ios2.png" width="200"/> <img src="screenshots/ios3.png" width="200"/> <img src="screenshots/ios4.png" width="200"/> <img src="screenshots/ios5.png" width="200"/> <img src="screenshots/ios6.png" width="200"/>
 
 ## Desktop
 
-<img src="screenshots/img8.png" width="640"/> <img src="screenshots/img9.png" width="640"/>
+<img src="screenshots/desktop1.png" width="640"/> <img src="screenshots/desktop2.png" width="640"/>
 
-## Prerequisite
 
-// ToDo
+## Getting Started
 
-## Running
+### Prerequisite
 
-Set up the `local.properties` file in the project's root directory (if it doesn't already exist) by adding the following properties:
+- [JDK](https://www.oracle.com/java/technologies/downloads/?er=221886) - Required for Android development.
+- [Android Studio](https://developer.android.com/studio) - For Android development and project management.
+- [Xcode](https://apps.apple.com/us/app/xcode/id497799835) - For iOS development and project management.
+- [Kotlin Multiplatform Plugin](https://kotlinlang.org/docs/multiplatform-plugin-releases.html?_gl=1*130bj1*_gcl_au*MTk1MDYwOTc4MS4xNzIxNjMzNjAy*_ga*MTM4NzQwMTA3NS4xNjk3NDg5MzQ5*_ga_9J976DJZ68*MTcyMzExNTUwNy43Ni4xLjE3MjMxMTU1OTYuNDQuMC4w#release-details)- In Android Studio, select Settings/Preferences | Plugins, search Marketplace for Kotlin Multiplatform, and then install it.
 
+### Installation
+- Clone the repository from GitHub:
+```bash
+git clone https://github.com/VictorKabata/Notflix.git
+```
+
+To install the __android__ application:
+- Open the project in Android Studio and connect your android device/emulator.
+- Configure the TMDB API key in the `local.properties` file.
 ```properties
 api_key=<YOUR TMDB API KEY>
 ```
-
-Run with the following command:
-
+- Sync the Gradle project to download dependencies.
+- Run the gradle command below from Android Studio terminal to build and install the android application on the connected android device/emulator:
 ```bash
-./gradlew run
+./gradlew installDebug
 ```
+
+To install the __iOS__ application:
+- Open the __iOS__ project from XCode and connect your iOS device/emulator.
+- Run the project.
+
+To install the __desktop__ application:
+- Open the project in Android Studio and run the gradle command below to build and install the application on the desktop:
+```bash
+gradlew desktopRun
+```
+
+## Project Structure
+
+The application has two main modules:
+1. composeApp: This is the core module containing the shared Kotlin Multiplatform code for network, caching, and UI logic.
+  - __androidMain__: Contains Android-specific code, primarily serving as an entry point for the Android application. This directory includes the MainActivity class, application-level configuration, and Android-specific dependencies or initialization.
+
+  - __iOSMain__: Contains iOS-specific code, primarily serving as an entry point for the iOS application. This directory includes the ContentView class, application-level configuration, and iOS-specific initialization for Koin.
+
+  - __desktopMain__: Contains desktop-specific code, primarily serving as an entry point for the desktop application. This directory includes the main application class, window creation, and desktop-specific dependencies or initialization.
+  - __commonMain__: Contains the core business logic, data access, and UI components that are shared across all platforms.
+    - __domain__: This package houses the domain layer, which defines the business logic and entities of the application. It typically includes interfaces, data classes, and utils.
+    - __data__: This package houses the data layer, which is responsible for fetching and caching data. It might include repositories, data sources, and network clients.
+    - __ui__: This package houses the UI components that are shared across all platforms. These components can be implemented using Compose Multiplatform, allowing for a consistent user experience.
+    - __di__: Contains the dependency injection setup, managing the creation and provision of dependencies throughout the application.
+
+2. appiOS:  This module houses the iOS-specific app code, serving as the entry point for the iOS application, providing the necessary configuration and integration with the shared _composeApp_ module.
 
 ## Libraries
 
-### Shared
-
-- [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform) - Compose Multiplatform is a declarative framework for sharing UIs across multiple platforms with Kotlin based on Jetpack compose.
-- [Koin](https://insert-koin.io/docs/setup/v3.1) - Kotin dependency injection library with multiplatform support.
-- [Ktor](https://ktor.io/docs/http-client-multiplatform.html) - Provides multiplatform libraries required to make network calls to the REST API.
-- [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings) - This is a Kotlin library for Multiplatform apps, so that common code can persist key-value data.
-- [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library support for Kotlin coroutines with multiplatform support.
-- [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) - Provides sets of libraries for various serialization formats eg. JSON, protocol buffers, CBOR etc.
+- [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html) - The foundation of the project, enabling shared code across platforms.
+- [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform) - Enables building consistent UI components for Android, iOS, and desktop.
+- [KotlinX  Coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Manages asynchronous operations for efficient app performance.
+- [Datastore](https://developer.android.com/kotlin/multiplatform/datastore) - Provides a mechanism for storing and retrieving key value pairs like user preferences.
+- [Koin](https://insert-koin.io/) - A dependency injection framework for managing dependencies throughout the application.
+- [kotlinx.serialization]() - Enables serialization and deserialization of data objects.
+- [Ktor](https://ktor.io/docs/client-create-and-configure.html) - A multiplatform HTTP client for making network requests and handling responses.
+- [Napier](https://github.com/AAkira/Napier) - A logging library for providing detailed logs during development.
 - [kotlinx.datetime](https://github.com/Kotlin/kotlinx-datetime) - A multiplatform Kotlin library for working with date and time.
-- [Napier](https://github.com/AAkira/Napier) -  Logger library for Kotlin Multiplatform.
+- [Room](https://developer.android.com/kotlin/multiplatform/room) - Provides a persistence layer for storing data locally.
+- [Paging](https://github.com/cashapp/multiplatform-paging) - Enables efficient handling of large datasets for pagination in UI components.
 - [BuildKonfig](https://github.com/yshrsmz/BuildKonfig) - Supports embedding values from gradle file.
-- [Image Loader](https://github.com/qdsfdhvh/compose-imageloader) - Compose Image library for Kotlin Multiplatform
+- [Coil3](https://github.com/qdsfdhvh/compose-imageloader) - Compose Image library for Kotlin Multiplatform
+- [Jetpack Navigation](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-navigation-routing.html) - Provides navigation components for handling UI transitions within the app.
+- [KMP Palette](https://github.com/jordond/kmpalette) - Provides tools for working with colors on multiple platforms.
+- [Ktlint](https://github.com/pinterest/ktlint): For enforcing code style consistency.
+- [Detekt](https://github.com/detekt/detekt): For static code analysis and quality checks.
 
 ## Related Resources
 
-In this section I've included some resources ie. articles and GitHub repositories that i used to learn about kotlin multiplatform mobile:
+In this section I've included some resources ie. articles and GitHub repositories that i used to learn about kotlin multiplatform:
 
 ### Videos 📽️
 
@@ -107,17 +143,3 @@ In this section I've included some resources ie. articles and GitHub repositorie
 - [KaMPKit](https://github.com/touchlab/KaMPKit)
 - [People In Space](https://github.com/joreilly/PeopleInSpace) - Minimal Kotlin Multiplatform project with SwiftUI, Jetpack Compose, Compose for Wear OS, Compose for Desktop, Compose for Web, and Kotlin/JS + React clients along with Ktor backend.
 - [Poetree](https://github.com/MamboBryan/poetree) - Poetree is a minimalistic poetry app that helps people freely access art from a global community full of poetry lovers.
-
-## Other Helpful Resources
-
-In this section I've included resources that are not related to kotlin multiplatform mobile but were really helpful in learning other android components and tools:
-
-### Videos 📽️
-
-- ToDo
-
-### Articles/Blogs 📖
-
-- [Introduction to Github Actions for Android](https://blog.mindorks.com/github-actions-for-android) blog by [Mindorks](https://mindorks.com/) on how to set up GitHub actions for an android project.
-
-### Sample Projects 🤖

@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -63,7 +64,7 @@ fun DetailsScreen(
 
     val networkLoader = rememberNetworkLoader(httpClient = koinInject())
 
-    val movieDetailsState = viewModel.movieDetailsState.collectAsState().value
+    val movieDetailsState by viewModel.movieDetailsState.collectAsState()
 
     val scrollState = rememberScrollState()
     val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
@@ -107,8 +108,8 @@ fun DetailsScreen(
                     //region Movie Ratings
                     if (movieDetailsState.movieDetails?.voteAverage != null) {
                         MovieRatingSection(
-                            popularity = movieDetailsState.movieDetails.voteAverage.getPopularity(),
-                            voteAverage = movieDetailsState.movieDetails.voteAverage.getRating()
+                            popularity = movieDetailsState.movieDetails?.voteAverage?.getPopularity(),
+                            voteAverage = movieDetailsState.movieDetails?.voteAverage?.getRating()
                         )
                     }
                     //endregion
@@ -128,7 +129,7 @@ fun DetailsScreen(
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp),
                             text = movieDetailsState.movieDetails?.overview ?: "",
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurface,
                             fontSize = 15.sp,
                             textAlign = TextAlign.Start,
@@ -138,7 +139,7 @@ fun DetailsScreen(
                     //endregion
 
                     //region Movie Cast
-                    if (!movieDetailsState.movieCast.isNullOrEmpty()) {
+                    movieDetailsState.movieCast?.let { cast ->
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = stringResource(Res.string.cast),
@@ -150,11 +151,12 @@ fun DetailsScreen(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            items(items = movieDetailsState.movieCast) { item ->
+                            items(items = cast) { item ->
                                 ItemMovieCast(modifier = Modifier, actor = item)
                             }
                         }
                     }
+
                     //endregion
 
                     //region Similar Movies
