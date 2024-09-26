@@ -27,9 +27,12 @@ import com.kmpalette.loader.NetworkLoader
 import com.kmpalette.rememberDominantColorState
 import com.vickbt.composeApp.domain.models.MovieDetails
 import com.vickbt.composeApp.utils.loadImage
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.see_more
 import io.ktor.http.Url
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MovieCardDescription(
@@ -37,7 +40,7 @@ fun MovieCardDescription(
     movie: MovieDetails,
     networkLoader: NetworkLoader,
     maxLine: Int = 3,
-    overFlowText: String = "See more",
+    overFlowText: String = stringResource(Res.string.see_more),
     onItemClick: (MovieDetails) -> Unit
 ) {
     val dominantColorState = rememberDominantColorState(
