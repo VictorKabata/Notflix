@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.kmpalette.loader.NetworkLoader
 import com.kmpalette.loader.rememberNetworkLoader
 import com.kmpalette.rememberDominantColorState
 import com.vickbt.composeApp.domain.models.Movie
@@ -41,24 +42,28 @@ import com.vickbt.composeApp.utils.loadImage
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.unknown_movie
 import io.ktor.http.Url
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MovieCardPager(
     modifier: Modifier = Modifier,
     movie: Movie,
+    networkLoader:NetworkLoader= rememberNetworkLoader(),
     onItemClick: (Movie) -> Unit
 ) {
-    val networkLoader = rememberNetworkLoader()
     val dominantColorState = rememberDominantColorState(
         loader = networkLoader,
-        defaultColor = Color.Transparent,
-        defaultOnColor = Color.LightGray
+        defaultColor = Color.DarkGray,
+        defaultOnColor = Color.LightGray,
+        coroutineContext = Dispatchers.IO
     )
 
-    val imageUrl = Url(movie.backdropPath?.loadImage() ?: "")
-    LaunchedEffect(imageUrl) {
-        dominantColorState.updateFrom(imageUrl)
+    movie.backdropPath?.loadImage()?.let {
+        LaunchedEffect(it) {
+            dominantColorState.updateFrom(Url(it))
+        }
     }
 
     Card(modifier = modifier.clickable { onItemClick(movie) }) {

@@ -19,10 +19,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -33,6 +30,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.kmpalette.loader.NetworkLoader
+import com.kmpalette.loader.rememberNetworkLoader
+import com.kmpalette.rememberDominantColorState
 import com.vickbt.composeApp.domain.models.Movie
 import com.vickbt.composeApp.ui.components.ratingbar.RatingBar
 import com.vickbt.composeApp.ui.components.ratingbar.RatingBarStyle
@@ -43,16 +43,30 @@ import com.vickbt.composeApp.utils.getReleaseDate
 import com.vickbt.composeApp.utils.loadImage
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.unknown_movie
+import io.ktor.http.Url
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MovieCardLandscape(
     modifier: Modifier = Modifier,
     movie: Movie,
+    networkLoader: NetworkLoader = rememberNetworkLoader(),
     onClickItem: (Movie) -> Unit
 ) {
-    var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
-    var dominantSubTextColor by remember { mutableStateOf(dominantTextColor) }
+    val dominantColorState = rememberDominantColorState(
+        loader = networkLoader,
+        defaultColor = Color.DarkGray,
+        defaultOnColor = Color.LightGray,
+        coroutineContext = Dispatchers.IO
+    )
+
+    movie.backdropPath?.loadImage()?.let {
+        LaunchedEffect(it) {
+            dominantColorState.updateFrom(Url(it))
+        }
+    }
 
     Card(
         modifier = modifier.clickable { onClickItem(movie) },
@@ -80,7 +94,7 @@ fun MovieCardLandscape(
                         Brush.verticalGradient(
                             listOf(
                                 Color.Transparent,
-                                Color.DarkGray
+                                dominantColorState.color
                             )
                         )
                     )
@@ -103,7 +117,7 @@ fun MovieCardLandscape(
                     style = MaterialTheme.typography.titleMedium,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
-                    color = dominantTextColor
+                    color = dominantColorState.onColor
                 )
                 //endregion
 
@@ -131,7 +145,7 @@ fun MovieCardLandscape(
                                 .padding(horizontal = 4.dp)
                                 .width(1.dp)
                                 .height(13.dp),
-                            color = dominantSubTextColor
+                            color = dominantColorState.onColor
                         )
 
                         Text(
@@ -142,7 +156,7 @@ fun MovieCardLandscape(
                             style = MaterialTheme.typography.labelSmall,
                             overflow = TextOverflow.Ellipsis,
                             textAlign = TextAlign.Start,
-                            color = dominantSubTextColor
+                            color = dominantColorState.onColor
                         )
                     }
                 }

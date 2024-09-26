@@ -12,10 +12,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -26,19 +23,35 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.kmpalette.loader.NetworkLoader
+import com.kmpalette.rememberDominantColorState
 import com.vickbt.composeApp.domain.models.MovieDetails
 import com.vickbt.composeApp.utils.loadImage
+import io.ktor.http.Url
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 
 @Composable
 fun MovieCardDescription(
     modifier: Modifier = Modifier,
     movie: MovieDetails,
+    networkLoader: NetworkLoader,
     maxLine: Int = 3,
     overFlowText: String = "See more",
     onItemClick: (MovieDetails) -> Unit
 ) {
-    var dominantColor by remember { mutableStateOf(Color.DarkGray) }
-    var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
+    val dominantColorState = rememberDominantColorState(
+        loader = networkLoader,
+        defaultColor = Color.DarkGray,
+        defaultOnColor = Color.LightGray,
+        coroutineContext = Dispatchers.IO
+    )
+
+    movie.backdropPath?.loadImage()?.let {
+        LaunchedEffect(it) {
+            dominantColorState.updateFrom(Url(it))
+        }
+    }
 
     Card(modifier = modifier.clickable { onItemClick(movie) }) {
         Box {
@@ -62,7 +75,7 @@ fun MovieCardDescription(
                     .align(Alignment.BottomCenter)
                     .background(
                         Brush.verticalGradient(
-                            listOf(Color.Transparent, dominantColor)
+                            listOf(Color.Transparent, dominantColorState.color)
                         )
                     )
             )
@@ -82,18 +95,16 @@ fun MovieCardDescription(
                     style = MaterialTheme.typography.titleMedium,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
-                    color = dominantTextColor,
+                    color = dominantColorState.onColor,
                     lineHeight = 30.sp
                 )
 
-                movie.overview?.let {
-                    ExpandableText(
-                        modifier = Modifier.padding(bottom = 4.dp),
-                        text = it,
-                        overFlowText = overFlowText,
-                        minimizedMaxLines = maxLine
-                    )
-                }
+                ExpandableText(
+                    modifier = Modifier.padding(bottom = 4.dp),
+                    text = movie.overview,
+                    overFlowText = overFlowText,
+                    minimizedMaxLines = maxLine
+                )
             }
         }
     }
