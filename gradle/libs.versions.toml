@@ -30,6 +30,7 @@ ksp = "2.0.20-1.0.24"
 sqlite = "2.5.0-SNAPSHOT"
 room = "2.7.0-alpha08"
 paging = "3.3.0-alpha02-0.5.1"
+kmppalette = "3.1.0"
 
 #Android Versions
 androidxActivity = "1.8.2"
@@ -116,5 +117,5 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 [bundles]
 ktor = ["ktor-core", "ktor-contentNegotiation", "ktor-json", "ktor-logging"]
 coil = ["coil-compose-core", "coil-compose", "coil-ktor", "coil-multiplatform"]
-kmpPalette=["kmpPalette-core", "kmpPalette-network"]
+kmpPalette = ["kmpPalette-core", "kmpPalette-network"]
 paging = ["paging-common", "paging-compose"]
