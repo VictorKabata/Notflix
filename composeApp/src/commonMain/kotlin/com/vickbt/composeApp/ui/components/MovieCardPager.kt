@@ -50,7 +50,7 @@ import org.jetbrains.compose.resources.stringResource
 fun MovieCardPager(
     modifier: Modifier = Modifier,
     movie: Movie,
-    networkLoader:NetworkLoader= rememberNetworkLoader(),
+    networkLoader: NetworkLoader = rememberNetworkLoader(),
     onItemClick: (Movie) -> Unit
 ) {
     val dominantColorState = rememberDominantColorState(
