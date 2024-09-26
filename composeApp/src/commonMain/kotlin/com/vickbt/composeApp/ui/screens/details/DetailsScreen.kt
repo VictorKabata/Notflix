@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -63,7 +64,7 @@ fun DetailsScreen(
 
     val networkLoader = rememberNetworkLoader(httpClient = koinInject())
 
-    val movieDetailsState = viewModel.movieDetailsState.collectAsState().value
+    val movieDetailsState by viewModel.movieDetailsState.collectAsState()
 
     val scrollState = rememberScrollState()
     val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
@@ -128,7 +129,7 @@ fun DetailsScreen(
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp),
                             text = movieDetailsState.movieDetails?.overview ?: "",
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurface,
                             fontSize = 15.sp,
                             textAlign = TextAlign.Start,
