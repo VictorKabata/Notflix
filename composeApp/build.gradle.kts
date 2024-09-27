@@ -74,6 +74,8 @@ kotlin {
             implementation(libs.sqlite.bundled)
 
             implementation(libs.bundles.paging)
+
+            implementation(libs.bundles.kmpPalette)
         }
 
         commonTest.dependencies {

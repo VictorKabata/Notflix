@@ -50,6 +50,8 @@
 
     <string name="search_movie">Search Movie</string>
 
+    <string name="see_more">See More</string>
+
     <string-array name="themes">
         <item>Light theme</item>
         <item>Dark theme</item>

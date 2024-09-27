@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -27,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import app.cash.paging.compose.collectAsLazyPagingItems
+import com.kmpalette.loader.rememberNetworkLoader
 import com.vickbt.composeApp.ui.components.ItemMovieCast
 import com.vickbt.composeApp.ui.components.MovieCardPortrait
 import com.vickbt.composeApp.ui.components.MovieRatingSection
@@ -42,6 +44,7 @@ import com.vickbt.shared.resources.cast
 import com.vickbt.shared.resources.overview
 import com.vickbt.shared.resources.similar_movies
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -59,7 +62,9 @@ fun DetailsScreen(
         viewModel.isMovieFavorite(movieId = movieId)
     }
 
-    val movieDetailsState = viewModel.movieDetailsState.collectAsState().value
+    val networkLoader = rememberNetworkLoader(httpClient = koinInject())
+
+    val movieDetailsState by viewModel.movieDetailsState.collectAsState()
 
     val scrollState = rememberScrollState()
     val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
@@ -83,6 +88,7 @@ fun DetailsScreen(
                         modifier = Modifier.fillMaxWidth(),
                         collapsingScrollState = collapsingScrollState,
                         movieDetailsState = movieDetailsState,
+                        networkLoader = networkLoader,
                         onNavigationIconClick = { navigator.navigateUp() },
                         onShareIconClick = {},
                         onFavoriteIconClick = { movieDetails, isFavorite ->
@@ -102,8 +108,8 @@ fun DetailsScreen(
                     //region Movie Ratings
                     if (movieDetailsState.movieDetails?.voteAverage != null) {
                         MovieRatingSection(
-                            popularity = movieDetailsState.movieDetails.voteAverage.getPopularity(),
-                            voteAverage = movieDetailsState.movieDetails.voteAverage.getRating()
+                            popularity = movieDetailsState.movieDetails?.voteAverage?.getPopularity(),
+                            voteAverage = movieDetailsState.movieDetails?.voteAverage?.getRating()
                         )
                     }
                     //endregion
@@ -123,7 +129,7 @@ fun DetailsScreen(
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp),
                             text = movieDetailsState.movieDetails?.overview ?: "",
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurface,
                             fontSize = 15.sp,
                             textAlign = TextAlign.Start,
@@ -133,7 +139,7 @@ fun DetailsScreen(
                     //endregion
 
                     //region Movie Cast
-                    if (!movieDetailsState.movieCast.isNullOrEmpty()) {
+                    movieDetailsState.movieCast?.let { cast ->
                         Text(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = stringResource(Res.string.cast),
@@ -145,11 +151,12 @@ fun DetailsScreen(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            items(items = movieDetailsState.movieCast) { item ->
+                            items(items = cast) { item ->
                                 ItemMovieCast(modifier = Modifier, actor = item)
                             }
                         }
                     }
+
                     //endregion
 
                     //region Similar Movies

@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import app.cash.paging.compose.collectAsLazyPagingItems
+import com.kmpalette.loader.rememberNetworkLoader
 import com.vickbt.composeApp.ui.components.MovieCardLandscape
 import com.vickbt.composeApp.ui.components.MovieCardPager
 import com.vickbt.composeApp.ui.components.MovieCardPagerIndicator
@@ -41,6 +42,7 @@ import com.vickbt.shared.resources.popular_movies
 import com.vickbt.shared.resources.trending_movies
 import com.vickbt.shared.resources.upcoming_movies
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -55,7 +57,7 @@ fun HomeScreen(
 
     val homeUiState = viewModel.homeUiState.collectAsState().value
 
-    val movies = homeUiState.trendingMovies?.collectAsLazyPagingItems()
+    val networkLoader = rememberNetworkLoader(httpClient = koinInject())
 
     Scaffold(
         modifier = Modifier
@@ -99,6 +101,7 @@ fun HomeScreen(
                         ) { currentPage ->
                             MovieCardPager(
                                 modifier = Modifier.fillMaxWidth().height(280.dp),
+                                networkLoader = networkLoader,
                                 movie = nowPlayingMovies[currentPage]
                             ) { movie ->
                                 navigator.navigate("/details/${movie.id}")
@@ -170,6 +173,7 @@ fun HomeScreen(
                                             .width(300.dp)
                                             .height(245.dp),
                                         movie = it,
+                                        networkLoader = networkLoader,
                                         onClickItem = { movie ->
                                             navigator.navigate("/details/${movie.id}")
                                         }

@@ -18,10 +18,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -33,6 +30,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.kmpalette.loader.NetworkLoader
+import com.kmpalette.loader.rememberNetworkLoader
+import com.kmpalette.rememberDominantColorState
 import com.vickbt.composeApp.domain.models.Movie
 import com.vickbt.composeApp.ui.components.ratingbar.RatingBar
 import com.vickbt.composeApp.ui.components.ratingbar.RatingBarStyle
@@ -41,16 +41,30 @@ import com.vickbt.composeApp.utils.getRating
 import com.vickbt.composeApp.utils.loadImage
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.unknown_movie
+import io.ktor.http.Url
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MovieCardPager(
     modifier: Modifier = Modifier,
     movie: Movie,
+    networkLoader: NetworkLoader = rememberNetworkLoader(),
     onItemClick: (Movie) -> Unit
 ) {
-    var dominantColor by remember { mutableStateOf(Color.DarkGray) }
-    var dominantTextColor by remember { mutableStateOf(Color.LightGray) }
+    val dominantColorState = rememberDominantColorState(
+        loader = networkLoader,
+        defaultColor = Color.DarkGray,
+        defaultOnColor = Color.LightGray,
+        coroutineContext = Dispatchers.IO
+    )
+
+    movie.backdropPath?.loadImage()?.let {
+        LaunchedEffect(it) {
+            dominantColorState.updateFrom(Url(it))
+        }
+    }
 
     Card(modifier = modifier.clickable { onItemClick(movie) }) {
         Box {
@@ -74,7 +88,7 @@ fun MovieCardPager(
                     .align(Alignment.BottomCenter)
                     .background(
                         Brush.verticalGradient(
-                            listOf(Color.Transparent, dominantColor)
+                            listOf(Color.Transparent, dominantColorState.color)
                         )
                     )
             )
@@ -95,7 +109,7 @@ fun MovieCardPager(
                     style = MaterialTheme.typography.titleMedium,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
-                    color = dominantTextColor,
+                    color = dominantColorState.onColor,
                     lineHeight = 30.sp
                 )
 
