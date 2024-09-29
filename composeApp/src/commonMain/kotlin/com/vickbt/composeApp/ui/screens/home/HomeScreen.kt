@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -94,13 +95,14 @@ fun HomeScreen(
                             rememberPagerState(pageCount = { nowPlayingMovies.size })
 
                         HorizontalPager(
-                            modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
+                            modifier = Modifier.fillMaxWidth().height(280.dp)
+                                .padding(vertical = 12.dp),
                             state = pagerState,
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             pageSpacing = 8.dp
                         ) { currentPage ->
                             MovieCardPager(
-                                modifier = Modifier.fillMaxWidth().height(280.dp),
+                                modifier = Modifier.fillMaxWidth().fillMaxHeight(),
                                 networkLoader = networkLoader,
                                 movie = nowPlayingMovies[currentPage]
                             ) { movie ->
@@ -132,13 +134,14 @@ fun HomeScreen(
                         LazyRow(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .wrapContentHeight(),
+                                .height(250.dp),
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
                             items(trendingMovies.itemCount) { index ->
                                 trendingMovies[index]?.let {
                                     MovieCardPortraitCompact(
+                                        modifier = Modifier.fillMaxHeight(),
                                         movie = it,
                                         onItemClick = { movie ->
                                             navigator.navigate("/details/${movie.id}")
@@ -162,16 +165,16 @@ fun HomeScreen(
                         )
 
                         LazyRow(
+                            modifier = Modifier.height(245.dp),
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(14.dp),
-                            modifier = Modifier.wrapContentHeight()
                         ) {
                             items(upcomingMovies.itemCount) { index ->
                                 upcomingMovies[index]?.let {
                                     MovieCardLandscape(
                                         modifier = Modifier
                                             .width(300.dp)
-                                            .height(245.dp),
+                                            .fillMaxHeight(),
                                         movie = it,
                                         networkLoader = networkLoader,
                                         onClickItem = { movie ->

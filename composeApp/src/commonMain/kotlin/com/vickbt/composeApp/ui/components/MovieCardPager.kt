@@ -30,6 +30,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
+import coil3.request.CachePolicy
+import coil3.request.ImageRequest
 import com.kmpalette.loader.NetworkLoader
 import com.kmpalette.loader.rememberNetworkLoader
 import com.kmpalette.rememberDominantColorState
@@ -40,10 +43,12 @@ import com.vickbt.composeApp.ui.components.ratingbar.StepSize
 import com.vickbt.composeApp.utils.getRating
 import com.vickbt.composeApp.utils.loadImage
 import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.ic_theatre
 import com.vickbt.shared.resources.unknown_movie
 import io.ktor.http.Url
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -60,6 +65,13 @@ fun MovieCardPager(
         coroutineContext = Dispatchers.IO
     )
 
+    val imageRequest = ImageRequest.Builder(LocalPlatformContext.current)
+        .data(movie.backdropPath?.loadImage())
+        .dispatcher(Dispatchers.IO)
+        .diskCachePolicy(CachePolicy.ENABLED)
+        .memoryCachePolicy(CachePolicy.ENABLED)
+        .build()
+
     movie.backdropPath?.loadImage()?.let {
         LaunchedEffect(it) {
             dominantColorState.updateFrom(Url(it))
@@ -73,10 +85,11 @@ fun MovieCardPager(
                 modifier = Modifier
                     .fillMaxSize()
                     .align(Alignment.Center),
-                model = movie.backdropPath?.loadImage(),
+                model = imageRequest,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
+                error = painterResource(Res.drawable.ic_theatre)
             )
             //endregion
 
