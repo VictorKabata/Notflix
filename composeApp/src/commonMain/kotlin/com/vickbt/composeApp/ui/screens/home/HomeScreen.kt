@@ -165,16 +165,16 @@ fun HomeScreen(
                         )
 
                         LazyRow(
+                            modifier = Modifier.height(245.dp),
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(14.dp),
-                            modifier = Modifier.wrapContentHeight()
                         ) {
                             items(upcomingMovies.itemCount) { index ->
                                 upcomingMovies[index]?.let {
                                     MovieCardLandscape(
                                         modifier = Modifier
                                             .width(300.dp)
-                                            .height(245.dp),
+                                            .fillMaxHeight(),
                                         movie = it,
                                         networkLoader = networkLoader,
                                         onClickItem = { movie ->

@@ -42,10 +42,12 @@ import com.vickbt.composeApp.utils.getRating
 import com.vickbt.composeApp.utils.getReleaseDate
 import com.vickbt.composeApp.utils.loadImage
 import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.ic_theatre
 import com.vickbt.shared.resources.unknown_movie
 import io.ktor.http.Url
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -82,6 +84,7 @@ fun MovieCardLandscape(
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
+                error = painterResource(Res.drawable.ic_theatre)
             )
             //endregion
 
