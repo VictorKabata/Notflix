@@ -134,14 +134,14 @@ fun HomeScreen(
                         LazyRow(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .wrapContentHeight(),
+                                .height(250.dp),
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
                             items(trendingMovies.itemCount) { index ->
                                 trendingMovies[index]?.let {
                                     MovieCardPortraitCompact(
-                                        modifier = Modifier.height(230.dp),
+                                        modifier = Modifier.fillMaxHeight(),
                                         movie = it,
                                         onItemClick = { movie ->
                                             navigator.navigate("/details/${movie.id}")

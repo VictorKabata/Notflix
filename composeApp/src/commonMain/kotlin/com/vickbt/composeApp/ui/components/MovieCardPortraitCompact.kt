@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -25,7 +26,9 @@ import coil3.compose.AsyncImage
 import com.vickbt.composeApp.domain.models.Movie
 import com.vickbt.composeApp.utils.loadImage
 import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.ic_theatre
 import com.vickbt.shared.resources.unknown_movie
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -35,13 +38,13 @@ fun MovieCardPortraitCompact(
     onItemClick: (Movie) -> Unit
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier.width(150.dp),
         verticalArrangement = Arrangement.spacedBy(3.dp)
     ) {
         Card(
             modifier = Modifier
-                .width(150.dp)
-                .fillMaxHeight()
+                .fillMaxWidth()
+                .height(220.dp)
                 .clickable { onItemClick(movie) },
             elevation = CardDefaults.cardElevation(8.dp),
             shape = RoundedCornerShape(4.dp)
@@ -49,17 +52,17 @@ fun MovieCardPortraitCompact(
             AsyncImage(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(220.dp)
-                    .sizeIn(minHeight = 30.dp),
+                    .fillMaxHeight(),
                 model = movie.posterPath?.loadImage(),
                 contentDescription = "Trending movie poster",
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
+                error = painterResource(Res.drawable.ic_theatre)
             )
         }
 
         Text(
-            modifier = Modifier.width(145.dp),
+            modifier=Modifier.wrapContentWidth(),
             text = movie.title ?: stringResource(Res.string.unknown_movie),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface,
