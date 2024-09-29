@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -94,13 +95,14 @@ fun HomeScreen(
                             rememberPagerState(pageCount = { nowPlayingMovies.size })
 
                         HorizontalPager(
-                            modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
+                            modifier = Modifier.fillMaxWidth().height(280.dp)
+                                .padding(vertical = 12.dp),
                             state = pagerState,
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             pageSpacing = 8.dp
                         ) { currentPage ->
                             MovieCardPager(
-                                modifier = Modifier.fillMaxWidth().height(280.dp),
+                                modifier = Modifier.fillMaxWidth().fillMaxHeight(),
                                 networkLoader = networkLoader,
                                 movie = nowPlayingMovies[currentPage]
                             ) { movie ->
@@ -139,6 +141,7 @@ fun HomeScreen(
                             items(trendingMovies.itemCount) { index ->
                                 trendingMovies[index]?.let {
                                     MovieCardPortraitCompact(
+                                        modifier = Modifier.height(230.dp),
                                         movie = it,
                                         onItemClick = { movie ->
                                             navigator.navigate("/details/${movie.id}")
