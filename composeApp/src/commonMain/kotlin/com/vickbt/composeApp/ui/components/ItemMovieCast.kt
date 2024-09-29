@@ -20,6 +20,9 @@ import coil3.compose.AsyncImage
 import com.vickbt.composeApp.domain.models.Actor
 import com.vickbt.composeApp.ui.theme.TextSecondary
 import com.vickbt.composeApp.utils.loadImage
+import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.ic_person
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
@@ -33,6 +36,7 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
             model = actor.profilePath?.loadImage(),
             contentDescription = "Cast",
             contentScale = ContentScale.Crop,
+            error = painterResource(Res.drawable.ic_person)
         )
 
         Text(
