@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -62,7 +61,7 @@ fun MovieCardPortraitCompact(
         }
 
         Text(
-            modifier=Modifier.wrapContentWidth(),
+            modifier = Modifier.wrapContentWidth(),
             text = movie.title ?: stringResource(Res.string.unknown_movie),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface,
