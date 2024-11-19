@@ -29,12 +29,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.kmpalette.loader.rememberNetworkLoader
+import com.vickbt.composeApp.ui.components.FilterHome
 import com.vickbt.composeApp.ui.components.MovieCardLandscape
 import com.vickbt.composeApp.ui.components.MovieCardPager
 import com.vickbt.composeApp.ui.components.MovieCardPagerIndicator
 import com.vickbt.composeApp.ui.components.MovieCardPortraitCompact
 import com.vickbt.composeApp.ui.components.SectionSeparator
-import com.vickbt.composeApp.ui.components.appbars.AppBar
 import com.vickbt.composeApp.ui.theme.DarkPrimaryColor
 import com.vickbt.composeApp.utils.WindowSize
 import com.vickbt.shared.resources.Res
@@ -63,7 +63,7 @@ fun HomeScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(mainPaddingValues),
-        topBar = { AppBar("Home") }
+        topBar = { FilterHome(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) }
     ) { paddingValues ->
 
         // region Home section
