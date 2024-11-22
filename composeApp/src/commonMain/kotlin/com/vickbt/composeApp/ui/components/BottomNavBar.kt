@@ -24,7 +24,7 @@ fun BottomNavBar(
 ) {
     NavigationBar(
         modifier = modifier.fillMaxWidth(),
-        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = .85f)
+        containerColor = MaterialTheme.colorScheme.background.copy(alpha = .85f)
     ) {
         bottomNavItems.iterator().forEach { item ->
 
@@ -49,7 +49,7 @@ fun BottomNavBar(
                 },
                 alwaysShowLabel = true,
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.onSurface,
+                    selectedIconColor = MaterialTheme.colorScheme.onBackground,
                     unselectedIconColor = Gray,
                     indicatorColor = Color.Transparent
                 ),

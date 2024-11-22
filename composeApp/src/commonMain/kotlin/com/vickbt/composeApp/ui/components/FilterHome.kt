@@ -55,17 +55,17 @@ fun FilterHome(
     ) {
         AnimatedVisibility(visible = selectedShowType != null, enter = fadeIn(), exit = fadeOut()) {
             FloatingActionButton(
-                modifier = Modifier.border(1.dp, MaterialTheme.colorScheme.onSurface, CircleShape)
+                modifier = Modifier.border(1.dp, MaterialTheme.colorScheme.onBackground, CircleShape)
                     .size(32.dp),
                 shape = CircleShape,
                 containerColor = Color.Transparent,
-                contentColor = MaterialTheme.colorScheme.onSurface,
+                contentColor = MaterialTheme.colorScheme.onBackground,
                 onClick = { selectedShowType = null }) {
                 Icon(
                     modifier = Modifier.size(18.dp),
                     imageVector = Icons.Rounded.Close,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurface
+                    tint = MaterialTheme.colorScheme.onBackground
                 )
             }
         }
@@ -83,12 +83,12 @@ fun FilterHome(
                         style = MaterialTheme.typography.labelMedium,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        color = MaterialTheme.colorScheme.onSurface,
+                        color = MaterialTheme.colorScheme.onBackground,
                         textAlign = TextAlign.Center
                     )
                 },
                 shape = RoundedCornerShape(16.dp),
-                border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.onSurface)
+                border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.onBackground)
             )
         }
 
@@ -105,12 +105,12 @@ fun FilterHome(
                         style = MaterialTheme.typography.labelMedium,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        color = MaterialTheme.colorScheme.onSurface,
+                        color = MaterialTheme.colorScheme.onBackground,
                         textAlign = TextAlign.Center
                     )
                 },
                 shape = RoundedCornerShape(16.dp),
-                border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.onSurface)
+                border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.onBackground)
             )
         }
 
@@ -123,7 +123,7 @@ fun FilterHome(
                     style = MaterialTheme.typography.labelMedium,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    color = MaterialTheme.colorScheme.onSurface,
+                    color = MaterialTheme.colorScheme.onBackground,
                     textAlign = TextAlign.Center
                 )
             },
@@ -132,10 +132,10 @@ fun FilterHome(
                 Icon(
                     imageVector = Icons.Rounded.KeyboardArrowDown,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurface
+                    tint = MaterialTheme.colorScheme.onBackground
                 )
             },
-            border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.onSurface)
+            border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.onBackground)
         )
     }
 }

@@ -44,7 +44,7 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
             overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Center,
             maxLines = 1,
-            color = MaterialTheme.colorScheme.onSurface
+            color = MaterialTheme.colorScheme.onBackground
         )
 
         Text(

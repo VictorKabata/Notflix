@@ -45,13 +45,13 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
                 modifier = Modifier,
                 text = if (popularity.isNullOrEmpty()) "N/A" else popularity,
                 style = MaterialTheme.typography.titleLarge.copy(fontSize = 42.sp),
-                color = MaterialTheme.colorScheme.onSurface,
+                color = MaterialTheme.colorScheme.onBackground,
             )
 
             Text(
                 text = stringResource(Res.string.popularity),
                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
-                color = MaterialTheme.colorScheme.onSurface,
+                color = MaterialTheme.colorScheme.onBackground,
             )
         }
         //endregion
@@ -60,7 +60,7 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
             modifier = Modifier
                 .fillMaxHeight()
                 .width(2.dp),
-            color = MaterialTheme.colorScheme.onSurface
+            color = MaterialTheme.colorScheme.onBackground
         )
 
         //region Rating
@@ -80,7 +80,7 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
                 modifier = Modifier,
                 text = if (voteAverage.isNullOrEmpty()) "N/A" else "$voteAverage/5.0",
                 style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp),
-                color = MaterialTheme.colorScheme.onSurface,
+                color = MaterialTheme.colorScheme.onBackground,
             )
         }
         //endregion
