@@ -19,7 +19,7 @@ fun AppBar(title: String) {
         colors = TopAppBarDefaults.mediumTopAppBarColors(MaterialTheme.colorScheme.surface),
         title = {
             Text(
-                modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp),
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 text = title,
                 color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.titleMedium,

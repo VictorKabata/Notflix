@@ -31,8 +31,7 @@ fun ExpandableText(
     overFlowText: String,
     modifier: Modifier = Modifier,
     minimizedMaxLines: Int = 1,
-    fontSize: TextUnit = 14.sp,
-    style: TextStyle = MaterialTheme.typography.bodySmall,
+    style: TextStyle = MaterialTheme.typography.bodyLarge,
     textAlign: TextAlign = TextAlign.Start,
     color: Color = Color.LightGray.copy(alpha = .85f),
 ) {
@@ -71,7 +70,6 @@ fun ExpandableText(
             maxLines = if (expanded) Int.MAX_VALUE else minimizedMaxLines,
             overflow = TextOverflow.Ellipsis,
             onTextLayout = { textLayoutResultState.value = it },
-            fontSize = fontSize,
             style = style,
             textAlign = textAlign,
             color = color
@@ -97,7 +95,6 @@ fun ExpandableText(
                         cutText = null
                     }
                     .alpha(if (seeMoreOffset != null) 1f else 0f),
-                fontSize = fontSize,
                 style = style,
                 color = Color.LightGray.copy(alpha = .9f)
             )

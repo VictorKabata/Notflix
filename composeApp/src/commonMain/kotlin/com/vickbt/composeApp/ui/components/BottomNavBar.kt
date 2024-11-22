@@ -43,7 +43,7 @@ fun BottomNavBar(
                 label = {
                     Text(
                         text = stringResource(item.title),
-                        style = MaterialTheme.typography.labelSmall
+                        style = MaterialTheme.typography.labelMedium
                     )
                 },
                 alwaysShowLabel = true,

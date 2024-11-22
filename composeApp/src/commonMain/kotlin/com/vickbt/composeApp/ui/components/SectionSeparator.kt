@@ -25,7 +25,7 @@ fun SectionSeparator(
             modifier = Modifier,
             text = sectionTitle,
             color = MaterialTheme.colorScheme.onSurface,
-            style = MaterialTheme.typography.titleLarge,
+            style = MaterialTheme.typography.headlineMedium,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )

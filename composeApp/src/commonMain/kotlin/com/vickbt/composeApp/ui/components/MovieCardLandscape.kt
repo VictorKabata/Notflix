@@ -112,9 +112,8 @@ fun MovieCardLandscape(
                 Text(
                     modifier = Modifier,
                     text = movie.title ?: stringResource(Res.string.unknown_movie),
-                    fontSize = 18.sp,
                     maxLines = 2,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.headlineLarge,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
                     color = dominantColorState.onColor
@@ -151,9 +150,8 @@ fun MovieCardLandscape(
                         Text(
                             modifier = Modifier,
                             text = movie.releaseDate.getReleaseDate().capitalizeEachWord(),
-                            fontSize = 14.sp,
                             maxLines = 1,
-                            style = MaterialTheme.typography.labelSmall,
+                            style = MaterialTheme.typography.bodyMedium,
                             overflow = TextOverflow.Ellipsis,
                             textAlign = TextAlign.Start,
                             color = dominantColorState.onColor
