@@ -6,6 +6,10 @@
     <string name="title_settings">Settings</string>
     <string name="title_details">Details</string>
 
+    <string name="movies">Movies</string>
+    <string name="tv_shows">TV Shows</string>
+    <string name="categories">Categories</string>
+
     <string name="trending_movies">Trending Movies</string>
     <string name="popular_movies">Popular Movies</string>
     <string name="upcoming_movies">Upcoming Movies</string>

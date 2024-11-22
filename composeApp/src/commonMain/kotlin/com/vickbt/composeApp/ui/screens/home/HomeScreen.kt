@@ -36,6 +36,7 @@ import com.vickbt.composeApp.ui.components.MovieCardPager
 import com.vickbt.composeApp.ui.components.MovieCardPagerIndicator
 import com.vickbt.composeApp.ui.components.MovieCardPortraitCompact
 import com.vickbt.composeApp.ui.components.SectionSeparator
+import com.vickbt.composeApp.ui.components.appbars.AppBar
 import com.vickbt.composeApp.ui.theme.DarkPrimaryColor
 import com.vickbt.composeApp.utils.WindowSize
 import com.vickbt.shared.resources.Res
@@ -64,7 +65,7 @@ fun HomeScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(mainPaddingValues),
-        topBar = { FilterHome(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) }
+        topBar = { AppBar(title = "") }
     ) { paddingValues ->
 
         // region Home section
@@ -90,6 +91,10 @@ fun HomeScreen(
                         .align(Alignment.Center),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+                    //region Home Filters
+                    FilterHome(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp))
+                    //endregion
+
                     //region Now Playing Movies
                     homeUiState.nowPlayingMovies?.let { nowPlayingMovies ->
                         val pagerState =
