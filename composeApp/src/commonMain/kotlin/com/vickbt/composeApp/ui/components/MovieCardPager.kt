@@ -104,13 +104,11 @@ fun MovieCardPager(
                 Text(
                     modifier = Modifier,
                     text = movie.title ?: stringResource(Res.string.unknown_movie),
-                    fontSize = 28.sp,
                     maxLines = 2,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.headlineLarge.copy(fontSize = 26.sp),
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
                     color = dominantColorState.onColor,
-                    lineHeight = 30.sp
                 )
 
                 movie.voteAverage?.let {

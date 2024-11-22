@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -32,6 +33,7 @@ import com.kmpalette.loader.rememberNetworkLoader
 import com.vickbt.composeApp.ui.components.ItemMovieCast
 import com.vickbt.composeApp.ui.components.MovieCardPortrait
 import com.vickbt.composeApp.ui.components.MovieRatingSection
+import com.vickbt.composeApp.ui.components.SectionSeparator
 import com.vickbt.composeApp.ui.components.appbars.DetailsAppBar
 import com.vickbt.composeApp.ui.components.collapsingToolbar.CollapsingToolbarScaffold
 import com.vickbt.composeApp.ui.components.collapsingToolbar.ScrollStrategy
@@ -64,19 +66,20 @@ fun DetailsScreen(
 
     val networkLoader = rememberNetworkLoader(httpClient = koinInject())
 
-    val movieDetailsState by viewModel.movieDetailsState.collectAsState()
+    val movieDetailsUiState by viewModel.movieDetailsState.collectAsState()
 
     val scrollState = rememberScrollState()
     val collapsingScrollState = rememberCollapsingToolbarScaffoldState()
 
     Box(modifier = Modifier.fillMaxSize()) {
-        if (movieDetailsState.isLoading && movieDetailsState.movieDetails == null) {
+        if (movieDetailsUiState.isLoading && movieDetailsUiState.movieDetails == null) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-        } else if (!movieDetailsState.error.isNullOrEmpty()) {
+        } else if (!movieDetailsUiState.error.isNullOrEmpty()) {
             Text(
                 modifier = Modifier.align(Alignment.Center),
-                text = "Error:\n${movieDetailsState.error}",
-                textAlign = TextAlign.Center
+                text = "Error:\n${movieDetailsUiState.error}",
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.headlineMedium
             )
         } else {
             CollapsingToolbarScaffold(
@@ -87,7 +90,7 @@ fun DetailsScreen(
                     DetailsAppBar(
                         modifier = Modifier.fillMaxWidth(),
                         collapsingScrollState = collapsingScrollState,
-                        movieDetailsState = movieDetailsState,
+                        movieDetailsState = movieDetailsUiState,
                         networkLoader = networkLoader,
                         onNavigationIconClick = { navigator.navigateUp() },
                         onShareIconClick = {},
@@ -106,30 +109,29 @@ fun DetailsScreen(
                     verticalArrangement = Arrangement.spacedBy(14.dp)
                 ) {
                     //region Movie Ratings
-                    if (movieDetailsState.movieDetails?.voteAverage != null) {
+                    if (movieDetailsUiState.movieDetails?.voteAverage != null) {
                         MovieRatingSection(
-                            popularity = movieDetailsState.movieDetails?.voteAverage?.getPopularity(),
-                            voteAverage = movieDetailsState.movieDetails?.voteAverage?.getRating()
+                            popularity = movieDetailsUiState.movieDetails?.voteAverage?.getPopularity(),
+                            voteAverage = movieDetailsUiState.movieDetails?.voteAverage?.getRating()
                         )
                     }
                     //endregion
 
                     //region Movie Overview
-                    if (!movieDetailsState.movieDetails?.overview.isNullOrEmpty()) {
-                        Text(
-                            modifier = Modifier.padding(horizontal = 16.dp),
-                            text = stringResource(Res.string.overview),
-                            style = MaterialTheme.typography.titleMedium,
-                            fontSize = 20.sp,
-                            color = MaterialTheme.colorScheme.onSurface,
+                    if (!movieDetailsUiState.movieDetails?.overview.isNullOrEmpty()) {
+                        SectionSeparator(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentHeight(),
+                            sectionTitle = stringResource(Res.string.overview)
                         )
 
                         Text(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp),
-                            text = movieDetailsState.movieDetails?.overview ?: "",
-                            style = MaterialTheme.typography.bodySmall,
+                            text = movieDetailsUiState.movieDetails?.overview ?: "",
+                            style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onSurface,
                             fontSize = 15.sp,
                             textAlign = TextAlign.Start,
@@ -139,12 +141,12 @@ fun DetailsScreen(
                     //endregion
 
                     //region Movie Cast
-                    movieDetailsState.movieCast?.let { cast ->
-                        Text(
-                            modifier = Modifier.padding(horizontal = 16.dp),
-                            text = stringResource(Res.string.cast),
-                            style = MaterialTheme.typography.titleMedium,
-                            fontSize = 20.sp
+                    movieDetailsUiState.movieCast?.let { cast ->
+                        SectionSeparator(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentHeight(),
+                            sectionTitle = stringResource(Res.string.cast)
                         )
 
                         LazyRow(
@@ -160,14 +162,13 @@ fun DetailsScreen(
                     //endregion
 
                     //region Similar Movies
-                    movieDetailsState.similarMovies?.let {
+                    movieDetailsUiState.similarMovies?.let {
                         val similarMovies = it.collectAsLazyPagingItems()
-                        Text(
-                            modifier = Modifier.padding(horizontal = 16.dp),
-                            text = stringResource(Res.string.similar_movies),
-                            style = MaterialTheme.typography.titleMedium,
-                            fontSize = 20.sp,
-                            color = MaterialTheme.colorScheme.onSurface
+                        SectionSeparator(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentHeight(),
+                            sectionTitle = stringResource(Res.string.similar_movies)
                         )
 
                         LazyRow(

@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -38,7 +39,7 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
         Text(
             modifier = Modifier.width(78.dp),
             text = actor.name ?: "Unknown actor",
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.headlineSmall,
             fontSize = 14.sp,
             overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Center,
@@ -49,7 +50,7 @@ fun ItemMovieCast(modifier: Modifier = Modifier, actor: Actor) {
         Text(
             modifier = Modifier.width(77.dp),
             text = actor.character ?: "Unknown character",
-            style = MaterialTheme.typography.labelSmall,
+            style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Medium),
             fontSize = 12.sp,
             color = TextSecondary,
             overflow = TextOverflow.Ellipsis,

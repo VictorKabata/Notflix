@@ -61,7 +61,7 @@ fun MovieCardPortraitCompact(
         Text(
             modifier = Modifier.width(145.dp),
             text = movie.title ?: stringResource(Res.string.unknown_movie),
-            style = MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onSurface,
             fontSize = 14.sp,
             maxLines = 1,

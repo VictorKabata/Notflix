@@ -95,7 +95,7 @@ fun MovieCardDescription(
                     text = movie.title,
                     fontSize = 24.sp,
                     maxLines = 1,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.headlineLarge,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
                     color = dominantColorState.onColor,
