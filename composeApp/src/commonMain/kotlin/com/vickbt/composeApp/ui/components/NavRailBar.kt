@@ -46,7 +46,7 @@ fun NavRailBar(
                 label = {
                     Text(
                         text = stringResource(item.title),
-                        style = MaterialTheme.typography.labelSmall
+                        style = MaterialTheme.typography.labelMedium
                     )
                 },
                 colors = NavigationRailItemDefaults.colors(

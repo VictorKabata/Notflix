@@ -41,6 +41,7 @@ import app.cash.paging.compose.collectAsLazyPagingItems
 import com.vickbt.composeApp.ui.components.MovieCardPortrait
 import com.vickbt.composeApp.utils.WindowSize
 import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.back
 import com.vickbt.shared.resources.title_search
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -69,7 +70,7 @@ fun SearchScreen(
             Text(
                 text = stringResource(Res.string.title_search),
                 fontSize = 18.sp,
-                style = MaterialTheme.typography.labelMedium,
+                style = MaterialTheme.typography.titleMedium,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Start
@@ -83,7 +84,7 @@ fun SearchScreen(
                 }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                        contentDescription = "Go back"
+                        contentDescription = stringResource(Res.string.back)
                     )
                 }
             } else {
@@ -116,7 +117,8 @@ fun SearchScreen(
                 Text(
                     modifier = Modifier.align(Alignment.Center),
                     text = "Error:\n${searchUiState.error}",
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.headlineMedium
                 )
             } else {
                 searchUiState.movieResults?.let { movieResults ->

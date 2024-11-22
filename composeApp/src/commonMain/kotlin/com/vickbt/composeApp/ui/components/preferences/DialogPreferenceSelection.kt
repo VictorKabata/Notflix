@@ -74,9 +74,8 @@ fun DialogPreferenceSelection(
                         Text(
                             modifier = Modifier.clickable { onNegativeClick() },
                             text = "Cancel".toUpperCase(Locale.current),
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = MaterialTheme.typography.headlineMedium.copy(fontSize = 16.sp),
                             color = MaterialTheme.colorScheme.primary,
-                            fontSize = 16.sp,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             textAlign = TextAlign.Center
