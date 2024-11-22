@@ -49,14 +49,14 @@ fun FavoritesScreen(
         Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
             if (favoritesUiState.isLoading) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-            }else if (!favoritesUiState.error.isNullOrEmpty()) {
+            } else if (!favoritesUiState.error.isNullOrEmpty()) {
                 Text(
                     modifier = Modifier.align(Alignment.Center),
                     text = "Error:\n${favoritesUiState.error}",
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.headlineMedium
                 )
-            }else{
+            } else {
                 LazyColumn(
                     modifier = Modifier.align(Alignment.Center).fillMaxSize()
                         .padding(horizontal = 16.dp)

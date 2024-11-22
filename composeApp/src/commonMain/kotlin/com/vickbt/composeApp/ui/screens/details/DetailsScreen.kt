@@ -45,7 +45,6 @@ import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.cast
 import com.vickbt.shared.resources.overview
 import com.vickbt.shared.resources.similar_movies
-import com.vickbt.shared.resources.trending_movies
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel

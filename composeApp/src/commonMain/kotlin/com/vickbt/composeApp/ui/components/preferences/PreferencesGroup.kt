@@ -24,7 +24,7 @@ fun PreferencesGroup(
     isLast: Boolean = false,
     content: @Composable ColumnScope.() -> Unit
 ) {
-    Column(modifier=modifier) {
+    Column(modifier = modifier) {
         if (!title.isNullOrEmpty()) {
             Text(
                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
