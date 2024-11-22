@@ -41,14 +41,14 @@ internal fun Typography(): Typography {
         ),
         headlineMedium = TextStyle(
             fontFamily = nunito,
-            fontWeight = FontWeight.Medium,
-            fontSize = 28.sp,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 24.sp,
             lineHeight = 36.sp
         ),
         headlineSmall = TextStyle(
             fontFamily = nunito,
             fontWeight = FontWeight.Medium,
-            fontSize = 24.sp,
+            fontSize = 18.sp,
             lineHeight = 32.sp
         ),
         titleLarge = TextStyle(
@@ -59,7 +59,7 @@ internal fun Typography(): Typography {
         ),
         titleMedium = TextStyle(
             fontFamily = nunito,
-            fontWeight = FontWeight.Medium,
+            fontWeight = FontWeight.Bold,
             fontSize = 16.sp,
             lineHeight = 24.sp
         ),
