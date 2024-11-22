@@ -32,9 +32,8 @@ fun ItemPreferenceOption(
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = optionText,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp),
             color = MaterialTheme.colorScheme.onSurface,
-            fontSize = 18.sp,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Start
