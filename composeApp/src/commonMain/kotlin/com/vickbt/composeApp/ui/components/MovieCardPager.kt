@@ -49,9 +49,12 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MovieCardPager(
     modifier: Modifier = Modifier,
-    movie: Movie,
+    movieId: Int,
+    backdropPath: String?=null,
+    title:String?=null,
+    voteAverage: Double?=null,
     networkLoader: NetworkLoader = rememberNetworkLoader(),
-    onItemClick: (Movie) -> Unit
+    onItemClick: (Int) -> Unit
 ) {
     val dominantColorState = rememberDominantColorState(
         loader = networkLoader,
@@ -60,20 +63,20 @@ fun MovieCardPager(
         coroutineContext = Dispatchers.IO
     )
 
-    movie.backdropPath?.loadImage()?.let {
+    backdropPath?.loadImage()?.let {
         LaunchedEffect(it) {
             dominantColorState.updateFrom(Url(it))
         }
     }
 
-    Card(modifier = modifier.clickable { onItemClick(movie) }) {
+    Card(modifier = modifier.clickable { onItemClick(movieId) }) {
         Box {
             //region Movie Cover Image
             AsyncImage(
                 modifier = Modifier
                     .fillMaxSize()
                     .align(Alignment.Center),
-                model = movie.backdropPath?.loadImage(),
+                model = backdropPath?.loadImage(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
@@ -103,7 +106,7 @@ fun MovieCardPager(
             ) {
                 Text(
                     modifier = Modifier,
-                    text = movie.title ?: stringResource(Res.string.unknown_movie),
+                    text = title ?: stringResource(Res.string.unknown_movie),
                     maxLines = 2,
                     style = MaterialTheme.typography.headlineLarge.copy(fontSize = 26.sp),
                     overflow = TextOverflow.Ellipsis,
@@ -111,7 +114,7 @@ fun MovieCardPager(
                     color = dominantColorState.onColor,
                 )
 
-                movie.voteAverage?.let {
+                voteAverage?.let {
                     RatingBar(
                         modifier = Modifier,
                         value = it.getRating().toFloat(),

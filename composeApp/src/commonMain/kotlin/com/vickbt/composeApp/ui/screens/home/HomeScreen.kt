@@ -35,6 +35,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.kmpalette.loader.rememberNetworkLoader
+import com.vickbt.composeApp.domain.models.Movie
+import com.vickbt.composeApp.domain.models.TvShow
 import com.vickbt.composeApp.domain.utils.Enums
 import com.vickbt.composeApp.ui.components.FilterHome
 import com.vickbt.composeApp.ui.components.MovieCardLandscape
@@ -44,7 +46,6 @@ import com.vickbt.composeApp.ui.components.MovieCardPortraitCompact
 import com.vickbt.composeApp.ui.components.SectionSeparator
 import com.vickbt.composeApp.ui.components.appbars.AppBar
 import com.vickbt.composeApp.ui.navigation.NavigationItem
-import com.vickbt.composeApp.ui.theme.DarkPrimaryColor
 import com.vickbt.composeApp.utils.WindowSize
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.logo_n
@@ -56,6 +57,7 @@ import com.vickbt.shared.resources.upcoming_movies
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
+import kotlin.random.Random
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -116,33 +118,72 @@ fun HomeScreen(
                     )
                     //endregion
 
-                    //region Now Playing Movies
-                    homeUiState.nowPlayingMovies?.let { nowPlayingMovies ->
-                        val pagerState =
-                            rememberPagerState(pageCount = { nowPlayingMovies.size })
+                    //region Now Playing Movies or Airing Today TV Shows
+                    val headerDisplay =
+                        if (Random.nextBoolean() && mediaTypeSelected == Enums.MediaType.MOVIE) homeUiState.nowPlayingMovies else homeUiState.airingTodayTvShows
 
-                        HorizontalPager(
-                            modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
-                            state = pagerState,
-                            contentPadding = PaddingValues(horizontal = 16.dp),
-                            pageSpacing = 8.dp
-                        ) { currentPage ->
-                            MovieCardPager(
-                                modifier = Modifier.fillMaxWidth().height(420.dp),
-                                networkLoader = networkLoader,
-                                movie = nowPlayingMovies[currentPage]
-                            ) { movie ->
-                                navigator.navigate("/details/${movie.id}")
+                    headerDisplay?.let {
+                        if (it == homeUiState.airingTodayTvShows) {
+                            val pagerState =
+                                rememberPagerState(pageCount = { it.size })
+
+                            HorizontalPager(
+                                modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
+                                state = pagerState,
+                                contentPadding = PaddingValues(horizontal = 16.dp),
+                                pageSpacing = 8.dp
+                            ) { currentPage ->
+                                val tvShow = it[currentPage] as TvShow
+                                MovieCardPager(
+                                    modifier = Modifier.fillMaxWidth().height(420.dp),
+                                    networkLoader = networkLoader,
+                                    movieId = tvShow.id,
+                                    backdropPath = tvShow.backdropPath,
+                                    title = tvShow.name,
+                                    voteAverage = tvShow.voteAverage
+                                ) { id ->
+                                    navigator.navigate("/details/$id")
+                                }
                             }
-                        }
 
-                        MovieCardPagerIndicator(
-                            modifier = Modifier.padding(vertical = 6.dp),
-                            pagerState = pagerState,
-                            indicatorSize = 6.dp,
-                            inactiveColor = Color.Gray,
-                            activeColor = DarkPrimaryColor
-                        )
+                            MovieCardPagerIndicator(
+                                modifier = Modifier.padding(vertical = 6.dp),
+                                pagerState = pagerState,
+                                indicatorSize = 6.dp,
+                                inactiveColor = Color.Gray,
+                                activeColor = MaterialTheme.colorScheme.primary
+                            )
+                        } else {
+                            val pagerState =
+                                rememberPagerState(pageCount = { it.size })
+
+                            HorizontalPager(
+                                modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
+                                state = pagerState,
+                                contentPadding = PaddingValues(horizontal = 16.dp),
+                                pageSpacing = 8.dp
+                            ) { currentPage ->
+                                val movie = it[currentPage] as Movie
+                                MovieCardPager(
+                                    modifier = Modifier.fillMaxWidth().height(420.dp),
+                                    networkLoader = networkLoader,
+                                    movieId = movie.id,
+                                    backdropPath = movie.backdropPath,
+                                    title = movie.title,
+                                    voteAverage = movie.voteAverage
+                                ) { id ->
+                                    navigator.navigate("/details/$id")
+                                }
+                            }
+
+                            MovieCardPagerIndicator(
+                                modifier = Modifier.padding(vertical = 6.dp),
+                                pagerState = pagerState,
+                                indicatorSize = 6.dp,
+                                inactiveColor = Color.Gray,
+                                activeColor = MaterialTheme.colorScheme.primary
+                            )
+                        }
                     }
                     //endregion
 
