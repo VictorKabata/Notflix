@@ -80,7 +80,8 @@ fun HomeScreen(
         topBar = {
             AppBar(
                 headerIcon = Res.drawable.logo_n,
-                onActionClicked = { navigator.navigate(NavigationItem.Search.route) })
+                onActionClicked = { navigator.navigate(NavigationItem.Search.route) }
+            )
         }
     ) { paddingValues ->
 
@@ -172,7 +173,7 @@ fun HomeScreen(
                                                 posterPath = it.posterPath,
                                                 title = it.title,
                                                 onItemClick = { id ->
-                                                    navigator.navigate("/details/${id}")
+                                                    navigator.navigate("/details/$id")
                                                 }
                                             )
                                         }
@@ -214,7 +215,7 @@ fun HomeScreen(
                                                 releaseDate = it.firstAirDate,
                                                 networkLoader = networkLoader,
                                                 onClickItem = { id ->
-                                                    navigator.navigate("/details/${id}")
+                                                    navigator.navigate("/details/$id")
                                                 }
                                             )
                                         }
@@ -250,7 +251,7 @@ fun HomeScreen(
                                                 posterPath = it.posterPath,
                                                 title = it.title,
                                                 onItemClick = { id ->
-                                                    navigator.navigate("/details/${id}")
+                                                    navigator.navigate("/details/$id")
                                                 }
                                             )
                                         }
@@ -292,7 +293,7 @@ fun HomeScreen(
                                                 releaseDate = it.firstAirDate,
                                                 networkLoader = networkLoader,
                                                 onClickItem = { id ->
-                                                    navigator.navigate("/details/${id}")
+                                                    navigator.navigate("/details/$id")
                                                 }
                                             )
                                         }
@@ -334,7 +335,7 @@ fun HomeScreen(
                                                 releaseDate = it.releaseDate,
                                                 networkLoader = networkLoader,
                                                 onClickItem = { id ->
-                                                    navigator.navigate("/details/${id}")
+                                                    navigator.navigate("/details/$id")
                                                 }
                                             )
                                         }
@@ -372,7 +373,7 @@ fun HomeScreen(
                                                 posterPath = it.posterPath,
                                                 title = it.name,
                                                 onItemClick = { id ->
-                                                    navigator.navigate("/details/${id}")
+                                                    navigator.navigate("/details/$id")
                                                 }
                                             )
                                         }

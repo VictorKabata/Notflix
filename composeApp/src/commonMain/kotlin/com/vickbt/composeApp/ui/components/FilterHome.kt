@@ -46,7 +46,6 @@ fun FilterHome(
     onFilterClosed: () -> Unit = {},
     onCategoriesClicked: () -> Unit = {}
 ) {
-
     var selectedMediaType by remember { mutableStateOf<Enums.MediaType?>(null) }
 
     Row(
@@ -72,7 +71,8 @@ fun FilterHome(
                 onClick = {
                     selectedMediaType = null
                     onFilterClosed()
-                }) {
+                }
+            ) {
                 Icon(
                     modifier = Modifier.size(18.dp),
                     imageVector = Icons.Rounded.Close,

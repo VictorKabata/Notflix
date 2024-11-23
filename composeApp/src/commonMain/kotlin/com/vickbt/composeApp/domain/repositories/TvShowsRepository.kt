@@ -5,7 +5,6 @@ import com.vickbt.composeApp.domain.models.TvShow
 import kotlinx.coroutines.flow.Flow
 
 interface TvShowsRepository {
-
     /** Fetch Tv Shows airing today from data source*/
     suspend fun fetchAiringTodayTvShows(
         language: String = "en-US",

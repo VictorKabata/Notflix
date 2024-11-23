@@ -141,5 +141,4 @@ class HomeViewModel(
             _homeUiState.update { it.copy(error = error.message, isLoading = false) }
         }
     }
-
 }
