@@ -1,5 +1,7 @@
 package com.vickbt.composeApp.domain.utils
 
+import androidx.compose.ui.unit.dp
+
 object Constants {
 
     const val BASE_URL = "api.themoviedb.org"
@@ -20,4 +22,7 @@ object Constants {
     const val DATABASE_NAME = "notflix.db"
 
     internal const val DATASTORE_FILE_NAME = "notflix.preferences_pb"
+
+    val COLLAPSED_TOP_BAR_HEIGHT = 56.dp
+    val EXPANDED_TOP_BAR_HEIGHT = 200.dp
 }
