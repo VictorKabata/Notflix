@@ -51,7 +51,7 @@ fun AppBar(
         actions = {
             IconButton(modifier = Modifier.padding(6.dp), onClick = { onActionClicked() }) {
                 Icon(
-                    modifier = Modifier.size(28.dp),
+                    modifier = Modifier.size(32.dp),
                     imageVector = Icons.Rounded.Search,
                     contentDescription = null
                 )
