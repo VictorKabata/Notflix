@@ -33,7 +33,6 @@ import coil3.compose.AsyncImage
 import com.kmpalette.loader.NetworkLoader
 import com.kmpalette.loader.rememberNetworkLoader
 import com.kmpalette.rememberDominantColorState
-import com.vickbt.composeApp.domain.models.Movie
 import com.vickbt.composeApp.ui.components.ratingbar.RatingBar
 import com.vickbt.composeApp.ui.components.ratingbar.RatingBarStyle
 import com.vickbt.composeApp.ui.components.ratingbar.StepSize
@@ -50,9 +49,9 @@ import org.jetbrains.compose.resources.stringResource
 fun MovieCardPager(
     modifier: Modifier = Modifier,
     movieId: Int,
-    backdropPath: String?=null,
-    title:String?=null,
-    voteAverage: Double?=null,
+    backdropPath: String? = null,
+    title: String? = null,
+    voteAverage: Double? = null,
     networkLoader: NetworkLoader = rememberNetworkLoader(),
     onItemClick: (Int) -> Unit
 ) {
