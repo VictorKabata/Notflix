@@ -16,16 +16,32 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBar(title: String, onActionClicked: () -> Unit = {}) {
+fun AppBar(
+    headerIcon: DrawableResource? = null,
+    title: String? = null,
+    onActionClicked: () -> Unit = {}
+) {
     TopAppBar(
         colors = TopAppBarDefaults.mediumTopAppBarColors(MaterialTheme.colorScheme.background),
+        navigationIcon = {
+            if (headerIcon != null) {
+                Icon(
+                    modifier = Modifier.size(32.dp),
+                    painter = painterResource(headerIcon),
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+        },
         title = {
             Text(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                text = title,
+                text = title ?: "",
                 color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.titleMedium.copy(fontSize = 28.sp),
                 maxLines = 1,

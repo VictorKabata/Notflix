@@ -37,9 +37,11 @@ import com.vickbt.composeApp.ui.components.MovieCardPagerIndicator
 import com.vickbt.composeApp.ui.components.MovieCardPortraitCompact
 import com.vickbt.composeApp.ui.components.SectionSeparator
 import com.vickbt.composeApp.ui.components.appbars.AppBar
+import com.vickbt.composeApp.ui.navigation.NavigationItem
 import com.vickbt.composeApp.ui.theme.DarkPrimaryColor
 import com.vickbt.composeApp.utils.WindowSize
 import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.logo_n
 import com.vickbt.shared.resources.popular_movies
 import com.vickbt.shared.resources.trending_movies
 import com.vickbt.shared.resources.upcoming_movies
@@ -65,7 +67,11 @@ fun HomeScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(mainPaddingValues),
-        topBar = { AppBar(title = "") }
+        topBar = {
+            AppBar(
+                headerIcon = Res.drawable.logo_n,
+                onActionClicked = { navigator.navigate(NavigationItem.Search.route) })
+        }
     ) { paddingValues ->
 
         // region Home section
