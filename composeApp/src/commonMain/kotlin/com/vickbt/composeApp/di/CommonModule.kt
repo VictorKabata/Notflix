@@ -5,11 +5,13 @@ import com.vickbt.composeApp.data.datasources.MovieDetailsRepositoryImpl
 import com.vickbt.composeApp.data.datasources.MoviesRepositoryImpl
 import com.vickbt.composeApp.data.datasources.SearchRepositoryImpl
 import com.vickbt.composeApp.data.datasources.SettingsRepositoryImpl
+import com.vickbt.composeApp.data.datasources.TvShowsRepositoryImpl
 import com.vickbt.composeApp.domain.repositories.FavoritesRepository
 import com.vickbt.composeApp.domain.repositories.MovieDetailsRepository
 import com.vickbt.composeApp.domain.repositories.MoviesRepository
 import com.vickbt.composeApp.domain.repositories.SearchRepository
 import com.vickbt.composeApp.domain.repositories.SettingsRepository
+import com.vickbt.composeApp.domain.repositories.TvShowsRepository
 import com.vickbt.composeApp.domain.utils.Constants.BASE_URL
 import com.vickbt.composeApp.domain.utils.Constants.URL_PATH
 import com.vickbt.composeApp.ui.screens.details.DetailsViewModel
@@ -80,6 +82,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     }
 
     single<MoviesRepository> { MoviesRepositoryImpl(httpClient = get()) }
+    single<TvShowsRepository> { TvShowsRepositoryImpl(httpClient = get()) }
     single<MovieDetailsRepository> {
         MovieDetailsRepositoryImpl(httpClient = get(), appDatabase = get())
     }

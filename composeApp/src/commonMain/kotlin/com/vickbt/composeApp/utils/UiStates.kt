@@ -4,6 +4,7 @@ import androidx.paging.PagingData
 import com.vickbt.composeApp.domain.models.Actor
 import com.vickbt.composeApp.domain.models.Movie
 import com.vickbt.composeApp.domain.models.MovieDetails
+import com.vickbt.composeApp.domain.models.TvShow
 import kotlinx.coroutines.flow.Flow
 
 data class MainUiState(
@@ -17,6 +18,11 @@ data class HomeUiState(
     val trendingMovies: Flow<PagingData<Movie>>? = null,
     val popularMovies: Flow<PagingData<Movie>>? = null,
     val upcomingMovies: Flow<PagingData<Movie>>? = null,
+
+    val airingTodayTvShows: List<TvShow>? = null,
+    val trendingTvShows: Flow<PagingData<TvShow>>? = null,
+    val topRatedTvShows: Flow<PagingData<TvShow>>? = null,
+    val popularTvShows: Flow<PagingData<TvShow>>? = null
 )
 
 data class DetailsUiState(

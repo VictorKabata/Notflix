@@ -90,19 +90,19 @@ internal fun Typography(): Typography {
         labelLarge = TextStyle(
             fontFamily = nunito,
             fontWeight = FontWeight.Medium,
-            fontSize = 14.sp,
+            fontSize = 16.sp,
             lineHeight = 20.sp
         ),
         labelMedium = TextStyle(
             fontFamily = nunito,
             fontWeight = FontWeight.SemiBold,
-            fontSize = 12.sp,
+            fontSize = 14.sp,
             lineHeight = 16.sp
         ),
         labelSmall = TextStyle(
             fontFamily = nunito,
             fontWeight = FontWeight.Medium,
-            fontSize = 11.sp,
+            fontSize = 12.sp,
             lineHeight = 16.sp
         )
     )

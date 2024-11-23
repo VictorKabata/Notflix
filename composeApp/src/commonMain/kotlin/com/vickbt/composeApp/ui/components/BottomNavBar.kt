@@ -9,6 +9,7 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.vickbt.composeApp.ui.navigation.NavigationItem
@@ -23,7 +24,7 @@ fun BottomNavBar(
 ) {
     NavigationBar(
         modifier = modifier.fillMaxWidth(),
-        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = .85f)
+        containerColor = MaterialTheme.colorScheme.background.copy(alpha = .85f)
     ) {
         bottomNavItems.iterator().forEach { item ->
 
@@ -48,8 +49,9 @@ fun BottomNavBar(
                 },
                 alwaysShowLabel = true,
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary,
-                    unselectedIconColor = Gray
+                    selectedIconColor = MaterialTheme.colorScheme.onBackground,
+                    unselectedIconColor = Gray,
+                    indicatorColor = Color.Transparent
                 ),
                 selected = isSelected,
                 onClick = {

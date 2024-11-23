@@ -44,7 +44,7 @@ fun FavoritesScreen(
 
     Scaffold(
         modifier = Modifier.padding(mainPaddingValues),
-        topBar = { AppBar(stringResource(Res.string.title_favorites)) }
+        topBar = { AppBar(title = stringResource(Res.string.title_favorites)) }
     ) { paddingValues ->
         Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
             if (favoritesUiState.isLoading) {

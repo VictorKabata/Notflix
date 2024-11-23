@@ -132,7 +132,7 @@ fun DetailsScreen(
                                 .padding(horizontal = 16.dp),
                             text = movieDetailsUiState.movieDetails?.overview ?: "",
                             style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onSurface,
+                            color = MaterialTheme.colorScheme.onBackground,
                             fontSize = 15.sp,
                             textAlign = TextAlign.Start,
                             overflow = TextOverflow.Ellipsis,

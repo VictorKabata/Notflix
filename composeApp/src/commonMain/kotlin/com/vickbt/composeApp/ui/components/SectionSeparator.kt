@@ -17,12 +17,12 @@ fun SectionSeparator(
     sectionTitle: String
 ) {
     Row(
-        modifier = modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+        modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(
-            modifier = Modifier,
+            modifier = Modifier.padding(all = 16.dp),
             text = sectionTitle,
             color = MaterialTheme.colorScheme.onSurface,
             style = MaterialTheme.typography.headlineMedium,
