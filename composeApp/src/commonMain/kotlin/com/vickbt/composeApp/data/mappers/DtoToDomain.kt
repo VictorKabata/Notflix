@@ -5,12 +5,14 @@ import com.vickbt.composeApp.data.network.models.CastDto
 import com.vickbt.composeApp.data.network.models.ErrorResponseDto
 import com.vickbt.composeApp.data.network.models.MovieDetailsDto
 import com.vickbt.composeApp.data.network.models.MovieDto
+import com.vickbt.composeApp.data.network.models.TvShowDto
 import com.vickbt.composeApp.data.network.models.VideoDto
 import com.vickbt.composeApp.domain.models.Actor
 import com.vickbt.composeApp.domain.models.Cast
 import com.vickbt.composeApp.domain.models.ErrorResponse
 import com.vickbt.composeApp.domain.models.Movie
 import com.vickbt.composeApp.domain.models.MovieDetails
+import com.vickbt.composeApp.domain.models.TvShow
 import com.vickbt.composeApp.domain.models.Video
 
 fun MovieDto.toDomain(): Movie {
@@ -29,6 +31,24 @@ fun MovieDto.toDomain(): Movie {
         voteAverage = this.voteAverage,
         voteCount = this.voteCount,
         mediaType = this.mediaType
+    )
+}
+
+fun TvShowDto.toDomain(): TvShow {
+    return TvShow(
+        adult = this.adult,
+        backdropPath = this.backdropPath,
+        id = this.id,
+        name = this.name,
+        overview = this.overview,
+        posterPath = this.posterPath,
+        mediaType = this.mediaType,
+        genreIds = this.genreIds,
+        popularity = this.popularity,
+        firstAirDate = this.firstAirDate,
+        voteAverage = this.voteAverage,
+        voteCount = this.voteCount,
+        originCountry = this.originCountry
     )
 }
 

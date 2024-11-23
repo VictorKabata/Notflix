@@ -15,6 +15,10 @@
     <string name="upcoming_movies">Upcoming Movies</string>
     <string name="view_all">View All</string>
 
+    <string name="trending_tv_shows">Trending TV Shows</string>
+    <string name="top_rated_tv_shows">Top Rated TV Shows</string>
+    <string name="popular_tv_shows">Popular TV Shows</string>
+
     <string name="share">Share</string>
 
     <!--Preference Titles-->

@@ -43,6 +43,7 @@ import com.vickbt.composeApp.utils.WindowSize
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.logo_n
 import com.vickbt.shared.resources.popular_movies
+import com.vickbt.shared.resources.top_rated_tv_shows
 import com.vickbt.shared.resources.trending_movies
 import com.vickbt.shared.resources.upcoming_movies
 import org.jetbrains.compose.resources.stringResource
@@ -163,7 +164,45 @@ fun HomeScreen(
                     }
                     //endregion
 
-                    //region Upcoming Movies
+                    //region Top Rated Tv Shows
+                    homeUiState.topRatedTvShows?.let { movies ->
+                        val topRatedTvShows = movies.collectAsLazyPagingItems()
+
+                        SectionSeparator(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentHeight(),
+                            sectionTitle = stringResource(Res.string.top_rated_tv_shows)
+                        )
+
+                        LazyRow(
+                            contentPadding = PaddingValues(horizontal = 16.dp),
+                            horizontalArrangement = Arrangement.spacedBy(14.dp),
+                            modifier = Modifier.wrapContentHeight()
+                        ) {
+                            items(topRatedTvShows.itemCount) { index ->
+                                topRatedTvShows[index]?.let {
+                                    MovieCardLandscape(
+                                        modifier = Modifier
+                                            .width(300.dp)
+                                            .height(245.dp),
+                                        movieId = it.id,
+                                        backdropPath = it.backdropPath,
+                                        title = it.name,
+                                        voteAverage = it.voteAverage,
+                                        releaseDate = it.firstAirDate,
+                                        networkLoader = networkLoader,
+                                        onClickItem = { id ->
+                                            navigator.navigate("/details/${id}")
+                                        }
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    //endregion
+
+                    /*//region Upcoming Movies
                     homeUiState.upcomingMovies?.let { movies ->
                         val upcomingMovies = movies.collectAsLazyPagingItems()
 
@@ -195,7 +234,39 @@ fun HomeScreen(
                             }
                         }
                     }
-                    //endregion
+                    //endregion*/
+
+                    /*//region Trending Tv Shows
+                    homeUiState.trendingTvShows?.let { movies ->
+                        val trendingMovies = movies.collectAsLazyPagingItems()
+
+                        SectionSeparator(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentHeight(),
+                            sectionTitle = stringResource(Res.string.trending_movies)
+                        )
+
+                        LazyRow(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentHeight(),
+                            contentPadding = PaddingValues(horizontal = 16.dp),
+                            horizontalArrangement = Arrangement.spacedBy(10.dp)
+                        ) {
+                            items(trendingMovies.itemCount) { index ->
+                                trendingMovies[index]?.let {
+                                    MovieCardPortraitCompact(
+                                        movie = it,
+                                        onItemClick = { movie ->
+                                            navigator.navigate("/details/${movie.id}")
+                                        }
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    //endregion*/
 
                     //region Popular Movies
                     homeUiState.popularMovies?.let { movies ->
@@ -228,6 +299,41 @@ fun HomeScreen(
                         }
                         //endregion
                     }
+                    //endregion
+
+                    /*//region Popular Tv Shows
+                    homeUiState.upcomingMovies?.let { movies ->
+                        val upcomingMovies = movies.collectAsLazyPagingItems()
+
+                        SectionSeparator(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentHeight(),
+                            sectionTitle = stringResource(Res.string.upcoming_movies)
+                        )
+
+                        LazyRow(
+                            contentPadding = PaddingValues(horizontal = 16.dp),
+                            horizontalArrangement = Arrangement.spacedBy(14.dp),
+                            modifier = Modifier.wrapContentHeight()
+                        ) {
+                            items(upcomingMovies.itemCount) { index ->
+                                upcomingMovies[index]?.let {
+                                    MovieCardLandscape(
+                                        modifier = Modifier
+                                            .width(300.dp)
+                                            .height(245.dp),
+                                        movie = it,
+                                        networkLoader = networkLoader,
+                                        onClickItem = { movie ->
+                                            navigator.navigate("/details/${movie.id}")
+                                        }
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    //endregion*/
                 }
             }
             // endregion

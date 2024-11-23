@@ -42,25 +42,25 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun FilterHome(
     modifier: Modifier = Modifier,
-    onFilterClicked: (Enums.ShowType?) -> Unit = {},
+    onFilterClicked: (Enums.MediaType?) -> Unit = {},
     onCategoriesClicked: () -> Unit = {}
 ) {
 
-    var selectedShowType by remember { mutableStateOf<Enums.ShowType?>(null) }
+    var selectedMediaType by remember { mutableStateOf<Enums.MediaType?>(null) }
 
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        AnimatedVisibility(visible = selectedShowType != null, enter = fadeIn(), exit = fadeOut()) {
+        AnimatedVisibility(visible = selectedMediaType != null, enter = fadeIn(), exit = fadeOut()) {
             FloatingActionButton(
                 modifier = Modifier.border(1.dp, MaterialTheme.colorScheme.onBackground, CircleShape)
                     .size(32.dp),
                 shape = CircleShape,
                 containerColor = Color.Transparent,
                 contentColor = MaterialTheme.colorScheme.onBackground,
-                onClick = { selectedShowType = null }) {
+                onClick = { selectedMediaType = null }) {
                 Icon(
                     modifier = Modifier.size(18.dp),
                     imageVector = Icons.Rounded.Close,
@@ -70,11 +70,11 @@ fun FilterHome(
             }
         }
 
-        AnimatedVisibility(visible = (selectedShowType == null) || selectedShowType == Enums.ShowType.TV_SHOW) {
+        AnimatedVisibility(visible = (selectedMediaType == null) || selectedMediaType == Enums.MediaType.TV_SHOW) {
             SuggestionChip(
                 onClick = {
-                    selectedShowType = Enums.ShowType.TV_SHOW
-                    onFilterClicked(selectedShowType)
+                    selectedMediaType = Enums.MediaType.TV_SHOW
+                    onFilterClicked(selectedMediaType)
                 },
                 label = {
                     Text(
@@ -92,11 +92,11 @@ fun FilterHome(
             )
         }
 
-        AnimatedVisibility(visible = (selectedShowType == null) || selectedShowType == Enums.ShowType.MOVIE) {
+        AnimatedVisibility(visible = (selectedMediaType == null) || selectedMediaType == Enums.MediaType.MOVIE) {
             SuggestionChip(
                 onClick = {
-                    selectedShowType = Enums.ShowType.MOVIE
-                    onFilterClicked(selectedShowType)
+                    selectedMediaType = Enums.MediaType.MOVIE
+                    onFilterClicked(selectedMediaType)
                 },
                 label = {
                     Text(

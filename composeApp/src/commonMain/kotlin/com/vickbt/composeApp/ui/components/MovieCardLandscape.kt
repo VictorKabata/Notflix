@@ -50,9 +50,13 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MovieCardLandscape(
     modifier: Modifier = Modifier,
-    movie: Movie,
+    movieId:Int,
+    backdropPath: String? = null,
+    title:String?=null,
+    voteAverage:Double?=null,
+    releaseDate:String?=null,
     networkLoader: NetworkLoader = rememberNetworkLoader(),
-    onClickItem: (Movie) -> Unit
+    onClickItem: (Int) -> Unit
 ) {
     val dominantColorState = rememberDominantColorState(
         loader = networkLoader,
@@ -61,14 +65,14 @@ fun MovieCardLandscape(
         coroutineContext = Dispatchers.IO
     )
 
-    movie.backdropPath?.loadImage()?.let {
+    backdropPath?.loadImage()?.let {
         LaunchedEffect(it) {
             dominantColorState.updateFrom(Url(it))
         }
     }
 
     Card(
-        modifier = modifier.clickable { onClickItem(movie) },
+        modifier = modifier.clickable { onClickItem(movieId) },
         elevation = CardDefaults.cardElevation(8.dp),
         shape = RoundedCornerShape(4.dp)
     ) {
@@ -77,7 +81,7 @@ fun MovieCardLandscape(
                 modifier = Modifier
                     .fillMaxSize()
                     .align(Alignment.Center),
-                model = movie.backdropPath?.loadImage(),
+                model = backdropPath?.loadImage(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
@@ -110,7 +114,7 @@ fun MovieCardLandscape(
                 //region Movie Title
                 Text(
                     modifier = Modifier,
-                    text = movie.title ?: stringResource(Res.string.unknown_movie),
+                    text = title ?: stringResource(Res.string.unknown_movie),
                     maxLines = 2,
                     style = MaterialTheme.typography.headlineLarge,
                     overflow = TextOverflow.Ellipsis,
@@ -129,7 +133,7 @@ fun MovieCardLandscape(
                 ) {
                     RatingBar(
                         modifier = Modifier,
-                        value = movie.voteAverage?.getRating()?.toFloat() ?: 0f,
+                        value = voteAverage?.getRating()?.toFloat() ?: 0f,
                         numOfStars = 5,
                         size = 15.dp,
                         stepSize = StepSize.HALF,
@@ -137,7 +141,7 @@ fun MovieCardLandscape(
                         style = RatingBarStyle.Fill()
                     )
 
-                    movie.releaseDate?.let {
+                    releaseDate?.let {
                         HorizontalDivider(
                             modifier = Modifier
                                 .padding(horizontal = 4.dp)
@@ -148,7 +152,7 @@ fun MovieCardLandscape(
 
                         Text(
                             modifier = Modifier,
-                            text = movie.releaseDate.getReleaseDate().capitalizeEachWord(),
+                            text = releaseDate.getReleaseDate().capitalizeEachWord(),
                             maxLines = 1,
                             style = MaterialTheme.typography.bodyMedium,
                             overflow = TextOverflow.Ellipsis,
