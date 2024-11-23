@@ -16,7 +16,9 @@ import com.vickbt.composeApp.utils.getRating
 fun MovieCardPortrait(modifier: Modifier = Modifier, movie: Movie, onItemClick: (Movie) -> Unit) {
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(1.dp)) {
         MovieCardPortraitCompact(
-            movie = movie,
+            movieId = movie.id,
+            posterPath = movie.posterPath,
+            title = movie.title,
             onItemClick = { onItemClick(movie) }
         )
 

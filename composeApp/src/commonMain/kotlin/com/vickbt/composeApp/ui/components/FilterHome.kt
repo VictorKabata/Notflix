@@ -43,6 +43,7 @@ import org.jetbrains.compose.resources.stringResource
 fun FilterHome(
     modifier: Modifier = Modifier,
     onFilterClicked: (Enums.MediaType?) -> Unit = {},
+    onFilterClosed: () -> Unit = {},
     onCategoriesClicked: () -> Unit = {}
 ) {
 
@@ -53,14 +54,25 @@ fun FilterHome(
         horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        AnimatedVisibility(visible = selectedMediaType != null, enter = fadeIn(), exit = fadeOut()) {
+        AnimatedVisibility(
+            visible = selectedMediaType != null,
+            enter = fadeIn(),
+            exit = fadeOut()
+        ) {
             FloatingActionButton(
-                modifier = Modifier.border(1.dp, MaterialTheme.colorScheme.onBackground, CircleShape)
+                modifier = Modifier.border(
+                    1.dp,
+                    MaterialTheme.colorScheme.onBackground,
+                    CircleShape
+                )
                     .size(32.dp),
                 shape = CircleShape,
                 containerColor = Color.Transparent,
                 contentColor = MaterialTheme.colorScheme.onBackground,
-                onClick = { selectedMediaType = null }) {
+                onClick = {
+                    selectedMediaType = null
+                    onFilterClosed()
+                }) {
                 Icon(
                     modifier = Modifier.size(18.dp),
                     imageVector = Icons.Rounded.Close,
