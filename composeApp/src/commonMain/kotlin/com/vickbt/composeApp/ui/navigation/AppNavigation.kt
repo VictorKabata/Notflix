@@ -23,10 +23,11 @@ fun AppNavigation(
 ) {
     NavHost(navController = navHostController, startDestination = NavigationItem.Home.route) {
         composable(route = NavigationItem.Home.route) {
-            HomeScreen(
-                navigator = navHostController,
-                mainPaddingValues = mainPaddingValues
-            )
+            HomeScreen {
+                navHostController.navigate(it) {
+                    popUpTo(NavigationItem.Home.route)
+                }
+            }
         }
 
         composable(route = NavigationItem.Favorites.route) {
