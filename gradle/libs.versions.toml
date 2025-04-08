@@ -1,11 +1,11 @@
 [versions]
-kotlin = "2.0.20"
+kotlin = "2.1.10"
 gradle = "8.1.4"
 ktLint = "11.6.0"
 detekt = "1.23.6"
 googleServices = "4.4.2"
-firebaseAppDistribution = "5.0.0"
-firebaseCrashlytics = "3.0.2"
+firebaseAppDistribution = "5.1.1"
+firebaseCrashlytics = "3.0.3"
 firebasePerformance = "1.4.2"
 
 # Kotlin Multiplatform Version
