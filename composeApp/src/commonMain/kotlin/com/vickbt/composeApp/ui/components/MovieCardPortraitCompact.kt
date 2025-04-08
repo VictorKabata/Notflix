@@ -58,9 +58,8 @@ fun MovieCardPortraitCompact(
         Text(
             modifier = Modifier.sizeIn(maxWidth = 88.sdp).basicMarquee(),
             text = title ?: stringResource(Res.string.unknown_movie),
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.titleSmall,
             color = MaterialTheme.colorScheme.onSurface,
-            fontSize = 14.sp,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Start
