@@ -9,7 +9,7 @@ firebaseCrashlytics = "3.0.3"
 firebasePerformance = "1.4.2"
 
 # Kotlin Multiplatform Version
-kotlinxCoroutines = "1.9.0"
+kotlinxCoroutines = "1.10.1"
 koinCore = "3.5.6"
 koinCompose = "1.1.5"
 koinComposeViewModel = "1.2.0-Beta5"
