@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.icons.Icons
@@ -36,10 +35,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
+import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.vickbt.composeApp.ui.components.MovieCardPortrait
-import com.vickbt.composeApp.utils.WindowSize
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.back
 import com.vickbt.shared.resources.title_search
@@ -49,10 +48,9 @@ import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun SearchScreen(
-    navigator: NavHostController,
     viewModel: SearchViewModel = koinViewModel<SearchViewModel>(),
-    windowSize: WindowSize = WindowSize.COMPACT,
-    mainPaddingValues: PaddingValues
+    windowSize: WindowSizeClass,
+    onNavigate: (String) -> Unit,
 ) {
     val searchUiState by viewModel.searchUiState.collectAsState()
 
@@ -108,8 +106,7 @@ fun SearchScreen(
         colors = SearchBarDefaults.colors(dividerColor = Color.LightGray)
     ) {
         Box(
-            modifier = Modifier.padding(mainPaddingValues)
-                .fillMaxSize().background(MaterialTheme.colorScheme.surface)
+            modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
         ) {
             if (searchUiState.isLoading) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
@@ -126,7 +123,7 @@ fun SearchScreen(
 
                     LazyVerticalGrid(
                         modifier = Modifier.fillMaxSize(),
-                        columns = if (windowSize == WindowSize.COMPACT) {
+                        columns = if (windowSize.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
                             GridCells.Fixed(2)
                         } else {
                             GridCells.Adaptive(minSize = 150.dp)
@@ -141,7 +138,7 @@ fun SearchScreen(
                                     modifier = Modifier,
                                     movie = movies,
                                     onItemClick = { movie ->
-                                        navigator.navigate("/details/${movie.id}")
+                                        onNavigate("/details/${movie.id}")
                                     }
                                 )
                             }

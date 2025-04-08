@@ -1,30 +1,32 @@
 package com.vickbt.composeApp.ui.screens.main
 
-import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.vickbt.composeApp.ui.components.BottomNavBar
-import com.vickbt.composeApp.ui.components.NavRailBar
-import com.vickbt.composeApp.ui.navigation.Navigation
+import androidx.window.core.layout.WindowWidthSizeClass
+import com.vickbt.composeApp.ui.navigation.AppNavigation
 import com.vickbt.composeApp.ui.navigation.NavigationItem
 import com.vickbt.composeApp.ui.theme.NotflixTheme
-import com.vickbt.composeApp.utils.WindowSize
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun MainScreen(viewModel: MainViewModel = koinViewModel<MainViewModel>()) {
+    val windowSize = currentWindowAdaptiveInfo().windowSizeClass
+
     val appUiState = viewModel.mainUiState.collectAsState().value
-    var windowSize by remember { mutableStateOf(WindowSize.COMPACT) }
 
     val isDarkTheme = appUiState.selectedTheme != 0
 
@@ -37,40 +39,54 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel<MainViewModel>()) {
             NavigationItem.Settings
         )
 
+        val currentDestination by rememberSaveable { mutableStateOf(navHostController.currentDestination?.route) }
         val isTopLevelDestination =
             navHostController.currentBackStackEntryAsState().value?.destination?.route in topLevelDestinations.map { it.route }
 
-        val showNavigationRail = windowSize != WindowSize.COMPACT
+        val navigationLayout = if (!isTopLevelDestination) {
+            NavigationSuiteType.None
+        } else if (windowSize.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
+            NavigationSuiteType.NavigationBar
+        } else {
+            NavigationSuiteType.NavigationRail
+        }
 
-        Scaffold(
-            bottomBar = {
-                if (isTopLevelDestination && !showNavigationRail) {
-                    BottomNavBar(
-                        bottomNavItems = topLevelDestinations,
-                        navHostController = navHostController
+        NavigationSuiteScaffold(
+            modifier = Modifier.fillMaxSize(),
+            navigationSuiteItems = {
+                topLevelDestinations.iterator().forEach { destination ->
+                    item(
+                        icon = {
+                            destination.icon?.let {
+                                Icon(
+                                    modifier = Modifier,
+                                    imageVector = destination.icon,
+                                    contentDescription = stringResource(destination.title)
+                                )
+                            }
+                        },
+                        label = {
+                            Text(
+                                text = stringResource(destination.title),
+                                style = MaterialTheme.typography.labelSmall
+                            )
+                        },
+                        selected = destination.route == currentDestination,
+                        onClick = {
+                            navHostController.navigate(destination.route) {
+                                popUpTo(NavigationItem.Home.route)
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
                     )
                 }
-            }
-        ) { paddingValues ->
-
-            BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
-                windowSize = WindowSize.basedOnWidth(this.minWidth)
-
-                Row(modifier = Modifier.fillMaxSize()) {
-                    if (isTopLevelDestination && showNavigationRail) {
-                        NavRailBar(
-                            navigationItems = topLevelDestinations,
-                            navHostController = navHostController
-                        )
-                    }
-
-                    Navigation(
-                        navHostController = navHostController,
-                        windowSize = windowSize,
-                        mainPaddingValues = paddingValues
-                    )
-                }
-            }
+            },
+            containerColor = MaterialTheme.colorScheme.background.copy(alpha = .85f),
+            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            layoutType = navigationLayout
+        ) {
+            AppNavigation(navHostController = navHostController, windowSize = windowSize)
         }
     }
 }

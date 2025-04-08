@@ -30,6 +30,7 @@ sqlite = "2.5.0-SNAPSHOT"
 room = "2.7.0-rc03"
 paging = "3.3.0-alpha02-0.5.1"
 version = "0.51.0"
+material3Adaptive="1.0.0-alpha03"
 
 #Android Versions
 androidxActivity = "1.10.1"
@@ -93,6 +94,8 @@ room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 paging-common = { module = "app.cash.paging:paging-common", version.ref = "paging" }
 paging-compose = { module = "app.cash.paging:paging-compose-common", version.ref = "paging" }
+
+adaptive-core = { module = "org.jetbrains.compose.material3.adaptive:adaptive", version.ref = "material3Adaptive" }
 
 #Android Lib Dependencies
 androidX-activity = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }

@@ -7,43 +7,46 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import androidx.window.core.layout.WindowSizeClass
 import com.vickbt.composeApp.ui.screens.details.DetailsScreen
 import com.vickbt.composeApp.ui.screens.favorites.FavoritesScreen
 import com.vickbt.composeApp.ui.screens.home.HomeScreen
 import com.vickbt.composeApp.ui.screens.search.SearchScreen
 import com.vickbt.composeApp.ui.screens.settings.SettingsScreen
-import com.vickbt.composeApp.utils.WindowSize
-import io.github.aakira.napier.Napier
 
 @Composable
-fun Navigation(
+fun AppNavigation(
     navHostController: NavHostController,
-    windowSize: WindowSize,
+    windowSize: WindowSizeClass,
     mainPaddingValues: PaddingValues = PaddingValues()
 ) {
     NavHost(navController = navHostController, startDestination = NavigationItem.Home.route) {
         composable(route = NavigationItem.Home.route) {
-            HomeScreen(
-                navigator = navHostController,
-                windowSize = windowSize,
-                mainPaddingValues = mainPaddingValues
-            )
+            HomeScreen {
+                navHostController.navigate(it) {
+                    popUpTo(NavigationItem.Home.route)
+                }
+            }
         }
 
         composable(route = NavigationItem.Favorites.route) {
-            FavoritesScreen(navigator = navHostController, mainPaddingValues = mainPaddingValues)
+            FavoritesScreen {
+                navHostController.navigate(it) {
+                    popUpTo(NavigationItem.Favorites.route)
+                }
+            }
         }
 
         composable(route = NavigationItem.Search.route) {
-            SearchScreen(
-                windowSize = windowSize,
-                navigator = navHostController,
-                mainPaddingValues = mainPaddingValues
-            )
+            SearchScreen(windowSize = windowSize) {
+                navHostController.navigate(it) {
+                    popUpTo(NavigationItem.Search.route)
+                }
+            }
         }
 
         composable(route = NavigationItem.Settings.route) {
-            SettingsScreen(mainPaddingValues = mainPaddingValues)
+            SettingsScreen()
         }
 
         composable(
@@ -51,12 +54,9 @@ fun Navigation(
             arguments = listOf(navArgument("movieId") { type = NavType.IntType })
         ) { backStackEntry ->
             backStackEntry.arguments?.getInt("movieId")?.let { movieId ->
-                Napier.e("Movie ID: $movieId")
-                DetailsScreen(
-                    navigator = navHostController,
-                    windowSize = windowSize,
-                    movieId = movieId
-                )
+                DetailsScreen(movieId = movieId) {
+                    navHostController.navigateUp()
+                }
             }
         }
     }

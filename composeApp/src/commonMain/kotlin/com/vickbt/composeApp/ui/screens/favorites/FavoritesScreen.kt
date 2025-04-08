@@ -3,7 +3,6 @@
 package com.vickbt.composeApp.ui.screens.favorites
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,7 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.kmpalette.loader.rememberNetworkLoader
 import com.vickbt.composeApp.ui.components.MovieCardDescription
 import com.vickbt.composeApp.ui.components.appbars.AppBar
@@ -34,16 +32,15 @@ import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun FavoritesScreen(
-    navigator: NavHostController,
     viewModel: FavoritesViewModel = koinViewModel<FavoritesViewModel>(),
-    mainPaddingValues: PaddingValues
+    onNavigate: (String) -> Unit,
 ) {
     val favoritesUiState by viewModel.favoriteMoviesState.collectAsState()
 
     val networkLoader = rememberNetworkLoader(httpClient = koinInject())
 
     Scaffold(
-        modifier = Modifier.padding(mainPaddingValues),
+        modifier = Modifier,
         topBar = { AppBar(title = stringResource(Res.string.title_favorites)) }
     ) { paddingValues ->
         Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
@@ -63,11 +60,12 @@ fun FavoritesScreen(
                 ) {
                     items(items = favoritesUiState.favoriteMovies ?: emptyList()) { favoriteMovie ->
                         MovieCardDescription(
-                            modifier = Modifier.fillMaxWidth().height(260.dp).padding(vertical = 4.dp),
+                            modifier = Modifier.fillMaxWidth().height(260.dp)
+                                .padding(vertical = 4.dp),
                             movie = favoriteMovie,
                             networkLoader = networkLoader
                         ) { movieDetails ->
-                            navigator.navigate("/details/${movieDetails.id}")
+                            onNavigate("/details/${movieDetails.id}")
                         }
                     }
                 }

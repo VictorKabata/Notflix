@@ -1,7 +1,6 @@
 package com.vickbt.composeApp.ui.screens.home
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,7 +31,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.kmpalette.loader.rememberNetworkLoader
 import com.vickbt.composeApp.domain.utils.Enums
@@ -45,7 +43,6 @@ import com.vickbt.composeApp.ui.components.SectionSeparator
 import com.vickbt.composeApp.ui.components.appbars.AppBar
 import com.vickbt.composeApp.ui.navigation.NavigationItem
 import com.vickbt.composeApp.ui.theme.DarkPrimaryColor
-import com.vickbt.composeApp.utils.WindowSize
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.logo_n
 import com.vickbt.shared.resources.popular_movies
@@ -57,13 +54,10 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
-    navigator: NavHostController,
-    windowSize: WindowSize = WindowSize.COMPACT,
     viewModel: HomeViewModel = koinViewModel<HomeViewModel>(),
-    mainPaddingValues: PaddingValues
+    onNavigate: (String) -> Unit,
 ) {
     val scrollState = rememberScrollState()
 
@@ -74,13 +68,11 @@ fun HomeScreen(
     var mediaTypeSelected by remember { mutableStateOf<Enums.MediaType?>(null) }
 
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(mainPaddingValues),
+        modifier = Modifier.fillMaxSize(),
         topBar = {
             AppBar(
                 headerIcon = Res.drawable.logo_n,
-                onActionClicked = { navigator.navigate(NavigationItem.Search.route) }
+                onActionClicked = { onNavigate(NavigationItem.Search.route) }
             )
         }
     ) { paddingValues ->
@@ -132,7 +124,7 @@ fun HomeScreen(
                                 networkLoader = networkLoader,
                                 movie = nowPlayingMovies[currentPage]
                             ) { movie ->
-                                navigator.navigate("/details/${movie.id}")
+                                onNavigate("/details/${movie.id}")
                             }
                         }
 
@@ -173,7 +165,7 @@ fun HomeScreen(
                                                 posterPath = it.posterPath,
                                                 title = it.title,
                                                 onItemClick = { id ->
-                                                    navigator.navigate("/details/$id")
+                                                    onNavigate("/details/$id")
                                                 }
                                             )
                                         }
@@ -215,7 +207,7 @@ fun HomeScreen(
                                                 releaseDate = it.firstAirDate,
                                                 networkLoader = networkLoader,
                                                 onClickItem = { id ->
-                                                    navigator.navigate("/details/$id")
+                                                    onNavigate("/details/$id")
                                                 }
                                             )
                                         }
@@ -251,7 +243,7 @@ fun HomeScreen(
                                                 posterPath = it.posterPath,
                                                 title = it.title,
                                                 onItemClick = { id ->
-                                                    navigator.navigate("/details/$id")
+                                                    onNavigate("/details/$id")
                                                 }
                                             )
                                         }
@@ -293,7 +285,7 @@ fun HomeScreen(
                                                 releaseDate = it.firstAirDate,
                                                 networkLoader = networkLoader,
                                                 onClickItem = { id ->
-                                                    navigator.navigate("/details/$id")
+                                                    onNavigate("/details/$id")
                                                 }
                                             )
                                         }
@@ -335,7 +327,7 @@ fun HomeScreen(
                                                 releaseDate = it.releaseDate,
                                                 networkLoader = networkLoader,
                                                 onClickItem = { id ->
-                                                    navigator.navigate("/details/$id")
+                                                    onNavigate("/details/$id")
                                                 }
                                             )
                                         }
@@ -373,7 +365,7 @@ fun HomeScreen(
                                                 posterPath = it.posterPath,
                                                 title = it.name,
                                                 onItemClick = { id ->
-                                                    navigator.navigate("/details/$id")
+                                                    onNavigate("/details/$id")
                                                 }
                                             )
                                         }
