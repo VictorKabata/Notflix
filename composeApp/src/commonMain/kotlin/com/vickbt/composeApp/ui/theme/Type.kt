@@ -5,105 +5,75 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.nunito
+import network.chaintech.sdpcomposemultiplatform.ssp
 import org.jetbrains.compose.resources.Font
 
 @Composable
 internal fun Typography(): Typography {
-    val nunito = FontFamily(Font(Res.font.nunito))
+    val nunitoFontFamily = FontFamily(Font(Res.font.nunito))
 
     return Typography(
-        displayLarge = TextStyle(
-            fontFamily = nunito,
-            fontWeight = FontWeight.Bold,
-            fontSize = 57.sp,
-            lineHeight = 64.sp
-        ),
-        displayMedium = TextStyle(
-            fontFamily = nunito,
-            fontWeight = FontWeight.Bold,
-            fontSize = 45.sp,
-            lineHeight = 52.sp
-        ),
-        displaySmall = TextStyle(
-            fontFamily = nunito,
-            fontWeight = FontWeight.Medium,
-            fontSize = 36.sp,
-            lineHeight = 44.sp
-        ),
         headlineLarge = TextStyle(
-            fontFamily = nunito,
             fontWeight = FontWeight.Bold,
-            fontSize = 24.sp,
-            lineHeight = 40.sp
+            fontSize = 28.ssp,
+            fontFamily = nunitoFontFamily
         ),
         headlineMedium = TextStyle(
-            fontFamily = nunito,
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 20.sp,
-            lineHeight = 36.sp
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.ssp,
+            fontFamily = nunitoFontFamily
         ),
         headlineSmall = TextStyle(
-            fontFamily = nunito,
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 18.sp,
-            lineHeight = 32.sp
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.ssp,
+            fontFamily = nunitoFontFamily
         ),
         titleLarge = TextStyle(
-            fontFamily = nunito,
-            fontWeight = FontWeight.Bold,
-            fontSize = 22.sp,
-            lineHeight = 28.sp
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 22.ssp,
+            fontFamily = nunitoFontFamily
         ),
         titleMedium = TextStyle(
-            fontFamily = nunito,
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp,
-            lineHeight = 24.sp
+            fontWeight = FontWeight.Medium,
+            fontSize = 16.ssp,
+            fontFamily = nunitoFontFamily
         ),
         titleSmall = TextStyle(
-            fontFamily = nunito,
             fontWeight = FontWeight.Medium,
-            fontSize = 14.sp,
-            lineHeight = 20.sp
+            fontSize = 14.ssp,
+            fontFamily = nunitoFontFamily
         ),
         bodyLarge = TextStyle(
-            fontFamily = nunito,
             fontWeight = FontWeight.Normal,
-            fontSize = 16.sp,
-            lineHeight = 24.sp
+            fontSize = 16.ssp,
+            fontFamily = nunitoFontFamily
         ),
         bodyMedium = TextStyle(
-            fontFamily = nunito,
             fontWeight = FontWeight.Normal,
-            fontSize = 14.sp,
-            lineHeight = 20.sp
+            fontSize = 14.ssp,
+            fontFamily = nunitoFontFamily
         ),
         bodySmall = TextStyle(
-            fontFamily = nunito,
             fontWeight = FontWeight.Normal,
-            fontSize = 12.sp,
-            lineHeight = 16.sp
+            fontSize = 12.ssp,
+            fontFamily = nunitoFontFamily
         ),
         labelLarge = TextStyle(
-            fontFamily = nunito,
             fontWeight = FontWeight.Medium,
-            fontSize = 16.sp,
-            lineHeight = 20.sp
+            fontSize = 14.ssp,
+            fontFamily = nunitoFontFamily
         ),
         labelMedium = TextStyle(
-            fontFamily = nunito,
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 14.sp,
-            lineHeight = 16.sp
+            fontWeight = FontWeight.Medium,
+            fontSize = 12.ssp,
+            fontFamily = nunitoFontFamily
         ),
         labelSmall = TextStyle(
-            fontFamily = nunito,
             fontWeight = FontWeight.Medium,
-            fontSize = 12.sp,
-            lineHeight = 16.sp
+            fontSize = 11.ssp,
+            fontFamily = nunitoFontFamily
         )
     )
 }
