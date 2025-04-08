@@ -29,6 +29,7 @@ ksp = "2.1.10-1.0.31"
 sqlite = "2.5.0-SNAPSHOT"
 room = "2.7.0-rc03"
 paging = "3.3.0-alpha02-0.5.1"
+version = "0.51.0"
 
 #Android Versions
 androidxActivity = "1.10.1"
@@ -52,6 +53,7 @@ compose = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
+version = { id = "com.github.ben-manes.versions", version.ref = "version" }
 
 googleServices-plugin = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 firebase-crashlytics-plugin = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }
