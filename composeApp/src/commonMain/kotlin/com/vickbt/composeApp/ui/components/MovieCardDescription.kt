@@ -32,6 +32,7 @@ import com.vickbt.shared.resources.see_more
 import io.ktor.http.Url
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import network.chaintech.sdpcomposemultiplatform.sdp
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -56,7 +57,10 @@ fun MovieCardDescription(
         }
     }
 
-    Card(modifier = modifier.clickable { onItemClick(movie) }) {
+    Card(
+        modifier = modifier.height(200.sdp).clickable { onItemClick(movie) },
+        shape = MaterialTheme.shapes.extraSmall
+    ) {
         Box {
             //region Movie Cover Image
             AsyncImage(
@@ -74,7 +78,7 @@ fun MovieCardDescription(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(190.dp)
+                    .height(120.dp)
                     .align(Alignment.BottomCenter)
                     .background(
                         Brush.verticalGradient(
@@ -87,7 +91,7 @@ fun MovieCardDescription(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 8.dp)
+                    .padding(4.dp)
                     .align(Alignment.BottomCenter)
             ) {
                 Text(
@@ -95,7 +99,7 @@ fun MovieCardDescription(
                     text = movie.title,
                     fontSize = 24.sp,
                     maxLines = 1,
-                    style = MaterialTheme.typography.headlineLarge,
+                    style = MaterialTheme.typography.titleLarge,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
                     color = dominantColorState.onColor,
@@ -103,10 +107,11 @@ fun MovieCardDescription(
                 )
 
                 ExpandableText(
-                    modifier = Modifier.padding(bottom = 4.dp),
+                    modifier = Modifier,
                     text = movie.overview,
                     overFlowText = overFlowText,
-                    minimizedMaxLines = maxLine
+                    minimizedMaxLines = maxLine,
+                    style = MaterialTheme.typography.bodySmall
                 )
             }
         }

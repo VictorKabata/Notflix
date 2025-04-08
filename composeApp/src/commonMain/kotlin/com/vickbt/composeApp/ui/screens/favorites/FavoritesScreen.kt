@@ -2,6 +2,7 @@
 
 package com.vickbt.composeApp.ui.screens.favorites
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,12 +20,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import com.kmpalette.loader.rememberNetworkLoader
 import com.vickbt.composeApp.ui.components.MovieCardDescription
 import com.vickbt.composeApp.ui.components.appbars.AppBar
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.title_favorites
+import network.chaintech.sdpcomposemultiplatform.sdp
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
@@ -51,17 +52,17 @@ fun FavoritesScreen(
                     modifier = Modifier.align(Alignment.Center),
                     text = "Error:\n${favoritesUiState.error}",
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.headlineMedium
+                    style = MaterialTheme.typography.titleMedium
                 )
             } else {
                 LazyColumn(
                     modifier = Modifier.align(Alignment.Center).fillMaxSize()
-                        .padding(horizontal = 16.dp)
+                        .padding(horizontal = 16.sdp),
+                    verticalArrangement = Arrangement.spacedBy(6.sdp)
                 ) {
                     items(items = favoritesUiState.favoriteMovies ?: emptyList()) { favoriteMovie ->
                         MovieCardDescription(
-                            modifier = Modifier.fillMaxWidth().height(260.dp)
-                                .padding(vertical = 4.dp),
+                            modifier = Modifier.fillMaxWidth(),
                             movie = favoriteMovie,
                             networkLoader = networkLoader
                         ) { movieDetails ->
