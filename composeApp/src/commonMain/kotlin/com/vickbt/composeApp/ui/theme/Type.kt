@@ -27,7 +27,7 @@ internal fun Typography(): Typography {
         ),
         headlineSmall = TextStyle(
             fontWeight = FontWeight.Bold,
-            fontSize = 20.ssp,
+            fontSize = 18.ssp,
             fontFamily = nunitoFontFamily
         ),
         titleLarge = TextStyle(

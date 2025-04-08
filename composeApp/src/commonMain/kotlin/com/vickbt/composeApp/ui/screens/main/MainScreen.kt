@@ -68,7 +68,8 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel<MainViewModel>()) {
                         label = {
                             Text(
                                 text = stringResource(destination.title),
-                                style = MaterialTheme.typography.labelSmall
+                                style = MaterialTheme.typography.labelSmall,
+                                maxLines = 1
                             )
                         },
                         selected = destination.route == currentDestination,

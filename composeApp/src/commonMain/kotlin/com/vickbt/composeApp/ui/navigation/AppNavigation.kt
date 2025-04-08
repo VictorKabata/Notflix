@@ -54,8 +54,9 @@ fun AppNavigation(
             arguments = listOf(navArgument("movieId") { type = NavType.IntType })
         ) { backStackEntry ->
             backStackEntry.arguments?.getInt("movieId")?.let { movieId ->
-                DetailsScreen(movieId = movieId) {
-                    navHostController.navigateUp()
+                DetailsScreen(movieId = movieId) { destination ->
+                    if (destination.isNullOrEmpty()) navHostController.navigateUp()
+                    else navHostController.navigate(destination)
                 }
             }
         }

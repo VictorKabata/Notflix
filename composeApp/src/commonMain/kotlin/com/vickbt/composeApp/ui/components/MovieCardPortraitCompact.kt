@@ -36,7 +36,7 @@ fun MovieCardPortraitCompact(
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(3.sdp)
+        verticalArrangement = Arrangement.spacedBy(4.sdp)
     ) {
         Card(
             modifier = Modifier

@@ -17,19 +17,17 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.vickbt.composeApp.ui.theme.Golden
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.popularity
 import com.vickbt.shared.resources.rating
+import network.chaintech.sdpcomposemultiplatform.sdp
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun MovieRatingSection(popularity: String?, voteAverage: String?) {
+fun MovieRatingSection(modifier: Modifier = Modifier, popularity: String?, voteAverage: String?) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight(),
         horizontalArrangement = Arrangement.SpaceEvenly,
@@ -44,13 +42,13 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
             Text(
                 modifier = Modifier,
                 text = if (popularity.isNullOrEmpty()) "N/A" else popularity,
-                style = MaterialTheme.typography.titleLarge.copy(fontSize = 42.sp),
+                style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.onBackground,
             )
 
             Text(
                 text = stringResource(Res.string.popularity),
-                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+                style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onBackground,
             )
         }
@@ -59,8 +57,8 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
         VerticalDivider(
             modifier = Modifier
                 .fillMaxHeight()
-                .width(2.dp),
-            color = MaterialTheme.colorScheme.onBackground
+                .width(2.sdp),
+            color = MaterialTheme.colorScheme.onSurface
         )
 
         //region Rating
@@ -70,7 +68,7 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
             verticalArrangement = Arrangement.Center
         ) {
             Icon(
-                modifier = Modifier.size(48.dp),
+                modifier = Modifier.size(48.sdp),
                 imageVector = Icons.Rounded.Star,
                 tint = Golden,
                 contentDescription = stringResource(Res.string.rating)
@@ -79,7 +77,7 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
             Text(
                 modifier = Modifier,
                 text = if (voteAverage.isNullOrEmpty()) "N/A" else "$voteAverage/5.0",
-                style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp),
+                style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onBackground,
             )
         }
