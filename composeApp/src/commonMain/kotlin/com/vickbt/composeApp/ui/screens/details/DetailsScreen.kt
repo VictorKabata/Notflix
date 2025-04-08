@@ -38,7 +38,6 @@ import com.vickbt.composeApp.ui.components.appbars.DetailsAppBar
 import com.vickbt.composeApp.ui.components.collapsingToolbar.CollapsingToolbarScaffold
 import com.vickbt.composeApp.ui.components.collapsingToolbar.ScrollStrategy
 import com.vickbt.composeApp.ui.components.collapsingToolbar.rememberCollapsingToolbarScaffoldState
-import com.vickbt.composeApp.utils.WindowSize
 import com.vickbt.composeApp.utils.getPopularity
 import com.vickbt.composeApp.utils.getRating
 import com.vickbt.shared.resources.Res
@@ -53,7 +52,6 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @Composable
 fun DetailsScreen(
     navigator: NavHostController,
-    windowSize: WindowSize = WindowSize.COMPACT,
     viewModel: DetailsViewModel = koinViewModel<DetailsViewModel>(),
     movieId: Int
 ) {

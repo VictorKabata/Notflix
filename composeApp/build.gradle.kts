@@ -49,6 +49,7 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.components.resources)
             implementation(compose.materialIconsExtended)
+            implementation(compose.material3AdaptiveNavigationSuite)
 
             implementation(libs.coroutines)
 
@@ -76,6 +77,8 @@ kotlin {
             implementation(libs.bundles.paging)
 
             implementation(libs.bundles.kmpPalette)
+
+            implementation(libs.adaptive.core)
         }
 
         commonTest.dependencies {

@@ -45,7 +45,6 @@ import com.vickbt.composeApp.ui.components.SectionSeparator
 import com.vickbt.composeApp.ui.components.appbars.AppBar
 import com.vickbt.composeApp.ui.navigation.NavigationItem
 import com.vickbt.composeApp.ui.theme.DarkPrimaryColor
-import com.vickbt.composeApp.utils.WindowSize
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.logo_n
 import com.vickbt.shared.resources.popular_movies
@@ -61,7 +60,6 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun HomeScreen(
     navigator: NavHostController,
-    windowSize: WindowSize = WindowSize.COMPACT,
     viewModel: HomeViewModel = koinViewModel<HomeViewModel>(),
     mainPaddingValues: PaddingValues
 ) {
