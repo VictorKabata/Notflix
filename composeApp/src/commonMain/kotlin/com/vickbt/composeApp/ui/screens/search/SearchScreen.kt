@@ -48,8 +48,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @Composable
 fun SearchScreen(
     viewModel: SearchViewModel = koinViewModel<SearchViewModel>(),
-    windowSize: WindowSizeClass,
-    onNavigate: (String) -> Unit,
+    onNavigate: (String?) -> Unit,
 ) {
     val searchUiState by viewModel.searchUiState.collectAsState()
 
@@ -77,6 +76,7 @@ fun SearchScreen(
                 IconButton(onClick = {
                     activeState = true
                     searchQuery = ""
+                    onNavigate(null)
                 }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Rounded.ArrowBack,

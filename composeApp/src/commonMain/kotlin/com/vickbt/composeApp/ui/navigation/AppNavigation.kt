@@ -38,9 +38,10 @@ fun AppNavigation(
         }
 
         composable(route = NavigationItem.Search.route) {
-            SearchScreen(windowSize = windowSize) {
-                navHostController.navigate(it) {
-                    popUpTo(NavigationItem.Search.route)
+            SearchScreen { destination ->
+                if (destination.isNullOrEmpty()) navHostController.navigateUp()
+                else navHostController.navigate(destination) {
+                    popUpTo(NavigationItem.Home.route)
                 }
             }
         }
