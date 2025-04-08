@@ -1,6 +1,7 @@
 package com.vickbt.composeApp.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -27,7 +27,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.kmpalette.loader.NetworkLoader
 import com.kmpalette.loader.rememberNetworkLoader
@@ -44,11 +43,12 @@ import com.vickbt.shared.resources.unknown_movie
 import io.ktor.http.Url
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import network.chaintech.sdpcomposemultiplatform.sdp
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MovieCardLandscape(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.width(200.sdp).height(144.sdp),
     movieId: Int,
     backdropPath: String? = null,
     title: String? = null,
@@ -71,17 +71,18 @@ fun MovieCardLandscape(
     }
 
     Card(
-        modifier = modifier.clickable { onClickItem(movieId) },
-        elevation = CardDefaults.cardElevation(8.dp),
-        shape = RoundedCornerShape(4.dp)
+        modifier = modifier.width(200.sdp).height(144.sdp).clickable { onClickItem(movieId) },
+        elevation = CardDefaults.cardElevation(8.sdp),
+        shape = MaterialTheme.shapes.extraSmall
     ) {
-        Box(modifier = modifier) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            //region Movie Backdrop
             AsyncImage(
                 modifier = Modifier
                     .fillMaxSize()
                     .align(Alignment.Center),
                 model = backdropPath?.loadImage(),
-                contentDescription = null,
+                contentDescription = title,
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
             )
@@ -91,7 +92,7 @@ fun MovieCardLandscape(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp)
+                    .height(80.sdp)
                     .background(
                         Brush.verticalGradient(
                             listOf(
@@ -107,15 +108,15 @@ fun MovieCardLandscape(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp)
+                    .padding(4.sdp)
                     .align(Alignment.BottomCenter)
             ) {
                 //region Movie Title
                 Text(
-                    modifier = Modifier,
+                    modifier = Modifier.basicMarquee(),
                     text = title ?: stringResource(Res.string.unknown_movie),
-                    maxLines = 2,
-                    style = MaterialTheme.typography.headlineLarge,
+                    maxLines = 1,
+                    style = MaterialTheme.typography.titleMedium,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
                     color = dominantColorState.onColor
@@ -134,7 +135,7 @@ fun MovieCardLandscape(
                         modifier = Modifier,
                         value = voteAverage?.getRating()?.toFloat() ?: 0f,
                         numOfStars = 5,
-                        size = 15.dp,
+                        size = 10.sdp,
                         stepSize = StepSize.HALF,
                         isIndicator = true,
                         style = RatingBarStyle.Fill()
@@ -143,9 +144,9 @@ fun MovieCardLandscape(
                     releaseDate?.let {
                         HorizontalDivider(
                             modifier = Modifier
-                                .padding(horizontal = 4.dp)
-                                .width(1.dp)
-                                .height(13.dp),
+                                .padding(horizontal = 4.sdp)
+                                .width(1.sdp)
+                                .height(13.sdp),
                             color = dominantColorState.onColor
                         )
 
@@ -153,7 +154,7 @@ fun MovieCardLandscape(
                             modifier = Modifier,
                             text = releaseDate.getReleaseDate().capitalizeEachWord(),
                             maxLines = 1,
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = MaterialTheme.typography.bodySmall,
                             overflow = TextOverflow.Ellipsis,
                             textAlign = TextAlign.Start,
                             color = dominantColorState.onColor

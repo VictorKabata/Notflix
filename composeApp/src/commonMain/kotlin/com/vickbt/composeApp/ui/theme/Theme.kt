@@ -64,7 +64,7 @@ fun NotflixTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography(),
-        shapes = Shapes
+        shapes = Shapes()
     ) {
         content()
     }

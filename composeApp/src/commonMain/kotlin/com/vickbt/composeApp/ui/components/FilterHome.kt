@@ -92,14 +92,14 @@ fun FilterHome(
                     Text(
                         modifier = Modifier.padding(vertical = 2.dp),
                         text = stringResource(Res.string.tv_shows),
-                        style = MaterialTheme.typography.labelMedium,
+                        style = MaterialTheme.typography.labelSmall,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         color = MaterialTheme.colorScheme.onBackground,
                         textAlign = TextAlign.Center
                     )
                 },
-                shape = RoundedCornerShape(16.dp),
+                shape = MaterialTheme.shapes.large,
                 border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.onBackground)
             )
         }
@@ -114,14 +114,14 @@ fun FilterHome(
                     Text(
                         modifier = Modifier.padding(vertical = 2.dp),
                         text = stringResource(Res.string.movies),
-                        style = MaterialTheme.typography.labelMedium,
+                        style = MaterialTheme.typography.labelSmall,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         color = MaterialTheme.colorScheme.onBackground,
                         textAlign = TextAlign.Center
                     )
                 },
-                shape = RoundedCornerShape(16.dp),
+                shape = MaterialTheme.shapes.large,
                 border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.onBackground)
             )
         }
@@ -132,14 +132,14 @@ fun FilterHome(
                 Text(
                     modifier = Modifier.padding(vertical = 2.dp),
                     text = stringResource(Res.string.categories),
-                    style = MaterialTheme.typography.labelMedium,
+                    style = MaterialTheme.typography.labelSmall,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     color = MaterialTheme.colorScheme.onBackground,
                     textAlign = TextAlign.Center
                 )
             },
-            shape = RoundedCornerShape(16.dp),
+            shape = MaterialTheme.shapes.large,
             trailingIcon = {
                 Icon(
                     imageVector = Icons.Rounded.KeyboardArrowDown,

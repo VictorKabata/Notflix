@@ -1,14 +1,13 @@
 package com.vickbt.composeApp.ui.components
 
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -19,12 +18,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.vickbt.composeApp.utils.loadImage
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.unknown_movie
+import network.chaintech.sdpcomposemultiplatform.sdp
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -37,32 +36,29 @@ fun MovieCardPortraitCompact(
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(3.dp)
+        verticalArrangement = Arrangement.spacedBy(3.sdp)
     ) {
         Card(
             modifier = Modifier
-                .width(150.dp)
+                .width(88.sdp)
                 .fillMaxHeight()
                 .clickable { onItemClick(movieId) },
-            elevation = CardDefaults.cardElevation(8.dp),
-            shape = RoundedCornerShape(4.dp)
+            elevation = CardDefaults.cardElevation(8.sdp),
+            shape = MaterialTheme.shapes.extraSmall
         ) {
             AsyncImage(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(220.dp)
-                    .sizeIn(minHeight = 30.dp),
+                modifier = Modifier.fillMaxSize(),
                 model = posterPath?.loadImage(),
-                contentDescription = "Trending movie poster",
+                contentDescription = title,
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
             )
         }
 
         Text(
-            modifier = Modifier.width(145.dp),
+            modifier = Modifier.sizeIn(maxWidth = 88.sdp).basicMarquee(),
             text = title ?: stringResource(Res.string.unknown_movie),
-            style = MaterialTheme.typography.headlineSmall,
+            style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurface,
             fontSize = 14.sp,
             maxLines = 1,

@@ -62,17 +62,17 @@ internal fun Typography(): Typography {
         ),
         labelLarge = TextStyle(
             fontWeight = FontWeight.Medium,
-            fontSize = 14.ssp,
+            fontSize = 16.ssp,
             fontFamily = nunitoFontFamily
         ),
         labelMedium = TextStyle(
             fontWeight = FontWeight.Medium,
-            fontSize = 12.ssp,
+            fontSize = 14.ssp,
             fontFamily = nunitoFontFamily
         ),
         labelSmall = TextStyle(
             fontWeight = FontWeight.Medium,
-            fontSize = 11.ssp,
+            fontSize = 12.ssp,
             fontFamily = nunitoFontFamily
         )
     )

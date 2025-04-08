@@ -1,7 +1,6 @@
 package com.vickbt.composeApp.ui.components
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -27,8 +26,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.kmpalette.loader.NetworkLoader
 import com.kmpalette.loader.rememberNetworkLoader
@@ -44,6 +41,7 @@ import com.vickbt.shared.resources.unknown_movie
 import io.ktor.http.Url
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import network.chaintech.sdpcomposemultiplatform.sdp
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -66,7 +64,7 @@ fun MovieCardPager(
         }
     }
 
-    Card(modifier = modifier.clickable { onItemClick(movie) }) {
+    Card(modifier = modifier.clickable { onItemClick(movie) }, shape = MaterialTheme.shapes.extraSmall) {
         Box {
             //region Movie Cover Image
             AsyncImage(
@@ -84,7 +82,7 @@ fun MovieCardPager(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(190.dp)
+                    .height(190.sdp)
                     .align(Alignment.BottomCenter)
                     .background(
                         Brush.verticalGradient(
@@ -97,15 +95,15 @@ fun MovieCardPager(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 12.dp, vertical = 8.dp)
+                    .padding(horizontal = 12.sdp, vertical = 8.sdp)
                     .align(Alignment.BottomCenter),
-                verticalArrangement = Arrangement.spacedBy(2.dp)
+                verticalArrangement = Arrangement.spacedBy(2.sdp)
             ) {
                 Text(
                     modifier = Modifier,
                     text = movie.title ?: stringResource(Res.string.unknown_movie),
                     maxLines = 2,
-                    style = MaterialTheme.typography.headlineLarge.copy(fontSize = 26.sp),
+                    style = MaterialTheme.typography.titleLarge,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
                     color = dominantColorState.onColor,
@@ -116,8 +114,8 @@ fun MovieCardPager(
                         modifier = Modifier,
                         value = it.getRating().toFloat(),
                         numOfStars = 5,
-                        size = 13.dp,
-                        spaceBetween = 1.dp,
+                        size = 13.sdp,
+                        spaceBetween = 1.sdp,
                         stepSize = StepSize.HALF,
                         isIndicator = true,
                         style = RatingBarStyle.Fill()
@@ -128,13 +126,12 @@ fun MovieCardPager(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MovieCardPagerIndicator(
     pagerState: PagerState,
     modifier: Modifier = Modifier,
-    indicatorSize: Dp = 6.dp,
-    spacing: Dp = 6.dp,
+    indicatorSize: Dp = 6.sdp,
+    spacing: Dp = 6.sdp,
     inactiveColor: Color = Color.LightGray,
     activeColor: Color = Color.DarkGray
 ) {

@@ -23,8 +23,8 @@ import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
+import network.chaintech.sdpcomposemultiplatform.sdp
 
 sealed interface StepSize {
     object ONE : StepSize
@@ -71,8 +71,8 @@ internal fun RatingBar(
     value: Float,
     modifier: Modifier = Modifier,
     numOfStars: Int = 5,
-    size: Dp = 32.dp,
-    spaceBetween: Dp = 1.2.dp,
+    size: Dp = 32.sdp,
+    spaceBetween: Dp = 1.2.sdp,
     isIndicator: Boolean = false,
     stepSize: StepSize = StepSize.ONE,
     hideInactiveStars: Boolean = false,
@@ -182,8 +182,8 @@ fun ComposeStars(
                 style = style,
                 modifier = Modifier
                     .padding(
-                        start = if (i > 1) spaceBetween else 0.dp,
-                        end = if (i < numOfStars) spaceBetween else 0.dp
+                        start = if (i > 1) spaceBetween else 0.sdp,
+                        end = if (i < numOfStars) spaceBetween else 0.sdp
                     )
                     .size(size = size)
                     .testTag("RatingStar"),
