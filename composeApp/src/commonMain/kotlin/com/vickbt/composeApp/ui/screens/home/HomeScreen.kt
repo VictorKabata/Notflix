@@ -1,5 +1,6 @@
 package com.vickbt.composeApp.ui.screens.home
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,10 +18,15 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,17 +35,23 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.kmpalette.loader.rememberNetworkLoader
+import com.vickbt.composeApp.domain.utils.Enums
+import com.vickbt.composeApp.ui.components.FilterHome
 import com.vickbt.composeApp.ui.components.MovieCardLandscape
 import com.vickbt.composeApp.ui.components.MovieCardPager
 import com.vickbt.composeApp.ui.components.MovieCardPagerIndicator
 import com.vickbt.composeApp.ui.components.MovieCardPortraitCompact
 import com.vickbt.composeApp.ui.components.SectionSeparator
 import com.vickbt.composeApp.ui.components.appbars.AppBar
+import com.vickbt.composeApp.ui.navigation.NavigationItem
 import com.vickbt.composeApp.ui.theme.DarkPrimaryColor
 import com.vickbt.composeApp.utils.WindowSize
 import com.vickbt.shared.resources.Res
+import com.vickbt.shared.resources.logo_n
 import com.vickbt.shared.resources.popular_movies
+import com.vickbt.shared.resources.top_rated_tv_shows
 import com.vickbt.shared.resources.trending_movies
+import com.vickbt.shared.resources.trending_tv_shows
 import com.vickbt.shared.resources.upcoming_movies
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
@@ -59,11 +71,18 @@ fun HomeScreen(
 
     val networkLoader = rememberNetworkLoader(httpClient = koinInject())
 
+    var mediaTypeSelected by remember { mutableStateOf<Enums.MediaType?>(null) }
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
             .padding(mainPaddingValues),
-        topBar = { AppBar("Home") }
+        topBar = {
+            AppBar(
+                headerIcon = Res.drawable.logo_n,
+                onActionClicked = { navigator.navigate(NavigationItem.Search.route) }
+            )
+        }
     ) { paddingValues ->
 
         // region Home section
@@ -78,7 +97,8 @@ fun HomeScreen(
                 Text(
                     modifier = Modifier.align(Alignment.Center),
                     text = "Error:\n${homeUiState.error}",
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.headlineMedium
                 )
             } else {
                 Column(
@@ -88,6 +108,14 @@ fun HomeScreen(
                         .align(Alignment.Center),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+                    //region Home Filters
+                    FilterHome(
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                        onFilterClicked = { mediaTypeSelected = it },
+                        onFilterClosed = { mediaTypeSelected = null }
+                    )
+                    //endregion
+
                     //region Now Playing Movies
                     homeUiState.nowPlayingMovies?.let { nowPlayingMovies ->
                         val pagerState =
@@ -100,7 +128,7 @@ fun HomeScreen(
                             pageSpacing = 8.dp
                         ) { currentPage ->
                             MovieCardPager(
-                                modifier = Modifier.fillMaxWidth().height(280.dp),
+                                modifier = Modifier.fillMaxWidth().height(420.dp),
                                 networkLoader = networkLoader,
                                 movie = nowPlayingMovies[currentPage]
                             ) { movie ->
@@ -119,31 +147,79 @@ fun HomeScreen(
                     //endregion
 
                     //region Trending Movies
-                    homeUiState.trendingMovies?.let { movies ->
-                        val trendingMovies = movies.collectAsLazyPagingItems()
+                    AnimatedVisibility(visible = mediaTypeSelected == null || mediaTypeSelected == Enums.MediaType.MOVIE) {
+                        homeUiState.trendingMovies?.let { movies ->
+                            val trendingMovies = movies.collectAsLazyPagingItems()
 
-                        SectionSeparator(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentHeight(),
-                            sectionTitle = stringResource(Res.string.trending_movies)
-                        )
+                            Column {
+                                SectionSeparator(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .wrapContentHeight(),
+                                    sectionTitle = stringResource(Res.string.trending_movies)
+                                )
 
-                        LazyRow(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentHeight(),
-                            contentPadding = PaddingValues(horizontal = 16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(10.dp)
-                        ) {
-                            items(trendingMovies.itemCount) { index ->
-                                trendingMovies[index]?.let {
-                                    MovieCardPortraitCompact(
-                                        movie = it,
-                                        onItemClick = { movie ->
-                                            navigator.navigate("/details/${movie.id}")
+                                LazyRow(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .wrapContentHeight(),
+                                    contentPadding = PaddingValues(horizontal = 16.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                ) {
+                                    items(trendingMovies.itemCount) { index ->
+                                        trendingMovies[index]?.let {
+                                            MovieCardPortraitCompact(
+                                                movieId = it.id,
+                                                posterPath = it.posterPath,
+                                                title = it.title,
+                                                onItemClick = { id ->
+                                                    navigator.navigate("/details/$id")
+                                                }
+                                            )
                                         }
-                                    )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    //endregion
+
+                    //region Top Rated Tv Shows
+                    AnimatedVisibility(visible = mediaTypeSelected == null || mediaTypeSelected == Enums.MediaType.TV_SHOW) {
+                        homeUiState.topRatedTvShows?.let { movies ->
+                            val topRatedTvShows = movies.collectAsLazyPagingItems()
+
+                            Column {
+                                SectionSeparator(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .wrapContentHeight(),
+                                    sectionTitle = stringResource(Res.string.top_rated_tv_shows)
+                                )
+
+                                LazyRow(
+                                    contentPadding = PaddingValues(horizontal = 16.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(14.dp),
+                                    modifier = Modifier.wrapContentHeight()
+                                ) {
+                                    items(topRatedTvShows.itemCount) { index ->
+                                        topRatedTvShows[index]?.let {
+                                            MovieCardLandscape(
+                                                modifier = Modifier
+                                                    .width(300.dp)
+                                                    .height(245.dp),
+                                                movieId = it.id,
+                                                backdropPath = it.backdropPath,
+                                                title = it.name,
+                                                voteAverage = it.voteAverage,
+                                                releaseDate = it.firstAirDate,
+                                                networkLoader = networkLoader,
+                                                onClickItem = { id ->
+                                                    navigator.navigate("/details/$id")
+                                                }
+                                            )
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -151,33 +227,77 @@ fun HomeScreen(
                     //endregion
 
                     //region Upcoming Movies
-                    homeUiState.upcomingMovies?.let { movies ->
-                        val upcomingMovies = movies.collectAsLazyPagingItems()
+                    AnimatedVisibility(visible = mediaTypeSelected == null || mediaTypeSelected == Enums.MediaType.MOVIE) {
+                        homeUiState.upcomingMovies?.let { movies ->
+                            val upcomingMovies = movies.collectAsLazyPagingItems()
 
-                        SectionSeparator(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentHeight(),
-                            sectionTitle = stringResource(Res.string.upcoming_movies)
-                        )
+                            Column(modifier = Modifier) {
+                                SectionSeparator(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .wrapContentHeight(),
+                                    sectionTitle = stringResource(Res.string.upcoming_movies)
+                                )
 
-                        LazyRow(
-                            contentPadding = PaddingValues(horizontal = 16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(14.dp),
-                            modifier = Modifier.wrapContentHeight()
-                        ) {
-                            items(upcomingMovies.itemCount) { index ->
-                                upcomingMovies[index]?.let {
-                                    MovieCardLandscape(
-                                        modifier = Modifier
-                                            .width(300.dp)
-                                            .height(245.dp),
-                                        movie = it,
-                                        networkLoader = networkLoader,
-                                        onClickItem = { movie ->
-                                            navigator.navigate("/details/${movie.id}")
+                                LazyRow(
+                                    modifier = Modifier.wrapContentHeight(),
+                                    contentPadding = PaddingValues(horizontal = 16.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                ) {
+                                    items(upcomingMovies.itemCount) { index ->
+                                        upcomingMovies[index]?.let {
+                                            MovieCardPortraitCompact(
+                                                movieId = it.id,
+                                                posterPath = it.posterPath,
+                                                title = it.title,
+                                                onItemClick = { id ->
+                                                    navigator.navigate("/details/$id")
+                                                }
+                                            )
                                         }
-                                    )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    //endregion
+
+                    //region Trending Tv Shows
+                    AnimatedVisibility(visible = mediaTypeSelected == null || mediaTypeSelected == Enums.MediaType.TV_SHOW) {
+                        homeUiState.trendingTvShows?.let { tvShows ->
+                            val trendingTvShows = tvShows.collectAsLazyPagingItems()
+
+                            Column {
+                                SectionSeparator(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .wrapContentHeight(),
+                                    sectionTitle = stringResource(Res.string.trending_tv_shows)
+                                )
+
+                                LazyRow(
+                                    contentPadding = PaddingValues(horizontal = 16.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(14.dp),
+                                    modifier = Modifier.wrapContentHeight()
+                                ) {
+                                    items(trendingTvShows.itemCount) { index ->
+                                        trendingTvShows[index]?.let {
+                                            MovieCardLandscape(
+                                                modifier = Modifier
+                                                    .width(300.dp)
+                                                    .height(245.dp),
+                                                movieId = it.id,
+                                                backdropPath = it.backdropPath,
+                                                title = it.name,
+                                                voteAverage = it.voteAverage,
+                                                releaseDate = it.firstAirDate,
+                                                networkLoader = networkLoader,
+                                                onClickItem = { id ->
+                                                    navigator.navigate("/details/$id")
+                                                }
+                                            )
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -185,36 +305,84 @@ fun HomeScreen(
                     //endregion
 
                     //region Popular Movies
-                    homeUiState.popularMovies?.let { movies ->
-                        val popularMovies = movies.collectAsLazyPagingItems()
+                    AnimatedVisibility(visible = mediaTypeSelected == null || mediaTypeSelected == Enums.MediaType.MOVIE) {
+                        homeUiState.popularMovies?.let { movies ->
+                            val popularMovies = movies.collectAsLazyPagingItems()
 
-                        Column(modifier = Modifier.padding(bottom = 90.dp)) {
-                            SectionSeparator(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .wrapContentHeight(),
-                                sectionTitle = stringResource(Res.string.popular_movies)
-                            )
+                            Column {
+                                SectionSeparator(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .wrapContentHeight(),
+                                    sectionTitle = stringResource(Res.string.popular_movies)
+                                )
 
-                            LazyRow(
-                                modifier = Modifier.wrapContentHeight(),
-                                contentPadding = PaddingValues(horizontal = 16.dp),
-                                horizontalArrangement = Arrangement.spacedBy(10.dp),
-                            ) {
-                                items(popularMovies.itemCount) { index ->
-                                    popularMovies[index]?.let {
-                                        MovieCardPortraitCompact(
-                                            movie = it,
-                                            onItemClick = { movie ->
-                                                navigator.navigate("/details/${movie.id}")
-                                            }
-                                        )
+                                LazyRow(
+                                    contentPadding = PaddingValues(horizontal = 16.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(14.dp),
+                                    modifier = Modifier.wrapContentHeight()
+                                ) {
+                                    items(popularMovies.itemCount) { index ->
+                                        popularMovies[index]?.let {
+                                            MovieCardLandscape(
+                                                modifier = Modifier
+                                                    .width(300.dp)
+                                                    .height(245.dp),
+                                                movieId = it.id,
+                                                backdropPath = it.backdropPath,
+                                                title = it.title,
+                                                voteAverage = it.voteAverage,
+                                                releaseDate = it.releaseDate,
+                                                networkLoader = networkLoader,
+                                                onClickItem = { id ->
+                                                    navigator.navigate("/details/$id")
+                                                }
+                                            )
+                                        }
                                     }
                                 }
                             }
                         }
-                        //endregion
                     }
+                    //endregion
+
+                    //region Popular Tv Shows
+                    AnimatedVisibility(visible = mediaTypeSelected == null || mediaTypeSelected == Enums.MediaType.TV_SHOW) {
+                        homeUiState.popularTvShows?.let { tvShows ->
+                            val popularTvShows = tvShows.collectAsLazyPagingItems()
+
+                            Column {
+                                SectionSeparator(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .wrapContentHeight(),
+                                    sectionTitle = stringResource(Res.string.trending_tv_shows)
+                                )
+
+                                LazyRow(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .wrapContentHeight(),
+                                    contentPadding = PaddingValues(horizontal = 16.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                ) {
+                                    items(popularTvShows.itemCount) { index ->
+                                        popularTvShows[index]?.let {
+                                            MovieCardPortraitCompact(
+                                                movieId = it.id,
+                                                posterPath = it.posterPath,
+                                                title = it.name,
+                                                onItemClick = { id ->
+                                                    navigator.navigate("/details/$id")
+                                                }
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    //endregion
                 }
             }
             // endregion

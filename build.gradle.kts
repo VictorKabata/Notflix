@@ -1,3 +1,6 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import java.util.Locale
+
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
@@ -16,6 +19,7 @@ plugins {
 
     alias(libs.plugins.ktLint)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.version)
 }
 
 allprojects {
@@ -27,6 +31,7 @@ allprojects {
 }
 
 subprojects {
+    //region KtLint Configs
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
     ktlint {
         debug.set(true)
@@ -40,14 +45,37 @@ subprojects {
             include("**/kotlin/**")
         }
     }
+    //endregion
 
+    //region Detekt Configs
     apply(plugin = "io.gitlab.arturbosch.detekt")
     detekt {
         parallel = true
         config = files("${project.rootDir}/config/detekt/detekt.yml")
     }
-}
+    //endregion
 
-tasks.register("clean").configure {
-    delete("build") // dependencyUpdates task, for example, writes here
+    //region Gradle Version Configs
+    fun isNonStable(version: String): Boolean {
+        val stableKeyword =
+            listOf("RELEASE", "FINAL", "GA").any {
+                version.uppercase(Locale.getDefault()).contains(it)
+            }
+        val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+        val isStable = stableKeyword || regex.matches(version)
+        return isStable.not()
+    }
+
+    apply(plugin = "com.github.ben-manes.versions")
+    tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
+        rejectVersionIf { isNonStable(candidate.version) && !isNonStable(currentVersion) }
+
+        checkForGradleUpdate = true
+        gradleReleaseChannel = "current"
+
+        outputFormatter = "html"
+        outputDir = "${project.rootDir}/build/reports"
+        reportfileName = "dependencies_report"
+    }
+    //endregion
 }

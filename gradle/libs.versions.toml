@@ -1,21 +1,21 @@
 [versions]
-kotlin = "2.0.20"
+kotlin = "2.1.10"
 gradle = "8.1.4"
 ktLint = "11.6.0"
 detekt = "1.23.6"
 googleServices = "4.4.2"
-firebaseAppDistribution = "5.0.0"
-firebaseCrashlytics = "3.0.2"
+firebaseAppDistribution = "5.1.1"
+firebaseCrashlytics = "3.0.3"
 firebasePerformance = "1.4.2"
 
 # Kotlin Multiplatform Version
-kotlinxCoroutines = "1.9.0"
+kotlinxCoroutines = "1.10.1"
 koinCore = "3.5.6"
 koinCompose = "1.1.5"
 koinComposeViewModel = "1.2.0-Beta5"
 koinAndroid = "3.5.6"
 koinAndroidxCompose = "3.5.6"
-composeMultiplatform = "1.6.11"
+composeMultiplatform = "1.7.3"
 kotlinxSerializationJson = "1.7.2"
 kotlinxDateTime = "0.6.1"
 napier = "2.7.1"
@@ -23,16 +23,17 @@ ktor = "2.3.12"
 buildKonfig = "0.15.2"
 navigation = "2.7.0-alpha07"
 coil = "3.0.0-alpha06"
-datastore = "1.1.1"
+datastore = "1.1.4"
 kmpPalette = "3.1.0"
-ksp = "2.0.20-1.0.24"
+ksp = "2.1.10-1.0.31"
 sqlite = "2.5.0-SNAPSHOT"
-room = "2.7.0-alpha08"
+room = "2.7.0-rc03"
 paging = "3.3.0-alpha02-0.5.1"
+version = "0.51.0"
 
 #Android Versions
-androidxActivity = "1.9.2"
-firebaseBOM = "33.3.0"
+androidxActivity = "1.10.1"
+firebaseBOM = "33.12.0"
 leakCanary = "2.12"
 
 mockk = "1.13.8"
@@ -52,6 +53,7 @@ compose = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
+version = { id = "com.github.ben-manes.versions", version.ref = "version" }
 
 googleServices-plugin = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 firebase-crashlytics-plugin = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }

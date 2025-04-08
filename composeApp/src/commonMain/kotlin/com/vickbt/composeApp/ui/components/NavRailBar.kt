@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.vickbt.composeApp.ui.navigation.NavigationItem
@@ -46,12 +47,13 @@ fun NavRailBar(
                 label = {
                     Text(
                         text = stringResource(item.title),
-                        style = MaterialTheme.typography.labelSmall
+                        style = MaterialTheme.typography.labelMedium
                     )
                 },
                 colors = NavigationRailItemDefaults.colors(
-                    selectedIconColor = PrimaryColor,
-                    unselectedIconColor = Gray
+                    selectedIconColor = MaterialTheme.colorScheme.onSurface,
+                    unselectedIconColor = Gray,
+                    indicatorColor = Color.Transparent
                 ),
                 alwaysShowLabel = false,
                 selected = isSelected,

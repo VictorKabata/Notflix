@@ -28,12 +28,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.kmpalette.loader.NetworkLoader
 import com.kmpalette.loader.rememberNetworkLoader
 import com.kmpalette.rememberDominantColorState
-import com.vickbt.composeApp.domain.models.Movie
 import com.vickbt.composeApp.ui.components.ratingbar.RatingBar
 import com.vickbt.composeApp.ui.components.ratingbar.RatingBarStyle
 import com.vickbt.composeApp.ui.components.ratingbar.StepSize
@@ -51,9 +49,13 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MovieCardLandscape(
     modifier: Modifier = Modifier,
-    movie: Movie,
+    movieId: Int,
+    backdropPath: String? = null,
+    title: String? = null,
+    voteAverage: Double? = null,
+    releaseDate: String? = null,
     networkLoader: NetworkLoader = rememberNetworkLoader(),
-    onClickItem: (Movie) -> Unit
+    onClickItem: (Int) -> Unit
 ) {
     val dominantColorState = rememberDominantColorState(
         loader = networkLoader,
@@ -62,14 +64,14 @@ fun MovieCardLandscape(
         coroutineContext = Dispatchers.IO
     )
 
-    movie.backdropPath?.loadImage()?.let {
+    backdropPath?.loadImage()?.let {
         LaunchedEffect(it) {
             dominantColorState.updateFrom(Url(it))
         }
     }
 
     Card(
-        modifier = modifier.clickable { onClickItem(movie) },
+        modifier = modifier.clickable { onClickItem(movieId) },
         elevation = CardDefaults.cardElevation(8.dp),
         shape = RoundedCornerShape(4.dp)
     ) {
@@ -78,7 +80,7 @@ fun MovieCardLandscape(
                 modifier = Modifier
                     .fillMaxSize()
                     .align(Alignment.Center),
-                model = movie.backdropPath?.loadImage(),
+                model = backdropPath?.loadImage(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
@@ -111,10 +113,9 @@ fun MovieCardLandscape(
                 //region Movie Title
                 Text(
                     modifier = Modifier,
-                    text = movie.title ?: stringResource(Res.string.unknown_movie),
-                    fontSize = 18.sp,
+                    text = title ?: stringResource(Res.string.unknown_movie),
                     maxLines = 2,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.headlineLarge,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
                     color = dominantColorState.onColor
@@ -131,7 +132,7 @@ fun MovieCardLandscape(
                 ) {
                     RatingBar(
                         modifier = Modifier,
-                        value = movie.voteAverage?.getRating()?.toFloat() ?: 0f,
+                        value = voteAverage?.getRating()?.toFloat() ?: 0f,
                         numOfStars = 5,
                         size = 15.dp,
                         stepSize = StepSize.HALF,
@@ -139,7 +140,7 @@ fun MovieCardLandscape(
                         style = RatingBarStyle.Fill()
                     )
 
-                    movie.releaseDate?.let {
+                    releaseDate?.let {
                         HorizontalDivider(
                             modifier = Modifier
                                 .padding(horizontal = 4.dp)
@@ -150,10 +151,9 @@ fun MovieCardLandscape(
 
                         Text(
                             modifier = Modifier,
-                            text = movie.releaseDate.getReleaseDate().capitalizeEachWord(),
-                            fontSize = 14.sp,
+                            text = releaseDate.getReleaseDate().capitalizeEachWord(),
                             maxLines = 1,
-                            style = MaterialTheme.typography.labelSmall,
+                            style = MaterialTheme.typography.bodyMedium,
                             overflow = TextOverflow.Ellipsis,
                             textAlign = TextAlign.Start,
                             color = dominantColorState.onColor

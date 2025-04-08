@@ -6,10 +6,18 @@
     <string name="title_settings">Settings</string>
     <string name="title_details">Details</string>
 
+    <string name="movies">Movies</string>
+    <string name="tv_shows">TV Shows</string>
+    <string name="categories">Categories</string>
+
     <string name="trending_movies">Trending Movies</string>
     <string name="popular_movies">Popular Movies</string>
     <string name="upcoming_movies">Upcoming Movies</string>
     <string name="view_all">View All</string>
+
+    <string name="trending_tv_shows">Trending TV Shows</string>
+    <string name="top_rated_tv_shows">Top Rated TV Shows</string>
+    <string name="popular_tv_shows">Popular TV Shows</string>
 
     <string name="share">Share</string>
 

@@ -17,15 +17,15 @@ fun SectionSeparator(
     sectionTitle: String
 ) {
     Row(
-        modifier = modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 8.dp),
+        modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(
-            modifier = Modifier,
+            modifier = Modifier.padding(all = 16.dp),
             text = sectionTitle,
             color = MaterialTheme.colorScheme.onSurface,
-            style = MaterialTheme.typography.titleLarge,
+            style = MaterialTheme.typography.headlineMedium,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )

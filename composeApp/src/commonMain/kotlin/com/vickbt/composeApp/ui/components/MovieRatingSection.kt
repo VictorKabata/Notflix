@@ -17,12 +17,13 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.vickbt.composeApp.ui.theme.Golden
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.popularity
 import com.vickbt.shared.resources.rating
-import com.vickbt.composeApp.ui.theme.Golden
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -43,16 +44,14 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
             Text(
                 modifier = Modifier,
                 text = if (popularity.isNullOrEmpty()) "N/A" else popularity,
-                style = MaterialTheme.typography.titleLarge,
-                fontSize = 42.sp,
-                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.titleLarge.copy(fontSize = 42.sp),
+                color = MaterialTheme.colorScheme.onBackground,
             )
 
             Text(
                 text = stringResource(Res.string.popularity),
-                style = MaterialTheme.typography.titleMedium,
-                fontSize = 18.sp,
-                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+                color = MaterialTheme.colorScheme.onBackground,
             )
         }
         //endregion
@@ -61,7 +60,7 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
             modifier = Modifier
                 .fillMaxHeight()
                 .width(2.dp),
-            color = MaterialTheme.colorScheme.onSurface
+            color = MaterialTheme.colorScheme.onBackground
         )
 
         //region Rating
@@ -80,9 +79,8 @@ fun MovieRatingSection(popularity: String?, voteAverage: String?) {
             Text(
                 modifier = Modifier,
                 text = if (voteAverage.isNullOrEmpty()) "N/A" else "$voteAverage/5.0",
-                style = MaterialTheme.typography.titleMedium,
-                fontSize = 20.sp,
-                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp),
+                color = MaterialTheme.colorScheme.onBackground,
             )
         }
         //endregion

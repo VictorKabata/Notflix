@@ -52,7 +52,7 @@ fun SettingsScreen(
 
     Scaffold(
         modifier = Modifier.padding(mainPaddingValues),
-        topBar = { AppBar(stringResource(Res.string.title_settings)) },
+        topBar = { AppBar(title = stringResource(Res.string.title_settings)) },
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
             PreferencesGroup(title = stringResource(Res.string.title_personalisation)) {
