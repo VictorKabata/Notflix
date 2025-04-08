@@ -27,7 +27,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.kmpalette.loader.rememberNetworkLoader
 import com.vickbt.composeApp.ui.components.ItemMovieCast
@@ -51,9 +50,9 @@ import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun DetailsScreen(
-    navigator: NavHostController,
     viewModel: DetailsViewModel = koinViewModel<DetailsViewModel>(),
-    movieId: Int
+    movieId: Int,
+    onNavigate: (String?) -> Unit,
 ) {
     LaunchedEffect(key1 = Unit) {
         viewModel.getMovieDetails(movieId = movieId)
@@ -90,7 +89,7 @@ fun DetailsScreen(
                         collapsingScrollState = collapsingScrollState,
                         movieDetailsState = movieDetailsUiState,
                         networkLoader = networkLoader,
-                        onNavigationIconClick = { navigator.navigateUp() },
+                        onNavigationIconClick = { onNavigate(null) },
                         onShareIconClick = {},
                         onFavoriteIconClick = { movieDetails, isFavorite ->
                             if (isFavorite == true) {

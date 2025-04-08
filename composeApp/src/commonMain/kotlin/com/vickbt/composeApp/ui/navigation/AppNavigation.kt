@@ -13,7 +13,6 @@ import com.vickbt.composeApp.ui.screens.favorites.FavoritesScreen
 import com.vickbt.composeApp.ui.screens.home.HomeScreen
 import com.vickbt.composeApp.ui.screens.search.SearchScreen
 import com.vickbt.composeApp.ui.screens.settings.SettingsScreen
-import io.github.aakira.napier.Napier
 
 @Composable
 fun AppNavigation(
@@ -31,19 +30,23 @@ fun AppNavigation(
         }
 
         composable(route = NavigationItem.Favorites.route) {
-            FavoritesScreen(navigator = navHostController, mainPaddingValues = mainPaddingValues)
+            FavoritesScreen {
+                navHostController.navigate(it) {
+                    popUpTo(NavigationItem.Favorites.route)
+                }
+            }
         }
 
         composable(route = NavigationItem.Search.route) {
-            SearchScreen(
-                windowSize = windowSize,
-                navigator = navHostController,
-                mainPaddingValues = mainPaddingValues
-            )
+            SearchScreen(windowSize = windowSize) {
+                navHostController.navigate(it) {
+                    popUpTo(NavigationItem.Search.route)
+                }
+            }
         }
 
         composable(route = NavigationItem.Settings.route) {
-            SettingsScreen(mainPaddingValues = mainPaddingValues)
+            SettingsScreen()
         }
 
         composable(
@@ -51,11 +54,9 @@ fun AppNavigation(
             arguments = listOf(navArgument("movieId") { type = NavType.IntType })
         ) { backStackEntry ->
             backStackEntry.arguments?.getInt("movieId")?.let { movieId ->
-                Napier.e("Movie ID: $movieId")
-                DetailsScreen(
-                    navigator = navHostController,
-                    movieId = movieId
-                )
+                DetailsScreen(movieId = movieId) {
+                    navHostController.navigateUp()
+                }
             }
         }
     }
