@@ -37,7 +37,7 @@ class HomeViewModel(
     fun fetchInitialData() = viewModelScope.launch {
         _homeUiState.update { it.copy(isLoading = true) }
         try {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 listOf(
                     async { fetchNowPlayingMovies() },
                     async { fetchTrendingMovies() },

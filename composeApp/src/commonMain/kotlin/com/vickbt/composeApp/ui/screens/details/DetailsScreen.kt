@@ -43,7 +43,6 @@ import network.chaintech.sdpcomposemultiplatform.sdp
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun DetailsScreen(
