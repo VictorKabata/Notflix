@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 @Composable
 fun ItemPreferenceOption(
@@ -32,7 +31,7 @@ fun ItemPreferenceOption(
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = optionText,
-            style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp),
+            style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,

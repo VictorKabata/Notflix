@@ -1,7 +1,6 @@
 package com.vickbt.composeApp.ui.screens.home
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.pager.HorizontalPager
@@ -31,8 +29,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.kmpalette.loader.rememberNetworkLoader
 import com.vickbt.composeApp.domain.utils.Enums
@@ -45,7 +41,6 @@ import com.vickbt.composeApp.ui.components.SectionSeparator
 import com.vickbt.composeApp.ui.components.appbars.AppBar
 import com.vickbt.composeApp.ui.navigation.NavigationItem
 import com.vickbt.composeApp.ui.theme.DarkPrimaryColor
-import com.vickbt.composeApp.utils.WindowSize
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.logo_n
 import com.vickbt.shared.resources.popular_movies
@@ -53,17 +48,15 @@ import com.vickbt.shared.resources.top_rated_tv_shows
 import com.vickbt.shared.resources.trending_movies
 import com.vickbt.shared.resources.trending_tv_shows
 import com.vickbt.shared.resources.upcoming_movies
+import network.chaintech.sdpcomposemultiplatform.sdp
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
-    navigator: NavHostController,
-    windowSize: WindowSize = WindowSize.COMPACT,
     viewModel: HomeViewModel = koinViewModel<HomeViewModel>(),
-    mainPaddingValues: PaddingValues
+    onNavigate: (String) -> Unit,
 ) {
     val scrollState = rememberScrollState()
 
@@ -74,13 +67,11 @@ fun HomeScreen(
     var mediaTypeSelected by remember { mutableStateOf<Enums.MediaType?>(null) }
 
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(mainPaddingValues),
+        modifier = Modifier.fillMaxSize(),
         topBar = {
             AppBar(
                 headerIcon = Res.drawable.logo_n,
-                onActionClicked = { navigator.navigate(NavigationItem.Search.route) }
+                onActionClicked = { onNavigate(NavigationItem.Search.route) }
             )
         }
     ) { paddingValues ->
@@ -98,7 +89,7 @@ fun HomeScreen(
                     modifier = Modifier.align(Alignment.Center),
                     text = "Error:\n${homeUiState.error}",
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.headlineMedium
+                    style = MaterialTheme.typography.titleMedium
                 )
             } else {
                 Column(
@@ -110,7 +101,7 @@ fun HomeScreen(
                 ) {
                     //region Home Filters
                     FilterHome(
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                        modifier = Modifier.padding(horizontal = 16.sdp, vertical = 8.sdp),
                         onFilterClicked = { mediaTypeSelected = it },
                         onFilterClosed = { mediaTypeSelected = null }
                     )
@@ -122,24 +113,24 @@ fun HomeScreen(
                             rememberPagerState(pageCount = { nowPlayingMovies.size })
 
                         HorizontalPager(
-                            modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
+                            modifier = Modifier.fillMaxWidth().padding(vertical = 12.sdp),
                             state = pagerState,
-                            contentPadding = PaddingValues(horizontal = 16.dp),
-                            pageSpacing = 8.dp
+                            contentPadding = PaddingValues(horizontal = 16.sdp),
+                            pageSpacing = 8.sdp
                         ) { currentPage ->
                             MovieCardPager(
-                                modifier = Modifier.fillMaxWidth().height(420.dp),
+                                modifier = Modifier.fillMaxWidth().height(336.sdp),
                                 networkLoader = networkLoader,
                                 movie = nowPlayingMovies[currentPage]
                             ) { movie ->
-                                navigator.navigate("/details/${movie.id}")
+                                onNavigate("/details/${movie.id}")
                             }
                         }
 
                         MovieCardPagerIndicator(
-                            modifier = Modifier.padding(vertical = 6.dp),
+                            modifier = Modifier.padding(vertical = 6.sdp),
                             pagerState = pagerState,
-                            indicatorSize = 6.dp,
+                            indicatorSize = 6.sdp,
                             inactiveColor = Color.Gray,
                             activeColor = DarkPrimaryColor
                         )
@@ -163,8 +154,8 @@ fun HomeScreen(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .wrapContentHeight(),
-                                    contentPadding = PaddingValues(horizontal = 16.dp),
-                                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                    contentPadding = PaddingValues(horizontal = 16.sdp),
+                                    horizontalArrangement = Arrangement.spacedBy(4.sdp)
                                 ) {
                                     items(trendingMovies.itemCount) { index ->
                                         trendingMovies[index]?.let {
@@ -173,7 +164,7 @@ fun HomeScreen(
                                                 posterPath = it.posterPath,
                                                 title = it.title,
                                                 onItemClick = { id ->
-                                                    navigator.navigate("/details/$id")
+                                                    onNavigate("/details/$id")
                                                 }
                                             )
                                         }
@@ -198,16 +189,14 @@ fun HomeScreen(
                                 )
 
                                 LazyRow(
-                                    contentPadding = PaddingValues(horizontal = 16.dp),
-                                    horizontalArrangement = Arrangement.spacedBy(14.dp),
+                                    contentPadding = PaddingValues(horizontal = 16.sdp),
+                                    horizontalArrangement = Arrangement.spacedBy(4.sdp),
                                     modifier = Modifier.wrapContentHeight()
                                 ) {
                                     items(topRatedTvShows.itemCount) { index ->
                                         topRatedTvShows[index]?.let {
                                             MovieCardLandscape(
-                                                modifier = Modifier
-                                                    .width(300.dp)
-                                                    .height(245.dp),
+                                                modifier = Modifier,
                                                 movieId = it.id,
                                                 backdropPath = it.backdropPath,
                                                 title = it.name,
@@ -215,7 +204,7 @@ fun HomeScreen(
                                                 releaseDate = it.firstAirDate,
                                                 networkLoader = networkLoader,
                                                 onClickItem = { id ->
-                                                    navigator.navigate("/details/$id")
+                                                    onNavigate("/details/$id")
                                                 }
                                             )
                                         }
@@ -241,8 +230,8 @@ fun HomeScreen(
 
                                 LazyRow(
                                     modifier = Modifier.wrapContentHeight(),
-                                    contentPadding = PaddingValues(horizontal = 16.dp),
-                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                    contentPadding = PaddingValues(horizontal = 16.sdp),
+                                    horizontalArrangement = Arrangement.spacedBy(4.sdp),
                                 ) {
                                     items(upcomingMovies.itemCount) { index ->
                                         upcomingMovies[index]?.let {
@@ -251,7 +240,7 @@ fun HomeScreen(
                                                 posterPath = it.posterPath,
                                                 title = it.title,
                                                 onItemClick = { id ->
-                                                    navigator.navigate("/details/$id")
+                                                    onNavigate("/details/$id")
                                                 }
                                             )
                                         }
@@ -276,16 +265,14 @@ fun HomeScreen(
                                 )
 
                                 LazyRow(
-                                    contentPadding = PaddingValues(horizontal = 16.dp),
-                                    horizontalArrangement = Arrangement.spacedBy(14.dp),
+                                    contentPadding = PaddingValues(horizontal = 16.sdp),
+                                    horizontalArrangement = Arrangement.spacedBy(4.sdp),
                                     modifier = Modifier.wrapContentHeight()
                                 ) {
                                     items(trendingTvShows.itemCount) { index ->
                                         trendingTvShows[index]?.let {
                                             MovieCardLandscape(
-                                                modifier = Modifier
-                                                    .width(300.dp)
-                                                    .height(245.dp),
+                                                modifier = Modifier,
                                                 movieId = it.id,
                                                 backdropPath = it.backdropPath,
                                                 title = it.name,
@@ -293,7 +280,7 @@ fun HomeScreen(
                                                 releaseDate = it.firstAirDate,
                                                 networkLoader = networkLoader,
                                                 onClickItem = { id ->
-                                                    navigator.navigate("/details/$id")
+                                                    onNavigate("/details/$id")
                                                 }
                                             )
                                         }
@@ -318,16 +305,14 @@ fun HomeScreen(
                                 )
 
                                 LazyRow(
-                                    contentPadding = PaddingValues(horizontal = 16.dp),
-                                    horizontalArrangement = Arrangement.spacedBy(14.dp),
+                                    contentPadding = PaddingValues(horizontal = 16.sdp),
+                                    horizontalArrangement = Arrangement.spacedBy(4.sdp),
                                     modifier = Modifier.wrapContentHeight()
                                 ) {
                                     items(popularMovies.itemCount) { index ->
                                         popularMovies[index]?.let {
                                             MovieCardLandscape(
-                                                modifier = Modifier
-                                                    .width(300.dp)
-                                                    .height(245.dp),
+                                                modifier = Modifier,
                                                 movieId = it.id,
                                                 backdropPath = it.backdropPath,
                                                 title = it.title,
@@ -335,7 +320,7 @@ fun HomeScreen(
                                                 releaseDate = it.releaseDate,
                                                 networkLoader = networkLoader,
                                                 onClickItem = { id ->
-                                                    navigator.navigate("/details/$id")
+                                                    onNavigate("/details/$id")
                                                 }
                                             )
                                         }
@@ -363,8 +348,8 @@ fun HomeScreen(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .wrapContentHeight(),
-                                    contentPadding = PaddingValues(horizontal = 16.dp),
-                                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                    contentPadding = PaddingValues(horizontal = 16.sdp),
+                                    horizontalArrangement = Arrangement.spacedBy(4.sdp)
                                 ) {
                                     items(popularTvShows.itemCount) { index ->
                                         popularTvShows[index]?.let {
@@ -373,7 +358,7 @@ fun HomeScreen(
                                                 posterPath = it.posterPath,
                                                 title = it.name,
                                                 onItemClick = { id ->
-                                                    navigator.navigate("/details/$id")
+                                                    onNavigate("/details/$id")
                                                 }
                                             )
                                         }

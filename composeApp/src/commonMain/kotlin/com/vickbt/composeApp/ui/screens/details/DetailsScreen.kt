@@ -25,9 +25,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.kmpalette.loader.rememberNetworkLoader
 import com.vickbt.composeApp.ui.components.ItemMovieCast
@@ -38,13 +35,13 @@ import com.vickbt.composeApp.ui.components.appbars.DetailsAppBar
 import com.vickbt.composeApp.ui.components.collapsingToolbar.CollapsingToolbarScaffold
 import com.vickbt.composeApp.ui.components.collapsingToolbar.ScrollStrategy
 import com.vickbt.composeApp.ui.components.collapsingToolbar.rememberCollapsingToolbarScaffoldState
-import com.vickbt.composeApp.utils.WindowSize
 import com.vickbt.composeApp.utils.getPopularity
 import com.vickbt.composeApp.utils.getRating
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.cast
 import com.vickbt.shared.resources.overview
 import com.vickbt.shared.resources.similar_movies
+import network.chaintech.sdpcomposemultiplatform.sdp
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
@@ -52,10 +49,9 @@ import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun DetailsScreen(
-    navigator: NavHostController,
-    windowSize: WindowSize = WindowSize.COMPACT,
     viewModel: DetailsViewModel = koinViewModel<DetailsViewModel>(),
-    movieId: Int
+    movieId: Int,
+    onNavigate: (String?) -> Unit,
 ) {
     LaunchedEffect(key1 = Unit) {
         viewModel.getMovieDetails(movieId = movieId)
@@ -79,7 +75,7 @@ fun DetailsScreen(
                 modifier = Modifier.align(Alignment.Center),
                 text = "Error:\n${movieDetailsUiState.error}",
                 textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.headlineMedium
+                style = MaterialTheme.typography.titleMedium
             )
         } else {
             CollapsingToolbarScaffold(
@@ -92,7 +88,7 @@ fun DetailsScreen(
                         collapsingScrollState = collapsingScrollState,
                         movieDetailsState = movieDetailsUiState,
                         networkLoader = networkLoader,
-                        onNavigationIconClick = { navigator.navigateUp() },
+                        onNavigationIconClick = { onNavigate(null) },
                         onShareIconClick = {},
                         onFavoriteIconClick = { movieDetails, isFavorite ->
                             if (isFavorite == true) {
@@ -105,8 +101,8 @@ fun DetailsScreen(
                 }
             ) {
                 Column(
-                    modifier = Modifier.padding(bottom = 20.dp).verticalScroll(state = scrollState),
-                    verticalArrangement = Arrangement.spacedBy(14.dp)
+                    modifier = Modifier.padding(vertical = 16.sdp)
+                        .verticalScroll(state = scrollState)
                 ) {
                     //region Movie Ratings
                     if (movieDetailsUiState.movieDetails?.voteAverage != null) {
@@ -129,11 +125,10 @@ fun DetailsScreen(
                         Text(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 16.dp),
+                                .padding(horizontal = 16.sdp),
                             text = movieDetailsUiState.movieDetails?.overview ?: "",
-                            style = MaterialTheme.typography.bodyLarge,
+                            style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onBackground,
-                            fontSize = 15.sp,
                             textAlign = TextAlign.Start,
                             overflow = TextOverflow.Ellipsis,
                         )
@@ -150,8 +145,8 @@ fun DetailsScreen(
                         )
 
                         LazyRow(
-                            contentPadding = PaddingValues(horizontal = 16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            contentPadding = PaddingValues(horizontal = 16.sdp),
+                            horizontalArrangement = Arrangement.spacedBy(8.sdp)
                         ) {
                             items(items = cast) { item ->
                                 ItemMovieCast(modifier = Modifier, actor = item)
@@ -172,12 +167,15 @@ fun DetailsScreen(
                         )
 
                         LazyRow(
-                            contentPadding = PaddingValues(horizontal = 16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            contentPadding = PaddingValues(horizontal = 16.sdp),
+                            horizontalArrangement = Arrangement.spacedBy(4.sdp)
                         ) {
                             items(similarMovies.itemCount) { index ->
                                 similarMovies[index]?.let { movie ->
-                                    MovieCardPortrait(movie = movie, onItemClick = {})
+                                    MovieCardPortrait(
+                                        movie = movie,
+                                        onItemClick = { onNavigate("/details/${movie.id}") }
+                                    )
                                 }
                             }
                         }

@@ -1,6 +1,8 @@
 package com.vickbt.composeApp.ui.components.collapsingToolbar
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.ScrollableDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateOf
@@ -20,41 +22,42 @@ import kotlin.math.max
 
 @Stable
 class CollapsingToolbarScaffoldState(
-	val toolbarState: CollapsingToolbarState,
-	initialOffsetY: Int = 0
+    val toolbarState: CollapsingToolbarState,
+    initialOffsetY: Int = 0
 ) {
-	val offsetY: Int
-		get() = offsetYState.value
+    val offsetY: Int
+        get() = offsetYState.value
 
-	internal val offsetYState = mutableStateOf(initialOffsetY)
+    internal val offsetYState = mutableStateOf(initialOffsetY)
 }
 
-private class CollapsingToolbarScaffoldStateSaver : Saver<CollapsingToolbarScaffoldState, List<Any>> {
-	override fun restore(value: List<Any>): CollapsingToolbarScaffoldState =
-		CollapsingToolbarScaffoldState(
-			CollapsingToolbarState(value[0] as Int),
-			value[1] as Int
-		)
+private class CollapsingToolbarScaffoldStateSaver :
+    Saver<CollapsingToolbarScaffoldState, List<Any>> {
+    override fun restore(value: List<Any>): CollapsingToolbarScaffoldState =
+        CollapsingToolbarScaffoldState(
+            CollapsingToolbarState(value[0] as Int),
+            value[1] as Int
+        )
 
-	override fun SaverScope.save(value: CollapsingToolbarScaffoldState): List<Any> =
-		listOf(
-			value.toolbarState.height,
-			value.offsetY
-	)
+    override fun SaverScope.save(value: CollapsingToolbarScaffoldState): List<Any> =
+        listOf(
+            value.toolbarState.height,
+            value.offsetY
+        )
 }
 
 @Composable
 fun rememberCollapsingToolbarScaffoldState(
     toolbarState: CollapsingToolbarState = rememberCollapsingToolbarState()
 ): CollapsingToolbarScaffoldState {
-	return rememberSaveable(toolbarState, saver = CollapsingToolbarScaffoldStateSaver()) {
-		CollapsingToolbarScaffoldState(toolbarState)
-	}
+    return rememberSaveable(toolbarState, saver = CollapsingToolbarScaffoldStateSaver()) {
+        CollapsingToolbarScaffoldState(toolbarState)
+    }
 }
 
 interface CollapsingToolbarScaffoldScope {
-	@ExperimentalToolbarApi
-	fun Modifier.align(alignment: Alignment): Modifier
+    @ExperimentalToolbarApi
+    fun Modifier.align(alignment: Alignment): Modifier
 }
 
 @Composable
@@ -68,111 +71,112 @@ fun CollapsingToolbarScaffold(
     toolbar: @Composable CollapsingToolbarScope.() -> Unit,
     body: @Composable CollapsingToolbarScaffoldScope.() -> Unit
 ) {
-	val flingBehavior = ScrollableDefaults.flingBehavior()
-	val layoutDirection = LocalLayoutDirection.current
+    val flingBehavior = ScrollableDefaults.flingBehavior()
+    val layoutDirection = LocalLayoutDirection.current
 
-	val nestedScrollConnection = remember(scrollStrategy, state) {
-		scrollStrategy.create(state.offsetYState, state.toolbarState, flingBehavior)
-	}
+    val nestedScrollConnection = remember(scrollStrategy, state) {
+        scrollStrategy.create(state.offsetYState, state.toolbarState, flingBehavior)
+    }
 
-	val toolbarState = state.toolbarState
+    val toolbarState = state.toolbarState
 
-	Layout(
-		content = {
-			CollapsingToolbar(
-				modifier = toolbarModifier,
-				clipToBounds = toolbarClipToBounds,
-				collapsingToolbarState = toolbarState,
-			) {
-				toolbar()
-			}
+    Layout(
+        content = {
+            CollapsingToolbar(
+                modifier = toolbarModifier,
+                clipToBounds = toolbarClipToBounds,
+                collapsingToolbarState = toolbarState,
+            ) {
+                toolbar()
+            }
 
-			CollapsingToolbarScaffoldScopeInstance.body()
-		},
-		modifier = modifier
-			.then(
-				if (enabled) {
-					Modifier.nestedScroll(nestedScrollConnection)
-				} else {
-					Modifier
-				}
-			)
-	) { measurables, constraints ->
-		check(measurables.size >= 2) {
-			"the number of children should be at least 2: toolbar, (at least one) body"
-		}
+            CollapsingToolbarScaffoldScopeInstance.body()
+        },
+        modifier = modifier
+            .background(MaterialTheme.colorScheme.surface)
+            .then(
+                if (enabled) {
+                    Modifier.nestedScroll(nestedScrollConnection)
+                } else {
+                    Modifier
+                }
+            )
+    ) { measurables, constraints ->
+        check(measurables.size >= 2) {
+            "the number of children should be at least 2: toolbar, (at least one) body"
+        }
 
-		val toolbarConstraints = constraints.copy(
-			minWidth = 0,
-			minHeight = 0
-		)
-		val bodyConstraints = constraints.copy(
-			minWidth = 0,
-			minHeight = 0,
-			maxHeight = when (scrollStrategy) {
-				ScrollStrategy.ExitUntilCollapsed ->
-					(constraints.maxHeight - toolbarState.minHeight).coerceAtLeast(0)
+        val toolbarConstraints = constraints.copy(
+            minWidth = 0,
+            minHeight = 0
+        )
+        val bodyConstraints = constraints.copy(
+            minWidth = 0,
+            minHeight = 0,
+            maxHeight = when (scrollStrategy) {
+                ScrollStrategy.ExitUntilCollapsed ->
+                    (constraints.maxHeight - toolbarState.minHeight).coerceAtLeast(0)
 
-				ScrollStrategy.EnterAlways, ScrollStrategy.EnterAlwaysCollapsed ->
-					constraints.maxHeight
-			}
-		)
+                ScrollStrategy.EnterAlways, ScrollStrategy.EnterAlwaysCollapsed ->
+                    constraints.maxHeight
+            }
+        )
 
-		val toolbarPlaceable = measurables[0].measure(toolbarConstraints)
+        val toolbarPlaceable = measurables[0].measure(toolbarConstraints)
 
-		val bodyMeasurables = measurables.subList(1, measurables.size)
-		val childrenAlignments = bodyMeasurables.map {
-			(it.parentData as? ScaffoldParentData)?.alignment
-		}
-		val bodyPlaceables = bodyMeasurables.map {
-			it.measure(bodyConstraints)
-		}
+        val bodyMeasurables = measurables.subList(1, measurables.size)
+        val childrenAlignments = bodyMeasurables.map {
+            (it.parentData as? ScaffoldParentData)?.alignment
+        }
+        val bodyPlaceables = bodyMeasurables.map {
+            it.measure(bodyConstraints)
+        }
 
-		val toolbarHeight = toolbarPlaceable.height
+        val toolbarHeight = toolbarPlaceable.height
 
-		val width = max(
-			toolbarPlaceable.width,
-			bodyPlaceables.maxOfOrNull { it.width } ?: 0
-		).coerceIn(constraints.minWidth, constraints.maxWidth)
-		val height = max(
-			toolbarHeight,
-			bodyPlaceables.maxOfOrNull { it.height } ?: 0
-		).coerceIn(constraints.minHeight, constraints.maxHeight)
+        val width = max(
+            toolbarPlaceable.width,
+            bodyPlaceables.maxOfOrNull { it.width } ?: 0
+        ).coerceIn(constraints.minWidth, constraints.maxWidth)
+        val height = max(
+            toolbarHeight,
+            bodyPlaceables.maxOfOrNull { it.height } ?: 0
+        ).coerceIn(constraints.minHeight, constraints.maxHeight)
 
-		layout(width, height) {
-			bodyPlaceables.forEachIndexed { index, placeable ->
-				val alignment = childrenAlignments[index]
+        layout(width, height) {
+            bodyPlaceables.forEachIndexed { index, placeable ->
+                val alignment = childrenAlignments[index]
 
-				if (alignment == null) {
-					placeable.placeRelative(0, toolbarHeight + state.offsetY)
-				} else {
-					val offset = alignment.align(
-						size = IntSize(placeable.width, placeable.height),
-						space = IntSize(width, height),
-						layoutDirection = layoutDirection
-					)
-					placeable.place(offset)
-				}
-			}
-			toolbarPlaceable.placeRelative(0, state.offsetY)
-		}
-	}
+                if (alignment == null) {
+                    placeable.placeRelative(0, toolbarHeight + state.offsetY)
+                } else {
+                    val offset = alignment.align(
+                        size = IntSize(placeable.width, placeable.height),
+                        space = IntSize(width, height),
+                        layoutDirection = layoutDirection
+                    )
+                    placeable.place(offset)
+                }
+            }
+            toolbarPlaceable.placeRelative(0, state.offsetY)
+        }
+    }
 }
 
 internal object CollapsingToolbarScaffoldScopeInstance : CollapsingToolbarScaffoldScope {
-	@ExperimentalToolbarApi
-	override fun Modifier.align(alignment: Alignment): Modifier =
-		this.then(ScaffoldChildAlignmentModifier(alignment))
+    @ExperimentalToolbarApi
+    override fun Modifier.align(alignment: Alignment): Modifier =
+        this.then(ScaffoldChildAlignmentModifier(alignment))
 }
 
 private class ScaffoldChildAlignmentModifier(
-	private val alignment: Alignment
+    private val alignment: Alignment
 ) : ParentDataModifier {
-	override fun Density.modifyParentData(parentData: Any?): Any {
-		return (parentData as? ScaffoldParentData) ?: ScaffoldParentData(alignment)
-	}
+    override fun Density.modifyParentData(parentData: Any?): Any {
+        return (parentData as? ScaffoldParentData) ?: ScaffoldParentData(alignment)
+    }
 }
 
 private data class ScaffoldParentData(
-	var alignment: Alignment? = null
+    var alignment: Alignment? = null
 )

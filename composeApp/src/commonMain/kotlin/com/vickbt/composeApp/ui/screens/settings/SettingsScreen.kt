@@ -3,7 +3,6 @@
 package com.vickbt.composeApp.ui.screens.settings
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Image
@@ -37,7 +36,6 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @Composable
 fun SettingsScreen(
     viewModel: SettingsViewModel = koinViewModel<SettingsViewModel>(),
-    mainPaddingValues: PaddingValues
 ) {
     val settingsUiState = viewModel.settingsUiState.collectAsState().value
 
@@ -51,7 +49,7 @@ fun SettingsScreen(
     val imageQualityLabel = imageQualityLabels[settingsUiState.selectedImageQuality]
 
     Scaffold(
-        modifier = Modifier.padding(mainPaddingValues),
+        modifier = Modifier,
         topBar = { AppBar(title = stringResource(Res.string.title_settings)) },
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
@@ -101,7 +99,7 @@ private fun ChangeTheme(
         title = stringResource(Res.string.change_theme),
         currentValue = currentValue ?: "Default",
         labels = stringArrayResource(Res.array.themes),
-        onNegativeClick = { showDialog.value = false }
+        onDismissRequest = { showDialog.value = false }
     ) { theme ->
         viewModel.savePreferenceSelection(key = KEY_THEME, selection = theme)
     }
@@ -118,7 +116,7 @@ private fun ChangeImageQuality(
         title = stringResource(Res.string.change_image_quality),
         currentValue = currentValue ?: stringResource(Res.string.def),
         labels = stringArrayResource(Res.array.image_qualities),
-        onNegativeClick = { showDialog.value = false }
+        onDismissRequest = { showDialog.value = false }
     ) { imageQuality ->
         viewModel.savePreferenceSelection(
             key = KEY_IMAGE_QUALITY,

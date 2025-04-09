@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import coil3.annotation.ExperimentalCoilApi
 import coil3.compose.setSingletonImageLoaderFactory
+import com.vickbt.composeApp.domain.utils.sdpSspScalingRatio
+import network.chaintech.sdpcomposemultiplatform.SDPConfig
 import com.vickbt.composeApp.utils.getAsyncImageLoader
 
 private val DarkColorPalette = darkColorScheme(
@@ -55,6 +57,8 @@ fun NotflixTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
+    SDPConfig.setScalingRatio(sdpSspScalingRatio)
+
     val colorScheme = if (darkTheme) DarkColorPalette else LightColorPalette
 
     setSingletonImageLoaderFactory { context ->
@@ -64,7 +68,7 @@ fun NotflixTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography(),
-        shapes = Shapes
+        shapes = Shapes()
     ) {
         content()
     }
