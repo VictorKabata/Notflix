@@ -1,5 +1,3 @@
-@file:OptIn(KoinExperimentalAPI::class)
-
 package com.vickbt.composeApp.ui.screens.details
 
 import androidx.compose.foundation.layout.Arrangement
@@ -53,11 +51,8 @@ fun DetailsScreen(
     movieId: Int,
     onNavigate: (String?) -> Unit,
 ) {
-    LaunchedEffect(key1 = Unit) {
-        viewModel.getMovieDetails(movieId = movieId)
-        viewModel.fetchSimilarMovies(movieId = movieId)
-        viewModel.getMovieCast(movieId = movieId)
-        viewModel.isMovieFavorite(movieId = movieId)
+    LaunchedEffect(movieId) {
+        viewModel.fetchInitialData(movieId = movieId)
     }
 
     val networkLoader = rememberNetworkLoader(httpClient = koinInject())
