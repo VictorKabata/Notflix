@@ -21,3 +21,5 @@ object Constants {
 
     internal const val DATASTORE_FILE_NAME = "notflix.preferences_pb"
 }
+
+expect val sdpSspScalingRatio: Double

@@ -33,15 +33,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.vickbt.composeApp.ui.components.MovieCardPortrait
 import com.vickbt.shared.resources.Res
 import com.vickbt.shared.resources.back
 import com.vickbt.shared.resources.title_search
+import network.chaintech.sdpcomposemultiplatform.sdp
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -49,8 +46,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @Composable
 fun SearchScreen(
     viewModel: SearchViewModel = koinViewModel<SearchViewModel>(),
-    windowSize: WindowSizeClass,
-    onNavigate: (String) -> Unit,
+    onNavigate: (String?) -> Unit,
 ) {
     val searchUiState by viewModel.searchUiState.collectAsState()
 
@@ -67,7 +63,6 @@ fun SearchScreen(
         placeholder = {
             Text(
                 text = stringResource(Res.string.title_search),
-                fontSize = 18.sp,
                 style = MaterialTheme.typography.titleMedium,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -79,6 +74,7 @@ fun SearchScreen(
                 IconButton(onClick = {
                     activeState = true
                     searchQuery = ""
+                    onNavigate(null)
                 }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
@@ -115,7 +111,7 @@ fun SearchScreen(
                     modifier = Modifier.align(Alignment.Center),
                     text = "Error:\n${searchUiState.error}",
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.headlineMedium
+                    style = MaterialTheme.typography.titleMedium
                 )
             } else {
                 searchUiState.movieResults?.let { movieResults ->
@@ -123,14 +119,13 @@ fun SearchScreen(
 
                     LazyVerticalGrid(
                         modifier = Modifier.fillMaxSize(),
-                        columns = if (windowSize.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
-                            GridCells.Fixed(2)
-                        } else {
-                            GridCells.Adaptive(minSize = 150.dp)
-                        },
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
-                        contentPadding = PaddingValues(vertical = 8.dp, horizontal = 16.dp)
+                        columns = GridCells.Adaptive(minSize = 80.sdp),
+                        horizontalArrangement = Arrangement.spacedBy(
+                            8.sdp,
+                            Alignment.CenterHorizontally
+                        ),
+                        verticalArrangement = Arrangement.spacedBy(8.sdp),
+                        contentPadding = PaddingValues(vertical = 8.sdp, horizontal = 16.sdp)
                     ) {
                         items(searchResults.itemCount) { index ->
                             searchResults[index]?.let { movies ->

@@ -79,6 +79,8 @@ kotlin {
             implementation(libs.bundles.kmpPalette)
 
             implementation(libs.adaptive.core)
+
+            implementation(libs.sdpSsp)
         }
 
         commonTest.dependencies {

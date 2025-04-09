@@ -2,6 +2,7 @@ package com.vickbt.composeApp.ui.components.appbars
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,7 +35,6 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.kmpalette.loader.NetworkLoader
@@ -49,6 +49,7 @@ import com.vickbt.shared.resources.unknown_movie
 import io.ktor.http.Url
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import network.chaintech.sdpcomposemultiplatform.sdp
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -88,7 +89,7 @@ fun DetailsAppBar(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(350.dp)
+            .height(280.sdp)
             .graphicsLayer { alpha = scrollProgress }
     ) {
         AsyncImage(
@@ -97,7 +98,7 @@ fun DetailsAppBar(
                 .align(Alignment.Center)
                 .aspectRatio(scrollProgress.coerceAtLeast(.1f)),
             model = movieDetails?.backdropPath?.loadImage(),
-            contentDescription = "Movie poster",
+            contentDescription = movieDetails?.title,
             contentScale = ContentScale.Crop,
             alignment = Alignment.Center,
         )
@@ -105,7 +106,7 @@ fun DetailsAppBar(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(210.dp)
+                .height(140.sdp)
                 .align(Alignment.BottomCenter)
                 .background(
                     Brush.verticalGradient(
@@ -119,10 +120,10 @@ fun DetailsAppBar(
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .graphicsLayer { alpha = scrollProgress }
-                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .padding(horizontal = 16.sdp, vertical = 6.sdp)
                 .align(Alignment.BottomCenter),
             verticalArrangement = Arrangement.spacedBy(
-                space = 2.dp,
+                space = 1.sdp,
                 alignment = Alignment.CenterVertically
             ),
             horizontalAlignment = Alignment.Start
@@ -130,21 +131,18 @@ fun DetailsAppBar(
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = movieDetails?.title ?: stringResource(Res.string.unknown_movie),
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.headlineLarge,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 color = dominantColorState.onColor,
-                fontSize = 32.sp,
-                textAlign = TextAlign.Start,
-                lineHeight = 30.sp
+                textAlign = TextAlign.Start
             )
 
             Text(
-                modifier = Modifier,
+                modifier = Modifier.fillMaxWidth(),
                 text = movieDetails?.runtime?.getMovieDuration() ?: "",
                 color = dominantColorState.onColor,
-                style = MaterialTheme.typography.bodyMedium,
-                fontSize = 14.sp
+                style = MaterialTheme.typography.titleSmall
             )
         }
     }
@@ -153,9 +151,9 @@ fun DetailsAppBar(
         modifier = Modifier.fillMaxWidth(),
         title = {
             Text(
-                modifier = Modifier.graphicsLayer { alpha = 1 - scrollProgress },
+                modifier = Modifier.basicMarquee().graphicsLayer { alpha = 1 - scrollProgress },
                 text = movieDetails?.title ?: stringResource(Res.string.unknown_movie),
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.headlineMedium,
                 fontSize = 20.sp,
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Center,

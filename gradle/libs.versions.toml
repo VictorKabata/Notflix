@@ -31,6 +31,7 @@ room = "2.7.0-rc03"
 paging = "3.3.0-alpha02-0.5.1"
 version = "0.51.0"
 material3Adaptive="1.0.0-alpha03"
+sdpSsp = "1.0.6"
 
 #Android Versions
 androidxActivity = "1.10.1"
@@ -65,13 +66,16 @@ firebase-performance-plugin = { id = "com.google.firebase.firebase-perf", versio
 #Kotlin Multiplatform Lib Dependencies
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinxCoroutines" }
+
 datastore-preferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastore" }
+
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCompose" }
 koin-composeViewModel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeViewModel" }
 kotlinX-serializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-contentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
@@ -80,22 +84,29 @@ ktor-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 ktor-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
 ktor-java = { module = "io.ktor:ktor-client-java", version.ref = "ktor" }
 ktor-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 kotlinX-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDateTime" }
 navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
+
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-compose-core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coil" }
 coil-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil" }
 coil-multiplatform = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
+
 kmpPalette-core = { module = "com.kmpalette:kmpalette-core", version.ref = "kmpPalette" }
 kmpPalette-network = { module = "com.kmpalette:extensions-network", version.ref = "kmpPalette" }
+
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+
 paging-common = { module = "app.cash.paging:paging-common", version.ref = "paging" }
 paging-compose = { module = "app.cash.paging:paging-compose-common", version.ref = "paging" }
 
 adaptive-core = { module = "org.jetbrains.compose.material3.adaptive:adaptive", version.ref = "material3Adaptive" }
+
+sdpSsp = { module = "network.chaintech:sdp-ssp-compose-multiplatform", version.ref = "sdpSsp" }
 
 #Android Lib Dependencies
 androidX-activity = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }

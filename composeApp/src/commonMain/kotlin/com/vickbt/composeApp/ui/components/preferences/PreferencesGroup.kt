@@ -14,8 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import network.chaintech.sdpcomposemultiplatform.sdp
 
 @Composable
 fun PreferencesGroup(
@@ -27,9 +26,9 @@ fun PreferencesGroup(
     Column(modifier = modifier) {
         if (!title.isNullOrEmpty()) {
             Text(
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
+                modifier = Modifier.padding(horizontal = 12.sdp, vertical = 4.sdp),
                 text = title,
-                style = MaterialTheme.typography.titleLarge.copy(fontSize = 16.sp),
+                style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.primary,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -37,10 +36,10 @@ fun PreferencesGroup(
             )
         }
 
-        Spacer(modifier = Modifier.height(2.dp))
+        Spacer(modifier = Modifier.height(2.sdp))
 
-        Column(content = content, verticalArrangement = Arrangement.spacedBy(3.dp))
+        Column(content = content, verticalArrangement = Arrangement.spacedBy(2.sdp))
 
-        if (!isLast) HorizontalDivider(color = Color.Gray.copy(alpha = 0.7f), thickness = 1.dp)
+        if (!isLast) HorizontalDivider(color = Color.Gray.copy(alpha = 0.7f), thickness = 1.sdp)
     }
 }

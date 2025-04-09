@@ -99,7 +99,7 @@ private fun ChangeTheme(
         title = stringResource(Res.string.change_theme),
         currentValue = currentValue ?: "Default",
         labels = stringArrayResource(Res.array.themes),
-        onNegativeClick = { showDialog.value = false }
+        onDismissRequest = { showDialog.value = false }
     ) { theme ->
         viewModel.savePreferenceSelection(key = KEY_THEME, selection = theme)
     }
@@ -116,7 +116,7 @@ private fun ChangeImageQuality(
         title = stringResource(Res.string.change_image_quality),
         currentValue = currentValue ?: stringResource(Res.string.def),
         labels = stringArrayResource(Res.array.image_qualities),
-        onNegativeClick = { showDialog.value = false }
+        onDismissRequest = { showDialog.value = false }
     ) { imageQuality ->
         viewModel.savePreferenceSelection(
             key = KEY_IMAGE_QUALITY,

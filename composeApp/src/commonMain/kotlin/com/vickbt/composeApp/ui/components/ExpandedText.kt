@@ -65,7 +65,7 @@ fun ExpandableText(
     Box(modifier) {
         Text(
             text = cutText ?: text,
-            maxLines = if (expanded) Int.MAX_VALUE else minimizedMaxLines,
+            maxLines = if (expanded) minimizedMaxLines + 2 else minimizedMaxLines,
             overflow = TextOverflow.Ellipsis,
             onTextLayout = { textLayoutResultState.value = it },
             style = style,
