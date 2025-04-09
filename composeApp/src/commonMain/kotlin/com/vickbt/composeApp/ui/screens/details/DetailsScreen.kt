@@ -174,7 +174,8 @@ fun DetailsScreen(
                                 similarMovies[index]?.let { movie ->
                                     MovieCardPortrait(
                                         movie = movie,
-                                        onItemClick = { onNavigate("/details/${movie.id}") })
+                                        onItemClick = { onNavigate("/details/${movie.id}") }
+                                    )
                                 }
                             }
                         }

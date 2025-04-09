@@ -39,9 +39,12 @@ fun AppNavigation(
 
         composable(route = NavigationItem.Search.route) {
             SearchScreen { destination ->
-                if (destination.isNullOrEmpty()) navHostController.navigateUp()
-                else navHostController.navigate(destination) {
+                if (destination.isNullOrEmpty()) {
+                    navHostController.navigateUp()
+                } else {
+                    navHostController.navigate(destination) {
                     popUpTo(NavigationItem.Home.route)
+                }
                 }
             }
         }
@@ -56,8 +59,11 @@ fun AppNavigation(
         ) { backStackEntry ->
             backStackEntry.arguments?.getInt("movieId")?.let { movieId ->
                 DetailsScreen(movieId = movieId) { destination ->
-                    if (destination.isNullOrEmpty()) navHostController.navigateUp()
-                    else navHostController.navigate(destination)
+                    if (destination.isNullOrEmpty()) {
+                        navHostController.navigateUp()
+                    } else {
+                        navHostController.navigate(destination)
+                    }
                 }
             }
         }

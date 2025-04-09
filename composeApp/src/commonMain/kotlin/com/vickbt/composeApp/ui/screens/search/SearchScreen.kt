@@ -33,8 +33,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.vickbt.composeApp.ui.components.MovieCardPortrait
 import com.vickbt.shared.resources.Res
@@ -123,7 +121,8 @@ fun SearchScreen(
                         modifier = Modifier.fillMaxSize(),
                         columns = GridCells.Adaptive(minSize = 80.sdp),
                         horizontalArrangement = Arrangement.spacedBy(
-                            8.sdp, Alignment.CenterHorizontally
+                            8.sdp,
+                            Alignment.CenterHorizontally
                         ),
                         verticalArrangement = Arrangement.spacedBy(8.sdp),
                         contentPadding = PaddingValues(vertical = 8.sdp, horizontal = 16.sdp)
