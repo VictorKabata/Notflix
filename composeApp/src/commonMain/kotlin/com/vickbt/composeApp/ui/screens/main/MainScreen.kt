@@ -5,6 +5,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
@@ -83,9 +84,13 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel<MainViewModel>()) {
                     )
                 }
             },
-            containerColor = MaterialTheme.colorScheme.background.copy(alpha = .85f),
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-            layoutType = navigationLayout
+            layoutType = navigationLayout,
+            navigationSuiteColors = NavigationSuiteDefaults.colors(
+                navigationBarContainerColor = MaterialTheme.colorScheme.surface,
+                navigationRailContainerColor = MaterialTheme.colorScheme.surface,
+                navigationBarContentColor = MaterialTheme.colorScheme.onSurface,
+                navigationRailContentColor = MaterialTheme.colorScheme.onSurface,
+            )
         ) {
             AppNavigation(navHostController = navHostController, windowSize = windowSize)
         }
