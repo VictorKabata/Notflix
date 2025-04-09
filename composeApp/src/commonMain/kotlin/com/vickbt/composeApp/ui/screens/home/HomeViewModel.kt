@@ -7,6 +7,8 @@ import com.vickbt.composeApp.domain.repositories.MoviesRepository
 import com.vickbt.composeApp.domain.repositories.TvShowsRepository
 import com.vickbt.composeApp.utils.HomeUiState
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +16,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeViewModel(
     private val moviesRepository: MoviesRepository,
@@ -34,16 +37,18 @@ class HomeViewModel(
     fun fetchInitialData() = viewModelScope.launch {
         _homeUiState.update { it.copy(isLoading = true) }
         try {
-            listOf(
-                async { fetchNowPlayingMovies() },
-                async { fetchTrendingMovies() },
-                async { fetchUpcomingMovies() },
-                async { fetchPopularMovies() },
-                async { fetchAiringTodayTvShows() },
-                async { fetchTrendingTvShows() },
-                async { fetchTopRatedTvShows() },
-                async { fetchPopularTvShows() }
-            ).awaitAll()
+            withContext(Dispatchers.IO){
+                listOf(
+                    async { fetchNowPlayingMovies() },
+                    async { fetchTrendingMovies() },
+                    async { fetchUpcomingMovies() },
+                    async { fetchPopularMovies() },
+                    async { fetchAiringTodayTvShows() },
+                    async { fetchTrendingTvShows() },
+                    async { fetchTopRatedTvShows() },
+                    async { fetchPopularTvShows() }
+                ).awaitAll()
+            }
             _homeUiState.update { it.copy(isLoading = false) }
         } catch (e: Exception) {
             _homeUiState.update { it.copy(error = e.message, isLoading = false) }
