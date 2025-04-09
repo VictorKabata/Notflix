@@ -8,7 +8,7 @@ import com.vickbt.composeApp.domain.models.TvShow
 import kotlinx.coroutines.flow.Flow
 
 data class MainUiState(
-    val selectedTheme: Int? = 0
+    val selectedTheme: Int? = null
 )
 
 data class HomeUiState(

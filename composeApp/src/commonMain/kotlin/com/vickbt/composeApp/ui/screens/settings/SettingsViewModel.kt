@@ -36,6 +36,8 @@ class SettingsViewModel(private val settingsRepository: SettingsRepository) :
             data.collectLatest { theme ->
                 _settingsUiState.update { it.copy(selectedTheme = theme, isLoading = false) }
             }
+        }.onFailure {
+            _settingsUiState.update { it.copy(selectedTheme = 0, isLoading = false) }
         }
     }
 
@@ -46,6 +48,8 @@ class SettingsViewModel(private val settingsRepository: SettingsRepository) :
                     it.copy(selectedImageQuality = imageQuality, isLoading = false)
                 }
             }
+        }.onFailure {
+            _settingsUiState.update { it.copy(selectedImageQuality = 0, isLoading = false) }
         }
     }
 }

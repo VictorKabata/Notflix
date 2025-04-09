@@ -29,7 +29,7 @@ class MainViewModel(private val settingsRepository: SettingsRepository) : ViewMo
                 _mainUiState.update { it.copy(selectedTheme = theme) }
             }
         }.onFailure {
-            Napier.e("Error getting theme: ${it.message}")
+            _mainUiState.update { it.copy(selectedTheme = 0) }
         }
     }
 }
