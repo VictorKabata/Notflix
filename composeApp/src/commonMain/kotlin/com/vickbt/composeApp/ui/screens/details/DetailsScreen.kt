@@ -1,5 +1,3 @@
-@file:OptIn(KoinExperimentalAPI::class)
-
 package com.vickbt.composeApp.ui.screens.details
 
 import androidx.compose.foundation.layout.Arrangement
@@ -45,7 +43,6 @@ import network.chaintech.sdpcomposemultiplatform.sdp
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun DetailsScreen(
@@ -53,11 +50,8 @@ fun DetailsScreen(
     movieId: Int,
     onNavigate: (String?) -> Unit,
 ) {
-    LaunchedEffect(key1 = Unit) {
-        viewModel.getMovieDetails(movieId = movieId)
-        viewModel.fetchSimilarMovies(movieId = movieId)
-        viewModel.getMovieCast(movieId = movieId)
-        viewModel.isMovieFavorite(movieId = movieId)
+    LaunchedEffect(movieId) {
+        viewModel.fetchInitialData(movieId = movieId)
     }
 
     val networkLoader = rememberNetworkLoader(httpClient = koinInject())

@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.vickbt.composeApp.domain.repositories.SettingsRepository
 import com.vickbt.composeApp.utils.SettingsUiState
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -22,8 +24,20 @@ class SettingsViewModel(private val settingsRepository: SettingsRepository) :
     }
 
     init {
-        getThemePreference()
-        getImageQualityPreference()
+        fetchInitialData()
+    }
+
+    fun fetchInitialData() = viewModelScope.launch(coroutineExceptionHandler) {
+        try {
+            listOf(
+                async { getThemePreference() },
+                async { getImageQualityPreference() }
+            ).awaitAll()
+        } catch (e: Exception) {
+            _settingsUiState.update { it.copy(error = e.message, isLoading = false) }
+        } finally {
+            _settingsUiState.update { it.copy(isLoading = false) }
+        }
     }
 
     fun savePreferenceSelection(key: String, selection: Int) =
@@ -36,6 +50,8 @@ class SettingsViewModel(private val settingsRepository: SettingsRepository) :
             data.collectLatest { theme ->
                 _settingsUiState.update { it.copy(selectedTheme = theme, isLoading = false) }
             }
+        }.onFailure {
+            _settingsUiState.update { it.copy(selectedTheme = 0, isLoading = false) }
         }
     }
 
@@ -46,6 +62,8 @@ class SettingsViewModel(private val settingsRepository: SettingsRepository) :
                     it.copy(selectedImageQuality = imageQuality, isLoading = false)
                 }
             }
+        }.onFailure {
+            _settingsUiState.update { it.copy(selectedImageQuality = 0, isLoading = false) }
         }
     }
 }

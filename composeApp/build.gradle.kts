@@ -57,7 +57,7 @@ kotlin {
 
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
-            implementation(libs.koin.composeViewModel)
+            implementation(libs.koin.viewmodel)
 
             implementation(libs.kotlinX.serializationJson)
 
@@ -93,7 +93,6 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.ktor.android)
             implementation(libs.koin.android)
-            implementation(libs.koin.androidx.compose)
             implementation(libs.androidX.activity)
 
             implementation(libs.firebase.analytics)

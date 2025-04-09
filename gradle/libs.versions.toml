@@ -10,11 +10,11 @@ firebasePerformance = "1.4.2"
 
 # Kotlin Multiplatform Version
 kotlinxCoroutines = "1.10.1"
-koinCore = "3.5.6"
-koinCompose = "1.1.5"
-koinComposeViewModel = "1.2.0-Beta5"
-koinAndroid = "3.5.6"
-koinAndroidxCompose = "3.5.6"
+koin = "4.1.0-Beta5"
+#koinCompose = "1.1.5"
+#koinComposeViewModel = "1.2.0-Beta5"
+#koinAndroid = "3.5.6"
+#koinAndroidxCompose = "3.5.6"
 composeMultiplatform = "1.7.3"
 kotlinxSerializationJson = "1.7.2"
 kotlinxDateTime = "0.6.1"
@@ -30,7 +30,7 @@ sqlite = "2.5.0-SNAPSHOT"
 room = "2.7.0-rc03"
 paging = "3.3.0-alpha02-0.5.1"
 version = "0.51.0"
-material3Adaptive="1.0.0-alpha03"
+material3Adaptive = "1.0.0-alpha03"
 sdpSsp = "1.0.6"
 
 #Android Versions
@@ -69,11 +69,11 @@ coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", 
 
 datastore-preferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastore" }
 
-koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
-koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
-koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCompose" }
-koin-composeViewModel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeViewModel" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
+koin-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
+
 kotlinX-serializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }

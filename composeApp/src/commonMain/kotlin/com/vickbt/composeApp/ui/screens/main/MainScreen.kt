@@ -5,13 +5,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -39,7 +37,7 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel<MainViewModel>()) {
             NavigationItem.Settings
         )
 
-        val currentDestination by rememberSaveable { mutableStateOf(navHostController.currentDestination?.route) }
+        val currentDestination = navHostController.currentDestination?.route
         val isTopLevelDestination =
             navHostController.currentBackStackEntryAsState().value?.destination?.route in topLevelDestinations.map { it.route }
 
@@ -74,18 +72,24 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel<MainViewModel>()) {
                         },
                         selected = destination.route == currentDestination,
                         onClick = {
-                            navHostController.navigate(destination.route) {
-                                popUpTo(NavigationItem.Home.route)
-                                launchSingleTop = true
-                                restoreState = true
+                            if (destination.route != currentDestination) {
+                                navHostController.navigate(destination.route) {
+                                    popUpTo(NavigationItem.Home.route)
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
                             }
                         }
                     )
                 }
             },
-            containerColor = MaterialTheme.colorScheme.background.copy(alpha = .85f),
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-            layoutType = navigationLayout
+            layoutType = navigationLayout,
+            navigationSuiteColors = NavigationSuiteDefaults.colors(
+                navigationBarContainerColor = MaterialTheme.colorScheme.background,
+                navigationRailContainerColor = MaterialTheme.colorScheme.background,
+                navigationBarContentColor = MaterialTheme.colorScheme.onBackground,
+                navigationRailContentColor = MaterialTheme.colorScheme.onBackground,
+            )
         ) {
             AppNavigation(navHostController = navHostController, windowSize = windowSize)
         }

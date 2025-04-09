@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vickbt.composeApp.domain.repositories.SettingsRepository
 import com.vickbt.composeApp.utils.MainUiState
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -29,7 +28,7 @@ class MainViewModel(private val settingsRepository: SettingsRepository) : ViewMo
                 _mainUiState.update { it.copy(selectedTheme = theme) }
             }
         }.onFailure {
-            Napier.e("Error getting theme: ${it.message}")
+            _mainUiState.update { it.copy(selectedTheme = 0) }
         }
     }
 }
