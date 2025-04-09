@@ -23,10 +23,10 @@ class FavoritesViewModel(
     }
 
     init {
-        getFavoriteMovie()
+        fetchFavoriteMovie()
     }
 
-    fun getFavoriteMovie() = viewModelScope.launch(coroutineExceptionHandler) {
+    fun fetchFavoriteMovie() = viewModelScope.launch(coroutineExceptionHandler) {
         favoritesRepository.getFavouriteMovies().onSuccess { data ->
             data.collectLatest { favoriteMoviesResult ->
                 _favoriteMoviesState.update {
