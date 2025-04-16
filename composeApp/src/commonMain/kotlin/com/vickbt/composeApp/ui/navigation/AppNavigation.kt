@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.window.core.layout.WindowSizeClass
 import com.vickbt.composeApp.ui.screens.details.DetailsScreen
@@ -13,6 +12,7 @@ import com.vickbt.composeApp.ui.screens.favorites.FavoritesScreen
 import com.vickbt.composeApp.ui.screens.home.HomeScreen
 import com.vickbt.composeApp.ui.screens.search.SearchScreen
 import com.vickbt.composeApp.ui.screens.settings.SettingsScreen
+import com.vickbt.composeApp.utils.animatedComposable
 
 @Composable
 fun AppNavigation(
@@ -21,7 +21,7 @@ fun AppNavigation(
     mainPaddingValues: PaddingValues = PaddingValues()
 ) {
     NavHost(navController = navHostController, startDestination = NavigationItem.Home.route) {
-        composable(route = NavigationItem.Home.route) {
+        animatedComposable(route = NavigationItem.Home.route) {
             HomeScreen {
                 navHostController.navigate(it) {
                     popUpTo(NavigationItem.Home.route)
@@ -29,7 +29,7 @@ fun AppNavigation(
             }
         }
 
-        composable(route = NavigationItem.Favorites.route) {
+        animatedComposable(route = NavigationItem.Favorites.route) {
             FavoritesScreen {
                 navHostController.navigate(it) {
                     popUpTo(NavigationItem.Favorites.route)
@@ -37,23 +37,23 @@ fun AppNavigation(
             }
         }
 
-        composable(route = NavigationItem.Search.route) {
+        animatedComposable(route = NavigationItem.Settings.route) {
+            SettingsScreen()
+        }
+
+        animatedComposable(route = NavigationItem.Search.route) {
             SearchScreen { destination ->
                 if (destination.isNullOrEmpty()) {
                     navHostController.navigateUp()
                 } else {
                     navHostController.navigate(destination) {
-                    popUpTo(NavigationItem.Home.route)
-                }
+                        popUpTo(NavigationItem.Home.route)
+                    }
                 }
             }
         }
 
-        composable(route = NavigationItem.Settings.route) {
-            SettingsScreen()
-        }
-
-        composable(
+        animatedComposable(
             route = NavigationItem.Details.route,
             arguments = listOf(navArgument("movieId") { type = NavType.IntType })
         ) { backStackEntry ->

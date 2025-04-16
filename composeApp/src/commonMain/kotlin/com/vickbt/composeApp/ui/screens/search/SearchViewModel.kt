@@ -25,10 +25,7 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
 
         searchRepository.searchMovie(movieName = movieName).onSuccess { data ->
             _searchUiState.update {
-                it.copy(
-                    movieResults = data.cachedIn(viewModelScope),
-                    isLoading = false
-                )
+                it.copy(movieResults = data.cachedIn(viewModelScope), isLoading = false)
             }
         }.onFailure { error ->
             _searchUiState.update { it.copy(error = error.message, isLoading = false) }

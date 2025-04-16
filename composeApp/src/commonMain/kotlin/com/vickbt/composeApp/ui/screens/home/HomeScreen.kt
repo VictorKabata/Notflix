@@ -82,7 +82,7 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            if (homeUiState.isLoading) {
+            if (homeUiState.isLoading && homeUiState.error.isNullOrEmpty()) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             } else if (!homeUiState.error.isNullOrEmpty()) {
                 Text(
