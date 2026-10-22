@@ -7,7 +7,7 @@ import androidx.room.RoomDatabaseConstructor
 import com.vickbt.composeApp.data.cache.daos.FavoriteMovieDao
 import com.vickbt.composeApp.data.cache.entities.MovieDetailsEntity
 
-@Suppress("NO_ACTUAL_FOR_EXPECT")
+@Suppress("NO_ACTUAL_FOR_EXPECT", "KotlinNoActualForExpect")
 expect object AppDatabaseConstructor : RoomDatabaseConstructor<AppDatabase> {
     override fun initialize(): AppDatabase
 }

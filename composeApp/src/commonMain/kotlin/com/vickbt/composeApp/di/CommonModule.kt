@@ -34,8 +34,8 @@ import io.ktor.http.URLProtocol
 import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 fun commonModule(enableNetworkLogs: Boolean) = module {

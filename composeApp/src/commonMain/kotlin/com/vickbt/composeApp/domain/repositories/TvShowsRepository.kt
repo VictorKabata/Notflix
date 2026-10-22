@@ -1,6 +1,6 @@
 package com.vickbt.composeApp.domain.repositories
 
-import app.cash.paging.PagingData
+import androidx.paging.PagingData
 import com.vickbt.composeApp.domain.models.TvShow
 import kotlinx.coroutines.flow.Flow
 

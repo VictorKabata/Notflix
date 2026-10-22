@@ -9,5 +9,5 @@ pluginManagement {
     }
 }
 
-// include(":appAndroid")
 include(":composeApp")
+include(":androidApp")

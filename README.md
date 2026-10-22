@@ -83,9 +83,9 @@ gradlew desktopRun
 
 ## Project Structure
 
-The application has two main modules:
+The application has three main modules:
 1. composeApp: This is the core module containing the shared Kotlin Multiplatform code for network, caching, and UI logic.
-  - __androidMain__: Contains Android-specific code, primarily serving as an entry point for the Android application. This directory includes the MainActivity class, application-level configuration, and Android-specific dependencies or initialization.
+  - __androidMain__: Contains Android-specific implementations of shared code (database, datastore and Koin platform module).
 
   - __iOSMain__: Contains iOS-specific code, primarily serving as an entry point for the iOS application. This directory includes the ContentView class, application-level configuration, and iOS-specific initialization for Koin.
 
@@ -96,7 +96,9 @@ The application has two main modules:
     - __ui__: This package houses the UI components that are shared across all platforms. These components can be implemented using Compose Multiplatform, allowing for a consistent user experience.
     - __di__: Contains the dependency injection setup, managing the creation and provision of dependencies throughout the application.
 
-2. appiOS:  This module houses the iOS-specific app code, serving as the entry point for the iOS application, providing the necessary configuration and integration with the shared _composeApp_ module.
+2. androidApp: The Android application module and entry point. It contains the MainActivity, Application class, manifest, app resources and Firebase configuration, and depends on _composeApp_ (required by AGP 9, which no longer allows the Android application plugin inside a Kotlin Multiplatform module).
+
+3. appiOS:  This module houses the iOS-specific app code, serving as the entry point for the iOS application, providing the necessary configuration and integration with the shared _composeApp_ module.
 
 ## Libraries
 

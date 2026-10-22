@@ -1,8 +1,8 @@
 package com.vickbt.composeApp.data.datasources
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import app.cash.paging.Pager
-import app.cash.paging.PagingConfig
 import com.vickbt.composeApp.data.cache.AppDatabase
 import com.vickbt.composeApp.data.mappers.toDomain
 import com.vickbt.composeApp.data.mappers.toEntity

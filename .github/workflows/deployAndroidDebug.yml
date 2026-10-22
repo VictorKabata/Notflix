@@ -65,4 +65,4 @@ jobs:
           appId: ${{secrets.FIREBASE_APP_ID}}
           serviceCredentialsFileContent: ${{secrets.CREDENTIAL_FILE_CONTENT}}
           groups: production
-          file: appAndroid/build/outputs/apk/debug/appAndroid-debug.apk
+          file: androidApp/build/outputs/apk/debug/androidApp-debug.apk

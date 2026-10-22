@@ -2,9 +2,9 @@ package com.vickbt.composeApp.data.mappers
 
 import com.vickbt.composeApp.data.cache.entities.MovieDetailsEntity
 import com.vickbt.composeApp.domain.models.MovieDetails
-import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
 
 fun MovieDetails.toEntity(): MovieDetailsEntity {
     return MovieDetailsEntity(

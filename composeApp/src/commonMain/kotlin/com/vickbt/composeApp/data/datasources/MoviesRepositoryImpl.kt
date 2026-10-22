@@ -1,8 +1,8 @@
 package com.vickbt.composeApp.data.datasources
 
-import app.cash.paging.Pager
-import app.cash.paging.PagingConfig
-import app.cash.paging.PagingData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.vickbt.composeApp.data.mappers.toDomain
 import com.vickbt.composeApp.data.network.models.MovieResultsDto
 import com.vickbt.composeApp.data.network.utils.safeApiCall

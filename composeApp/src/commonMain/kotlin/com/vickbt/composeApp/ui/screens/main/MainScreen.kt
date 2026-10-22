@@ -13,7 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.window.core.layout.WindowWidthSizeClass
+import androidx.window.core.layout.WindowSizeClass
 import com.vickbt.composeApp.ui.navigation.AppNavigation
 import com.vickbt.composeApp.ui.navigation.NavigationItem
 import com.vickbt.composeApp.ui.theme.NotflixTheme
@@ -43,7 +43,7 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel<MainViewModel>()) {
 
         val navigationLayout = if (!isTopLevelDestination) {
             NavigationSuiteType.None
-        } else if (windowSize.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
+        } else if (!windowSize.isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND)) {
             NavigationSuiteType.NavigationBar
         } else {
             NavigationSuiteType.NavigationRail

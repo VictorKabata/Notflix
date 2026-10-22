@@ -3,8 +3,7 @@ import java.util.Locale
 
 plugins {
     alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.android.kotlin) apply false
+    alias(libs.plugins.android.kmp.library) apply false
     alias(libs.plugins.multiplatform) apply false
     alias(libs.plugins.jvm) apply false
 
@@ -51,7 +50,17 @@ subprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
     detekt {
         parallel = true
-        config = files("${project.rootDir}/config/detekt/detekt.yml")
+        config.setFrom(files("${project.rootDir}/config/detekt/detekt.yml"))
+    }
+
+    // Detekt 1.23.x is compiled against Kotlin 2.0.21 and fails if the project's newer Kotlin
+    // version leaks onto its classpath, so pin the Kotlin artifacts used by the detekt configuration.
+    configurations.matching { it.name == "detekt" }.configureEach {
+        resolutionStrategy.eachDependency {
+            if (requested.group == "org.jetbrains.kotlin") {
+                useVersion("2.0.21")
+            }
+        }
     }
     //endregion
 

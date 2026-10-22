@@ -2,7 +2,7 @@ package com.vickbt.composeApp.data.cache.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 
 @Entity(tableName = "Favorite Movies")
 data class MovieDetailsEntity(

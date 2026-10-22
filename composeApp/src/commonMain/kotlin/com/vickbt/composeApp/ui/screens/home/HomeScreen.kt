@@ -29,7 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import app.cash.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.kmpalette.loader.rememberNetworkLoader
 import com.vickbt.composeApp.domain.utils.Enums
 import com.vickbt.composeApp.ui.components.FilterHome

@@ -1,7 +1,7 @@
 package com.vickbt.composeApp.data.paging
 
-import app.cash.paging.PagingSource
-import app.cash.paging.PagingState
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.vickbt.composeApp.domain.utils.Constants.STARTING_PAGE_INDEX
 
 class BasePagingSource<T : Any>(val fetchData: suspend (page: Int) -> List<T>?) :
